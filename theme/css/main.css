@@ -1,0 +1,554 @@
+/*
+    Document   : Main Stylesheet
+    Created on : Sep 11, 2012, 3:15:35 PM
+    Author     : Héctor Fabio Tobón R. (h.f.tobon@cgiar.org)
+*/
+
+/********************** GENERAL BODY ***************************/
+body {
+    color: #555555;
+    font-family: "Trebuchet MS";
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    /*background: #E6F4E3;*/
+    background: url("/theme/images/background.jpg") #E6F4E3 50% no-repeat fixed;
+    background-size: cover;
+
+}
+a:link, #content a {
+    color: #4E2700;
+    text-decoration: none;
+}
+p {
+    text-align: justify;
+}
+img {
+    border: 0;
+}
+h4 {
+    display: inline;
+}
+.container {
+    text-align: left;
+    width: 100%;
+}
+.wrapper {
+    margin: 20px auto;
+    width: 940px;
+    padding: 20px 30px 10px;
+    background: url("/theme/images/header-background.png") no-repeat scroll top left white;
+    /* SHADOW */
+    -webkit-box-shadow: 2px 7px 29px #5A5E59; /* Safari and Chrome */
+    box-shadow: 2px 7px 29px #5A5E59;
+    /* For IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Glow(Color=#5A5E59,Strength=10)";
+}
+
+div.center {
+    text-align: center;
+}
+span.little {
+    font-size: 10px;
+}
+
+/* Header-Body */
+.wrapper #logo {
+    text-align: right;
+}
+.wrapper #logo img {
+    width: 33%;
+}
+
+/* Subheader */
+.wrapper #subheader-image {
+    text-align: center;
+    margin-top: 30px;
+    margin-left: -49px;
+}
+
+
+
+/* Content */
+#content {
+    padding: 0 50px;
+}
+#content h1 {
+    text-align: center;
+}
+
+/************************** MAIN MENU **************************/
+
+#navlist {
+    background: none repeat scroll 0 0 black;
+    height: 35px;
+    margin-bottom: 0;
+    width: 100%;
+    min-width: 1100px;
+    padding-top: 10px;
+    text-align: center;
+    color: grey;
+}
+#navlist li {
+    display: inline;
+}
+#navlist a {
+    font-size: 14px;
+    padding: 4px 19px;
+    color: #FFFFFF;
+    font-size: 0.8em;
+    text-decoration: none;
+}
+#navlist a:hover {
+    border-bottom: 2px solid #225C22;
+    color: #000000;
+    text-decoration: none;
+}
+#navlist li.current a {
+    font-weight: bold;
+    border-bottom: 2px solid #225C22;
+}
+
+.wrapper #navlist {
+    z-index: 50;
+    text-align: right;
+    background: transparent;
+    min-width: 0px;
+    padding: 0;
+}
+.wrapper #main-menu #navlist {
+    margin-top: 30px;
+}
+.wrapper #navlist a {
+    color: #074701;
+}
+.wrapper #secondary-menu #navlist a {
+    padding: 2px 5px;
+}
+.wrapper #main-menu #navlist a {
+    font-size: 16px;
+    padding: 2px 5px;
+}
+
+
+/********************* SCONDARY MENU **************************/
+
+.wrapper #secondary-menu #navlist {
+    margin: 0;
+}
+
+
+/************************** HOME **************************/
+div.home {
+    padding: 0px 0px !important; /* bad practice, just for home */
+}
+/* Links to sections */
+.home #sections {
+    margin-top: 40px;
+}
+.home #sections img {
+    /*width: 158px;*/
+    /*height: 350px;*/
+    width: 126.4px;
+    height: 280px;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+.home #sections #section {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 131px;
+}
+
+.home #content-description {
+    margin-top: 300px;
+    font-size: 14px;
+}
+
+/******************** SPATIAL DOWNSCALING ***********************/
+
+.downscaling #methods {
+    text-align: center;
+    margin-left: 35px;
+}
+
+.downscaling  #methods #section {
+    height: 180px;
+    position: relative;
+    top: 0;
+    width: 400px;
+}
+
+.downscaling #methods img {
+    width: 380px;
+    height: 171px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 0;
+}
+
+/***************** SPATIAL DOWNSCALING DELTA ********************/
+
+.downscaling_delta #projections {
+    margin-left: -40px;
+    width: 110%;
+}
+
+.downscaling_delta #projections img {
+    width: 450px;
+    border: 0;
+}
+
+/***************** PATTERN SCALING ********************/
+
+.pattern_scaling #sections {
+    text-align: center;
+    font-weight: bold;
+}
+.pattern_scaling #sections li {
+    display: inline;
+    padding: 0px 20px;
+    border-left: 2px #074701 solid;
+}
+
+.pattern_scaling #sections li.last {
+    border-right: 2px #074701 solid;
+}
+
+.pattern_scaling #button_down_resc {
+    margin-top: 10px;
+}
+
+.pattern_scaling #data_support {
+    border-bottom: 1px solid #DDDDDD;
+    border-top: 1px solid #DDDDDD;
+    margin-bottom: 5px;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.pattern_scaling #data_support h5 {
+    margin: 5px 0 0;
+}
+
+/*************** SPATIAL DOWNSCALING CLIMGEN *****************/
+.downscaling_climgen #projection_images {
+    width: 105%;
+}
+
+/*************** DYNAMIC DOWNSCALING PRECIS *****************/
+.downscaling_dynamical #table-downs-sa {
+    border: 2px groove;
+    margin-left: 110px;
+    text-align: center;
+}
+
+.downscaling_dynamical #table-downs-sa td {
+    padding: 0 10px;
+}
+
+/******************* SPATIAL DISAGGREGATION ************/
+.disaggregation #circulation-model {
+    margin-left: -60px;
+    margin-right: -60px;
+    width: 116%;
+}
+
+/******************** DOCUMENTATION ******************/
+.documentation #document-list li {
+    padding-top: 15px;
+    list-style-type: none;
+}
+
+/******************** LINKS *****************************/
+.links #link-list li {
+    padding-top: 15px;
+}
+
+/******************* CONTACT ***********************/
+.contact #table-contact td {
+    padding: 0 20px;
+    text-align: center;
+    vertical-align: top;
+}
+
+.contact #table-contact .contact-info {
+    font-size: 13px;
+}
+
+/******************** DATA *****************************/
+.data #search_form {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.data #formSearch {
+    background-color: #F7F7F7;
+    border: 3px ridge;
+    padding: 20px;
+    text-align: center;
+}
+.data .option-name {
+    width: 130px;
+}
+.data .options {
+    width: 250px;
+}
+.data tr {
+    text-align: right;
+}
+.data #table_fields .help_icon {
+    display: none;
+}
+.data #table_fields .loader {
+    display: none;
+}
+
+/* ToolTip - TipTip */
+#tiptip_content {
+    text-align: justify;
+}
+
+/******************** DATA2 *****************************/
+.data2 #search_form {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.data2 #formSearch {
+    background-color: #F7F7F7;
+    border: 3px ridge;
+    text-align: left;
+}
+
+.data2 #div-fileSet {
+    display: inline-block;
+    vertical-align: top;
+    width: 180px;
+}
+
+.data2 #div-period {
+    display: inline-block;
+    vertical-align: top;
+    width: 140px;
+}
+
+.data2 #div-variable {
+    display: inline-block;
+    vertical-align: top;
+    width: 180px;
+}
+
+.data2 #div-resolution {
+    display: inline-block;
+    vertical-align: top;
+    width: 180px;
+}
+
+.data2 #div-format {
+    display: inline-block;
+    vertical-align: top;
+    width: 140px;
+}
+
+.data2 #div-extent {
+    display: inline-block;
+    margin-left: 730px;
+    margin-top: -120px;
+    vertical-align: top;
+    width: 140px;
+}
+
+.data2 #div-scenario {
+    display: inline-block;
+    vertical-align: top;
+    width: 180px;
+}
+
+.data2 #div-model {
+    display: inline-block;
+    vertical-align: top;
+    width: 180px;
+}
+
+.data2 #div-tile {
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+    text-align: right;
+    vertical-align: top;
+    width: 640px;
+}
+
+.data2 h4 {
+    background-color: #565656;
+    color: white;
+    padding: 2px 30px;
+}
+.data2 .left-title {    
+    display: inline-block;
+    margin: 10px -10px 0;
+}
+
+.data2 .top-title {
+    display: inline-block;
+    margin: -10px 0 0;
+}
+
+.data2 .right-title {
+    display: inline-block;
+    margin: 0 0 0 15px;
+}
+
+.data2 .form-options {
+    font-size: 11px;
+    margin-left: 10px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.data2 #buttons {
+    
+}
+
+.data2 #buttons label {
+    font-size: 11px;
+}
+
+.data2 #div-tile #searchSubmit {
+    background: url("/theme/images/search-icon.png") no-repeat scroll left center transparent;
+    height: 30px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    width: 85px;
+}
+.data2 #div-tile #map-canvas {
+    height: 300px;
+}
+
+
+/******************* FORM *********************/
+.form .button-image {
+    padding-right: 5px;
+}
+
+.form #div-form {
+    width: 100%;
+}
+
+.form #div-form #contact-form {
+    margin-left: 150px;
+    position: relative;
+    width: 60%;
+}
+
+.form #div-form #contact-form .input-form {
+    text-align: center;
+}
+
+.form #div-form #additional-information {
+    border: 3px ridge;
+    margin-top: 20px;
+    padding: 10px 40px;
+    background-color: #FEFEF5;
+    display: none;
+}
+
+.form #div-form #additional-information .input-form {
+    margin-right: 80px;
+    margin-top: 10px;
+    text-align: right;
+}
+
+.form #div-form #additional-information .checkbox-form {
+    margin-top: 10px;
+}
+
+.form #div-form #additional-information .check-group {
+    margin-left: 20px;
+}
+
+.form #div-form #additional-information .check-group input {
+    width: 30px;
+}
+
+.form #div-form #additional-information .text-area-form {
+    margin-top: 20px;
+}
+
+.form #div-form #additional-information .text-area-form textarea {
+    display: block;
+}
+
+.form #div-form #additional-information .submit-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form #additional-information #welcome-message {
+    font-size: 11px;
+    margin: 0 0 20px;
+    padding: 0;
+    text-align: right;
+}
+
+.form .input-form .ajax-loader {
+    display: none;
+}
+
+.form .input-form .error {
+    color: red;
+    display: block;
+    font-size: 12px;
+    margin-left: 160px;
+    text-align: left;
+    display: none;
+}
+
+.form .submit-button #ajax-loader {
+    display: none;
+}
+.form .submit-button #message {
+    color: green;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.form #download-files {
+    display: none;
+    margin-top: 40px;
+}
+
+.form #download-files p {
+    color: blue;
+    font-size: 14px;
+    text-align: center;
+}
+
+
+
+/******************* FOOTER *********************/
+#footer {
+    background-image: url("/theme/images/footer-background.jpg");
+    background-size: 17px auto;
+    background-repeat: repeat-x;
+    background-color: #DDDDDD;
+    font-size: 10px;
+    margin-bottom: -10px;
+    margin-left: -30px;
+    margin-top: 20px;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    text-align: center;
+    width: 106.4%;
+}
+#footer hr {
+    margin-bottom: 30px;
+}
+#footer img {
+    height: 65px;
+    padding: 5px 8px;
+}
+

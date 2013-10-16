@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Global Tiled</name>
+	<Style id="zn">
+		<IconStyle>
+			<scale>1.2</scale>
+			<Icon>
+				<href>http://www.ccafs-climate.org/theme/images/icon-pdf.png</href>
+			</Icon>
+			<hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+		</IconStyle>
+		<LabelStyle>
+			<scale>0</scale>
+		</LabelStyle>
+		<BalloonStyle>
+			<text>$[description]</text>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ffff0000</color>
+			<width>0.5</width>
+                </LineStyle>
+		<PolyStyle>
+			<color>0FAFAFA</color>
+		</PolyStyle>
+	</Style>
+	<Folder>
+		<Placemark>
+			<name>A1</name>
+			<description><![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">A1</font></td></tr></table>]]></description>
+			<styleUrl>#zn</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-120,30,0 -180,30,0 -180,90,0 -120,90,0 -120,30,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<coordinates>-150,60,0</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+			<name>A2</name>			
+			<description><![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">A2</font></td></tr></table>]]></description>
+			<styleUrl>#zn</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-60,30,0 -120,30,0 -120,90,0 -60,90,0 -60,30,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<coordinates>-90,60,0</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+			<name>A3</name>
+			
+			<description><![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">A3</font></td></tr></table>]]></description>
+			<styleUrl>#zn</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								0,30,0 -60,30,0 -60,90,0 0,90,0 0,30,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<coordinates>-30,60,0</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+			<name>A4</name>
+			
+			<description><![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">A4</font></td></tr></table>]]></description>
+			<styleUrl>#zn</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								60,30,0 -0,30,0 -0,90,0 60,90,0 60,30,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<coordinates>30,60,0</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+			<name>A5</name>
+			
+			<description><![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">A5</font></td></tr></table>]]></description>
+			<styleUrl>#zn</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								120,30,0 60,30,0 60,90,0 120,90,0 120,30,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<coordinates>90,60,0</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+			<name>A6</name>
+			
+			<description><![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">A6</font></td></tr></table>]]></description>
+			<styleUrl>#zn</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								180,30,0 120,30,0 120,90,0 180,90,0 180,30,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<coordinates>150,60,0</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+			<name>B1</name>
+			
+			<description><![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">B1</font></td></tr></table>]]></description>
+			<styleUrl>#zn</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-120,-30,0 -180,-30,0 -180,30,0 -120,30,0 -120,-30,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<coordinates>-150,0,0</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+			<name>B2</name>
+			
+			<description><![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">B2</font></td></tr></table>]]></description>
+			<styleUrl>#zn</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-60,-30,0 -120,-30,0 -120,30,0 -60,30,0 -60,-30,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<coordinates>-90,0,0</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+			<name>B3</name>
+			
+			<description><![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">B3</font></td></tr></table>]]></description>
+			<styleUrl>#zn</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								0,-30,0 -60,-30,0 -60,30,0 0,30,0 0,-30,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<coordinates>-30,0,0</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+			<name>B4</name>
+			
+			<description><![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">B4</font></td></tr></table>]]></description>
+			<styleUrl>#zn</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								60,-30,0 -0,-30,0 -0,30,0 60,30,0 60,-30,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<coordinates>30,0,0</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+			<name>B5</name>
+			
+			<description><![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">B5</font></td></tr></table>]]></description>
+			<styleUrl>#zn</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								120,-30,0 60,-30,0 60,30,0 120,30,0 120,-30,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<coordinates>90,0,0</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+			<name>B6</name>
+			
+			<description><![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">B6</font></td></tr></table>]]></description>
+			<styleUrl>#zn</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								180,-30,0 120,-30,0 120,30,0 180,30,0 180,-30,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<coordinates>150,0,0</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+			<name>C1</name>
+			
+			<description><![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">C1</font></td></tr></table>]]></description>
+			<styleUrl>#zn</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-120,-90,0 -180,-90,0 -180,-30,0 -120,-30,0 -120,-90,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<coordinates>-150,-60,0</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+			<name>C2</name>
+			
+			<description><![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">C2</font></td></tr></table>]]></description>
+			<styleUrl>#zn</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								-60,-90,0 -120,-90,0 -120,-30,0 -60,-30,0 -60,-90,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<coordinates>-90,-60,0</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+			<name>C3</name>
+			
+			<description><![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">C3</font></td></tr></table>]]></description>
+			<styleUrl>#zn</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								0,-90,0 -60,-90,0 -60,-30,0 0,-30,0 0,-90,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<coordinates>-30,-60,0</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+			<name>C4</name>
+			
+			<description><![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">C4</font></td></tr></table>]]></description>
+			<styleUrl>#zn</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								60,-90,0 -0,-90,0 -0,-30,0 60,-30,0 60,-90,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<coordinates>30,-60,0</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+			<name>C5</name>
+			
+			<description><![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">C5</font></td></tr></table>]]></description>
+			<styleUrl>#zn</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								120,-90,0 60,-90,0 60,-30,0 120,-30,0 120,-90,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<coordinates>90,-60,0</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+			<name>C6</name>
+			
+			<description><![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">C6</font></td></tr></table>]]></description>
+			<styleUrl>#zn</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>
+								180,-90,0 120,-90,0 120,-30,0 180,-30,0 180,-90,0 
+							</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<coordinates>150,-60,0</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+	</Folder>	
+</Document>
+</kml>
