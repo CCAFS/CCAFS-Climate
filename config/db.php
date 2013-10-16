@@ -10,7 +10,7 @@
  * International Center for Tropical Agriculture (CIAT)
  *
  */
-require_once 'config.php';
+require_once dirname(__FILE__).'/'.'config.php';
 require_once( LIB_DIR. '/adodb/adodb.inc.php' );
 
 global $db;
