@@ -15,7 +15,7 @@ require_once( LIB_DIR. '/adodb/adodb.inc.php' );
 
 global $db;
 
-$db = &ADONewConnection('mysql');
+$db = &ADONewConnection($infoDB['driver']);
 if (!$db) {
     //$log->error('Could not connect to the database.');
     exit;
