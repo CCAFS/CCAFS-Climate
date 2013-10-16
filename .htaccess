@@ -17,14 +17,6 @@ ErrorDocument 404 /pages/404.php
 #There is no reason that an URL start with [.
 RedirectMatch 403 \[
 
-# END WordPress
-
-# BEGIN Extra Security
-<files /config/config.php>
-order allow,deny
-deny from all
-</files>
-
 #prevent folder browsing
 Options All -Indexes
 # END Extra Security
