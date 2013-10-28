@@ -1,4 +1,4 @@
-{include file='head.tpl' pageTitle="About Us - CCAFS Climate" pageDescription="About the CCAFS team and downscaled datasets" keywords="CCAFS,about,information,description"}
+{include file='head.tpl' jsIncludes=[] pageTitle="About Us - CCAFS Climate" pageDescription="About the CCAFS team and downscaled datasets" keywords="CCAFS,about,information,description"}
 {include file='header.tpl' current="about"}
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_aboutus.gif" />

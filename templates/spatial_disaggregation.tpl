@@ -1,4 +1,4 @@
-{include file='head.tpl' pageTitle="Spatial Disaggregation - CCAFS Climate" pageDescription="Spatially disaggregated future climate projections from all IPCC assessment reports." keywords="IPCC,disaggregated,climate change,CMIP,projections,high resolution"}
+{include file='head.tpl' jsIncludes=[] pageTitle="Spatial Disaggregation - CCAFS Climate" pageDescription="Spatially disaggregated future climate projections from all IPCC assessment reports." keywords="IPCC,disaggregated,climate change,CMIP,projections,high resolution"}
 {include file='header.tpl' current="dissagregation"}
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_spdis.gif" />

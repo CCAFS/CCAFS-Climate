@@ -1,4 +1,4 @@
-{include file='head.tpl' pageTitle="Citations - CCAFS Climate" pageDescription="Peer-reviewed literature that have cited the CCAFS downscaled climate datasets." keywords="CCAFS,literature,citations,climate change,impacts"}
+{include file='head.tpl' jsIncludes=[] pageTitle="Citations - CCAFS Climate" pageDescription="Peer-reviewed literature that have cited the CCAFS downscaled climate datasets." keywords="CCAFS,literature,citations,climate change,impacts"}
 {include file='header.tpl' current="citations"}
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_citations.gif" />

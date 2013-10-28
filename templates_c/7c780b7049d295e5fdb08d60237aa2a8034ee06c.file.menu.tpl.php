@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2013-10-16 18:15:27
+<?php /* Smarty version Smarty-3.1.11, created on 2013-10-25 21:07:16
          compiled from "D:\DESARROLLO\PHP\xampp\htdocs\CCAFS-Climate\templates\menu.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:30003525ebb9f526ff5-21967186%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:32604526ac164f32211-01878655%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '30003525ebb9f526ff5-21967186',
+  'nocache_hash' => '32604526ac164f32211-01878655',
   'function' => 
   array (
   ),
@@ -21,9 +21,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.11',
-  'unifunc' => 'content_525ebb9f54f097_04789251',
+  'unifunc' => 'content_526ac165020860_54453942',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_525ebb9f54f097_04789251')) {function content_525ebb9f54f097_04789251($_smarty_tpl) {?><nav id="main-menu">
+<?php if ($_valid && !is_callable('content_526ac165020860_54453942')) {function content_526ac165020860_54453942($_smarty_tpl) {?><nav id="main-menu">
     <ul id="navlist">
         <li <?php if ($_smarty_tpl->tpl_vars['current']->value=='home'){?>class="current"<?php }?>><a href="/">Home</a></li>
         <li <?php if ($_smarty_tpl->tpl_vars['current']->value=='downscaling'){?>class="current"<?php }?>><a href="/spatial_downscaling/">Spatial Downscaling</a></li>

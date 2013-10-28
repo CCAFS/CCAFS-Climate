@@ -1,4 +1,4 @@
-{include file='head.tpl' pageTitle="Dynamical Downscaling (PRECIS) - CCAFS Climate" pageDescription="Downscaled future climate data using MetOffice's PRECIS regional climate model." keywords="PRECIS,regional climate model,future projections,IPCC,MetOffice"}
+{include file='head.tpl' jsIncludes=[] pageTitle="Dynamical Downscaling (PRECIS) - CCAFS Climate" pageDescription="Downscaled future climate data using MetOffice's PRECIS regional climate model." keywords="PRECIS,regional climate model,future projections,IPCC,MetOffice"}
 {include file='header.tpl' current="downscaling"}
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_rcm.gif" />

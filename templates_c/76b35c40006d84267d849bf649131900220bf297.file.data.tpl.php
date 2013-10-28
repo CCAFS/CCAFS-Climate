@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2013-10-16 18:23:17
+<?php /* Smarty version Smarty-3.1.11, created on 2013-10-25 21:09:01
          compiled from "D:\DESARROLLO\PHP\xampp\htdocs\CCAFS-Climate\templates\data.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:30743525ebd75daba05-81919950%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:22936526ac1cd764d15-64999220%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,7 +11,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '30743525ebd75daba05-81919950',
+  'nocache_hash' => '22936526ac1cd764d15-64999220',
   'function' => 
   array (
   ),
@@ -34,9 +34,9 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => 'Smarty-3.1.11',
-  'unifunc' => 'content_525ebd75ed7360_47488255',
+  'unifunc' => 'content_526ac1cd8b9687_49737185',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_525ebd75ed7360_47488255')) {function content_525ebd75ed7360_47488255($_smarty_tpl) {?><?php echo $_smarty_tpl->getSubTemplate ('head.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array('jsIncludes'=>array("jquery","data","tiptip"),'pageTitle'=>"Data - CCAFS Climate",'pageDescription'=>"High resolution climate change data for download, downscaled using different methods.",'keywords'=>"IPCC,data,download,downscaling,high resolution,delta method,climate change,projections,MarkSim,MetOffice,PRECIS"), 0);?>
+<?php if ($_valid && !is_callable('content_526ac1cd8b9687_49737185')) {function content_526ac1cd8b9687_49737185($_smarty_tpl) {?><?php echo $_smarty_tpl->getSubTemplate ('head.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array('jsIncludes'=>array("jquery","data","tiptip"),'pageTitle'=>"Data - CCAFS Climate",'pageDescription'=>"High resolution climate change data for download, downscaled using different methods.",'keywords'=>"IPCC,data,download,downscaling,high resolution,delta method,climate change,projections,MarkSim,MetOffice,PRECIS"), 0);?>
 
 <?php echo $_smarty_tpl->getSubTemplate ('header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array('current'=>"data"), 0);?>
 

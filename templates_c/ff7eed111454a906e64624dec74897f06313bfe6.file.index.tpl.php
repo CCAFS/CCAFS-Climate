@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2013-10-16 18:45:35
+<?php /* Smarty version Smarty-3.1.11, created on 2013-10-25 21:12:42
          compiled from "D:\DESARROLLO\PHP\xampp\htdocs\CCAFS-Climate\templates\index.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1687525ebb9f2c20a7-10798177%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:9713526ac2aab14479-88618070%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,15 +11,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1687525ebb9f2c20a7-10798177',
+  'nocache_hash' => '9713526ac2aab14479-88618070',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.11',
-  'unifunc' => 'content_525ebb9f3a1fc6_60380581',
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.11',
+  'unifunc' => 'content_526ac2aabe7cf3_29221581',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_525ebb9f3a1fc6_60380581')) {function content_525ebb9f3a1fc6_60380581($_smarty_tpl) {?><?php echo $_smarty_tpl->getSubTemplate ('head.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array('jsIncludes'=>array('jquery','index'),'pageTitle'=>"CCAFS Climate",'pageDescription'=>"Climate change downscaled data portal provided by CIAT and CCAFS.",'keywords'=>"downscaling,GCM,climate change,CIAT,CCAFS"), 0);?>
+<?php if ($_valid && !is_callable('content_526ac2aabe7cf3_29221581')) {function content_526ac2aabe7cf3_29221581($_smarty_tpl) {?><?php echo $_smarty_tpl->getSubTemplate ('head.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array('jsIncludes'=>array('jquery','index'),'pageTitle'=>"CCAFS Climate",'pageDescription'=>"Climate change downscaled data portal provided by CIAT and CCAFS.",'keywords'=>"downscaling,GCM,climate change,CIAT,CCAFS"), 0);?>
 
 <?php echo $_smarty_tpl->getSubTemplate ('header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array('current'=>"home"), 0);?>
 

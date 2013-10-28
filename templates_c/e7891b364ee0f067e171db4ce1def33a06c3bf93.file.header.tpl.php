@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2013-10-16 18:45:36
+<?php /* Smarty version Smarty-3.1.11, created on 2013-10-25 21:07:16
          compiled from "D:\DESARROLLO\PHP\xampp\htdocs\CCAFS-Climate\templates\header.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:8301525ebb9f4d7748-98548861%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:6702526ac164edc4d1-49173785%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,15 +11,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '8301525ebb9f4d7748-98548861',
+  'nocache_hash' => '6702526ac164edc4d1-49173785',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.11',
-  'unifunc' => 'content_525ebb9f4e61b0_84332955',
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.11',
+  'unifunc' => 'content_526ac164ee9621_80925951',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_525ebb9f4e61b0_84332955')) {function content_525ebb9f4e61b0_84332955($_smarty_tpl) {?><div class="container">
+<?php if ($_valid && !is_callable('content_526ac164ee9621_80925951')) {function content_526ac164ee9621_80925951($_smarty_tpl) {?><div class="container">
     <div class="wrapper">
         <?php echo $_smarty_tpl->getSubTemplate ('secondary-menu.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array('current'=>((string)$_smarty_tpl->tpl_vars['current']->value)), 0);?>
 

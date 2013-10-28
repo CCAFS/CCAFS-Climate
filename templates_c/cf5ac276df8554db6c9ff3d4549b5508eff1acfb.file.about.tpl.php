@@ -1,25 +1,25 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2013-10-16 18:59:10
+<?php /* Smarty version Smarty-3.1.11, created on 2013-10-28 13:35:27
          compiled from "D:\DESARROLLO\PHP\xampp\htdocs\CCAFS-Climate\templates\about.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:23300525ec5de975fc3-19927400%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:20470526ac1cbe3a2e2-66204762%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'cf5ac276df8554db6c9ff3d4549b5508eff1acfb' => 
     array (
       0 => 'D:\\DESARROLLO\\PHP\\xampp\\htdocs\\CCAFS-Climate\\templates\\about.tpl',
-      1 => 1349454583,
+      1 => 1382963710,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '23300525ec5de975fc3-19927400',
+  'nocache_hash' => '20470526ac1cbe3a2e2-66204762',
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.11',
-  'unifunc' => 'content_525ec5dea1b8b3_92481483',
+  'unifunc' => 'content_526ac1cbee12d5_65260545',
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_525ec5dea1b8b3_92481483')) {function content_525ec5dea1b8b3_92481483($_smarty_tpl) {?><?php echo $_smarty_tpl->getSubTemplate ('head.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array('pageTitle'=>"About Us - CCAFS Climate",'pageDescription'=>"About the CCAFS team and downscaled datasets",'keywords'=>"CCAFS,about,information,description"), 0);?>
+<?php if ($_valid && !is_callable('content_526ac1cbee12d5_65260545')) {function content_526ac1cbee12d5_65260545($_smarty_tpl) {?><?php echo $_smarty_tpl->getSubTemplate ('head.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array('jsIncludes'=>array(),'pageTitle'=>"About Us - CCAFS Climate",'pageDescription'=>"About the CCAFS team and downscaled datasets",'keywords'=>"CCAFS,about,information,description"), 0);?>
 
 <?php echo $_smarty_tpl->getSubTemplate ('header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array('current'=>"about"), 0);?>
 

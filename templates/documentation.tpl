@@ -1,4 +1,4 @@
-{include file='head.tpl' pageTitle="Documentation- CCAFS Climate" pageDescription="Useful reading for understanding the CCAFS downscaled climate change projections." keywords="CCAFS,documentation,downscaling,climate change"}
+{include file='head.tpl' jsIncludes=[] pageTitle="Documentation- CCAFS Climate" pageDescription="Useful reading for understanding the CCAFS downscaled climate change projections." keywords="CCAFS,documentation,downscaling,climate change"}
 {include file='header.tpl' current="documentation"}
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_docs.gif" />
@@ -36,6 +36,12 @@
                     Data Source and Process flow chart Delta Method (Hiett M., 2011).
                 </a>
             </li>
+            <li type="circle">
+                <a href="{$smarty.const.SMARTY_DOCS_URI}/delta_disaggregation_variables.pdf">
+                    <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
+                    Abbreviations Used For Delta Method Downscaled and Disaggregation data.
+                </a>
+            </li>
         </ul>
         <li type="square">
             <a href="{$smarty.const.SMARTY_DOCS_URI}/Disaggregation-WP-02.pdf">
@@ -54,15 +60,7 @@
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
                 Very high resolution interpolated climate surfaces for Global Land Areas.
             </a>
-        </li>
-        <ul>
-            <li type="circle">
-                <a href="{$smarty.const.SMARTY_DOCS_URI}/Data_source_and_process_flow_chart_worldclim.pdf">
-                    <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
-                    Data Source and Process flow chart WorldClim (Hiett M., 2011).
-                </a>
-            </li>
-        </ul>
+        </li>                
         <li type="square">
             <a href="http://www.metoffice.gov.uk/media/pdf/6/5/PRECIS_Handbook.pdf">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />

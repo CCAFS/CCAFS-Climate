@@ -1,4 +1,4 @@
-{include file='head.tpl' pageTitle="Contact - CCAFS Climate" pageDescription="Who to contact in the case of any problems with downscaled CCAFS datasets." keywords="CCAFS,contact,issues,recommendations"}
+{include file='head.tpl' jsIncludes=[] pageTitle="Contact - CCAFS Climate" pageDescription="Who to contact in the case of any problems with downscaled CCAFS datasets." keywords="CCAFS,contact,issues,recommendations"}
 {include file='header.tpl' current="contact"}
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_contact.gif" />

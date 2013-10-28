@@ -1,4 +1,4 @@
-{include file='head.tpl' pageTitle="Statistical Downscaling (Delta Method) - CCAFS Climate" pageDescription="Downscaled future climate data using the delta method." keywords="delta method,climate change,downscaling,high resolution,IPCC"}
+{include file='head.tpl' jsIncludes=[] pageTitle="Statistical Downscaling (Delta Method) - CCAFS Climate" pageDescription="Downscaled future climate data using the delta method." keywords="delta method,climate change,downscaling,high resolution,IPCC"}
 {include file='header.tpl' current="downscaling"}
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_stdown.gif" />

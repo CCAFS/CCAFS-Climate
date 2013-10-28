@@ -1,4 +1,4 @@
-{include file='head.tpl' pageTitle="Statistical Downscaling (Climgen) - CCAFS Climate" pageDescription="Downscaled future climate data using the Climgen pattern scaling method." keywords="Climgen,pattern scaling,climate change,IPCC,projections"}
+{include file='head.tpl' jsIncludes=[] pageTitle="Statistical Downscaling (Climgen) - CCAFS Climate" pageDescription="Downscaled future climate data using the Climgen pattern scaling method." keywords="Climgen,pattern scaling,climate change,IPCC,projections"}
 {include file='header.tpl' current="downscaling"}
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_climgen.gif" />
