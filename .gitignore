@@ -2,4 +2,4 @@
 ## CCAFS-Climate
 #################
 /config/config.php
-/templates_c/
+templates_c/*
