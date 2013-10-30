@@ -2,4 +2,11 @@
 ## CCAFS-Climate
 #################
 /config/config.php
+
+# Smarthy
 templates_c/*
+
+# NetBeans
+nbproject/*
+!nbproject/project.properties
+!nbproject/project.xml
