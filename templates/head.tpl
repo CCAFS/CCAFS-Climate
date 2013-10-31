@@ -21,12 +21,9 @@
                     <script src="{$smarty.const.SMARTY_JS_URI}/downscaling.js"></script>
                 {elseif $jsToInclude == "pattern_scaling"}
                     <script src="{$smarty.const.SMARTY_JS_URI}/pattern_scaling.js"></script>
-                {elseif $jsToInclude == "data"}
-                    <script src="{$smarty.const.SMARTY_JS_URI}/data.js"></script>
-                <!-- TEMPORAL OPTION -->
-                {elseif $jsToInclude == "data2"}
+                {elseif $jsToInclude == "data"}                    
                     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={$smarty.const.GOOGLE_API_KEY}&sensor=false"></script>
-                    <script src="{$smarty.const.SMARTY_JS_URI}/data2.js"></script>
+                    <script src="{$smarty.const.SMARTY_JS_URI}/data.js"></script>
                 {elseif $jsToInclude == "bpopup"}
                     <!-- Reference http://dinbror.dk/bpopup/ -->
                     <script src="{$smarty.const.SMARTY_JS_URI}/bpopup/jquery.bpopup-0.7.0.min.js"></script>
