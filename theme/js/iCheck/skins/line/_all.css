@@ -4,12 +4,12 @@
 .iradio_line {
     position: relative;
     display: block;
-    margin: 0;
+    margin: 1px 0 0 0px;
     padding: 5px 15px 5px 38px;
-    font-size: 13px;
-    line-height: 17px;
+    font-size: 12px;
+    line-height: 13px;
     color: #fff;
-    background: #000;
+    background: #302728;
     border: none;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -36,7 +36,7 @@
     }
     .icheckbox_line.checked,
     .iradio_line.checked {
-        background: #000;
+        background: #181818;
     }
         .icheckbox_line.checked .icheck_line-icon,
         .iradio_line.checked .icheck_line-icon {

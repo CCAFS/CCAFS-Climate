@@ -39,10 +39,15 @@
                 {elseif $jsToInclude == "tablesorter"}
                     <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/tablesorter.css" />
                     <script src="{$smarty.const.SMARTY_JS_URI}/tablesorter/jquery.tablesorter.min.js"></script>
+                
                 {elseif $jsToInclude == "modernizr"}
                     <!-- Reference: JavaScript library that detects HTML5 and CSS3 features in the user’s browser. http://modernizr.com/ -->
                     <script type="text/javascript" src="{$smarty.const.SMARTY_JS_URI}/Modernizr-2.0.6/modernizr.custom.29473.js"></script>
-                       
+                 {elseif $jsToInclude == "icheck"}
+                      <link href="{$smarty.const.SMARTY_JS_URI}/iCheck/demo/css/custom.css?v=0.9.1" rel="stylesheet">
+                      <link href="{$smarty.const.SMARTY_JS_URI}/iCheck/skins/minimal/_all.css" rel="stylesheet"> 
+                      <link href="{$smarty.const.SMARTY_JS_URI}/iCheck/skins/line/_all.css" rel="stylesheet"> 
+                      <script src="{$smarty.const.SMARTY_JS_URI}/iCheck/jquery.icheck.min.js?v=0.9.1"></script>         
                 {/if}
             {/foreach}
         {/if}  

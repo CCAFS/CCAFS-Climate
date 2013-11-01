@@ -1,5 +1,6 @@
-{include file='head.tpl' jsIncludes=["jquery", "data", "tiptip","modernizr"] pageTitle="Data - CCAFS Climate" pageDescription="High resolution climate change data for download, downscaled using different methods." keywords="IPCC,data,download,downscaling,high resolution,delta method,climate change,projections,MarkSim,MetOffice,PRECIS"}
+{include file='head.tpl' jsIncludes=["jquery", "data", "tiptip","modernizr","icheck"] pageTitle="Data - CCAFS Climate" pageDescription="High resolution climate change data for download, downscaled using different methods." keywords="IPCC,data,download,downscaling,high resolution,delta method,climate change,projections,MarkSim,MetOffice,PRECIS"}
 {include file='header.tpl' current="data"}
+
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_data.gif" />
 </div>
@@ -17,13 +18,13 @@
                     <label class="inputs-ac" for="ac-1">File Set</label>
                    
                     <article class="ac-large">
-                         
-                        {$isFirst = true}
+
+                         {$isFirst = true}
                         {foreach from=$fileSets item=fileSet}                            
-                            <input id="fileSet-{$fileSet['id']}" class="fileset" type="radio" name="fileSet" value="{$fileSet['id']}" {if $isFirst}checked{/if}/><label for="fileSet-{$fileSet['id']}">{$fileSet["name"]}</label><br>
+                            <input id="fileSet-{$fileSet['id']}" type="radio" name="fileSet" value="{$fileSet['id']}" {if $isFirst}checked{/if}/><label for="fileSet-{$fileSet['id']}">{$fileSet["name"]}</label><br>
                             {$isFirst = false}
                         {/foreach}
-                         
+
                     </article>
                 </div>
                 <div class="inputs-ac">
@@ -42,12 +43,13 @@
                     <input class="inputs-ac" id="ac-3" name="accordion-1" type="radio"  />
                     <label  class="inputs-ac" for="ac-3">Model</label>
                     
-                    <article class="ac-large">
-                        <select name=models size=16 multiple>
+                    <article class="ac-large2">
+                       
                             {foreach from=$models item=model}
-                                <option name="{$model['acronym']}" value={$model['id']}>{$model['acronym']}</option>                                
+                            <input type="checkbox" id="line-checkbox-{$model['id']}" name="{$model['acronym']}" value="{$model['id']}">
+                            <label for="line-checkbox-{$model['id']}">{$model['acronym']}</label>                         
                             {/foreach}
-                        </select>
+                        
                     </article>
                 </div>
             </section>

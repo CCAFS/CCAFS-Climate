@@ -114,7 +114,14 @@ input.inputs-ac:checked ~ article{
 }
 
 input.inputs-ac:checked ~ article.ac-large{
-    height: 380px;
+    height: 370px;
+    padding-top: 10px;
+}
+
+input.inputs-ac:checked ~ article.ac-large2{
+    height: 370px;
+    padding-top: 10px;
+    overflow: scroll;
 }
 
 
