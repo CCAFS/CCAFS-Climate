@@ -1,6 +1,6 @@
 
 $(document).ready(function(){
-
+              // initializing iCheck Settings
               $('.ac-large input').iCheck({
                 checkboxClass: 'icheckbox_minimal',
                 radioClass: 'iradio_minimal',
@@ -18,6 +18,11 @@ $(document).ready(function(){
                   insert: '<div class="icheck_line-icon"></div>' + label_text
                 });
               });
+              $('#block input').iCheck({
+                checkboxClass: 'icheckbox_flat',
+                radioClass: 'iradio_flat'
+              });
+
            
     // initializing map configuration.
     initializeMap();

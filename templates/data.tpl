@@ -56,6 +56,21 @@
         </div>
         <div id="side-right"> 
             <div id="side-right-top">
+               <div id="block">
+                    <div id="box"> Extend </div> 
+                    <input tabindex="19" type="radio" id="line-radio-1" name="extent" value="global">
+                    <label for="line-radio-1">Global</label><br> 
+                    <input tabindex="19" type="radio" id="line-radio-2" name="extent" value="regional" checked>
+                    <label for="line-radio-2">Regional</label><br> 
+               </div> 
+                <div id="block">
+                    <div id="box"> Format </div> 
+                    {$isFirst = true}
+                        {foreach from=$formats item=format}
+                            <input id="format-{$format['id']}" type="radio" name="format" value="{$format['id']}" {if $isFirst}checked{/if}/><label for="format-{$format['id']}">{$format["name"]}</label><br>
+                            {$isFirst = false}
+                        {/foreach}
+               </div> 
             </div>
             <div id="side-right-bottom">
                 <div id="map-canvas">Zx</div>

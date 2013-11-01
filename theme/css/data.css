@@ -2,11 +2,14 @@
  *==      Data.css      ==
  *========================
  */
- @import url(http://fonts.googleapis.com/css?family=Oswald:400,700);
+ @import url(http://fonts.googleapis.com/css?family=Oswald:400,300);
+ul{margin:0;padding:0;list-style:none} 
+.skin-minimal .skin-section .list li{padding-left:0px}
+
 #search_form {
     font-family: 'Oswald', sans-serif;
     font-size: 17px;
-    background: url(../images/search-form.png);
+    /*background: url(../images/search-form.png);*/
     min-height: 510px;
 }
 
@@ -133,4 +136,19 @@ input.inputs-ac:checked ~ article.ac-large2{
     height: 407px;
 }
 
+/* blocks Settings */
 
+#block {
+    font-size: 13px;
+    width: 130px;
+    float: left;
+}
+#box {
+    background: #E0DED9;
+    font-weight: 300;
+    color: #FFF;
+    width: 80px;
+    border-radius: 5px;
+    padding: 0px 0px 0px 43px;
+    margin-bottom: 10px;
+}

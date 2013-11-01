@@ -4,12 +4,13 @@
 .iradio_flat {
     display: block;
     margin: 0;
-    padding: 0;
+    padding-right: 2px;
     width: 20px;
     height: 20px;
     background: url(flat.png) no-repeat;
     border: none;
     cursor: pointer;
+    float: left;
 }
 
 .icheckbox_flat {
