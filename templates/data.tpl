@@ -58,6 +58,7 @@
             <div id="side-right-top">
             </div>
             <div id="side-right-bottom">
+                <div id="map-canvas">Zx</div>
             </div>
         </div>
     </div>

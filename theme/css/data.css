@@ -126,6 +126,11 @@ input.inputs-ac:checked ~ article.ac-large2{
 
 
 
+/* Map Settings */
 
+#map-canvas{
+    width: 610px;
+    height: 407px;
+}
 
 
