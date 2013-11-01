@@ -12,10 +12,10 @@
         <div id="side-left"> 
             <section class="ac-container">
                 <div>
-                    <div class="inputs-ac">
-                    <input id="ac-1" name="accordion-1" type="radio" checked />
-                    <label for="ac-1">File Set</label>
-                    </div>
+                    
+                    <input id="ac-1" class="inputs-ac" name="accordion-1" type="radio" checked />
+                    <label class="inputs-ac" for="ac-1">File Set</label>
+                   
                     <article class="ac-large">
                          
                         {$isFirst = true}
@@ -26,22 +26,28 @@
                          
                     </article>
                 </div>
-                <div>
-                    <div class="inputs-ac">
-                    <input id="ac-2" name="accordion-1" type="radio" />
-                    <label for="ac-2">Scenario</label>
-                    </div>
+                <div class="inputs-ac">
+                     
+                    <input id="ac-2" class="inputs-ac" name="accordion-1" type="radio" />
+                    <label class="inputs-ac" for="ac-2">Scenario</label>
+                     
                     <article class="ac-large">
-                        <p>Some content... </p>
+                       {foreach from=$scenarios item=scenario}
+                            <input id="scenario-{$scenario['id']}" type="checkbox" name="scenarios[]" value="{$scenario['id']}"><label for="scenario-{$scenario['id']}">{$scenario['name']}</label><br>
+                        {/foreach}
                     </article>
                 </div>
-                <div>
-                    <div class="inputs-ac">
-                    <input id="ac-3" name="accordion-1" type="radio"  />
-                    <label for="ac-3">Model</label>
-                    </div>
+                <div class="inputs-ac">
+                     
+                    <input class="inputs-ac" id="ac-3" name="accordion-1" type="radio"  />
+                    <label  class="inputs-ac" for="ac-3">Model</label>
+                    
                     <article class="ac-large">
-                        <p>Some content... </p>
+                        <select name=models size=16 multiple>
+                            {foreach from=$models item=model}
+                                <option name="{$model['acronym']}" value={$model['id']}>{$model['acronym']}</option>                                
+                            {/foreach}
+                        </select>
                     </article>
                 </div>
             </section>
