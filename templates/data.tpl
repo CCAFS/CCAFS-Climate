@@ -12,22 +12,34 @@
         <div id="side-left"> 
             <section class="ac-container">
                 <div>
+                    <div class="inputs-ac">
                     <input id="ac-1" name="accordion-1" type="radio" checked />
                     <label for="ac-1">File Set</label>
+                    </div>
                     <article class="ac-large">
-                        <p>Some content... </p>
+                         
+                        {$isFirst = true}
+                        {foreach from=$fileSets item=fileSet}                            
+                            <input id="fileSet-{$fileSet['id']}" class="fileset" type="radio" name="fileSet" value="{$fileSet['id']}" {if $isFirst}checked{/if}/><label for="fileSet-{$fileSet['id']}">{$fileSet["name"]}</label><br>
+                            {$isFirst = false}
+                        {/foreach}
+                         
                     </article>
                 </div>
                 <div>
+                    <div class="inputs-ac">
                     <input id="ac-2" name="accordion-1" type="radio" />
                     <label for="ac-2">Scenario</label>
+                    </div>
                     <article class="ac-large">
                         <p>Some content... </p>
                     </article>
                 </div>
                 <div>
+                    <div class="inputs-ac">
                     <input id="ac-3" name="accordion-1" type="radio"  />
                     <label for="ac-3">Model</label>
+                    </div>
                     <article class="ac-large">
                         <p>Some content... </p>
                     </article>
