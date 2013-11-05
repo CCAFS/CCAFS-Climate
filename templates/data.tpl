@@ -63,14 +63,14 @@
         </div>
         <div id="side-right"> 
             <div id="side-right-top">
-               <div id="block">
+               <div id="bloc">
                     <div id="box"> Extend </div> 
                     <input tabindex="19" type="radio" id="line-radio-1" name="extent" value="global">
                     <label for="line-radio-1">Global</label><br> 
                     <input tabindex="19" type="radio" id="line-radio-2" name="extent" value="regional" checked>
                     <label for="line-radio-2">Regional</label><br> 
                </div> 
-                <div id="block">
+                <div id="bloc">
                     <div id="box"> Format </div> 
                     {$isFirst = true}
                         {foreach from=$formats item=format}
@@ -79,7 +79,7 @@
                         {/foreach}
                </div> 
 
-                <div id="block">
+                <div id="bloc">
                     <div id="box-b"> Period </div> 
                     <div id="box-content"> 
 
@@ -89,7 +89,7 @@
                     </div>
                     
                </div> 
-                <div id="block">
+                <div id="bloc">
                     <div id="box-b"> Variable </div> 
                     <div id="box-content"> 
 
@@ -100,7 +100,7 @@
                     </div>
                     
                </div> 
-                <div id="block">
+                <div id="bloc">
                     <div id="box-b"> Resolution </div> 
                     <div id="box-content"> 
                         {$isFirst = true}
@@ -108,10 +108,12 @@
                             <input id="resolution-{$resolution['id']}" type="radio" name="resolution" value="{$resolution['id']}" {if $isFirst}checked{/if}/><label for="resolution-{$resolution['id']}">{$resolution["name"]}</label><br>
                             {$isFirst = false}
                         {/foreach}
-                    </div>
-
-                    
+                    </div> 
                </div> 
+               <div id="bloc-search">
+                        <label>0 files found</label>
+                        <button type="submit" id="searchSubmit" disabled="disabled">Search</button>
+                </div>
             </div>
             <div id="side-right-bottom">
                 <div id="map-canvas">Zx</div>

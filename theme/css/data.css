@@ -136,9 +136,9 @@ input.inputs-ac:checked ~ article.ac-large2{
     height: 407px;
 }
 
-/* blocks Settings */
+/* blocs Settings */
 
-#block {
+#bloc {
     font-size: 13px;
     width: 120px;
     float: left;
@@ -167,21 +167,39 @@ input.inputs-ac:checked ~ article.ac-large2{
 }
 
 #box-content:hover,#box-b:hover ~ #box-content {
-display: block;
+    display: block;
 }
 
 
 #box-content {
-position: absolute;
-z-index: 100;
-background: #323A45;
-color: #FFF;
-padding: 10px;
-border-radius: 5px;
-min-width: 96px;
-display: none;
+    position: absolute;
+    z-index: 100;
+    background: #323A45;
+    color: #FFF;
+    padding: 10px;
+    border-radius: 5px;
+    min-width: 96px;
+    display: none;
 }
 
-#block label{
-float: left;
+#bloc label{
+    float: left;
+}
+
+#bloc-search {
+    margin-top: 42px;
+    color: #555;
+    font-weight: 300;
+    position: inherit;
+    width: 150px;
+    float: right;
+}
+
+#bloc-search button{
+    border: 0;
+
+    background: #2a313a;
+    color: #fff;
+    padding: 4px 14px 4px 14px;
+    border-radius: 4px;
 }

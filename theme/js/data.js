@@ -18,7 +18,7 @@ $(document).ready(function(){
                   insert: '<div class="icheck_line-icon"></div>' + label_text
                 });
               });
-              $('#block input').iCheck({
+              $('#bloc input').iCheck({
                 checkboxClass: 'icheckbox_flat',
                 radioClass: 'iradio_flat'
               });
