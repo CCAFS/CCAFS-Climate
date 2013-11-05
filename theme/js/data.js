@@ -1,5 +1,29 @@
 
 $(document).ready(function(){
+              // initializing iCheck Settings
+              $('.ac-large input').iCheck({
+                checkboxClass: 'icheckbox_minimal',
+                radioClass: 'iradio_minimal',
+                increaseArea: '20%'
+              });
+              $('.ac-large2 input').each(function(){
+                var self = $(this),
+                  label = self.next(),
+                  label_text = label.text();
+
+                label.remove();
+                self.iCheck({
+                  checkboxClass: 'icheckbox_line',
+                  radioClass: 'iradio_line',
+                  insert: '<div class="icheck_line-icon"></div>' + label_text
+                });
+              });
+              $('#block input').iCheck({
+                checkboxClass: 'icheckbox_flat',
+                radioClass: 'iradio_flat'
+              });
+
+           
     // initializing map configuration.
     initializeMap();
     // applying a kml to the map.

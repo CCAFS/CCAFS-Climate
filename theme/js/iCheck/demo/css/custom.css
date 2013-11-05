@@ -1,0 +1,9 @@
+@import url("normalize.css");
+
+ul{margin:0;padding:0;list-style:none}
+
+
+
+.skin-minimal .skin-section .list li{padding-left:0px}
+
+
