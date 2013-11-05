@@ -24,7 +24,7 @@
                 {elseif $jsToInclude == "data"}                    
                     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={$smarty.const.GOOGLE_API_KEY}&sensor=false"></script>
                     <script src="{$smarty.const.SMARTY_JS_URI}/data.js"></script>
-                    
+                    <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/data.css" media="screen" />
                 {elseif $jsToInclude == "bpopup"}
                     <!-- Reference http://dinbror.dk/bpopup/ -->
                     <script src="{$smarty.const.SMARTY_JS_URI}/bpopup/jquery.bpopup-0.7.0.min.js"></script>
@@ -39,6 +39,7 @@
                 {elseif $jsToInclude == "tablesorter"}
                     <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/tablesorter.css" />
                     <script src="{$smarty.const.SMARTY_JS_URI}/tablesorter/jquery.tablesorter.min.js"></script>
+                
                 {elseif $jsToInclude == "modernizr"}
                     <!-- Reference: JavaScript library that detects HTML5 and CSS3 features in the user’s browser. http://modernizr.com/ -->
                     <script type="text/javascript" src="{$smarty.const.SMARTY_JS_URI}/Modernizr-2.0.6/modernizr.custom.29473.js"></script>
@@ -49,7 +50,6 @@
                     <link href="{$smarty.const.SMARTY_JS_URI}/iCheck/skins/line/_all.css" rel="stylesheet"> 
                     <link href="{$smarty.const.SMARTY_JS_URI}/iCheck/skins/flat/_all.css" rel="stylesheet"> 
                               
-
                 {/if}
             {/foreach}
         {/if}  
