@@ -71,6 +71,37 @@
                             {$isFirst = false}
                         {/foreach}
                </div> 
+
+                <div id="block">
+                    <div id="box-b"> Period </div> 
+                    <div id="box-content"> 
+                        {foreach from=$periods item=period}
+                            <input id="period-{$period['id']}" type="checkbox" name="periods[]" value="{$period['id']}"><label for="period-{$period['id']}">{$period['name']}</label><br>
+                        {/foreach}
+                    </div>
+                    
+               </div> 
+                <div id="block">
+                    <div id="box-b"> Variable </div> 
+                    <div id="box-content"> 
+                        {foreach from=$variables item=variable}
+                            <input id="variable-{$variable['id']}" type="checkbox" name="variables[]" value="{$variable['id']}"><label for="variabe-{$variable['id']}">{$variable['name']}</label><br>
+                        {/foreach}
+                        <input id="variable-9999" type="checkbox" name="variables[]" value="9999"><label for="variable-9999">Other</label><br>
+                    </div>
+                    
+               </div> 
+                <div id="block">
+                    <div id="box-b"> Resolution </div> 
+                    <div id="box-content"> 
+                        {$isFirst = true}
+                        {foreach from=$resolutions item=resolution}
+                            <input id="resolution-{$resolution['id']}" type="radio" name="resolution" value="{$resolution['id']}" {if $isFirst}checked{/if}/><label for="resolution-{$resolution['id']}">{$resolution["name"]}</label><br>
+                            {$isFirst = false}
+                        {/foreach}
+                    </div>
+                    
+               </div> 
             </div>
             <div id="side-right-bottom">
                 <div id="map-canvas">Zx</div>

@@ -140,15 +140,48 @@ input.inputs-ac:checked ~ article.ac-large2{
 
 #block {
     font-size: 13px;
-    width: 130px;
+    width: 120px;
     float: left;
 }
 #box {
     background: #E0DED9;
     font-weight: 300;
     color: #FFF;
-    width: 80px;
+    width: 74px;
     border-radius: 5px;
     padding: 0px 0px 0px 43px;
     margin-bottom: 10px;
+}
+
+#box-b {
+    background: #7c7c7c;
+    font-weight: 400;
+    color: #FFF;
+    width: 76px;
+    border-radius: 5px;
+    padding: 3px 20px 3px 20px;
+    
+     
+    text-align: center;
+    cursor: pointer;
+}
+
+#box-content:hover,#box-b:hover ~ #box-content {
+display: block;
+}
+
+
+#box-content {
+position: absolute;
+z-index: 100;
+background: #323A45;
+color: #FFF;
+padding: 10px;
+border-radius: 5px;
+width: 96px;
+display: none;
+}
+
+#block label{
+float: left;
 }
