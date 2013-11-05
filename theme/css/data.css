@@ -178,7 +178,7 @@ background: #323A45;
 color: #FFF;
 padding: 10px;
 border-radius: 5px;
-width: 96px;
+min-width: 96px;
 display: none;
 }
 
