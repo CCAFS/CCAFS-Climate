@@ -166,20 +166,32 @@ input.inputs-ac:checked ~ article.ac-large2{
     cursor: pointer;
 }
 
-#box-content:hover,#box-b:hover ~ #box-content {
+#dropdown-arrow:hover,#box-content:hover,#box-b:hover ~ #box-content{
     display: block;
 }
+
+
 
 
 #box-content {
     position: absolute;
     z-index: 100;
-    background: #323A45;
-    color: #FFF;
+    color: #FFF; 
+    display: none;
+}
+
+#drop-content{
+    background: #34495E;
+     
     padding: 10px;
     border-radius: 5px;
-    min-width: 96px;
-    display: none;
+    min-width: 96px;    
+}
+
+#dropdown-arrow {
+    width: 100px;
+    height: 5px;
+    background: url(../images/dropdown-arrow.png);
 }
 
 #bloc label{
@@ -196,8 +208,7 @@ input.inputs-ac:checked ~ article.ac-large2{
 }
 
 #bloc-search button{
-    border: 0;
-
+    border: 0; 
     background: #2a313a;
     color: #fff;
     padding: 4px 14px 4px 14px;
