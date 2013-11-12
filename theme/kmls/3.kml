@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.0">
+    <Document>
+        <name>Global Tiled</name>
+        <Style id="tiles-style">
+            <IconStyle>
+                <Icon>
+                    <href>http://www.ccafs-climate.org/theme/images/help_icon.png</href>
+                </Icon>
+            </IconStyle>						
+        </Style>
+        <Style id="zh">
+            <IconStyle>                
+                <Icon>
+                    <href>http://www.ccafs-climate.org/theme/images/help_icon.png</href>
+                </Icon>
+            </IconStyle>
+            <LineStyle>
+                <color>FFFFFFFF</color>
+                <width>2</width>
+            </LineStyle>
+            <PolyStyle>
+                <color>FFFFFFFF</color>
+            </PolyStyle>
+        </Style>
+        <Style id="zn">
+            <IconStyle>
+                <color>FFFFFFFF</color>
+                <scale>1.0</scale>
+                <Icon>
+                    <href>http://www.ccafs-climate.org/theme/images/help_icon.png</href>                    
+                </Icon>
+            </IconStyle>
+            <LabelStyle>
+                <scale>0</scale>
+            </LabelStyle>
+            <BalloonStyle >
+                <text>$[description]</text>
+                <color>FFFFFFFF</color>
+            </BalloonStyle>
+            <LineStyle>
+                <color>FFFF0000</color>
+                <width>1</width>
+            </LineStyle>
+            <PolyStyle>
+                <color>FFFFCA95</color>
+            </PolyStyle>
+        </Style>
+        <StyleMap id="MapRollOver">
+            <Pair>
+                <key>normal</key>
+                <styleUrl>#zn</styleUrl>
+            </Pair>
+            <Pair>
+                <key>highlight</key>
+                <styleUrl>#zh</styleUrl>
+            </Pair>
+        </StyleMap>
+        
+        <Placemark>
+            <name>A1</name>
+            <Snippet/>
+            <description>
+					<![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">A1</font></td></tr></table>]]>
+            </description>
+            <styleUrl>#MapRollOver</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>-120.0000000000,30.0000000000,0 -180.0000000000,30.0000000000,0 -180.0000000000,90.0000000000,0 -120.0000000000,90.0000000000,0 -120.0000000000,30.0000000000,0 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-150.0000000000,60.0000000000,0 </coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>A2</name>
+            <Snippet/>
+            <description>
+					<![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">A2</font></td></tr></table>]]>
+            </description>
+            <styleUrl>#MapRollOver</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>-60.0000000000,30.0000000000,0 -120.0000000000,30.0000000000,0 -120.0000000000,90.0000000000,0 -60.0000000000,90.0000000000,0 -60.0000000000,30.0000000000,0 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-90.0000000000,60.0000000000,0 </coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>A3</name>
+            <Snippet/>
+            <description>
+					<![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">A3</font></td></tr></table>]]>
+            </description>
+            <styleUrl>#MapRollOver</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>0.0000000000,30.0000000000,0 -60.0000000000,30.0000000000,0 -60.0000000000,90.0000000000,0 0.0000000000,90.0000000000,0 0.0000000000,30.0000000000,0 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-30.0000000000,60.0000000000,0 </coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>A4</name>
+            <Snippet/>
+            <description>
+					<![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">A4</font></td></tr></table>]]>
+            </description>
+            <styleUrl>#MapRollOver</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>60.0000000000,30.0000000000,0 -0.0000000000,30.0000000000,0 -0.0000000000,90.0000000000,0 60.0000000000,90.0000000000,0 60.0000000000,30.0000000000,0 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>30.0000000000,60.0000000000,0 </coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>A5</name>
+            <Snippet/>
+            <description>
+					<![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">A5</font></td></tr></table>]]>
+            </description>
+            <styleUrl>#MapRollOver</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>120.0000000000,30.0000000000,0 60.0000000000,30.0000000000,0 60.0000000000,90.0000000000,0 120.0000000000,90.0000000000,0 120.0000000000,30.0000000000,0 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>90.0000000000,60.0000000000,0 </coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>A6</name>
+            <Snippet/>
+            <description>
+					<![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">A6</font></td></tr></table>]]>
+            </description>
+            <styleUrl>#MapRollOver</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>180.0000000000,30.0000000000,0 120.0000000000,30.0000000000,0 120.0000000000,90.0000000000,0 180.0000000000,90.0000000000,0 180.0000000000,30.0000000000,0 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>150.0000000000,60.0000000000,0 </coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>B1</name>
+            <Snippet/>
+            <description>
+					<![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">B1</font></td></tr></table>]]>
+            </description>
+            <styleUrl>#MapRollOver</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>-120.0000000000,-30.0000000000,0 -180.0000000000,-30.0000000000,0 -180.0000000000,30.0000000000,0 -120.0000000000,30.0000000000,0 -120.0000000000,-30.0000000000,0 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-150.0000000000,0.0000000000,0 </coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>B2</name>
+            <Snippet/>
+            <description>
+					<![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">B2</font></td></tr></table>]]>
+            </description>
+            <styleUrl>#MapRollOver</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>-60.0000000000,-30.0000000000,0 -120.0000000000,-30.0000000000,0 -120.0000000000,30.0000000000,0 -60.0000000000,30.0000000000,0 -60.0000000000,-30.0000000000,0 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-90.0000000000,0.0000000000,0 </coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>B3</name>
+            <Snippet/>
+            <description>
+					<![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">B3</font></td></tr></table>]]>
+            </description>
+            <styleUrl>#MapRollOver</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>0.0000000000,-30.0000000000,0 -60.0000000000,-30.0000000000,0 -60.0000000000,30.0000000000,0 0.0000000000,30.0000000000,0 0.0000000000,-30.0000000000,0 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-30.0000000000,0.0000000000,0 </coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>B4</name>
+            <Snippet/>
+            <description>
+					<![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">B4</font></td></tr></table>]]>
+            </description>
+            <styleUrl>#MapRollOver</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>60.0000000000,-30.0000000000,0 -0.0000000000,-30.0000000000,0 -0.0000000000,30.0000000000,0 60.0000000000,30.0000000000,0 60.0000000000,-30.0000000000,0 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>30.0000000000,0.0000000000,0 </coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>B5</name>
+            <Snippet/>
+            <description>
+					<![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">B5</font></td></tr></table>]]>
+            </description>
+            <styleUrl>#MapRollOver</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>120.0000000000,-30.0000000000,0 60.0000000000,-30.0000000000,0 60.0000000000,30.0000000000,0 120.0000000000,30.0000000000,0 120.0000000000,-30.0000000000,0 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>90.0000000000,0.0000000000,0 </coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>B6</name>
+            <Snippet/>
+            <description>
+					<![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">B6</font></td></tr></table>]]>
+            </description>
+            <styleUrl>#MapRollOver</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>180.0000000000,-30.0000000000,0 120.0000000000,-30.0000000000,0 120.0000000000,30.0000000000,0 180.0000000000,30.0000000000,0 180.0000000000,-30.0000000000,0 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>150.0000000000,0.0000000000,0 </coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>C1</name>
+            <Snippet/>
+            <description>
+					<![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">C1</font></td></tr></table>]]>
+            </description>
+            <styleUrl>#MapRollOver</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>-120.0000000000,-90.0000000000,0 -180.0000000000,-90.0000000000,0 -180.0000000000,-30.0000000000,0 -120.0000000000,-30.0000000000,0 -120.0000000000,-90.0000000000,0 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-150.0000000000,-60.0000000000,0 </coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>C2</name>
+            <Snippet/>
+            <description>
+					<![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">C2</font></td></tr></table>]]>
+            </description>
+            <styleUrl>#MapRollOver</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>-60.0000000000,-90.0000000000,0 -120.0000000000,-90.0000000000,0 -120.0000000000,-30.0000000000,0 -60.0000000000,-30.0000000000,0 -60.0000000000,-90.0000000000,0 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-90.0000000000,-60.0000000000,0 </coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>C3</name>
+            <Snippet/>
+            <description>
+					<![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">C3</font></td></tr></table>]]>
+            </description>
+            <styleUrl>#MapRollOver</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>0.0000000000,-90.0000000000,0 -60.0000000000,-90.0000000000,0 -60.0000000000,-30.0000000000,0 0.0000000000,-30.0000000000,0 0.0000000000,-90.0000000000,0 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-30.0000000000,-60.0000000000,0 </coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>C4</name>
+            <Snippet/>
+            <description>
+					<![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">C4</font></td></tr></table>]]>
+            </description>
+            <styleUrl>#MapRollOver</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>60.0000000000,-90.0000000000,0 -0.0000000000,-90.0000000000,0 -0.0000000000,-30.0000000000,0 60.0000000000,-30.0000000000,0 60.0000000000,-90.0000000000,0 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>30.0000000000,-60.0000000000,0 </coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>C5</name>
+            <Snippet/>
+            <description>
+					<![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">C5</font></td></tr></table>]]>
+            </description>
+            <styleUrl>#MapRollOver</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>120.0000000000,-90.0000000000,0 60.0000000000,-90.0000000000,0 60.0000000000,-30.0000000000,0 120.0000000000,-30.0000000000,0 120.0000000000,-90.0000000000,0 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>90.0000000000,-60.0000000000,0 </coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>C6</name>
+            <Snippet/>
+            <description>
+					<![CDATA[Global Tiled<br><table border=0 cellpadding=0 cellspacing=0  width=250 style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ZONE</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">C6</font></td></tr></table>]]>
+            </description>
+            <styleUrl>#MapRollOver</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+                            <coordinates>180.0000000000,-90.0000000000,0 120.0000000000,-90.0000000000,0 120.0000000000,-30.0000000000,0 180.0000000000,-30.0000000000,0 180.0000000000,-90.0000000000,0 </coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>150.0000000000,-60.0000000000,0 </coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        
+        
+    </Document>
+</kml>

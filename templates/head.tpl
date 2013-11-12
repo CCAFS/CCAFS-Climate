@@ -14,7 +14,7 @@
         {if $jsIncludes}
             {foreach from=$jsIncludes item=jsToInclude}
                 {if $jsToInclude == "jquery"}
-                    <script src="{$smarty.const.SMARTY_JS_URI}/jquery/jquery-1.8.1.min.js"></script>
+                    <script src="{$smarty.const.SMARTY_JS_URI}/jquery/jquery-1.8.1.min.js"></script>					
                 {elseif $jsToInclude == "index"}
                     <script src="{$smarty.const.SMARTY_JS_URI}/index.js"></script>
                 {elseif $jsToInclude == "downscaling"}
@@ -48,10 +48,12 @@
                     <script src="{$smarty.const.SMARTY_JS_URI}/iCheck/jquery.icheck.min.js?v=0.9.1"></script>
                     <link href="{$smarty.const.SMARTY_JS_URI}/iCheck/skins/minimal/_all.css" rel="stylesheet"> 
                     <link href="{$smarty.const.SMARTY_JS_URI}/iCheck/skins/line/_all.css" rel="stylesheet"> 
-                    <link href="{$smarty.const.SMARTY_JS_URI}/iCheck/skins/flat/_all.css" rel="stylesheet"> 
+                    <link href="{$smarty.const.SMARTY_JS_URI}/iCheck/skins/flat/_all.css" rel="stylesheet">
+				 {elseif $jsToInclude == "map"}		
+					<script src="http://geoxml3.googlecode.com/svn/branches/polys/geoxml3.js"></script>
                               
                 {/if}
             {/foreach}
-        {/if}  
+        {/if}		
     </head> 
     <body>

@@ -1,5 +1,5 @@
 
-{include file='head.tpl' jsIncludes=["jquery", "data", "tiptip","modernizr","icheck"] pageTitle="Data - CCAFS Climate" pageDescription="High resolution climate change data for download, downscaled using different methods." keywords="IPCC,data,download,downscaling,high resolution,delta method,climate change,projections,MarkSim,MetOffice,PRECIS"}
+{include file='head.tpl' jsIncludes=["jquery", "data", "tiptip","modernizr","icheck", "map"] pageTitle="Data - CCAFS Climate" pageDescription="High resolution climate change data for download, downscaled using different methods." keywords="IPCC,data,download,downscaling,high resolution,delta method,climate change,projections,MarkSim,MetOffice,PRECIS"}
 {include file='header.tpl' current="data"}
 
 <div id="subheader-image">
