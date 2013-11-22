@@ -5,14 +5,14 @@
         <Style id="tiles-style">
             <IconStyle>
                 <Icon>
-                    <href>http://www.ccafs-climate.org/theme/images/help_icon.png</href>
+                    <href>https://dl.dropboxusercontent.com/u/42719711/a1.png</href>
                 </Icon>
             </IconStyle>						
         </Style>
         <Style id="zh">
             <IconStyle>                
                 <Icon>
-                    <href>http://www.ccafs-climate.org/theme/images/help_icon.png</href>
+                    <href>https://dl.dropboxusercontent.com/u/42719711/a1.png</href>
                 </Icon>
             </IconStyle>
             <LineStyle>
@@ -28,7 +28,7 @@
                 <color>FFFFFFFF</color>
                 <scale>1.0</scale>
                 <Icon>
-                    <href>http://www.ccafs-climate.org/theme/images/help_icon.png</href>                    
+                    <href>https://dl.dropboxusercontent.com/u/42719711/a1.png</href>                    
                 </Icon>
             </IconStyle>
             <LabelStyle>

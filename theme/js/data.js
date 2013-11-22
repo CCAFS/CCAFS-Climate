@@ -44,20 +44,24 @@ $(document).ready(function(){
 	// load on the map the selected layer(file set). Depending on the value of the radio button
 	$("input[name='fileSet']").on('ifChecked', function(event){
 		initializeMap();
-		geoXml = new geoXML3.parser({
+		if($(event.target).attr("value")==3 || $(event.target).attr("value")==8 || $(event.target).attr("value")==7){		  
+		   geoXml = new geoXML3.parser({
                  map: map,
                  singleInfoWindow: true,
                  afterParse: useTheData
 				});
-             geoXml.parse('http://ccafs-climate.local/theme/kmls/'+this.value+'.kml');			
-	});	
+             geoXml.parse('http://ccafs-climate.local/theme/kmls/'+this.value+'.kml');
+		}		
+	});
+	
 	map.setCenter(new google.maps.LatLng(19.3, 18.6));
 });
 
-
+var selectedPolygonStyle=null;
 var map;
 var highlightOptions = {fillColor: "#FFFF00", strokeColor: "#000000", fillOpacity: 0.4, strokeWidth: 10};
 var normalStyle = {fillColor: "#FF0000", strokeColor: "#000000", fillOpacity: 0.4, strokeWidth: 10};
+var selectedStyle= {fillColor: "#00ff00", strokeColor: "#000000", fillOpacity: 0.7, strokeWidth: 10};
 // function initialize map
 function initializeMap() {
     var mapOptions = {
@@ -69,31 +73,36 @@ function initializeMap() {
         mapOptions);
 				
 }
-
-
-
 //function for mouseover and mouse out
 function highlightPoly(poly) {
     google.maps.event.addListener(poly,"mouseover",function() {
       poly.setOptions(highlightOptions);
     });
-    google.maps.event.addListener(poly,"mouseout",function() {
+    google.maps.event.addListener(poly,"mouseout",function() {	 
       poly.setOptions(normalStyle);
     });
 	
 }
-
 //function for events onclick over each polygon
+
 function createListener(poly) {
-	google.maps.event.addListener(poly,"click",function() {
-      poly.setOptions(highlightOptions);	  
+	google.maps.event.addListener(poly,"click",function() {	
+	if(selectedPolygonStyle!=null){    
+      selectedPolygonStyle.setOptions(normalStyle);
+      highlightPoly(selectedPolygonStyle);
+      }    
+        poly.infoWindow.close();   
+        selectedPolygonStyle=poly;    
+        poly.setOptions(selectedStyle);
+		google.maps.event.clearListeners(poly, 'mouseover');  
+        google.maps.event.clearListeners(poly, 'mouseout');  	
     });
 }
 
 // function to manage the data into the kml files
 function useTheData(doc){
   // Geodata handling goes here, using JSON properties of the doc object
-  geoXmlDoc = doc[0];
+  geoXmlDoc = doc[0]; 
   if(geoXmlDoc.gpolygons!=undefined){
 		for (var i = 0; i < geoXmlDoc.gpolygons.length; i++) {
 			geoXmlDoc.gpolygons[i].setOptions(normalStyle);
