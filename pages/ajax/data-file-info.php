@@ -18,7 +18,7 @@ if (!is_null($section)) {
         case "method":
             filesFound("datasets_method", $ids["method_id"]);
             break;
-        case "scenario":
+        case "scenarios":
             filesFound("datasets_scenario", $ids["scenario_id"]);
             break;
         case "model":
@@ -27,7 +27,7 @@ if (!is_null($section)) {
         case "period":
             filesFound("datasets_period", $ids["period_id"]);
             break;
-        case "variable":
+        case "variables":
             filesFound("datasets_variable", $ids["variable_id"]);
             break;
         case "resolution":
@@ -47,10 +47,22 @@ if (!is_null($section)) {
 function filesFound($databaseName, $id) {
     global $db, $ids;
     $info = new stdClass();
+    $info->description= new stdClass();
+
     if (!is_null($id)) {
-        $query = "SELECT id, description FROM " . $databaseName . " WHERE id = " . $id;
-        $result = $db->GetRow($query);
-        $info->description = $result["description"];
+        $optionsIds = explode(",", $id);
+
+        foreach($optionsIds as $oId){
+            // 'Others' option for 'variables' filter
+            if($oId == "9999" && $databaseName == "datasets_variable"){
+                $query = "SELECT id, description FROM " . $databaseName . " WHERE id > 7";
+            }else{
+                $query = "SELECT id, description FROM " . $databaseName . " WHERE id = " . $oId;
+            }
+
+            $result = $db->GetRow($query);
+            $info->description->$oId= $result["description"];
+        }
     } else {
         $info->description = "";
     }
@@ -64,15 +76,23 @@ function filesFound($databaseName, $id) {
             } else {
                 $isFirst = false;
             }
-            $query .= $key . " = " . $value;
+
+            // 'Others' option for 'variables' filter
+            if($key == "variable_id" && $value == 9999) {
+                $query .= $key . " > 7 ";
+            }else{
+                $query .= $key . " IN ( " . $value . " )";
+            }
         }
     }
+
     if($isFirst) {
         $info->filesFound = -1;
     } else {
         $info->filesFound = $db->GetOne($query);
     }
     $info->query = $query;
+
     echo json_encode($info);
 }
 

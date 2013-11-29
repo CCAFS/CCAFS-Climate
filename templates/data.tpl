@@ -5,7 +5,7 @@
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_data.gif" />
 </div>
-<div id="content" class="data2">
+<div id="content" class="data">
     <h3>Data</h3>
     <hr>
     <br>
@@ -20,14 +20,16 @@
                 <div>
                     
                     <input id="ac-1" class="inputs-ac" name="accordion-1" type="radio" checked />
+                    
                     <label class="inputs-ac" for="ac-1">File Set</label>
                    
                     <article class="ac-large">
 
                          {$isFirst = true}
 
-                        {foreach from=$fileSets item=fileSet}                            
-                            <input id="fileSet-{$fileSet['id']}" type="radio" name="fileSet" value="{$fileSet['id']}" {if $isFirst}checked{/if}/><label for="fileSet-{$fileSet['id']}">{$fileSet["name"]}</label><br>
+                        {foreach from=$fileSets item=fileSet}
+                            <img class="help_icon" id="help_icon_fileSet" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                            <input id="fileSet-{$fileSet['id']}" type="radio" name="fileSet" value="{$fileSet['id']}" /><label for="fileSet-{$fileSet['id']}">{$fileSet["name"]}</label><br>
                             {$isFirst = false}
                         {/foreach}
 
@@ -41,7 +43,8 @@
                      
                     <article class="ac-large">
                        {foreach from=$scenarios item=scenario}
-                            <input id="scenario-{$scenario['id']}" type="checkbox" name="scenarios[]" value="{$scenario['id']}"><label for="scenario-{$scenario['id']}">{$scenario['name']}</label><br>
+                            <img class="help_icon" id="help_icon_scenario" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                            <input id="scenario-{$scenario['id']}" type="checkbox" name="scenarios" value="{$scenario['id']}"><label for="scenario-{$scenario['id']}">{$scenario['name']}</label><br>
                         {/foreach}
                     </article>
                 </div>
@@ -53,8 +56,9 @@
                     <article class="ac-large2">
                        
                             {foreach from=$models item=model}
-                            <input type="checkbox" id="line-checkbox-{$model['id']}" name="{$model['acronym']}" value="{$model['id']}">
-                            <label for="line-checkbox-{$model['id']}">{$model['acronym']}</label>                         
+                                <img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                                <input type="checkbox" id="line-checkbox-{$model['id']}" name="model" value="{$model['id']}">
+                                <label for="line-checkbox-{$model['id']}">{$model['acronym']}</label>                         
                             {/foreach}
                         
                     </article>
@@ -65,33 +69,35 @@
             <div id="side-right-top">
                <div id="bloc">
                     <div id="box"> Extend </div> 
-                    <input tabindex="19" type="radio" id="line-radio-1" name="extent" value="global">
+                    <input tabindex="19" type="radio" id="line-radio-1" name="extent" value="global" />
                     <label for="line-radio-1">Global</label><br> 
-                    <input tabindex="19" type="radio" id="line-radio-2" name="extent" value="regional" checked>
+                    <input tabindex="19" type="radio" id="line-radio-2" name="extent" value="regional" />
                     <label for="line-radio-2">Regional</label><br> 
                </div> 
                 <div id="bloc">
                     <div id="box"> Format </div> 
                     {$isFirst = true}
                         {foreach from=$formats item=format}
-                            <input id="format-{$format['id']}" type="radio" name="format" value="{$format['id']}" {if $isFirst}checked{/if}/><label for="format-{$format['id']}">{$format["name"]}</label><br>
+                            <img class="help_icon" id="help_icon_format" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                            <input id="format-{$format['id']}" type="radio" name="format" value="{$format['id']}" /><label for="format-{$format['id']}">{$format["name"]}</label><br>
                             {$isFirst = false}
                         {/foreach}
                </div> 
 
-                <div id="bloc">
+               <div id="bloc">
                     <div id="box-b"> Period </div> 
 
-                    <div id="box-content">  
+                    <div id="box-content">
                         
                          <div id="dropdown-arrow"></div> 
                          <div id="drop-content">
                         {foreach from=$periods item=period}
-                            <input id="period-{$period['id']}" type="checkbox" name="periods[]" value="{$period['id']}"><label for="period-{$period['id']}">{$period['name']}</label><br>
+                            <img class="help_icon" id="help_icon_period" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                            <input id="period-{$period['id']}" type="checkbox" name="period" value="{$period['id']}"><label for="period-{$period['id']}">{$period['name']}</label><br>
                         {/foreach}
                         </div>
                     </div>
-                    
+
                </div> 
                 <div id="bloc">
                     <div id="box-b"> Variable </div> 
@@ -99,12 +105,13 @@
                         <div id="dropdown-arrow"></div> 
                         <div id="drop-content">
                         {foreach from=$variables item=variable}
-                            <input id="variable-{$variable['id']}" type="checkbox" name="variables[]" value="{$variable['id']}"><label for="variabe-{$variable['id']}">{$variable['name']}</label><br>
+                            <img class="help_icon" id="help_icon_variable" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                            <input id="variable-{$variable['id']}" type="checkbox" name="variables" value="{$variable['id']}"><label for="variabe-{$variable['id']}">{$variable['name']}</label><br>
                         {/foreach}
-                        <input id="variable-9999" type="checkbox" name="variables[]" value="9999"><label for="variable-9999">Other</label><br>
+                        <input id="variable-9999" type="checkbox" name="variables" value="9999"><label for="variable-9999">Other</label><br>
                         </div>
                     </div>
-                    
+
                </div> 
                 <div id="bloc">
                     <div id="box-b"> Resolution </div> 
@@ -113,15 +120,19 @@
                         <div id="drop-content">
                         {$isFirst = true}
                         {foreach from=$resolutions item=resolution}
-                            <input id="resolution-{$resolution['id']}" type="radio" name="resolution" value="{$resolution['id']}" {if $isFirst}checked{/if}/><label for="resolution-{$resolution['id']}">{$resolution["name"]}</label><br>
+                            <img class="help_icon" id="help_icon_resolution" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                            <input id="resolution-{$resolution['id']}" type="radio" name="resolution" value="{$resolution['id']}" /><label for="resolution-{$resolution['id']}">{$resolution["name"]}</label><br>
                             {$isFirst = false}
                         {/foreach}
                         </div>
                     </div> 
                </div> 
                <div id="bloc-search">
-                        <label>0 files found</label>
                         <button type="submit" id="searchSubmit" disabled="disabled">Search</button>
+                        <label>
+                            <span id="filesFound">0 files found</span>
+                            <img class="loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />
+                        </label>
                 </div>
             </div>
             <div id="side-right-bottom">

@@ -170,9 +170,6 @@ input.inputs-ac:checked ~ article.ac-large2{
     display: block;
 }
 
-
-
-
 #box-content {
     position: absolute;
     z-index: 100;
@@ -182,7 +179,6 @@ input.inputs-ac:checked ~ article.ac-large2{
 
 #drop-content{
     background: #34495E;
-     
     padding: 10px;
     border-radius: 5px;
     min-width: 96px;    
@@ -203,8 +199,9 @@ input.inputs-ac:checked ~ article.ac-large2{
     color: #555;
     font-weight: 300;
     position: inherit;
-    width: 150px;
+    width: 165px;
     float: right;
+    text-align: center;
 }
 
 #bloc-search button{
@@ -213,4 +210,18 @@ input.inputs-ac:checked ~ article.ac-large2{
     color: #fff;
     padding: 4px 14px 4px 14px;
     border-radius: 4px;
+    float: right;
+}
+
+.data .help_icon {
+    display: none;
+    float: right;
+}
+.data .loader {
+    display: none;
+}
+
+/* ToolTip - TipTip */
+#tiptip_content {
+    text-align: justify;
 }
