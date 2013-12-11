@@ -7,19 +7,7 @@ $(document).ready(function(){
   
   $("#searchSubmit").removeAttr("disabled");
   // FILE SET.
-
-  //validate if cordex option is checked for the first layer on map
-  if($("#fileSet-8").attr("checked")=="checked"){
-    geoXml = new geoXML3.parser({
-                    map: map,
-                    singleInfoWindow: true,
-                    afterParse: useTheData
-                });
-
-    geoXml.parse('http://ccafs-climate.local/theme/kmls/8.kml');
-  }
-
-  map.setCenter(new google.maps.LatLng(19.3, 18.6));
+  $("input[name='fileSet']").iCheck('uncheck'); 		
 });
 
 
@@ -214,33 +202,40 @@ function getArrayValues(array){
 // Functions below are in charge of load and update the map.
 //
 /* ******************************************************************************** */
-
-var map;
-var highlightOptions = {fillColor: "#FFFF00", strokeColor: "#000000", fillOpacity: 0.4, strokeWidth: 10};
-var normalStyle = {fillColor: "#FF0000", strokeColor: "#000000", fillOpacity: 0.4, strokeWidth: 10};
+var map=null;
+var selectedPolygonStyle=null;
+var highlightOptions = {fillColor: "#FFFFFF", strokeColor: "#FFFFFF", fillOpacity: 0.6, strokeWidth: 10};
+var normalStyle = {fillColor: "#BDBDBD", strokeColor: "#424242", fillOpacity: 0.4, strokeWidth: 10};
+var selectedStyle= {fillColor: "#2E2E2E", strokeColor: "#1C1C1C", fillOpacity: 0.6, strokeWidth: 10};
 
 // function initialize map
 function initializeMap() {
     var mapOptions = {
         zoom: 2,
-        center: new google.maps.LatLng(38, 4.5),
+        center: new google.maps.LatLng(23.079732,17.226563),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
+	google.maps.event.addListenerOnce(map, 'idle', function(){
+			map.setCenter(new google.maps.LatLng(23.079732,17.226563));
+			map.setZoom(1);
+		});			
 
 }
 
 //function to load the kml once the user changes file setz
 function loadKmlOnMap(){
   initializeMap();
-  geoXml = new geoXML3.parser({
-               map: map,
-               singleInfoWindow: true,
-               afterParse: useTheData
-      });
+if(this.value==3 || this.value==8 || this.value==7){	  
+	  geoXml = new geoXML3.parser({
+				   map: map,
+				   singleInfoWindow: true,
+				   afterParse: useTheData
+		  });
 
-  geoXml.parse('http://ccafs-climate.local/theme/kmls/'+this.value+'.kml');
+	  geoXml.parse('http://ccafs-climate.local/theme/kmls/'+this.value+'.kml');
+  }
 }
 
 //function for mouseover and mouse out
@@ -255,24 +250,31 @@ function highlightPoly(poly) {
 }
 
 //function for events onclick over each polygon
-function createListener(poly) {
-  google.maps.event.addListener(poly,"click",function() {
-      poly.setOptions(highlightOptions);    
+function createListener(poly,name) {	
+	google.maps.event.addListener(poly,"click",function() {		
+	if(selectedPolygonStyle!=null){    
+      selectedPolygonStyle.setOptions(normalStyle);
+      highlightPoly(selectedPolygonStyle);
+      }            
+        selectedPolygonStyle=poly;    
+        poly.setOptions(selectedStyle);
+		google.maps.event.clearListeners(poly, 'mouseover');  
+        google.maps.event.clearListeners(poly, 'mouseout');  	
     });
+	poly.infoWindow.close();
 }
 
 // function to manage the data into the kml files
 function useTheData(doc){
   // Geodata handling goes here, using JSON properties of the doc object
-  geoXmlDoc = doc[0];
+  geoXmlDoc = doc[0]; 
   if(geoXmlDoc.gpolygons!=undefined){
-    for (var i = 0; i < geoXmlDoc.gpolygons.length; i++) {
-      geoXmlDoc.gpolygons[i].setOptions(normalStyle);
-      highlightPoly(geoXmlDoc.gpolygons[i]);
-      createListener(geoXmlDoc.gpolygons[i]);
-    }
-    map.setZoom(1);
-  }
+		for (var i = 0; i < geoXmlDoc.gpolygons.length; i++) {
+			geoXmlDoc.gpolygons[i].setOptions(normalStyle);
+			highlightPoly(geoXmlDoc.gpolygons[i]);
+			createListener(geoXmlDoc.gpolygons[i],geoXmlDoc.placemarks[i].name);
+		}		
+	}	
 }
 /* Apply a custom KML to the map */
 
