@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
 
-  initializeICheckSettings();  
+  initializeICheckSettings();
   initializeMap();
   setPageEvents();
   
@@ -52,12 +52,12 @@ function initializeICheckSettings(){
 function setPageEvents(){
 
   $("input[name='fileSet']").on("ifChanged", getFilesInfo);
-  $("input[name='scenarios']").on("ifChanged", getFilesInfo);
-  $("input[name='model']").on("ifChanged", getFilesInfo);
+  $("input[name='scenarios\\[\\]']").on("ifChanged", getFilesInfo);
+  $("input[name='model\\[\\]']").on("ifChanged", getFilesInfo);
   $("input[name='extent']").on("ifChanged", getFilesInfo);
   $("input[name='format']").on("ifChanged", getFilesInfo);
-  $("input[name='period']").on("ifChanged", getFilesInfo);
-  $("input[name='variables']").on("ifChanged", getFilesInfo);
+  $("input[name='period\\[\\]']").on("ifChanged", getFilesInfo);
+  $("input[name='variables\\[\\]']").on("ifChanged", getFilesInfo);
   $("input[name='resolution']").on("ifChanged", getFilesInfo);
 
   // load on the map the selected layer(file set). 
@@ -89,7 +89,7 @@ function getFilesInfo(evt){
     data: filterValues,
     beforeSend: function() {
       // Hide the help icon if exists
-      var help_icon_element = $("#help_icon_"+$(evt.target).attr("name"));
+      var help_icon_element = $("#help_icon_"+$(evt.target).attr("name").replace('[', '').replace(']', ''));
       if($(help_icon_element).length > 0){
         $(help_icon_element).hide();
       }
@@ -154,13 +154,13 @@ function getFilesInfo(evt){
 function getUserSelections(filterName){
   var scenarios, model, period;
 
-  scenarios = getArrayValues( $("[name='scenarios']:checked") );
-  model = getArrayValues( $("input[name='model']:checked") );
-  period = getArrayValues( $("input[name='period']:checked") );
-  variables = getArrayValues( $("input[name='variables']:checked") );
+  scenarios = getArrayValues( $("[name='scenarios\\[\\]']:checked") );
+  model = getArrayValues( $("input[name='model\\[\\]']:checked") );
+  period = getArrayValues( $("input[name='period\\[\\]']:checked") );
+  variables = getArrayValues( $("input[name='variables\\[\\]']:checked") );
 
   var data = {
-    methodId: $("input[name='fileSet']:checked").val(),
+    methodId: $("input[name='method']:checked").val(),
     modelId: model,
     extendId: $("input[name='extent']:checked").val(),
     formatId: $("input[name='format']:checked").val(),
@@ -168,6 +168,7 @@ function getUserSelections(filterName){
     periodId: period,
     variableId: variables,
     resolutionId: $("input[name='resolution']:checked").val(),
+    filesetId: $("input[name='fileSet']:checked").val(),
     //tileId: $("#id_tile").val(),
     section: filterName
   }

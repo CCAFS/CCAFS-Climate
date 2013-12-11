@@ -11,6 +11,7 @@ $ids["period_id"] = isset($_POST["periodId"]) && $_POST["periodId"] != "" ? $_PO
 $ids["variable_id"] = isset($_POST["variableId"]) && $_POST["variableId"] != "" ? $_POST["variableId"] : null;
 $ids["resolution_id"] = isset($_POST["resolutionId"]) && $_POST["resolutionId"] != "" ? $_POST["resolutionId"] : null;
 $ids["format_id"] = isset($_POST["formatId"]) && $_POST["formatId"] != "" ? $_POST["formatId"] : null;
+$ids["file_set_id"] = isset($_POST["filesetId"]) && $_POST["filesetId"] != "" ? $_POST["filesetId"] : null;
 //$ids["tile_id"] = isset($_POST["tileId"]) && $_POST["tileId"] != "" ? $_POST["tileId"] : null;
 
 if (!is_null($section)) {
@@ -18,16 +19,16 @@ if (!is_null($section)) {
         case "method":
             filesFound("datasets_method", $ids["method_id"]);
             break;
-        case "scenarios":
+        case "scenarios[]":
             filesFound("datasets_scenario", $ids["scenario_id"]);
             break;
-        case "model":
+        case "model[]":
             filesFound("datasets_model", $ids["model_id"]);
             break;
-        case "period":
+        case "period[]":
             filesFound("datasets_period", $ids["period_id"]);
             break;
-        case "variables":
+        case "variables[]":
             filesFound("datasets_variable", $ids["variable_id"]);
             break;
         case "resolution":
@@ -35,6 +36,9 @@ if (!is_null($section)) {
             break;
         case "format":
             filesFound("datasets_format", $ids["format_id"]);
+            break;
+        case "fileSet":
+            filesFound("datasets_fileset", $ids["file_set_id"]);
             break;
         //case "tile":
         //filesFound("datasets_tile", $ids["tile_id"]);

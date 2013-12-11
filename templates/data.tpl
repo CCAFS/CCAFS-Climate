@@ -14,7 +14,7 @@
         <img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png">
     </div>
     <div id="search_form">
-
+        <form method="GET" action="/file-list.php" id="formSearch">
         <div id="side-left"> 
             <section class="ac-container">
                 <div>
@@ -43,8 +43,8 @@
                      
                     <article class="ac-large">
                        {foreach from=$scenarios item=scenario}
-                            <img class="help_icon" id="help_icon_scenario" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <input id="scenario-{$scenario['id']}" type="checkbox" name="scenarios" value="{$scenario['id']}"><label for="scenario-{$scenario['id']}">{$scenario['name']}</label><br>
+                            <img class="help_icon" id="help_icon_scenarios[]" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                            <input id="scenario-{$scenario['id']}" type="checkbox" name="scenarios[]" value="{$scenario['id']}"><label for="scenario-{$scenario['id']}">{$scenario['name']}</label><br>
                         {/foreach}
                     </article>
                 </div>
@@ -57,7 +57,7 @@
                        
                             {foreach from=$models item=model}
                                 <img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                                <input type="checkbox" id="line-checkbox-{$model['id']}" name="model" value="{$model['id']}">
+                                <input type="checkbox" id="line-checkbox-{$model['id']}" name="model[]" value="{$model['id']}">
                                 <label for="line-checkbox-{$model['id']}">{$model['acronym']}</label>                         
                             {/foreach}
                         
@@ -93,7 +93,7 @@
                          <div id="drop-content">
                         {foreach from=$periods item=period}
                             <img class="help_icon" id="help_icon_period" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <input id="period-{$period['id']}" type="checkbox" name="period" value="{$period['id']}"><label for="period-{$period['id']}">{$period['name']}</label><br>
+                            <input id="period-{$period['id']}" type="checkbox" name="period[]" value="{$period['id']}"><label for="period-{$period['id']}">{$period['name']}</label><br>
                         {/foreach}
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                         <div id="drop-content">
                         {foreach from=$variables item=variable}
                             <img class="help_icon" id="help_icon_variable" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <input id="variable-{$variable['id']}" type="checkbox" name="variables" value="{$variable['id']}"><label for="variabe-{$variable['id']}">{$variable['name']}</label><br>
+                            <input id="variable-{$variable['id']}" type="checkbox" name="variables[]" value="{$variable['id']}"><label for="variabe-{$variable['id']}">{$variable['name']}</label><br>
                         {/foreach}
                         <input id="variable-9999" type="checkbox" name="variables" value="9999"><label for="variable-9999">Other</label><br>
                         </div>
@@ -139,6 +139,7 @@
                 <div id="map-canvas">Zx</div>
             </div>
         </div>
+        </form>
     </div>
 
     <p>
