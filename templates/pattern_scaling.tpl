@@ -29,9 +29,10 @@
     </p>
     <p>
         This work was developed by the theme 4 of the CGIAR Research Program on Climate Change, Agriculture and Food Security (CCAFS). (<i>For more info about themes, visit <a target="_blank" href="http://www.ccafs.cgiar.org">CCAFS</a> portal</i>).
-    </p>
-    <h4 id="marksim_standalone">MarkSim standalone for DSSAT users</h4>
+    </p>    
+    <h4 id="marksim_standalone">MarkSim standalone for DSSAT users</h4> -
     <img src="{$smarty.const.SMARTY_IMG_URI}/icon_new.png">
+    
     <p>
         Marksim standalone combines the basic routines from the original MarkSim version, produced at CIAT and distributed on CD (Jones et.al., 2002, <a target="_blank" href="http://gisweb.ciat.cgiar.org/marksim/download/Theory.pdf"><i>see the theory section</i></a>), and the new <a target="_blank" href="http://gismap.ciat.cgiar.org/MarkSimGCM">MarkSimGCM web application</a> (Jones et al. 2011, <a target="_blank" href="https://hc.box.com/shared/f2gk053td8"><i>see the full report</i></a>) that runs off Google Earth.
         The standalone version is designed for computer users that need to process a large amount of data. It eliminates their picking at a keyboard and abusing their eyesight by searching an on-screen map for the required data point. It uses the same six GCM model results as MarkSimGCM and the same three scenarios, along with an ensemble of the six.
@@ -61,7 +62,7 @@
                 MarkSim standalone V2 for DSSAT users -
                 <img id="download_pdf_button" title="Download the document" src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />                
                 <span class="little">(355 KB)</span>
-                <img class="new_item" title="New" src="{$smarty.const.SMARTY_IMG_URI}/icon_new.png" />
+                - <img class="new_item" title="New" src="{$smarty.const.SMARTY_IMG_URI}/icon_new.png" />
             </a>
         </li>
         <li>
@@ -83,7 +84,7 @@
                     <img src="{$resource->iconUrl}">
                     <span class="little">({$resource->size})</span>
                     {if $resource->isNew == true}
-                    <img class="new_item" title="New" src="{$smarty.const.SMARTY_IMG_URI}/icon_new.png" />
+                    - <img class="new_item" title="New" src="{$smarty.const.SMARTY_IMG_URI}/icon_new.png" />
                     {/if}
                 </li>
             {/foreach}
