@@ -41,16 +41,27 @@
         In each of these it will place up to 99 replicates of yearly weather data and a new CLI file describing the climate under the particular situation of GCM/scenario/year for which the user called.
     </p>
     <p>
+        A new version of MarkSim standalone (v. 2) was developed for the CMIP5 GCMs. The original MarkSim_Standalone used six GCMs from the fourth approximation of the IPCC, the new one use 17 models from the CMIP5 range that were considered in the last IPCC report.
+    </p>
+    <p>
         The executable program, the GCM data and the MarkSim standalone documentation are available in the following links (you must allow pop-up windows in your browser):
     </p>
     <br>
     <h4>Documentation</h4>
     <ul>
-        <li>
+        <li>            
             <a target="_blank" href="/downloads/docs/MarkSim_Standalone_Documentation.pdf">
                 MarkSim standalone for DSSAT users -
                 <img id="download_pdf_button" title="Download the document" src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
-                <span class="little">(36 KB)</span>
+                <span class="little">(36 KB)</span>                
+            </a>
+        </li>
+        <li>
+            <a target="_blank" href="/downloads/docs/MarkSim_Standalone_Documentation_v2">
+                MarkSim standalone V2 for DSSAT users -
+                <img id="download_pdf_button" title="Download the document" src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />                
+                <span class="little">(355 KB)</span>
+                <img class="new_item" title="New" src="{$smarty.const.SMARTY_IMG_URI}/icon_new.png" />
             </a>
         </li>
         <li>
@@ -71,6 +82,9 @@
                     {$resource->description} -
                     <img src="{$resource->iconUrl}">
                     <span class="little">({$resource->size})</span>
+                    {if $resource->isNew == true}
+                    <img class="new_item" title="New" src="{$smarty.const.SMARTY_IMG_URI}/icon_new.png" />
+                    {/if}
                 </li>
             {/foreach}
             <input type="hidden" name="file-type" value="resource" />
