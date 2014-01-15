@@ -43,6 +43,10 @@ function initializeICheckSettings(){
     checkboxClass: 'icheckbox_flat',
     radioClass: 'iradio_flat'
   });
+  $('#bloc-e input').iCheck({
+    checkboxClass: 'icheckbox_flat',
+    radioClass: 'iradio_flat'
+  });
 
 }
 

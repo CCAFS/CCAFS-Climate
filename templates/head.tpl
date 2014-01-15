@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en-US" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
+<html class="no-js" lang="en-US" dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
     <head profile="http://gmpg.org/xfn/11">
         <title>{$pageTitle|default:'CCAFS Climate'}</title>
         <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
@@ -42,7 +42,7 @@
                 
                 {elseif $jsToInclude == "modernizr"}
                     <!-- Reference: JavaScript library that detects HTML5 and CSS3 features in the user’s browser. http://modernizr.com/ -->
-                    <script type="text/javascript" src="{$smarty.const.SMARTY_JS_URI}/Modernizr-2.0.6/modernizr.custom.29473.js"></script>
+                    <script type="text/javascript" src="{$smarty.const.SMARTY_JS_URI}/Modernizr-2.0.6/modernizr.custom.23336.js"></script>
                  {elseif $jsToInclude == "icheck"}
                     <!-- Reference: customizable checkboxes and radio buttons http://damirfoy.com/iCheck/ -->
                     <script src="{$smarty.const.SMARTY_JS_URI}/iCheck/jquery.icheck.min.js?v=0.9.1"></script>

@@ -117,12 +117,12 @@ input.inputs-ac:checked ~ article{
 }
 
 input.inputs-ac:checked ~ article.ac-large{
-    height: 370px;
+    height: 330px;
     padding-top: 10px;
 }
 
 input.inputs-ac:checked ~ article.ac-large2{
-    height: 370px;
+    height: 330px;
     padding-top: 10px;
     overflow: scroll;
 }
@@ -137,27 +137,34 @@ input.inputs-ac:checked ~ article.ac-large2{
 }
 
 /* blocs Settings */
+#bloc-e {
+    font-size: 13px;
+    width: 137px;
+    float: left;
+}
 
 #bloc {
     font-size: 13px;
-    width: 120px;
+    width: 110px;
     float: left;
 }
 #box {
     background: #E0DED9;
     font-weight: 300;
     color: #FFF;
-    width: 74px;
+    width: 85px;
     border-radius: 5px;
-    padding: 0px 0px 0px 43px;
+    padding: 1px 0px 1px 47px;
     margin-bottom: 10px;
+    text-shadow: 1px 1px 6px #B4B4B4;
+    font-size: 14px;
 }
 
 #box-b {
     background: #7c7c7c;
     font-weight: 400;
     color: #FFF;
-    width: 76px;
+    width: 65px;
     border-radius: 5px;
     padding: 3px 20px 3px 20px;
     
@@ -199,7 +206,7 @@ input.inputs-ac:checked ~ article.ac-large2{
     color: #555;
     font-weight: 300;
     position: inherit;
-    width: 165px;
+    width: 175px;
     float: right;
     text-align: center;
 }
@@ -224,4 +231,12 @@ input.inputs-ac:checked ~ article.ac-large2{
 /* ToolTip - TipTip */
 #tiptip_content {
     text-align: justify;
+}
+
+.disable{ 
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)"; 
+    filter: alpha(opacity=30); 
+    -moz-opacity:0.3; 
+    -khtml-opacity: 0.3; 
+    opacity: 0.3;
 }

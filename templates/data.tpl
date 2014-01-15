@@ -17,23 +17,26 @@
         <form method="GET" action="/file-list.php" id="formSearch">
         <div id="side-left"> 
             <section class="ac-container">
-                <div>
-                    
-                    <input id="ac-1" class="inputs-ac" name="accordion-1" type="radio" checked />
-                    
-                    <label class="inputs-ac" for="ac-1">File Set</label>
-                   
-                    <article class="ac-large">
-
-                         {$isFirst = true}
-
+                <div> 
+                    <input id="ac-0" class="inputs-ac" name="accordion-1" type="radio" checked /> 
+                    <label class="inputs-ac" for="ac-0">Method</label> 
+                    <article class="ac-large"> 
+                        {$isFirst = true} 
+                        {foreach from=$methods item=method}
+                            <img class="help_icon" id="help_icon_fileSet" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                            <input id="method-{$method['id']}" type="radio" name="method" value="{$method['id']}" /><label for="method-{$method['id']}">{$method["name"]}</label><br>
+                            {$isFirst = false}
+                        {/foreach} 
+                    </article>
+                </div>
+                <div class="inputs-ac">
+                    <input id="ac-1" class="inputs-ac" name="accordion-1" type="radio" /> 
+                    <label class="inputs-ac" for="ac-1">File Set</label> 
+                    <article class="ac-large">  
                         {foreach from=$fileSets item=fileSet}
                             <img class="help_icon" id="help_icon_fileSet" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <input id="fileSet-{$fileSet['id']}" type="radio" name="fileSet" value="{$fileSet['id']}" /><label for="fileSet-{$fileSet['id']}">{$fileSet["name"]}</label><br>
-                            {$isFirst = false}
-                        {/foreach}
-
-
+                            <input id="fileSet-{$fileSet['id']}" type="radio" name="fileSet" value="{$fileSet['id']}" /><label for="fileSet-{$fileSet['id']}">{$fileSet["name"]}</label><br> 
+                        {/foreach} 
                     </article>
                 </div>
                 <div class="inputs-ac">
@@ -67,14 +70,14 @@
         </div>
         <div id="side-right"> 
             <div id="side-right-top">
-               <div id="bloc">
+               <div id="bloc-e">
                     <div id="box"> Extend </div> 
                     <input tabindex="19" type="radio" id="line-radio-1" name="extent" value="global" />
                     <label for="line-radio-1">Global</label><br> 
                     <input tabindex="19" type="radio" id="line-radio-2" name="extent" value="regional" />
                     <label for="line-radio-2">Regional</label><br> 
                </div> 
-                <div id="bloc">
+                <div id="bloc-e">
                     <div id="box"> Format </div> 
                     {$isFirst = true}
                         {foreach from=$formats item=format}
