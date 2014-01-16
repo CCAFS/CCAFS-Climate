@@ -2,15 +2,16 @@
 ----------------------------------- */
 .icheckbox_flat,
 .iradio_flat {
-    display: block;
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
     margin: 0;
-    padding-right: 2px;
+    padding: 0;
     width: 20px;
     height: 20px;
     background: url(flat.png) no-repeat;
     border: none;
     cursor: pointer;
-    float: left;
 }
 
 .icheckbox_flat {
@@ -57,7 +58,9 @@
 /* red */
 .icheckbox_flat-red,
 .iradio_flat-red {
-    display: block;
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
     margin: 0;
     padding: 0;
     width: 20px;
@@ -111,7 +114,9 @@
 /* green */
 .icheckbox_flat-green,
 .iradio_flat-green {
-    display: block;
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
     margin: 0;
     padding: 0;
     width: 20px;
@@ -165,7 +170,9 @@
 /* blue */
 .icheckbox_flat-blue,
 .iradio_flat-blue {
-    display: block;
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
     margin: 0;
     padding: 0;
     width: 20px;
@@ -219,7 +226,9 @@
 /* aero */
 .icheckbox_flat-aero,
 .iradio_flat-aero {
-    display: block;
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
     margin: 0;
     padding: 0;
     width: 20px;
@@ -273,7 +282,9 @@
 /* grey */
 .icheckbox_flat-grey,
 .iradio_flat-grey {
-    display: block;
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
     margin: 0;
     padding: 0;
     width: 20px;
@@ -327,7 +338,9 @@
 /* orange */
 .icheckbox_flat-orange,
 .iradio_flat-orange {
-    display: block;
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
     margin: 0;
     padding: 0;
     width: 20px;
@@ -381,7 +394,9 @@
 /* yellow */
 .icheckbox_flat-yellow,
 .iradio_flat-yellow {
-    display: block;
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
     margin: 0;
     padding: 0;
     width: 20px;
@@ -435,7 +450,9 @@
 /* pink */
 .icheckbox_flat-pink,
 .iradio_flat-pink {
-    display: block;
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
     margin: 0;
     padding: 0;
     width: 20px;
@@ -489,7 +506,9 @@
 /* purple */
 .icheckbox_flat-purple,
 .iradio_flat-purple {
-    display: block;
+    display: inline-block;
+    *display: inline;
+    vertical-align: middle;
     margin: 0;
     padding: 0;
     width: 20px;
