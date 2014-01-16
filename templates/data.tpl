@@ -13,12 +13,56 @@
     <div class="center">
         <img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png">
     </div>
+    <div id="browserWarning">
+        <H5>Search engine no longer supports Internet Explorer versions 7 or 8.</H5>
+        <P>We recommend upgrading to the latest <A href="https://ie.microsoft.com/">Internet Explorer</A>, <A href="https://chrome.google.com">Google Chrome</A>, or <A href="https://mozilla.org/firefox/">Firefox</A>.</P>
+        <P>If you are using IE 9 or later, make sure you <A href="http://windows.microsoft.com/en-US/windows7/webpages-look-incorrect-in-Internet-Explorer">turn off "Compatibility View"</A>.</P>
+    </div>
     <div id="search_form">
         <form method="GET" action="/file-list.php" id="formSearch">
         <div id="side-left"> 
             <section class="ac-container">
-                <div> 
-                    <input id="ac-0" class="inputs-ac" name="accordion-1" type="radio" checked /> 
+
+                <div>
+
+                    <input id="ac-1" class="inputs-ac" name="accordion-1" type="radio" checked  /> 
+                    <label class="inputs-ac" for="ac-1">* File Set</label> 
+                    <article class="ac-large">  
+                        {foreach from=$fileSets item=fileSet}
+                            <img class="help_icon" id="help_icon_fileSet" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                            <input id="fileSet-{$fileSet['id']}" type="radio" name="fileSet" value="{$fileSet['id']}" /><label for="fileSet-{$fileSet['id']}">{$fileSet["name"]}</label><br> 
+                        {/foreach} 
+                    </article>
+
+                </div>
+                <div class="inputs-ac">
+                     
+                    <input id="ac-2" class="inputs-ac" name="accordion-1" type="radio" />
+                    <label class="inputs-ac" for="ac-2">* Scenario</label> 
+                    <article class="ac-large">
+                       {foreach from=$scenarios item=scenario}
+                            <img class="help_icon" id="help_icon_scenarios[]" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                            <input id="scenario-{$scenario['id']}" type="checkbox" name="scenarios[]" value="{$scenario['id']}"><label for="scenario-{$scenario['id']}">{$scenario['name']}</label><br>
+                        {/foreach}
+                    </article>
+
+                </div>
+                <div class="inputs-ac"> 
+
+                    <input class="inputs-ac" id="ac-3" name="accordion-1" type="radio"  />
+                    <label  class="inputs-ac" for="ac-3">* Model</label> 
+                    <article class="ac-large2"> 
+                            {foreach from=$models item=model}
+                                <img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                                <input type="checkbox" id="line-checkbox-{$model['id']}" name="model[]" value="{$model['id']}">
+                                <label for="line-checkbox-{$model['id']}">{$model['acronym']}</label>                         
+                            {/foreach} 
+                    </article>
+
+                </div>
+                <div class="inputs-ac"> 
+                
+                    <input id="ac-0" class="inputs-ac" name="accordion-1" type="radio" /> 
                     <label class="inputs-ac" for="ac-0">Method</label> 
                     <article class="ac-large"> 
                         {$isFirst = true} 
@@ -28,43 +72,7 @@
                             {$isFirst = false}
                         {/foreach} 
                     </article>
-                </div>
-                <div class="inputs-ac">
-                    <input id="ac-1" class="inputs-ac" name="accordion-1" type="radio" /> 
-                    <label class="inputs-ac" for="ac-1">File Set</label> 
-                    <article class="ac-large">  
-                        {foreach from=$fileSets item=fileSet}
-                            <img class="help_icon" id="help_icon_fileSet" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <input id="fileSet-{$fileSet['id']}" type="radio" name="fileSet" value="{$fileSet['id']}" /><label for="fileSet-{$fileSet['id']}">{$fileSet["name"]}</label><br> 
-                        {/foreach} 
-                    </article>
-                </div>
-                <div class="inputs-ac">
-                     
-                    <input id="ac-2" class="inputs-ac" name="accordion-1" type="radio" />
-                    <label class="inputs-ac" for="ac-2">Scenario</label>
-                     
-                    <article class="ac-large">
-                       {foreach from=$scenarios item=scenario}
-                            <img class="help_icon" id="help_icon_scenarios[]" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <input id="scenario-{$scenario['id']}" type="checkbox" name="scenarios[]" value="{$scenario['id']}"><label for="scenario-{$scenario['id']}">{$scenario['name']}</label><br>
-                        {/foreach}
-                    </article>
-                </div>
-                <div class="inputs-ac">
-                     
-                    <input class="inputs-ac" id="ac-3" name="accordion-1" type="radio"  />
-                    <label  class="inputs-ac" for="ac-3">Model</label>
-                    
-                    <article class="ac-large2">
-                       
-                            {foreach from=$models item=model}
-                                <img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                                <input type="checkbox" id="line-checkbox-{$model['id']}" name="model[]" value="{$model['id']}">
-                                <label for="line-checkbox-{$model['id']}">{$model['acronym']}</label>                         
-                            {/foreach}
-                        
-                    </article>
+
                 </div>
             </section>
         </div>
@@ -72,10 +80,17 @@
             <div id="side-right-top">
                <div id="bloc-e">
                     <div id="box"> Extend </div> 
-                    <input tabindex="19" type="radio" id="line-radio-1" name="extent" value="global" />
-                    <label for="line-radio-1">Global</label><br> 
-                    <input tabindex="19" type="radio" id="line-radio-2" name="extent" value="regional" />
-                    <label for="line-radio-2">Regional</label><br> 
+
+                    <div id="option">
+                        <input tabindex="19" type="radio" id="line-radio-1" name="extent" value="global" />
+                        <label for="line-radio-1">Global</label>
+                    </div> 
+                    
+                    <div id="option">
+                        <input tabindex="19" type="radio" id="line-radio-2" name="extent" value="regional" />
+                        <label for="line-radio-2">Regional</label>
+                    </div> 
+                     
                </div> 
                 <div id="bloc-e">
                     <div id="box"> Format </div> 
@@ -109,7 +124,7 @@
                         <div id="drop-content">
                         {foreach from=$variables item=variable}
                             <img class="help_icon" id="help_icon_variable" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <input id="variable-{$variable['id']}" type="checkbox" name="variables[]" value="{$variable['id']}"><label for="variabe-{$variable['id']}">{$variable['name']}</label><br>
+                            <input id="variable-{$variable['id']}" type="checkbox" name="variables[]" value="{$variable['id']}"><label for="variable-{$variable['id']}">{$variable['name']}</label><br>
                         {/foreach}
                         <input id="variable-9999" type="checkbox" name="variables" value="9999"><label for="variable-9999">Other</label><br>
                         </div>
@@ -139,7 +154,7 @@
                 </div>
             </div>
             <div id="side-right-bottom">
-                <div id="map-canvas">Zx</div>
+                <div id="map-canvas"></div>
             </div>
         </div>
         </form>

@@ -72,15 +72,15 @@ label.inputs-ac{
     position: relative;
     z-index: 20;
     display: block;
-    height: 30px;
-    cursor: pointer;
+    height: 30px
+;    cursor: pointer;
     color: #FFF;
     
     line-height: 33px;
     
 }
 label.inputs-ac:hover{
-    background: #323A45;
+    background: #2A3038;
 }
 input.inputs-ac:checked + label.inputs-ac,
 input.inputs-ac:checked + label.inputs-ac:hover{
@@ -154,10 +154,14 @@ input.inputs-ac:checked ~ article.ac-large2{
     color: #FFF;
     width: 85px;
     border-radius: 5px;
-    padding: 1px 0px 1px 47px;
-    margin-bottom: 10px;
+    padding: 1px 0px 1px 46px;
+    margin-bottom: 4px;
     text-shadow: 1px 1px 6px #B4B4B4;
     font-size: 14px;
+}
+
+#box-b:hover {
+ background: #5c5c5c;
 }
 
 #box-b {
@@ -198,7 +202,7 @@ input.inputs-ac:checked ~ article.ac-large2{
 }
 
 #bloc label{
-    float: left;
+   /* float: left;*/
 }
 
 #bloc-search {
@@ -206,9 +210,10 @@ input.inputs-ac:checked ~ article.ac-large2{
     color: #555;
     font-weight: 300;
     position: inherit;
-    width: 175px;
+    width: 240px;
     float: right;
     text-align: center;
+    /* box-shadow: 1px 1px 8px #A7A7A7; */
 }
 
 #bloc-search button{
@@ -239,4 +244,42 @@ input.inputs-ac:checked ~ article.ac-large2{
     -moz-opacity:0.3; 
     -khtml-opacity: 0.3; 
     opacity: 0.3;
+}
+
+
+/* iCheck style */
+
+.icheckbox_line, .iradio_line {
+    position: relative;
+    display: block;
+    margin: 2px;
+    padding: 5px 15px 5px 38px;
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 8px;
+    letter-spacing: 0.03em;
+    color: #FFF;
+    background: #353535;
+    border: none;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 3px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.icheckbox_flat,  { 
+    float: left;
+}
+
+/* IE Browsers message */
+
+#browserWarning {
+    background: url(../images/iewarn.png) no-repeat;
+    font-size: 14px;
+    line-height: 4px;
+    padding: 5px 15px 5px 94px;
+    margin: 10px 31px;
+    border: 1px solid #DADADA;
+    background-color: #F3F3F3;
+    display: none;
 }

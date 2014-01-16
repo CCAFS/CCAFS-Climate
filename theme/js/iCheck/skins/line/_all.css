@@ -1,19 +1,20 @@
 /* iCheck plugin Line skin
 ----------------------------------- */
-.icheckbox_line,
-.iradio_line {
+.icheckbox_line, .iradio_line {
     position: relative;
     display: block;
-    margin: 0;
+    margin: 2px;
     padding: 5px 15px 5px 38px;
-    font-size: 13px;
-    line-height: 17px;
-    color: #fff;
-    background: #000;
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 8px;
+    letter-spacing: 0.03em;
+    color: #FFF;
+    background: #353535;
     border: none;
-    -webkit-border-radius: 3px;
+    -webkit-border-radius: 4px;
     -moz-border-radius: 3px;
-    border-radius: 3px;
+    border-radius: 4px;
     cursor: pointer;
 }
     .icheckbox_line .icheck_line-icon,

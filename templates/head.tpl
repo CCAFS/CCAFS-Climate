@@ -14,7 +14,13 @@
         {if $jsIncludes}
             {foreach from=$jsIncludes item=jsToInclude}
                 {if $jsToInclude == "jquery"}
-                    <script src="{$smarty.const.SMARTY_JS_URI}/jquery/jquery-1.8.1.min.js"></script>					
+                    <script src="{$smarty.const.SMARTY_JS_URI}/jquery/jquery-1.8.1.min.js"></script>		
+                {elseif $jsToInclude == "icheck"}
+                    <!-- Reference: customizable checkboxes and radio buttons http://damirfoy.com/iCheck/ -->
+                    <script src="{$smarty.const.SMARTY_JS_URI}/iCheck/jquery.icheck.min.js?v=0.9.1"></script>
+                    <link href="{$smarty.const.SMARTY_JS_URI}/iCheck/skins/minimal/_all.css" rel="stylesheet"> 
+                    <link href="{$smarty.const.SMARTY_JS_URI}/iCheck/skins/line/_all.css" rel="stylesheet"> 
+                    <link href="{$smarty.const.SMARTY_JS_URI}/iCheck/skins/flat/_all.css" rel="stylesheet">    
                 {elseif $jsToInclude == "index"}
                     <script src="{$smarty.const.SMARTY_JS_URI}/index.js"></script>
                 {elseif $jsToInclude == "downscaling"}
@@ -23,8 +29,11 @@
                     <script src="{$smarty.const.SMARTY_JS_URI}/pattern_scaling.js"></script>
                 {elseif $jsToInclude == "data"}                    
                     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={$smarty.const.GOOGLE_API_KEY}&sensor=false"></script>
-                    <script src="{$smarty.const.SMARTY_JS_URI}/data.js"></script>
-                    <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/data.css" media="screen" />
+                    <script src="{$smarty.const.SMARTY_JS_URI}/data.js"></script> 
+                        <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/data.css" media="screen" /> 
+                    <!--[if lte IE 8]>
+                        <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/data-IE8.css" media="screen" />
+                    <![endif]-->
                 {elseif $jsToInclude == "bpopup"}
                     <!-- Reference http://dinbror.dk/bpopup/ -->
                     <script src="{$smarty.const.SMARTY_JS_URI}/bpopup/jquery.bpopup-0.7.0.min.js"></script>
@@ -43,12 +52,7 @@
                 {elseif $jsToInclude == "modernizr"}
                     <!-- Reference: JavaScript library that detects HTML5 and CSS3 features in the user’s browser. http://modernizr.com/ -->
                     <script type="text/javascript" src="{$smarty.const.SMARTY_JS_URI}/Modernizr-2.0.6/modernizr.custom.23336.js"></script>
-                 {elseif $jsToInclude == "icheck"}
-                    <!-- Reference: customizable checkboxes and radio buttons http://damirfoy.com/iCheck/ -->
-                    <script src="{$smarty.const.SMARTY_JS_URI}/iCheck/jquery.icheck.min.js?v=0.9.1"></script>
-                    <link href="{$smarty.const.SMARTY_JS_URI}/iCheck/skins/minimal/_all.css" rel="stylesheet"> 
-                    <link href="{$smarty.const.SMARTY_JS_URI}/iCheck/skins/line/_all.css" rel="stylesheet"> 
-                    <link href="{$smarty.const.SMARTY_JS_URI}/iCheck/skins/flat/_all.css" rel="stylesheet">
+                
 				 {elseif $jsToInclude == "map"}		
 					<script src="http://geoxml3.googlecode.com/svn/branches/polys/geoxml3.js"></script>
                               
