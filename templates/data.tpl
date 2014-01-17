@@ -97,7 +97,7 @@
                     {$isFirst = true}
                         {foreach from=$formats item=format}
                             <img class="help_icon" id="help_icon_format" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <input id="format-{$format['id']}" type="radio" name="format" value="{$format['id']}" /><label for="format-{$format['id']}">{$format["name"]}</label><br>
+                            <input id="format-{$format['id']}" type="checkbox" name="format" value="{$format['id']}" /><label for="format-{$format['id']}">{$format["name"]}</label><br>
                             {$isFirst = false}
                         {/foreach}
                </div> 
