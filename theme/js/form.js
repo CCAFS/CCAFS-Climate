@@ -64,6 +64,14 @@ $(document).ready(function(){
     });
 
 
+    // Submitting user information.
+    $("#skip-form").on("click", function(event) { 
+        event.preventDefault();
+        generateLinks("0");
+       console.log($selectedFiles);
+    });
+
+
     function generateLinks(downloadId) {
         // variable $selectedFiles is initialized in form.tpl.
         $.ajax({
