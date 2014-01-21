@@ -117,12 +117,12 @@ input.inputs-ac:checked ~ article{
 }
 
 input.inputs-ac:checked ~ article.ac-large{
-    height: 330px;
+    height: 372px;
     padding-top: 10px;
 }
 
 input.inputs-ac:checked ~ article.ac-large2{
-    height: 330px;
+    height: 372px;
     padding-top: 10px;
     overflow: scroll;
 }
@@ -161,16 +161,16 @@ input.inputs-ac:checked ~ article.ac-large2{
 }
 
 #box-b:hover {
- background: #5c5c5c;
+ background-color: #5c5c5c;
 }
 
 #box-b {
-    background: #7c7c7c;
+    background: url(../images/dropdown.png) 83px no-repeat #7C7C7C;
     font-weight: 400;
     color: #FFF;
-    width: 65px;
+    width: 54px;
     border-radius: 5px;
-    padding: 3px 20px 3px 20px;
+    padding: 3px 33px 3px 20px;
     
      
     text-align: center;
@@ -238,7 +238,14 @@ input.inputs-ac:checked ~ article.ac-large2{
     text-align: justify;
 }
 
-.disable{ 
+.disabled { 
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)"; 
+    filter: alpha(opacity=30); 
+    -moz-opacity:0.3; 
+    -khtml-opacity: 0.3; 
+    opacity: 0.3;
+}
+button[type="submit"][disabled] { 
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)"; 
     filter: alpha(opacity=30); 
     -moz-opacity:0.3; 
@@ -246,26 +253,7 @@ input.inputs-ac:checked ~ article.ac-large2{
     opacity: 0.3;
 }
 
-
-/* iCheck style */
-
-.icheckbox_line, .iradio_line {
-    position: relative;
-    display: block;
-    margin: 2px;
-    padding: 5px 15px 5px 38px;
-    font-size: 14px;
-    font-weight: 100;
-    line-height: 8px;
-    letter-spacing: 0.03em;
-    color: #FFF;
-    background: #353535;
-    border: none;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 3px;
-    border-radius: 4px;
-    cursor: pointer;
-}
+/* iCheck style */ 
 
 .icheckbox_flat,  { 
     float: left;

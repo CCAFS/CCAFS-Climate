@@ -6,9 +6,46 @@ $(document).ready(function(){
   setPageEvents();
 
   // FILE SET.
+<<<<<<< HEAD
   $("input[name='fileSet']").iCheck('uncheck');     
 });
+=======
+  $("input[name='fileSet']").iCheck('uncheck'); 	 
+  inputsDisabled();
+}); 
 
+function inputsDisabled(){ 
+  // Inputs Disabled
+  $("input[name='extent']").iCheck('disable'); 
+  $("input[name='format']").iCheck('disable'); 
+  $("input[name='period\\[\\]']").iCheck('disable');  
+  $("input[name='variables\\[\\]']").iCheck('disable');  
+  $("input[name='resolution']").iCheck('disable'); 
+
+  //labels style disabled
+  $("label.format").addClass( "disabled" );
+  $("label.extent").addClass( "disabled" ); 
+  $("label.period\\[\\]").addClass( "disabled" );
+  $("label.variables\\[\\]").addClass( "disabled" );
+  $("label.resolution").addClass( "disabled" );
+}
+>>>>>>> Improve some features
+
+function inputsEnabled(){ 
+  // Inputs Enabled
+  $("input[name='extent']").iCheck('enable'); 
+  $("input[name='format']").iCheck('enable'); 
+  $("input[name='period\\[\\]']").iCheck('enable');  
+  $("input[name='variables\\[\\]']").iCheck('enable');  
+  $("input[name='resolution']").iCheck('enable'); 
+  
+  //labels style remove disabled
+  $("label.format").removeClass( "disabled" );
+  $("label.extent").removeClass( "disabled" ); 
+  $("label.period\\[\\]").removeClass( "disabled" );
+  $("label.variables\\[\\]").removeClass( "disabled" );
+  $("label.resolution").removeClass( "disabled" );
+}
 
 /**
  * This function initialize the settings for 

@@ -23,8 +23,7 @@
         <div id="side-left"> 
             <section class="ac-container">
 
-                <div>
-
+                <div> 
                     <input id="ac-1" class="inputs-ac" name="accordion-1" type="radio" checked  /> 
                     <label class="inputs-ac" for="ac-1">* File Set</label> 
                     <article class="ac-large">  
@@ -60,35 +59,22 @@
                     </article>
 
                 </div>
-                <div class="inputs-ac"> 
                 
-                    <input id="ac-0" class="inputs-ac" name="accordion-1" type="radio" /> 
-                    <label class="inputs-ac" for="ac-0">Method</label> 
-                    <article class="ac-large"> 
-                        {$isFirst = true} 
-                        {foreach from=$methods item=method}
-                            <img class="help_icon" id="help_icon_fileSet" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <input id="method-{$method['id']}" type="radio" name="method" value="{$method['id']}" /><label for="method-{$method['id']}">{$method["name"]}</label><br>
-                            {$isFirst = false}
-                        {/foreach} 
-                    </article>
-
-                </div>
             </section>
         </div>
         <div id="side-right"> 
             <div id="side-right-top">
                <div id="bloc-e">
-                    <div id="box"> Extend </div> 
+                    <div id="box"> Extent </div> 
 
                     <div id="option">
                         <input tabindex="19" type="radio" id="line-radio-1" name="extent" value="global" />
-                        <label for="line-radio-1">Global</label>
+                        <label for="line-radio-1" class="extent">Global</label>
                     </div> 
                     
                     <div id="option">
                         <input tabindex="19" type="radio" id="line-radio-2" name="extent" value="regional" />
-                        <label for="line-radio-2">Regional</label>
+                        <label for="line-radio-2" class="extent">Regional</label>
                     </div> 
                      
                </div> 
@@ -97,7 +83,8 @@
                     {$isFirst = true}
                         {foreach from=$formats item=format}
                             <img class="help_icon" id="help_icon_format" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <input id="format-{$format['id']}" type="checkbox" name="format" value="{$format['id']}" /><label for="format-{$format['id']}">{$format["name"]}</label><br>
+                            <input id="format-{$format['id']}" type="checkbox" name="format" value="{$format['id']}" />
+                            <label for="format-{$format['id']}" class="format">{$format["name"]}</label><br>
                             {$isFirst = false}
                         {/foreach}
                </div> 
@@ -111,7 +98,8 @@
                          <div id="drop-content">
                         {foreach from=$periods item=period}
                             <img class="help_icon" id="help_icon_period" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <input id="period-{$period['id']}" type="checkbox" name="period[]" value="{$period['id']}"><label for="period-{$period['id']}">{$period['name']}</label><br>
+                            <input id="period-{$period['id']}" type="checkbox" name="period[]" value="{$period['id']}">
+                            <label for="period-{$period['id']}" class="period[]">{$period['name']}</label><br>
                         {/foreach}
                         </div>
                     </div>
@@ -124,9 +112,11 @@
                         <div id="drop-content">
                         {foreach from=$variables item=variable}
                             <img class="help_icon" id="help_icon_variable" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <input id="variable-{$variable['id']}" type="checkbox" name="variables[]" value="{$variable['id']}"><label for="variable-{$variable['id']}">{$variable['name']}</label><br>
+                            <input id="variable-{$variable['id']}" type="checkbox" name="variables[]" value="{$variable['id']}">
+                            <label for="variable-{$variable['id']}" class="variables[]">{$variable['name']}</label><br>
                         {/foreach}
-                        <input id="variable-9999" type="checkbox" name="variables" value="9999"><label for="variable-9999">Other</label><br>
+                        <input id="variable-9999" type="checkbox" name="variables[]" value="9999">
+                        <label for="variable-9999" class="variables[]">Other</label><br>
                         </div>
                     </div>
 
@@ -139,7 +129,8 @@
                         {$isFirst = true}
                         {foreach from=$resolutions item=resolution}
                             <img class="help_icon" id="help_icon_resolution" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <input id="resolution-{$resolution['id']}" type="radio" name="resolution" value="{$resolution['id']}" /><label for="resolution-{$resolution['id']}">{$resolution["name"]}</label><br>
+                            <input id="resolution-{$resolution['id']}" type="radio" name="resolution" value="{$resolution['id']}" />
+                            <label for="resolution-{$resolution['id']}" class="resolution">{$resolution["name"]}</label><br>
                             {$isFirst = false}
                         {/foreach}
                         </div>

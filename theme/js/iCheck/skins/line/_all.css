@@ -10,7 +10,7 @@
     line-height: 8px;
     letter-spacing: 0.03em;
     color: #FFF;
-    background: #353535;
+    background: #8D8D84;
     border: none;
     -webkit-border-radius: 4px;
     -moz-border-radius: 3px;
@@ -33,11 +33,11 @@
     .icheckbox_line.hover,
     .icheckbox_line.checked.hover,
     .iradio_line.hover {
-        background: #444;
+        background: #797972;
     }
     .icheckbox_line.checked,
     .iradio_line.checked {
-        background: #000;
+        background: #64645B;
     }
         .icheckbox_line.checked .icheck_line-icon,
         .iradio_line.checked .icheck_line-icon {
