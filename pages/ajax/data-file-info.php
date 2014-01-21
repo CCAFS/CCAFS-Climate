@@ -12,7 +12,7 @@ $ids["variable_id"] = isset($_POST["variableId"]) && $_POST["variableId"] != "" 
 $ids["resolution_id"] = isset($_POST["resolutionId"]) && $_POST["resolutionId"] != "" ? $_POST["resolutionId"] : null;
 $ids["format_id"] = isset($_POST["formatId"]) && $_POST["formatId"] != "" ? $_POST["formatId"] : null;
 $ids["file_set_id"] = isset($_POST["filesetId"]) && $_POST["filesetId"] != "" ? $_POST["filesetId"] : null;
-//$ids["tile_id"] = isset($_POST["tileId"]) && $_POST["tileId"] != "" ? $_POST["tileId"] : null;
+$ids["tiles"] = isset($_POST["tileName"]) && $_POST["tileName"] != "" ? $_POST["tileName"] : null;
 
 if (!is_null($section)) {
     switch ($section) {
@@ -40,12 +40,22 @@ if (!is_null($section)) {
         case "fileSet":
             filesFound("datasets_fileset", $ids["file_set_id"]);
             break;
-        //case "tile":
-        //filesFound("datasets_tile", $ids["tile_id"]);
-        //break;
+        case "tile":
+            $ids["tiles"] = getTileID($ids["tiles"]);
+            filesFound("datasets_tile", $ids["tiles"]);
+            break;
         default:
             break;
     }
+}
+
+function getTileID($tileName){
+    global $db;
+    $query = "SELECT id FROM datasets_tile WHERE name = '" . $tileName . "';";
+    $result = $db->GetRow($query);
+
+    $tileID = $result["id"];
+    return $tileID;
 }
 
 function filesFound($databaseName, $id) {

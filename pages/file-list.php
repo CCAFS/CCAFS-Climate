@@ -11,7 +11,7 @@ $formatId = isset($_GET["format"]) && is_numeric($_GET["format"]) && $_GET["form
 $periodId = isset($_GET["period"]) ?  implode( ",", $_GET["period"] ) : null;
 $fileSetId = isset($_GET["fileSet"]) && is_numeric($_GET["fileSet"]) && $_GET["fileSet"] >= 0 ? $_GET["fileSet"] : null;
 
-$query = "SELECT df.id, df.local_url, df.name, da.name as availability, fset.name as fileset
+$query = "SELECT df.id, df.local_url, df.name, da.id as availability_id, da.name as availability, fset.name as fileset
     FROM datasets_file df, datasets_dataavailability da, datasets_fileset fset
     WHERE df.availability_status_id = da.id
     AND df.file_set_id = fset.id";
