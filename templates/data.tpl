@@ -8,14 +8,14 @@
     <hr>
     <br>
     
-    <!-- span style="background-color: rgb(255, 162, 162); padding: 6px; margin-bottom: 22px; display: block;">Due to some technical problems, the data is temporally unavailable. Please come back in a couple of hours.</span -->
+    <span style="background-color: rgb(255, 162, 162); padding: 6px; margin-bottom: 22px; display: block;">Due to some technical problems, the data is temporally unavailable. Please come back in a couple of hours.</span>
 
     <div class="center">
         <img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png">
     </div>
     <div id="search_form">
         <form method="GET" action="/file-list.php" id="formSearch">
-            <table id="table_fields" class="table_form">
+            <table id="table_fields" class="table_form" style="display:none">
                 <tbody>
                     <tr>
                         <!-- Method -->
