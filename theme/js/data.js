@@ -6,8 +6,9 @@ $(document).ready(function(){
   setPageEvents();
 
   // FILE SET.
-  $("input[name='fileSet']").iCheck('uncheck'); 	 
+  //$("input[name='fileSet']").iCheck('uncheck'); 	 
   inputsDisabled();
+  
 }); 
 
 function inputsDisabled(){ 
@@ -298,7 +299,7 @@ function loadKmlOnMap(){
                   afterParse: useTheData
                 });
 
-	  geoXml.parse('http://ccafs-climate.local/theme/kmls/'+this.value+'.kml');
+	  geoXml.parse('/theme/kmls/'+this.value+'.kml');
   }
 }
 
