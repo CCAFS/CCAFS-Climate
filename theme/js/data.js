@@ -6,10 +6,6 @@ $(document).ready(function(){
   setPageEvents();
 
   // FILE SET.
-<<<<<<< HEAD
-  $("input[name='fileSet']").iCheck('uncheck');     
-});
-=======
   $("input[name='fileSet']").iCheck('uncheck'); 	 
   inputsDisabled();
 }); 
@@ -29,7 +25,6 @@ function inputsDisabled(){
   $("label.variables\\[\\]").addClass( "disabled" );
   $("label.resolution").addClass( "disabled" );
 }
->>>>>>> Improve some features
 
 function inputsEnabled(){ 
   // Inputs Enabled
