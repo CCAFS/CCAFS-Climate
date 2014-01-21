@@ -29,9 +29,8 @@
     </p>
     <p>
         This work was developed by the theme 4 of the CGIAR Research Program on Climate Change, Agriculture and Food Security (CCAFS). (<i>For more info about themes, visit <a target="_blank" href="http://www.ccafs.cgiar.org">CCAFS</a> portal</i>).
-    </p>
-    <h4 id="marksim_standalone">MarkSim standalone for DSSAT users</h4>
-    <img src="{$smarty.const.SMARTY_IMG_URI}/icon_new.png">
+    </p>    
+    <h4 id="marksim_standalone">MarkSim standalone for DSSAT users</h4>    
     <p>
         Marksim standalone combines the basic routines from the original MarkSim version, produced at CIAT and distributed on CD (Jones et.al., 2002, <a target="_blank" href="http://gisweb.ciat.cgiar.org/marksim/download/Theory.pdf"><i>see the theory section</i></a>), and the new <a target="_blank" href="http://gismap.ciat.cgiar.org/MarkSimGCM">MarkSimGCM web application</a> (Jones et al. 2011, <a target="_blank" href="https://hc.box.com/shared/f2gk053td8"><i>see the full report</i></a>) that runs off Google Earth.
         The standalone version is designed for computer users that need to process a large amount of data. It eliminates their picking at a keyboard and abusing their eyesight by searching an on-screen map for the required data point. It uses the same six GCM model results as MarkSimGCM and the same three scenarios, along with an ensemble of the six.
@@ -41,16 +40,27 @@
         In each of these it will place up to 99 replicates of yearly weather data and a new CLI file describing the climate under the particular situation of GCM/scenario/year for which the user called.
     </p>
     <p>
+        A new version of MarkSim standalone (v. 2) was developed for the CMIP5 GCMs. The original MarkSim_Standalone used six GCMs from the fourth approximation of the IPCC, the new one use 17 models from the CMIP5 range that were considered in the last IPCC report.
+    </p>
+    <p>
         The executable program, the GCM data and the MarkSim standalone documentation are available in the following links (you must allow pop-up windows in your browser):
     </p>
     <br>
     <h4>Documentation</h4>
     <ul>
-        <li>
+        <li>            
             <a target="_blank" href="/downloads/docs/MarkSim_Standalone_Documentation.pdf">
                 MarkSim standalone for DSSAT users -
                 <img id="download_pdf_button" title="Download the document" src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
-                <span class="little">(36 KB)</span>
+                <span class="little">(36 KB)</span>                
+            </a>
+        </li>
+        <li>
+            <a target="_blank" href="/downloads/docs/MarkSim_Standalone_Documentation_v2">
+                MarkSim standalone V2 for DSSAT users -
+                <img id="download_pdf_button" title="Download the document" src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />                
+                <span class="little">(355 KB)</span>
+                - <img class="new_item" title="New" src="{$smarty.const.SMARTY_IMG_URI}/icon_new.png" />
             </a>
         </li>
         <li>
@@ -71,6 +81,9 @@
                     {$resource->description} -
                     <img src="{$resource->iconUrl}">
                     <span class="little">({$resource->size})</span>
+                    {if $resource->isNew == true}
+                    - <img class="new_item" title="New" src="{$smarty.const.SMARTY_IMG_URI}/icon_new.png" />
+                    {/if}
                 </li>
             {/foreach}
             <input type="hidden" name="file-type" value="resource" />

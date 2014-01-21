@@ -9,3 +9,8 @@
 # Netbeans
 /nbproject/
 /core/
+
+# Eclipse
+.buildpath
+.project
+.settings*
