@@ -2,12 +2,13 @@
 $(document).ready(function(){
 
   initializeICheckSettings();
+  inputsDisabled();
   initializeMap();
   setPageEvents();
 
   // FILE SET.
   //$("input[name='fileSet']").iCheck('uncheck'); 	 
-  inputsDisabled();
+  
   
 }); 
 
@@ -87,15 +88,15 @@ function initializeICheckSettings(){
  */
 function setPageEvents(){
 
-  $("input[name='fileSet']").on("ifChanged", getFilesInfo);
-  $("input[name='scenarios\\[\\]']").on("ifChanged", getFilesInfo);
-  $("input[name='model\\[\\]']").on("ifChanged", getFilesInfo);
-  $("input[name='method']").on("ifChanged", getFilesInfo);
-  $("input[name='extent']").on("ifChanged", getFilesInfo);
-  $("input[name='format']").on("ifChanged", getFilesInfo);
-  $("input[name='period\\[\\]']").on("ifChanged", getFilesInfo);
-  $("input[name='variables\\[\\]']").on("ifChanged", getFilesInfo);
-  $("input[name='resolution']").on("ifChanged", getFilesInfo);
+  $("input[name='fileSet']").on("ifToggled", getFilesInfo);
+  $("input[name='scenarios\\[\\]']").on("ifToggled", getFilesInfo);
+  $("input[name='model\\[\\]']").on("ifToggled", getFilesInfo);
+  $("input[name='method']").on("ifToggled", getFilesInfo);
+  $("input[name='extent']").on("ifToggled", getFilesInfo);
+  $("input[name='format']").on("ifToggled", getFilesInfo);
+  $("input[name='period\\[\\]']").on("ifToggled", getFilesInfo);
+  $("input[name='variables\\[\\]']").on("ifToggled", getFilesInfo);
+  $("input[name='resolution']").on("ifToggled", getFilesInfo);
 
 
   // load on the map the selected layer(file set). 
@@ -115,9 +116,9 @@ function setPageEvents(){
 
 function areRequiredFieldsFilled(filterValues){
 
-  if( filterValues.filesetId == null ||
-      filterValues.scenarioId == null ||
-      filterValues.modelId == null
+  if( filterValues.filesetId == "" ||
+      filterValues.scenarioId == "" ||
+      filterValues.modelId == ""
     ){
     return false;
   }
@@ -126,13 +127,16 @@ function areRequiredFieldsFilled(filterValues){
 }
 
 function getFilesInfo(evt){
+  console.log("getfilesinfo")
   var filterValues = getUserSelections($(evt.target).attr("name"));
-
-  /*
+  
+  
   if( ! areRequiredFieldsFilled(filterValues) ){
     return false;
+  }else{
+    inputsEnabled();
   }
-  */
+  
 
   // Hide the help icon 
   if($(evt.target).parent().prev().hasClass("help_icon")){
@@ -300,6 +304,8 @@ function loadKmlOnMap(){
                 });
 
 	  geoXml.parse('/theme/kmls/'+this.value+'.kml');
+  }else{
+    $("#map-canvas").html("<img src='/theme/images/map-not-available.png'/>");
   }
 }
 

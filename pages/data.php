@@ -5,8 +5,8 @@ require_once '../config/db.php';
 $query = "SELECT id, name FROM datasets_fileset ORDER BY name ASC";
 $fileSets = $db->getAll($query);
 
-$query = "SELECT id, name FROM datasets_method";
-$methods = $db->getAll($query);
+//$query = "SELECT id, name FROM datasets_method";
+//$methods = $db->getAll($query);
 
 $query = "SELECT id, name FROM datasets_scenario";
 $scenarios = $db->getAll($query);
@@ -31,7 +31,7 @@ $query = "SELECT id, name FROM datasets_tile";
 $tiles = $db->getAll($query);
 
 $smarty->assign("fileSets", $fileSets);
-$smarty->assign("methods", $methods);
+//$smarty->assign("methods", $methods);
 $smarty->assign("scenarios", $scenarios);
 $smarty->assign("models", $models);
 $smarty->assign("periods", $periods);
