@@ -51,12 +51,13 @@
                     <input class="inputs-ac" id="ac-3" name="accordion-1" type="radio"  />
                     <label  class="inputs-ac" for="ac-3">* Model</label> 
                     <article class="ac-large2"> 
-                                <input type="checkbox" id="line-checkbox-all" name="model[]">
-                                <label for="line-checkbox-all">Select all options</label>
+                                <img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                                <input type="checkbox" id="line-checkbox-999" value="999">
+                                <label for="line-checkbox-999}">Select all options</label>
                             {foreach from=$models item=model}
                                 <img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
                                 <input type="checkbox" id="line-checkbox-{$model['id']}" name="model[]" value="{$model['id']}">
-                                <label for="line-checkbox-{$model['id']}">{$model['acronym']}</label>                         
+                                <label for="line-checkbox-{$model['id']}">{$model['acronym']}</label>
                             {/foreach} 
                     </article>
 

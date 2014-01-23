@@ -14,8 +14,9 @@ $(document).ready(function(){
 
 function inputsDisabled(){ 
   // Inputs Disabled
+   
   $("input[name='extent']").iCheck('disable'); 
-  $("input[name='formats\\[\\]").iCheck('disable'); 
+  $("input[name='formats\\[\\]']").iCheck('disable'); 
   $("input[name='period\\[\\]']").iCheck('disable');  
   $("input[name='variables\\[\\]']").iCheck('disable');  
   $("input[name='resolution']").iCheck('disable'); 
@@ -26,12 +27,13 @@ function inputsDisabled(){
   $("label.period\\[\\]").addClass( "disabled" );
   $("label.variables\\[\\]").addClass( "disabled" );
   $("label.resolution").addClass( "disabled" );
+  
 }
 
 function inputsEnabled(){ 
   // Inputs Enabled
   $("input[name='extent']").iCheck('enable'); 
-  $("input[name='formats\\[\\]").iCheck('enable'); 
+  $("input[name='formats\\[\\]']").iCheck('enable'); 
   $("input[name='period\\[\\]']").iCheck('enable');  
   $("input[name='variables\\[\\]']").iCheck('enable');  
   $("input[name='resolution']").iCheck('enable'); 
@@ -88,6 +90,7 @@ function initializeICheckSettings(){
  */
 function setPageEvents(){
 
+  //$("input[name='fileSet']").on("ifToggled", deleteTileValue);
   $("input[name='fileSet']").on("ifToggled", getFilesInfo);
   $("input[name='scenarios\\[\\]']").on("ifToggled", getFilesInfo);
   $("input[name='model\\[\\]']").on("ifToggled", getFilesInfo);
@@ -98,10 +101,10 @@ function setPageEvents(){
   $("input[name='variables\\[\\]']").on("ifToggled", getFilesInfo);
   $("input[name='resolution']").on("ifToggled", getFilesInfo);
 
-
   // load on the map the selected layer(file set). 
   $("input[name='fileSet']").on('ifChecked', loadKmlOnMap); 
-
+  // Select/De-select all option in model filter
+  $("input#line-checkbox-999").on("ifToggled", selectAllOptionsEvent);
 }
 
 /* ******************************************************************************** */
@@ -126,17 +129,44 @@ function areRequiredFieldsFilled(filterValues){
   return true;
 }
 
+/**
+ * deleteTileValue erase the id of the tile stored in 
+ * the hidden input if exists
+ */
+function deleteTileValue(){
+  $("#tile_name").attr("value", null);
+}
+
+/*
+  This function checks if option "Select all options"
+  in Model filter was pressed
+ */
+function selectAllOptionsEvent(evt){
+  var element = evt.target;
+
+  // Disable temporary the toggled event
+  $("input[name='model\\[\\]']").off("ifToggled", getFilesInfo);
+
+  if($(element).attr("checked") == "checked"){
+    $("input[name='model\\[\\]']").iCheck('check');
+  }else{
+    $("input[name='model\\[\\]']").iCheck('uncheck');
+  }
+
+  // Enable again the toggled event
+  $("input[name='model\\[\\]']").on("ifToggled", getFilesInfo);
+  // Trigger the toggled event 
+  $("input[name='model\\[\\]']").first().trigger("ifToggled");
+}
+
 function getFilesInfo(evt){
-  console.log("getfilesinfo")
   var filterValues = getUserSelections($(evt.target).attr("name"));
-  
-  
+
   if( ! areRequiredFieldsFilled(filterValues) ){
     return false;
   }else{
     inputsEnabled();
   }
-  
 
   // Hide the help icon 
   if($(evt.target).parent().prev().hasClass("help_icon")){
@@ -357,7 +387,6 @@ function polygonClickEvent(evt, poly){
 // function to manage the data into the kml files
 function useTheData(doc){
   // Geodata handling goes here, using JSON properties of the doc object
-  console.log(doc);
   geoXmlDoc = doc[0]; 
   if(geoXmlDoc.gpolygons!=undefined){
 		for (var i = 0; i < geoXmlDoc.gpolygons.length; i++) {
