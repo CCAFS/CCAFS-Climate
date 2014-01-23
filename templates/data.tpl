@@ -8,7 +8,7 @@
     <hr>
     <br>
     
-    <span style="background-color: rgb(255, 162, 162); padding: 6px; margin-bottom: 22px; display: block;">Due to some technical problems, the data is temporally unavailable. Please come back in a couple of hours.</span>
+    <span style="background-color: rgb(255, 162, 162); padding: 6px; margin-bottom: 22px; display: block;">Due to some technical improvements, the data is temporally unavailable. Please come back in a couple of hours.</span>
 
     <div class="center">
         <img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png">
