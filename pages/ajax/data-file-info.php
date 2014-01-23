@@ -11,8 +11,9 @@ $ids["period_id"] = isset($_POST["periodId"]) && $_POST["periodId"] != "" ? $_PO
 $ids["variable_id"] = isset($_POST["variableId"]) && $_POST["variableId"] != "" ? $_POST["variableId"] : null;
 $ids["resolution_id"] = isset($_POST["resolutionId"]) && $_POST["resolutionId"] != "" ? $_POST["resolutionId"] : null;
 $ids["format_id"] = isset($_POST["formatId"]) && $_POST["formatId"] != "" ? $_POST["formatId"] : null;
+$ids["extent_id"] = isset($_POST["extendId"]) && $_POST["extendId"] != "" ? $_POST["extendId"] : null;
 $ids["file_set_id"] = isset($_POST["filesetId"]) && $_POST["filesetId"] != "" ? $_POST["filesetId"] : null;
-$ids["tiles"] = isset($_POST["tileName"]) && $_POST["tileName"] != "" ? $_POST["tileName"] : null;
+$ids["tile_id"] = isset($_POST["tileName"]) && $_POST["tileName"] != "" ? $_POST["tileName"] : null;
 
 if (!is_null($section)) {
     switch ($section) {
@@ -34,15 +35,18 @@ if (!is_null($section)) {
         case "resolution":
             filesFound("datasets_resolution", $ids["resolution_id"]);
             break;
-        case "format":
+        case "formats[]":
             filesFound("datasets_format", $ids["format_id"]);
             break;
+        case "extent":
+            filesFound("datasets_extent", $ids["extent_id"]);
+            break;    
         case "fileSet":
             filesFound("datasets_fileset", $ids["file_set_id"]);
             break;
         case "tile":
-            $ids["tiles"] = getTileID($ids["tiles"]);
-            filesFound("datasets_tile", $ids["tiles"]);
+            $ids["tile_id"] = getTileID($ids["tile_id"]);
+            filesFound("datasets_tile", $ids["tile_id"]);
             break;
         default:
             break;

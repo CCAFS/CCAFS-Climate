@@ -15,7 +15,7 @@ $(document).ready(function(){
 function inputsDisabled(){ 
   // Inputs Disabled
   $("input[name='extent']").iCheck('disable'); 
-  $("input[name='format']").iCheck('disable'); 
+  $("input[name='formats\\[\\]").iCheck('disable'); 
   $("input[name='period\\[\\]']").iCheck('disable');  
   $("input[name='variables\\[\\]']").iCheck('disable');  
   $("input[name='resolution']").iCheck('disable'); 
@@ -31,7 +31,7 @@ function inputsDisabled(){
 function inputsEnabled(){ 
   // Inputs Enabled
   $("input[name='extent']").iCheck('enable'); 
-  $("input[name='format']").iCheck('enable'); 
+  $("input[name='formats\\[\\]").iCheck('enable'); 
   $("input[name='period\\[\\]']").iCheck('enable');  
   $("input[name='variables\\[\\]']").iCheck('enable');  
   $("input[name='resolution']").iCheck('enable'); 
@@ -93,7 +93,7 @@ function setPageEvents(){
   $("input[name='model\\[\\]']").on("ifToggled", getFilesInfo);
   $("input[name='method']").on("ifToggled", getFilesInfo);
   $("input[name='extent']").on("ifToggled", getFilesInfo);
-  $("input[name='format']").on("ifToggled", getFilesInfo);
+  $("input[name='formats\\[\\]']").on("ifToggled", getFilesInfo);
   $("input[name='period\\[\\]']").on("ifToggled", getFilesInfo);
   $("input[name='variables\\[\\]']").on("ifToggled", getFilesInfo);
   $("input[name='resolution']").on("ifToggled", getFilesInfo);
@@ -218,24 +218,26 @@ function getFilesInfo(evt){
  * @return an object with the values selected by the user.
  */
 function getUserSelections(filterName){
-  var scenarios, model, period;
+  var scenarios, model, period, tileNameVal;
 
   scenarios = getArrayValues( $("[name='scenarios\\[\\]']:checked") );
   model = getArrayValues( $("input[name='model\\[\\]']:checked") );
   period = getArrayValues( $("input[name='period\\[\\]']:checked") );
-  variables = getArrayValues( $("input[name='variables\\[\\]']:checked") );
+  variables = getArrayValues( $("input[name='variables\\[\\]']:checked") ); 
+  formats = getArrayValues( $("input[name='formats\\[\\]']:checked") ); 
+  tileNameVal = (  $("#tile_name").val() == "" ) ? undefined : "'" + $("#tile_name").val() + "'";
 
   var data = {
     methodId: $("input[name='method']:checked").val(),
     modelId: model,
     extendId: $("input[name='extent']:checked").val(),
-    formatId: $("input[name='format']:checked").val(),
+    formatId: formats,
     scenarioId: scenarios,
     periodId: period,
     variableId: variables,
     resolutionId: $("input[name='resolution']:checked").val(),
     filesetId: $("input[name='fileSet']:checked").val(),
-    tileName: $("#tile_name").val(),
+    tileName: tileNameVal,
     section: filterName
   }
 

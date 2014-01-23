@@ -27,6 +27,9 @@ $resolutions = $db->getAll($query);
 $query = "SELECT id, name FROM datasets_format";
 $formats = $db->getAll($query);
 
+$query = "SELECT id, name FROM datasets_extent";
+$extents = $db->getAll($query);
+
 $query = "SELECT id, name FROM datasets_tile";
 $tiles = $db->getAll($query);
 
@@ -38,6 +41,7 @@ $smarty->assign("periods", $periods);
 $smarty->assign("variables", $variables);
 $smarty->assign("resolutions", $resolutions);
 $smarty->assign("formats", $formats);
+$smarty->assign("extents", $extents);
 $smarty->assign("tiles", $tiles);
 
 $smarty->display("data.tpl");

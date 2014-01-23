@@ -49,7 +49,7 @@
 <StyleMap id="MapRollOver"><Pair><key>normal</key><styleUrl>#zn</styleUrl></Pair><Pair><key>highlight</key><styleUrl>#zh</styleUrl></Pair>
 </StyleMap>   
         <Placemark>
-            <name>A1</name>            
+            <name>tile_a1</name>            
             <styleUrl>#MapRollOver</styleUrl>
             <MultiGeometry>
                 <Polygon>
@@ -70,7 +70,7 @@
             </MultiGeometry>
         </Placemark>
         <Placemark>
-            <name>A2</name>           
+            <name>tile_a2</name>           
             <styleUrl>#MapRollOver</styleUrl>
             <MultiGeometry>
                 <Polygon>
@@ -91,7 +91,7 @@
             </MultiGeometry>
         </Placemark>
         <Placemark>
-            <name>A3</name>           
+            <name>tile_a3</name>           
             <styleUrl>#MapRollOver</styleUrl>
             <MultiGeometry>
                 <Polygon>
@@ -112,7 +112,7 @@
             </MultiGeometry>
         </Placemark>
         <Placemark>
-            <name>A4</name>            
+            <name>tile_a4</name>            
             <styleUrl>#MapRollOver</styleUrl>
             <MultiGeometry>
                 <Polygon>
@@ -133,7 +133,7 @@
             </MultiGeometry>
         </Placemark>
         <Placemark>
-            <name>A5</name>           
+            <name>tile_a5</name>           
             <styleUrl>#MapRollOver</styleUrl>
             <MultiGeometry>
                 <Polygon>
@@ -154,7 +154,7 @@
             </MultiGeometry>
         </Placemark>
         <Placemark>
-            <name>A6</name>            
+            <name>tile_a6</name>            
             <styleUrl>#MapRollOver</styleUrl>
             <MultiGeometry>
                 <Polygon>
@@ -175,7 +175,7 @@
             </MultiGeometry>
         </Placemark>
         <Placemark>
-            <name>B1</name>            
+            <name>tile_b1</name>            
             <styleUrl>#MapRollOver</styleUrl>
             <MultiGeometry>
                 <Polygon>
@@ -196,7 +196,7 @@
             </MultiGeometry>
         </Placemark>
         <Placemark>
-            <name>B2</name>            
+            <name>tile_b2</name>            
             <styleUrl>#MapRollOver</styleUrl>
             <MultiGeometry>
                 <Polygon>
@@ -217,7 +217,7 @@
             </MultiGeometry>
         </Placemark>
         <Placemark>
-            <name>B3</name>            
+            <name>tile_b3</name>            
             <styleUrl>#MapRollOver</styleUrl>
             <MultiGeometry>
                 <Polygon>
@@ -238,7 +238,7 @@
             </MultiGeometry>
         </Placemark>
         <Placemark>
-            <name>B4</name>            
+            <name>tile_b4</name>            
             <styleUrl>#MapRollOver</styleUrl>
             <MultiGeometry>
                 <Polygon>
@@ -259,7 +259,7 @@
             </MultiGeometry>
         </Placemark>
         <Placemark>
-            <name>B5</name>            
+            <name>tile_b5</name>            
             <styleUrl>#MapRollOver</styleUrl>
             <MultiGeometry>
                 <Polygon>
@@ -280,7 +280,7 @@
             </MultiGeometry>
         </Placemark>
         <Placemark>
-            <name>B6</name>            
+            <name>tile_b6</name>            
             <styleUrl>#MapRollOver</styleUrl>
             <MultiGeometry>
                 <Polygon>
@@ -301,7 +301,7 @@
             </MultiGeometry>
         </Placemark>
         <Placemark>
-            <name>C1</name>            
+            <name>tile_c1</name>            
             <styleUrl>#MapRollOver</styleUrl>
             <MultiGeometry>
                 <Polygon>
@@ -322,7 +322,7 @@
             </MultiGeometry>
         </Placemark>
         <Placemark>
-            <name>C2</name>            
+            <name>tile_c2</name>            
             <styleUrl>#MapRollOver</styleUrl>
             <MultiGeometry>
                 <Polygon>
@@ -343,7 +343,7 @@
             </MultiGeometry>
         </Placemark>
         <Placemark>
-            <name>C3</name>            
+            <name>tile_c3</name>            
             <styleUrl>#MapRollOver</styleUrl>
             <MultiGeometry>
                 <Polygon>
@@ -364,7 +364,7 @@
             </MultiGeometry>
         </Placemark>
         <Placemark>
-            <name>C4</name>            
+            <name>tile_c4</name>            
             <styleUrl>#MapRollOver</styleUrl>
             <MultiGeometry>
                 <Polygon>
@@ -385,7 +385,7 @@
             </MultiGeometry>
         </Placemark>
         <Placemark>
-            <name>C5</name>            
+            <name>tile_c5</name>            
             <styleUrl>#MapRollOver</styleUrl>
             <MultiGeometry>
                 <Polygon>
@@ -406,7 +406,7 @@
             </MultiGeometry>
         </Placemark>
         <Placemark>
-            <name>C6</name>            
+            <name>tile_c6</name>            
             <styleUrl>#MapRollOver</styleUrl>
             <MultiGeometry>
                 <Polygon>
