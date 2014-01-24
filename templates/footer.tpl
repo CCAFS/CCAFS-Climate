@@ -22,7 +22,7 @@
     <br><br>
     <b>
         CCAFS GCM DATA PORTAL
-        <br>2012
+        <br>2014
     </b>
 
 </div> <!-- End footer -->
