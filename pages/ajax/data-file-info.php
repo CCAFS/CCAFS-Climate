@@ -15,11 +15,6 @@ $ids["extent_id"] = isset($_POST["extendId"]) && $_POST["extendId"] != "" ? $_PO
 $ids["file_set_id"] = isset($_POST["filesetId"]) && $_POST["filesetId"] != "" ? $_POST["filesetId"] : null;
 $ids["tile_id"] = isset($_POST["tileName"]) && $_POST["tileName"] != "" ? $_POST["tileName"] : null;
 
-
-if( $ids["file_set_id"] == null || $ids["scenario_id"] == null || $ids["model_id"] == null){
-    return;
-}
-
 if (!is_null($section)) {
     switch ($section) {
         case "method":

@@ -26,7 +26,7 @@
 
                 <div> 
                     <input id="ac-1" class="inputs-ac" name="accordion-1" type="radio" checked  /> 
-                    <label class="inputs-ac" for="ac-1">* File Set</label> 
+                    <label class="inputs-ac" for="ac-1">File Set</label> 
                     <article class="ac-large">  
                         {foreach from=$fileSets item=fileSet}
                             <img class="help_icon" id="help_icon_fileSet" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
@@ -38,7 +38,7 @@
                 <div class="inputs-ac">
                      
                     <input id="ac-2" class="inputs-ac" name="accordion-1" type="radio" />
-                    <label class="inputs-ac" for="ac-2">* Scenario</label> 
+                    <label class="inputs-ac" for="ac-2">Scenario</label> 
                     <article class="ac-large">
                        {foreach from=$scenarios item=scenario}
                             <img class="help_icon" id="help_icon_scenarios[]" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
@@ -50,7 +50,7 @@
                 <div class="inputs-ac"> 
 
                     <input class="inputs-ac" id="ac-3" name="accordion-1" type="radio"  />
-                    <label  class="inputs-ac" for="ac-3">* Model</label> 
+                    <label  class="inputs-ac" for="ac-3">Model</label> 
                     <article class="ac-large2"> 
                                 <img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
                                 <input type="checkbox" id="line-checkbox-999" value="999">

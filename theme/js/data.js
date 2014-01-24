@@ -2,49 +2,10 @@
 $(document).ready(function(){
 
   initializeICheckSettings();
-  inputsDisabled();
   initializeMap();
   setPageEvents();
-
-  // FILE SET.
-  //$("input[name='fileSet']").iCheck('uncheck'); 	 
-  
   
 }); 
-
-function inputsDisabled(){ 
-  // Inputs Disabled
-   
-  $("input[name='extent']").iCheck('disable'); 
-  $("input[name='formats\\[\\]']").iCheck('disable'); 
-  $("input[name='period\\[\\]']").iCheck('disable');  
-  $("input[name='variables\\[\\]']").iCheck('disable');  
-  $("input[name='resolution']").iCheck('disable'); 
-
-  //labels style disabled
-  $("label.format").addClass( "disabled" );
-  $("label.extent").addClass( "disabled" ); 
-  $("label.period\\[\\]").addClass( "disabled" );
-  $("label.variables\\[\\]").addClass( "disabled" );
-  $("label.resolution").addClass( "disabled" );
-  
-}
-
-function inputsEnabled(){ 
-  // Inputs Enabled
-  $("input[name='extent']").iCheck('enable'); 
-  $("input[name='formats\\[\\]']").iCheck('enable'); 
-  $("input[name='period\\[\\]']").iCheck('enable');  
-  $("input[name='variables\\[\\]']").iCheck('enable');  
-  $("input[name='resolution']").iCheck('enable'); 
-  
-  //labels style remove disabled
-  $("label.format").removeClass( "disabled" );
-  $("label.extent").removeClass( "disabled" ); 
-  $("label.period\\[\\]").removeClass( "disabled" );
-  $("label.variables\\[\\]").removeClass( "disabled" );
-  $("label.resolution").removeClass( "disabled" );
-}
 
 /**
  * This function initialize the settings for 
@@ -90,7 +51,7 @@ function initializeICheckSettings(){
  */
 function setPageEvents(){
 
-  //$("input[name='fileSet']").on("ifToggled", deleteTileValue);
+  $("input[name='fileSet']").on("ifToggled", deleteTileValue);
   $("input[name='fileSet']").on("ifToggled", getFilesInfo);
   $("input[name='scenarios\\[\\]']").on("ifToggled", getFilesInfo);
   $("input[name='model\\[\\]']").on("ifToggled", getFilesInfo);
@@ -115,19 +76,6 @@ function setPageEvents(){
 // amount of files available.
 //
 /* ******************************************************************************** */
-
-
-function areRequiredFieldsFilled(filterValues){
-
-  if( filterValues.filesetId == "" ||
-      filterValues.scenarioId == "" ||
-      filterValues.modelId == ""
-    ){
-    return false;
-  }
-
-  return true;
-}
 
 /**
  * deleteTileValue erase the id of the tile stored in 
@@ -161,12 +109,6 @@ function selectAllOptionsEvent(evt){
 
 function getFilesInfo(evt){
   var filterValues = getUserSelections($(evt.target).attr("name"));
-
-  if( ! areRequiredFieldsFilled(filterValues) ){
-    return false;
-  }else{
-    inputsEnabled();
-  }
 
   // Hide the help icon 
   if($(evt.target).parent().prev().hasClass("help_icon")){
