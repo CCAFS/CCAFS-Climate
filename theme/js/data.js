@@ -61,9 +61,11 @@ function setPageEvents(){
   $("input[name='period\\[\\]']").on("ifToggled", getFilesInfo);
   $("input[name='variables\\[\\]']").on("ifToggled", getFilesInfo);
   $("input[name='resolution']").on("ifToggled", getFilesInfo);
+  $("input[name='extent']").on("ifChecked", changeMap);
 
   // load on the map the selected layer(file set). 
-  $("input[name='fileSet']").on('ifChecked', loadKmlOnMap); 
+  //$("input[name='fileSet']").on('ifChecked', loadKmlOnMap); 
+  $("input[name='fileSet']").on('ifChecked', changeMap); 
   // Select/De-select all option in model filter
   $("input#line-checkbox-999").on("ifToggled", selectAllOptionsEvent);
 }
@@ -83,6 +85,21 @@ function setPageEvents(){
  */
 function deleteTileValue(){
   $("#tile_name").attr("value", null);
+}
+
+function changeMap(){
+  var extentValue = $("[name='extent']:checked").val();
+
+  if(extentValue == 1){ // Global
+    $("#map-canvas").html("<img src='/theme/images/map-not-available.png'/>");
+  } else if(extentValue == 2){ // Regional
+    loadKmlOnMap();
+  } else {
+    // If it is not defined, 
+    $("#line-radio-1").iCheck('check');
+    $("#map-canvas").html("<img src='/theme/images/map-not-available.png'/>");
+  }
+  
 }
 
 /*
@@ -269,12 +286,13 @@ function initializeMap() {
 
 //function to load the kml once the user changes file setz
 function loadKmlOnMap(){
+
   initializeMap();
-  var filesetId = this.value;
+  var filesetId = $("input[name='fileSet']:checked").val();
   var kmlName = "";
 
   switch(filesetId){
-    case "4":  // IPCC 4AR (CIAT) e IPCC 5AR (CIAT)
+    case "4":  // IPCC 4AR (CIAT)
       kmlName = "tiled";
     break;
 
@@ -290,7 +308,7 @@ function loadKmlOnMap(){
       kmlName = "eta";
     break;
 
-    case "12":  // IPCC 4AR (CIAT) e IPCC 5AR (CIAT)
+    case "12":  // IPCC 5AR (CIAT)
       kmlName = "tiled";
     break;
   }
@@ -303,8 +321,6 @@ function loadKmlOnMap(){
                 });
 
 	  geoXml.parse('/theme/kmls/' + kmlName + '.kml');
-  }else{
-    $("#map-canvas").html("<img src='/theme/images/map-not-available.png'/>");
   }
 }
 
