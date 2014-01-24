@@ -52,7 +52,7 @@ function initializeICheckSettings(){
 function setPageEvents(){
 
   $("input[name='fileSet']").on("ifToggled", deleteTileValue);
-  $("input[name='fileSet']").on("ifToggled", getFilesInfo);
+  $("input[name='fileSet']").on("ifChecked", getFilesInfo);
   $("input[name='scenarios\\[\\]']").on("ifToggled", getFilesInfo);
   $("input[name='model\\[\\]']").on("ifToggled", getFilesInfo);
   $("input[name='method']").on("ifToggled", getFilesInfo);
