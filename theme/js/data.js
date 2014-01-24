@@ -328,14 +328,39 @@ function initializeMap() {
 //function to load the kml once the user changes file setz
 function loadKmlOnMap(){
   initializeMap();
-  if(this.value==3 || this.value==8 || this.value==7){	  
+  var filesetId = this.value;
+  var kmlName = "";
+
+  switch(filesetId){
+    case "4":  // IPCC 4AR (CIAT) e IPCC 5AR (CIAT)
+      kmlName = "tiled";
+    break;
+
+    case "7": // Precis Andes
+      kmlName = "precis";
+    break;
+
+    case "8":  // Cordex
+      kmlName = "cordex";
+    break;
+
+    case "10": // Precis Andes
+      kmlName = "precis";
+    break;
+
+    case "12":  // IPCC 4AR (CIAT) e IPCC 5AR (CIAT)
+      kmlName = "tiled";
+    break;
+  }
+
+  if(kmlName != ""){
     geoXml = new geoXML3.parser({
                   map: map,
                   singleInfoWindow: true,
                   afterParse: useTheData
                 });
 
-	  geoXml.parse('/theme/kmls/'+this.value+'.kml');
+	  geoXml.parse('/theme/kmls/' + kmlName + '.kml');
   }else{
     $("#map-canvas").html("<img src='/theme/images/map-not-available.png'/>");
   }
@@ -396,6 +421,7 @@ function useTheData(doc){
 		}		
 	}	
 }
+
 /* Apply a custom KML to the map */
 
 /* ******************************************************************************** */
