@@ -11,46 +11,81 @@ $ids["period_id"] = isset($_POST["periodId"]) && $_POST["periodId"] != "" ? $_PO
 $ids["variable_id"] = isset($_POST["variableId"]) && $_POST["variableId"] != "" ? $_POST["variableId"] : null;
 $ids["resolution_id"] = isset($_POST["resolutionId"]) && $_POST["resolutionId"] != "" ? $_POST["resolutionId"] : null;
 $ids["format_id"] = isset($_POST["formatId"]) && $_POST["formatId"] != "" ? $_POST["formatId"] : null;
-//$ids["tile_id"] = isset($_POST["tileId"]) && $_POST["tileId"] != "" ? $_POST["tileId"] : null;
+$ids["extent_id"] = isset($_POST["extendId"]) && $_POST["extendId"] != "" ? $_POST["extendId"] : null;
+$ids["file_set_id"] = isset($_POST["filesetId"]) && $_POST["filesetId"] != "" ? $_POST["filesetId"] : null;
+$ids["tile_id"] = isset($_POST["tileName"]) && $_POST["tileName"] != "" ? $_POST["tileName"] : null;
+
+
+if( $ids["file_set_id"] == null || $ids["scenario_id"] == null || $ids["model_id"] == null){
+    return;
+}
 
 if (!is_null($section)) {
     switch ($section) {
         case "method":
             filesFound("datasets_method", $ids["method_id"]);
             break;
-        case "scenario":
+        case "scenarios[]":
             filesFound("datasets_scenario", $ids["scenario_id"]);
             break;
-        case "model":
+        case "model[]":
             filesFound("datasets_model", $ids["model_id"]);
             break;
-        case "period":
+        case "period[]":
             filesFound("datasets_period", $ids["period_id"]);
             break;
-        case "variable":
+        case "variables[]":
             filesFound("datasets_variable", $ids["variable_id"]);
             break;
         case "resolution":
             filesFound("datasets_resolution", $ids["resolution_id"]);
             break;
-        case "format":
+        case "formats[]":
             filesFound("datasets_format", $ids["format_id"]);
             break;
-        //case "tile":
-        //filesFound("datasets_tile", $ids["tile_id"]);
-        //break;
+        case "extent":
+            filesFound("datasets_extent", $ids["extent_id"]);
+            break;    
+        case "fileSet":
+            filesFound("datasets_fileset", $ids["file_set_id"]);
+            break;
+        case "tile":
+            $ids["tile_id"] = getTileID($ids["tile_id"]);
+            filesFound("datasets_tile", $ids["tile_id"]);
+            break;
         default:
             break;
     }
 }
 
+function getTileID($tileName){
+    global $db;
+    $query = "SELECT id FROM datasets_tile WHERE name = " . $tileName . ";";
+    $result = $db->GetRow($query);
+
+    $tileID = $result["id"];
+    return $tileID;
+}
+
 function filesFound($databaseName, $id) {
     global $db, $ids;
     $info = new stdClass();
+    $info->description= new stdClass();
+
     if (!is_null($id)) {
-        $query = "SELECT id, description FROM " . $databaseName . " WHERE id = " . $id;
-        $result = $db->GetRow($query);
-        $info->description = $result["description"];
+        $optionsIds = explode(",", $id);
+
+        foreach($optionsIds as $oId){
+            // 'Others' option for 'variables' filter
+            if($oId == "9999" && $databaseName == "datasets_variable"){
+                $query = "SELECT id, description FROM " . $databaseName . " WHERE id > 7";
+            }else{
+                $query = "SELECT id, description FROM " . $databaseName . " WHERE id = " . $oId;
+            }
+
+            $result = $db->GetRow($query);
+            $info->description->$oId= $result["description"];
+        }
     } else {
         $info->description = "";
     }
@@ -64,15 +99,23 @@ function filesFound($databaseName, $id) {
             } else {
                 $isFirst = false;
             }
-            $query .= $key . " = " . $value;
+
+            // 'Others' option for 'variables' filter
+            if($key == "variable_id" && $value == 9999) {
+                $query .= $key . " > 7 ";
+            }else{
+                $query .= $key . " IN ( " . $value . " )";
+            }
         }
     }
+
     if($isFirst) {
         $info->filesFound = -1;
     } else {
         $info->filesFound = $db->GetOne($query);
     }
     $info->query = $query;
+
     echo json_encode($info);
 }
 

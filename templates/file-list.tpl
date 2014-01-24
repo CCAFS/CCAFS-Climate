@@ -24,7 +24,12 @@
                 {foreach from=$files item=file}
                     <tr>
                         <td>
-                            <input class="checkbox-file" type="checkbox" name="download-files[]" value="{$file["id"]}" />
+                            {* Checkbox is shown only if the file is available *}
+                            {if $file.availability_id == "2"}
+                                <input class="checkbox-file" type="checkbox" name="download-files[]" value="{$file["id"]}" />
+                            {else}
+                                <input class="checkbox-file" type="checkbox" disabled="disabled" />
+                            {/if}
                         </td>
                         <td>{$file.name}</td>
                         <td>{$file.fileset}</td>

@@ -1,5 +1,7 @@
-{include file='head.tpl' jsIncludes=["jquery", "data", "tiptip"] pageTitle="Data - CCAFS Climate" pageDescription="High resolution climate change data for download, downscaled using different methods." keywords="IPCC,data,download,downscaling,high resolution,delta method,climate change,projections,MarkSim,MetOffice,PRECIS"}
+
+{include file='head.tpl' jsIncludes=["jquery", "data", "tiptip","modernizr","icheck", "map"] pageTitle="Data - CCAFS Climate" pageDescription="High resolution climate change data for download, downscaled using different methods." keywords="IPCC,data,download,downscaling,high resolution,delta method,climate change,projections,MarkSim,MetOffice,PRECIS"}
 {include file='header.tpl' current="data"}
+
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_data.gif" />
 </div>
@@ -7,157 +9,147 @@
     <h3>Data</h3>
     <hr>
     <br>
-    
-    <span style="background-color: rgb(255, 162, 162); padding: 6px; margin-bottom: 22px; display: block;">Due to some technical problems, the data is temporally unavailable. Please come back in a couple of hours.</span>
+
+
 
     <div class="center">
         <img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png">
     </div>
+    <div id="browserWarning">
+        <H5>Search engine no longer supports Internet Explorer versions 7 or 8.</H5>
+        <P>We recommend upgrading to the latest <A href="https://ie.microsoft.com/">Internet Explorer</A>, <A href="https://chrome.google.com">Google Chrome</A>, or <A href="https://mozilla.org/firefox/">Firefox</A>.</P>
+        <P>If you are using IE 9 or later, make sure you <A href="http://windows.microsoft.com/en-US/windows7/webpages-look-incorrect-in-Internet-Explorer">turn off "Compatibility View"</A>.</P>
+    </div>
     <div id="search_form">
         <form method="GET" action="/file-list.php" id="formSearch">
-            <table id="table_fields" class="table_form" style="display:none">
-                <tbody>
-                    <tr>
-                        <!-- Method -->
-                        <td class="option-name">
-                            1. Method:
-                        </td>
-                        <td>
-                            <select id="id_method" name="method" class="options">
-                                <option selected="selected" value="">Select all</option>
-                                {foreach from=$methods item=method}
-                                    <option value='{$method["id"]}'>{$method["name"]}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-                        <td>
-                            <img class="help_icon" id="help_icon_method" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <img class="loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />
-                        </td>
 
-                        <!-- Variable -->
-                        <td class="option-name">
-                            5. Variable:
-                        </td>
-                        <td>
-                            <select id="id_variable" name="variable" class="options" >
-                                <option value="" selected="selected">Select all</option>
-                                {foreach from=$variables item=variable}
-                                    <option value='{$variable["id"]}'>{$variable["name"]}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-                        <td>
-                            <img class="help_icon" id="help_icon_variable" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <img class="loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <!-- Scenario -->
-                        <td class="option-name">
-                            2. Scenario:
-                        </td>
-                        <td>
-                            <select id="id_scenario" name="scenario" class="options" >
-                                <option value="" selected="selected">Select all</option>
-                                {foreach from=$scenarios item=scenario}
-                                    <option value='{$scenario["id"]}'>{$scenario["name"]}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-                        <td>
-                            <img class="help_icon" id="help_icon_scenario" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <img class="loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />
-                        </td>
-                        <!-- Resolution -->
-                        <td class="option-name">
-                            6. Resolution:
-                        </td>
-                        <td>
-                            <select id="id_resolution" name="resolution" class="options" >
-                                <option value="" selected="selected">Select all</option>
-                                {foreach from=$resolutions item=resolution}
-                                    <option value='{$resolution["id"]}'>{$resolution["name"]}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-                        <td>
-                            <img class="help_icon" id="help_icon_resolution" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <img class="loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <!-- Model -->
-                        <td class="option-name">
-                            3. Model:
-                        </td>
-                        <td>
-                            <select id="id_model" name="model" class="options" >
-                                <option value="" selected="selected">Select all</option>
-                                {foreach from=$models item=model}
-                                    <option value='{$model["id"]}'>{$model["acronym"]}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-                        <td>
-                            <img class="help_icon" id="help_icon_model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <img class="loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />
-                        </td>
-                        <!-- File Format -->
-                        <td class="option-name">
-                            7. File format:
-                        </td>
-                        <td>
-                            <select id="id_format" name="format" class="options" >
-                                <option value="" selected="selected">Select all</option>
-                                {foreach from=$formats item=format}
-                                    <option value='{$format["id"]}'>{$format["name"]}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-                        <td>
+        <div id="side-left"> 
+            <section class="ac-container">
+
+
+                <div> 
+                    <input id="ac-1" class="inputs-ac" name="accordion-1" type="radio" checked  /> 
+                    <label class="inputs-ac" for="ac-1">* File Set</label> 
+                    <article class="ac-large">  
+                        {foreach from=$fileSets item=fileSet}
+                            <img class="help_icon" id="help_icon_fileSet" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                            <input id="fileSet-{$fileSet['id']}" type="radio" name="fileSet" value="{$fileSet['id']}" /><label for="fileSet-{$fileSet['id']}">{$fileSet["name"]}</label><br> 
+                        {/foreach} 
+                    </article>
+                    <input type="hidden" id="tile_name" />
+                </div>
+                <div class="inputs-ac">
+                     
+                    <input id="ac-2" class="inputs-ac" name="accordion-1" type="radio" />
+                    <label class="inputs-ac" for="ac-2">* Scenario</label> 
+                    <article class="ac-large">
+                       {foreach from=$scenarios item=scenario}
+                            <img class="help_icon" id="help_icon_scenarios[]" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                            <input id="scenario-{$scenario['id']}" type="checkbox" name="scenarios[]" value="{$scenario['id']}"><label for="scenario-{$scenario['id']}">{$scenario['name']}</label><br>
+                        {/foreach}
+                    </article>
+
+                </div>
+                <div class="inputs-ac"> 
+
+                    <input class="inputs-ac" id="ac-3" name="accordion-1" type="radio"  />
+                    <label  class="inputs-ac" for="ac-3">* Model</label> 
+                    <article class="ac-large2"> 
+                                <img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                                <input type="checkbox" id="line-checkbox-999" value="999">
+                                <label for="line-checkbox-999}">Select all options</label>
+                            {foreach from=$models item=model}
+                                <img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                                <input type="checkbox" id="line-checkbox-{$model['id']}" name="model[]" value="{$model['id']}">
+                                <label for="line-checkbox-{$model['id']}">{$model['acronym']}</label>
+                            {/foreach} 
+                    </article>
+
+                </div>
+                
+            </section>
+        </div>
+        <div id="side-right"> 
+            <div id="side-right-top">
+               <div id="bloc-e">
+                    <div id="box"> Extent </div> 
+                    {foreach from=$extents item=extent}
+                    <div id="option">
+                        <input tabindex="19" type="radio" id="line-radio-{$extent['id']}" name="extent" value="{$extent['id']}" />
+                        <label for="line-radio-{$extent['id']}" class="extent">{$extent['name']}</label>
+                    </div>
+                    {/foreach} 
+               </div> 
+                <div id="bloc-e">
+                    <div id="box"> Format </div> 
+                    {$isFirst = true}
+                        {foreach from=$formats item=format}
                             <img class="help_icon" id="help_icon_format" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <img class="loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <!-- Period -->
-                        <td class="option-name">
-                            4. Period:
-                        </td>
-                        <td>
-                            <select id="id_period" name="period" class="options" >
-                                <option value="" selected="selected">Select all</option>
-                                {foreach from=$periods item=period}
-                                    <option value='{$period["id"]}'>{$period["name"]}</option>
-                                {/foreach}
-                            </select>
-                        </td>
-                        <td>
+                            <input id="format-{$format['id']}" type="checkbox" name="formats[]" value="{$format['id']}" />
+                            <label for="format-{$format['id']}" class="format">{$format["name"]}</label><br>
+                            {$isFirst = false}
+                        {/foreach}
+               </div> 
+
+               <div id="bloc">
+                    <div id="box-b"> Period </div> 
+
+                    <div id="box-content">
+                        
+                         <div id="dropdown-arrow"></div> 
+                         <div id="drop-content">
+                        {foreach from=$periods item=period}
                             <img class="help_icon" id="help_icon_period" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                            <input id="period-{$period['id']}" type="checkbox" name="period[]" value="{$period['id']}">
+                            <label for="period-{$period['id']}" class="period[]">{$period['name']}</label><br>
+                        {/foreach}
+                        </div>
+                    </div>
+
+               </div> 
+                <div id="bloc">
+                    <div id="box-b"> Variable </div> 
+                    <div id="box-content"> 
+                        <div id="dropdown-arrow"></div> 
+                        <div id="drop-content">
+                        {foreach from=$variables item=variable}
+                            <img class="help_icon" id="help_icon_variable" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                            <input id="variable-{$variable['id']}" type="checkbox" name="variables[]" value="{$variable['id']}">
+                            <label for="variable-{$variable['id']}" class="variables[]">{$variable['name']}</label><br>
+                        {/foreach}
+                        <input id="variable-9999" type="checkbox" name="variables[]" value="9999">
+                        <label for="variable-9999" class="variables[]">Other</label><br>
+                        </div>
+                    </div>
+
+               </div> 
+                <div id="bloc">
+                    <div id="box-b"> Resolution </div> 
+                    <div id="box-content"> 
+                        <div id="dropdown-arrow"></div> 
+                        <div id="drop-content">
+                        {$isFirst = true}
+                        {foreach from=$resolutions item=resolution}
+                            <img class="help_icon" id="help_icon_resolution" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                            <input id="resolution-{$resolution['id']}" type="radio" name="resolution" value="{$resolution['id']}" />
+                            <label for="resolution-{$resolution['id']}" class="resolution">{$resolution["name"]}</label><br>
+                            {$isFirst = false}
+                        {/foreach}
+                        </div>
+                    </div> 
+               </div> 
+               <div id="bloc-search">
+                        <button type="submit" id="searchSubmit" disabled="disabled">Search</button>
+                        <label>
+                            <span id="filesFound">0 files found</span>
                             <img class="loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />
-                        </td>
-                        <!-- Tile -->
-                        <td class="option-name">
-                            <!-- 8. Tile: -->
-                        </td>
-                        <td>
-                            <!-- div id="link_image">
-                                <select id="id_tile" name="tile" class="options" >
-                                    <option value="">No tile</option>
-                                </select>
-                            </div -->
-                        </td>
-                        <td>
-                            <!-- img class="help_icon" id="help_icon_tile" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <img class="loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" /-->
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <br>
-            <button type="submit" id="searchSubmit" disabled="disabled">Search</button>
-            <span id="file-count" style="font-size: 12px;"></span>
+                        </label>
+                </div>
+            </div>
+            <div id="side-right-bottom">
+                <div id="map-canvas"></div>
+            </div>
+        </div>
         </form>
     </div>
 
