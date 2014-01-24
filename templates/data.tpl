@@ -9,9 +9,6 @@
     <h3>Data</h3>
     <hr>
     <br>
-
-
-
     <div class="center">
         <img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png">
     </div>
