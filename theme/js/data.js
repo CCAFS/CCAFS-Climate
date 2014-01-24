@@ -286,8 +286,8 @@ function loadKmlOnMap(){
       kmlName = "cordex";
     break;
 
-    case "10": // Precis Andes
-      kmlName = "precis";
+    case "10": // Eta South america
+      kmlName = "eta";
     break;
 
     case "12":  // IPCC 4AR (CIAT) e IPCC 5AR (CIAT)

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><kml xmlns="http://earth.google.com/kml/2.0"><Document>
+<name>precis_lat.shp</name>
+<Style id="zn">
+<IconStyle>
+<color>FFFFFFFF</color>
+<scale>1.0</scale>
+<Icon><href>root://icons/palette-5.png</href><x>192</x><y>192</y><w>32</w><h>32</h></Icon>
+</IconStyle>
+<LabelStyle>
+<scale>0</scale>
+</LabelStyle>
+<BalloonStyle ><text>$[description]</text><color>FFFFFFFF</color></BalloonStyle>
+<LineStyle><color>FFFFFFFF</color><width>1</width></LineStyle>
+<PolyStyle><color>60CECECE</color></PolyStyle>
+</Style>
+<Folder>
+<Placemark>
+<name>sa_eta</name>
+<description><![CDATA[<table border=0 cellpadding=0 cellspacing=0  width=100px style="FONT-SIZE: 11px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;"><tr><td bgcolor="#E3E1CA" align="right"><font COLOR="#000000"><b>ID</b></font></td><td bgcolor="#E4E6CA"> <font COLOR="#008000">0</font></td></tr></table>]]>
+</description>
+<styleUrl>#zn</styleUrl>
+<MultiGeometry><Polygon><tessellate>0</tessellate><extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode><outerBoundaryIs><LinearRing><coordinates>-33.9000000000,-34.1000000000,0 -95.5000000000,-34.1000000000,0 -95.5000000000,21.4000000000,0 -33.9000000000,21.4000000000,0 -33.9000000000,-34.1000000000,0 </coordinates></LinearRing></outerBoundaryIs></Polygon><Point><extrude>0</extrude><altitudeMode>clampedToGround</altitudeMode><coordinates>-64.7000000000,-6.3500000000,0 </coordinates></Point>
+</MultiGeometry></Placemark></Folder>
+</Document></kml>
