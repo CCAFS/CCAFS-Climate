@@ -64,11 +64,41 @@ $(document).ready(function(){
     });
 
 
-    // Submitting user information.
+    // Submitting anonymous user information.
     $("#skip-form").on("click", function(event) { 
         event.preventDefault();
-        generateLinks("0");
-       console.log($selectedFiles);
+        // validate fields. 
+        $.ajax({
+            type: "POST",
+            dataType: "text",
+            url: "/ajax/user-info.php",
+            data: {
+                context: "submit-user-anonymous",
+                userId: "-1",
+                instituteName: "Anonymous",
+                use: "unknown"
+            },
+            beforeSend: function(){
+                $("#submit-user-info").attr("disabled", "disabled");
+                $(".submit-button #ajax-loader").show();
+                $(".submit-button #message").text("Saving...");
+            },
+            success: function(downloadId) {
+                if($.isNumeric(downloadId)) {
+                    // information saved successfully!
+                    // next step, generate links.
+                     $("#skip-form").unbind('click');
+                     $("#email").attr("disabled", "disabled");
+                     $("#email-button").attr("disabled", "disabled");
+                    generateLinks(downloadId);
+                } else {
+                    $("#message").css("color", "red");
+                    $("#message").text(downloadId);
+                    $(".submit-button #ajax-loader").hide();
+                }
+            }
+        });
+        
     });
 
 
@@ -90,7 +120,7 @@ $(document).ready(function(){
                 $(".submit-button #message").text("DONE!");
                  $(".submit-button #ajax-loader").attr("src", "/theme/images/ok-icon.png");
                 $.each(data, function(index, file){
-                    $htmlContent = "<tr><td>"+index+"</td><td><a href='"+file.reference+"'>"+file.name+"</a></td></tr>"
+                    $htmlContent = "<tr><td>"+index+"</td><td><a href='"+file.reference+"'>"+file.name+"</a></td></tr>"; 
                     $("#download-table tbody").append($htmlContent);
                 });
                 $("#download-table").tablesorter();

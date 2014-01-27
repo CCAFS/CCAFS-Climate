@@ -9,9 +9,40 @@ if (!is_null($context)) {
         case "user-info":
             getUserInfo();
             break;
+        case "submit-user-anonymous":
+            addUserInfoAnonymous();
+            break;    
         case "submit-user":
             addUserInfo();
             break;
+    }
+}
+
+function addUserInfoAnonymous() {
+    global $db;
+    $userId = isset($_POST["userId"]) ? $_POST["userId"] : null;
+    $instituteName = isset($_POST["instituteName"]) ? $_POST["instituteName"] : null;
+    $use = isset($_POST["use"]) ? $_POST["use"] : null;
+    if (!is_null($instituteName) && !is_null($use)) { 
+        // Now is an existing user.
+        // lets insert the download information.
+        $query = "INSERT INTO datasets_download (user_id, institute, intended_use, date)
+                        VALUES ('$userId', '$instituteName', '$use', now())";
+        if ($db->Execute($query)) {
+            // figure out what was the download id inserted before.
+            $query = "SELECT max(id) as id FROM datasets_download
+                             WHERE user_id = " . $userId;
+            $downloadId = $db->GetOne($query);
+            if (is_numeric($downloadId)) {
+                echo $downloadId;
+            } else {
+                echo "Error querying download id: " . $downloadId . " - " . $db->ErrorMsg();
+            }
+        } else {
+            echo "Error inserting download information: " . $db->ErrorMsg();
+        }
+    } else {
+        echo "NOT OK";
     }
 }
 
