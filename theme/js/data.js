@@ -42,8 +42,10 @@ function initializeICheckSettings(){
   $('#bloc-e input').iCheck({
     checkboxClass: 'icheckbox_flat',
     radioClass: 'iradio_flat'
-  });
-
+  }); 
+  
+  $('#fileSet-8').iCheck('disable');
+  $('label[for=fileSet-8]').addClass( "disabled" ); 
 }
 
 /**
