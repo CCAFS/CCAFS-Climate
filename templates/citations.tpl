@@ -13,9 +13,9 @@
 
   <h5>2014</h5>
   <ol>    
-    <li>Chapman, D. S., T. Haynes, et al. 2014. <a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/24038855">"Phenology predicts the native and invasive range limits of common ragweed."</a> Global Change Biology 20(1): 192-202.</li>
-    <li>Feng, S., Q. Hu, et al. 2014.	 <a target="_blank" href="http://www.sciencedirect.com/science/article/pii/S0921818113002403">"Projected climate regime shift under future global warming from multi-model, multi-scenario CMIP5 simulations.	"</a> 	Global and Planetary Change 112: 41-52.	</li>	<li> Feng, S., Q. Hu, et al. 2014. <a target="_blank" href="http://www.sciencedirect.com/science/article/pii/S0921818113002403">"Projected climate regime shift under future global warming from multi-model, multi-scenario CMIP5 simulations."</a> Global and Planetary Change 112: 41-52.</li>
-    <li>Fraga, H., A. C. Malheiro, et al. 2014.	 <a target="_blank" href="	http://dx.doi.org/10.1007/s10113-013-0490-y	">"	Very high resolution bioclimatic zoning of Portuguese wine regions: present and future scenarios.	"</a> 	Regional Environmental Change 14(1): 295-306.	</li>	<li> Fraga, H., A. C. Malheiro, et al. 2014. <a target="_blank" href="http://dx.doi.org/10.1007/s10113-013-0490-y">"Very high resolution bioclimatic zoning of Portuguese wine regions: present and future scenarios."</a> Regional Environmental Change 14(1): 295-306.</li>
+    <li>Chapman, D. S., T. Haynes, et al. 2014. <a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/24038855">"Phenology predicts the native and invasive range limits of common ragweed."</a> Global Change Biology 20(1): 192-202.</li>    
+    <li>Feng, S., Q. Hu, et al. 2014. <a target="_blank" href="http://www.sciencedirect.com/science/article/pii/S0921818113002403">"Projected climate regime shift under future global warming from multi-model, multi-scenario CMIP5 simulations."</a> Global and Planetary Change 112: 41-52.</li>
+    <li>Fraga, H., A. C. Malheiro, et al. 2014. <a target="_blank" href="http://dx.doi.org/10.1007/s10113-013-0490-y">"Very high resolution bioclimatic zoning of Portuguese wine regions: present and future scenarios."</a> Regional Environmental Change 14(1): 295-306.</li>
   </ol>  	
 
   <h5>2013</h5>
