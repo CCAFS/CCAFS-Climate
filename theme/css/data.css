@@ -137,19 +137,19 @@ input.inputs-ac:checked ~ article.ac-large2{
 }
 
 /* blocs Settings */
-#bloc-e {
+.bloc-e {
     font-size: 13px;
     width: 137px;
     float: left;
 }
 
-#bloc {
+.bloc {
     font-size: 13px;
     width: 110px;
     float: left;
 }
 #box {
-    background: #E0DED9;
+    background: #7C7C7C;
     font-weight: 300;
     color: #FFF;
     width: 85px;
@@ -160,11 +160,11 @@ input.inputs-ac:checked ~ article.ac-large2{
     font-size: 14px;
 }
 
-#box-b:hover {
+.box-b:hover {
  background-color: #5c5c5c;
 }
 
-#box-b {
+.box-b {
     background: url(../images/dropdown.png) 83px no-repeat #7C7C7C;
     font-weight: 400;
     color: #FFF;
@@ -177,11 +177,11 @@ input.inputs-ac:checked ~ article.ac-large2{
     cursor: pointer;
 }
 
-#dropdown-arrow:hover,#box-content:hover,#box-b:hover ~ #box-content{
+#dropdown-arrow:hover,.box-content:hover,.box-b:hover ~ .box-content{
     display: block;
 }
 
-#box-content {
+.box-content {
     position: absolute;
     z-index: 100;
     color: #FFF; 
@@ -199,10 +199,6 @@ input.inputs-ac:checked ~ article.ac-large2{
     width: 100px;
     height: 5px;
     background: url(../images/dropdown-arrow.png);
-}
-
-#bloc label{
-   /* float: left;*/
 }
 
 #bloc-search {
@@ -238,13 +234,14 @@ input.inputs-ac:checked ~ article.ac-large2{
     text-align: justify;
 }
 
-.disabled { 
+.disabled {
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)"; 
     filter: alpha(opacity=30); 
     -moz-opacity:0.3; 
     -khtml-opacity: 0.3; 
     opacity: 0.3;
 }
+
 button[type="submit"][disabled] { 
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)"; 
     filter: alpha(opacity=30); 

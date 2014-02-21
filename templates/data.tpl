@@ -24,7 +24,7 @@
             <section class="ac-container">
 
 
-                <div> 
+                <div id="fileSet-filters"> 
                     <input id="ac-1" class="inputs-ac" name="accordion-1" type="radio" checked  /> 
                     <label class="inputs-ac" for="ac-1">File Set</label> 
                     <article class="ac-large">  
@@ -35,8 +35,8 @@
                     </article>
                     <input type="hidden" id="tile_name" />
                 </div>
-                <div class="inputs-ac">
-                     
+
+                <div class="inputs-ac" id="scenario-filters">
                     <input id="ac-2" class="inputs-ac" name="accordion-1" type="radio" />
                     <label class="inputs-ac" for="ac-2">Scenario</label> 
                     <article class="ac-large">
@@ -45,54 +45,50 @@
                             <input id="scenario-{$scenario['id']}" type="checkbox" name="scenarios[]" value="{$scenario['id']}"><label for="scenario-{$scenario['id']}">{$scenario['name']}</label><br>
                         {/foreach}
                     </article>
-
                 </div>
-                <div class="inputs-ac"> 
 
+                <div class="inputs-ac" id="model-filters"> 
                     <input class="inputs-ac" id="ac-3" name="accordion-1" type="radio"  />
                     <label  class="inputs-ac" for="ac-3">Model</label> 
                     <article class="ac-large2"> 
                                 <img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                                <input type="checkbox" id="line-checkbox-999" value="999">
-                                <label for="line-checkbox-999}">Select all options</label>
+                                <input type="checkbox" id="model-999" value="999">
+                                <label for="model-999}">Select all options</label>
                             {foreach from=$models item=model}
                                 <img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                                <input type="checkbox" id="line-checkbox-{$model['id']}" name="model[]" value="{$model['id']}">
-                                <label for="line-checkbox-{$model['id']}">{$model['acronym']}</label>
+                                <input type="checkbox" id="model-{$model['id']}" name="model[]" value="{$model['id']}">
+                                <label for="model-{$model['id']}">{$model['acronym']}</label>
                             {/foreach} 
                     </article>
-
                 </div>
-                
             </section>
         </div>
         <div id="side-right"> 
             <div id="side-right-top">
-               <div id="bloc-e">
+               <div id="extent-filters" class="bloc-e">
                     <div id="box"> Extent </div> 
                     {foreach from=$extents item=extent}
                     <div id="option">
-                        <input tabindex="19" type="radio" id="line-radio-{$extent['id']}" name="extent" value="{$extent['id']}" />
-                        <label for="line-radio-{$extent['id']}" class="extent">{$extent['name']}</label>
+                        <input tabindex="19" type="radio" id="extent-{$extent['id']}" name="extent" value="{$extent['id']}" />
+                        <label for="extent-{$extent['id']}" class="extent">{$extent['name']}</label>
                     </div>
                     {/foreach} 
                </div> 
-                <div id="bloc-e">
+
+                <div id="format-filters" class="bloc-e">
                     <div id="box"> Format </div> 
                     {$isFirst = true}
-                        {foreach from=$formats item=format}
-                            <img class="help_icon" id="help_icon_format" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                            <input id="format-{$format['id']}" type="checkbox" name="formats[]" value="{$format['id']}" />
-                            <label for="format-{$format['id']}" class="format">{$format["name"]}</label><br>
-                            {$isFirst = false}
-                        {/foreach}
+                    {foreach from=$formats item=format}
+                        <img class="help_icon" id="help_icon_format" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                        <input id="format-{$format['id']}" type="checkbox" name="formats[]" value="{$format['id']}" />
+                        <label for="format-{$format['id']}" class="format">{$format["name"]}</label><br>
+                        {$isFirst = false}
+                    {/foreach}
                </div> 
 
-               <div id="bloc">
-                    <div id="box-b"> Period </div> 
-
-                    <div id="box-content">
-                        
+               <div id="period-filters" class="bloc">
+                    <div class="box-b"> Period </div> 
+                    <div class="box-content">
                          <div id="dropdown-arrow"></div> 
                          <div id="drop-content">
                         {foreach from=$periods item=period}
@@ -102,11 +98,11 @@
                         {/foreach}
                         </div>
                     </div>
+               </div>
 
-               </div> 
-                <div id="bloc">
-                    <div id="box-b"> Variable </div> 
-                    <div id="box-content"> 
+                <div id="variable-filters" class="bloc">
+                    <div class="box-b"> Variable </div> 
+                    <div class="box-content"> 
                         <div id="dropdown-arrow"></div> 
                         <div id="drop-content">
                         {foreach from=$variables item=variable}
@@ -118,11 +114,11 @@
                         <label for="variable-9999" class="variables[]">Other</label><br>
                         </div>
                     </div>
-
                </div> 
-                <div id="bloc">
-                    <div id="box-b"> Resolution </div> 
-                    <div id="box-content"> 
+
+                <div id="resolution-filters" class="bloc">
+                    <div class="box-b"> Resolution </div> 
+                    <div class="box-content"> 
                         <div id="dropdown-arrow"></div> 
                         <div id="drop-content">
                         {$isFirst = true}
@@ -135,6 +131,7 @@
                         </div>
                     </div> 
                </div> 
+
                <div id="bloc-search">
                         <button type="submit" id="searchSubmit" disabled="disabled">Search</button>
                         <label>
