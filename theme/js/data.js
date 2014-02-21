@@ -5,6 +5,19 @@ $(document).ready(function(){
   initializeMap();
   setPageEvents();
   
+
+    // Make the accordion effect on elements at left
+  $(".inputs-ac").on("click", function(){
+    var elementClicked = this;
+    $(elementClicked).find("span").addClass("selected");
+
+    // Le quitamos la seleccion a los demas elementos
+    $(".inputs-ac").each(function(){
+      if( $(this).attr("id") != $(elementClicked).attr("id") ){
+        $(this).find("span").removeClass("selected");
+      }
+    });
+  });
 }); 
 
 /**
@@ -35,11 +48,11 @@ function initializeICheckSettings(){
     });
   });
 
-  $('#bloc input').iCheck({
+  $('.bloc input').iCheck({
     checkboxClass: 'icheckbox_flat',
     radioClass: 'iradio_flat'
   });
-  $('#bloc-e input').iCheck({
+  $('.bloc-e input').iCheck({
     checkboxClass: 'icheckbox_flat',
     radioClass: 'iradio_flat'
   }); 
@@ -53,24 +66,48 @@ function initializeICheckSettings(){
  */
 function setPageEvents(){
 
-  $("input[name='fileSet']").on("ifToggled", deleteTileValue);
-  $("input[name='fileSet']").on("ifChecked", getFilesInfo);
-  $("input[name='scenarios\\[\\]']").on("ifToggled", getFilesInfo);
-  $("input[name='model\\[\\]']").on("ifToggled", getFilesInfo);
-  $("input[name='method']").on("ifToggled", getFilesInfo);
-  $("input[name='extent']").on("ifToggled", getFilesInfo);
-  $("input[name='formats\\[\\]']").on("ifToggled", getFilesInfo);
-  $("input[name='period\\[\\]']").on("ifToggled", getFilesInfo);
-  $("input[name='variables\\[\\]']").on("ifToggled", getFilesInfo);
-  $("input[name='resolution']").on("ifToggled", getFilesInfo);
-  $("input[name='extent']").on("ifChecked", changeMap);
+  $("#fileSet-filters").find("input")
+    .on("ifToggled", adjustFiltersOnFileSetSelection)
+    .on("ifChecked", getFilesInfo);
+
+  $("#scenario-filters").find("input").on("ifToggled", getFilesInfo);
+  $("#model-filters").find("input").on("ifToggled", getFilesInfo);
+  $("#method-filters").find("input").on("ifToggled", getFilesInfo);
+  $("#extent-filters").find("input").on("ifToggled", getFilesInfo);
+  $("#format-filters").find("input").on("ifToggled", getFilesInfo);
+  $("#period-filters").find("input").on("ifToggled", getFilesInfo);
+  $("#variable-filters").find("input").on("ifToggled", getFilesInfo);
+  $("#resolution-filters").find("input").on("ifToggled", getFilesInfo);
+  $("#extent-filters").find("input").on("ifChecked", changeMap);
 
   // load on the map the selected layer(file set). 
   //$("input[name='fileSet']").on('ifChecked', loadKmlOnMap); 
   $("input[name='fileSet']").on('ifChecked', changeMap); 
   // Select/De-select all option in model filter
-  $("input#line-checkbox-999").on("ifToggled", selectAllOptionsEvent);
+  $("model-999").on("ifToggled", selectAllModelOptionsEvent);
 }
+
+function removePageEvents(){
+
+  $("#fileSet-filters").find("input")
+    .off("ifToggled", getFilesInfo)
+    .off("ifChecked", getFilesInfo)
+    .off('ifChecked', changeMap);
+
+  $("#scenario-filters").find("input").off("ifToggled", getFilesInfo);
+  $("#model-filters").find("input").off("ifToggled", getFilesInfo);
+  $("#extent-filters").find("input").off("ifToggled", getFilesInfo);
+  $("#format-filters").find("input").off("ifToggled", getFilesInfo);
+  $("#period-filters").find("input").off("ifToggled", getFilesInfo);
+  $("#variable-filters").find("input").off("ifToggled", getFilesInfo);
+  $("#resolution-filters").find("input").off("ifToggled", getFilesInfo);
+  $("#extent-filters").find("input").off("ifToggled", getFilesInfo);
+
+
+  // Select/De-select all option in model filter
+  $("#model-999").off("ifToggled", selectAllModelOptionsEvent);
+}
+
 
 /* ******************************************************************************** */
 //
@@ -104,11 +141,23 @@ function changeMap(){
   
 }
 
+function adjustFiltersOnFileSetSelection(){
+  var fileSetSelected = $("input[name='fileSet']:checked").attr("id");
+
+  deleteTileValue();
+  uncheckAllInputs();
+
+  // Select again the fileset
+  $("#fileSet-" + fileSetSelected).attr("checked", true);
+
+
+}
+
 /*
   This function checks if option "Select all options"
   in Model filter was pressed
  */
-function selectAllOptionsEvent(evt){
+function selectAllModelOptionsEvent(evt){
   var element = evt.target;
 
   // Disable temporary the toggled event
@@ -196,10 +245,56 @@ function getFilesInfo(evt){
           $("#searchSubmit").attr("disabled", "disabled");
           $("#searchSubmit").addClass("disable"); 
       }
+      console.log(filterValues.section);
+      if(filterValues.section == 'fileSet' || filterValues.section == 'scenarios[]'){
+        updateFilters(data.filtersAvailable);
+      }
+
       $("#filesFound").show();
     }
   });
 }
+
+function uncheckAllInputs(){
+  $("input").attr("checked", false);
+  $("input").iCheck('update');
+}
+
+/**
+ * According to the filters selected the others filters
+ * are disabled/enabled.
+ * 
+ * @param  {array} $filtersAvailable contains an associative 
+ *                 arrray with pairs: 
+ *                 "filterName" => "inputs available comma separated" 
+ */
+function updateFilters(filtersAvailable){
+  $.each(filtersAvailable, function(filter, inputsIds){    
+
+    // Deshabilitamos los eventos temporalmente para
+    // evitar dispararlos
+    removePageEvents();
+
+
+    if(inputsIds){
+        var arrayInputsIds = inputsIds.split(",");
+        $("input[id^='" + filter + "']").iCheck("disable");
+
+        $.each(arrayInputsIds, function(index, id){
+          $("#" + filter + "-" + id).iCheck("enable");
+        });
+
+        if(arrayInputsIds.length == 1){
+          $("#" + filter + "-" + arrayInputsIds[0]).iCheck("check");
+        }
+    }
+
+    // Habilitamos los eventos nuevamente
+    setPageEvents();
+    changeMap();
+  });
+}
+
 
 /**
  * This function return all the options selected by the user in 

@@ -82,8 +82,8 @@ label.inputs-ac{
 label.inputs-ac:hover{
     background: #2A3038;
 }
-input.inputs-ac:checked + label.inputs-ac,
-input.inputs-ac:checked + label.inputs-ac:hover{
+span.inputs-ac.selected + label.inputs-ac,
+span.inputs-ac.selected + label.inputs-ac:hover{
     background: #323a45;
     border-radius: 4px 4px 0px 0px;
     color: #FFFFFF;
@@ -93,7 +93,7 @@ input.inputs-ac:checked + label.inputs-ac:hover{
         0px 2px 2px rgba(0,0,0,0.1);
 }
 label.inputs-ac:hover:after,
-input.inputs-ac:checked + label.inputs-ac:hover:after{
+span.inputs-ac.selected + label.inputs-ac:hover:after{
     content: '';
     position: absolute;
     width: 24px;
@@ -102,26 +102,26 @@ input.inputs-ac:checked + label.inputs-ac:hover:after{
     top: 7px;
     background: transparent url(../images/arrow_down.png) no-repeat center center;  
 }
-input.inputs-ac:checked + label.inputs-ac:hover:after{
+span.inputs-ac.selected + label.inputs-ac:hover:after{
     background-image: url(../images/arrow_up.png);
 }
-input.inputs-ac{
+span.inputs-ac{
     display: none;
 }
 
-input.inputs-ac:checked ~ article{
+span.inputs-ac.selected ~ article{
     transition: 
         height 0.5s ease-in-out, 
         box-shadow 0.1s linear;
     box-shadow: 0px 0px 0px 1px rgba(155,155,155,0.3);
 }
 
-input.inputs-ac:checked ~ article.ac-large{
+span.inputs-ac.selected ~ article.ac-large{
     height: 372px;
     padding-top: 10px;
 }
 
-input.inputs-ac:checked ~ article.ac-large2{
+span.inputs-ac.selected ~ article.ac-large2{
     height: 372px;
     padding-top: 10px;
     overflow: scroll;

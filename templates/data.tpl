@@ -24,8 +24,8 @@
             <section class="ac-container">
 
 
-                <div id="fileSet-filters"> 
-                    <input id="ac-1" class="inputs-ac" name="accordion-1" type="radio" checked  /> 
+                <div id="fileSet-filters" class="inputs-ac"> 
+                    <span id="ac-1" class="inputs-ac selected" > </span>
                     <label class="inputs-ac" for="ac-1">File Set</label> 
                     <article class="ac-large">  
                         {foreach from=$fileSets item=fileSet}
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="inputs-ac" id="scenario-filters">
-                    <input id="ac-2" class="inputs-ac" name="accordion-1" type="radio" />
+                    <span id="ac-2" class="inputs-ac" > </span>
                     <label class="inputs-ac" for="ac-2">Scenario</label> 
                     <article class="ac-large">
                        {foreach from=$scenarios item=scenario}
@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="inputs-ac" id="model-filters"> 
-                    <input class="inputs-ac" id="ac-3" name="accordion-1" type="radio"  />
+                    <span class="inputs-ac" id="ac-3" > </span>
                     <label  class="inputs-ac" for="ac-3">Model</label> 
                     <article class="ac-large2"> 
                                 <img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />

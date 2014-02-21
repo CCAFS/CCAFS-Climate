@@ -110,8 +110,32 @@ function filesFound($databaseName, $id) {
         $info->filesFound = $db->GetOne($query);
     }
     $info->query = $query;
+    $info->filtersAvailable = getFiltersAvailable();
 
     echo json_encode($info);
+}
+
+function getFiltersAvailable(){
+    global $ids, $db;
+
+    $sql = "SELECT GROUP_CONCAT( DISTINCT `scenario_id` ) as 'scenario', GROUP_CONCAT( DISTINCT `period_id` ) as 'period', ";
+    $sql .= "GROUP_CONCAT( DISTINCT `model_id` ) as 'model', GROUP_CONCAT( DISTINCT `variable_id` ) as 'variable', ";
+    $sql .= "GROUP_CONCAT( DISTINCT `resolution_id` ) as 'resolution', GROUP_CONCAT( DISTINCT `format_id` ) as 'format', ";
+    $sql .= "GROUP_CONCAT( DISTINCT `extent_id` ) as 'extent' ";
+    $sql .= "FROM `datasets_file` WHERE 1";
+
+    if( isset($ids["file_set_id"]) && $ids["file_set_id"] != "" ){
+        $sql .= " AND file_set_id = " . $ids["file_set_id"];
+    }
+
+    // Adjust the db to only return the assoc array
+    $db->SetFetchMode(ADODB_FETCH_ASSOC); 
+    $result = $db->GetRow($sql);
+
+    // Returning the fetch mode to default
+    $db->SetFetchMode(ADODB_FETCH_BOTH); 
+
+    return $result;
 }
 
 ?>
