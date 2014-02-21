@@ -148,7 +148,7 @@ function adjustFiltersOnFileSetSelection(){
   uncheckAllInputs();
 
   // Select again the fileset
-  $("#fileSet-" + fileSetSelected).attr("checked", true);
+  $("#" + fileSetSelected).attr("checked", true);
 
 
 }
@@ -291,7 +291,7 @@ function updateFilters(filtersAvailable){
 
     // Habilitamos los eventos nuevamente
     setPageEvents();
-    changeMap();
+    //changeMap();
   });
 }
 
