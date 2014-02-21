@@ -67,8 +67,8 @@ function initializeICheckSettings(){
 function setPageEvents(){
 
   $("#fileSet-filters").find("input")
-    .on("ifToggled", adjustFiltersOnFileSetSelection)
-    .on("ifChecked", getFilesInfo);
+    .on("ifChecked", getFilesInfo)
+    .on("ifToggled", adjustFiltersOnFileSetSelection);
 
   $("#scenario-filters").find("input").on("ifToggled", getFilesInfo);
   $("#model-filters").find("input").on("ifToggled", getFilesInfo);
@@ -78,11 +78,11 @@ function setPageEvents(){
   $("#period-filters").find("input").on("ifToggled", getFilesInfo);
   $("#variable-filters").find("input").on("ifToggled", getFilesInfo);
   $("#resolution-filters").find("input").on("ifToggled", getFilesInfo);
-  $("#extent-filters").find("input").on("ifChecked", changeMap);
+  $("#extent-filters").find("input").on("ifClicked", changeMap);
 
   // load on the map the selected layer(file set). 
   //$("input[name='fileSet']").on('ifChecked', loadKmlOnMap); 
-  $("input[name='fileSet']").on('ifChecked', changeMap); 
+  //$("input[name='fileSet']").on('ifChecked', changeMap); 
   // Select/De-select all option in model filter
   $("model-999").on("ifToggled", selectAllModelOptionsEvent);
 }
@@ -149,8 +149,6 @@ function adjustFiltersOnFileSetSelection(){
 
   // Select again the fileset
   $("#" + fileSetSelected).attr("checked", true);
-
-
 }
 
 /*
@@ -194,10 +192,10 @@ function getFilesInfo(evt){
       if($(help_icon_element).length > 0){
         $(help_icon_element).hide();
       }
+      $(".loader").show();
       // Hide the files found text
       $("#filesFound").hide();
       // Show the loader gif
-      $(".loader").show();
     },
     success: function(data) {
       $(".loader").hide();
@@ -249,7 +247,7 @@ function getFilesInfo(evt){
       if(filterValues.section == 'fileSet' || filterValues.section == 'scenarios[]'){
         updateFilters(data.filtersAvailable);
       }
-
+      changeMap();
       $("#filesFound").show();
     }
   });
