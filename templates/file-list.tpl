@@ -10,6 +10,7 @@
     <p>
         Please select one or more files you want to download.
     </p>
+    <button id="download-button-top" class="download-button" type="submit" disabled="disabled">Generate Download Links</button>
     <form id="files-form" action="/form.php" method="POST">
         <table id="files-table" class="tablesorter">
             <thead>
@@ -40,7 +41,7 @@
             </tbody>
         </table>
         <input type="hidden" name="file-type" value="file" />
-        <button id="download-button" type="submit" disabled="disabled">Generate Download Links</button>
+        <button id="download-button-bottom" class="download-button" type="submit" disabled="disabled">Generate Download Links</button>
     </form>
 </div>
 {include file='footer.tpl'}
