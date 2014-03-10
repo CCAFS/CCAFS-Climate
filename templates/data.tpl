@@ -9,9 +9,7 @@
     <h3>Data</h3>
     <hr>
     <br>
-    <div class="center">
-        <img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png">
-    </div>
+    
     <div id="browserWarning">
         <H5>Search engine no longer supports Internet Explorer versions 7 or 8.</H5>
         <P>We recommend upgrading to the latest <A href="https://ie.microsoft.com/">Internet Explorer</A>, <A href="https://chrome.google.com">Google Chrome</A>, or <A href="https://mozilla.org/firefox/">Firefox</A>.</P>
