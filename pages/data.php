@@ -2,7 +2,9 @@
 require_once '../config/smarty.php';
 require_once '../config/db.php';
 
-$query = "SELECT id, name FROM datasets_fileset ORDER BY name ASC";
+$query = "SELECT df.id, df.name, dfc.name as 'category' FROM datasets_fileset df ";
+$query .= "INNER JOIN datasets_fileset_category dfc ON df.category_id = dfc.id ";
+$query .= "ORDER BY dfc.id, df.name ASC ";
 $fileSets = $db->getAll($query);
 
 //$query = "SELECT id, name FROM datasets_method";

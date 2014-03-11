@@ -26,7 +26,16 @@
                     <span id="ac-1" class="inputs-ac selected" > </span>
                     <label class="inputs-ac" for="ac-1">File Set</label> 
                     <article class="ac-large">  
+                        
+                        {assign var="category" value=$fileSets[0].category}
+                        <div class="fileset-category">{$category}</div>
+
                         {foreach from=$fileSets item=fileSet}
+                            {if $category != $fileSet.category}
+                                {assign var="category" value=$fileSet.category}
+                                <div class="fileset-category">{$category}</div>
+                            {else}
+                            {/if}
                             <img class="help_icon" id="help_icon_fileSet" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
                             <input id="fileSet-{$fileSet['id']}" type="radio" name="fileSet" value="{$fileSet['id']}" /><label for="fileSet-{$fileSet['id']}">{$fileSet["name"]}</label><br> 
                         {/foreach} 
