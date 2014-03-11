@@ -11,7 +11,7 @@ $fileSets = $db->getAll($query);
 $query = "SELECT id, name FROM datasets_scenario";
 $scenarios = $db->getAll($query);
 
-$query = "SELECT id, name, acronym FROM datasets_model";
+$query = "SELECT id, name, acronym FROM datasets_model ORDER BY acronym";
 $models = $db->getAll($query);
 
 $query = "SELECT id, name FROM datasets_period ORDER BY name";
