@@ -14,11 +14,11 @@ $scenarios = $db->getAll($query);
 $query = "SELECT id, name, acronym FROM datasets_model";
 $models = $db->getAll($query);
 
-$query = "SELECT id, name FROM datasets_period";
+$query = "SELECT id, name FROM datasets_period ORDER BY name";
 $periods = $db->getAll($query);
 
 // Only the first 7 variables will be listed. The rest will be marked as other.
-$query = "SELECT id, name FROM datasets_variable WHERE id <= 7";
+$query = "SELECT id, name FROM datasets_variable WHERE id <= 7 ORDER BY name";
 $variables = $db->getAll($query);
 
 $query = "SELECT id, name FROM datasets_resolution";
