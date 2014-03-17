@@ -6,5 +6,13 @@ $(document).ready(function(){
             $("#download-button").attr("disabled", "disabled");
         }
     });
+    
+    $(".checkbox-resourceR").change(function() {
+        if ($(".checkbox-resourceR:checked").length > 0) {
+            $("#download-buttonR").removeAttr("disabled");
+        } else {
+            $("#download-buttonR").attr("disabled", "disabled");
+        }
+    });
 });
 
