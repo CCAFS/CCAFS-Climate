@@ -80,7 +80,6 @@
         <ul style="list-style: none;">          
             {foreach from=$resourceA item=resource}
                 <li>
-{*                  {$resource|@debug_print_var}*}
                     <input type="checkbox" name="download-files[]" id="option_1" class="checkbox-resource" value="{$resource->id}" />
                     {$resource->description} -
                     <img src="{$resource->iconUrl}">

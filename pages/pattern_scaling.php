@@ -52,7 +52,6 @@ foreach ($result as $value) {
 //    array_push($resources, $resource);    
     $resources[$resource->group][]=$resource;    
 }
-echo "<pre>".print_r($resources,true)."</pre>";
 $smarty->assign("resources", $resources);
 
 $query = "SELECT id, name, description, size, local_url FROM datasets_resource WHERE group_title = 'marksim' ORDER BY position ASC";
