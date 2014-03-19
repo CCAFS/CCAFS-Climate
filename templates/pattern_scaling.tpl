@@ -6,33 +6,33 @@
 <div id="content" class="pattern_scaling">
     <h3>Pattern Scaling with MarkSim Weather Generator</h3>
     <hr>
-    <br>
-    <ul id="sections">
-        <li><i><a href="#future_climate_data">Future climate data</a></i></li>
-        <li><i><a href="#marksim_standalone">Standalone application</a></i></li>
-        <li class="last"><i><a target="_blank" href="http://gismap.ciat.cgiar.org/MarkSimGCM">Online web application</a></i></li>
-    </ul>
     <br><br>
 
     <h4>Method Description</h4>
 
     <p>
-        Two different outputs are provided in this section:
+        Three different outputs are provided in this section:
     </p>
     <ol>
-        <li>A <a href="#marksim_standalone">daily weather generator</a> accompanied by data for generating future characteristic weather series.</li>
-        <li><a href="/data/">Future climatological data</a> derived from the application of the daily weather generator in (1).</li>
+        <li><a href="#marksim_standalone">MarkSim standalone for DSSAT users</a>: A daily weather generator accompanied by data for generating future characteristic weather series.</li>
+        <li><a href="#future_climate_data">Pattern Scaling (MarkSim) Data</a>: Future climatological data derived from the application of the daily weather generator.</li>
+        <li><a href="#standard_version">MarkSim Standard Version</a>: The first version of MarkSim software and User Reference Manual.</li>
+        <li><a href="#web_version">MarkSimGCM web application</a>: MarkSim application that runs off Google Earth.</li>
     </ol>
     <p>
-        The input GCM data for the weather generator was produced using polynomial regressions (<a target="_blank" href="https://hc.box.com/shared/f2gk053td8"><i>see the report</i></a>) over up to 10 timeslices and 6 IPCC Fourth Assessment Report Global Circulation Models.
-        The weather generator can thus be used to generate data for any future year between 2020 and 2100, whereas the future climatological data is only available for two time slices (2030 and 2050), and was produced using the stochastic generation of daily weather data and are to some extent characteristic of future climatologies.
-    </p>
-    <p>
-        This work was developed by the theme 4 of the CGIAR Research Program on Climate Change, Agriculture and Food Security (CCAFS). (<i>For more info about themes, visit <a target="_blank" href="http://www.ccafs.cgiar.org">CCAFS</a> portal</i>).
-    </p>    
-    <h4 id="marksim_standalone">MarkSim standalone for DSSAT users</h4>    
-    <p>
-        Marksim standalone combines the basic routines from the original MarkSim version, produced at CIAT and distributed on CD (Jones et.al., 2002, <a target="_blank" href="http://gisweb.ciat.cgiar.org/marksim/download/Theory.pdf"><i>see the theory section</i></a>), and the new <a target="_blank" href="http://gismap.ciat.cgiar.org/MarkSimGCM">MarkSimGCM web application</a> (Jones et al. 2011, <a target="_blank" href="https://hc.box.com/shared/f2gk053td8"><i>see the full report</i></a>) that runs off Google Earth.
+        This work was developed by the theme 4 of the CGIAR Research Program on Climate Change, Agriculture and Food Security (CCAFS). (<i>For more info about themes, visit <a target="_blank" href="http://www.ccafs.cgiar.org">CCAFS</a> portal</i>), and was supported by:
+    </p> 
+    <ul>
+      <li>International Center for Tropical Agriculture (CIAT).</li>
+      <li>International Livestock Research Institute (ILRI).</li>
+      <li>Potsdam Institute for Climate Impact Research (PIK).</li>
+      <li>International Food Policy Research Institute (IFPRI)</li>
+      <li>HarvestChoice.</li>
+      <li>Integrated Pest Management Collaborative Research Support Program (IPM-CRSP).</li>
+    </ul>
+    <ol><li><h4 id="marksim_standalone">MarkSim standalone for DSSAT users</h4></li>
+    <p>        
+        Marksim standalone combines the basic routines from the original MarkSim version, produced at CIAT (<a href="#standard_version">see below</a>), and the new <a href="#web_version">MarkSimGCM web application</a> (Jones et al. 2011, <a target="_blank" href="https://hc.box.com/shared/f2gk053td8"><i>see the full report</i></a>) that runs off Google Earth. 
         The standalone version is designed for computer users that need to process a large amount of data. It eliminates their picking at a keyboard and abusing their eyesight by searching an on-screen map for the required data point. It uses the same six GCM model results as MarkSimGCM and the same three scenarios, along with an ensemble of the six.
     </p>
     <p>
@@ -40,7 +40,7 @@
         In each of these it will place up to 99 replicates of yearly weather data and a new CLI file describing the climate under the particular situation of GCM/scenario/year for which the user called.
     </p>
     <p>
-        A new version of MarkSim standalone (v. 2) was developed for the CMIP5 GCMs. The original MarkSim_Standalone used six GCMs from the fourth approximation of the IPCC, the new one use 17 models from the CMIP5 range that were considered in the last IPCC report.
+        A new version of MarkSim standalone (v. 2) was developed for the CMIP5 GCMs. The original MarkSim_Standalone used six GCMs from the fourth approximation of the IPCC(<a target="_blank" href="https://hc.box.com/shared/f2gk053td8"><i>see the full report</i></a>), the new one use 17 models from the CMIP5 range that were considered in the last IPCC report.
     </p>
     <p>
         The executable program, the GCM data and the MarkSim standalone documentation are available in the following links (you must allow pop-up windows in your browser):
@@ -72,10 +72,13 @@
         </li>
     </ul>
 
-    <h4 style="color: red">Resources</h4>
+{*    <h4 style="color: red">Resources</h4>*}
     <form action="/form.php" method="POST">
-        <ul style="list-style: none;">
-            {foreach from=$resources item=resource}
+      {foreach from=$resources item=resourceA key=keyr}
+        <br>
+        <h4>{$keyr}</h4>
+        <ul style="list-style: none;">          
+            {foreach from=$resourceA item=resource}
                 <li>
                     <input type="checkbox" name="download-files[]" id="option_1" class="checkbox-resource" value="{$resource->id}" />
                     {$resource->description} -
@@ -86,20 +89,24 @@
                     {/if}
                 </li>
             {/foreach}
+          
+        </ul>
+        {/foreach}
             <input type="hidden" name="file-type" value="resource" />
             <div id="button_down_resc">
                 <button id="download-button" type="submit" disabled="disabled">Download resources</button>
             </div>
-        </ul>
     </form>
-
-    <h4 id="future_climate_data">Future climate data</h4>
+    <br>
+    <li><h4 id="future_climate_data">Pattern Scaling (MarkSim) Data</h4></li>
     <p>
         This dataset was generated by a generalized downscaling and data generation method that takes the outputs of a General Circulation Model and allows. Such data can then be used to drive any impacts model that requires daily (or otherwise aggregated) weather data.
         A subset of the climate models and scenario runs carried out for 2007's Fourth Assessment Report of the Intergovernmental Panel on Climate Change (IPCC) for two time slices (2030 and 2050) was used in this process.
         Find the full list of models and scenarios, assessment of the methods used, comments on the limitations of the data, and suggestions for further work at the full report before proceeding to downloading and using the dataset.
     </p>
-
+    <p>
+      Find the full list of models and scenarios, assessment of the methods used, comments on the limitations of the data, and suggestions for further work at the <a target="_blank" href="https://hc.box.com/shared/f2gk053td8"><i>full report</i></a> and <a href="https://hc.box.net/shared/xc38lnbznn">disclaimers</a>. To download see the <a href="http://www.ccafs-climate.org/data/">Data Section</a>.
+    </p>
     <h4>Credits</h4>
     <ol>
         <li type="square">
@@ -118,21 +125,41 @@
             Potsdam Institute for Climate Impact Research (PIK), PO Box 60 12 03, 14412 Potsdam, Germany.
         </li>
     </ol>
+    <br>
+    <li><h4 id="standard_version">MarkSim standard version</h4></li>
     <p>
-        Find the full list of models and scenarios, assessment of the methods used, comments on the limitations of the data, and suggestions for further work at the <a target="_blank" href="https://hc.box.net/shared/f2gk053td8">full report</a> and <a target="_blank" href="https://hc.box.net/shared/xc38lnbznn">disclaimers</a>.
+      MarkSim is a Windows application that will be installed from the .iso image (Jones et.al., 2002, <a href="{$smarty.const.SMARTY_DOCS_URI}/MarkSim-manual.pdf">see the User Reference Manual</a>) and registered automatically. MarkSim is a daily weather generator based on a third order Markov model for rainfall that is especially adapted to the tropics. It works from a set of interpolated climate surfaces to fit a Markov model to the estimated climate data. It uses a third order model with a special stochastic resampling of the model parameters to realistically simulate the rainfall and temperature variances for almost anywhere in the tropics. To see how it does this, consult the <a href="http://gisweb.ciat.cgiar.org/marksim/download/Theory.pdf">theory section</a>.
     </p>
     <p>
-        This work was supported by:
+      For further information visit <a href="http://gisweb.ciat.cgiar.org/marksim">MarkSim CIAT product site</a>. 
     </p>
-    <ol>
-        <li type="square">International Center for Tropical Agriculture (CIAT).</li>
-        <li type="square">International Livestock Research Institute (ILRI).</li>
-        <li type="square">Potsdam Institute for Climate Impact Research (PIK).</li>
-        <li type="square">International Food Policy Research Institute (IFPRI)</li>
-        <li type="square">CGIAR Challenge Program on Climate Change, Agriculture and Food Security (CCAFS).</li>
-        <li type="square">HarvestChoice.</li>
-        <li type="square">Integrated Pest Management Collaborative Research Support Program (IPM-CRSP).</li>
-    </ol>
+    <h4>Resources</h4>
+    <form action="/form.php" method="POST">
+        <ul style="list-style: none;">
+            {foreach from=$resourcesMarksim item=resource}
+                <li>
+                    <input type="checkbox" name="download-files[]" id="option_1" class="checkbox-resourceR" value="{$resource->id}" />
+                    {$resource->description} -
+                    <img src="{$resource->iconUrl}">
+                    <span class="little">({$resource->size})</span>
+                    {if $resource->isNew == true}
+                    - <img class="new_item" title="New" src="{$smarty.const.SMARTY_IMG_URI}/icon_new.png" />
+                    {/if}
+                </li>
+            {/foreach}
+            <input type="hidden" name="file-type" value="resource" />
+            <div id="button_down_resc">
+                <button id="download-buttonR" type="submit" disabled="disabled">Download resources</button>
+            </div>
+        </ul>
+    </form>
+    <br>
+    <li><h4 id="web_version">MarkSimGCM web application</h4></li>
+    <p>
+      The <a>MarkSimGCM web application</a> uses the well-known MarkSim application (<a href="http://dx.doi.org/10.2134/agronj2000.923445x">Jones & Thornton 2000</a>, <a href="{$smarty.const.SMARTY_DOCS_URI}/MarkSim-manual.pdf">Jones et al 2002</a>) working off a 30 arc-second climate surface derived from WorldClim (Hijmans et al 2005). Point and click on the map and up to 99 WTG files are prepared ready for use with <a href="http://icasa.net/dssat/index.html">DSSAT ®</a>. 
+      Download and unpack to a directory on your machine and they are ready for use with the DSSAT4 crop modelling system (<a href="http://www.abe.ufl.edu/Faculty/jjones/ABE_5646/Xtra files/The DSSAT Cropping System Model.pdf">Jones et al 2003</a>).
+    </p>
+    </ol>    
     <br>
     <div id="data_support">
         <h4>Data Support:</h4>    

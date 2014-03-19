@@ -2,7 +2,7 @@
 require_once '../config/smarty.php';
 require_once '../config/db.php';
 
-$query = "SELECT id, name, description, size, local_url FROM datasets_resource ORDER BY position ASC";
+$query = "SELECT id, name, description, size, local_url, group_title FROM datasets_resource WHERE group_title NOT LIKE 'marksim' ORDER BY position ASC";
 $result = $db->GetAll($query);
 $resources = array();
 foreach ($result as $value) {
@@ -12,6 +12,7 @@ foreach ($result as $value) {
     $resource->description = $value["description"];
     $resource->localUrl = $value["local_url"];
     $resource->size = $value["size"];
+    $resource->group = $value["group_title"];
     $resource->isNew = false;
     switch ($value["id"]) {
         case 1:        
@@ -48,11 +49,33 @@ foreach ($result as $value) {
             $resource->iconUrl = SMARTY_IMG_URI."/resources/icon_grid.png";
             break;
     }
-    array_push($resources, $resource);
+//    array_push($resources, $resource);    
+    $resources[$resource->group][]=$resource;    
 }
 $smarty->assign("resources", $resources);
 
-
+$query = "SELECT id, name, description, size, local_url FROM datasets_resource WHERE group_title = 'marksim' ORDER BY position ASC";
+$result = $db->GetAll($query);
+$resources = array();
+foreach ($result as $value) {
+    $resource = new stdClass();
+    $resource->id = $value["id"];
+    $resource->name = $value["name"];
+    $resource->description = $value["description"];
+    $resource->localUrl = $value["local_url"];
+    $resource->size = $value["size"];
+    $resource->isNew = true;
+    switch ($value["id"]) {
+        case 10:        
+            $resource->iconUrl = SMARTY_IMG_URI."/resources/icon_iso.png";
+            break;        
+        default:
+            $resource->iconUrl = SMARTY_IMG_URI."/resources/icon_grid.png";
+            break;
+    }
+    array_push($resources, $resource);
+}
+$smarty->assign("resourcesMarksim", $resources);
 
 $smarty->display("pattern_scaling.tpl");
 ?>

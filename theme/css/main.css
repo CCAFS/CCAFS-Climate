@@ -19,6 +19,7 @@ body {
 a:link, #content a {
     color: #4E2700;
     text-decoration: none;
+    font-weight:bold;
 }
 p {
     text-align: justify;
