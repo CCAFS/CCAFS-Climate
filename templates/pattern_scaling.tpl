@@ -156,7 +156,7 @@
     <br>
     <li><h4 id="web_version">MarkSimGCM web application</h4></li>
     <p>
-      The <a href="http://gisweb.ciat.cgiar.org/MarkSimGCM/">MarkSimGCM web application</a> uses the well-known MarkSim application (<a href="http://dx.doi.org/10.2134/agronj2000.923445x">Jones & Thornton 2000</a>, <a href="{$smarty.const.SMARTY_DOCS_URI}/MarkSim-manual.pdf">Jones et al 2002</a>) working off a 30 arc-second climate surface derived from WorldClim (Hijmans et al 2005). Point and click on the map and up to 99 WTG files are prepared ready for use with <a href="http://icasa.net/dssat/index.html">DSSAT ®</a>. 
+      The <a href="http://gisweb.ciat.cgiar.org/MarkSimGCM/" target="_blank">MarkSimGCM web application</a> uses the well-known MarkSim application (<a href="http://dx.doi.org/10.2134/agronj2000.923445x">Jones & Thornton 2000</a>, <a href="{$smarty.const.SMARTY_DOCS_URI}/MarkSim-manual.pdf">Jones et al 2002</a>) working off a 30 arc-second climate surface derived from WorldClim (Hijmans et al 2005). Point and click on the map and up to 99 WTG files are prepared ready for use with <a href="http://icasa.net/dssat/index.html">DSSAT ®</a>. 
       Download and unpack to a directory on your machine and they are ready for use with the DSSAT4 crop modelling system (<a href="http://www.abe.ufl.edu/Faculty/jjones/ABE_5646/Xtra files/The DSSAT Cropping System Model.pdf">Jones et al 2003</a>).
     </p>
     </ol>    
