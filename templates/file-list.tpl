@@ -9,9 +9,9 @@
     <br>
     <p>
         Please select one or more files you want to download.
-    </p>
-    <button id="download-button-top" class="download-button" type="submit" disabled="disabled">Generate Download Links</button>
+    </p>    
     <form id="files-form" action="/form.php" method="POST">
+      <button id="download-button-top" class="download-button" type="submit" disabled="disabled">Generate Download Links</button>
         <table id="files-table" class="tablesorter">
             <thead>
                 <tr>
