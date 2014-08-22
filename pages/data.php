@@ -2,7 +2,9 @@
 require_once '../config/smarty.php';
 require_once '../config/db.php';
 
-$query = "SELECT id, name FROM datasets_fileset ORDER BY name ASC";
+$query = "SELECT df.id, df.name, dfc.name as 'category' FROM datasets_fileset df ";
+$query .= "INNER JOIN datasets_fileset_category dfc ON df.category_id = dfc.id ";
+$query .= "ORDER BY dfc.id, df.name ASC ";
 $fileSets = $db->getAll($query);
 
 //$query = "SELECT id, name FROM datasets_method";
@@ -11,14 +13,14 @@ $fileSets = $db->getAll($query);
 $query = "SELECT id, name FROM datasets_scenario";
 $scenarios = $db->getAll($query);
 
-$query = "SELECT id, name, acronym FROM datasets_model";
+$query = "SELECT id, name, acronym FROM datasets_model ORDER BY acronym";
 $models = $db->getAll($query);
 
-$query = "SELECT id, name FROM datasets_period";
+$query = "SELECT id, name FROM datasets_period ORDER BY name";
 $periods = $db->getAll($query);
 
 // Only the first 7 variables will be listed. The rest will be marked as other.
-$query = "SELECT id, name FROM datasets_variable WHERE id <= 7";
+$query = "SELECT id, name FROM datasets_variable WHERE id <= 7 ORDER BY name";
 $variables = $db->getAll($query);
 
 $query = "SELECT id, name FROM datasets_resolution";

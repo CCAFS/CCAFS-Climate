@@ -10,20 +10,39 @@
     <table id="methods">
         <tr>
             <td>
-                <a href="/statistical_downscaling_delta/" >
+                <a href="/statistical_downscaling_delta_cmip5/" >
                     <div id="section">
-                        <img src="{$smarty.const.SMARTY_IMG_URI}/logo_delta_method.png" />
+                        <img src="{$smarty.const.SMARTY_IMG_URI}/logo_cmp5Downscaled.png" /> 
                     </div>
                 </a>
             </td>
             <td>
-                <a href="/pattern_scaling/" >
+                <a href="/statistical_downscaling_delta/" >
+                    <div id="section">
+                        <img src="{$smarty.const.SMARTY_IMG_URI}/logo_cmp3Downscaled.png" />
+                    </div>
+                </a>
+            </td>
+        </tr>
+		
+        <tr>
+            <td>
+                <a href="/eta_model/" >
+                    <div id="section">
+                        <img src="{$smarty.const.SMARTY_IMG_URI}/logo_eta.png" />
+                    </div>
+                </a>
+            </td>		
+            <td>
+                <a href="/pattern_scaling/" > 
                     <div id="section">
                         <img src="{$smarty.const.SMARTY_IMG_URI}/logo_marksim.png" />
                     </div>
                 </a>
             </td>
+
         </tr>
+		
         <tr>
             <td>
                 <a href="/statistical_downscaling_climgen/" >

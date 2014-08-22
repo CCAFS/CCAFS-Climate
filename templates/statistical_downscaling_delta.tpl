@@ -4,9 +4,9 @@
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_stdown.gif" />
 </div>
 <div id="content" class="downscaling_delta">
-    <h3>Statistical Downscaling (Delta Method)</h3>
+    <h3>Statistical Downscaling (Delta Method) CMIP3 Data</h3>
     <hr>
-    <br>
+    
     <p>
         <b>Method Description</b>
     </p>
@@ -39,7 +39,7 @@
     </p>
 
     <p>
-        <i>For more info see the <a href="{$smarty.const.SMARTY_DOCS_URI}/Downscaling-WP-01.pdf">Downscaling Gloabl Circulation Model Outputs: The Delta Method (PDF)</a> document</i>.
+        <i>For more info see the <a href="{$smarty.const.SMARTY_DOCS_URI}/Downscaling-WP-01.pdf">Downscaling Global Circulation Model Outputs: The Delta Method (PDF)</a> document</i>.
     </p>
     <table id="projections">
         <tbody>
@@ -55,7 +55,7 @@
     <b>Figure 1</b>. Projections of future global average annual precipitation and temperature for A1B scenarios from donwscaled data.
 
     <p>
-        <i>View all projections from spatial disaggregated data, for <a href="{$smarty.const.SMARTY_DOCS_URI}/Disaggregation_Graphs_A1B.pdf">A1B</a>,
+        <i>View all projections from spatial downscaled data, for <a href="{$smarty.const.SMARTY_DOCS_URI}/Disaggregation_Graphs_A1B.pdf">A1B</a>,
             <a href="{$smarty.const.SMARTY_DOCS_URI}/Disaggregation_Graphs_A2.pdf">A2A</a>,
             <a href="{$smarty.const.SMARTY_DOCS_URI}/Disaggregation_Graphs_B1.pdf">B1</a>
             scenarios
@@ -86,7 +86,7 @@
     </p>
     <br>
     <div class="center">
-        <a href="/data/">
+        <a href="/data.php">
             <img width="224" height="75" border="0" id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png">
         </a>
     </div>

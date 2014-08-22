@@ -41,7 +41,7 @@ ul{margin:0;padding:0;list-style:none}
     margin: 4px 3px 30px 3px;
 }
 .ac-container article{
-    font-size: 14px;
+    font-size: 13px;
     padding: 0px 11px 0 11px;
     background: #fff;
     margin-top: -1px;
@@ -117,17 +117,28 @@ span.inputs-ac.selected ~ article{
 }
 
 span.inputs-ac.selected ~ article.ac-large{
-    height: 372px;
+    height: 380px;
     padding-top: 10px;
 }
 
 span.inputs-ac.selected ~ article.ac-large2{
-    height: 372px;
+    height: 380px;
     padding-top: 10px;
     overflow: scroll;
 }
 
+.fileset-category:first-child{
+    margin-top : 0 !important;
+}
 
+.fileset-category{
+    margin-top : 6px;
+    color: rgb(19, 90, 146);
+}
+
+.iradio_minimal + label{
+    margin-left: 3px;
+}
 
 /* Map Settings */
 
