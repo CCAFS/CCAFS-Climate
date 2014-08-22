@@ -70,7 +70,7 @@
 <p><b>RCP 8.5:</b>
   It is characterized by increasing greenhouse gas emissions over time representative for scenarios in the literature leading to high greenhouse gas concentration levels. The underlying scenario drivers and resulting development path are based on the A2r scenario detailed in Riahi et al. (2007).  </p>
 
-<p> <i>View all projections from spatial downscaled data, for <a href="{$smarty.const.SMARTY_DOCS_URI}/Graphs_RCP26.pdf">RCP 2.6</a>, <a href="{$smarty.const.SMARTY_DOCS_URI}/Graphs_RCP45.pdf">RCP 4.5</a>, <a href="{$smarty.const.SMARTY_DOCS_URI}/Graphs_RCP60.pdf">RCP 6.0</a>, <a href="{$smarty.const.SMARTY_DOCS_URI}/Graphs_RCP85.pdf">RCP 8.5</a> rcps </i>. </p>
+<p> <i>View all projections from spatial downscaled data, for <a href="{$smarty.const.SMARTY_DOCS_URI}/Graphs_RCP26.pdf">RCP 2.6</a>, <a href="{$smarty.const.SMARTY_DOCS_URI}/Graphs_RCP45.pdf">RCP 4.5</a>, <a href="{$smarty.const.SMARTY_DOCS_URI}/Graphs_RCP60.pdf">RCP 6.0</a>, <a href="{$smarty.const.SMARTY_DOCS_URI}/Graphs_RCP85.pdf">RCP 8.5</a> rcps</i>. </p>
     <ol>
     <h4>More information:</h4>
     <ul>
