@@ -4,7 +4,7 @@
         <header>
             <div id="logo">
                 <a href="http://ccafs.cgiar.org" target="_BLANK">
-                    <img class="logo" alt="Home" src="/theme/images/logo_ccafs.png">
+                    <img class="logo" alt="Home" src="{$smarty.const.SMARTY_IMG_URI}/logo_ccafs.png">
                 </a>
             </div>
         </header>

@@ -117,12 +117,12 @@ span.inputs-ac.selected ~ article{
 }
 
 span.inputs-ac.selected ~ article.ac-large{
-    height: 372px;
+    height: 380px;
     padding-top: 10px;
 }
 
 span.inputs-ac.selected ~ article.ac-large2{
-    height: 372px;
+    height: 380px;
     padding-top: 10px;
     overflow: scroll;
 }
@@ -132,7 +132,7 @@ span.inputs-ac.selected ~ article.ac-large2{
 }
 
 .fileset-category{
-    margin-top : 13px;
+    margin-top : 6px;
     color: rgb(19, 90, 146);
 }
 
