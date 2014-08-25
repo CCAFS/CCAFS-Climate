@@ -45,9 +45,9 @@
     <p><b>CMIP5 - Coupled Model Intercomparison Project Phase 5</b> </p>
     <p>CMIP5 promotes a standard set of model simulations in order to:</p>
     <ul>
-      <li>evaluate how realistic the models are in simulating the recent past,</li>
-      <li>provide projections of future climate change on two time scales, near term (out to about 2035) and long term (out to 2100 and beyond), and</li>
-      <li>understand some of the factors responsible for differences in model projections, including quantifying some key feedbacks such as those involving clouds and the carbon cycle</li>
+      <li>Evaluate how realistic the models are in simulating the recent past,</li>
+      <li>Provide projections of future climate change on two time scales, near term (out to about 2035) and long term (out to 2100 and beyond), and</li>
+      <li>Understand some of the factors responsible for differences in model projections, including quantifying some key feedbacks such as those involving clouds and the carbon cycle</li>
   </ul>
     <p>
         <b>Representative Concentration Pathways (RCP)</b>    </p>
