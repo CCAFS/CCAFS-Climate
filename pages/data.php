@@ -2,9 +2,21 @@
 require_once '../config/smarty.php';
 require_once '../config/db.php';
 
-$query = "SELECT df.id, df.name, dfc.name as 'category' FROM datasets_fileset df ";
-$query .= "INNER JOIN datasets_fileset_category dfc ON df.category_id = dfc.id ";
-$query .= "ORDER BY dfc.id, df.name ASC ";
+// $query = "SELECT df.id, df.name, dfc.name as 'category' FROM datasets_fileset df ";
+// $query .= "INNER JOIN datasets_fileset_category dfc ON df.category_id = dfc.id ";
+// $query .= "ORDER BY dfc.id, df.name DESC ";
+$query = "SELECT df.id, df.name, dfc.name as 'category' FROM datasets_fileset df INNER JOIN datasets_fileset_category dfc ON df.category_id = dfc.id ORDER BY (CASE df.id ";
+$query .= "WHEN '12' 	 THEN 1 ";
+$query .= "WHEN '4' 	 THEN 2 ";
+$query .= "WHEN '9' 	 THEN 3 ";
+$query .= "WHEN '10' 	 THEN 4 ";
+$query .= "WHEN '7' 	 THEN 5 ";
+$query .= "WHEN '8' 	 THEN 6 ";
+$query .= "WHEN '11' 	 THEN 7 ";
+$query .= "WHEN '3' 	 THEN 8 ";
+$query .= "WHEN '2' 	 THEN 9 ";
+$query .= "WHEN '5' 	 THEN 10 ";
+$query .= "ELSE 100 END) ASC ";
 $fileSets = $db->getAll($query);
 
 //$query = "SELECT id, name FROM datasets_method";
