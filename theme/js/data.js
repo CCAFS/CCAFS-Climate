@@ -129,10 +129,14 @@ function deleteTileValue(){
 function changeMap(){
   var extentValue = $("[name='extent']:checked").val();
 
+  // console.log($("#tile_name").val());
+
   if(extentValue == 1){ // Global
     $("#map-canvas").html("<img src='/theme/images/map-not-available.png'/>");
   } else if(extentValue == 2){ // Regional
-    loadKmlOnMap();
+	if(!$("#tile_name").val()){
+     loadKmlOnMap();
+	}
   } else {
     // If it is not defined, 
     $("#line-radio-1").iCheck('check');
@@ -199,7 +203,6 @@ function getFilesInfo(evt){
     },
     success: function(data) {
       $(".loader").hide();
-      
       if(data != null){
         if(data.filesFound < 0) {
             $("#filesFound").text("0 files found");
@@ -243,7 +246,10 @@ function getFilesInfo(evt){
           $("#searchSubmit").attr("disabled", "disabled");
           $("#searchSubmit").addClass("disable"); 
       }
-      console.log(filterValues.section);
+
+     // console.log(filterValues.section);
+     // console.log(data);
+	 
       if(filterValues.section == 'fileSet' || filterValues.section == 'scenarios[]'){
         updateFilters(data.filtersAvailable);
       }
@@ -434,25 +440,34 @@ function highlightPoly(poly) {
 function createListener(poly,name) {	
   google.maps.event.addListener(poly, "click", function(evt){
 
-    // Creating the property to send as section property
+	// Creating the property to send as section property
     evt.target = {};
     evt.target["name"] = "tile";
     polygonClickEvent(evt, poly);
   });
 }
 
-function polygonClickEvent(evt, poly){
+function createListenerMarker(marker,poly,name) {	
+  google.maps.event.addListener(marker, "click", function(evt){
+
+    ///// Creating the property to send as section property
+    evt.target = {};
+    evt.target["name"] = "tile";
+    markerClickEvent(evt, marker,poly);
+  });
+}
+
+function markerClickEvent(evt, marker,poly){
     // Don't show the info window
     poly.infoWindow.close();
-   
+ 
     // Setting the tile id in the hidden input
     $("#tile_name").val(poly.title);
-
+	
     if(selectedPolygonStyle != null){
       selectedPolygonStyle.setOptions(normalStyle);
       highlightPoly(selectedPolygonStyle);
     }
-
     selectedPolygonStyle=poly;    
     poly.setOptions(selectedStyle);
     google.maps.event.clearListeners(poly, 'mouseover');  
@@ -460,19 +475,47 @@ function polygonClickEvent(evt, poly){
 
     // Look for the files available
     getFilesInfo(evt);
+
+}
+
+function polygonClickEvent(evt, poly){
+    // Don't show the info window
+    poly.infoWindow.close();
+
+	// console.log(evt);
+  
+    // Setting the tile id in the hidden input
+    $("#tile_name").val(poly.title);
+	
+    if(selectedPolygonStyle != null){
+      selectedPolygonStyle.setOptions(normalStyle);
+      highlightPoly(selectedPolygonStyle);
+    }
+    selectedPolygonStyle=poly;    
+    poly.setOptions(selectedStyle);
+    google.maps.event.clearListeners(poly, 'mouseover');  
+    google.maps.event.clearListeners(poly, 'mouseout');   
+
+    // Look for the files available
+    getFilesInfo(evt);
+
 }
 
 // function to manage the data into the kml files
 function useTheData(doc){
   // Geodata handling goes here, using JSON properties of the doc object
   geoXmlDoc = doc[0]; 
+
   if(geoXmlDoc.gpolygons!=undefined){
 		for (var i = 0; i < geoXmlDoc.gpolygons.length; i++) {
 			geoXmlDoc.gpolygons[i].setOptions(normalStyle);
 			highlightPoly(geoXmlDoc.gpolygons[i]);
 			createListener(geoXmlDoc.gpolygons[i],geoXmlDoc.placemarks[i].name);
+			createListenerMarker(geoXmlDoc.markers[i],geoXmlDoc.gpolygons[i],geoXmlDoc.placemarks[i].name);
+
+			
 		}		
-	}	
+	}
 }
 
 /* Apply a custom KML to the map */

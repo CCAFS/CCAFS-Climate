@@ -37,7 +37,7 @@
 <IconStyle>
 <color>FFFFFFFF</color>
 <scale>1.0</scale>
-<Icon><href>root://icons/palette-5.png</href><x>192</x><y>192</y><w>32</w><h>32</h></Icon>
+<Icon><href>../../theme/images/help_icon.png</href><x>192</x><y>192</y><w>32</w><h>32</h></Icon>
 </IconStyle>
 <LabelStyle>
 <scale>0</scale>
@@ -48,9 +48,155 @@
 </Style>
 <StyleMap id="MapRollOver"><Pair><key>normal</key><styleUrl>#zn</styleUrl></Pair><Pair><key>highlight</key><styleUrl>#zh</styleUrl></Pair>
 </StyleMap>   
+
+  <Style id="styleA1">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/A1-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  
+   <Style id="styleA2">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/A2-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+  
+   <Style id="styleA3">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/A3-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+  
+   <Style id="styleA4">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/A4-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>  
+
+   <Style id="styleA5">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/A5-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+
+   <Style id="styleA6">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/A6-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+
+  <Style id="styleB1">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/B1-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  
+   <Style id="styleB2">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/B2-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+  
+   <Style id="styleB3">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/B3-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+  
+   <Style id="styleB4">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/B4-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>  
+
+   <Style id="styleB5">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/B5-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+
+   <Style id="styleB6">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/B6-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>  
+  
+  
+   <Style id="styleC1">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/C1-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  
+   <Style id="styleC2">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/C2-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+  
+   <Style id="styleC3">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/C3-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+  
+   <Style id="styleC4">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/C4-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>  
+
+   <Style id="styleC5">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/C5-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+
+   <Style id="styleC6">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/C6-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>   
+  
         <Placemark>
-            <name>tile_a1</name>            
-            <styleUrl>#MapRollOver</styleUrl>
+            <name>tile_a1</name>    
+            <styleUrl>#styleA1</styleUrl>
             <MultiGeometry>
                 <Polygon>
                     <tessellate>0</tessellate>
@@ -71,7 +217,7 @@
         </Placemark>
         <Placemark>
             <name>tile_a2</name>           
-            <styleUrl>#MapRollOver</styleUrl>
+            <styleUrl>#styleA2</styleUrl>
             <MultiGeometry>
                 <Polygon>
                     <tessellate>0</tessellate>
@@ -84,6 +230,7 @@
                     </outerBoundaryIs>
                 </Polygon>
                 <Point>
+					<tessellate>0</tessellate>
                     <extrude>0</extrude>
                     <altitudeMode>clampedToGround</altitudeMode>
                     <coordinates>-90.0000000000,60.0000000000,0 </coordinates>
@@ -92,7 +239,7 @@
         </Placemark>
         <Placemark>
             <name>tile_a3</name>           
-            <styleUrl>#MapRollOver</styleUrl>
+            <styleUrl>#styleA3</styleUrl>
             <MultiGeometry>
                 <Polygon>
                     <tessellate>0</tessellate>
@@ -113,7 +260,7 @@
         </Placemark>
         <Placemark>
             <name>tile_a4</name>            
-            <styleUrl>#MapRollOver</styleUrl>
+            <styleUrl>#styleA4</styleUrl>
             <MultiGeometry>
                 <Polygon>
                     <tessellate>0</tessellate>
@@ -134,7 +281,7 @@
         </Placemark>
         <Placemark>
             <name>tile_a5</name>           
-            <styleUrl>#MapRollOver</styleUrl>
+            <styleUrl>#styleA5</styleUrl>
             <MultiGeometry>
                 <Polygon>
                     <tessellate>0</tessellate>
@@ -155,7 +302,7 @@
         </Placemark>
         <Placemark>
             <name>tile_a6</name>            
-            <styleUrl>#MapRollOver</styleUrl>
+            <styleUrl>#styleA6</styleUrl>
             <MultiGeometry>
                 <Polygon>
                     <tessellate>0</tessellate>
@@ -176,7 +323,7 @@
         </Placemark>
         <Placemark>
             <name>tile_b1</name>            
-            <styleUrl>#MapRollOver</styleUrl>
+            <styleUrl>#styleB1</styleUrl>
             <MultiGeometry>
                 <Polygon>
                     <tessellate>0</tessellate>
@@ -197,7 +344,7 @@
         </Placemark>
         <Placemark>
             <name>tile_b2</name>            
-            <styleUrl>#MapRollOver</styleUrl>
+            <styleUrl>#styleB2</styleUrl>
             <MultiGeometry>
                 <Polygon>
                     <tessellate>0</tessellate>
@@ -218,7 +365,7 @@
         </Placemark>
         <Placemark>
             <name>tile_b3</name>            
-            <styleUrl>#MapRollOver</styleUrl>
+            <styleUrl>#styleB3</styleUrl>
             <MultiGeometry>
                 <Polygon>
                     <tessellate>0</tessellate>
@@ -239,7 +386,7 @@
         </Placemark>
         <Placemark>
             <name>tile_b4</name>            
-            <styleUrl>#MapRollOver</styleUrl>
+            <styleUrl>#styleB4</styleUrl>
             <MultiGeometry>
                 <Polygon>
                     <tessellate>0</tessellate>
@@ -260,7 +407,7 @@
         </Placemark>
         <Placemark>
             <name>tile_b5</name>            
-            <styleUrl>#MapRollOver</styleUrl>
+            <styleUrl>#styleB5</styleUrl>
             <MultiGeometry>
                 <Polygon>
                     <tessellate>0</tessellate>
@@ -281,7 +428,7 @@
         </Placemark>
         <Placemark>
             <name>tile_b6</name>            
-            <styleUrl>#MapRollOver</styleUrl>
+            <styleUrl>#styleB6</styleUrl>
             <MultiGeometry>
                 <Polygon>
                     <tessellate>0</tessellate>
@@ -302,7 +449,7 @@
         </Placemark>
         <Placemark>
             <name>tile_c1</name>            
-            <styleUrl>#MapRollOver</styleUrl>
+            <styleUrl>#styleC1</styleUrl>
             <MultiGeometry>
                 <Polygon>
                     <tessellate>0</tessellate>
@@ -323,7 +470,7 @@
         </Placemark>
         <Placemark>
             <name>tile_c2</name>            
-            <styleUrl>#MapRollOver</styleUrl>
+            <styleUrl>#styleC2</styleUrl>
             <MultiGeometry>
                 <Polygon>
                     <tessellate>0</tessellate>
@@ -344,7 +491,7 @@
         </Placemark>
         <Placemark>
             <name>tile_c3</name>            
-            <styleUrl>#MapRollOver</styleUrl>
+            <styleUrl>#styleC3</styleUrl>
             <MultiGeometry>
                 <Polygon>
                     <tessellate>0</tessellate>
@@ -365,7 +512,7 @@
         </Placemark>
         <Placemark>
             <name>tile_c4</name>            
-            <styleUrl>#MapRollOver</styleUrl>
+            <styleUrl>#styleC4</styleUrl>
             <MultiGeometry>
                 <Polygon>
                     <tessellate>0</tessellate>
@@ -386,7 +533,7 @@
         </Placemark>
         <Placemark>
             <name>tile_c5</name>            
-            <styleUrl>#MapRollOver</styleUrl>
+            <styleUrl>#styleC5</styleUrl>
             <MultiGeometry>
                 <Polygon>
                     <tessellate>0</tessellate>
@@ -407,7 +554,7 @@
         </Placemark>
         <Placemark>
             <name>tile_c6</name>            
-            <styleUrl>#MapRollOver</styleUrl>
+            <styleUrl>#styleC6</styleUrl>
             <MultiGeometry>
                 <Polygon>
                     <tessellate>0</tessellate>
