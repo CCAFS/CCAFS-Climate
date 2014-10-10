@@ -69,7 +69,6 @@ function setPageEvents(){
   $("#fileSet-filters").find("input")
     .on("ifChecked", getFilesInfo)
     .on("ifToggled", adjustFiltersOnFileSetSelection);
-
   $("#scenario-filters").find("input").on("ifToggled", getFilesInfo);
   $("#model-filters").find("input").on("ifToggled", getFilesInfo);
   $("#method-filters").find("input").on("ifToggled", getFilesInfo);
@@ -126,14 +125,17 @@ function deleteTileValue(){
   $("#tile_name").attr("value", null);
 }
 
-function changeMap(){
+function changeMap(evt){
   var extentValue = $("[name='extent']:checked").val();
-
-  // console.log($("#tile_name").val());
-
+  
+  var section = $(evt.target).attr("name");
+  
   if(extentValue == 1){ // Global
+	// console.log($("#tile_name").val())
+	deleteTileValue()
     $("#map-canvas").html("<img src='/theme/images/map-not-available.png'/>");
   } else if(extentValue == 2){ // Regional
+	// if(section!="tile"){
 	if(!$("#tile_name").val()){
      loadKmlOnMap();
 	}
@@ -184,7 +186,7 @@ function getFilesInfo(evt){
   if($(evt.target).parent().prev().hasClass("help_icon")){
     $(evt.target).parent().prev().hide();
   }
-
+	
     $.ajax({
     type: "POST",
     dataType: "json",
@@ -247,13 +249,12 @@ function getFilesInfo(evt){
           $("#searchSubmit").addClass("disable"); 
       }
 
-     // console.log(filterValues.section);
-     // console.log(data);
 	 
       if(filterValues.section == 'fileSet' || filterValues.section == 'scenarios[]'){
         updateFilters(data.filtersAvailable);
       }
-      changeMap();
+
+      changeMap(evt);
       $("#filesFound").show();
     }
   });
@@ -274,7 +275,6 @@ function uncheckAllInputs(){
  */
 function updateFilters(filtersAvailable){
   $.each(filtersAvailable, function(filter, inputsIds){    
-
     // Deshabilitamos los eventos temporalmente para
     // evitar dispararlos
     removePageEvents();
@@ -316,6 +316,7 @@ function getUserSelections(filterName){
   variables = getArrayValues( $("input[name='variables\\[\\]']:checked") ); 
   formats = getArrayValues( $("input[name='formats\\[\\]']:checked") ); 
   tileNameVal = (  $("#tile_name").val() == "" ) ? undefined : "'" + $("#tile_name").val() + "'";
+  if(filterName=="extent"){tileNameVal= null}
 
   var data = {
     methodId: $("input[name='method']:checked").val(),
@@ -330,6 +331,8 @@ function getUserSelections(filterName){
     tileName: tileNameVal,
     section: filterName
   }
+  
+    // console.log(data)
 
   return data;
 }
@@ -366,11 +369,12 @@ var selectedPolygonStyle=null;
 var highlightOptions = {fillColor: "#FFFFFF", strokeColor: "#FFFFFF", fillOpacity: 0.6, strokeWidth: 10};
 var normalStyle = {fillColor: "#BDBDBD", strokeColor: "#424242", fillOpacity: 0.4, strokeWidth: 10};
 var selectedStyle= {fillColor: "#2E2E2E", strokeColor: "#1C1C1C", fillOpacity: 0.6, strokeWidth: 10};
+var minZoomLevel = 1;  
 
 // function initialize map
 function initializeMap() {
   var mapOptions = {
-      zoom: 2,
+      zoom: minZoomLevel,
       center: new google.maps.LatLng(23.079732,17.226563),
       mapTypeId: google.maps.MapTypeId.ROADMAP
   };
@@ -380,7 +384,7 @@ function initializeMap() {
 
   google.maps.event.addListenerOnce(map, 'idle', function(){
     map.setCenter(new google.maps.LatLng(23.079732,17.226563));
-    map.setZoom(1);
+	map.setZoom(minZoomLevel);	
   });
 
 }
@@ -481,11 +485,11 @@ function markerClickEvent(evt, marker,poly){
 function polygonClickEvent(evt, poly){
     // Don't show the info window
     poly.infoWindow.close();
-
-	// console.log(evt);
-  
+ 
     // Setting the tile id in the hidden input
     $("#tile_name").val(poly.title);
+	
+	// console.log(evt);
 	
     if(selectedPolygonStyle != null){
       selectedPolygonStyle.setOptions(normalStyle);

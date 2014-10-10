@@ -14,6 +14,7 @@ $ids["format_id"] = isset($_POST["formatId"]) && $_POST["formatId"] != "" ? $_PO
 $ids["extent_id"] = isset($_POST["extendId"]) && $_POST["extendId"] != "" ? $_POST["extendId"] : null;
 $ids["file_set_id"] = isset($_POST["filesetId"]) && $_POST["filesetId"] != "" ? $_POST["filesetId"] : null;
 $ids["tile_id"] = isset($_POST["tileName"]) && $_POST["tileName"] != "" ? $_POST["tileName"] : null;
+$ids["tile_id"] = getTileID($ids["tile_id"]);
 
 if (!is_null($section)) {
     switch ($section) {
@@ -45,7 +46,7 @@ if (!is_null($section)) {
             filesFound("datasets_fileset", $ids["file_set_id"]);
             break;
         case "tile":
-            $ids["tile_id"] = getTileID($ids["tile_id"]);
+            // $ids["tile_id"] = getTileID($ids["tile_id"]);
             filesFound("datasets_tile", $ids["tile_id"]);
             break;
         default:
