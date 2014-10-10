@@ -10,6 +10,7 @@ $modelId = isset($_GET["model"]) ?  implode( ",", $_GET["model"] ) : null;
 $formatId = isset($_GET["format"]) && is_numeric($_GET["format"]) && $_GET["format"] >= 0 ? $_GET["format"] : null;
 $periodId = isset($_GET["period"]) ?  implode( ",", $_GET["period"] ) : null;
 $fileSetId = isset($_GET["fileSet"]) && is_numeric($_GET["fileSet"]) && $_GET["fileSet"] >= 0 ? $_GET["fileSet"] : null;
+$extentId = isset($_GET["extent"]) && is_numeric($_GET["extent"]) && $_GET["extent"] >= 0 ? $_GET["extent"] : null;
 
 $query = "SELECT df.id, df.local_url, df.name, da.id as availability_id, da.name as availability, fset.name as fileset
     FROM datasets_file df, datasets_dataavailability da, datasets_fileset fset
@@ -23,6 +24,7 @@ if(!is_null($modelId)) $query .= " AND df.model_id IN ( ".$modelId . ")";
 if(!is_null($formatId)) $query .= " AND df.format_id = ".$formatId;
 if(!is_null($periodId)) $query .= " AND df.period_id IN ( ".$periodId . ")";
 if(!is_null($fileSetId)) $query .= " AND df.file_set_id = ".$fileSetId;
+if(!is_null($extentId)) $query .= " AND df.extent_id = ".$extentId;
 
 $files = $db->getAll($query);
 
