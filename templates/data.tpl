@@ -16,7 +16,7 @@
         <P>If you are using IE 9 or later, make sure you <A href="http://windows.microsoft.com/en-US/windows7/webpages-look-incorrect-in-Internet-Explorer">turn off "Compatibility View"</A>.</P>
     </div>
     <div id="search_form">
-        <form method="GET" action="/file-list.php" id="formSearch" target="_blank">
+        <form method="GET" action="/file-list.php" id="formSearch">
 
         <div id="side-left"> 
             <section class="ac-container">
