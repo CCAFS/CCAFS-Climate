@@ -181,12 +181,11 @@ function selectAllModelOptionsEvent(evt){
 
 function getFilesInfo(evt){
   var filterValues = getUserSelections($(evt.target).attr("name"));
-
+	// console.log(filterValues)
   // Hide the help icon 
   if($(evt.target).parent().prev().hasClass("help_icon")){
     $(evt.target).parent().prev().hide();
   }
-	
     $.ajax({
     type: "POST",
     dataType: "json",
@@ -317,7 +316,7 @@ function getUserSelections(filterName){
   formats = getArrayValues( $("input[name='formats\\[\\]']:checked") ); 
   tileNameVal = (  $("#tile_name").val() == "" ) ? undefined : "'" + $("#tile_name").val() + "'";
   if(filterName=="extent"){tileNameVal= null}
-
+	
   var data = {
     methodId: $("input[name='method']:checked").val(),
     modelId: model,
