@@ -406,3 +406,9 @@ div.home {
     padding: 5px 8px;
 }
 
+#dataTable td:nth-child(1){
+width: 62px;
+}
+#dataTable td:nth-child(2){
+width: 800px;
+}

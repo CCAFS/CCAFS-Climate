@@ -127,7 +127,7 @@ function deleteTileValue(){
 
 function changeMap(evt){
   var extentValue = $("[name='extent']:checked").val();
-  
+  variables = getArrayValues( $("input[name='variables\\[\\]']:checked") );
   var section = $(evt.target).attr("name");
   
   if(extentValue == 1){ // Global
@@ -136,7 +136,7 @@ function changeMap(evt){
     $("#map-canvas").html("<img src='/theme/images/map-not-available.png'/>");
   } else if(extentValue == 2){ // Regional
 	// if(section!="tile"){
-	if(!$("#tile_name").val()){
+	if(!$("#tile_name").val() && !variables){
      loadKmlOnMap();
 	}
   } else {
@@ -181,7 +181,7 @@ function selectAllModelOptionsEvent(evt){
 
 function getFilesInfo(evt){
   var filterValues = getUserSelections($(evt.target).attr("name"));
-	// console.log(filterValues)
+  // console.log(filterValues)
   // Hide the help icon 
   if($(evt.target).parent().prev().hasClass("help_icon")){
     $(evt.target).parent().prev().hide();
@@ -203,6 +203,7 @@ function getFilesInfo(evt){
       // Show the loader gif
     },
     success: function(data) {
+		// console.log(data)
       $(".loader").hide();
       if(data != null){
         if(data.filesFound < 0) {
@@ -241,6 +242,7 @@ function getFilesInfo(evt){
                 
               }
             });
+			//$("#filesFound1").val(data.filesFound);
         }
       }else{
           $("#filesFound").text("0 files found");
@@ -249,7 +251,12 @@ function getFilesInfo(evt){
       }
 
 	 
-      if(filterValues.section == 'fileSet' || filterValues.section == 'scenarios[]'){
+      if(filterValues.section == 'fileSet' || filterValues.section == 'extent' || filterValues.section == 'scenarios[]' ){
+		if(filterValues.section == 'extent'){  
+			if(data.filtersAvailable.extent=="2"){
+				data.filtersAvailable.extent="1,2"
+			}
+		}
         updateFilters(data.filtersAvailable);
       }
 

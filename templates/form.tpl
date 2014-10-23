@@ -79,16 +79,20 @@
             </fieldset>
         </form>
     </div>
+	<div class="submit-button">
+		<img id="ajax-loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />
+		<span id="message"></span>
+	</div>
     <div id="download-files">
         <p>The following links will be available for {$smarty.const.LINK_DAYS} days.</p>
         <table id="download-table" class="tablesorter">
-            <thead>
+            <thead  style="display: block;border-spacing: 1">
                 <tr>
-                    <th>No.</th>
-                    <th>File</th>
+                    <th style="padding: 3px 22px;">No.</th>
+                    <th style="padding: 3px 364px;">File</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id ="dataTable" style="display:block; height:500px;overflow:auto;border-spacing: 1;">
             </tbody>
         </table>
     </div>

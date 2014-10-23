@@ -144,6 +144,7 @@
                             <span id="filesFound">0 files found</span>
                             <img class="loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />
                         </label>
+						<!--<input type="hidden" id="filesFound1" name="filesFound1" /> -->
                 </div>
             </div>
             <div id="side-right-bottom">

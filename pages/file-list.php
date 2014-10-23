@@ -40,9 +40,15 @@ if(!is_null($fileSetId)) $query .= " AND df.file_set_id = ".$fileSetId;
 if(!is_null($extentId)) $query .= " AND df.extent_id = ".$extentId;
 if(!is_null($tile)) $query .= " AND df.tile_id = ".$tile;
 
-$files = $db->getAll($query);
-
+// $files = $db->getAll($query);
+$files = $db->Execute($query);
+$count = $files->RecordCount();
+// foreach ($files as $row) {
+    // print_r($row);
+// }
+// var_dump($files[0]);
 $smarty->assign("files", $files);
+$smarty->assign("count", $count);
 
 $smarty->display("file-list.tpl");
 ?>
