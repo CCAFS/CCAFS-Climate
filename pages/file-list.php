@@ -7,13 +7,13 @@ $variableId = isset($_GET["variables"]) ?  implode( ",", $_GET["variables"] ) : 
 $scenarioId = isset($_GET["scenarios"]) ? implode( ",", $_GET["scenarios"] ) : null;
 $resolutionId = isset($_GET["resolution"]) && is_numeric($_GET["resolution"]) && $_GET["resolution"] >= 0 ? $_GET["resolution"] : null;
 $modelId = isset($_GET["model"]) ?  implode( ",", $_GET["model"] ) : null;
-$formatId = isset($_GET["format"]) && is_numeric($_GET["format"]) && $_GET["format"] >= 0 ? $_GET["format"] : null;
+// $formatId = isset($_GET["formats"]) && is_numeric($_GET["formats"]) && $_GET["formats"] >= 0 ? $_GET["formats"] : null;
+$formatId = isset($_GET["formats"]) ?  implode( ",", $_GET["formats"] ) : null;
 $periodId = isset($_GET["period"]) ?  implode( ",", $_GET["period"] ) : null;
 $fileSetId = isset($_GET["fileSet"]) && is_numeric($_GET["fileSet"]) && $_GET["fileSet"] >= 0 ? $_GET["fileSet"] : null;
 $extentId = isset($_GET["extent"]) && is_numeric($_GET["extent"]) && $_GET["extent"] >= 0 ? $_GET["extent"] : null;
 $tile = isset($_GET["tile_name"]) && $_GET["tile_name"] != "" ? $_GET["tile_name"] : null;
 $tile = getTileID($tile);
-
 function getTileID($tileName){
     global $db;
 	if(!is_null($tileName)){
