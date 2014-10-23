@@ -19,7 +19,7 @@
                     <th style=""><input type="checkbox" id="check-all"/>Select All</th>
                     <th style="width: 398px;">File Name</th>
                     <th style="width: 213px;">File Set</th>
-                    <th style="width: 88px;">Status</th>
+                    <th style="width: 91px;">Status</th>
                 </tr>
             </thead>
             <tbody id="bodyTableFiles">
@@ -37,7 +37,7 @@
                         </td>
                         <td style="width: 400px;">{$file.name}</td>
                         <td style="width: 215px;">{$file.fileset}</td>
-                        <td style="width: 90px;">{$file.availability}</td>
+                        <td style="width: 93px;">{$file.availability}</td>
 
                     </tr>
                 {/foreach}
