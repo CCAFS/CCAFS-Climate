@@ -14,7 +14,7 @@
       <button id="download-button-top" class="download-button" type="submit" disabled="disabled">Generate Download Links</button>
 		<span id="filesFound" style="	float:	right">{$count} files found</span>
         <table id="files-table" class="tablesorter">
-            <thead style="display: block;border-spacing: 1;width: 100%;">
+            <thead id="headTableFiles">
                 <tr>
                     <th style=""><input type="checkbox" id="check-all"/>Select All</th>
                     <th style="width: 398px;">File Name</th>
@@ -22,7 +22,7 @@
                     <th style="width: 88px;">Status</th>
                 </tr>
             </thead>
-            <tbody style="display:block; height:500px;overflow:auto;border-spacing: 1;width: 100%;margin:0;">
+            <tbody id="bodyTableFiles">
 
                 {foreach from=$files item=file}
 

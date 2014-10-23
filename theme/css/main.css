@@ -407,8 +407,14 @@ div.home {
 }
 
 #dataTable td:nth-child(1){
-width: 62px;
+ width: 56px;
 }
 #dataTable td:nth-child(2){
-width: 800px;
+ width: 742px;
+}
+#bodyTableFiles {
+ max-height: 500px; overflow: auto;display: inline-block; margin-right: 10px;width: 100%;
+}
+#headTableFiles {
+ display: block;border-spacing: 1;width: 100%;width: 100%;
 }
