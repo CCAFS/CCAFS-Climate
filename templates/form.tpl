@@ -86,13 +86,13 @@
     <div id="download-files">
         <p>The following links will be available for {$smarty.const.LINK_DAYS} days.</p>
         <table id="download-table" class="tablesorter">
-            <thead  style="display: block;border-spacing: 1">
+            <thead  style="display: block;border-spacing: 1;width: 100%;">
                 <tr>
-                    <th style="padding: 3px 22px;">No.</th>
-                    <th style="padding: 3px 364px;">File</th>
+                    <th style="width: 54px;">No.</th>
+                    <th style="width: 740px;">File</th>
                 </tr>
             </thead>
-            <tbody id ="dataTable" style="display:block; height:500px;overflow:auto;border-spacing: 1;">
+            <tbody id ="dataTable" style="max-height: 500px; overflow: auto;display: inline-block; margin-right: 10px;width: 100%;">
             </tbody>
         </table>
     </div>

@@ -253,9 +253,7 @@ function getFilesInfo(evt){
 	 
       if(filterValues.section == 'fileSet' || filterValues.section == 'extent' || filterValues.section == 'scenarios[]' ){
 		if(filterValues.section == 'extent'){  
-			if(data.filtersAvailable.extent=="2"){
-				data.filtersAvailable.extent="1,2"
-			}
+			data.filtersAvailable.extent="1,2"
 		}
         updateFilters(data.filtersAvailable);
       }
