@@ -67,7 +67,7 @@ function filesFound($databaseName, $id) {
     global $db, $ids;
     $info = new stdClass();
     $info->description= new stdClass();
-
+			
     if (!is_null($id)) {
         $optionsIds = explode(",", $id);
 
@@ -78,9 +78,9 @@ function filesFound($databaseName, $id) {
             }else{
                 $query = "SELECT id, description FROM " . $databaseName . " WHERE id = " . $oId;
             }
-
             $result = $db->GetRow($query);
             $info->description->$oId= $result["description"];
+			// print_r($info);
         }
     } else {
         $info->description = "";
@@ -109,11 +109,12 @@ function filesFound($databaseName, $id) {
         $info->filesFound = -1;
     } else {
         $info->filesFound = $db->GetOne($query);
-    }
+    }	
     $info->query = $query;
     $info->filtersAvailable = getFiltersAvailable();
 
     echo json_encode($info);
+
 }
 
 function getFiltersAvailable(){
@@ -128,7 +129,9 @@ function getFiltersAvailable(){
     if( isset($ids["file_set_id"]) && $ids["file_set_id"] != "" ){
         $sql .= " AND file_set_id = " . $ids["file_set_id"];
     }
-
+    if( isset($ids["extent_id"]) && $ids["extent_id"] != "" ){
+        $sql .= " AND extent_id = " . $ids["extent_id"];
+    }
     // Adjust the db to only return the assoc array
     $db->SetFetchMode(ADODB_FETCH_ASSOC); 
     $result = $db->GetRow($sql);
