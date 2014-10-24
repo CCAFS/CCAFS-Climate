@@ -128,6 +128,11 @@ function deleteTileValue(){
 function changeMap(evt){
   var extentValue = $("[name='extent']:checked").val();
   variables = getArrayValues( $("input[name='variables\\[\\]']:checked") );
+  scenarios = getArrayValues( $("[name='scenarios\\[\\]']:checked") );
+  model = getArrayValues( $("input[name='model\\[\\]']:checked") );
+  period = getArrayValues( $("input[name='period\\[\\]']:checked") );
+  formats = getArrayValues( $("input[name='formats\\[\\]']:checked") );  
+  
   var section = $(evt.target).attr("name");
   
   if(extentValue == 1){ // Global
@@ -136,7 +141,7 @@ function changeMap(evt){
     $("#map-canvas").html("<img src='/theme/images/map-not-available.png'/>");
   } else if(extentValue == 2){ // Regional
 	// if(section!="tile"){
-	if(!$("#tile_name").val() && !variables){
+	if(!$("#tile_name").val() && !variables && !scenarios && !model && !period){
      loadKmlOnMap();
 	}
   } else {
@@ -181,7 +186,7 @@ function selectAllModelOptionsEvent(evt){
 
 function getFilesInfo(evt){
   var filterValues = getUserSelections($(evt.target).attr("name"));
-  // console.log(filterValues)
+  // console.log(filterValues.filesetId)
   // Hide the help icon 
   if($(evt.target).parent().prev().hasClass("help_icon")){
     $(evt.target).parent().prev().hide();
@@ -252,7 +257,7 @@ function getFilesInfo(evt){
 
 	 
       if(filterValues.section == 'fileSet' || filterValues.section == 'extent' || filterValues.section == 'scenarios[]' ){
-		if(filterValues.section == 'extent'){  
+		if(filterValues.filesetId == 4){  
 			data.filtersAvailable.extent="1,2"
 		}
         updateFilters(data.filtersAvailable);
