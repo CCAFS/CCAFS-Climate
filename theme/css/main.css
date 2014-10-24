@@ -341,6 +341,11 @@ div.home {
     margin-top: 20px;
 }
 
+.form #div-form #additional-information .skip-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
 .form #additional-information #welcome-message {
     font-size: 11px;
     margin: 0 0 20px;
@@ -369,7 +374,14 @@ div.home {
     font-size: 12px;
     font-weight: bold;
 }
-
+.form .skip-button #ajax-loader {
+    display: none;
+}
+.form .skip-button #message {
+    color: green;
+    font-size: 12px;
+    font-weight: bold;
+}
 .form #download-files {
     display: none;
     margin-top: 40px;

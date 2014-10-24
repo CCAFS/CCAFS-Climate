@@ -79,7 +79,7 @@
             </fieldset>
         </form>
     </div>
-	<div class="submit-button">
+	<div class="skip-button">
 		<img id="ajax-loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />
 		<span id="message"></span>
 	</div>
