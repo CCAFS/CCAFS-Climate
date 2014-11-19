@@ -111,7 +111,8 @@ $(document).ready(function(){
             data: {
                 files: $selectedFiles,
                 downloadId: downloadId,
-                fileType: $("#file-type").val()
+                fileType: $("#file-type").val(),
+				fileSet: $("#fileSet").val()
             },
             beforeSend: function(){
                 $(".skip-button #message").text("Generating links...");
@@ -137,7 +138,8 @@ $(document).ready(function(){
             data: {
                 files: $selectedFiles,
                 downloadId: downloadId,
-                fileType: $("#file-type").val()
+                fileType: $("#file-type").val(),
+                fileSet: $("#fileSet").val()
             },
             beforeSend: function(){
                 $(".submit-button #message").text("Generating links...");

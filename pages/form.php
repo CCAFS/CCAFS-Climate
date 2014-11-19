@@ -8,12 +8,14 @@ require_once '../config/db.php';
  * En caso de ser resource, se hace el trato como recurso.
  */
 $fileType = isset($_POST["file-type"]) ? $_POST["file-type"] : null;
+$filset = isset($_POST["fileSet"]) ? $_POST["fileSet"] : null;
 
 $filesToDownload = isset($_POST["download-files"]) ? $_POST["download-files"] : null;
 
 if (!is_null($filesToDownload)) {
     $smarty->assign("downloads", json_encode($filesToDownload));
     $smarty->assign("fileType", $fileType);
+    $smarty->assign("filsetTem", $filset);
     $smarty->display("form.tpl");
 } else {
     $smarty->display("data.tpl");

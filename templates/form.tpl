@@ -11,8 +11,10 @@
     <hr>
     <br>
     <p>
-        To continue downloading your files, please first fill in your email and then some basic information. This information will be used by CCAFS solely for impact assessment and CGIAR and Center level reporting purposes. Filling it in will greatly help us to track the use of the portal and keep improving it. This portal provides data to a very large community of users and improving its usability and efficiency is a key aspect we work on continuously. However, you may click on <a id="skip-form" href="#">skip</a> to download links directly.
+        To continue downloading your files, please first fill in your email and then some basic information. This information will be used by CCAFS solely for impact assessment and CGIAR and Center level reporting purposes. Filling it in will greatly help us to track the use of the portal and keep improving it. This portal provides data to a very large community of users and improving its usability and efficiency is a key aspect we work on continuously. However, you may click on <a id="skip-form" href="#">skip <input type="hidden" id="fileSet" name="fileSet" value="{$filsetTem}" />
+</a> to download links directly.
     </p>
+	
     <div id="div-form">
         <form id="contact-form" action="/ajax/user-info.php" method="GET">
             <input type="hidden" id="user-id" name="userId" value="-1" />
@@ -80,6 +82,7 @@
         </form>
     </div>
 	<div class="skip-button">
+		<input type="hidden" id="fileSet" name="fileSet" value="{$filsetTem}" />
 		<img id="ajax-loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />
 		<span id="message"></span>
 	</div>
