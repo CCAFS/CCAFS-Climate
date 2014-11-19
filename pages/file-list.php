@@ -48,6 +48,7 @@ $count = $files->RecordCount();
 // }
 // var_dump($files[0]);
 $smarty->assign("files", $files);
+$smarty->assign("fileSet", $fileSetId);
 $smarty->assign("count", $count);
 
 $smarty->display("file-list.tpl");

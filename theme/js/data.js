@@ -257,11 +257,26 @@ function getFilesInfo(evt){
 
 	 
       if(filterValues.section == 'fileSet' || filterValues.section == 'extent' || filterValues.section == 'scenarios[]' ){
-		if(filterValues.filesetId == 4){  
+		if(filterValues.filesetId ==12 || filterValues.filesetId == 4){  
 			data.filtersAvailable.extent="1,2"
 		}
         updateFilters(data.filtersAvailable);
       }
+	  
+		if(filterValues.section == 'fileSet' || filterValues.section == 'extent'){
+			if(filterValues.filesetId ==4 && filterValues.extendId==1 && filterValues.resolutionId==1){
+				  if($("input[name='resolution']").attr("checked") == "checked"){
+					$("input[name='resolution']").iCheck('uncheck');
+				  }		
+								
+			}
+			if(filterValues.filesetId ==12 && filterValues.extendId==1 && filterValues.resolutionId==1){
+				  if($("input[name='resolution']").attr("checked") == "checked"){
+					$("input[name='resolution']").iCheck('uncheck');
+				  }		
+								
+			}
+		}
 
       changeMap(evt);
       $("#filesFound").show();

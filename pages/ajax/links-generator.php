@@ -1,13 +1,20 @@
 <?php
 
 require_once '../../config/db.php';
+define("LINKS_AWS_URI", "http://cgiardata.s3.amazonaws.com/ccafs/ccafs-climate");
 
 $files = isset($_POST["files"]) ? $_POST["files"] : null;
 $downloadId = isset($_POST["downloadId"]) ? $_POST["downloadId"] : null;
-
+$fileSet = isset($_POST["fileSet"]) ? $_POST["fileSet"] : null;
 
 // fileType comes from hidden input in: file-list.tpl and pattern_scaling.tpl.
 $fileType = isset($_POST["fileType"]) ? $_POST["fileType"] : null;
+
+if ($fileSet==12 or $fileSet==10 or $fileSet==9 or $fileSet==7){
+$links_urls=LINKS_AWS_URI;
+}else{
+$links_urls=LINKS_BASE_URI;
+}
 
 
 if (!is_null($files) && !is_null($downloadId) && !is_null($fileType)) {
@@ -24,7 +31,9 @@ if (!is_null($files) && !is_null($downloadId) && !is_null($fileType)) {
         //$link = generateLink($fileName);
         // Links are now generated directly from DAPA public link.        
         $link = new stdClass();
-        $link->reference = LINKS_BASE_URI . $fileName;
+		
+        // $link->reference = LINKS_BASE_URI .$fileName;
+        $link->reference = $links_urls.$fileName;
         $arr = explode("/", $fileName);
         $fileName = $arr[count($arr) - 1];
         $link->name = $fileName;
