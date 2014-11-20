@@ -17,7 +17,14 @@
         <table id="files-table" class="tablesorter">
             <thead id="headTableFiles">
                 <tr>
-                    <th style=""><input type="checkbox" id="check-all"/>Select All</th>
+					{foreach from=$files item=file} 
+					{/foreach}
+					{if "{$file["availability_id"]}" == "2"}
+						<th style=""><input type="checkbox" id="check-all"/>Select All</th>
+					{else}
+						<th style=""><input type="checkbox" id="check-all" disabled="disabled"/>Select All</th> 
+					{/if}
+
                     <th style="width: 398px;">File Name</th>
                     <th style="width: 210px;">File Set</th>
                     <th style="width: 91px;">Status</th>

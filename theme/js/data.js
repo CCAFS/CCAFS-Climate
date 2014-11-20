@@ -188,6 +188,13 @@ function getFilesInfo(evt){
   var filterValues = getUserSelections($(evt.target).attr("name"));
   // console.log(filterValues.filesetId)
   // Hide the help icon 
+  
+	if(filterValues.filesetId ==4 && filterValues.extendId==2){
+		filterValues.formatId=1;
+	}  
+ 	if(filterValues.filesetId ==12 && filterValues.extendId==2){
+		filterValues.formatId=1;
+	}  
   if($(evt.target).parent().prev().hasClass("help_icon")){
     $(evt.target).parent().prev().hide();
   }
@@ -256,31 +263,43 @@ function getFilesInfo(evt){
       }
 
 	 
-      if(filterValues.section == 'fileSet' || filterValues.section == 'extent' || filterValues.section == 'scenarios[]' ){
+	  // if(filterValues.section == 'fileSet' || filterValues.section == 'extent' || filterValues.section == 'scenarios[]' ){
 		if(filterValues.filesetId ==12 || filterValues.filesetId == 4){  
 			data.filtersAvailable.extent="1,2"
 		}
-        updateFilters(data.filtersAvailable);
-      }
+	  // }
 	  
-		if(filterValues.section == 'fileSet' || filterValues.section == 'extent'){
-			if(filterValues.filesetId ==4 && filterValues.extendId==1){deleteTileValue()}
-			if(filterValues.filesetId ==12 && filterValues.extendId==1){deleteTileValue()}
-			
-			if(filterValues.filesetId ==4 && filterValues.extendId==1 && filterValues.resolutionId==1){
-				  if($("input[name='resolution']").attr("checked") == "checked"){
-					$("input[name='resolution']").iCheck('uncheck');
-				  }		
-								
-			}
-			if(filterValues.filesetId ==12 && filterValues.extendId==1 && filterValues.resolutionId==1){
-				  if($("input[name='resolution']").attr("checked") == "checked"){
-					$("input[name='resolution']").iCheck('uncheck');
-				  }		
-								
-			}
+	// if(filterValues.section == 'fileSet' || filterValues.section == 'extent'){
+		if(filterValues.filesetId ==4 && filterValues.extendId==1){deleteTileValue()}
+		if(filterValues.filesetId ==12 && filterValues.extendId==1){deleteTileValue()}
+		
+		if(filterValues.filesetId ==4 && filterValues.extendId==1 && filterValues.resolutionId==1){
+			  if($("input[name='resolution']").attr("checked") == "checked"){
+				$("input[name='resolution']").iCheck('uncheck');
+			  }		
+							
 		}
-
+		if(filterValues.filesetId ==12 && filterValues.extendId==1 && filterValues.resolutionId==1){
+			  if($("input[name='resolution']").attr("checked") == "checked"){
+				$("input[name='resolution']").iCheck('uncheck');
+			  }		
+		}
+		if(filterValues.filesetId ==12 && filterValues.extendId==2){
+			data.filtersAvailable.format="1"
+		}			
+		if(filterValues.filesetId ==4 && filterValues.extendId==2){ 
+			$("#format-2").iCheck("uncheck");
+			$("#format-2").iCheck("enable");
+		}  
+		if(filterValues.filesetId ==12 && filterValues.extendId==2){ 
+			$("#format-2").iCheck("uncheck");
+			$("#format-2").iCheck("enable");
+		}  
+		
+	// }
+		
+	updateFilters(data.filtersAvailable);
+	
       changeMap(evt);
       $("#filesFound").show();
     }
@@ -305,7 +324,6 @@ function updateFilters(filtersAvailable){
     // Deshabilitamos los eventos temporalmente para
     // evitar dispararlos
     removePageEvents();
-
 
     if(inputsIds){
         var arrayInputsIds = inputsIds.split(",");
