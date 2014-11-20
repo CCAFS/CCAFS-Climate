@@ -264,6 +264,9 @@ function getFilesInfo(evt){
       }
 	  
 		if(filterValues.section == 'fileSet' || filterValues.section == 'extent'){
+			if(filterValues.filesetId ==4 && filterValues.extendId==1){deleteTileValue()}
+			if(filterValues.filesetId ==12 && filterValues.extendId==1){deleteTileValue()}
+			
 			if(filterValues.filesetId ==4 && filterValues.extendId==1 && filterValues.resolutionId==1){
 				  if($("input[name='resolution']").attr("checked") == "checked"){
 					$("input[name='resolution']").iCheck('uncheck');
