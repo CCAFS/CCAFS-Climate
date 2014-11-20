@@ -164,7 +164,7 @@
 	</div>
     
          <div style="float:right;font-size:12px;padding-bottom:5px;margin-top:2px; height:10px">
-		   <i>Last updated: 18 November 2014</i>
+		   <i>Last updated: 20 November 2014</i>
 <!--          <script language="javascript"> 
             months = ['January', 'Febraury', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; 
             var theDate = new Date(document.lastModified); 
