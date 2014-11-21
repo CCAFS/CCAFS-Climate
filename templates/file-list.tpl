@@ -35,7 +35,7 @@
                 {foreach from=$files item=file}
 
                     <tr>
-                        <td style="width: 75px;">
+                        <td style="width: 73px;">
                             {* Checkbox is shown only if the file is available *}
                             {if $file.availability_id == "2"}
                                 <input class="checkbox-file" type="checkbox" name="download-files[]" value="{$file["id"]}" />
@@ -43,9 +43,9 @@
                                 <input class="checkbox-file" type="checkbox" disabled="disabled" />
                             {/if}
                         </td>
-                        <td style="width: 401px;">{$file.name}</td>
-                        <td style="width: 215px;">{$file.fileset}</td>
-                        <td style="width: 93px;">{$file.availability}</td>
+                        <td style="width: 400px;">{$file.name}</td>
+                        <td style="width: 212px;">{$file.fileset}</td>
+                        <td style="width: 92px;">{$file.availability}</td>
 
                     </tr>
                 {/foreach}
