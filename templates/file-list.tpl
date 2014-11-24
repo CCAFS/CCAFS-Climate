@@ -20,13 +20,13 @@
 					{foreach from=$files item=file} 
 					{/foreach}
 					{if "{$file["availability_id"]}" == "2"}
-						<th style=""><input type="checkbox" id="check-all"/>Select All</th>
+						<th style="width: 75px;"><input type="checkbox" id="check-all"/>Select All</th>
 					{else}
-						<th style=""><input type="checkbox" id="check-all" disabled="disabled"/>Select All</th> 
+						<th style="width: 75px;"><input type="checkbox" id="check-all" disabled="disabled"/>Select All</th> 
 					{/if}
 
-                    <th style="width: 398px;">File Name</th>
-                    <th style="width: 210px;">File Set</th>
+                    <th style="width: 395px;">File Name</th>
+                    <th style="width: 205px;">File Set</th>
                     <th style="width: 91px;">Status</th>
                 </tr>
             </thead>
@@ -35,7 +35,7 @@
                 {foreach from=$files item=file}
 
                     <tr>
-                        <td style="width: 73px;">
+                        <td style="width: 77px;">
                             {* Checkbox is shown only if the file is available *}
                             {if $file.availability_id == "2"}
                                 <input class="checkbox-file" type="checkbox" name="download-files[]" value="{$file["id"]}" />
@@ -43,9 +43,9 @@
                                 <input class="checkbox-file" type="checkbox" disabled="disabled" />
                             {/if}
                         </td>
-                        <td style="width: 400px;">{$file.name}</td>
-                        <td style="width: 212px;">{$file.fileset}</td>
-                        <td style="width: 92px;">{$file.availability}</td>
+                        <td style="width: 397px;">{$file.name}</td>
+                        <td style="width: 207px;">{$file.fileset}</td>
+                        <td style="width: 93px;">{$file.availability}</td>
 
                     </tr>
                 {/foreach}

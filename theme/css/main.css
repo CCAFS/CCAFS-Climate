@@ -422,7 +422,7 @@ div.home {
  width: 56px;
 }
 #dataTable td:nth-child(2){
- width: 742px;
+ width: 740px;
 }
 #bodyTableFiles {
  max-height: 500px; overflow: auto;display: inline-block; margin-right: 10px;width: 100%;

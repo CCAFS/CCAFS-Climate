@@ -92,7 +92,7 @@
             <thead  style="display: block;border-spacing: 1;width: 100%;">
                 <tr>
                     <th style="width: 54px;">No.</th>
-                    <th style="width: 740px;">File</th>
+                    <th style="width: 738px;">File</th>
                 </tr>
             </thead>
             <tbody id ="dataTable" style="max-height: 500px; overflow: auto;display: inline-block; margin-right: 10px;width: 100%;">
