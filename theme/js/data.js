@@ -77,7 +77,7 @@ function setPageEvents(){
   $("#period-filters").find("input").on("ifToggled", getFilesInfo);
   $("#variable-filters").find("input").on("ifToggled", getFilesInfo);
   $("#resolution-filters").find("input").on("ifToggled", getFilesInfo);
-  $("#extent-filters").find("input").on("ifClicked", changeMap);
+  $("#extent-filters").find("input").on("ifClicked", changeMap).on("ifToggled", adjustFiltersOnExtentSelection);
 
   // load on the map the selected layer(file set). 
   //$("input[name='fileSet']").on('ifChecked', loadKmlOnMap); 
@@ -160,6 +160,17 @@ function adjustFiltersOnFileSetSelection(){
 
   // Select again the fileset
   $("#" + fileSetSelected).attr("checked", true);
+}
+
+function adjustFiltersOnExtentSelection(){
+  var fileSetSelected = $("input[name='fileSet']:checked").attr("id");
+  var ExtentSelected = $("input[name='extent']:checked").attr("id");
+  var ResolutionSelected = $("input[name='resolution']:checked").attr("id");
+  var PeriodSelected = $("input[name='period']:checked").attr("id");
+  var VariablesSelected = $("input[name='variables']:checked").attr("id");
+  deleteTileValue();
+  $("#" + ResolutionSelected).attr("checked", false);
+  $("#" + ResolutionSelected).iCheck('update');
 }
 
 /*
@@ -272,18 +283,7 @@ function getFilesInfo(evt){
 	// if(filterValues.section == 'fileSet' || filterValues.section == 'extent'){
 		if(filterValues.filesetId ==4 && filterValues.extendId==1){deleteTileValue()}
 		if(filterValues.filesetId ==12 && filterValues.extendId==1){deleteTileValue()}
-		
-		if(filterValues.filesetId ==4 && filterValues.extendId==1 && filterValues.resolutionId==1){
-			  if($("input[name='resolution']").attr("checked") == "checked"){
-				$("input[name='resolution']").iCheck('uncheck');
-			  }		
-							
-		}
-		if(filterValues.filesetId ==12 && filterValues.extendId==1 && filterValues.resolutionId==1){
-			  if($("input[name='resolution']").attr("checked") == "checked"){
-				$("input[name='resolution']").iCheck('uncheck');
-			  }		
-		}
+
 		if(filterValues.filesetId ==12 && filterValues.extendId==2){
 			data.filtersAvailable.format="1"
 		}			
