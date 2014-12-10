@@ -14,6 +14,9 @@
         To continue downloading your files, please first fill in your email and then some basic information. This information will be used by CCAFS solely for impact assessment and CGIAR and Center level reporting purposes. Filling it in will greatly help us to track the use of the portal and keep improving it. This portal provides data to a very large community of users and improving its usability and efficiency is a key aspect we work on continuously. However, you may click on <a id="skip-form" href="#">skip <input type="hidden" id="fileSet" name="fileSet" value="{$filsetTem}" />
 </a> to download links directly.
     </p>
+    <p>
+        These open-access datasets are hosted by <a href="http://aws.amazon.com/datasets/0241269495883982" target="_blank">Amazon Web Services</a>.
+    </p>
 	
     <div id="div-form">
         <form id="contact-form" action="/ajax/user-info.php" method="GET">

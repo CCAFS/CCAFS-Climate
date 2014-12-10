@@ -66,6 +66,9 @@
             For commercial access to the data, send requests to <a href="mailto:a.jarvis@cgiar.org">Andy Jarvis</a> at the International Center for Tropical Agriculture (CIAT).
         </p>
         <p>
+            These open-access datasets are hosted by <a href="http://aws.amazon.com/datasets/0241269495883982" target="_blank">Amazon Web Services</a>.
+        </p>
+        <p>
             CCAFS provides these data without any warranty of any kind whatsoever, either express or implied, including warranties of merchantability and fitness for a particular purpose.
             CCAFS shall not be liable for incidental, consequential, or special damages arising out of the use of any data published here.
         </p>
