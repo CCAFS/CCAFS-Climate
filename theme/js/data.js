@@ -68,7 +68,8 @@ function setPageEvents(){
 
   $("#fileSet-filters").find("input")
     .on("ifChecked", getFilesInfo)
-    .on("ifToggled", adjustFiltersOnFileSetSelection);
+    .on("ifToggled", adjustFiltersOnFileSetSelection)
+	.on("ifClicked", changeMap2);
   $("#scenario-filters").find("input").on("ifToggled", getFilesInfo);
   $("#model-filters").find("input").on("ifToggled", getFilesInfo);
   $("#method-filters").find("input").on("ifToggled", getFilesInfo);
@@ -91,7 +92,7 @@ function removePageEvents(){
   $("#fileSet-filters").find("input")
     .off("ifToggled", getFilesInfo)
     .off("ifChecked", getFilesInfo)
-    .off('ifChecked', changeMap);
+    .off('ifChecked', changeMap2);
 
   $("#scenario-filters").find("input").off("ifToggled", getFilesInfo);
   $("#model-filters").find("input").off("ifToggled", getFilesInfo);
@@ -125,9 +126,10 @@ function deleteTileValue(){
   $("#tile_name").attr("value", null);
 }
 
-// function changeMap2(evt){
-
-// }
+function changeMap2(evt){
+	deleteTileValue()
+    $("#map-canvas").html("<img src='/theme/images/map-not-available.png'/>");  
+}
 
 function changeMap(evt){
   var filterValues= $(evt.target).attr("id")
@@ -137,10 +139,12 @@ function changeMap(evt){
   var model = getArrayValues( $("input[name='model\\[\\]']:checked") );
   var period = getArrayValues( $("input[name='period\\[\\]']:checked") ); 
   var section = $(evt.target).attr("name");
-
+  
+  // console.log(filterValues,extentValue)
   if(filterValues== "extent-2"){
     loadKmlOnMap();
-  }else{
+  }
+  else{
 	deleteTileValue()
     $("#map-canvas").html("<img src='/theme/images/map-not-available.png'/>");  
   }
@@ -309,22 +313,28 @@ function getFilesInfo(evt){
 		if(filterValues.filesetId ==4 && filterValues.extendId==1){deleteTileValue()}
 		if(filterValues.filesetId ==12 && filterValues.extendId==1){deleteTileValue()}
 
-		if(filterValues.filesetId ==12 && filterValues.extendId==2){
-			data.filtersAvailable.format="1"
-		}			
-		if(filterValues.filesetId ==4 && filterValues.extendId==2){ 
-			$("#format-2").iCheck("uncheck");
-			$("#format-2").iCheck("enable");
-		}  
-		if(filterValues.filesetId ==12 && filterValues.extendId==2){ 
-			$("#format-2").iCheck("uncheck");
-			$("#format-2").iCheck("enable");
-		}  
+		if(filterValues.filesetId ==12 && filterValues.extendId==1){
+			data.filtersAvailable.format="1,2"
+		}	
+		if(filterValues.filesetId ==4 && filterValues.extendId==1){
+			data.filtersAvailable.format="1,2"
+		}		
+		// if(filterValues.filesetId ==4 && filterValues.extendId==2){ 
+			// $("#format-2").iCheck("uncheck");
+			// $("#format-2").iCheck("enable");
+		// }  
+		// if(filterValues.filesetId ==12 && filterValues.extendId==2){ 
+			// $("#format-2").iCheck("uncheck");
+			// $("#format-2").iCheck("enable");
+		// } 
+
+	updateFilters(data.filtersAvailable);
+	
 		
 	// }
 
 		
-	updateFilters(data.filtersAvailable);
+
 	
       // changeMap(evt);
       $("#filesFound").show();
