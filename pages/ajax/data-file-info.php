@@ -132,6 +132,9 @@ function getFiltersAvailable(){
     if( isset($ids["extent_id"]) && $ids["extent_id"] != "" ){
         $sql .= " AND extent_id = " . $ids["extent_id"];
     }
+    if( isset($ids["format_id"]) && $ids["format_id"] != "" ){
+        $sql .= " AND format_id = " . $ids["format_id"];
+    }	
     // Adjust the db to only return the assoc array
     $db->SetFetchMode(ADODB_FETCH_ASSOC); 
     $result = $db->GetRow($sql);
