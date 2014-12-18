@@ -68,8 +68,8 @@ function setPageEvents(){
 
   $("#fileSet-filters").find("input")
     .on("ifChecked", getFilesInfo)
-    .on("ifToggled", adjustFiltersOnFileSetSelection)
-	.on("ifClicked", changeMap2);
+    .on("ifToggled", adjustFiltersOnFileSetSelection);
+	/*.on("ifClicked", changeMap);*/
   $("#scenario-filters").find("input").on("ifToggled", getFilesInfo);
   $("#model-filters").find("input").on("ifToggled", getFilesInfo);
   $("#method-filters").find("input").on("ifToggled", getFilesInfo);
@@ -78,10 +78,10 @@ function setPageEvents(){
   $("#period-filters").find("input").on("ifToggled", getFilesInfo);
   $("#variable-filters").find("input").on("ifToggled", getFilesInfo);
   $("#resolution-filters").find("input").on("ifToggled", getFilesInfo);
-  $("#extent-filters").find("input").on("ifClicked", changeMap).on("ifToggled", adjustFiltersOnExtentSelection);
+  $("#extent-filters").find("input")/*.on("ifClicked", changeMap)*/.on("ifToggled", adjustFiltersOnExtentSelection);
 
   // load on the map the selected layer(file set). 
-  //$("input[name='fileSet']").on('ifChecked', loadKmlOnMap); 
+  // $("input[name='fileSet']").on('ifChecked', loadKmlOnMap); 
   //$("input[name='fileSet']").on('ifChecked', changeMap); 
   // Select/De-select all option in model filter
   $("model-999").on("ifToggled", selectAllModelOptionsEvent);
@@ -91,8 +91,8 @@ function removePageEvents(){
 
   $("#fileSet-filters").find("input")
     .off("ifToggled", getFilesInfo)
-    .off("ifChecked", getFilesInfo)
-    .off('ifChecked', changeMap2);
+    .off("ifChecked", getFilesInfo);
+    /*.off('ifChecked', changeMap);*/
 
   $("#scenario-filters").find("input").off("ifToggled", getFilesInfo);
   $("#model-filters").find("input").off("ifToggled", getFilesInfo);
@@ -126,10 +126,9 @@ function deleteTileValue(){
   $("#tile_name").attr("value", null);
 }
 
-function changeMap2(evt){
-	deleteTileValue()
-    $("#map-canvas").html("<img src='/theme/images/map-not-available.png'/>");  
-}
+// function changeMap2(evt){
+
+// }
 
 function changeMap(evt){
   var filterValues= $(evt.target).attr("id")
@@ -140,9 +139,11 @@ function changeMap(evt){
   var period = getArrayValues( $("input[name='period\\[\\]']:checked") ); 
   var section = $(evt.target).attr("name");
   
-  // console.log(filterValues,extentValue)
-  if(filterValues== "extent-2"){
-    loadKmlOnMap();
+  //console.log(filterValues,section,extentValue)
+  if(filterValues== "extent-2" || extentValue== 2){
+	if(!$("#tile_name").val() && !variables && !scenarios && !model && !period){
+		loadKmlOnMap();
+	}
   }
   else{
 	deleteTileValue()
@@ -336,7 +337,7 @@ function getFilesInfo(evt){
 		
 
 	
-      // changeMap(evt);
+      changeMap(evt);
       $("#filesFound").show();
     }
   });
