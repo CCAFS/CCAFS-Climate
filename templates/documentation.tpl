@@ -8,7 +8,13 @@
     <hr>
     <br>
     <h4>Useful documents</h4>
-    <ul id="document-list" type="none">        
+    <ul id="document-list" type="none">    
+        <li type="square">
+            <a href="{$smarty.const.SMARTY_DOCS_URI}/mapping_data_ccafs-climate.pdf">
+                <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
+                CCAFS Climate datasets map.
+            </a>
+        </li>    
         <li type="square">
             <a href="{$smarty.const.SMARTY_DOCS_URI}/Ramirez_Bueno-Cabrera_2009_tutorial_bcvars_creation.pdf">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
