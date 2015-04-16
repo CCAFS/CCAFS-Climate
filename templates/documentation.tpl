@@ -3,9 +3,48 @@
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_docs.gif" />
 </div>
+
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>		
+<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>		
+<script type="text/javascript">
+  $(document).ready(function(){
+    var show; // declare variable to hold show/hide state
+
+    $(".thebody").hide(); // hide articles at first
+     
+    $(".readme a").click(function(event){ // show/hide articles
+
+      if (!show) { showhide($(this),"Hide video",true); } // show, change label
+      else { showhide($(this),"Show video",false);
+		$('#thebody').get(0).stopVideo();
+	  } // or hide, change label
+
+      return false; // u know: disable usual link click function
+
+      function showhide(what,swaptext,swapstate){
+        $(what).parents(".readme").next(".thebody").toggle('fast');
+        $(what).text(swaptext);
+        show = swapstate; // pass the current state to... oops! Fails if > 1 article showing...
+      }
+    });
+
+  });
+</script> 
+	
 <div id="content" class="documentation">
     <h3>Documentation</h3>
     <hr>
+	 <br>
+    <h4>Tutorial to download data from CCAFS-Climate</h4>
+
+	<div class="readme">
+		 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="" title="See video tutorial">Show video</a>
+	</div>	
+	<div id="thebody" class="thebody" style="display: block;width:800px;height:450px;">
+		<iframe id="doctutoVideo" width="100%" height="100%" src="http://www.youtube.com/embed/ubZ_d3X96tc" style="padding-left:3%;border:hidden"> </iframe>
+	</div>	
     <br>
     <h4>Useful documents</h4>
     <ul id="document-list" type="none">    

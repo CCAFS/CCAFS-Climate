@@ -2,12 +2,34 @@
 {include file='head.tpl' jsIncludes=["jquery", "data", "tiptip","modernizr","icheck", "map"] pageTitle="Data - CCAFS Climate" pageDescription="High resolution climate change data for download, downscaled using different methods." keywords="IPCC,data,download,downscaling,high resolution,delta method,climate change,projections,MarkSim,MetOffice,PRECIS"}
 {include file='header.tpl' current="data"}
 
+
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_data.gif" />
 </div>
+
+
+<div class="messagepop pop" id='frameMain_video' class="ui-widget-content" title="Tutorial CCAFS-Climate">
+	<div id="content-video">
+		<iframe id="playerID" width="100%" height="100%" src="http://www.youtube.com/embed/ubZ_d3X96tc">  </iframe>
+	</div>
+</div>	
+
 <div id="content" class="data" style="margin-bottom:45px">
-	<h3>Data</h3>
-    <hr>
+	<div style="height: 43px;">
+		<div style="width:70%; float:left; height: 38px;" >
+		 <h3>Data</h3>
+		</div>
+		
+		<div style="width:30%; height: 30px;float:left; text-align: right; padding-top: 20px;">
+			<div id="tutoVideo" style="width:44%; float:left">
+			 <a href="/tutoVideo" id="tutoVideo"> <img src="{$smarty.const.SMARTY_IMG_URI}/Aqua-Play-icon.png" width="23" height="23" alt="Help" /></a>
+			</div>
+			<div id="tutoVideo" style="width:55%; float:right;; font-size: 13px; padding-top: 5px;">
+				<a href="/tutoVideo" id="tutoVideo">How to download data</a>
+			</div>
+		 </div>
+	</div>
+	<hr>
     <br>
     <div id="browserWarning">
         <H5>Search engine no longer supports Internet Explorer versions 7 or 8.</H5>
@@ -164,7 +186,7 @@
 	</div>
     
          <div style="float:right;font-size:12px;padding-bottom:5px;margin-top:2px; height:10px">
-		   <i>Last updated: 20 November 2014</i>
+		   <i>Last updated: 16 April 2015</i>
 <!--          <script language="javascript"> 
             months = ['January', 'Febraury', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; 
             var theDate = new Date(document.lastModified); 
@@ -176,5 +198,8 @@
 		
     </p>
 </div>
+
+
+
 
 {include file='footer.tpl'}

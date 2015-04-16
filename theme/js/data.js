@@ -1,6 +1,36 @@
-
 $(document).ready(function(){
 
+//***********************************VIDEO******************************	
+	$(".messagepop").hide();
+
+	$(function() {
+	
+	  $('#tutoVideo a').on('click', function() {
+	  
+		$('#frameMain_video').dialog({
+            height: 470,
+            width: 550,
+			minWidth: 200,
+			minHeight: 200,
+            modal: true,
+			closeOnEscape: false,
+			open: function(event, ui) { 
+			   ////Close dialog when outside is clicked
+			   $('.ui-widget-overlay').bind('click', function(){ 
+				$("#frameMain_video").dialog('close'); 
+			   }); 			
+			},
+			close: function () {
+				$(this).dialog('destroy');
+			}
+        });
+
+		return false;
+	  });
+
+	});
+
+//*****************************************************************	
   initializeICheckSettings();
   initializeMap();
   setPageEvents();
