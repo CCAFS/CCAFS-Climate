@@ -5,7 +5,7 @@ require_once '../config/db.php';
 // $query = "SELECT df.id, df.name, dfc.name as 'category' FROM datasets_fileset df ";
 // $query .= "INNER JOIN datasets_fileset_category dfc ON df.category_id = dfc.id ";
 // $query .= "ORDER BY dfc.id, df.name DESC ";
-$query = "SELECT df.id, df.name, dfc.name as 'category' FROM datasets_fileset df INNER JOIN datasets_fileset_category dfc ON df.category_id = dfc.id ORDER BY (CASE df.id ";
+$query = "SELECT df.id, df.name, dfc.name as \"category\" FROM datasets_fileset df INNER JOIN datasets_fileset_category dfc ON df.category_id = dfc.id ORDER BY (CASE df.id ";
 $query .= "WHEN '12' 	 THEN 1 ";
 $query .= "WHEN '4' 	 THEN 2 ";
 $query .= "WHEN '9' 	 THEN 3 ";

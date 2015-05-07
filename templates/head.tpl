@@ -55,7 +55,9 @@
                 
 				 {elseif $jsToInclude == "map"}		
 					<script src="http://geoxml3.googlecode.com/svn/branches/polys/geoxml3.js"></script>
-                              
+                
+                {elseif $jsToInclude == "station"}
+                    <script src="{$smarty.const.SMARTY_JS_URI}/station.js"></script>              
                 {/if}
             {/foreach}
         {/if}		

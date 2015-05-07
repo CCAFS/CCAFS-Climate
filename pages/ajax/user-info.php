@@ -91,7 +91,7 @@ function addUserInfo() {
                 }
                 $query .= ") VALUES (" . $downloadId;
                 foreach ($instituteRegions as $region) {
-                    $query .= ", 1";
+                    $query .= ", TRUE";
                 }
                 $query .= ")";
                 if ($db->Execute($query)) {
@@ -102,7 +102,7 @@ function addUserInfo() {
                     }
                     $query .= ") VALUES (" . $downloadId;
                     foreach ($researchRegions as $region) {
-                        $query .= ", 1";
+                        $query .= ", TRUE";
                     }
                     $query .= ")";
                     if ($db->Execute($query)) {
