@@ -80,7 +80,7 @@
       <li> <a target="_blank" href="http://tntcat.iiasa.ac.at:8787/RcpDb/dsd?Action=htmlpage&amp;page=welcome"> RCP Database (version 2.0)<span class="little"></span></a></li>
       <li><a target="_blank" href="http://www.pik-potsdam.de/~mmalte/rcps/">RCP Concentration Calculations and Data 
 Final Version<span class="little"></span></a></li>
-      <li><a target="_blank" href="http://download.springer.com/static/pdf/609/art%253A10.1007%252Fs10584-011-0156-z.pdf?auth66=1408801006_c1012c109d79de6a52a9ad2f38d76b0f&ext=.pdf">The RCP greenhouse gas concentrations
+      <li><a target="_blank" href="http://link.springer.com/article/10.1007%2Fs10584-011-0156-z">The RCP greenhouse gas concentrations
 and their extensions from 1765 to 2300<span class="little"></span></a>
         <h4 style="color: red">&nbsp;</h4>
         <br>

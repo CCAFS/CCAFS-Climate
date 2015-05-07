@@ -11,8 +11,13 @@
     <hr>
     <br>
     <p>
-        To continue downloading your files, please first fill in your email and then some basic information. This information will be used by CCAFS solely for impact assessment and CGIAR and Center level reporting purposes. Filling it in will greatly help us to track the use of the portal and keep improving it. This portal provides data to a very large community of users and improving its usability and efficiency is a key aspect we work on continuously. However, you may click on <a id="skip-form" href="#">skip</a> to download links directly.
+        To continue downloading your files, please first fill in your email and then some basic information. This information will be used by CCAFS solely for impact assessment and CGIAR and Center level reporting purposes. Filling it in will greatly help us to track the use of the portal and keep improving it. This portal provides data to a very large community of users and improving its usability and efficiency is a key aspect we work on continuously. However, you may click on <a id="skip-form" href="#">skip <input type="hidden" id="fileSet" name="fileSet" value="{$filsetTem}" />
+</a> to download links directly.
     </p>
+    <p>
+        These open-access datasets are hosted by <a href="http://aws.amazon.com/datasets/0241269495883982" target="_blank">Amazon Web Services</a>.
+    </p>
+	
     <div id="div-form">
         <form id="contact-form" action="/ajax/user-info.php" method="GET">
             <input type="hidden" id="user-id" name="userId" value="-1" />
@@ -79,16 +84,21 @@
             </fieldset>
         </form>
     </div>
+	<div class="skip-button">
+		<input type="hidden" id="fileSet" name="fileSet" value="{$filsetTem}" />
+		<img id="ajax-loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />
+		<span id="message"></span>
+	</div>
     <div id="download-files">
         <p>The following links will be available for {$smarty.const.LINK_DAYS} days.</p>
         <table id="download-table" class="tablesorter">
-            <thead>
+            <thead  style="display: block;border-spacing: 1;width: 100%;">
                 <tr>
-                    <th>No.</th>
-                    <th>File</th>
+                    <th style="width: 54px;">No.</th>
+                    <th style="width: 738px;">File</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id ="dataTable" style="max-height: 500px; overflow: auto;display: inline-block; margin-right: 10px;width: 100%;">
             </tbody>
         </table>
     </div>

@@ -80,8 +80,8 @@ $(document).ready(function(){
             },
             beforeSend: function(){
                 $("#submit-user-info").attr("disabled", "disabled");
-                $(".submit-button #ajax-loader").show();
-                $(".submit-button #message").text("Saving...");
+                $(".skip-button #ajax-loader").show();
+                $(".skip-button #message").text("Generating links...");
             },
             success: function(downloadId) {
                 if($.isNumeric(downloadId)) {
@@ -89,19 +89,46 @@ $(document).ready(function(){
                     // next step, generate links.
                      $("#skip-form").unbind('click');
                      $("#email").attr("disabled", "disabled");
-                     $("#email-button").attr("disabled", "disabled");
-                    generateLinks(downloadId);
+                     // $("#email-button").attr("disabled", "disabled");
+                    generateLinksSkip(downloadId);
+					
                 } else {
                     $("#message").css("color", "red");
                     $("#message").text(downloadId);
-                    $(".submit-button #ajax-loader").hide();
+                    $(".skip-button #ajax-loader").hide();
                 }
             }
         });
         
     });
 
-
+    function generateLinksSkip(downloadId) {
+        // variable $selectedFiles is initialized in form.tpl.
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/ajax/links-generator.php",
+            data: {
+                files: $selectedFiles,
+                downloadId: downloadId,
+                fileType: $("#file-type").val(),
+				fileSet: $("#fileSet").val()
+            },
+            beforeSend: function(){
+                $(".skip-button #message").text("Generating links...");
+            },
+            success: function(data) {
+                $(".skip-button #message").text("DONE!");
+                 $(".skip-button #ajax-loader").attr("src", "/theme/images/ok-icon.png");
+                $.each(data, function(index, file){
+                    $htmlContent = "<tr><td>"+index+"</td><td><a href='"+file.reference+"'>"+file.name+"</a></td></tr>"; 
+                    $("#download-table tbody").append($htmlContent);
+                });
+                $("#download-table").tablesorter();
+                $("#download-files").slideDown("slow");
+            }
+        });
+    }
     function generateLinks(downloadId) {
         // variable $selectedFiles is initialized in form.tpl.
         $.ajax({
@@ -111,7 +138,8 @@ $(document).ready(function(){
             data: {
                 files: $selectedFiles,
                 downloadId: downloadId,
-                fileType: $("#file-type").val()
+                fileType: $("#file-type").val(),
+                fileSet: $("#fileSet").val()
             },
             beforeSend: function(){
                 $(".submit-button #message").text("Generating links...");

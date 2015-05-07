@@ -279,3 +279,32 @@ button[type="submit"][disabled] {
     background-color: #F3F3F3;
     display: none;
 }
+
+
+/******************* VIDEO TUTORIAL *********************/
+
+
+#content-video {
+	border: solid 1px #000
+	width: 100%;
+    height: 100%;		
+}
+
+
+.messagepop {
+ background-color:#FFFFFF;
+  border:2px solid #999999;
+  cursor:default;
+  display:none;
+  /*margin-top: 20px;*/
+  position:absolute;
+  text-align:left;
+  height:100%;
+ width:100%;
+  z-index:50;
+  padding: 10px 10px 10px;
+  padding: .3em 1em;
+  border-radius: 8px 8px 8px 8px;
+ 
+  
+}

@@ -341,6 +341,11 @@ div.home {
     margin-top: 20px;
 }
 
+.form #div-form #additional-information .skip-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
 .form #additional-information #welcome-message {
     font-size: 11px;
     margin: 0 0 20px;
@@ -369,7 +374,14 @@ div.home {
     font-size: 12px;
     font-weight: bold;
 }
-
+.form .skip-button #ajax-loader {
+    display: none;
+}
+.form .skip-button #message {
+    color: green;
+    font-size: 12px;
+    font-weight: bold;
+}
 .form #download-files {
     display: none;
     margin-top: 40px;
@@ -406,3 +418,15 @@ div.home {
     padding: 5px 8px;
 }
 
+#dataTable td:nth-child(1){
+ width: 56px;
+}
+#dataTable td:nth-child(2){
+ width: 740px;
+}
+#bodyTableFiles {
+ max-height: 500px; overflow: auto;display: inline-block; margin-right: 10px;width: 100%;
+}
+#headTableFiles {
+ display: block;border-spacing: 1;width: 100%;width: 100%;
+}

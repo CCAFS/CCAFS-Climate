@@ -3,6 +3,7 @@
 require_once '../../config/db.php';
 
 $context = isset($_POST["context"]) ? $_POST["context"] : null;
+$filset = isset($_POST["fileSet"]) ? $_POST["fileSet"] : null;
 
 if (!is_null($context)) {
     switch ($context) {

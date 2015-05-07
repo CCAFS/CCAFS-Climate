@@ -1,16 +1,29 @@
 <?php
 
 require_once '../../config/db.php';
+define("LINKS_AWS_URI", "http://cgiardata.s3.amazonaws.com/ccafs/ccafs-climate");
 
 $files = isset($_POST["files"]) ? $_POST["files"] : null;
 $downloadId = isset($_POST["downloadId"]) ? $_POST["downloadId"] : null;
+$fileSet = isset($_POST["fileSet"]) ? $_POST["fileSet"] : null;
+
 // fileType comes from hidden input in: file-list.tpl and pattern_scaling.tpl.
 $fileType = isset($_POST["fileType"]) ? $_POST["fileType"] : null;
+
+if ($fileSet==12 or $fileSet==10 or $fileSet==9 or $fileSet==7){
+$links_urls=LINKS_AWS_URI;
+}else{
+$links_urls=LINKS_BASE_URI;
+}
+
+
 if (!is_null($files) && !is_null($downloadId) && !is_null($fileType)) {
     $links = array();
+	$nfiles=count($files);
     foreach ($files as $fileId) {
         if($fileType == "file") {
-            $fileName = registerFile($fileId, $downloadId);
+            $fileName = registerFile($fileId, $downloadId,$nfiles);
+
         }
         if($fileType == "resource") {
             $fileName = registerResource($fileId, $downloadId);
@@ -18,16 +31,20 @@ if (!is_null($files) && !is_null($downloadId) && !is_null($fileType)) {
         //$link = generateLink($fileName);
         // Links are now generated directly from DAPA public link.        
         $link = new stdClass();
-        $link->reference = LINKS_BASE_URI . $fileName;
+		
+        // $link->reference = LINKS_BASE_URI .$fileName;
+        $link->reference = $links_urls.$fileName;
         $arr = explode("/", $fileName);
         $fileName = $arr[count($arr) - 1];
         $link->name = $fileName;
+
         // --------------------------------------
         if (!is_null($link)) {
             array_push($links, $link);
         }
     }
     echo json_encode($links);
+	
 }
 
 function registerResource($resourceId, $downloadId) {
@@ -38,17 +55,22 @@ function registerResource($resourceId, $downloadId) {
     if ($db->Execute($query)) {
         return $resourceInfo["local_url"] . "/" . $resourceInfo["name"];
     }
+
     return null;
 }
 
-function registerFile($fileId, $downloadId) {
+function registerFile($fileId, $downloadId,$nfiles) {
     global $db;
     $query = "SELECT id, name, local_url FROM datasets_file WHERE id = " . $fileId;
     $fileInfo = $db->GetRow($query);
-    $query = "INSERT INTO datasets_downloadedfile (download_id, file_id) VALUES (" . $downloadId . ", " . $fileId . ")";
-    if ($db->Execute($query)) {
+	if ($nfiles<2000){
+	    $queryLog = "INSERT INTO datasets_downloadedfile (download_id, file_id) VALUES (" . $downloadId . ", " . $fileId . ")";
+		$db->Execute($queryLog);	
+	}
+    if ($db->Execute($query)){
         return $fileInfo["local_url"] . "/" . $fileInfo["name"];
     }
+	
     return null;
 }
 

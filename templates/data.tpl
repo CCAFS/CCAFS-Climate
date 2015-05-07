@@ -2,21 +2,42 @@
 {include file='head.tpl' jsIncludes=["jquery", "data", "tiptip","modernizr","icheck", "map"] pageTitle="Data - CCAFS Climate" pageDescription="High resolution climate change data for download, downscaled using different methods." keywords="IPCC,data,download,downscaling,high resolution,delta method,climate change,projections,MarkSim,MetOffice,PRECIS"}
 {include file='header.tpl' current="data"}
 
+
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_data.gif" />
 </div>
-<div id="content" class="data">
-    <h3>Data</h3>
-    <hr>
+
+
+<div class="messagepop pop" id='frameMain_video' class="ui-widget-content" title="Tutorial CCAFS-Climate">
+	<div id="content-video">
+		<iframe id="playerID" width="100%" height="100%" src="http://www.youtube.com/embed/ubZ_d3X96tc">  </iframe>
+	</div>
+</div>	
+
+<div id="content" class="data" style="margin-bottom:45px">
+	<div style="height: 43px;">
+		<div style="width:70%; float:left; height: 38px;" >
+		 <h3>Data</h3>
+		</div>
+		
+		<div style="width:30%; height: 30px;float:left; text-align: right; padding-top: 20px;">
+			<div id="tutoVideo" style="width:44%; float:left">
+			 <a href="/tutoVideo" id="tutoVideo"> <img src="{$smarty.const.SMARTY_IMG_URI}/Aqua-Play-icon.png" width="23" height="23" alt="Help" /></a>
+			</div>
+			<div id="tutoVideo" style="width:55%; float:right;; font-size: 13px; padding-top: 5px;">
+				<a href="/tutoVideo" id="tutoVideo">How to download data</a>
+			</div>
+		 </div>
+	</div>
+	<hr>
     <br>
-    
     <div id="browserWarning">
         <H5>Search engine no longer supports Internet Explorer versions 7 or 8.</H5>
         <P>We recommend upgrading to the latest <A href="https://ie.microsoft.com/">Internet Explorer</A>, <A href="https://chrome.google.com">Google Chrome</A>, or <A href="https://mozilla.org/firefox/">Firefox</A>.</P>
         <P>If you are using IE 9 or later, make sure you <A href="http://windows.microsoft.com/en-US/windows7/webpages-look-incorrect-in-Internet-Explorer">turn off "Compatibility View"</A>.</P>
     </div>
     <div id="search_form">
-        <form method="GET" action="/file-list.php" id="formSearch">
+        <form method="GET" action="/file-list.php" TARGET="_blank" id="formSearch">
 
         <div id="side-left"> 
             <section class="ac-container">
@@ -26,21 +47,21 @@
                     <span id="ac-1" class="inputs-ac selected" > </span>
                     <label class="inputs-ac" for="ac-1">File Set</label> 
                     <article class="ac-large">  
-                        
+					
                         {assign var="category" value=$fileSets[0].category}
-                        <div class="fileset-category">{$category}</div>
-
+                        <div class="fileset-category">{$category}</div>		
+						
                         {foreach from=$fileSets item=fileSet}
                             {if $category != $fileSet.category}
                                 {assign var="category" value=$fileSet.category}
                                 <div class="fileset-category">{$category}</div>
                             {else}
-                            {/if}
+                            {/if}						
                             <img class="help_icon" id="help_icon_fileSet" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
                             <input id="fileSet-{$fileSet['id']}" type="radio" name="fileSet" value="{$fileSet['id']}" /><label for="fileSet-{$fileSet['id']}">{$fileSet["name"]}</label><br> 
                         {/foreach} 
                     </article>
-                    <input type="hidden" id="tile_name" />
+                    <input type="hidden" id="tile_name" name="tile_name" />
                 </div>
 
                 <div class="inputs-ac" id="scenario-filters">
@@ -145,6 +166,7 @@
                             <span id="filesFound">0 files found</span>
                             <img class="loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />
                         </label>
+						<!--<input type="hidden" id="filesFound1" name="filesFound1" /> -->
                 </div>
             </div>
             <div id="side-right-bottom">
@@ -155,12 +177,29 @@
     </div>
 
     <p>
-        The data distributed here are in ARC GRID, and ARC ASCII format, in decimal degrees and datum WGS84. CCAFS and its partners have processed this data to provide seamless continuous future climate surfaces.
+	<div>
+        <p>The data distributed here are in ARC GRID, and ARC ASCII format, in decimal degrees and datum WGS84. CCAFS and its partners have processed this data to provide seamless continuous future climate surfaces.
         Users are prohibited from any commercial, non-free resale, or redistribution without explicit written permission from CCAFS or the data-developing institutions.
         Users should acknowledge CCAFS as the source used in the creation of any reports, publications, new data sets, derived products, or services resulting from the use of this data set.
         For commercial access to the data, send requests to <a href="mailto:a.jarvis@cgiar.org">Andy Jarvis</a> at the International Center for Tropical Agriculture (CIAT).
+        </p>
+	</div>
+    
+         <div style="float:right;font-size:12px;padding-bottom:5px;margin-top:2px; height:10px">
+		   <i>Last updated: 16 April 2015</i>
+<!--          <script language="javascript"> 
+            months = ['January', 'Febraury', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; 
+            var theDate = new Date(document.lastModified); 
+            with (theDate) { 
+            document.write("<i>Last updated: "+getDate()+' '+months[getMonth()]+' '+getFullYear()+"</i>") 
+            } 
+          </script> -->   		
+		</div>   
+		
     </p>
-
 </div>
+
+
+
 
 {include file='footer.tpl'}

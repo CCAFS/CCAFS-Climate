@@ -1,6 +1,36 @@
-
 $(document).ready(function(){
 
+//***********************************VIDEO******************************	
+	$(".messagepop").hide();
+
+	$(function() {
+	
+	  $('#tutoVideo a').on('click', function() {
+	  
+		$('#frameMain_video').dialog({
+            height: 470,
+            width: 550,
+			minWidth: 200,
+			minHeight: 200,
+            modal: true,
+			closeOnEscape: false,
+			open: function(event, ui) { 
+			   ////Close dialog when outside is clicked
+			   $('.ui-widget-overlay').bind('click', function(){ 
+				$("#frameMain_video").dialog('close'); 
+			   }); 			
+			},
+			close: function () {
+				$(this).dialog('destroy');
+			}
+        });
+
+		return false;
+	  });
+
+	});
+
+//*****************************************************************	
   initializeICheckSettings();
   initializeMap();
   setPageEvents();
@@ -69,7 +99,7 @@ function setPageEvents(){
   $("#fileSet-filters").find("input")
     .on("ifChecked", getFilesInfo)
     .on("ifToggled", adjustFiltersOnFileSetSelection);
-
+	/*.on("ifClicked", changeMap);*/
   $("#scenario-filters").find("input").on("ifToggled", getFilesInfo);
   $("#model-filters").find("input").on("ifToggled", getFilesInfo);
   $("#method-filters").find("input").on("ifToggled", getFilesInfo);
@@ -78,10 +108,10 @@ function setPageEvents(){
   $("#period-filters").find("input").on("ifToggled", getFilesInfo);
   $("#variable-filters").find("input").on("ifToggled", getFilesInfo);
   $("#resolution-filters").find("input").on("ifToggled", getFilesInfo);
-  $("#extent-filters").find("input").on("ifClicked", changeMap);
+  $("#extent-filters").find("input")/*.on("ifClicked", changeMap)*/.on("ifToggled", adjustFiltersOnExtentSelection);
 
   // load on the map the selected layer(file set). 
-  //$("input[name='fileSet']").on('ifChecked', loadKmlOnMap); 
+  // $("input[name='fileSet']").on('ifChecked', loadKmlOnMap); 
   //$("input[name='fileSet']").on('ifChecked', changeMap); 
   // Select/De-select all option in model filter
   $("model-999").on("ifToggled", selectAllModelOptionsEvent);
@@ -91,8 +121,8 @@ function removePageEvents(){
 
   $("#fileSet-filters").find("input")
     .off("ifToggled", getFilesInfo)
-    .off("ifChecked", getFilesInfo)
-    .off('ifChecked', changeMap);
+    .off("ifChecked", getFilesInfo);
+    /*.off('ifChecked', changeMap);*/
 
   $("#scenario-filters").find("input").off("ifToggled", getFilesInfo);
   $("#model-filters").find("input").off("ifToggled", getFilesInfo);
@@ -126,18 +156,41 @@ function deleteTileValue(){
   $("#tile_name").attr("value", null);
 }
 
-function changeMap(){
-  var extentValue = $("[name='extent']:checked").val();
+// function changeMap2(evt){
 
-  if(extentValue == 1){ // Global
-    $("#map-canvas").html("<img src='/theme/images/map-not-available.png'/>");
-  } else if(extentValue == 2){ // Regional
-    loadKmlOnMap();
-  } else {
-    // If it is not defined, 
-    $("#line-radio-1").iCheck('check');
-    $("#map-canvas").html("<img src='/theme/images/map-not-available.png'/>");
+// }
+
+function changeMap(evt){
+  var filterValues= $(evt.target).attr("id")
+  var extentValue = $("[name='extent']:checked").val();
+  var variables = getArrayValues( $("input[name='variables\\[\\]']:checked") );
+  var scenarios = getArrayValues( $("[name='scenarios\\[\\]']:checked") );
+  var model = getArrayValues( $("input[name='model\\[\\]']:checked") );
+  var period = getArrayValues( $("input[name='period\\[\\]']:checked") ); 
+  var section = $(evt.target).attr("name");
+  
+  //console.log(filterValues,section,extentValue)
+  if(filterValues== "extent-2" || extentValue== 2){
+	if(!$("#tile_name").val() && !variables && !scenarios && !model && !period){
+		loadKmlOnMap();
+	}
   }
+  else{
+	deleteTileValue()
+    $("#map-canvas").html("<img src='/theme/images/map-not-available.png'/>");  
+  }
+  
+  // if(extentValue == 1){ // Global
+	// deleteTileValue()
+    // $("#map-canvas").html("<img src='/theme/images/map-not-available.png'/>");
+  // } else if(extentValue == 2){ // Regional
+	// if(!$("#tile_name").val() && !variables && !scenarios && !model && !period){
+		// loadKmlOnMap();
+     // }
+  // } else {// If it is not defined, 
+    // $("#line-radio-1").iCheck('check');     
+    // $("#map-canvas").html("<img src='/theme/images/map-not-available.png'/>");
+  // }
   
 }
 
@@ -149,6 +202,35 @@ function adjustFiltersOnFileSetSelection(){
 
   // Select again the fileset
   $("#" + fileSetSelected).attr("checked", true);
+}
+
+function adjustFiltersOnExtentSelection(){
+  var ResolutionSelected = $("input[name='resolution']:checked").attr("id");
+  
+  // console.log(variables)
+  deleteTileValue();
+  $("#" + ResolutionSelected).attr("checked", false);
+  $("#" + ResolutionSelected).iCheck('update');
+
+  $("input[id^='variable']").attr("checked", false);
+  $("input[id^='variable']").iCheck('update');  
+
+  $("input[id^='model']").attr("checked", false);
+  $("input[id^='model']").iCheck('update'); 
+
+  // $("input[id^='format']").attr("checked", false);
+  // $("input[id^='format']").iCheck('update');   
+	if($("#format-2").attr("checked") == "checked"){
+		$("#format-2").attr("checked", false);
+		$("#format-2").iCheck('update');   
+	}	
+
+  $("input[id^='scenario']").attr("checked", false);
+  $("input[id^='scenario']").iCheck('update');  
+  
+  $("input[id^='period']").attr("checked", false);
+  $("input[id^='period']").iCheck('update'); 
+
 }
 
 /*
@@ -175,12 +257,18 @@ function selectAllModelOptionsEvent(evt){
 
 function getFilesInfo(evt){
   var filterValues = getUserSelections($(evt.target).attr("name"));
-
+  // console.log(filterValues.filesetId)
   // Hide the help icon 
+  
+	if(filterValues.filesetId ==4 && filterValues.extendId==2){
+		filterValues.formatId=1;
+	}  
+ 	if(filterValues.filesetId ==12 && filterValues.extendId==2){
+		filterValues.formatId=1;
+	}  
   if($(evt.target).parent().prev().hasClass("help_icon")){
     $(evt.target).parent().prev().hide();
   }
-
     $.ajax({
     type: "POST",
     dataType: "json",
@@ -198,8 +286,8 @@ function getFilesInfo(evt){
       // Show the loader gif
     },
     success: function(data) {
+		// console.log(data)
       $(".loader").hide();
-      
       if(data != null){
         if(data.filesFound < 0) {
             $("#filesFound").text("0 files found");
@@ -237,17 +325,49 @@ function getFilesInfo(evt){
                 
               }
             });
+			//$("#filesFound1").val(data.filesFound);
         }
       }else{
           $("#filesFound").text("0 files found");
           $("#searchSubmit").attr("disabled", "disabled");
           $("#searchSubmit").addClass("disable"); 
       }
-      console.log(filterValues.section);
-      if(filterValues.section == 'fileSet' || filterValues.section == 'scenarios[]'){
-        updateFilters(data.filtersAvailable);
-      }
-      changeMap();
+
+	 
+	  // if(filterValues.section == 'fileSet' || filterValues.section == 'extent' || filterValues.section == 'scenarios[]' ){
+		if(filterValues.filesetId ==12 || filterValues.filesetId == 4){  
+			data.filtersAvailable.extent="1,2"
+		}
+	  // }
+	  
+	// if(filterValues.section == 'fileSet' || filterValues.section == 'extent'){
+		if(filterValues.filesetId ==4 && filterValues.extendId==1){deleteTileValue()}
+		if(filterValues.filesetId ==12 && filterValues.extendId==1){deleteTileValue()}
+
+		if(filterValues.filesetId ==12 && filterValues.extendId==1){
+			data.filtersAvailable.format="1,2"
+		}	
+		if(filterValues.filesetId ==4 && filterValues.extendId==1){
+			data.filtersAvailable.format="1,2"
+		}		
+		// if(filterValues.filesetId ==4 && filterValues.extendId==2){ 
+			// $("#format-2").iCheck("uncheck");
+			// $("#format-2").iCheck("enable");
+		// }  
+		// if(filterValues.filesetId ==12 && filterValues.extendId==2){ 
+			// $("#format-2").iCheck("uncheck");
+			// $("#format-2").iCheck("enable");
+		// } 
+
+	updateFilters(data.filtersAvailable);
+	
+		
+	// }
+
+		
+
+	
+      changeMap(evt);
       $("#filesFound").show();
     }
   });
@@ -268,12 +388,9 @@ function uncheckAllInputs(){
  */
 function updateFilters(filtersAvailable){
   $.each(filtersAvailable, function(filter, inputsIds){    
-
     // Deshabilitamos los eventos temporalmente para
     // evitar dispararlos
     removePageEvents();
-
-
     if(inputsIds){
         var arrayInputsIds = inputsIds.split(",");
         $("input[id^='" + filter + "']").iCheck("disable");
@@ -289,7 +406,7 @@ function updateFilters(filtersAvailable){
 
     // Habilitamos los eventos nuevamente
     setPageEvents();
-    //changeMap();
+    // changeMap();
   });
 }
 
@@ -310,7 +427,8 @@ function getUserSelections(filterName){
   variables = getArrayValues( $("input[name='variables\\[\\]']:checked") ); 
   formats = getArrayValues( $("input[name='formats\\[\\]']:checked") ); 
   tileNameVal = (  $("#tile_name").val() == "" ) ? undefined : "'" + $("#tile_name").val() + "'";
-
+  if(filterName=="extent"){tileNameVal= null}
+	
   var data = {
     methodId: $("input[name='method']:checked").val(),
     modelId: model,
@@ -324,6 +442,8 @@ function getUserSelections(filterName){
     tileName: tileNameVal,
     section: filterName
   }
+  
+    // console.log(data)
 
   return data;
 }
@@ -360,11 +480,12 @@ var selectedPolygonStyle=null;
 var highlightOptions = {fillColor: "#FFFFFF", strokeColor: "#FFFFFF", fillOpacity: 0.6, strokeWidth: 10};
 var normalStyle = {fillColor: "#BDBDBD", strokeColor: "#424242", fillOpacity: 0.4, strokeWidth: 10};
 var selectedStyle= {fillColor: "#2E2E2E", strokeColor: "#1C1C1C", fillOpacity: 0.6, strokeWidth: 10};
+var minZoomLevel = 1;  
 
 // function initialize map
 function initializeMap() {
   var mapOptions = {
-      zoom: 2,
+      zoom: minZoomLevel,
       center: new google.maps.LatLng(23.079732,17.226563),
       mapTypeId: google.maps.MapTypeId.ROADMAP
   };
@@ -374,7 +495,7 @@ function initializeMap() {
 
   google.maps.event.addListenerOnce(map, 'idle', function(){
     map.setCenter(new google.maps.LatLng(23.079732,17.226563));
-    map.setZoom(1);
+	map.setZoom(minZoomLevel);	
   });
 
 }
@@ -434,25 +555,35 @@ function highlightPoly(poly) {
 function createListener(poly,name) {	
   google.maps.event.addListener(poly, "click", function(evt){
 
-    // Creating the property to send as section property
+	// Creating the property to send as section property
     evt.target = {};
     evt.target["name"] = "tile";
     polygonClickEvent(evt, poly);
+	// changeMap2(evt)
   });
 }
 
-function polygonClickEvent(evt, poly){
+function createListenerMarker(marker,poly,name) {	
+  google.maps.event.addListener(marker, "click", function(evt){
+
+    ///// Creating the property to send as section property
+    evt.target = {};
+    evt.target["name"] = "tile";
+    markerClickEvent(evt, marker,poly);
+  });
+}
+
+function markerClickEvent(evt, marker,poly){
     // Don't show the info window
     poly.infoWindow.close();
-   
+ 
     // Setting the tile id in the hidden input
     $("#tile_name").val(poly.title);
-
+	
     if(selectedPolygonStyle != null){
       selectedPolygonStyle.setOptions(normalStyle);
       highlightPoly(selectedPolygonStyle);
     }
-
     selectedPolygonStyle=poly;    
     poly.setOptions(selectedStyle);
     google.maps.event.clearListeners(poly, 'mouseover');  
@@ -460,19 +591,47 @@ function polygonClickEvent(evt, poly){
 
     // Look for the files available
     getFilesInfo(evt);
+
+}
+
+function polygonClickEvent(evt, poly){
+    // Don't show the info window
+    poly.infoWindow.close();
+ 
+    // Setting the tile id in the hidden input
+    $("#tile_name").val(poly.title);
+	
+	// console.log(evt);
+	
+    if(selectedPolygonStyle != null){
+      selectedPolygonStyle.setOptions(normalStyle);
+      highlightPoly(selectedPolygonStyle);
+    }
+    selectedPolygonStyle=poly;    
+    poly.setOptions(selectedStyle);
+    google.maps.event.clearListeners(poly, 'mouseover');  
+    google.maps.event.clearListeners(poly, 'mouseout');   
+
+    // Look for the files available
+    getFilesInfo(evt);
+
 }
 
 // function to manage the data into the kml files
 function useTheData(doc){
   // Geodata handling goes here, using JSON properties of the doc object
   geoXmlDoc = doc[0]; 
+
   if(geoXmlDoc.gpolygons!=undefined){
 		for (var i = 0; i < geoXmlDoc.gpolygons.length; i++) {
 			geoXmlDoc.gpolygons[i].setOptions(normalStyle);
 			highlightPoly(geoXmlDoc.gpolygons[i]);
 			createListener(geoXmlDoc.gpolygons[i],geoXmlDoc.placemarks[i].name);
+			createListenerMarker(geoXmlDoc.markers[i],geoXmlDoc.gpolygons[i],geoXmlDoc.placemarks[i].name);
+
+			
 		}		
-	}	
+	}
 }
 
 /* Apply a custom KML to the map */

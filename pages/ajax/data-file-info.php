@@ -14,6 +14,7 @@ $ids["format_id"] = isset($_POST["formatId"]) && $_POST["formatId"] != "" ? $_PO
 $ids["extent_id"] = isset($_POST["extendId"]) && $_POST["extendId"] != "" ? $_POST["extendId"] : null;
 $ids["file_set_id"] = isset($_POST["filesetId"]) && $_POST["filesetId"] != "" ? $_POST["filesetId"] : null;
 $ids["tile_id"] = isset($_POST["tileName"]) && $_POST["tileName"] != "" ? $_POST["tileName"] : null;
+$ids["tile_id"] = getTileID($ids["tile_id"]);
 
 if (!is_null($section)) {
     switch ($section) {
@@ -45,7 +46,7 @@ if (!is_null($section)) {
             filesFound("datasets_fileset", $ids["file_set_id"]);
             break;
         case "tile":
-            $ids["tile_id"] = getTileID($ids["tile_id"]);
+            // $ids["tile_id"] = getTileID($ids["tile_id"]);
             filesFound("datasets_tile", $ids["tile_id"]);
             break;
         default:
@@ -66,7 +67,7 @@ function filesFound($databaseName, $id) {
     global $db, $ids;
     $info = new stdClass();
     $info->description= new stdClass();
-
+			
     if (!is_null($id)) {
         $optionsIds = explode(",", $id);
 
@@ -77,9 +78,9 @@ function filesFound($databaseName, $id) {
             }else{
                 $query = "SELECT id, description FROM " . $databaseName . " WHERE id = " . $oId;
             }
-
             $result = $db->GetRow($query);
             $info->description->$oId= $result["description"];
+			// print_r($info);
         }
     } else {
         $info->description = "";
@@ -108,11 +109,12 @@ function filesFound($databaseName, $id) {
         $info->filesFound = -1;
     } else {
         $info->filesFound = $db->GetOne($query);
-    }
+    }	
     $info->query = $query;
     $info->filtersAvailable = getFiltersAvailable();
 
     echo json_encode($info);
+
 }
 
 function getFiltersAvailable(){
@@ -127,7 +129,12 @@ function getFiltersAvailable(){
     if( isset($ids["file_set_id"]) && $ids["file_set_id"] != "" ){
         $sql .= " AND file_set_id = " . $ids["file_set_id"];
     }
-
+    if( isset($ids["extent_id"]) && $ids["extent_id"] != "" ){
+        $sql .= " AND extent_id = " . $ids["extent_id"];
+    }
+    if( isset($ids["format_id"]) && $ids["format_id"] != "" ){
+        $sql .= " AND format_id = " . $ids["format_id"];
+    }	
     // Adjust the db to only return the assoc array
     $db->SetFetchMode(ADODB_FETCH_ASSOC); 
     $result = $db->GetRow($sql);
