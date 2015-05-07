@@ -10,6 +10,7 @@
         <!-- Stylesheets -->
         <!-- Main -->
         <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/main.css" media="screen" />
+		
         <!-- include specified javascripts -->
         {if $jsIncludes}
             {foreach from=$jsIncludes item=jsToInclude}
@@ -27,10 +28,15 @@
                     <script src="{$smarty.const.SMARTY_JS_URI}/downscaling.js"></script>
                 {elseif $jsToInclude == "pattern_scaling"}
                     <script src="{$smarty.const.SMARTY_JS_URI}/pattern_scaling.js"></script>
-                {elseif $jsToInclude == "data"}                    
+                {elseif $jsToInclude == "data"}
+					<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>	
                     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={$smarty.const.GOOGLE_API_KEY}&sensor=false"></script>
                     <script src="{$smarty.const.SMARTY_JS_URI}/data.js"></script> 
                         <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/data.css" media="screen" /> 
+						
+					<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+					<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>		
+					<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>							
                     <!--[if lte IE 8]>
                         <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/data-IE8.css" media="screen" />
                     <![endif]-->
@@ -55,11 +61,19 @@
                 
 				 {elseif $jsToInclude == "map"}		
 					<script src="http://geoxml3.googlecode.com/svn/branches/polys/geoxml3.js"></script>
-                
+                                        
                 {elseif $jsToInclude == "station"}
                     <script src="{$smarty.const.SMARTY_JS_URI}/station.js"></script>              
                 {/if}
             {/foreach}
-        {/if}		
+        {/if}
+
+
+
+  
+		
     </head> 
     <body>
+	
+	
+	</body>
