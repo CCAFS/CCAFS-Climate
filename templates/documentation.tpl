@@ -133,7 +133,7 @@
             </a>
         </li>
         <li type="square">
-            <a href="{$smarty.const.SMARTY_DOCS_URI}/MarkSim_Standalone_Documentation_V2.pdf">
+            <a href="{$smarty.const.SMARTY_DOCS_URI}/MarkSim_Standalone_Documentation_v2.pdf">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
                 MarkSim standalone V2 for DSSAT users (Jones et al., 2013).
             </a>
