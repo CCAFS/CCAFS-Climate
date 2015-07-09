@@ -525,7 +525,7 @@ function loadKmlOnMap(){
     break;
 
     case "12":  // IPCC 5AR (CIAT)
-      kmlName = "tiled";
+      kmlName = "tiled_cmip5";
     break;
   }
 

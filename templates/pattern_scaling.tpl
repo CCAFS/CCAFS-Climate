@@ -56,7 +56,7 @@
             </a>
         </li>
         <li>
-            <a target="_blank" href="/downloads/docs/MarkSim_Standalone_Documentation_v2">
+            <a target="_blank" href="/downloads/docs/MarkSim_Standalone_Documentation_v2.pdf">
                 MarkSim standalone V2 for DSSAT users -
                 <img id="download_pdf_button" title="Download the document" src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />                
                 <span class="little">(355 KB)</span>

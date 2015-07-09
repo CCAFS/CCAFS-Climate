@@ -129,9 +129,15 @@
         <li type="square">
             <a href="{$smarty.const.SMARTY_DOCS_URI}/MarkSim_Standalone_Documentation.pdf">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
-                MarkSim standalone for DSSAT users (Jones et al., 2011).
+                MarkSim standalone for DSSAT users (Jones et al., 2012).
             </a>
         </li>
+        <li type="square">
+            <a href="{$smarty.const.SMARTY_DOCS_URI}/MarkSim_Standalone_Documentation_v2.pdf">
+                <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
+                MarkSim standalone V2 for DSSAT users (Jones et al., 2013).
+            </a>
+        </li>		
         <li type="square">
             <a href="{$smarty.const.SMARTY_DOCS_URI}/MarkSim_Generating_Downscaled_Weather_Data.pdf">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
