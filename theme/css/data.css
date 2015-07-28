@@ -263,7 +263,7 @@ button[type="submit"][disabled] {
 
 /* iCheck style */ 
 
-.icheckbox_flat,  { 
+.icheckbox_flat  { 
     float: left;
 }
 
@@ -285,7 +285,7 @@ button[type="submit"][disabled] {
 
 
 #content-video {
-	border: solid 1px #000
+	border: solid 1px #000;
 	width: 100%;
     height: 100%;		
 }

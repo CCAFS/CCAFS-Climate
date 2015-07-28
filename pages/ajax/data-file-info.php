@@ -59,7 +59,7 @@ function getTileID($tileName){
     $query = "SELECT id FROM datasets_tile WHERE name = " . $tileName . ";";
     $result = $db->GetRow($query);
 
-    $tileID = $result["id"];
+    $tileID = (isset($result["id"]))?$result["id"]:null;
     return $tileID;
 }
 
@@ -119,12 +119,23 @@ function filesFound($databaseName, $id) {
 
 function getFiltersAvailable(){
     global $ids, $db;
-
-    $sql = "SELECT GROUP_CONCAT( DISTINCT `scenario_id` ) as 'scenario', GROUP_CONCAT( DISTINCT `period_id` ) as 'period', ";
-    $sql .= "GROUP_CONCAT( DISTINCT `model_id` ) as 'model', GROUP_CONCAT( DISTINCT `variable_id` ) as 'variable', ";
-    $sql .= "GROUP_CONCAT( DISTINCT `resolution_id` ) as 'resolution', GROUP_CONCAT( DISTINCT `format_id` ) as 'format', ";
-    $sql .= "GROUP_CONCAT( DISTINCT `extent_id` ) as 'extent' ";
-    $sql .= "FROM `datasets_file` WHERE 1";
+    //SQL only for mysql
+//    $sql = "SELECT GROUP_CONCAT( DISTINCT scenario_id ) as \"scenario\", GROUP_CONCAT( DISTINCT period_id ) as \"period\", ";
+//    $sql .= "GROUP_CONCAT( DISTINCT model_id ) as \"model\", GROUP_CONCAT( DISTINCT variable_id ) as \"variable\", ";
+//    $sql .= "GROUP_CONCAT( DISTINCT resolution_id ) as \"resolution\", GROUP_CONCAT( DISTINCT format_id ) as \"format\", ";
+//    $sql .= "GROUP_CONCAT( DISTINCT extent_id ) as \"extent\" ";
+//    $sql .= "FROM datasets_file WHERE TRUE";
+    
+    //SQL only for postgres
+    $sql = "SELECT array_to_string(array_agg(DISTINCT scenario_id), ',') as \"scenario\", 
+            array_to_string(array_agg(DISTINCT period_id ), ',') as \"period\", 
+            array_to_string(array_agg(DISTINCT model_id ), ',') as \"model\", 
+            array_to_string(array_agg(DISTINCT variable_id ), ',') as \"variable\", 
+            array_to_string(array_agg(DISTINCT resolution_id ), ',') as \"resolution\", 
+            array_to_string(array_agg(DISTINCT format_id ), ',') as \"format\", 
+            array_to_string(array_agg(DISTINCT extent_id ), ',') as \"extent\" 
+            FROM datasets_file 
+            WHERE TRUE";
 
     if( isset($ids["file_set_id"]) && $ids["file_set_id"] != "" ){
         $sql .= " AND file_set_id = " . $ids["file_set_id"];
@@ -137,6 +148,7 @@ function getFiltersAvailable(){
     }	
     // Adjust the db to only return the assoc array
     $db->SetFetchMode(ADODB_FETCH_ASSOC); 
+//    echo $sql;
     $result = $db->GetRow($sql);
 
     // Returning the fetch mode to default
