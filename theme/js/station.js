@@ -5,6 +5,7 @@
  */
 $(document).ready(function() {
   $("#station").change();
+//  getMapPoints ();
 });
 function generateGraps() {
   var filterValues = $("#stations-form").serialize();
@@ -210,3 +211,14 @@ function generateGraps() {
   });
 }
 
+function getMapPoints () {
+  $.ajax({
+    type: "POST",
+//    dataType: "json",
+    url: "/ajax/data-map-stations.php",
+//    data: filterValues,
+    success: function(result) {
+      
+    }
+  });
+}

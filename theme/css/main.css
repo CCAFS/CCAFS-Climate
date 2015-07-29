@@ -131,6 +131,81 @@ span.little {
     padding: 2px 5px;
 }
 
+nav {
+    /*background-color:rgb(255,100,100);*/
+    padding:10px 0;
+}
+nav ul {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+nav ul li {
+    display:inline-block;
+    position:relative;
+}
+
+nav li ul {    
+    background-color:rgba(50, 58, 69, 0.9);
+    position:absolute;
+    left:0;
+    /*top:40px;  make this equal to the line-height of the links (specified below) */
+    width:200px;
+}
+nav li li {
+    position:relative;
+    margin:0;
+    display:block;
+}
+nav li li ul {
+    position:absolute;
+    top:0;
+    left:200px; /* make this equal to the width of the sub nav above */
+    margin:0;
+}
+
+ul.sub-menu {
+    display:none;
+    z-index: 100;
+}
+
+/* style all links */
+nav li li a:hover,
+nav a:focus,
+nav a:active {
+    color:#FCD116!important;
+}
+
+/* style sub level links */
+nav li li a {
+    border-bottom:solid 1px #fff!important;
+    margin:0 10px;
+    padding:0;
+    line-height:40px;
+    padding:0 12px;
+    margin:0 12px;
+    color:#fff!important;
+    text-decoration:none;
+    display:block;
+    text-align: left;
+}
+nav li li:last-child a {
+    border-bottom:none;
+}
+
+/* show arrows for dropdowns */
+/*nav li.dropdown > a {
+    background-image:url('../images/arrow_down.png');
+    background-position:right 20px;
+    background-repeat:no-repeat;
+}
+
+nav li li.dropdown > a {
+    background-image:url('../img/arrow-right.png');
+    background-position:right 16px;
+    background-repeat:no-repeat;
+}*/
+
 
 /********************* SCONDARY MENU **************************/
 
