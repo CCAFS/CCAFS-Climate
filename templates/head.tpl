@@ -23,6 +23,9 @@
                     <link href="{$smarty.const.SMARTY_JS_URI}/iCheck/skins/line/_all.css" rel="stylesheet"> 
                     <link href="{$smarty.const.SMARTY_JS_URI}/iCheck/skins/flat/_all.css" rel="stylesheet">    
                 {elseif $jsToInclude == "index"}
+                    <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/modal-index.css" media="screen" /> 
+                    <link rel="stylesheet" href="{$smarty.const.SMARTY_JS_URI}/Remodal-master/dist/jquery.remodal.css">
+                    <script src="{$smarty.const.SMARTY_JS_URI}/Remodal-master/dist/jquery.remodal.min.js"></script>
                     <script src="{$smarty.const.SMARTY_JS_URI}/index.js"></script>
                 {elseif $jsToInclude == "downscaling"}
                     <script src="{$smarty.const.SMARTY_JS_URI}/downscaling.js"></script>
