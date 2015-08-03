@@ -111,7 +111,7 @@ Ext.application({
 		toolip_groupLegendIMG='Legend by institutes of each country'		
 		toolip_groupLabels='Select an attribute to add labels to stations in the map'		
 		toolip_groupLayers='Layers of map'		
-
+		
 		mapPanel = Ext.create('GeoExt.panel.Map', {
 			id: 'mapPanelID',
             border: true,
@@ -4865,7 +4865,7 @@ Ext.application({
 			overCls : 'my-over',
 			toggleGroup: "draw",
 			group: "draw",
-			icon: icons+'s.png',
+			icon: icons+'select_off.gif',
 			scale: 'medium',
 			control: new OpenLayers.Control.SelectFeature(clusters, {
 				type: OpenLayers.Control.TYPE_TOGGLE,
@@ -5192,29 +5192,42 @@ var tabCount = 4;
 			defaults: {
 				split: true
 			},
-			tools: [{
-				type: 'maximize',
-				tooltip: 'Agrandir la fenêtre',
-				handler: function (e, target, panelHdr) {
-					var panel = panelHdr.up('panel');
-					if (!panel.maximized) {
-
-						panel.restoreSize = panel.getSize();
-						panel.restorePos = panel.getPosition(true);
-						panel.maximized = true;
-						var parent = panel.ownerCt,
-							container = parent ? parent.getTargetEl() : panel.container,
-							newBox = container.getViewSize(false);
-						panel.setBox(newBox);
-					} else {
-						var newBox = panel.restoreSize;
-						newBox.x = panel.restorePos[0];
-						newBox.y = panel.restorePos[1];
-						panel.maximized = false;
-						panel.setBox(newBox);
+			tools: [
+				{xtype: 'tbfill'},
+				{
+					icon   : icons+'buttons/login24.png',
+					tooltip: 'Login',
+					scale: 'medium',
+					cls:"toolLogin",
+					handler: function(){
+						console.log("ghghg")
 					}
-				}
-			}],			
+				
+				}		
+				// {
+					// type: 'maximize',
+					// tooltip: 'Agrandir la fenêtre',
+					// handler: function (e, target, panelHdr) {
+						// var panel = panelHdr.up('panel');
+						// if (!panel.maximized) {
+
+							// panel.restoreSize = panel.getSize();
+							// panel.restorePos = panel.getPosition(true);
+							// panel.maximized = true;
+							// var parent = panel.ownerCt,
+								// container = parent ? parent.getTargetEl() : panel.container,
+								// newBox = container.getViewSize(false);
+							// panel.setBox(newBox);
+						// } else {
+							// var newBox = panel.restoreSize;
+							// newBox.x = panel.restorePos[0];
+							// newBox.y = panel.restorePos[1];
+							// panel.maximized = false;
+							// panel.setBox(newBox);
+						// }
+					// }
+				// }
+			],			
 			header: {
 				titlePosition: 1,
 				titleAlign: 'left',

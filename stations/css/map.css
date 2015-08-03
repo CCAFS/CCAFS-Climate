@@ -1,8 +1,8 @@
 			.icon-grid {
-				background-image:url(../libs/ext-4.2.2/examples/shared/icons/fam/grid.png) !important;
+				background-image:url(../../libs/ext-4.2.2/examples/shared/icons/fam/grid.png) !important;
 			}
 			.add {
-				background-image:url(../libs/ext-4.2.2/examples/shared/icons/fam/add.gif) !important;
+				background-image:url(../../libs/ext-4.2.2/examples/shared/icons/fam/add.gif) !important;
 			}			
 			.x-grid-rowbody p {
 				margin: .5em 0;
@@ -356,6 +356,25 @@
 			border-style: none;
 			}
 	
-			
+			/*############### title mainpanel #############################*/	
+			.x-panel-header-text-container-default {
+				color: white;
+				font-size: 16px;
+				font-weight: bold;
+				font-family: Trebuchet MS;
+				line-height: 15px;
+				padding: 1px 0 0;
+				text-transform: none;
+			}
 
-	
+			.toolLogin .x-tool-img {
+				overflow: hidden;
+				width: 18px;
+				height: 18px;
+				background-image: url(../iconosGIS/buttons/login16.png);
+				margin: 0;
+			}	
+			.toolLogin .x-tool-img {
+				opacity: 10;
+			}
+			
