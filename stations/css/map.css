@@ -1,0 +1,361 @@
+			.icon-grid {
+				background-image:url(../libs/ext-4.2.2/examples/shared/icons/fam/grid.png) !important;
+			}
+			.add {
+				background-image:url(../libs/ext-4.2.2/examples/shared/icons/fam/add.gif) !important;
+			}			
+			.x-grid-rowbody p {
+				margin: .5em 0;
+			}
+			/*body {
+				font-family: "Trebuchet MS"!important;
+			}*/
+			.x-body {
+				font-family: 'Oswald', sans-serif;
+				font-size: 11px;
+				color: #333;
+			}
+						
+			.css_labels .x-form-item-label {
+			color:#555555;padding-left:3px;padding-rigth:1px;font-family: 'Oswald', sans-serif;font-size: 14px;
+			}
+
+			.css_labels .x-form-cb-label-after{
+			color:#555555;padding-left:17px;padding-rigth:1px;font-family: 'Oswald', sans-serif;font-size: 13px;
+
+			}
+			.css_labels .x-fieldset-header-text{
+			color:rgb(19, 90, 146);
+			font-family: 'Oswald';
+			font-size: 13px;
+			}
+			.css_labels  .x-tab-default-active .x-tab-inner{
+			font-family: 'Oswald';
+			font-size: 14px;
+			color:#135A92;
+			}
+
+			.css_labels .x-form-text {
+			font-family: 'Oswald';
+			font-size: 14px;
+			color:rgb(179, 31, 132);
+			}
+			.css_labels .x-grid-cell{
+			font-family: 'Oswald';
+			font-size: 13px;
+			color:#555555;
+			}
+			.css_labels .x-column-header-text{
+			font-family: 'Oswald';
+			font-size: 14px;
+			color:#555555;
+			}
+			.css_labels .x-border-layout-ct{
+			background-color: white;
+			}
+
+			.css_labels .x-panel-default-outer-border-rbl{ /*lineas del grid*/
+			border-right-color: silver !important;
+			border-right-width: 1px !important;
+			border-bottom-color: silver !important;
+			border-bottom-width: 1px !important;
+			border-left-color: silver !important;
+			}
+
+
+			.x-panel-header-default {
+			  background-image: none;
+			  background-color: #4D545E;
+			}
+			.css_labels .x-tab-bar-default {
+			background-color: #323a45;
+			}
+			.css_labels .x-tab-default-top {
+			background-color: #83939E;
+			}
+			.x-tab-default-active {
+			background-color: #B1EDAD;
+			}
+			.x-tab-bar-strip-default {
+			  border-style: solid;
+			  border-color: #157fcc;
+			  background-color: #83939E;
+			}
+
+			.x-btn-default-small {
+			border-radius: 3px;
+			padding: 3px 3px 3px 3px;
+			border-width: 1px;
+			border-style: solid;
+			background-image: none;
+			background-color: #F5F5F5/* #5B5F61*/;
+			border-color: #C0C0C0;
+			background-image: none;
+			}
+			.x-btn-default-small-over {
+			border-radius: 3px;
+			padding: 3px 3px 3px 3px;
+			border-width: 1px;
+			border-style: solid;
+			background-image: none;
+			background-color: #ebebeb;
+			border-color: #C0C0C0;
+			background-image: none;
+			}
+			.x-btn-default-small .x-btn-inner {
+			font-size: 12px;
+			font-weight: bold;
+			font-family: helvetica, arial, verdana, sans-serif;
+			color: rgb(76, 54, 54);
+			padding: 0 5px;
+			}
+			.x-splitter-horizontal {
+			cursor: e-resize;
+			cursor: row-resize;
+			background-color: #323a45;
+			}
+			.x-panel-header-default .x-tool-img {
+			background-color: #4D545E;
+			}
+
+			.x-panel-default-outer-border-rl { /*dos lineas del grid del header*/
+			border-right-color: silver !important;
+			border-right-width: 1px !important;
+			border-left-color: silver !important;
+			border-left-width: 1px !important;
+			}
+			.x-splitter-collapsed .x-layout-split-left {
+
+			background-color: rgb(85, 85, 85);
+			}
+			.regiongrid-max .x-grid-cell {
+				font-size: 20px;
+			}
+			.regiongrid-min .x-grid-cell {
+				font-size: 15px;
+			}	
+			
+			.my-header .x-panel-header{
+				height: 30px;
+				 padding: 10px;
+
+			}
+			.my-header .x-panel-header-text-container-default{
+				font-size: 8px;
+			}	
+			.my-header .x-panel-header-padding{
+				padding:5px 5px 10px;
+			}	
+
+			html, body, #geomap {
+				height: 100%;
+			}	
+			.x-toolbar-footer {background:rgba(223, 234, 242, 0)} 
+			
+			.btn-icon{
+				height: 24px !important;
+
+			}	
+			.x-btn-default-toolbar-medium{
+				border-width: 0.1px;
+				padding: 2px 2px 2px 2px;
+			}
+			.x-toolbar .x-toolbar-item {
+				margin-right: 2px;
+				
+			}
+			.x-box-layout-ct {
+				/*left: 50px;*/
+				width: 150px;
+				
+			}
+
+			.x-window-header-default {
+			background-color: #4D545E;
+			border-color: #5D6269;
+			}
+			.x-window-default {
+			border-color: #5D6269;
+			}
+			.x-window-header-default .x-tool-img {
+			background-color: #4D545E;
+			}
+			.x-window-body-default {
+			border-color: #3892d3;
+			border-width: 1px;
+			border-style: solid;
+			background: white;
+			color: black;
+			font-weight: normal;
+			font-family: Oswald,sans-serif;
+			font-size: 14px;
+			}
+			.x-window-header-text-container-default {
+			color: white;
+			font-weight: bold;
+			line-height: 15px;
+			font-family: Oswald,sans-serif;
+			font-size: 12px;
+			padding: 1px 0 0;
+			text-transform: none;
+			}
+			.gx-popup-anc.top {
+			background: transparent url(../../libs/geoext2-2.0.3/resources/images/default/anchor-top-access.png) no-repeat 0 0 !important;
+			}	
+			.gx-popup-anc {
+			background: transparent url(../../libs/geoext2-2.0.3/resources/images/default/anchor-access.png) no-repeat 0 0 !important;
+			}
+			.x-panel-default-outer-border-rbl {
+			border-right-color: silver !important;
+			border-right-width: 1px !important;
+			border-bottom-color: silver !important;
+			border-bottom-width: 1px !important;
+			border-left-color: silver !important;
+			border-left-width: 1px !important;
+			}
+
+			.x-panel-body-default { /*para los xtype: 'label'*/
+			background: white;
+			border-color: silver !important;
+			color: black;
+			font-size: 13px;
+			font-weight: normal;
+			font-family: Trebuchet MS;
+			font-weight: bold;
+			border-width: 1px;
+			border-style: solid;
+			}
+
+						
+			.custom-gridPanelHover .x-grid-cell { 
+				font-family: Trebuchet MS;
+				font-size: 11px !important;
+			}
+
+			.custom-gridPanelHover .x-column-header-text {
+			white-space: nowrap;
+			font-family: Trebuchet MS;
+			background-repeat: no-repeat;
+			font-size: 11px;
+			}
+			.custom-gridPanelHover .x-btn-default-toolbar-small {
+			padding: 1px 1px 1px 1px;
+			}
+
+			.custom-gridPanelHover .x-toolbar {
+			/* font-size: 13px; */
+			/* border-style: solid; */
+			padding: 0px 0 0px 0px;
+			}
+
+			.custom-gridPanelHover .x-grid-cell-inner { /*alto de la fila*/
+				overflow: hidden;
+				padding: 1px 3px;
+				white-space: nowrap;
+			}
+
+
+			.custom-slider {
+				width:214px;
+				padding-top:6px;
+				background-image:url(images/ticks.gif);
+			}
+			.custom-slider .x-slider-thumb {
+				background-image:url(images/slider-thumb.png);
+			}
+
+
+			.x-toolbar-default{
+			border: none;
+			}
+
+			.my_css_toolbar .x-toolbar .x-docked{
+				width: 100px;
+			}
+			.active-button-icon {
+			  background-color: yellow;
+			  background-image: none;
+			}	
+
+			.x-btn.x-btn-my-over {
+				background: #E9F077;
+			}
+			/*.x-btn-over  {  aplica par todos los botones
+				background: #E9F077;
+			}*/
+			/*Ext is not consistent */
+			.x-btn.x-btn-my-pressed {
+				background: #E9F077;
+			}
+			.my-cls .x-btn-inner {
+				font-size: 10px;
+			}
+
+			.legend {
+				padding-left: 18px;
+			}
+			.x-tree-elbow, .x-tree-elbow-end {
+				width: 3px !important;
+			}
+			.gx-tree-layer-icon {
+				display: none !important;
+			}
+
+		/*######################## LEGEND ############################*/
+			#cafenica:before {
+				content: ' \25CF';
+				font-size: 20px;
+				color: red;
+			}	
+			#ideam:before {
+				content: ' \25CF';
+				font-size: 20px;
+				color: blue;
+			}
+			#cruz-roja:before {
+				content: ' \25CF';
+				font-size: 20px;
+				color: black;
+			}		
+			.legendFond{
+				font-family: Oswald,sans-serif;
+				font-size: 10px !important;
+				/*height: 28px; */
+
+			}
+				
+			/*######################## INFO HELP ############################*/
+			.x-tip .x-tip-body{
+			background-color: rgba(45,45,45,0.88);
+			color: #fff;
+			border: 1px solid rgba(255,255,255,0.25);
+			font-size: 11px !important;
+			font-family: Trebuchet MS;
+			text-shadow: 0 0 2px #000;
+			-webkit-border-radius: 3px;
+			-webkit-box-shadow: 0 0 3px #555;
+			}
+			.tooltipIcon{
+			width: 13px;
+			height: 13px;
+			vertical-align: middle;
+			}
+			/*#######################################################*/	
+
+			.tabTreeCSS .x-panel-default-outer-border-trl {
+			border-top-color: red !important;
+			border-top-width: 1px !important;
+			border-right-color: silver !important;
+			border-right-width: 1px !important;
+			border-left-color: silver !important;
+			border-left-width: 1px !important;
+			}	
+
+			.tabTreeCSS .x-panel-body-default { /* para quitar una linea del panel de layers */	
+			border: none;
+			border-style: none;
+			}
+	
+			
+
+	

@@ -10,12 +10,12 @@
         <!-- Stylesheets -->
         <!-- Main -->
         <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/main.css" media="screen" />
-	<script src="{$smarty.const.SMARTY_JS_URI}/jquery/jquery-1.8.1.min.js"></script>	
+	{*<script src="{$smarty.const.SMARTY_JS_URI}/jquery/jquery-1.8.1.min.js"></script>	*}
         <!-- include specified javascripts -->
         {if $jsIncludes}
             {foreach from=$jsIncludes item=jsToInclude}
                 {if $jsToInclude == "jquery"}
-{*                    <script src="{$smarty.const.SMARTY_JS_URI}/jquery/jquery-1.8.1.min.js"></script>		*}
+                    <script src="{$smarty.const.SMARTY_JS_URI}/jquery/jquery-1.8.1.min.js"></script>
                 {elseif $jsToInclude == "icheck"}
                     <!-- Reference: customizable checkboxes and radio buttons http://damirfoy.com/iCheck/ -->
                     <script src="{$smarty.const.SMARTY_JS_URI}/iCheck/jquery.icheck.min.js?v=0.9.1"></script>
@@ -70,7 +70,31 @@
                     <script src="http://geoxml3.googlecode.com/svn/branches/polys/geoxml3.js"></script>
                                         
                 {elseif $jsToInclude == "station"}
-                    <script src="{$smarty.const.SMARTY_JS_URI}/station.js"></script>              
+                    {*<script src="{$smarty.const.SMARTY_JS_URI}/station.js"></script>
+					<script>var 
+						js_uri = '{$smarty.const.SMARTY_JS_URI}';
+						icons_uri = '{$smarty.const.SMARTY_IMG_URI}/iconosGIS/';
+					</script>
+					<script type="text/javascript" src="{$smarty.const.SMARTY_JS_URI}/ext-4.2.2/examples/shared/include-ext.js?theme=neptune"></script>	
+					<script src="{$smarty.const.SMARTY_JS_URI}/theme.js"></script>
+					<script src="{$smarty.const.SMARTY_JS_URI}/OpenLayers-2.13.1/OpenLayers.js"></script>
+					<script type="text/javascript" src="{$smarty.const.SMARTY_JS_URI}/loader.js"></script>
+					<script type="text/javascript" src="{$smarty.const.SMARTY_JS_URI}/tree.js"></script>
+					<script src="{$smarty.const.SMARTY_JS_URI}/countries.js" type="text/javascript"></script>		
+					<script src="{$smarty.const.SMARTY_JS_URI}/stylesLayer.js" type="text/javascript"></script>		
+					<script src="{$smarty.const.SMARTY_JS_URI}/layersOpenlayer.js" type="text/javascript"></script>		
+					<script type="text/javascript" src="{$smarty.const.SMARTY_JS_URI}/ext-4.2.2/examples/shared/examples.js"></script>
+					<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+					<script src="http://code.highcharts.com/stock/highstock.js"></script>
+					<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGkYt6T3eVNusLjkov8jmxdQGT2YuSgJw&sensor=false"></script>		
+
+					<link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/map.css" />
+					<link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/tabs.css" />
+					<link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_JS_URI}/ext-4.2.2/examples/ux/css/TabScrollerMenu.css" />
+					<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+					<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">*}
+
                 {/if}
             {/foreach}
         {/if}

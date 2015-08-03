@@ -1,0 +1,12 @@
+code,name,institute,model,category,instalation,lon,lat,elev,country,state,city,variables
+13015040,Represa Urra,ideam,Convencional,Climatológica Principal,2014-11-15,76d12'15"W,8ø1'0"N,300,Colombia,C¢rdoba,Tierralta,prec|rhum|tmax|tmean|tmin
+13055030,Galan,ideam,Convencional,Climatológica Ordinaria,1979-06-15,75ø58'21"W,8ø39'33"N,30,Colombia,C¢rdoba,Monter¡a,prec|rhum|tmax|tmin
+13065020,Maracayo,ideam,Convencional,Climatológica Ordinaria,1979-05-15,75ø53'29"W,8ø24'28.8"N,25,Colombia,C¢rdoba,Monter¡a,prec|rhum|tmax|tmin
+EM29128,Tigray, Tsibet,Afr-Rising,NA,NA,0001-01-01 BC,,,3063,Ethiopia,Tigray,Southern Tigray,prec|rhum|srad|tmax|tmin|windd|wsmean
+EM29129,Hosainna, Jawe,Afr-Rising,NA,NA,0001-01-01 BC,,,2133,Ethiopia,Southern Nations	 Nationalities and Peoples,Hadiya,prec|rhum|srad|tmax|tmin|windd|wsmean
+EM29140,Tigray, Embahasti,Afr-Rising,NA,NA,0001-01-01 BC,,,2913,Ethiopia,Tigray,Southern Tigray,prec|rhum|srad|tmax|tmin|windd|wsmean
+EM29141,Sanbitu, Bale,Afr-Rising,NA,NA,0001-01-01 BC,,,2462,Ethiopia,Oromia,Bale,prec|rhum|srad|tmax|tmin|windd|wsmean
+EM29142,Bale, Salka,madr,Automatica,Meteorológica Especial,0001-01-01 BC,,,100,Ethiopia,Oromia,Bale,prec|rhum|srad|tmax|tmin|windd|wsmean
+EM29143,Hosainna, Upper Gana,Afr-Rising,NA,NA,0001-01-01 BC,,,2209,Ethiopia,Southern Nations	 Nationalities and Peoples,Hadiya,prec|rhum|srad|tmax|tmin|windd|wsmean
+EM29144,Debre Birhan, Gudo Beret,Afr-Rising,NA,NA,0001-01-01 BC,,,3071,Ethiopia,Amhara,North Shewa (K3),prec|rhum|srad|tmax|tmin|windd|wsmean
+EM29145,Debre Birhan, Goshe Bado,Afr-Rising,NA,NA,0001-01-01 BC,,,2821,Ethiopia,Amhara,North Shewa (K3),prec|rhum|srad|tmax|tmin|windd|wsmean

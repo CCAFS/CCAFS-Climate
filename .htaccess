@@ -6,7 +6,7 @@ DirectoryIndex index.php pages/index.php
 RewriteEngine On
 RewriteBase /
 # URL more readable and much shorter.
-RewriteCond %{REQUEST_URI} !^/pages/
+RewriteCond %{REQUEST_URI} !^/(pages|stations)/
 RewriteRule ^(.*)\.php /pages/$1.php [L]
 RewriteRule ^(.*)/$ /pages/$1.php [L]
 
@@ -38,7 +38,7 @@ Options All -Indexes
  RewriteCond %{QUERY_STRING} \:         [NC,OR]
  RewriteCond %{QUERY_STRING} \[         [NC,OR]
  RewriteCond %{QUERY_STRING} \]         [NC]
- RewriteRule .* . [F]
+ #RewriteRule .* . [F]
  </IfModule>
 
 # 5G:[USER AGENTS]
