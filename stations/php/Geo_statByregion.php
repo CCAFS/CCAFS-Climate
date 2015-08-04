@@ -110,7 +110,7 @@ if($type==9){
 
 if($type==4){
 	// $Geosql =	"select code,category,name,country,state,city,elev,lon_dec,lat_dec,lon,lat,institute,suspension,time_step,copyrigth,ctrl_quali,type,status,url_online,instalation,variables,st_asgeojson(geom) from geostation;";
-	$Geosql =	"select s.id,st_asgeojson(s.geom) from geostation as s;";
+	$Geosql =	"select s.id from geostation as s;"; //,st_asgeojson(s.geom) 
   
 	$result = pg_query($dbcon, $Geosql);
 
