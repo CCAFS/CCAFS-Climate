@@ -108,7 +108,7 @@ if($type==9){
 
 		
 if($type==4){
-	$Geosql =	"select *,st_asgeojson(geom) from geostation;";
+	$Geosql =	"select id,st_asgeojson(geom) from geostation;";
 	$result = pg_query($dbcon, $Geosql);
 	$geojson = array(
 					'type' => 'FeatureCollection',
