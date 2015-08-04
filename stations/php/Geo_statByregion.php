@@ -108,7 +108,27 @@ if($type==9){
 
 		
 if($type==4){
-	$sql =	"select *,st_asgeojson(geom) from geostation;";
+	$Geosql =	"select *,st_asgeojson(geom) from geostation;";
+	$result = pg_query($dbcon, $Geosql);
+	$geojson = array(
+					'type' => 'FeatureCollection',
+					'features' => array()
+				);
+		
+	$i = 0;	
+	while($line = pg_fetch_assoc($result)){
+		$feature = array(
+						'geometry' => json_decode($line['st_asgeojson'],true),
+						'properties' => $data[]=$line,
+						'id' => $i++
+
+					);
+		array_push($geojson['features'],$feature);
+	}
+	
+	$especie = json_encode($geojson);
+
+	echo $especie;	
 }
 
 
@@ -347,31 +367,45 @@ if($type==7){
 }
 
 if($type==8){
-	if($radioCh==1){
-	$sql_tabla ="select v.id as name,f.name as inst from geostation as v JOIN station_institute as f ON (f.id=v.institute);";		
-	}else{
-	$sql_tabla ="select v.id,v.name,f.name as inst from geostation as v JOIN station_institute as f ON (f.id=v.institute);";	
-	}
-	$result = pg_query($dbcon, $sql_tabla);
 
-
-	$geojson = array(
-					'totalCount' => pg_numrows($result),
-					'topics' => array()
-				);
-	
 	$i = 0;
-	while($line = pg_fetch_assoc($result)){
-		$feature = array(
-						'id' => $line['id'],
-						'name' => $line['name'],
-						'inst' => $line['inst']
-					);
-				
-		array_push($geojson['topics'],$feature);
+	if($radioCh==1){
+		$sql_tabla ="select v.id as name,f.name as inst from geostation as v JOIN station_institute as f ON (f.id=v.institute);";	
+		$result = pg_query($dbcon, $sql_tabla);
 
-		$i++;
+
+		$geojson = array(
+						'totalCount' => pg_numrows($result),
+						'topics' => array()
+					);
+		while($line = pg_fetch_assoc($result)){
+			$feature = array(
+							'name' => $line['name'],
+							'inst' => $line['inst']
+						);
+			array_push($geojson['topics'],$feature);
+			$i++;
+		}		
+	}else{
+		$sql_tabla ="select v.id,v.name,f.name as inst from geostation as v JOIN station_institute as f ON (f.id=v.institute);";	
+		$result = pg_query($dbcon, $sql_tabla);
+
+
+		$geojson = array(
+						'totalCount' => pg_numrows($result),
+						'topics' => array()
+					);
+		while($line = pg_fetch_assoc($result)){
+			$feature = array(
+							'id' => $line['id'],
+							'name' => $line['name'],
+							'inst' => $line['inst']
+						);
+			array_push($geojson['topics'],$feature);
+			$i++;
+		}		
 	}
+
 
 	$especie = json_encode($geojson);
 	
@@ -956,7 +990,7 @@ if($type==21){
 	
 }
 
-if($type==2 or $type==4 or $type==9  or $type==19 or $type==21){
+if($type==2 or $type==9  or $type==19 or $type==21){
 	while($line = pg_fetch_assoc($result)){
 		$feature = array(
 						'geometry' => json_decode($line['st_asgeojson'],true),
