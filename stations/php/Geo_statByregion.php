@@ -108,7 +108,9 @@ if($type==9){
 
 		
 if($type==4){
-	$Geosql =	"select id,st_asgeojson(geom) from geostation;";
+	// $Geosql =	"select code,category,name,country,state,city,elev,lon_dec,lat_dec,lon,lat,institute,suspension,time_step,copyrigth,ctrl_quali,type,status,url_online,instalation,variables,st_asgeojson(geom) from geostation;";
+	$Geosql =	"select s.id,st_asgeojson(s.geom) from geostation as s;";
+  
 	$result = pg_query($dbcon, $Geosql);
 
 	$geojson = array(
@@ -119,9 +121,23 @@ if($type==4){
 	$i = 0;	
 	while($line = pg_fetch_assoc($result)){
 		$feature = array(
-						'geometry' => json_decode($line['st_asgeojson'],true),
+						'id' => $line['id'],					
+						// 'code' => $line['code'],
+						// 'name' => $line['name'],
+						// 'category' => $line['category'],
+						// 'institute' => $line['institute'],
+						// 'instalation' => $line['instalation'],
+						// 'ctrl_quali' => $line['ctrl_quali'],
+						// 'model' => $line['model'],
+						// 'variables' => $line['variables'],
+						// 'lon' => $line['lon'],
+						// 'lat' => $line['lat'],
+						// 'elev' => $line['elev'],
+						// 'country' => $line['country'],
+						// 'state' => $line['state'],
+						// 'city' => $line['city']		
+						// 'geometry' => json_decode($line['st_asgeojson'],true),
 						// 'properties' => $data[]=$line,
-						'id' => $line['id'],
 						// 'id' => $i++
 
 					);
