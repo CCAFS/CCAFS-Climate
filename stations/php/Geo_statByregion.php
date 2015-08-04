@@ -106,13 +106,16 @@ if($type==9){
 	}
 }
 
-		
+	
+
 if($type==4){
 	// $Geosql =	"select code,category,name,country,state,city,elev,lon_dec,lat_dec,lon,lat,institute,suspension,time_step,copyrigth,ctrl_quali,type,status,url_online,instalation,variables,st_asgeojson(geom) from geostation;";
 	$Geosql =	"select s.id,st_asgeojson(s.geom) from geostation as s;";
   
 	$result = pg_query($dbcon, $Geosql);
 
+	echo pg_numrows($result);
+	
 	$geojson = array(
 					'type' => 'FeatureCollection',
 					'features' => array()
@@ -146,7 +149,7 @@ if($type==4){
 	
 	$especie = json_encode($geojson);
 
-	echo $especie;	
+	// echo $especie;	
 }
 
 
