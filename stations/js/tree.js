@@ -109,7 +109,7 @@ Ext.application({
 			// anchorOffset: 110,	
 		});
 
-		toolip_groupByRegion='Find weather stations in a region'
+		toolip_groupByRegion='Find weather stations in a region. To clear the map search using the reset button'
 		toolip_groupByStation='Find stations weather by name or id'
 		toolip_groupByQuery='Find weather stations with a custom search. Can add and remove search conditions'		
 		toolip_groupSlider='Change size cluster of stations. Resize view cluster'		
