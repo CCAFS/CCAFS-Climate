@@ -7,6 +7,22 @@
 <div id="content" class="documentation">
   <h3>Weather Stations</h3>
   <hr>
-  <iframe src="{$smarty.const.SMARTY_ROOT_URI}/stations/data-stations.php" width="836" height="650" frameBorder="0" scrolling="no" ></iframe>
+  <div id="loading" style=""><img style="" src="{$smarty.const.SMARTY_IMG_URI}/loading.gif" alt="Loader" /></div>
+  <iframe name="myFrame" id="myFrame" src="{$smarty.const.SMARTY_ROOT_URI}/stations/data-stations.php" width="836" height="650" frameBorder="0" scrolling="no" onload="document.getElementById('loading').style.display='none';"></iframe>
+  <p>
+  <div>
+    <p>The data distributed here are in ARC GRID, and ARC ASCII format, in decimal degrees and datum WGS84. CCAFS and its partners have processed this data to provide seamless continuous future climate surfaces.
+      Users are prohibited from any commercial, non-free resale, or redistribution without explicit written permission from CCAFS or the data-developing institutions.
+      Users should acknowledge CCAFS as the source used in the creation of any reports, publications, new data sets, derived products, or services resulting from the use of this data set.
+      For commercial access to the data, send requests to <a href="mailto:a.jarvis@cgiar.org">Andy Jarvis</a> at the International Center for Tropical Agriculture (CIAT).
+    </p>
+  </div>
+
+  <div style="float:right;font-size:12px;padding-bottom:5px;margin-top:2px; height:10px">
+    <i>Last updated: 16 April 2015</i>  		
+  </div>   
+
+</p>
 </div>
+
 {include file='footer.tpl'}

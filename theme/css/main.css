@@ -505,3 +505,25 @@ div.home {
 #headTableFiles {
  display: block;border-spacing: 1;width: 100%;width: 100%;
 }
+
+#loading{
+  /*display:none;*/ 
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #FFF;
+  opacity: 0.6;
+}
+#loading img{
+  position: absolute;
+  top: 44%;
+  left: 50%;
+}
+
+#myFrame {
+ background-image: url("/theme/images/loading.gif");   
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
