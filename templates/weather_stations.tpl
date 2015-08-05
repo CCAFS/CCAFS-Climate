@@ -7,8 +7,10 @@
 <div id="content" class="documentation">
   <h3>Weather Stations</h3>
   <hr>
-  <div id="loading" style=""><img style="" src="{$smarty.const.SMARTY_IMG_URI}/loading.gif" alt="Loader" /></div>
-  <iframe name="myFrame" id="myFrame" src="{$smarty.const.SMARTY_ROOT_URI}/stations/data-stations.php" width="836" height="650" frameBorder="0" scrolling="no" onload="document.getElementById('loading').style.display='none';"></iframe>
+  <div>
+	  <div id="loading" style=""><img style="" src="{$smarty.const.SMARTY_IMG_URI}/loading.gif" alt="Loader" /></div>
+	  <iframe name="myFrame" id="myFrame" src="{$smarty.const.SMARTY_ROOT_URI}/stations/data-stations.php" width="836" height="650" frameBorder="0" scrolling="no" onload="document.getElementById('loading').style.display='none';"></iframe>
+  </div>
   <p>
   <div>
     <p>The data distributed here are in ARC GRID, and ARC ASCII format, in decimal degrees and datum WGS84. CCAFS and its partners have processed this data to provide seamless continuous future climate surfaces.
