@@ -4152,7 +4152,7 @@ Ext.application({
 						resize: {
 						  fn: function(el) {
 							if(el.height){
-							  gridRegion.maxHeight=el.height-40
+							  gridRegionHover.maxHeight=el.height-40
 							  // Ext.getCmp('popupID').maxHeight=el.height
 							  Ext.getCmp('gridRegionIDHover').getView().refresh();
 							} 
