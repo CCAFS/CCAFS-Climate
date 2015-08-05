@@ -84,7 +84,8 @@ $sql = "SELECT " . pg_escape_string($fields) . ", st_asgeojson(st_transform(" . 
 //echo $sql;
 
 # Try query or error
-$rs = pg_query($conn, $sql);
+$rs = pg_query($conn, $sql) or die
+(pg_ErrorMessage());
 if (!$rs) {
     echo "An SQL error occured.\n";
     exit;
