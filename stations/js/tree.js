@@ -514,6 +514,7 @@ Ext.application({
 				border: true,
 				// layout: 'fit',
 				forceFit: true,
+				cls:"gridStatisticCSS",
 				store: statisticStore,
 				maxHeight: 360,//Ext.getBody().getViewSize().height*0.3,
 				// width: mainPanelWidth-50,

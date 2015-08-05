@@ -349,12 +349,20 @@
 			/*#######################################################*/	
 
 			.tabTreeCSS .x-panel-default-outer-border-trl {
-			border-top-color: red !important;
+			border-top-color: silver !important;
 			border-top-width: 1px !important;
 			border-right-color: silver !important;
 			border-right-width: 1px !important;
 			border-left-color: silver !important;
 			border-left-width: 1px !important;
+			}			
+			.gridStatisticCSS .x-panel-default-outer-border-trl {
+				border-top-color: #C0C0C0 !important;
+				border-top-width: 1px !important;
+				border-right-color: #C0C0C0 !important;
+				border-right-width: 1px !important;
+				border-left-color: #C0C0C0 !important;
+				border-left-width: 1px !important;			
 			}	
 
 			.tabTreeCSS .x-panel-body-default { /* para quitar una linea del panel de layers */	
