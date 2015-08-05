@@ -111,11 +111,11 @@ Ext.application({
 
 		toolip_groupByRegion='Find weather stations in a region'
 		toolip_groupByStation='Find stations weather by name or id'
-		toolip_groupByQuery='Find weather stations with a custom search'		
+		toolip_groupByQuery='Find weather stations with a custom search. Can add and remove search conditions'		
 		toolip_groupSlider='Change size cluster of stations. Resize view cluster'		
 		toolip_groupLegendIMG='Legend by institutes of each country'		
 		toolip_groupLabels='Select an attribute to add labels to stations in the map'		
-		toolip_groupLayers='Layers of map'		
+		toolip_groupLayers='Base layers of map. Can select a layer by clicking in the radio button'		
 		
 		mapPanel = Ext.create('GeoExt.panel.Map', {
 			id: 'mapPanelID',
@@ -4253,7 +4253,7 @@ Ext.application({
 		var btonZooExtent = new Ext.Button({
 			pressedCls : 'my-pressed',
 			overCls : 'my-over',
-			tooltip: "Zoom Extent to stations",
+			tooltip: "Zoom Extent to all stations",
 			icon: icons+'ze.png', 
 			scale: 'medium',
 			enableToggle: false,
@@ -4275,7 +4275,7 @@ Ext.application({
 		var btonIdentify = new Ext.Button({
 			pressedCls : 'my-pressed',
 			overCls : 'my-over',
-			tooltip: "Identify stations with hover mouse",
+			tooltip: "Identify stations with hover mouse. Shows a attribute table summary",
 			icon: icons+'identify_off.gif', 
 			scale: 'medium',
 			enableToggle: true,
@@ -4387,7 +4387,7 @@ Ext.application({
 			map: mapPanel.map,
 			toggleGroup: "draw",
 			allowDepress: true,
-			tooltip: "Distance",
+			tooltip: "Distance. To finish measure double-clicking on the map",
 			cls: 'x-btn-icon',
 			icon: icons+'a.png',
 			scale: 'medium',
@@ -5023,7 +5023,7 @@ Ext.application({
 			map: mapPanel.map,
 			// button options
 			enableToggle: true,
-			tooltip: "select stations for download",
+			tooltip: "select stations by box or use shift key to select stations individual and to download press the next button",
 			handler: function(toggled){
 				if(Ext.getCmp('popupID')){
 					Ext.getCmp('popupID').close()

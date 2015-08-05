@@ -116,7 +116,7 @@
 		rules: [oneRuleHover],context: contextHover }
 	);
 			
-	var vectorHover = new OpenLayers.Layer.Vector('layerHover',{//'displayInLayerSwitcher':false,
+	var vectorHover = new OpenLayers.Layer.Vector('layerHover',{'displayInLayerSwitcher':false,
 		/*styleMap: new OpenLayers.Style({
 			// fillColor: "#00FF00",
 			fillColor: "${styleFunction2}",
