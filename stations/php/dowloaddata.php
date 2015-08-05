@@ -83,7 +83,7 @@ if (isset($varList) && $varList != "") {
    } 
    $filesArray = pg_fetch_all($ret);
    
-   $sql ="SELECT a.code, a.name, b.name as institute, c.name as model, d.name as category, a.instalation, a.lon, a.lat, a.elev, e.name as country, f.name as state, g.name as city, array_to_string(array_agg(DISTINCT i.acronym), '|') as variables
+   $sql ="SELECT a.id, a.code, a.name, b.name as institute, c.name as model, d.name as category, a.instalation, a.lon, a.lat, a.elev, e.name as country, f.name as state, g.name as city, array_to_string(array_agg(DISTINCT i.acronym), '|') as variables
 			FROM geostation a 
 			inner join station_institute b ON (b.id = a.institute) 
 			inner join station_type c ON (c.id = a.type)
@@ -93,7 +93,7 @@ if (isset($varList) && $varList != "") {
 			inner join station_city g ON (g.id = a.city)
 			inner join station_file h on (a.id = h.station_id)
 			inner join station_variable i ON (i.id = h.station_variable_id) 
-			WHERE TRUE $whereStation group by a.code, a.name, b.name , c.name , d.name , a.instalation, a.lon, a.lat, a.elev, e.name , f.name , g.name ";
+			WHERE TRUE $whereStation group by a.id, a.code, a.name, b.name , c.name , d.name , a.instalation, a.lon, a.lat, a.elev, e.name , f.name , g.name ";
    $ret = pg_query($dbcon, $sql);
    if(!$ret){
       echo pg_last_error($dbcon);
