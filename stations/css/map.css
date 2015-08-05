@@ -126,7 +126,7 @@
 			}
 			.x-splitter-collapsed .x-layout-split-left {
 
-			background-color: rgb(85, 85, 85);
+			/*background-color: rgb(85, 85, 85);*/
 			}
 			.regiongrid-max .x-grid-cell {
 				font-size: 20px;
@@ -317,6 +317,12 @@
 				font-size: 20px;
 				color: black;
 			}		
+			#afr-rising:before {
+				content: ' \25CF';
+				font-size: 20px;
+				color: green;
+			}			
+			
 			.legendFond{
 				font-family: Oswald,sans-serif;
 				font-size: 10px !important;

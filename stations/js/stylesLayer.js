@@ -2,7 +2,8 @@
 		renderer = (renderer) ? [renderer] : OpenLayers.Layer.Vector.prototype.renderers;	
 	
 	icons='iconosGIS/'
-	symbStatIntercep= icons+"bloqF_24px.png"
+	symbStatIntercep= icons+"map-marker-icon.png"//"bloqF_24px.png"
+	graphicSize=16
 	symbLocation= icons+"bloqF_24px2.png"
 	var rulesStat = [
 		new OpenLayers.Rule({
@@ -10,8 +11,8 @@
 			symbolizer: {
 				externalGraphic: symbStatIntercep,
 				pointRadius: 8,
-				graphicHeight: 24,
-				graphicWidth: 24,
+				graphicHeight: graphicSize,
+				graphicWidth: graphicSize,
 				// graphicYOffset: -24,									
 				fillColor: "#99ccff",
 				label:"${id}",
@@ -20,7 +21,7 @@
 				strokeColor: "#00FF00",
 				strokeWidth: 3,
 				labelOutlineColor: "white",
-				labelYOffset: -5,
+				labelYOffset: graphicSize+5,
 				labelOutlineWidth: 3	
 			}			
 
@@ -32,9 +33,9 @@
 			"default": new OpenLayers.Style({
 				externalGraphic: symbStatIntercep,
 				graphicOpacity: 1,
-				graphicHeight: 24,
-				graphicWidth: 24,
-				graphicYOffset: -24,
+				graphicHeight: graphicSize,
+				graphicWidth: graphicSize,
+				graphicYOffset: -graphicSize,
 				fillOpacity: 0.2,
 				pointRadius: 10
 			}, {rules: rulesStat})
@@ -80,10 +81,45 @@
 		renderers: ['Canvas','SVG'],
 		styleMap:  new OpenLayers.StyleMap(styleTempRegion)	
 	});	
-		
-	var vectorHover = new OpenLayers.Layer.Vector('layerHover',{'displayInLayerSwitcher':false,
-		styleMap: new OpenLayers.Style({
-			fillColor: "#00FF00",
+
+	
+	var oneRuleHover = new OpenLayers.Rule({
+		symbolizer:{
+			fillColor: "${styleFunction2}",
+			fillOpacity: 0.9, 
+			labelYOffset: -5, // no efunciona cuando se usa renderers: ['Canvas','SVG']
+			labelAlign:'lb', // lb,cb,rb,cm
+			strokeColor: "#00FF00",//colorsCluster.low,
+			strokeOpacity: 0.3,
+			strokeWidth: 1,
+			pointRadius: 5,
+			labelOutlineWidth:0.5,
+		}
+	});	
+	contextHover= {
+		styleFunction2: function(feature) {
+			if(feature.attributes.institute==1){
+				return "blue"
+			}
+			if(feature.attributes.institute==6){
+				return "red"
+			}					
+			if(feature.attributes.institute==5){
+				return "black"
+			}
+			if(feature.attributes.institute==7){
+				return "green"
+			}
+		},
+	}			
+	var style = new OpenLayers.Style(null, {
+		rules: [oneRuleHover],context: contextHover }
+	);
+			
+	var vectorHover = new OpenLayers.Layer.Vector('layerHover',{//'displayInLayerSwitcher':false,
+		/*styleMap: new OpenLayers.Style({
+			// fillColor: "#00FF00",
+			fillColor: "${styleFunction2}",
 			fillOpacity: 0.9, 
 			strokeColor: "red",
 			strokeOpacity: 0.3,
@@ -94,7 +130,10 @@
 			fontColor: "#ffffff",
 			fontOpacity: 0.8,
 			fontSize: "12px"
-		})	
+		})*/
+		styleMap:  new OpenLayers.StyleMap({
+				"default": style					
+			})
 	})
 	
 	
