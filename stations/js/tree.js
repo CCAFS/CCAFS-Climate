@@ -4231,7 +4231,7 @@ Ext.application({
 		);
 		
 		mapPanel.map.addControl(selectHover);
-		selectHover.activate();
+		// selectHover.activate();
 
 		var oClickClose = new OpenLayers.Control.Click({eventMethods:{
 		 'click': function(e) {
@@ -4281,7 +4281,7 @@ Ext.application({
 			scale: 'medium',
 			enableToggle: true,
 			allowDepress: true,
-			pressed:true,
+			// pressed:true,
 			handler: function(toggled){
 				if(Ext.getCmp('popupID')){
 					Ext.getCmp('popupID').close()
