@@ -1,7 +1,9 @@
 <html>
     <head>
         <title>Weather Stations</title>
-
+		<!-- <script src="http://maps.google.com/maps/api/js?v=3&amp;sensor=false"></script> -->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGkYt6T3eVNusLjkov8jmxdQGT2YuSgJw&sensor=false"> </script>		
+		
         <!-- ExtJS -->
 		<!-- <script type="text/javascript" src="../libs/ext-4.2.2/examples/shared/include-ext.js"></script>
 		<script type="text/javascript" src="../libs/ext-4.2.2/examples/shared/options-toolbar.js"></script>	-->
@@ -48,7 +50,7 @@
 		<script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
 
 
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGkYt6T3eVNusLjkov8jmxdQGT2YuSgJw&sensor=false"> </script>		
+
 		
 		<link rel="stylesheet" type="text/css" href="css/map.css" />
 	

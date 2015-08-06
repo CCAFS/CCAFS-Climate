@@ -76,7 +76,7 @@
                     fontOpacity: 0.8,
 					fontFamily: "Trebuchet MS",
 					fontWeight: "bold",					
-                    fontSize: "9px"
+                    fontSize: "10px"
                 }
             });			
 			// var instRule = new OpenLayers.Rule({
@@ -182,7 +182,10 @@
 					if(feature.cluster[0].attributes.institute==5){
 						return "black"
 					
-					}					
+					}
+					if(feature.cluster[0].attributes.institute==7){
+						return "green"
+					}						
 					// if (count < 2) {
 						// return "blue";
 					// }else{
@@ -257,7 +260,7 @@
 		
 			strategy = new OpenLayers.Strategy.Cluster(); //{distance: 20}
 			
-             var clusters = new OpenLayers.Layer.Vector("Features", {
+            var clusters = new OpenLayers.Layer.Vector("Stations", {
 				projection: new OpenLayers.Projection("EPSG:4326"),
 				displayProjection: new OpenLayers.Projection("EPSG:900913"),					 
                 protocol: new OpenLayers.Protocol.HTTP({
@@ -282,6 +285,24 @@
 				if(bounds){ mapPanel.map.panTo(bounds.getCenterLonLat()); mapPanel.map.zoomToExtent(bounds); }
 				
 			}})	
+			
+			var gsat = new OpenLayers.Layer.Google(
+				"Google Satellite",
+				{type: google.maps.MapTypeId.SATELLITE, numZoomLevels: 22}
+			);
+			var gphy = new OpenLayers.Layer.Google(
+				"Google Physical",
+				{type: google.maps.MapTypeId.TERRAIN, visibility: false}
+			);
+			var gmap = new OpenLayers.Layer.Google(
+				"Google Streets", // the default
+				{numZoomLevels: 20, visibility: false}
+			);
+			var ghyb = new OpenLayers.Layer.Google(
+				"Google Hybrid",
+				{type: google.maps.MapTypeId.HYBRID, numZoomLevels: 22, visibility: false}
+			);			
+			
 // label:function(feature) {
 	// return feature.cluster[0].attributes.name;
 // }
