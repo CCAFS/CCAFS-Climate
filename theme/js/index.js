@@ -1,5 +1,27 @@
 $(document).ready(function() {
 
+  $(document).tooltip({
+    position: {
+      my: "center bottom-20",
+      at: "center top",
+      using: function(position, feedback) {
+        $(this).css(position);
+        $("<div>")
+                .addClass("arrow")
+                .addClass(feedback.vertical)
+                .addClass(feedback.horizontal)
+                .appendTo(this);
+      }
+    },
+    items: "[title]",
+    content: function() {
+      var element = $(this);
+      if (element.is("[title]")) {
+        return element.attr("title");
+      }
+    }
+  });
+
   $("#gotoclimate").on('click', function() {
     closeLandingPage();
   });
@@ -9,19 +31,19 @@ $(document).ready(function() {
       type: "POST",
       dataType: "text",
       url: "/ajax/user-profiles.php",
-      data: {profile:0},
+      data: {profile: 0},
       success: function(data) {
         $("#whatisamkn").html(data);
       }
     });
   });
 
-  $("#policy").on('click', function() {
+  $(".policy").on('click', function() {
     $.ajax({
       type: "POST",
       dataType: "text",
       url: "/ajax/user-profiles.php",
-      data: {profile:1},
+      data: {profile: 1},
       success: function(data) {
         $("#whatisamkn").html(data);
       }
@@ -33,7 +55,7 @@ $(document).ready(function() {
       type: "POST",
       dataType: "text",
       url: "/ajax/user-profiles.php",
-      data: {profile:2},
+      data: {profile: 2},
       success: function(data) {
         $("#whatisamkn").html(data);
       }
@@ -45,7 +67,7 @@ $(document).ready(function() {
       type: "POST",
       dataType: "text",
       url: "/ajax/user-profiles.php",
-      data: {profile:3},
+      data: {profile: 3},
       success: function(data) {
         $("#whatisamkn").html(data);
       }
@@ -57,7 +79,7 @@ $(document).ready(function() {
       type: "POST",
       dataType: "text",
       url: "/ajax/user-profiles.php",
-      data: {profile:4},
+      data: {profile: 4},
       success: function(data) {
         $("#whatisamkn").html(data);
       }
