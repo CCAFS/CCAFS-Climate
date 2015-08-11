@@ -68,7 +68,7 @@
 					labelAlign:'lb', // lb,cb,rb,cm
                     strokeColor: "#00FF00",//colorsCluster.low,
                     strokeOpacity: 0.3,
-                    strokeWidth: 2,
+                    strokeWidth: 1,
                     pointRadius: 5,
                     label: "${label}",
                     labelOutlineWidth:0.5,

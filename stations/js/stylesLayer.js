@@ -149,7 +149,7 @@
 			fontFamily: "Trebuchet MS",
 			fontWeight: "bold",
 			strokeColor: "#00FF00",
-			strokeWidth: 3,
+			strokeWidth: 1,
 			labelOutlineColor: "white",
 			labelYOffset: -5,
 			labelOutlineWidth: 3			

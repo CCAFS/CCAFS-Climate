@@ -811,7 +811,8 @@ if($type==17){
 if($type==18){
 
 	if($idCond==2){ // Variables
-		$sql_tabla ="SELECT id, name FROM station_variable;";	
+		// $sql_tabla ="SELECT id, name,acronym FROM station_variable;";	
+		$sql_tabla ="select v.id, v.acronym as name from geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) group by v.id;";	
 	}
 	if($idCond==3){ // status
 		$sql_tabla ="SELECT id, name FROM station_status;";	
@@ -841,7 +842,7 @@ if($type==18){
 		$sql_tabla ="SELECT id, name FROM station_time_step;";	
 	}
 	
-	if($idCond!=1 && $idCond!=4 && $idCond!=5){
+	if($idCond!=1 && $idCond!=2 && $idCond!=4 && $idCond!=5){
 		$result = pg_query($dbcon, $sql_tabla);
 		$geojson = array(
 						'totalCount' => pg_numrows($result),
@@ -859,13 +860,30 @@ if($type==18){
 
 			$i++;
 		}	
-			
-		$especie = json_encode($geojson);
+ 
+	}elseif ($idCond==2) {
+		$result = pg_query($dbcon, $sql_tabla);
+
+
+		$geojson = array(
+						'totalCount' => pg_numrows($result),
+						'topics' => array()
+					);
 		
-		pg_close($dbcon);
-		header('Content-type: application/json',true);
-		
-		echo $especie;  
+		$i = 0;
+		while($line = pg_fetch_assoc($result)){
+			$feature = array(
+							'id' => $line['id'],
+							'name' => $line['name'],
+							// 'acronym' => $line['acronym']
+
+						);
+					
+			array_push($geojson['topics'],$feature);
+
+			$i++;
+		}
+
 	}else{
 		$geojson = array(
 						'totalCount' => null,
@@ -876,14 +894,15 @@ if($type==18){
 						'name' => null
 					);
 		array_push($geojson['topics'],$feature);
-			
-		$especie = json_encode($geojson);
-		pg_close($dbcon);
-		header('Content-type: application/json',true);
-		
-		echo $especie; 	
 	
 	}
+	
+	$especie = json_encode($geojson);
+	pg_close($dbcon);
+	header('Content-type: application/json',true);
+	
+	echo $especie; 	
+	
 }
 
 if($type==19){
@@ -934,8 +953,6 @@ if($type==19){
 	"JOIN station_time_step as a ON (f.station_time_step_id=a.id) JOIN station_ctrl_quality as q ON (f.station_ctrl_quality_id=q.id)".
 	"JOIN station_category as c ON (s.category=c.id) JOIN station_type as t ON (s.type=t.id) where ".implode(" ".$typeCon." ",$sqltemp).' group by s.id;';
 	
-
-
 	$result = pg_query($dbcon, $sql_tabla1);
 	$geojson = array(
 					'type' => 'FeatureCollection',
@@ -994,6 +1011,7 @@ if($type==21){
 	$i = 0;	
 	
 }
+
 
 if($type==2 or $type==9  or $type==19 or $type==21){
 	while($line = pg_fetch_assoc($result)){
