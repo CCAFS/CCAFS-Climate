@@ -20,13 +20,13 @@
       <h3>Data</h3>
     </div>
 
-{*    <div style="width:30%; height: 30px;float:left; text-align: right; padding-top: 20px;">
-      <div id="tutoVideo" style="width:44%; float:left">
-        <a href="/tutoVideo" id="tutoVideo"> <img src="{$smarty.const.SMARTY_IMG_URI}/Aqua-Play-icon.png" width="23" height="23" alt="Help" /></a>
-      </div>
-      <div id="tutoVideo" style="width:55%; float:right;; font-size: 13px; padding-top: 5px;">
-        <a href="/tutoVideo" id="tutoVideo">How to download data</a>
-      </div>
+    {*    <div style="width:30%; height: 30px;float:left; text-align: right; padding-top: 20px;">
+    <div id="tutoVideo" style="width:44%; float:left">
+    <a href="/tutoVideo" id="tutoVideo"> <img src="{$smarty.const.SMARTY_IMG_URI}/Aqua-Play-icon.png" width="23" height="23" alt="Help" /></a>
+    </div>
+    <div id="tutoVideo" style="width:55%; float:right;; font-size: 13px; padding-top: 5px;">
+    <a href="/tutoVideo" id="tutoVideo">How to download data</a>
+    </div>
     </div>*}
   </div>
   <hr>
@@ -37,35 +37,28 @@
     <P>If you are using IE 9 or later, make sure you <A href="http://windows.microsoft.com/en-US/windows7/webpages-look-incorrect-in-Internet-Explorer">turn off "Compatibility View"</A>.</P>
   </div>
   <div id="search_form">
-    <form method="GET" action="/file-list.php" TARGET="_blank" id="formSearch">
+    <form method="GET" action="" TARGET="_blank" id="formSearch">
 
       <div id="side-left"> 
         <section class="ac-container">
 
-          <div id="location-filters" class="inputs-ac">
+          <div id="location-filters" class="inputs-acf">
             <span id="ac-0" class="inputs-ac selected" > </span>
-            <label class="inputs-ac" for="ac-1">Location</label>
+            <label class="inputs-acf" for="ac-0">Location</label>
             <article class="ac-large"> 
+              <label for="lat">Latitude</label>
+              <input type="text" id="lat" value="">
+              <label for="lon">Longitude</label>
+              <input type="text" id="lon" value="">
             </article>
           </div>
-          
+
           <div id="fileSet-filters" class="inputs-ac"> 
-            <span id="ac-1" class="inputs-ac" > </span>
-            <label class="inputs-ac" for="ac-1">File Set</label> 
-            <article class="ac-large">  
-
-              {assign var="category" value=$fileSets[0].category}
-              <div class="fileset-category">{$category}</div>		
-
-              {foreach from=$fileSets item=fileSet}
-                {if $category != $fileSet.category}
-                  {assign var="category" value=$fileSet.category}
-                  <div class="fileset-category">{$category}</div>
-                {else}
-                {/if}						
-                <img class="help_icon" id="help_icon_fileSet" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                <input id="fileSet-{$fileSet['id']}" type="radio" name="fileSet" value="{$fileSet['id']}" /><label for="fileSet-{$fileSet['id']}">{$fileSet["name"]}</label><br> 
-              {/foreach} 
+            <span id="ac-1" class="inputs-ac selected" > </span>
+            <label class="inputs-ac" for="ac-1">GCM File Set</label> 
+            <article class="ac-large">
+              <img class="help_icon" id="help_icon_fileSet" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+              <input id="fileSet-0" type="radio" name="fileSet" value="1" /><label for="fileSet-0">CMIP5 Raw daily data</label><br> 
             </article>
             <input type="hidden" id="tile_name" name="tile_name" />
           </div>
@@ -87,7 +80,7 @@
             <article class="ac-large2"> 
               <img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
               <input type="checkbox" id="model-999" value="999">
-              <label for="model-999}">Select all options</label>
+              <label for="model-999">Select all options</label>
               {foreach from=$models item=model}
                 <img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
                 <input type="checkbox" id="model-{$model['id']}" name="model[]" value="{$model['id']}">
@@ -95,41 +88,29 @@
               {/foreach} 
             </article>
           </div>
+
+          <div id="observation-filters" class="inputs-ac">
+            <span id="ac-4" class="inputs-ac" > </span>
+            <label class="inputs-ac" for="ac-4">Observation Dataset</label>
+            <article class="ac-large"> 
+            </article>
+          </div>
         </section>
       </div>
       <div id="side-right"> 
         <div id="side-right-top">
-          {*               <div id="extent-filters" class="bloc-e">
-          <div id="box"> Extent </div> 
-          {foreach from=$extents item=extent}
-          <div id="option">
-          <input tabindex="19" type="radio" id="extent-{$extent['id']}" name="extent" value="{$extent['id']}" />
-          <label for="extent-{$extent['id']}" class="extent">{$extent['name']}</label>
-          </div>
-          {/foreach} 
-          </div> *}
-
-          <div id="format-filters" class="bloc-e">
-            <div id="box"> Format </div> 
-            {$isFirst = true}
-            {foreach from=$formats item=format}
-              <img class="help_icon" id="help_icon_format" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-              <input id="format-{$format['id']}" type="checkbox" name="formats[]" value="{$format['id']}" />
-              <label for="format-{$format['id']}" class="format">{$format["name"]}</label><br>
-              {$isFirst = false}
-            {/foreach}
-          </div> 
-
-          <div id="period-filters" class="bloc">
+          <div id="period-b-filters" class="bloc">
             <div class="box-b"> Period </div> 
             <div class="box-content">
               <div id="dropdown-arrow"></div> 
               <div id="drop-content">
-                {foreach from=$periods item=period}
+{*                <input type="hidden" class="slider-input" value="23" />*}
+                <input type="text" id="example_id" name="example_name" value="" />
+{*                {foreach from=$periods item=period}
                   <img class="help_icon" id="help_icon_period" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
                   <input id="period-{$period['id']}" type="checkbox" name="period[]" value="{$period['id']}">
                   <label for="period-{$period['id']}" class="period[]">{$period['name']}</label><br>
-                {/foreach}
+                {/foreach}*}
               </div>
             </div>
           </div>
@@ -150,21 +131,37 @@
             </div>
           </div> 
 
-          {*                <div id="resolution-filters" class="bloc">
-          <div class="box-b"> Resolution </div> 
-          <div class="box-content"> 
-          <div id="dropdown-arrow"></div> 
-          <div id="drop-content">
-          {$isFirst = true}
-          {foreach from=$resolutions item=resolution}
-          <img class="help_icon" id="help_icon_resolution" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-          <input id="resolution-{$resolution['id']}" type="radio" name="resolution" value="{$resolution['id']}" />
-          <label for="resolution-{$resolution['id']}" class="resolution">{$resolution["name"]}</label><br>
-          {$isFirst = false}
-          {/foreach}
+          <div id="method-filters" class="bloc l">
+            <div class="box-b l"> Correction Method </div> 
+            <div class="box-content"> 
+              <div id="dropdown-arrow"></div> 
+              <div id="drop-content">
+                {$isFirst = true}
+                {foreach from=$resolutions item=resolution}
+                  <img class="help_icon" id="help_icon_resolution" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                  <input id="resolution-{$resolution['id']}" type="radio" name="resolution" value="{$resolution['id']}" />
+                  <label for="resolution-{$resolution['id']}" class="resolution">{$resolution["name"]}</label><br>
+                  {$isFirst = false}
+                {/foreach}
+              </div>
+            </div> 
           </div>
-          </div> 
-          </div> *}
+
+          <div id="output-filters" class="bloc l">
+            <div class="box-b l"> Output Format </div> 
+            <div class="box-content"> 
+              <div id="dropdown-arrow"></div> 
+              <div id="drop-content">
+                {$isFirst = true}
+                {foreach from=$resolutions item=resolution}
+                  <img class="help_icon" id="help_icon_resolution" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+                  <input id="resolution-{$resolution['id']}" type="radio" name="resolution" value="{$resolution['id']}" />
+                  <label for="resolution-{$resolution['id']}" class="resolution">{$resolution["name"]}</label><br>
+                  {$isFirst = false}
+                {/foreach}
+              </div>
+            </div> 
+          </div>
 
           <div id="bloc-search">
             <button type="submit" id="searchSubmit" disabled="disabled">Search</button>
@@ -187,7 +184,7 @@
     </form>
   </div>
 
-  <p>
+  {*  <p>*}
   <div>
     <p>The data distributed here are in ARC GRID, and ARC ASCII format, in decimal degrees and datum WGS84. CCAFS and its partners have processed this data to provide seamless continuous future climate surfaces.
       Users are prohibited from any commercial, non-free resale, or redistribution without explicit written permission from CCAFS or the data-developing institutions.

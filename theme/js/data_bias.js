@@ -1,5 +1,25 @@
 $(document).ready(function() {
+//  $('.range-slider').jRange({
+//    from: 0,
+//    to: 100,
+//    step: 1,
+//    scale: [0,25,50,75,100],
+//    format: '%s',
+//    width: 300,
+//    showLabels: true,
+//    isRange : true
+//});
 
+//$("#example_id").ionRangeSlider();
+
+$("#example_id").ionRangeSlider({
+    type: "double",
+    min: 2015,
+    max: 2100,
+    from: 2015,
+    to: 2039,
+    drag_interval: true
+});
 //***********************************VIDEO******************************	
   $(".messagepop").hide();
 
@@ -79,6 +99,10 @@ function initializeICheckSettings() {
   });
 
   $('.bloc input').iCheck({
+    checkboxClass: 'icheckbox_flat',
+    radioClass: 'iradio_flat'
+  });
+  $('.blocl input').iCheck({
     checkboxClass: 'icheckbox_flat',
     radioClass: 'iradio_flat'
   });
@@ -518,6 +542,8 @@ function initializeMap() {
     });
 //    console.log(event.latLng.lat() + ', ' + event.latLng.lng());
     $('#bias_point').text(event.latLng.lat().toFixed(4) + ', ' + event.latLng.lng().toFixed(4));
+    $('#lat').val(event.latLng.lat().toFixed(4));
+    $('#lon').val(event.latLng.lng().toFixed(4));
   });
 }
 

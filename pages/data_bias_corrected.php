@@ -22,7 +22,7 @@ $fileSets = $db->getAll($query);
 //$query = "SELECT id, name FROM datasets_method";
 //$methods = $db->getAll($query);
 
-$query = "SELECT id, name FROM datasets_scenario";
+$query = "SELECT id, name FROM datasets_scenario where id > 6";
 $scenarios = $db->getAll($query);
 
 $query = "SELECT id, name, acronym FROM datasets_model ORDER BY acronym";

@@ -28,8 +28,8 @@
                   <script src="{$smarty.const.SMARTY_JS_URI}/Remodal-master/dist/jquery.remodal.min.js"></script>
                   <script src="{$smarty.const.SMARTY_JS_URI}/index.js"></script>
                   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-{*                  <script src="//code.jquery.com/jquery-1.10.2.js"></script>*}
-                  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+                    {*                  <script src="//code.jquery.com/jquery-1.10.2.js"></script>*}
+                    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
                   {elseif $jsToInclude == "downscaling"}
                     <script src="{$smarty.const.SMARTY_JS_URI}/downscaling.js"></script>
                   {elseif $jsToInclude == "pattern_scaling"}
@@ -50,9 +50,12 @@
                       <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={$smarty.const.GOOGLE_API_KEY}&sensor=false"></script>
                       <script src="{$smarty.const.SMARTY_JS_URI}/data_bias.js"></script> 
                       <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/data_bias.css" media="screen" /> 
-                      <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-                        <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>		
-                        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>							
+                      <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css"/>
+                      <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>		
+                      <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>	
+                      <link rel="stylesheet" href="{$smarty.const.SMARTY_CSS_URI}/ion.rangeSlider.skinHTML5.css"/>
+                      <link rel="stylesheet" href="{$smarty.const.SMARTY_CSS_URI}/ion.rangeSlider.css"/>
+                        <script src="{$smarty.const.SMARTY_JS_URI}/ion.rangeSlider.js"></script> 
                       {elseif $jsToInclude == "bpopup"}
                         <!-- Reference http://dinbror.dk/bpopup/ -->
                         <script src="{$smarty.const.SMARTY_JS_URI}/bpopup/jquery.bpopup-0.7.0.min.js"></script>
