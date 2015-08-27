@@ -277,6 +277,15 @@ label.inputs-acf {
     /* box-shadow: 1px 1px 8px #A7A7A7; */
 }
 
+#bloc-point {
+    margin-top: 15px;
+    color: #555;
+    /*font-weight: 300;*/
+    position: inherit;
+    width: 240px;
+    float: left;
+}
+
 #bloc-search button{
     border: 0; 
     background: #2a313a;

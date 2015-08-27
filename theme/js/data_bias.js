@@ -387,15 +387,11 @@ function getFilesInfo(evt) {
       // $("#format-2").iCheck("enable");
       // } 
 
-      updateFilters(data.filtersAvailable);
+//      updateFilters(data.filtersAvailable);
 
 
       // }
-
-
-
-
-      changeMap(evt);
+//      changeMap(evt);
       $("#filesFound").show();
     }
   });

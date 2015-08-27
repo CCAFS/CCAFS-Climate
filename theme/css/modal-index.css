@@ -7,17 +7,17 @@ and open the template in the editor.
     Created on : Jul 31, 2015, 7:46:17 AM
     Author     : CRSANCHEZ
 */
-.remodal a#gotoclimate {
+.remodal a.gotoclimate {
   background: rgb(214,174,0);
   color: #fff;
   border-radius: 10px;
   font-weight: bold;
   padding: 1.5em;
-  position: absolute;
-  right: 0;
-  top: 0%;
-  width: 150px;
+  /*float: right;*/
+  margin-left: 20px;
+  /*width: 150px;*/
   cursor: pointer;
+  text-align: center;
 }
 
 .remodal #info {
@@ -27,8 +27,25 @@ and open the template in the editor.
   text-align: center;
 }
 
+.remodal #info p {
+  text-align: center;
+}
+
+.buttons {
+  width: 100%;
+  float:left;
+  margin-top: 30px;
+  min-height: 50px;
+  text-align: left;
+}
+
+.buttons-c {
+  text-align: center!important;
+  margin-top: 13px;
+}
+
 .remodal * {
-  font-family: 'Exo 2', sans-serif;
+  font-family: "Trebuchet MS"!important;
 }
 
 .remodal div {
@@ -62,6 +79,7 @@ and open the template in the editor.
 
 #whatisamkn {
   overflow: hidden;
+  margin-bottom: 30px;
 }
 
 .icon {
@@ -76,16 +94,17 @@ and open the template in the editor.
   width: 164px;
   /*width: 100%;*/
   height: 173px;
-  float:left;
+  /*float:left;*/
+  margin: auto;
   /*margin: 0.5em;*/
 }
 
 .icon-c {
-  width: 120px;
+  width: 90px;
   /*width: 100%;*/
-  height: 120px;
-  float:left;
-  /*margin: 0.5em;*/
+  height: 90px;
+  /*float:right;*/
+  margin: auto;
 }
 
 .policy {
@@ -169,32 +188,39 @@ and open the template in the editor.
   float: left;
   font-size: 15px;
   text-align: center!important;
-  width: 170px;
+  /*width: 170px;*/
+  width: 100%;
   margin-top: 10px;
 }
 
 .icon-text-c {
-  float: left;
+  /*float: right;*/
   font-size: 15px;
   text-align: center!important;
-  width: 120px;
-  margin-top: 10px;
+  width: 90px;
+  margin: auto;
+}
+
+.icon-container-d{
+  width: 100%;
+  float:left;
+  /*cursor: pointer;*/
 }
 
 .icon-container{
-  max-width: 25%;
+  width: 25%;
   float:left;
   cursor: pointer;
 }
 
 .icon-container-d1{
-  max-width: 33%;
+  width: 33%;
   float:left;
   /*cursor: pointer;*/
 }
 
 .icon-container-d2{
-  max-width: 33%;
+  width: 33%;
   float:left;
   cursor: pointer;
 }
@@ -205,13 +231,17 @@ and open the template in the editor.
 }
 
 .icon-detail-container {
-  width: 30%;
+  width: 29%;
   float:left;
 }
 
+.icon-detail-container h2 {
+  text-align: center;
+}
 .profile-detail {
   width: 70%;
-  float:left;
+  float:right;
+  border-left: solid 1px;
   /*position: relative;*/
 }
 .profile-detail-1 {

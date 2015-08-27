@@ -57,8 +57,10 @@
             <span id="ac-1" class="inputs-ac selected" > </span>
             <label class="inputs-ac" for="ac-1">GCM File Set</label> 
             <article class="ac-large">
+              {foreach from=$fileSets item=fileSet}
               <img class="help_icon" id="help_icon_fileSet" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-              <input id="fileSet-0" type="radio" name="fileSet" value="1" /><label for="fileSet-0">CMIP5 Raw daily data</label><br> 
+              <input id="fileSet-{$fileSet['id']}" type="radio" name="fileSet" value="{$fileSet['id']}" checked/><label for="fileSet-{$fileSet['id']}">{$fileSet["name"]}</label><br> 
+              {/foreach}
             </article>
             <input type="hidden" id="tile_name" name="tile_name" />
           </div>
@@ -137,10 +139,10 @@
               <div id="dropdown-arrow"></div> 
               <div id="drop-content">
                 {$isFirst = true}
-                {foreach from=$resolutions item=resolution}
+                {foreach from=$methods item=resolution}
                   <img class="help_icon" id="help_icon_resolution" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                  <input id="resolution-{$resolution['id']}" type="radio" name="resolution" value="{$resolution['id']}" />
-                  <label for="resolution-{$resolution['id']}" class="resolution">{$resolution["name"]}</label><br>
+                  <input id="method-{$resolution['id']}" type="radio" name="method" value="{$resolution['id']}" />
+                  <label for="method-{$resolution['id']}" class="resolution">{$resolution["name"]}</label><br>
                   {$isFirst = false}
                 {/foreach}
               </div>
@@ -153,10 +155,10 @@
               <div id="dropdown-arrow"></div> 
               <div id="drop-content">
                 {$isFirst = true}
-                {foreach from=$resolutions item=resolution}
+                {foreach from=$formats item=resolution}
                   <img class="help_icon" id="help_icon_resolution" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                  <input id="resolution-{$resolution['id']}" type="radio" name="resolution" value="{$resolution['id']}" />
-                  <label for="resolution-{$resolution['id']}" class="resolution">{$resolution["name"]}</label><br>
+                  <input id="format-{$resolution['id']}" type="radio" name="format" value="{$resolution['id']}" />
+                  <label for="format-{$resolution['id']}" class="resolution">{$resolution["name"]}</label><br>
                   {$isFirst = false}
                 {/foreach}
               </div>
@@ -171,9 +173,9 @@
             </label>
             <!--<input type="hidden" id="filesFound1" name="filesFound1" /> -->
           </div>
-          <div id="bloc-search" style="margin-top: 10px;">
+          <div id="bloc-point">
             <label>
-              <span id="bias_point" style="float: right;"></span>
+              <span id="bias_point"></span>
             </label>
           </div>
         </div>
