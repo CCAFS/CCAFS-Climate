@@ -2032,7 +2032,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 																   icon: 'x-message-box-info'
 																});	
 																winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
-																
+																Ext.getCmp('mainpanelID').enable()
 															}else{
 																// Ext.Msg.alert('Login Failed!',"Sorry, a user with this login and/or e-mail address already exist."); 
 																winInfo=Ext.MessageBox.show({
@@ -2056,7 +2056,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 														},
 														scope: this
 													});																
-													Ext.getCmp('mainpanelID').enable()
+													
 													/* Normally we would submit the form to the server here and handle the response...
 													form.submit({
 														clientValidation: true,
