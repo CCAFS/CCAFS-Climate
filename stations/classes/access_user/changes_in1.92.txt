@@ -1,0 +1,238 @@
+	// added the MD5 to the sql statement
+	function activate_new_password($new_pass, $new_confirm, $old_pass, $user_id) {
+		if ($this->check_new_password($new_pass, $new_confirm)) {
+			$sql_new_pass = sprintf("UPDATE %s SET pw = '%s' WHERE MD5(pw) = '%s' AND id = %d", $this->table_name, md5($new_pass), $old_pass, $user_id);
+			if (mysql_query($sql_new_pass)) {
+				$this->the_msg = $this->messages(30);
+				return true;
+			} else {
+				$this->the_msg = $this->messages(14);
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+	// added the MD5 to the sql statement
+	function check_activation_password($controle_str, $id) {
+		if ($controle_str != "" && strlen($controle_str) == 32 && $id > 0) {
+			$this->user_pw = $controle_str;
+			$this->id = $id;
+			if ($this->check_user("new_pass")) {
+				// this is a fix for version 1.76
+				$sql_get_user = sprintf("SELECT login FROM %s WHERE MD5(pw) = '%s' AND id = %d", $this->table_name, $this->user_pw, $this->id);
+				$get_user = mysql_query($sql_get_user);
+				$this->user = mysql_result($get_user, 0, "login"); // end fix
+				return true;
+			} else {
+				$this->the_msg = $this->messages(21);
+				return false;
+			}
+		} else {
+			$this->the_msg = $this->messages(21);
+			return false;
+		}
+	}
+	// added the MD5 to the sql statement
+	function activate_account($activate_key, $key_id) {
+		if ($activate_key != "" && strlen($activate_key) == 32 && $key_id > 0) {
+			$this->id = $key_id;
+			if ($this->check_user("active")) {
+				if ($this->auto_activation) {
+					$upd_sql = sprintf("UPDATE %s SET active = 'y' WHERE id = %s AND MD5(pw) = '%s'", $this->table_name, $key_id, $activate_key);
+					if (mysql_query($upd_sql)) {
+						if ($this->send_confirmation($key_id)) {
+							$this->the_msg = $this->messages(18);
+						} else {
+							$this->the_msg = $this->messages(14);
+						}
+					} else {
+						$this->the_msg = $this->messages(19);
+					}
+				} else {
+					if ($this->send_mail($this->admin_mail, 40, 39)) {
+						$this->the_msg = $this->messages(36);
+					} else {
+						$this->the_msg = $this->messages(14);
+					}
+				}
+			} else {
+				$this->the_msg = $this->messages(20);
+			}
+		} else {
+			$this->the_msg = $this->messages(21);
+		}
+	}
+	// added the MD5 to the sql statement
+	function validate_email($validation_key, $key_id) {
+		if ($validation_key != "" && strlen($validation_key) == 32 && $key_id > 0) {
+			$this->id = $key_id;
+			if ($this->check_user("validate")) {
+				$upd_sql = sprintf("UPDATE %s SET email = tmp_mail, tmp_mail = '' WHERE id = %d AND MD5(pw) = '%s'", $this->table_name, $key_id, $validation_key);
+				if (mysql_query($upd_sql)) {
+					$this->the_msg = $this->messages(18);
+				} else {
+					$this->the_msg = $this->messages(19);
+				}
+			} else {
+				$this->the_msg = $this->messages(34);
+			}
+		} else {
+			$this->the_msg = $this->messages(21);
+		}
+	}
+	// added the md5 to the var $first_password before calling the send_mail() method
+	function register_user($first_login, $first_password, $confirm_password, $first_name, $first_info, $first_email) {
+		if ($this->check_new_password($first_password, $confirm_password)) {
+			if (strlen($first_login) >= LOGIN_LENGTH) {
+				if ($this->check_email($first_email)) {
+					$this->user_email = $first_email;
+					$this->user = $first_login;
+					if ($this->check_user("new")) {
+						$this->the_msg = $this->messages(12);
+						return;
+					} else {
+						$sql = sprintf("INSERT INTO %s (id, login, pw, real_name, extra_info, email, access_level, active) VALUES (NULL, %s, %s, %s, %s, %s, %d, 'n')", 
+							$this->table_name,
+							$this->ins_string($first_login),
+							$this->ins_string(md5($first_password)),
+							$this->ins_string($first_name),
+							$this->ins_string($first_info),
+							$this->ins_string($this->user_email),
+							DEFAULT_ACCESS_LEVEL);
+						$ins_res = mysql_query($sql) or die(mysql_error());
+						if ($ins_res) {
+							$this->id = mysql_insert_id();
+							$this->user_pw = md5($first_password);
+							if ($this->send_mail($this->user_email, 29, 28)) {
+								$this->the_msg = $this->messages(13);
+							} else {
+								mysql_query(sprintf("DELETE FROM %s WHERE id = %s", $this->table_name, $this->id));
+								$this->the_msg = $this->messages(14);
+							}
+						} else {
+							$this->the_msg = $this->messages(15);
+						}
+					}
+				} else {
+					$this->the_msg = $this->messages(16);
+				}
+			} else {
+				$this->the_msg = $this->messages(17);
+			}
+		}
+	}
+	// added md5 to the var $new_password
+	// removed the md5 from $this->ins_string($ins_password)
+	function update_user($new_password, $new_confirm, $new_name, $new_info, $new_mail) {
+		if ($new_password != "") {
+			if ($this->check_new_password($new_password, $new_confirm)) {
+				$ins_password = md5($new_password);
+				$update_pw = true;
+			} else {
+				return;
+			}
+		} else {
+			$ins_password = $this->user_pw;
+			$update_pw = false;
+		}
+		if (trim($new_mail) <> $this->user_email) {
+			if  ($this->check_email($new_mail)) {
+				$this->user_email = $new_mail;
+				if (!$this->check_user("lost")) {
+					$update_email = true;
+				} else {
+					$this->the_msg = $this->messages(31);
+					return;
+				}
+			} else {
+				$this->the_msg = $this->messages(16);
+				return;
+			}
+		} else {
+			$update_email = false;
+			$new_mail = "";
+		}
+		$upd_sql = sprintf("UPDATE %s SET pw = %s, real_name = %s, extra_info = %s, tmp_mail = %s WHERE id = %d", 
+			$this->table_name,
+			$this->ins_string($ins_password),
+			$this->ins_string($new_name),
+			$this->ins_string($new_info),
+			$this->ins_string($new_mail),
+			$this->id);
+		$upd_res = mysql_query($upd_sql);
+		if ($upd_res) {
+			if ($update_pw) {
+				$_SESSION['pw'] = $this->user_pw = $ins_password;
+				if (isset($_COOKIE[$this->cookie_name])) {
+					$this->save_login = "yes";
+					$this->login_saver();
+				}
+			}
+			$this->the_msg = $this->messages(30);
+			if ($update_email) {
+				if ($this->send_mail($new_mail, 33)) {
+					$this->the_msg = $this->messages(27);
+				} else {
+					mysql_query(sprintf("UPDATE %s SET tmp_mail = ''", $this->table_name));
+					$this->the_msg = $this->messages(14);
+				} 
+			}
+		} else {
+			$this->the_msg = $this->messages(15);
+		}
+	}
+	// removed the md5 from var $pass
+	function reg_visit($login, $pass) {
+		$visit_sql = sprintf("UPDATE %s SET extra_info = '%s' WHERE login = '%s' AND pw = '%s'", $this->table_name, date("Y-m-d H:i:s"), $login, $pass);
+		mysql_query($visit_sql);
+	}
+	// added md5 to var $password id $this->is_cookie = false
+	// changed argument for req_visit to $this->user_pw
+	function login_user($user, $password) {
+		if ($user != "" && $password != "") {
+			$this->user = $user;
+			$this->user_pw = md5($password);
+			if ($this->check_user()) {
+				$this->login_saver();
+				if ($this->count_visit) {
+					$this->reg_visit($user, $this->user_pw);
+				}
+				$this->set_user();
+			} else {
+				$this->the_msg = $this->messages(10);
+			}
+		} else {
+			$this->the_msg = $this->messages(11);
+		}
+	}
+	// removed check for encoded var $this->user_pw
+	// replaced in default case var $password with $this->user_pw
+	// added MD5 to sql statement for "new_pass"
+	function check_user($pass = "") {
+		switch ($pass) {
+			case "new": 
+			$sql = sprintf("SELECT COUNT(*) AS test FROM %s WHERE email = '%s' OR login = '%s'", $this->table_name, $this->user_email, $this->user);
+			break;
+			case "lost":
+			$sql = sprintf("SELECT COUNT(*) AS test FROM %s WHERE email = '%s' AND active = 'y'", $this->table_name, $this->user_email);
+			break;
+			case "new_pass":
+			$sql = sprintf("SELECT COUNT(*) AS test FROM %s WHERE MD5(pw) = '%s' AND id = %d", $this->table_name, $this->user_pw, $this->id);
+			break;
+			case "active":
+			$sql = sprintf("SELECT COUNT(*) AS test FROM %s WHERE id = %d AND active = 'n'", $this->table_name, $this->id);
+			break;
+			case "validate":
+			$sql = sprintf("SELECT COUNT(*) AS test FROM %s WHERE id = %d AND tmp_mail <> ''", $this->table_name, $this->id);
+			break;
+			default:
+			$sql = sprintf("SELECT COUNT(*) AS test FROM %s WHERE BINARY login = '%s' AND pw = '%s' AND active = 'y'", $this->table_name, $this->user, $this->user_pw);
+		}
+		$result = mysql_query($sql) or die(mysql_error());
+		if (mysql_result($result, 0, "test") == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}

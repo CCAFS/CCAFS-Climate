@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><title>Access_user Class documentation</title>
+
+<style type="text/css">
+<!--
+.code {
+	font:14px 'Courier New', Courier, mono;
+	color:#0000FF;
+}
+.style1 {
+	color: #CC9900
+}
+-->
+</style>
+</head>
+
+<body>
+<h1>Access_user Class<span style="font-size: 14px; font-weight: normal;"> version 1.94</span></h1>
+<h2>Description</h2>
+<p>Use this class to protect your pages with PHP-Sessions and register users while using a MySQL database</p>
+<ul><b>Current functions</b>
+  <li>Update user information</li>
+  <li>Register new users</li>
+  <li>Forgotten password recovery</li>
+  <li>Protect (single or multiple) pages</li>
+  <li>E-mail activation messages</li>
+  <li>Access level (new in version 1.80)</li>
+  <li>Admin function (for important user data) </li>
+  <li>MySQL session handler support (new in version 1.92)</li>
+  <li>Automatic Login (cookie based) </li>
+</ul>
+<h2>Requirements</h2>
+<p>This class requires a PHP enabled Apache (virtual) host. I tested this class with PHP 4.3(5.1) and MySQL 3.23(4.1) on Windows and Linux. <br>
+I never tested this class with IIS. If you want to use this class on
+Windows / IIS than you have to be sure that the server variable
+DOCUMENT_ROOT is available. You can test this while using this code on
+your PHP host: </p>
+<p style="margin-left: 30px;" class="code">echo getenv("DOCUMENT_ROOT");</p>
+<p> If you can't see the document path then this class will not work
+for you. I'm sure it is possible to change all paths but there is no
+description about in this manual. </p>
+<p><b>For windows user using this class on a localhost:</b> <br>
+  You need a mail server program to run some of the scripts (register.php, forgot_password.php and update_user.php)</p>
+<p><b>Database selection</b><br>
+  By default the database is not selected with the PHP function mysql_select_db() and the database name is in front of the table name. It's possible that your server doesn't allow the database name inside a query,  if this forms a problem then don't use them there and unescape the mysql_select_db() function  inside the connect_db() method.</p>
+<h2>Installation</h2>
+<ul>
+  <li>Use the "users_table.sql" file to create your MySQL table.</li>
+  <li><b>NEW since version 1.92: </b>It's possible now to safe the session data a MySQL database (is more safe on shared hostings) </li>
+  <li>Create a file called db.php (I place it into the folder classes which is one above the root), add this code with you database connection parameters:<br>
+    <span class="code">&lt;?php<br>
+  define(&quot;DB_SERVER&quot;, &quot;localhost&quot;);<br>
+  define(&quot;DB_NAME&quot;, &quot;database&quot;);<br>
+  define (&quot;DB_USER&quot;, &quot;user&quot;);<br>
+  define (&quot;DB_PASSWORD&quot;, &quot;password&quot;);<br>
+  ?&gt;</span></li>
+  <li>Most important, change all important pathes...
+    <ul>
+	  <li><b>APPLICATION_PATH</b>: the directory where your scripts are placed</li>
+	  <li><b>CLASS_PATH</b>: this path is dynamic, use it if all files are inside the same directory</li>
+	  <li>... or use your own ones (only needed for <b>LOGIN_PAGE</b>, <b>START_PAGE</b> and <b>ACTIVE_PASS_PAGE</b>)</li>
+	</ul>
+  </li>
+  <li>To fit the exsiting path structure in all example files you have to create two folders:
+    <ul>
+	  <li>the first "classes" is above your document root...</li>
+	  <li>...the second "access_user" is inside the classes folder.</li>
+	</ul>
+  </li>
+  <li>Place the class- and config file inside "access_user" folder.</li>
+  <li>After this you can use all example files (except the three one defined inside the config file) on different locations from the virtual host.</li>
+</ul>
+<h2>How does it work?</h2>
+<ul>
+  <li>Run the register.php in your browser to enter the first user into your database. </li>
+  <li>After
+succesfull registration
+you get an confirmation mail,    
+    <ul>
+      <li> activate and
+      confirm your acoount and you can enter the protected pages</li>
+      <li>use the manual activation status and the site admin have to activate each single account. </li>
+    </ul>
+  </li>
+  <li>Login and you have assess to the update page where it's possible to modify the user information. </li>
+  <li>If you change the e-mail address you get a new confirmation e-mail, activate the new address with the given link. </li>
+  <li>Click on log out or exit you browser to end the session.</li>
+  <li>If you have forgotten the password and or login, you can use the e-mail address to get a reminder message.</li>
+</ul>
+<h2>How to use?</h2>
+<p>Remember, all example files are full working. The next documentation is only to 
+
+
+explain
+
+what the methods / variables exactly do. </p>
+<p>A note about the usage of the &quot;automatic login&quot; feature: If a cookie is saved on the client side, the user doesn't need to login (new in version 1.94) </p>
+<p><b>login.php</b><br> Find in this file a form with to text fields
+one for the login and one for the password. These entries will be
+validated before you can enter the protected area. <br>
+  I use this page as the target for the account activation process, too. <br>
+  <b>Important:</b> If you use the feature &quot;Visitor count&quot;, the table field <i>extra_info</i> can't be used for other information!</p>
+<p><b>Note: </b>Since version 1.92 if the login cookie function is used, the recovered (encrypted) password inside the password form field is always 32 chars long. This is not a problem, the script can handle that. </p>
+<p>  Important methods and variables on this page:</p>
+<ul style="list-style-type: none;" class="code">
+  <li> $my_access-&gt;save_login <span class="style1">// use a cookie to remember the client login, possible values are "yes" or "no"</span></li>
+  <li>$my_access-&gt;count_visit = true <span class="style1">// if this is true then the last visit date is saved in the database <b>(field extra_info)</b></span></li>
+  <li>$my_access-&gt;login_user($user, $password) <span class="style1">// call the login method</span></li> 
+  <li>$my_access-&gt;activate_account($activate_key, $key_id) <span class="style1">// the account activation method </span></li>
+  <li>$my_access-&gt;validate_email($validation_key, $key_id) <span class="style1">// (updated) e-mail address validation</span></li>
+</ul>
+<p>This class can be used in two modes: </p>
+<ul>
+  <li>automatic account activation </li>
+  <li>account activation by admin (check the default account details beneath) </li>
+</ul>
+<p>If you want to disable the automatic activation feature, use this variable inside the login script: <span class="code"><b>$my_access-&gt;auto_activation = false;</b></span><b> <span class="style1">// (true/false)</span></b> or set this boolean inside the class file.</p>
+<p><b>logout.php</b><br>
+if you use the setting <b>USE_MYSQL_SESSIONS</b> inside the config file you need a logout page <b>without</b> class object to clear the old session data from the database. </p>
+<p><b>register.php</b><br>
+The register.php file is a regular form with fields for login,
+password, e-mail, real name and for extra information. My suggestion
+is, removing the last field and using instead the extra info field for
+information like: language, register date, customer number etc. To
+register a new user only one method required: </p>
+<ul style="list-style-type: none;" class="code">
+  <li> $new_member-&gt;register_user($first_login, $first_password, $confirm_password, $first_name, $first_info, $first_email)</li>
+</ul>
+<p>Of course there are also standard 
+
+
+variables
+
+for  error messages and to switch messages in different languages (like in the other examples).</p>
+<p><b>update_user.php</b><br> Use this example where the user can
+update his information like: e-mail, password, extra info and his real
+name. The login name is unique and can't be changed. If the user
+changed his e-mail address a confirmation mail is send to his new
+address and the old one is active until he confirmed the new one. The
+user can change his password if he let the password field empty, the
+password will not be changed. Methods for this example are: </p>
+<ul style="list-style-type: none;" class="code">
+  <li> $update_member-&gt;access_page()<span class="style1"> // protect this page too.</span></li>
+  <li>$update_member-&gt;get_user_info() <span class="style1">// call this method to get all the user information</span></li>
+  <li>$update_member-&gt;update_user($new_password, $new_confirm, $new_name, $new_info, $new_mail)<span class="style1"> // the update method</span></li>
+</ul>
+<p><b>forgot_password.php</b><br> If a user forgot his password and/or
+login he can request a reminder mail. Using this file the user fills
+the form field with the e-mail address which is used during
+registration. After submitting the user get a mail with a link to the
+(next) file where you can (re)enter a new password. Only one method is
+required (the error message functions as a important option):</p>
+<ul style="list-style-type: none;" class="code">
+  <li> $renew_password-&gt;forgot_password($forgot_email)<span class="style1"> // call the method with the entered mail address as property </span></li>
+</ul>
+<p><b>activate_password.php</b><br> If the user use the link inside the
+mail he got, he will reach this page. On this page the user have the
+option to enter a new password for his account. After submitting this
+new password the user can use it in the login form. </p>
+<ul style="list-style-type: none;">
+  <li class="code">$act_password-&gt;check_activation_password($controle_str, $id) <span class="style1">// this will check the query string for valid data </span></li>
+  <li class="code">$act_password-&gt;activate_new_password($new_pass, $new_confirm, $old_pass) <span class="style1">// this update the record with the new password</span></li>
+</ul>
+<p>I put the activation string into a session in place of a hidden field.</p>
+<p><b>example.php</b><br> Use the code from this file in all pages you
+want to protect. I use this file to link to protected pages like
+"update_user.php". Notice these methods and variables:</p>
+<ul style="list-style-type: none;">
+  <li class="code">$page_protect-&gt;access_page() <span class="style1">// only set this this method to protect your page!</span></li>
+  <li class="code">$page_protect-&gt;log_out() <span class="style1">// the method to log off (optional)</span></li>
+</ul>
+<p><b>testpage.php</b><br>
+  I created this optional page to show how this class take care of previous pages if the user have to login first.</p>
+<ul style="list-style-type: none;">
+  <li class="code">$test_page_protect-&gt;access_page(<b>$_SERVER['PHP_SELF'], <b>$_SERVER['</b>QUERY_STRING']</b>) <span class="style1">// set this  method, including the server vars to protect your page and get redirected to here after login</span></li>
+</ul>
+<p>Use this method the same like before, except that you enter these two server variables.</p>
+<p><b>test_access_level.php</b><br>
+  This file is an example to test the access level from a user. Find the link on the example.php page. </p>
+<ul style="list-style-type: none;">
+  <li class="code">$test_access_level->access_page($_SERVER['PHP_SELF'], "", <b>5</b>) <span class="style1">// the last parameter is the value of the access level. Configure the levels inside the db_config.php file. </span></li>
+</ul>
+<p><b>admin_user.php</b><br>
+  This file is also an extenstion, with this file it's possible to change user data like the password (reset), email address, activation status and access level.</p>
+<p>Use the example record to admin users (after installation): user: <b>administrator</b> / password: <b>welcome</b> </p>
+<ul style="list-style-type: none;">
+  <li class="code">$admin_update-&gt;get_userdata($for_user, $type = &quot;login&quot;); <span class="style1">// obtain the user data to show in the admin form ($type is used to select dat by &quot;id&quot; or &quot;login&quot; </span></li>
+  <li class="code">$admin_update-&gt;update_user_by_admin($new_level, $user_id, $def_pass, $new_email, $active, $confirmation = &quot;no&quot;); <span class="style1">// with this method only a few data can be updated by the administrator. The last parameter is used to send a conformation mail </span></li>
+  <li class="code">$admin_update-&gt;access_level_menu($curr_level, $element_name = &quot;level&quot;) <span class="style1">// a simple select menu will show the min - max value of the access levels </span></li>
+</ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

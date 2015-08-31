@@ -55,7 +55,7 @@
 		<link rel="stylesheet" type="text/css" href="css/map.css" />
 	
     </head>
-    <body>
+    <body onload="checkFirstVisit()">
 
 		<!-- <div id="geomap" style="width:100%;height:100%;"></div>-->
 		
