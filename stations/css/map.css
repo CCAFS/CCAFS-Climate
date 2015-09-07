@@ -1,3 +1,16 @@
+
+			 @import url(http://fonts.googleapis.com/css?family=Oswald:400,300);
+			ul{margin:0;padding:0;list-style:none} 
+			.skin-minimal .skin-section .list li{padding-left:0px}
+
+			#search_form {
+				font-family: 'Oswald', sans-serif;
+				font-size: 17px;
+				/*background: url(../images/search-form.png);*/
+				min-height: 510px;
+			}
+
+
 			.icon-grid {
 				background-image:url(../../libs/ext-4.2.2/examples/shared/icons/fam/grid.png) !important;
 			}
@@ -67,34 +80,38 @@
 			  background-image: none;
 			  background-color: #EFEFEF;/*#4D545E;*/
 			}
+			
+			/*================================= TABS =============================================*/
+			
 			.css_labels .x-tab-bar-default { 
 			background-color: #EFEFEF;/*#323a45;*/
 			}
 			.css_labels .x-tab-default-top {
-			background-color:#323a45; 
+			background-color:#323a45;
 			}
-			/*.x-tab-default-active {
-			background-color: #B1EDAD;
-			}*/
+			.x-tab-bar-default-horizontal { /*quita la linea del tab*/
+				height: 33px;
+			}	
 			.x-tab-bar-strip-default {
 			  border-style: solid;
 			  border-color: #157fcc;
 			  background-color: #EFEFEF;/*#2F4056;/*#83939E;*/
 			}
+			
 			.x-tab-default .x-tab-inner {
-				font-size: 14px;
-				/*font-weight: bold;*/
-				font-family: 'Oswald'; /*font-family: helvetica, arial, verdana, sans-serif;*/
+				font-size: 16px;
 				color: #95999A;
-				line-height: 16px;
+				font-family: 'Oswald', sans-serif;
+				min-width: 53px;				
 			}
 			.x-tab-default-active .x-tab-inner {
-				font-family: 'Oswald';
-				font-size: 14px;
+				font-size: 16px;
 				color: white;
-				line-height: 16px;
-			}			
-			
+				font-family: 'Oswald', sans-serif;
+				min-width: 53px;
+			}
+	
+			/*================================= TABS FIN =============================================*/
 			.x-btn-default-small {
 			border-radius: 3px;
 			padding: 3px 3px 3px 3px;
@@ -347,7 +364,7 @@
 			}			
 			
 			.legendFond{
-				font-family: Oswald,sans-serif;
+				font-family: Trebuchet MS;/*Oswald,sans-serif;*/
 				font-size: 10px !important;
 				/*height: 28px; */
 
@@ -495,12 +512,7 @@
 				filter: alpha(opacity=80);
 			}	
 	
-			.x-tab-bar-default .x-box-scroller {
-				cursor: pointer;
-				filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
-				opacity: 0.5;
-				background-color: #4D545E;
-			}	
+	
 			
 			.x-panel-default-framed {
 				-webkit-border-radius: 4px;
@@ -582,9 +594,7 @@
     text-align: center;
 }			
 			
-.x-tab-bar-default-horizontal { /*quita la linea del tab*/
-    height: 33px;
-}	
+	
 
 .x-panel-body-default-framed {
     background: white;
@@ -596,6 +606,8 @@
     border-width: 1px;
     border-style: solid;
 }
+		
+	
 		
 /* 			
 .x-grid-hd-checker-on .x-column-header-text, .x-grid-row-selected .x-grid-row-checker, .x-grid-row-checked .x-grid-row-checker {

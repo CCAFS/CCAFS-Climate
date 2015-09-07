@@ -1640,7 +1640,17 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 								// title:'Please Login', 
 								defaultType:'textfield',
 								monitorValid:true,
-
+								defaults: {
+									listeners:{
+										specialkey: function(field, e){
+											if (e.getKey() == e.ENTER){
+												var element = Ext.getCmp("Btn_Submit_id");
+												element.handler.call(element.scope);
+												// element.fireEvent('click',element); // field.up('form').getForm().submit({});
+											}
+										}									
+									}
+								},
 								items:[{ 
 										fieldLabel:'Login', 
 										name:'login', 
@@ -1662,6 +1672,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 										{ 
 												// iconCls: 'key-go',
 												text:' Submit',
+												id:"Btn_Submit_id",
 												overCls : 'my-over',
 												formBind: true,	 
 												// icon: icons+'key-go-icon.png', 
@@ -1721,7 +1732,9 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 														});										
 													
 										} 
-									}] 
+									}],
+									// keys: [{ key: Ext.EventObject.ENTER, fn: Ext.getCmp('Btn_Submit_id') }]
+									
 						   });
 						   
 							btonLog=Ext.getCmp('btonLoginId').text
@@ -1735,6 +1748,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 								collapsible: true,
 								resizable: false,
 								frame:true, 
+								// keys: [{ key: Ext.EventObject.ENTER, scope: this, handler:function(){console.log("holaaa")} }],
 								width: 250,
 								height: 150,
 								layout: 'fit', //fit
@@ -1744,10 +1758,11 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 								x:mainPanelWidth/2,
 								y:mainPanelHeight/3,									
 								items: [login],
+								enablekeyEvents: true,
 								listeners:{
 									'close':function(){
 										Ext.getCmp('mainpanelID').enable()
-									}
+									}									
 								}								
 							}); // fin windows
 								
@@ -1762,6 +1777,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 										resul=response.responseText
 										Ext.getCmp('btonLoginId').setText('Login');
 										ventana_login.hide();
+										Ext.getCmp('mainpanelID').enable()
 									},
 									failure: function(response, opts) {
 										var responseText = (response.responseText ? response.responseText : 'Unable to contact the server.  Please try again later.');
@@ -2008,8 +2024,6 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 													password2=form.getValues().password2
 													acceptTerms=form.getValues().acceptTerms
 													
-													console.log(username)
-													
 													Ext.Ajax.request({
 														url: 'php/Geo_statByregion.php',
 														method: 'POST',
@@ -2029,10 +2043,18 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 																   width:300,
 																   buttons: Ext.MessageBox.OK,
 																   animateTarget: 'info',
-																   icon: 'x-message-box-info'
+																   icon: 'x-message-box-info',
+																   fn : function(btn) {
+																		if (btn == 'ok') {
+																			Ext.getCmp('registerID').destroy()
+																		}
+																	}
+																	
 																});	
 																winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
 																Ext.getCmp('mainpanelID').enable()
+																
+																
 															}else{
 																// Ext.Msg.alert('Login Failed!',"Sorry, a user with this login and/or e-mail address already exist."); 
 																winInfo=Ext.MessageBox.show({
@@ -2042,6 +2064,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 																   buttons: Ext.MessageBox.OK,
 																   animateTarget: 'error',
 																   icon: 'x-message-box-error'
+																   
 																});	
 																winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
 															}
@@ -2080,6 +2103,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 									
 								var Register = new Ext.Window({
 									iconCls: 'key',
+									id:"registerID",
 									title: 'Account Registration',
 									style: "font-family: 'Oswald', sans-serif;font-size: 14px;",
 									constrainHeader: true,
@@ -2144,7 +2168,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 						stateVal = stateCmb.getValue()						
 						municipVal = cityCmb.getValue()	
 						
-						// layerTemp=mapPanel.map.getLayersByName("FindRegion")[0]
+						// layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 						// if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
 
 						// layerTemp=mapPanel.map.getLayersByName("FindStation")[0]
@@ -2180,14 +2204,14 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 								params : { type:1,country : country, state:state, municip:municip},
 								method: 'GET',
 								success: function ( result, request ) {
-									layerTemp=mapPanel.map.getLayersByName("FindRegion")[0]
+									layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 									if(layerTemp){layerTemp.destroyFeatures();}
 									
 									geocapa = result.responseText;
 									var format = new OpenLayers.Format.GeoJSON({'internalProjection': new OpenLayers.Projection("EPSG:900913"), 'externalProjection': new OpenLayers.Projection("EPSG:4326")
 									});
 									mapPanel.map.addLayer(layerTempRegion);
-									layerTemp=mapPanel.map.getLayersByName("FindRegion")[0]
+									layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 									layerTemp.addFeatures(format.read(geocapa));
 									var bounds = layerTemp.getDataExtent();
 									if(bounds){ mapPanel.map.panTo(bounds.getCenterLonLat()); mapPanel.map.zoomToExtent(bounds);}
@@ -2870,7 +2894,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 					}				
 					selectControl.control.unselectAll();
 					tabSearchRegion.getForm().reset();
-					layerTempReg=mapPanel.map.getLayersByName("FindRegion")[0]
+					layerTempReg=mapPanel.map.getLayersByName("Search region")[0]
 					if(layerTempReg){mapPanel.map.removeLayer(layerTempReg);}
 					
 					layerTempStat=mapPanel.map.getLayersByName("FindStation")[0]
@@ -2977,7 +3001,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 						radioCh = 2//Ext.getCmp('radioBton').getChecked()[0].getGroupValue();
 					
 						getStat = cmbStat.getValue();
-						layerTemp=mapPanel.map.getLayersByName("FindRegion")[0]
+						layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 						if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
 						
 						// FindStation=mapPanel.map.getLayersByName("FindStation")[0]
@@ -3540,7 +3564,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 					selectControl.control.unselectAll();
 					Ext.getCmp("cmbStatID").reset();
 					tabSearchStat.getForm().reset();
-					layerTempReg=mapPanel.map.getLayersByName("FindRegion")[0]
+					layerTempReg=mapPanel.map.getLayersByName("Search region")[0]
 					if(layerTempReg){mapPanel.map.removeLayer(layerTempReg);}
 					
 					layerTempStat=mapPanel.map.getLayersByName("FindStation")[0]
@@ -4567,7 +4591,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 						for (var i=0, l=condlistsel.length; i < l; i++) {
 								delete condlistsel[i];
 						}		
-						layerTempReg=mapPanel.map.getLayersByName("FindRegion")[0]
+						layerTempReg=mapPanel.map.getLayersByName("Search region")[0]
 						if(layerTempReg){mapPanel.map.removeLayer(layerTempReg);}
 						
 						layerTempStat=mapPanel.map.getLayersByName("FindStation")[0]
@@ -4700,11 +4724,26 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 		// },
 		{ 
 			xtype: "panel",
-			html: '<img src='+icons+'cluster.PNG height="25" width="25" style="vertical-align: middle;"/><span class="legendFond" style="vertical-align: middle;"> Cluster</span>'+
-				  '<div class="legendFond" id="ideam">IDEAM</div>'+
-				  '<div class="legendFond" id="cafenica">CAFENICA</div>'+
-				  '<div class="legendFond" id="cruz-roja">Cruz-Roja</div>'+
-				  '<div class="legendFond" id="afr-rising">Afr-Rising</div>'
+			// html: '<img src='+icons+'cluster.PNG height="25" width="25" style="vertical-align: middle;"/><span class="legendFond" style="vertical-align: middle;"> Cluster</span>'+
+				  // '<div class="legendFond" id="ideam">IDEAM</div>'+
+				  // '<div class="legendFond" id="cafenica">CAFENICA</div>'+
+				  // '<div class="legendFond" id="cruz-roja">Cruz-Roja</div>'+
+				  // '<div class="legendFond" id="afr-rising">Afr-Rising</div>'
+				  
+			html: '<table style="width:100%">'+
+					  '<tr>'+
+						'<td><img src='+icons+'cluster.PNG height="25" width="25" style="vertical-align: middle;"/><span class="legendFond" style="vertical-align: middle;"> Cluster</span></td>'+
+						'<td><div class="legendFond" id="ideam">IDEAM</div></td>'+
+						'<td><div class="legendFond" id="cafenica">CAFENICA</div></td>'+
+					  '</tr>'+
+					  '<tr>'+
+						'<td><img src='+icons+'map-marker-icon.png height="16" width="16" style="vertical-align: middle;"/><span class="legendFond" style="vertical-align: middle;"> Search</span></td>'+
+						'<td><div class="legendFond" id="cruz-roja">Cruz-Roja</div></td>'+
+						'<td><div class="legendFond" id="afr-rising">Afr-Rising</div></td>' +
+					  '</tr>'+
+					'</table>'				  
+				  
+				  
 		}]
 	}	
 	
@@ -4944,13 +4983,13 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 				params : {type:21,listStatSel: Ext.encode(ids)},
 				method: 'GET',
 				success: function ( result, request ) {
-					layerTemp=mapPanel.map.getLayersByName("FindRegion")[0]
+					layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 					if(layerTemp){layerTemp.destroyFeatures();}
 					geocapa = result.responseText;
 					var format = new OpenLayers.Format.GeoJSON({'internalProjection': new OpenLayers.Projection("EPSG:900913"), 'externalProjection': new OpenLayers.Projection("EPSG:4326")
 					});
 					mapPanel.map.addLayer(layerTempRegion);
-					layerTemp=mapPanel.map.getLayersByName("FindRegion")[0]
+					layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 					layerTemp.addFeatures(format.read(geocapa));
 					var bounds = layerTemp.getDataExtent();
 					if(bounds){mapPanel.map.zoomToExtent(bounds);}
@@ -5012,7 +5051,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 								Ext.getCmp('popupID').close()
 							}	
 							
-							layerTemp=mapPanel.map.getLayersByName("FindRegion")[0]
+							layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 							if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
 							
 							FindStation=mapPanel.map.getLayersByName("FindStation")[0]
@@ -5846,7 +5885,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 								Ext.getCmp('popupID').close()
 							}	
 							
-							layerTemp=mapPanel.map.getLayersByName("FindRegion")[0]
+							layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 							if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
 							
 							FindStation=mapPanel.map.getLayersByName("FindStation")[0]
@@ -6564,7 +6603,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 				Ext.getCmp('gridRegionID').destroy();	
 			}
 			
-			// layerTemp=mapPanel.map.getLayersByName("FindRegion")[0]
+			// layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 			if(layerTempRegion){layerTempRegion.removeAllFeatures()}			
 			// layerTempStat=mapPanel.map.getLayersByName("FindStation")[0]
 			if(layerTempStat){layerTempStat.removeAllFeatures()}			

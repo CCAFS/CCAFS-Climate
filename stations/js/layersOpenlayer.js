@@ -292,15 +292,15 @@
 			);
 			var gphy = new OpenLayers.Layer.Google(
 				"Google Physical",
-				{type: google.maps.MapTypeId.TERRAIN, visibility: false}
+				{type: google.maps.MapTypeId.TERRAIN} //, visibility: false
 			);
 			var gmap = new OpenLayers.Layer.Google(
 				"Google Streets", // the default
-				{numZoomLevels: 20, visibility: false}
+				{numZoomLevels: 20} //, visibility: false
 			);
 			var ghyb = new OpenLayers.Layer.Google(
 				"Google Hybrid",
-				{type: google.maps.MapTypeId.HYBRID, numZoomLevels: 22, visibility: false}
+				{type: google.maps.MapTypeId.HYBRID, numZoomLevels: 22} //, visibility: false
 			);			
 			
 // label:function(feature) {
@@ -315,7 +315,7 @@
 
 			// console.log(clusters)
 			
-			// var geocapa = new OpenLayers.Layer.Vector("FindRegion", {
+			// var geocapa = new OpenLayers.Layer.Vector("Search region", {
 				// projection: new OpenLayers.Projection("EPSG:4326"),
 				// displayProjection: new OpenLayers.Projection("EPSG:900913"),						
 				// strategies: [new OpenLayers.Strategy.Fixed()],
@@ -330,7 +330,7 @@
 				
 			// });
 			// mapPanel.map.addLayer(geocapa)
-			// layerTemp=mapPanel.map.getLayersByName("FindRegion")[0]
+			// layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 			// layerTemp.events.on({"loadend": function(){ //layerTemp.events.register("featuresadded",layerTemp,function(){console.log(layerTemp.features.length)});	
 				// var bounds = layerTemp.getDataExtent();
 				// if(bounds){ mapPanel.map.panTo(bounds.getCenterLonLat()); mapPanel.map.zoomToExtent(bounds); }
