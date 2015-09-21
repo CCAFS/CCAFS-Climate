@@ -3,6 +3,7 @@
 	
 	icons='iconosGIS/'
 	symbStatIntercep= icons+"map-marker-icon.png"//"bloqF_24px.png"
+	symbStatSel= icons+"bloqE_16px.png"
 	graphicSize=16
 	symbLocation= icons+"bloqF_24px2.png"
 	var rulesStat = [
@@ -15,7 +16,7 @@
 				graphicWidth: graphicSize,
 				// graphicYOffset: -24,									
 				fillColor: "#99ccff",
-				label:"${id}",
+				// label:"${id}",
 				fontFamily: "Trebuchet MS",
 				fontWeight: "bold",
 				strokeColor: "#00FF00",
@@ -26,8 +27,30 @@
 			}			
 
 		})
-	];		
-	var layerTempStat = new OpenLayers.Layer.Vector('FindStation', {
+	];	
+	var rulesStatSel = [
+		new OpenLayers.Rule({
+			title: "Interc. Station",
+			symbolizer: {
+				externalGraphic: symbStatSel,
+				pointRadius: 8,
+				graphicHeight: graphicSize,
+				graphicWidth: graphicSize,
+				// graphicYOffset: -24,									
+				fillColor: "#99ccff",
+				// label:"${id}",
+				fontFamily: "Trebuchet MS",
+				fontWeight: "bold",
+				strokeColor: "#00FF00",
+				strokeWidth: 3,
+				labelOutlineColor: "white",
+				labelYOffset: graphicSize+5,
+				labelOutlineWidth: 3	
+			}			
+
+		})
+	];	
+	var layerTempStat = new OpenLayers.Layer.Vector('Search station', {
 		renderers: renderer,
 		styleMap: new OpenLayers.StyleMap({
 			"default": new OpenLayers.Style({
@@ -42,6 +65,25 @@
 
 		})
 	});
+	var layerTempSel = new OpenLayers.Layer.Vector('SelSation', {//'displayInLayerSwitcher':false,
+		renderers: renderer,
+		styleMap: new OpenLayers.StyleMap({
+			"default": new OpenLayers.Style({
+				externalGraphic: symbStatSel,
+				graphicOpacity: 1,
+				graphicHeight: graphicSize,
+				graphicWidth: graphicSize,
+				graphicYOffset: -graphicSize,
+				fillOpacity: 0.2,
+				pointRadius: 10
+			}, {rules: rulesStatSel}
+			)
+
+		})
+	});	
+	
+	var polygonDraw = new OpenLayers.Layer.Vector("Shapes",{'displayInLayerSwitcher':false, renderers: renderer,transparent: true,visibility: true});
+			
 	var rulesRegion = [
 		new OpenLayers.Rule({
 			title: "Buffer",
@@ -74,7 +116,7 @@
 		pointRadius: 10
 	}, {rules: rulesRegion});
 			
-	var layerTempRegion = new OpenLayers.Layer.Vector('Search region', {
+	var layerTempRegion = new OpenLayers.Layer.Vector('Search region', {'displayInLayerSwitcher':false,
 		// renderers: renderer,
 		projection: new OpenLayers.Projection("EPSG:4326"),
 		displayProjection: new OpenLayers.Projection("EPSG:900913"),						

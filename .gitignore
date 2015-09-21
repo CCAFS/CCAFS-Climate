@@ -15,3 +15,4 @@
 .project
 .settings*
 stations/config/db_ccafs_climate.php
+downloads/data_stations

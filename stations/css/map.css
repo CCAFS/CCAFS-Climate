@@ -607,7 +607,61 @@
     border-style: solid;
 }
 		
-	
+/*================================================== POPUP=======================================================*/	
+#popup_FrameDecorationDiv_0 img, #popup_FrameDecorationDiv_1 img,
+#popup_FrameDecorationDiv_2 img, #popup_FrameDecorationDiv_3 img,
+#popup_FrameDecorationDiv_4 img{
+    display: none;
+}
+.olPopupCloseBox {
+    background: url("../iconosGIS/popup_images/gmap_ui.png") no-repeat;
+    background-position: 0px -334px;
+    cursor: pointer;
+    top: 10px !important;
+    right: 10px !important;
+}
+.olFramedCloudPopupContent {
+    padding: 5px;
+    overflow: auto;
+    /*font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif;*/
+    font-family: Trebuchet MS;
+    font-size: 10px;
+    top: 5px !important;
+    right: 5px;
+    bottom: 20px;
+    left: 5px !important;
+    width: auto !important;
+    height: auto !important;
+    background: white;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.298039) !important;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    box-shadow: 0px 1px 4px -1px rgba(0, 0, 0, 0.298039);
+    line-height: 1.5em;
+	opacity: 0.8;
+}
+.olFramedCloudPopupContent .title{
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+.olFramedCloudPopupContent .spacer{
+    margin-left: 40px;
+}
+#popup_FrameDecorationDiv_2{
+    /*width: 100% !important;*/
+    width: 100% !important;
+    background: url('../iconosGIS/popup_images/tail.png') no-repeat center center;
+    z-index: 10;
+    height: 21px !important;
+    bottom: 0px !important;
+	opacity: 0.5;
+}
+
+
+/*=========================================================================================================*/	
 		
 /* 			
 .x-grid-hd-checker-on .x-column-header-text, .x-grid-row-selected .x-grid-row-checker, .x-grid-row-checked .x-grid-row-checker {

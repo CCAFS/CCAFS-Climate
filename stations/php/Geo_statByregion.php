@@ -20,7 +20,8 @@
 	if (isset($_REQUEST['radioCh'])){$radioCh = $_REQUEST["radioCh"];}
 	if (isset($_REQUEST['getStat'])){$getStat = $_REQUEST["getStat"];}
 	if (isset($_REQUEST['idCond'])){$idCond = $_REQUEST["idCond"];}
-	$Cond = isset($_GET['condit']) ? $_GET['condit'] : '';
+	if (isset($_REQUEST['wkt'])){$wkt = $_REQUEST["wkt"];}
+	$Cond = isset($_REQUEST['condit']) ? $_REQUEST['condit'] : '';
 	if (isset($_REQUEST['children'])){$children = $_REQUEST["children"];}
 	if(isset($_REQUEST['cadena'])){
 		$cadena= implode(",",json_decode ($_REQUEST['cadena']));
@@ -147,32 +148,9 @@ if($type==4){
 }
 
 
-if(isset($sql)){
-// if($type==2 or $type==3){
-	$result = pg_query($dbcon, $sql);
-	$geojson = array(
-					'type' => 'FeatureCollection',
-					'features' => array()
-				);
-		
-	$i = 0;
-}
 
-if($type==1){
-	while($line = pg_fetch_assoc($result)){
-		$feature = array(
-						'geometry' => json_decode($line['st_asgeojson'],true),
-						'properties' => $data[]=$line,
-						'id' => $i++,
-						'extend' => $extent
-					);
-		array_push($geojson['features'],$feature);
-	}
-	
-	$especie = json_encode($geojson);
-	
-	echo $especie;	
-}
+
+
 
 
 
@@ -702,12 +680,32 @@ if($type==13){
 	
 }
 if($type==14){
-	$whereStation = "";
 	
-	$statList=json_decode($_REQUEST["listStatSel"]);
-	if (isset($statList) && $statList != "") {
-	  $whereStation .= " AND s.id IN (" . implode(",",$statList).")";
-	}	
+	if (isset($_REQUEST['listStatSel'])){
+		$whereStation = "";
+		$listStatSel = $_REQUEST["listStatSel"];
+		$statList=json_decode($listStatSel);
+
+		if (isset($statList) && $statList != "") {
+			$whereStation .= " AND s.id IN (" . implode(",",$statList).")";
+		}	
+		$sql_tabla ="select DISTINCT s.id, s.code,s.name, c.name category,i.name institute,s.instalation,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,cop.name copyright,l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
+							 from gadm_lev2 as l, geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_status as t ON (t.id = s.status)
+							JOIN station_type as p ON (p.id = s.type)  JOIN station_time_step as a ON (a.id = s.time_step) JOIN station_ctrl_quality as q ON (q.id = s.ctrl_quali)
+							JOIN station_category as c ON (c.id = s.category) JOIN station_institute as i ON (i.id = s.institute) JOIN station_copyright as cop ON (s.copyrigth=cop.id)	
+							where TRUE $whereStation AND st_intersects(s.geom , l.geom);";		
+	}else{
+
+		$sql_tabla ="select DISTINCT s.id, s.code,s.name, c.name category,i.name institute,s.instalation,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,cop.name copyright,l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
+							 from gadm_lev2 as l, geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_status as t ON (t.id = s.status)
+							JOIN station_type as p ON (p.id = s.type)  JOIN station_time_step as a ON (a.id = s.time_step) JOIN station_ctrl_quality as q ON (q.id = s.ctrl_quali)
+							JOIN station_category as c ON (c.id = s.category) JOIN station_institute as i ON (i.id = s.institute) JOIN station_copyright as cop ON (s.copyrigth=cop.id)	
+							where st_intersects(s.geom , ST_GeomFromText('$wkt',4326)) AND st_intersects(s.geom , l.geom);";		
+	
+	}
+	
+	
+	
 
 	// $sql_tabla = "select s.id,s.code,s.name, c.name category,i.name institute,s.instalation,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,
 	// l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
@@ -716,17 +714,9 @@ if($type==14){
 			// JOIN station_category as c ON (c.id = s.category) JOIN station_institute as i ON (i.id = s.institute)
 	// where TRUE $whereStation and st_intersects(s.geom , l.geom);";	
 
-// $sql_tabla = "select s.id,s.code,s.name, c.name category,i.name institute,s.instalation,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
-					// from gadm_lev2 as l , geostation as s, station_category as c, station_institute as i, station_status as t, station_time_step as a, station_type as p, 
-					// station_ctrl_quality as q, station_file as f
-					// where TRUE $whereStation AND st_intersects(s.geom , l.geom) and s.category=c.id and s.institute=i.id and s.time_step=a.id and s.type=p.id and f.station_ctrl_quality_id=q.id and f.station_id=s.id
-					// group by s.id, s.name, c.name,i.name,q.name,p.name,l.NAME_0,l.NAME_1,l.NAME_2;";
 
-		$sql_tabla ="select DISTINCT s.id, s.code,s.name, c.name category,i.name institute,s.instalation,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,cop.name copyright,l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
-							 from gadm_lev2 as l, geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_status as t ON (t.id = s.status)
-							JOIN station_type as p ON (p.id = s.type)  JOIN station_time_step as a ON (a.id = s.time_step) JOIN station_ctrl_quality as q ON (q.id = s.ctrl_quali)
-							JOIN station_category as c ON (c.id = s.category) JOIN station_institute as i ON (i.id = s.institute) JOIN station_copyright as cop ON (s.copyrigth=cop.id)	
-							where TRUE $whereStation AND st_intersects(s.geom , l.geom);";					
+				
+				
 
 	$result = pg_query($dbcon, $sql_tabla);
 
@@ -790,17 +780,18 @@ if($type==14){
 }
 if($type==15){
 
-	$whereStation = "";
+	// $whereStation = "";
 	
-	$statList=json_decode($_REQUEST["listStatSel"]);
-	if (isset($statList) && $statList != "") {
-	  $whereStation .= " AND s.id IN (" . implode(",",$statList).")";
-	}	
+	// $statList=json_decode($_REQUEST["listStatSel"]);
+	// if (isset($statList) && $statList != "") {
+	  // $whereStation .= " AND s.id IN (" . implode(",",$statList).")";
+	// }	
 	
 	
 	$sql_tabla ="select v.id, v.name, v.acronym
 		 from geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
-		where TRUE $whereStation;";	
+		where st_intersects(s.geom , ST_GeomFromText('$wkt',4326));	";	
+		// where TRUE $whereStation;";	
 
 
 	$result = pg_query($dbcon, $sql_tabla);
@@ -934,7 +925,7 @@ if($type==18){
 		$sql_tabla ="select v.id, v.acronym as name from geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) group by v.id;";	
 	}
 	if($idCond==3){ // status
-		$sql_tabla ="SELECT id, name FROM station_status;";	
+		$sql_tabla ="SELECT id, name FROM station_copyright;";	
 	}
 	if($idCond==6){ // Institute
 		$sql_tabla ="SELECT id, name FROM station_institute;";	
@@ -957,9 +948,10 @@ if($type==18){
 	if($idCond==12){ // Municipality
 		$sql_tabla ="SELECT id_2 as id, name_2 as name FROM gadm_lev2 group by id_2,name_2 order by name_2 ASC;";	
 	}
-	if($idCond==13){ // timespet
-		$sql_tabla ="SELECT id, name FROM station_time_step;";	
-	}
+	// if($idCond==13){ // timespet
+		// $sql_tabla ="SELECT id, name FROM station_time_step;";	
+	// }
+	
 	
 	if($idCond!=1 && $idCond!=2 && $idCond!=4 && $idCond!=5){
 		$result = pg_query($dbcon, $sql_tabla);
@@ -1067,7 +1059,7 @@ if($type==19){
 			}		
 	}
 	
-	$sql_tabla1="SELECT s.id,st_asgeojson(s.geom) FROM station_file as f JOIN geostation as s ON (f.station_id=s.id) JOIN station_status as st ON (s.status=st.id)".
+	$sql_tabla1="SELECT s.id,st_asgeojson(s.geom) FROM station_file as f JOIN geostation as s ON (f.station_id=s.id) JOIN station_copyright as st ON (s.copyrigth=st.id)".
 	"JOIN station_institute as i ON (s.institute=i.id) JOIN station_variable as v ON (f.station_variable_id=v.id)".
 	"JOIN station_time_step as a ON (f.station_time_step_id=a.id) JOIN station_ctrl_quality as q ON (f.station_ctrl_quality_id=q.id)".
 	"JOIN station_category as c ON (s.category=c.id) JOIN station_type as t ON (s.type=t.id) where ".implode(" ".$typeCon." ",$sqltemp).' group by s.id;';
@@ -1121,32 +1113,18 @@ if($type==21){
 		 from geostation as s
 		where TRUE $whereStation;";	
 
-	$result = pg_query($dbcon, $sql);
-	$geojson = array(
-					'type' => 'FeatureCollection',
-					'features' => array()
-				);
+	// $result = pg_query($dbcon, $sql);
+	// $geojson = array(
+					// 'type' => 'FeatureCollection',
+					// 'features' => array()
+				// );
 		
-	$i = 0;	
+	// $i = 0;	
 	
 }
 
 
-if($type==2 or $type==9  or $type==19 or $type==21){
-	while($line = pg_fetch_assoc($result)){
-		$feature = array(
-						'geometry' => json_decode($line['st_asgeojson'],true),
-						'properties' => $data[]=$line,
-						'id' => $i++
 
-					);
-		array_push($geojson['features'],$feature);
-	}
-	
-	$especie = json_encode($geojson);
-
-	echo $especie;	
-}
 
 if($type==22){
 	$whereStation = "";
@@ -1232,7 +1210,53 @@ if($type==25){
 
 }
 
+if($type==26){
+	$sql =	"select zv.id,zv.code,zv.name,st_asgeojson(zv.geom)
+		from ".$tableStation." as zv
+		where st_intersects(zv.geom , ST_GeomFromText('$wkt',4326));";		
+	
+}
 
+if(isset($sql)){
+// if($type==2 or $type==3){
+	$result = pg_query($dbcon, $sql);
+	$geojson = array(
+					'type' => 'FeatureCollection',
+					'features' => array()
+				);
+		
+	$i = 0;
+}
 
+if($type==1){
+	while($line = pg_fetch_assoc($result)){
+		$feature = array(
+						'geometry' => json_decode($line['st_asgeojson'],true),
+						'properties' => $data[]=$line,
+						'id' => $i++,
+						'extend' => $extent
+					);
+		array_push($geojson['features'],$feature);
+	}
+	
+	$especie = json_encode($geojson);
+	
+	echo $especie;	
+}
 
+if($type==2 or $type==9  or $type==19 or $type==21  or $type==26){
+	while($line = pg_fetch_assoc($result)){
+		$feature = array(
+						'geometry' => json_decode($line['st_asgeojson'],true),
+						'properties' => $data[]=$line,
+						'id' => $i++
+
+					);
+		array_push($geojson['features'],$feature);
+	}
+	
+	$especie = json_encode($geojson);
+
+	echo $especie;	
+}
 ?>

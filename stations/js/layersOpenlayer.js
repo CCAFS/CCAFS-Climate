@@ -103,8 +103,8 @@
                 filter: new OpenLayers.Filter.Comparison({
                     type: OpenLayers.Filter.Comparison.BETWEEN,
                     property: "count",
-                    lowerBoundary: 2,//2,
-                    upperBoundary: 4//15
+                    lowerBoundary: 2,//2,//2,
+                    upperBoundary: 15//4//15
                 }),
                 symbolizer: {
                     fillColor: colorsCluster.low,
@@ -124,8 +124,8 @@
                 filter: new OpenLayers.Filter.Comparison({
                     type: OpenLayers.Filter.Comparison.BETWEEN,
                     property: "count",
-                    lowerBoundary: 4,//15,
-                    upperBoundary: 8//50
+                    lowerBoundary: 15,//4,//15,
+                    upperBoundary: 50//8//50
                 }),
                 symbolizer: {
                     fillColor: colorsCluster.middle,
@@ -145,7 +145,7 @@
                 filter: new OpenLayers.Filter.Comparison({
                     type: OpenLayers.Filter.Comparison.GREATER_THAN,
                     property: "count",
-                    value: 8//50
+                    value: 50//8//50
                 }),
                 symbolizer: {
                     fillColor: colorsCluster.high,
@@ -173,15 +173,12 @@
 					
 					if(feature.cluster[0].attributes.institute==1){
 						return "blue"
-					
 					}
 					if(feature.cluster[0].attributes.institute==6){
 						return "red"
-					
 					}					
 					if(feature.cluster[0].attributes.institute==5){
 						return "black"
-					
 					}
 					if(feature.cluster[0].attributes.institute==7){
 						return "green"
@@ -258,7 +255,7 @@
 				rules: [oneRule, lowRule, middleRule, highRule],context: context }
 			);  
 		
-			strategy = new OpenLayers.Strategy.Cluster(); //{distance: 20}
+			strategy = new OpenLayers.Strategy.Cluster({distance: 40}); //
 			
             var clusters = new OpenLayers.Layer.Vector("Stations", {
 				projection: new OpenLayers.Projection("EPSG:4326"),
