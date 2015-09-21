@@ -103,8 +103,8 @@
                 filter: new OpenLayers.Filter.Comparison({
                     type: OpenLayers.Filter.Comparison.BETWEEN,
                     property: "count",
-                    lowerBoundary: 2,//2,
-                    upperBoundary: 4//15
+                    lowerBoundary: 2,//2,//2,
+                    upperBoundary: 15//4//15
                 }),
                 symbolizer: {
                     fillColor: colorsCluster.low,
@@ -124,8 +124,8 @@
                 filter: new OpenLayers.Filter.Comparison({
                     type: OpenLayers.Filter.Comparison.BETWEEN,
                     property: "count",
-                    lowerBoundary: 4,//15,
-                    upperBoundary: 8//50
+                    lowerBoundary: 15,//4,//15,
+                    upperBoundary: 50//8//50
                 }),
                 symbolizer: {
                     fillColor: colorsCluster.middle,
@@ -145,7 +145,7 @@
                 filter: new OpenLayers.Filter.Comparison({
                     type: OpenLayers.Filter.Comparison.GREATER_THAN,
                     property: "count",
-                    value: 8//50
+                    value: 50//8//50
                 }),
                 symbolizer: {
                     fillColor: colorsCluster.high,
@@ -173,15 +173,12 @@
 					
 					if(feature.cluster[0].attributes.institute==1){
 						return "blue"
-					
 					}
 					if(feature.cluster[0].attributes.institute==6){
 						return "red"
-					
 					}					
 					if(feature.cluster[0].attributes.institute==5){
 						return "black"
-					
 					}
 					if(feature.cluster[0].attributes.institute==7){
 						return "green"
@@ -258,7 +255,7 @@
 				rules: [oneRule, lowRule, middleRule, highRule],context: context }
 			);  
 		
-			strategy = new OpenLayers.Strategy.Cluster(); //{distance: 20}
+			strategy = new OpenLayers.Strategy.Cluster({distance: 40}); //
 			
             var clusters = new OpenLayers.Layer.Vector("Stations", {
 				projection: new OpenLayers.Projection("EPSG:4326"),
@@ -292,15 +289,15 @@
 			);
 			var gphy = new OpenLayers.Layer.Google(
 				"Google Physical",
-				{type: google.maps.MapTypeId.TERRAIN, visibility: false}
+				{type: google.maps.MapTypeId.TERRAIN} //, visibility: false
 			);
 			var gmap = new OpenLayers.Layer.Google(
 				"Google Streets", // the default
-				{numZoomLevels: 20, visibility: false}
+				{numZoomLevels: 20} //, visibility: false
 			);
 			var ghyb = new OpenLayers.Layer.Google(
 				"Google Hybrid",
-				{type: google.maps.MapTypeId.HYBRID, numZoomLevels: 22, visibility: false}
+				{type: google.maps.MapTypeId.HYBRID, numZoomLevels: 22} //, visibility: false
 			);			
 			
 // label:function(feature) {
@@ -315,7 +312,7 @@
 
 			// console.log(clusters)
 			
-			// var geocapa = new OpenLayers.Layer.Vector("FindRegion", {
+			// var geocapa = new OpenLayers.Layer.Vector("Search region", {
 				// projection: new OpenLayers.Projection("EPSG:4326"),
 				// displayProjection: new OpenLayers.Projection("EPSG:900913"),						
 				// strategies: [new OpenLayers.Strategy.Fixed()],
@@ -330,7 +327,7 @@
 				
 			// });
 			// mapPanel.map.addLayer(geocapa)
-			// layerTemp=mapPanel.map.getLayersByName("FindRegion")[0]
+			// layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 			// layerTemp.events.on({"loadend": function(){ //layerTemp.events.register("featuresadded",layerTemp,function(){console.log(layerTemp.features.length)});	
 				// var bounds = layerTemp.getDataExtent();
 				// if(bounds){ mapPanel.map.panTo(bounds.getCenterLonLat()); mapPanel.map.zoomToExtent(bounds); }

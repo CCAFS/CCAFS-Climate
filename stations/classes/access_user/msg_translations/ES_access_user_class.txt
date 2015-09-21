@@ -1,0 +1,37 @@
+			break;
+			default:
+			/*
+			 *	translation by eliezer.iero@gmail.com
+			 */
+			$msg[10] = "El Nombre de Usuario y la Contraseña no existen o no coinciden, por favor verifique su información.";
+			$msg[11] = "Nombre de Usuario y Contraseña nulos!";
+			$msg[12] = "Lo sentimos, un Nombre de Usuario con éste correo electrónico ya existe.";
+			$msg[13] = "Por favor verifique su email para proceder a Activar su cuenta.";
+			$msg[14] = "Lo sentimos, un error ocurrió.. Inténtelo más tarde.";
+			$msg[15] = "Lo sentimos, un error ocurrió.. Inténtelo más tarde.";
+			$msg[16] = "La dirección de Email no es válida.";
+			$msg[17] = "El Nombre de Usuario requiere de mínimo ".LOGIN_LENGTH." carácteres.";
+			$msg[18] = "Su petición está siendo ejecutada, por favor haga Acceso.";
+			$msg[19] = "Lo sentimos, no pudimos activar su cuenta.";
+			$msg[20] = "No hay cuenta que activar.";
+			$msg[21] = "Lo lamentamos, la Clave de Activación no es correcta!<BR>Refiera a su documentación en su correo electrónico.";
+			$msg[22] = "Lo sentimos, no hay una cuenta activa que coincida con éste correo.";
+			$msg[23] = "Por favor verifique su Bandeja de Entrada en su Correo Electrónico para continuar.";
+			$msg[24] = "Su cuenta ha sido activada exitosamente... ";
+			$msg[25] = "Lo lamentamos, no se pudo activar su contraseña.";
+			$msg[26] = "Su contraseña olvidada..."; 
+			$msg[27] = "Por favor verifique su correo y active las Modificaciones.";
+			$msg[28] = "Su petición debe ser procesada...";
+			$msg[29] = "Hola,\nPara activar su cuenta usted debe hacer click en el siguiente hipervínculo:\n".$host.$this->login_page."?ident=".$this->id."&activate=".md5($this->user_pw)."&language=".$this->language."\nSaludos cordiales\n".$this->admin_name;
+			$msg[30] = "Su cuenta ha sido mofificada.";
+			$msg[31] = "Su cuenta de correo ya está registrada, por favor pruebe con otra.";
+			$msg[32] = "La contraseña debe ser de mínimo ".PW_LENGTH." carácteres.";
+			$msg[33] = "Hola,\nla nueva dirección de correo debe ser validada, por favor haga click en el siguiente hipervínculo:\n".$host.$this->login_page."?id=".$this->id."&validate=".md5($this->user_pw)."&language=".$this->language."\nSaludos cordiales\n".$this->admin_name;
+			$msg[34] = "No existe dirección de correo para ser validada.";
+			$msg[35] = "Hola,\nAhora debe proporcionar su nueva contraseña, por favor haga click en el siguiente hipervínculo para hacerlo:\n".$host.$this->password_page."?id=".$this->id."&activate=".md5($this->user_pw)."&language=".$this->language."\nSaludos cordiales\n".$this->admin_name;
+			$msg[36] = "Su petición está siendo procesada y revisada por un administrador. \nRecibirá un email si su petición es ejecutada con éxito.";
+			$msg[37] = "Hola ".$this->user_full_name.",\nLa cuenta ha sido activada y es posible usarla de ahora en delante.\r\n\r\nClickee en el siguiente hipervínculo para accesar a su cuenta:\r\n".$host.$this->login_page."\nSaludos cordiales\n".$this->admin_name;
+			$msg[38] = "La contraseña de confirmación no coincide con la contraseña.";
+			$msg[39] = "Un nuevo Usuario...";
+			$msg[40] = "Hubo un nuevo registro de Usuario el día ".date("Y-m-d").":\nClickee aquí para acceder a la Administración:\r\n\r\n".$host.$this->admin_page."?login_id=".$this->id;
+			$msg[41] = "Valide su dirección de correo..."; // subject in e-mail

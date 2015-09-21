@@ -1,0 +1,22 @@
+CREATE TABLE `users_profile` (
+  `id` int(11) NOT NULL auto_increment,
+  `users_id` int(11) NOT NULL default '0',
+  `language` char(2) NOT NULL default '',
+  `address` varchar(50) NOT NULL default '',
+  `postcode` varchar(15) NOT NULL default '',
+  `city` varchar(50) NOT NULL default '',
+  `country` char(2) NOT NULL default '',
+  `phone` varchar(50) NOT NULL default '',
+  `fax` varchar(50) NOT NULL default '',
+  `homepage` varchar(100) NOT NULL default '',
+  `notes` text NOT NULL,
+  `user_1` varchar(100) NOT NULL default '',
+  `user_2` varchar(100) NOT NULL default '',
+  `user_3` varchar(100) NOT NULL default '',
+  `user_4` varchar(100) NOT NULL default '',
+  `user_5` varchar(100) NOT NULL default '',
+  `user_6` varchar(100) NOT NULL default '',
+  `last_change` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `users_id` (`users_id`)
+) TYPE=MyISAM;

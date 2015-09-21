@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><title>Access_user Class documentation</title>
+
+<style type="text/css">
+<!--
+.code {
+	font:14px 'Courier New', Courier, mono;
+	color:#0000FF;
+}
+.style1 {
+	color: #CC9900
+}
+-->
+</style>
+</head>
+
+<body>
+<h1>Access_user Class (Users_profile extension)<span style="font-size: 14px; font-weight: normal;">&nbsp;</span></h1>
+<h2>Description</h2>
+<p>With &quot;Users_profile&quot; is it possible to save also users profile data. This data is stored in an extra mysql table. </p>
+<ul>
+  <b>In this extension ...</b>
+  <li>Insert/update user profile data</li>
+  <li>Dynamic form fields</li>
+  <li>Show  users profile data</li>
+  <li>Login with the language settings defined by the user (the messages) </li>
+  <li>Language (according the lang's inside the class) and country menu </li>
+  <li>just 6 user defined fields (updated in ver. 1.87) </li>
+</ul>
+<h2>Requirements</h2>
+<p>To use this extension (of course) you need the latest the &quot;access_user Class&quot;.</p>
+<h2>Installation</h2>
+<ul>
+  <li>Use the &quot;users_profile_table.sql&quot; and the &quot;countries_table.sql&quot; files to create the extra MySQL tables.</li>
+  <li>Check  the config-file "db_config.php" to fit your environment.</li>
+  <li>Login with the main application and check the example: update_user_profile.php</li>
+</ul>
+<h2>How does it work?</h2>
+<ul>
+  <li>If you use this extension you have to create the object from the &quot;Users_profile&quot; class and you have to include the extension file only. </li>
+  <li>With file &quot;update_user_profile.php&quot; you have access to change the users profile and users (login) data.</li>
+  <li>Use instead of the regular login file the new &quot;local_login.php&quot; to get messages based on the users profile settings (the language var is changed). </li>
+</ul>
+<h2>How to use?</h2>
+<p>Check the (next) information with a description and examples of the files, variables and methods. After reading this you should have enough information to build your own update user profile application.</p>
+<p><b>login_local.php</b><br>
+   With this scipt it's possible to change the language for the messages used by the class after login, f.e. you can use this setting to switch the content, too (if you are using a multiple language website).</p>
+<ul style="list-style-type: none;" class="code">
+  <li> $my_local_access-&gt;login_local($_POST['login'], $_POST['password']); <span class="style1">// call the &quot;adv.&quot; login method, thats all... </span></li>
+</ul>
+<p><b>update_user_profile.php</b><br>
+This example form will show you the most functions of &quot;Users_profile extension&quot;. I put the functions of the standard update user form together with the new one. I used in this example the dynamic formelements, too. The country menu is optional, but I think it's a nice feature. Additional methods: </p>
+<ul style="list-style-type: none;" class="code">
+  <li>$update_profile-&gt;get_profile_data(); <span class="style1">// this is used to call an existing profile record </span></li>
+  <li>$update_profile-&gt;save_profile_date($ident = &quot;&quot;, $lang = &quot;&quot;, $address = &quot;&quot;, $pc = &quot;&quot;, $city = &quot;&quot;, $country = &quot;&quot;, $phone = &quot;&quot;, $fax = &quot;&quot;, $hp = &quot;&quot;, $notes = &quot;&quot;, $field1 = &quot;&quot;, $field2 = &quot;&quot;, $field3 = &quot;&quot;, $field4 = &quot;&quot;); <span class="style1">// This method will insert/update the profile data, the last four attributes are for the user defined fields </span></li>
+  <li>$update_profile-&gt;create_form_field($formelement, $label, $length = 25); <span class="style1">// use this method for regular text type form fields, $formelement is the name for the classes variable AND the formelement, $length is an optional field length </span></li>
+  <li>$update_profile-&gt;create_country_menu(&quot;country&quot;, &quot;Country:&quot;); <span class="style1">// this function is optional and shows some countries out of the database</span></li>
+  <li>$update_profile-&gt;create_text_area($text_field, $label); <span class="style1">// this method works the same like the formfield but will output a textarea</span></li>
+  <li>$update_profile-&gt;language_menu($label); <span class="style1">// creates a select from all languages used is in this class (check the variables at the top of  the extension file) </span></li>
+</ul>
+<p>Since version 1.88 its possible to optimize different types of values for differnet type of table colomns. </p>
+<p>The table insert patterns are: <b>date_value##date</b> or <b>eu_date_value##eu_date</b> or <b>int_value##int</b></p>
+<p>The date type &quot;eu_date&quot; is used for standard european date notations (dd/mm/yyyy), if you need a US notation use the default type &quot;date&quot;. Inside the method <b>ins_string()</b> is some validation and string splitting to take care about the date value.</p>
+<p>Inside the method create_form_field() is also some new function to show european date format, use this kind of attributres inside the method:</p>
+<ul style="list-style-type: none;" class="code">
+  <li>$update_profile-&gt;create_form_field($formelement, $label, $length = 25, $required = false, $disabled = false, <b>$euro_date = true</b>) </li>
+</ul>
+<p>Note also the new variable <b>$disabled</b>, setting this variable to &quot;true&quot; will disable the generated formfield.</p>
+<p><b>If you use the user defined fields then check the information about later in this document!</b></p>
+<p><b>db_config.php</b><br> 
+Since this extension is created there are more settings inside the config file. These variables are important for the extension:</p>
+<ul style="list-style-type: none;" class="code">
+  <li>define(&quot;PROFILE_TABLE&quot;, &quot;users_profile&quot;);  <span class="style1"> // you have to change this if you use a different name for the profile database table</span></li>
+  <li>define(&quot;TBL_USERFIELD_1&quot;, &quot;user_1&quot;);<br>
+    define(&quot;TBL_USERFIELD_2&quot;, &quot;user_2&quot;);<br>
+    define(&quot;TBL_USERFIELD_3&quot;, &quot;user_3&quot;);<br>
+    define(&quot;TBL_USERFIELD_4&quot;, &quot;user_4&quot;);<br>
+define(&quot;TBL_USERFIELD_5&quot;, &quot;user_5&quot;);<br>
+  define(&quot;TBL_USERFIELD_6&quot;, &quot;user_6&quot;); <span class="style1">// change these variables if you need different names in the DB table</span></li>
+  <li></li>
+</ul>
+<p><b>Att.: If you change the (userfield ) values, you have to rename the fields in the database, too. </b></p>
+<h2><b>User defined fields &amp; variables (name) conventions</b></h2>
+<p> 
+It's possible to change at least  field names in the database and in this class, use them wisely. I added this feature to make it more clear if you check the database directly.</p>
+<p>Please notice that some methods in this extension works only if you use the same name for the form fields and the class variables. Check the example and build your own 
+
+
+application
+
+like provided and 
+
+
+your work will be much easier.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

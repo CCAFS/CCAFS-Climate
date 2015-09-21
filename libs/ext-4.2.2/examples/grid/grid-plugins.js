@@ -221,4 +221,105 @@ Ext.onReady(function(){
         iconCls: 'icon-grid',
         renderTo: Ext.getBody()
     });
+    ////////////////////////////////////////////////////////////////////////////////////////
+    // Grid 5
+    ////////////////////////////////////////////////////////////////////////////////////////	
+   Ext.define('Company', {
+        extend: 'Ext.data.Model',
+        fields: ['name', 'day1', 'day2', 'day3', 'day4', 'type']
+    });
+    var myData = [
+        ['This another yes/no',  true, true, false, false, 'boolean'],
+        ['This another yes/no',  false, true, false, true, 'boolean'],
+        ['this is a text row', 'test', 'test2', 'test3', 'test4', 'string'],
+        ['this is a time row', '03:00', '17:32', '12:33', '00:00', 'time']
+    ];
+    specialRender = function(val, meta, rec) {
+        var type = rec.get('type');
+        var result = val;
+        if (type == 'time' && Ext.isDate(val)){
+            result = Ext.util.Format.date(val,'H:i');
+        } else if (type == 'boolean' && Ext.isBoolean(val)) {
+            if (val) {result='Yes'}else{result='No'};
+        }
+        return Ext.util.Format.htmlEncode(result);
+    };
+    getCellEditor = function(record, column) {
+        return myeditors[record.get('type')];
+    };
+    var myeditors = {
+        'date'    : Ext.create('Ext.grid.CellEditor', { field: Ext.create('Ext.form.field.Date',   {selectOnFocus: true})}),
+        'string'  : Ext.create('Ext.grid.CellEditor', { field: Ext.create('Ext.form.field.Text',   {selectOnFocus: true})}),
+        'number'  : Ext.create('Ext.grid.CellEditor', { field: Ext.create('Ext.form.field.Number', {selectOnFocus: true})}),
+        'int'     : Ext.create('Ext.grid.CellEditor', { field: Ext.create('Ext.form.field.Number', {selectOnFocus: true})}),
+        'time'    : Ext.create('Ext.grid.CellEditor', { field: Ext.create('Ext.form.TimeField',    {selectOnFocus: true,format: 'H:i'})}),
+        'boolean' : Ext.create('Ext.grid.CellEditor', { field: Ext.create('Ext.form.field.ComboBox', {
+            editable: false,
+            store: [[ true, 'Yes' ], [false, 'No' ]]
+        })})
+    };
+    var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', {
+        clicksToEdit: 1
+    });
+    // create the data store
+    var store = Ext.create('Ext.data.ArrayStore', {
+        model: 'Company',
+        data: myData
+    });
+
+    // create the Grid
+    grid5 = Ext.create('Ext.grid.Panel', {
+        store:      store,
+        stateful:   true,
+        stateId:    'stateGrid',
+        plugins: [cellEditing],
+        columns: [
+            {
+                text     : 'Company',
+                flex     : 200,
+                sortable : false,
+                render   : specialRender,
+                dataIndex: 'name'
+            },
+            {
+                text     : 'day1',
+                width    : 75,
+                sortable : false,
+                renderer : Ext.Function.bind(this.specialRender, this),
+                getEditor: Ext.Function.bind(this.getCellEditor, this),
+                dataIndex: 'day1'
+            },
+            {
+                text     : 'day2',
+                width    : 75,
+                sortable : false,
+                renderer : Ext.Function.bind(this.specialRender, this),
+                getEditor: Ext.Function.bind(this.getCellEditor, this),
+                dataIndex: 'day2'
+            },
+            {
+                text     : 'day3',
+                width    : 75,
+                sortable : false,
+                renderer : Ext.Function.bind(this.specialRender, this),
+                getEditor: Ext.Function.bind(this.getCellEditor, this),
+                dataIndex: 'day3'
+            },
+            {
+                text     : 'day4',
+                width    : 75,
+                sortable : false,
+                renderer : Ext.Function.bind(this.specialRender, this),
+                getEditor: Ext.Function.bind(this.getCellEditor, this),
+                dataIndex: 'day4'
+            }
+        ],
+        height: 350,
+        width: 600,
+        renderTo: Ext.getBody(),
+        viewConfig: {
+            stripeRows: true
+        }
+    });	
+	
 });

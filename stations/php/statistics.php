@@ -18,7 +18,7 @@ if (isset($vars) && $vars != "" && count($vars) && !in_array(0, $vars)) {
 }
 
 
-   $sql ="SELECT a.file_name, a.local_url, a.station_variable_id, a.date_start, b.acronym, c.code, c.id, c.name FROM station_file a INNER JOIN station_variable b ON (a.station_variable_id = b.id) INNER JOIN station c ON (a.station_id = c.id)  WHERE TRUE $where order by c.id DESC";
+   $sql ="SELECT a.file_name, a.local_url, a.station_variable_id, a.date_start, b.acronym, c.code, c.id, c.name FROM station_file a INNER JOIN station_variable b ON (a.station_variable_id = b.id) INNER JOIN geostation c ON (a.station_id = c.id)  WHERE TRUE $where order by c.id DESC";
 
    $ret = pg_query($dbcon, $sql);
    if(!$ret){

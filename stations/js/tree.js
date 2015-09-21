@@ -31,20 +31,41 @@ Ext.require([
     'Ext.util.Point',
     'GeoExt.container.UrlLegend',
     'GeoExt.container.VectorLegend',
-    'GeoExt.panel.Legend'	
-	
+    'GeoExt.panel.Legend'
+
 ]);
 
 
 var mapPanel, tree;
 
+// para eliminar seciones cuando se refresca
+function checkFirstVisit() {
+  if(document.cookie.indexOf('mycookie')==-1) {
+	document.cookie = 'mycookie=1';
+  }
+  else {
+	Ext.Ajax.request({
+		url: 'php/Geo_statByregion.php',
+		method: 'POST',
+		params : {type:24},
+		success: function(response, opts) {
+		},
+		failure: function(response, opts) {
+
+		}
+	});
+  }
+}
+	
+
 Ext.application({
     name: 'Tree',
     launch: function() {
-	
+
 		mapHeight=400	
 		mapWidth=500	
 		tabsHeight= 600
+		MaxFileDownload=150
 		
 		var heightDiv = $("#geomap").height();
 		var widthDiv = $("#geomap").width();
@@ -70,7 +91,7 @@ Ext.application({
 		var WGS84 = new OpenLayers.Projection("EPSG:4326");
 		var WGS84_google_mercator = new OpenLayers.Projection("EPSG:900913"); //map.getProjectionObject()
 	
-	
+		
 		// Init the singleton.  Any tag-based quick tips will start working.
 		Ext.tip.QuickTipManager.init();
 
@@ -94,6 +115,7 @@ Ext.application({
 		toolip_groupLegendIMG='Legend by institutes of each country'		
 		toolip_groupLabels='Select an attribute to add labels to stations in the map'		
 		toolip_groupLayers='Base layers of map. Can select a layer by clicking in the radio button'		
+		toolip_fieldsetLogin='According to the terms of use some stations are restricted for users not authorized'		
 
 		// para corregir cuando se desplega en el boton + las varaibles aparece error en property 'isGroupHeader'
 		Ext.define('SystemFox.overrides.view.Table', {
@@ -125,7 +147,7 @@ Ext.application({
             // we do not want all overlays, to try the OverlayLayerContainer
             height: '60%',
             // width: 300,			
-            map: {allOverlays: false,controls: [],numZoomLevels: 20,
+            map: {allOverlays: false,numZoomLevels: 20,//controls: [],
 				projection: WGS84_google_mercator,
 				displayProjection: WGS84		
 			},
@@ -135,15 +157,15 @@ Ext.application({
             layers: [
 				// new OpenLayers.Layer.OSM("OSM"),
 				clusters,
-                new OpenLayers.Layer.WMS("OpenStreetMap WMS",
+                new OpenLayers.Layer.WMS("Streets Map",
                     "http://ows.terrestris.de/osm/service?",
-                    {layers: 'OSM-WMS'},
-                    {
-                        attribution: '&copy; terrestris GmbH & Co. KG <br>' +
-                            'Data &copy; OpenStreetMap ' +
-                            '<a href="http://www.openstreetmap.org/copyright/en"' +
-                            'target="_blank">contributors<a>'
-                    }
+                    {layers: 'OSM-WMS'}
+                    // ,{
+                        // attribution: '&copy; terrestris GmbH & Co. KG <br>' +
+                            // 'Data &copy; OpenStreetMap ' +
+                            // '<a href="http://www.openstreetmap.org/copyright/en"' +
+                            // 'target="_blank">contributors<a>'
+                    // }
                 ),				
                 // new OpenLayers.Layer.WMS("Global Imagery",
                     // "http://maps.opengeo.org/geowebcache/service/wms", {
@@ -154,7 +176,8 @@ Ext.application({
                         // visibility: false
                     // }
                 // ),
-				gsat,gphy,ghyb
+				//gsat,
+				gphy,ghyb
 
             ],
 			// tbar: [{
@@ -189,7 +212,7 @@ Ext.application({
 					// pack: 'justify',
 					align: 'left' // align center is the default
 				},				
-				style: "background-color: transparent;width: 360px !important;margin-left: 50px;",//opacity: .6;transparent,;margin-left: 75%
+				//style: "background-color: transparent;width: 140px !important;margin-left: 50px;",//opacity: .6;transparent,;margin-left: 75%
                 dock: 'top',
 				// layoutConfig : {
 					// align : 'stretch'
@@ -199,7 +222,612 @@ Ext.application({
 				// }				
             }]			
         });
+
+//===============================================================================================================
 	
+	
+
+	var bton_login = new Ext.Button({	
+		text:'Login',
+		icon   : icons+'buttons/login16.png',//'buttons/login24.png',
+		width:70,
+		height:22,
+		id:'btonLoginId',
+		tooltip: 'Login',
+		// scale: 'small',
+		// cls:"toolLogin",
+		handler: function(){
+			var login = Ext.create('Ext.FormPanel', {
+				// url:'php/Login.php', 
+				// id:'formLoginId',
+				bodyPadding: 5,
+				cls: 'css_labels',
+				frame:true, 
+				// title:'Please Login', 
+				defaultType:'textfield',
+				monitorValid:true,
+
+				items:[{ 
+						fieldLabel:'Login', 
+						name:'login', 
+						id:'login', 
+						labelWidth:60,
+						allowBlank:false,
+						minLength: 4, maxLength: 32
+					},{ 
+						fieldLabel:'Password', 
+						name:'password', 
+						id:'password', 
+						inputType:'password', 
+						labelWidth:60,
+						allowBlank:false, minLength: 4,
+						maxLength: 32, minLengthText: 'Password must be at least 4 characters long.' 
+					}],
+
+					buttons:[
+						{
+							text:'Sign Up',
+							overCls : 'my-over',
+							scale: 'small',
+							handler:function(){
+								/*
+								var simple = Ext.widget({
+									xtype: 'form',
+									layout: 'form',
+									collapsible: true,
+									id: 'simpleForm',
+									url: 'save-form.php',
+									frame: true,
+									title: 'Simple Form',
+									bodyPadding: '5 5 0',
+									width: 350,
+									fieldDefaults: {
+										msgTarget: 'side',
+										labelWidth: 75
+									},
+									plugins: {
+										ptype: 'datatip'
+									},
+									defaultType: 'textfield',
+									items: [{
+										fieldLabel: 'First Name',
+										afterLabelTextTpl: required,
+										name: 'first',
+										allowBlank: false,
+										tooltip: 'Enter your first name'
+									},{
+										fieldLabel: 'Last Name',
+										afterLabelTextTpl: required,
+										name: 'last',
+										allowBlank: false,
+										tooltip: 'Enter your last name'
+									},{
+										fieldLabel: 'Company',
+										name: 'company',
+										tooltip: "Enter your employer's name"
+									}, {
+										fieldLabel: 'Email',
+										afterLabelTextTpl: required,
+										name: 'email',
+										allowBlank: false,
+										vtype:'email',
+										tooltip: 'Enter your email address'
+									}, {
+										fieldLabel: 'DOB',
+										name: 'dob',
+										xtype: 'datefield',
+										tooltip: 'Enter your date of birth'
+									}, {
+										fieldLabel: 'Age',
+										name: 'age',
+										xtype: 'numberfield',
+										minValue: 0,
+										maxValue: 100,
+										tooltip: 'Enter your age'
+									}, {
+										xtype: 'timefield',
+										fieldLabel: 'Time',
+										name: 'time',
+										minValue: '8:00am',
+										maxValue: '6:00pm',
+										tooltip: 'Enter a time',
+										plugins: {
+											ptype: 'datatip',
+											tpl: 'Select time {date:date("G:i")}'
+										}
+									}],
+
+									buttons: [{
+										text: 'Save',
+										handler: function() {
+											this.up('form').getForm().isValid();
+										}
+									},{
+										text: 'Cancel',
+										handler: function() {
+											this.up('form').getForm().reset();
+										}
+									}]
+								});										
+								*/
+								Ext.getCmp('ventana_loginID').destroy();
+								
+								var formPanel = Ext.widget('form', {
+									// renderTo: Ext.getBody(),
+									frame: true,
+									width: 350,
+									labelWidth:260,
+									bodyPadding: 10,
+									bodyBorder: true,
+									// title: 'Account Registration',
+							 
+									defaults: {
+										anchor: '100%'
+									},
+									fieldDefaults: {
+										labelAlign: 'left',
+										msgTarget: 'none',
+										invalidCls: '' //unset the invalidCls so individual fields do not get styled as invalid
+									},
+							 
+									/*
+									 * Listen for validity change on the entire form and update the combined error icon
+									 */
+									listeners: {
+										fieldvaliditychange: function() {
+											this.updateErrorState();
+										},
+										fielderrorchange: function() {
+											this.updateErrorState();
+										}
+									},
+							 
+									updateErrorState: function() {
+										var me = this,
+											errorCmp, fields, errors;
+							 
+										if (me.hasBeenDirty || me.getForm().isDirty()) { //prevents showing global error when form first loads
+											errorCmp = me.down('#formErrorState');
+											fields = me.getForm().getFields();
+											errors = [];
+											fields.each(function(field) {
+												Ext.Array.forEach(field.getErrors(), function(error) {
+													errors.push({name: field.getFieldLabel(), error: error});
+												});
+											});
+											errorCmp.setErrors(errors);
+											me.hasBeenDirty = true;
+										}
+									},
+							 
+									items: [{
+										xtype: 'textfield',
+										name: 'username',
+										fieldLabel: 'User Name',
+										allowBlank: false,
+										minLength: 6
+									}, {
+										xtype: 'textfield',
+										name: 'email',
+										fieldLabel: 'Email Address',
+										vtype: 'email',
+										allowBlank: false
+									}, {
+										xtype: 'textfield',
+										name: 'password1',
+										fieldLabel: 'Password',
+										inputType: 'password',
+										style: 'margin-top:15px',
+										allowBlank: false,
+										minLength: 8
+									}, {
+										xtype: 'textfield',
+										name: 'password2',
+										fieldLabel: 'Repeat Password',
+										inputType: 'password',
+										allowBlank: false,
+										/**
+										 * Custom validator implementation - checks that the value matches what was entered into
+										 * the password1 field.
+										 */
+										validator: function(value) {
+											var password1 = this.previousSibling('[name=password1]');
+											return (value === password1.getValue()) ? true : 'Passwords do not match.'
+										}
+									},
+							 
+									/*
+									 * Terms of Use acceptance checkbox. Two things are special about this:
+									 * 1) The boxLabel contains a HTML link to the Terms of Use page; a special click listener opens this
+									 *    page in a modal Ext window for convenient viewing, and the Decline and Accept buttons in the window
+									 *    update the checkbox's state automatically.
+									 * 2) This checkbox is required, i.e. the form will not be able to be submitted unless the user has
+									 *    checked the box. Ext does not have this type of validation built in for checkboxes, so we add a
+									 *    custom getErrors method implementation.
+									 */
+									{
+										xtype: 'checkboxfield',
+										name: 'acceptTerms',
+										fieldLabel: 'Terms of Use',
+										hideLabel: true,
+										style: 'margin-top:15px',
+										boxLabel: 'I have read and accept the <a href="http://www.sencha.com/legal/terms-of-use/" class="terms">Terms of Use</a>.',
+							 
+										// Listener to open the Terms of Use page link in a modal window
+										listeners: {
+											click: {
+												element: 'boxLabelEl',
+												fn: function(e) {
+													var target = e.getTarget('.terms'),
+														win;
+													if (target) {
+														win = Ext.widget('window', {
+															title: 'Terms of Use',
+															modal: true,
+															html: '<iframe src="' + target.href + '" width="950" height="500" style="border:0"></iframe>',
+															buttons: [{
+																text: 'Decline',
+																handler: function() {
+																	this.up('window').close();
+																	formPanel.down('[name=acceptTerms]').setValue(false);
+																}
+															}, {
+																text: 'Accept',
+																handler: function() {
+																	this.up('window').close();
+																	formPanel.down('[name=acceptTerms]').setValue(true);
+																}
+															}]
+														});
+														win.show();
+														e.preventDefault();
+													}
+												}
+											}
+										},
+							 
+										// Custom validation logic - requires the checkbox to be checked
+										getErrors: function() {
+											return this.getValue() ? [] : ['You must accept the Terms of Use']
+										}
+									}],
+							 
+									dockedItems: [{
+										xtype: 'container',
+										dock: 'bottom',
+										layout: {
+											type: 'hbox',
+											align: 'middle'
+										},
+										padding: '10 10 5',
+							 
+										items: [{
+											xtype: 'component',
+											id: 'formErrorState',
+											baseCls: 'form-error-state',
+											flex: 1,
+											validText: 'Form is valid',
+											invalidText: 'Form has errors',
+											tipTpl: Ext.create('Ext.XTemplate', '<ul><tpl for="."><li><span class="field-name">{name}</span>: <span class="error">{error}</span></li></tpl></ul>'),
+							 
+											getTip: function() {
+												var tip = this.tip;
+												if (!tip) {
+													tip = this.tip = Ext.widget('tooltip', {
+														target: this.el,
+														title: 'Error Details:',
+														autoHide: false,
+														anchor: 'top',
+														mouseOffset: [-11, -2],
+														closable: true,
+														constrainPosition: false,
+														cls: 'errors-tip'
+													});
+													tip.show();
+												}
+												return tip;
+											},
+							 
+											setErrors: function(errors) {
+												var me = this,
+													baseCls = me.baseCls,
+													tip = me.getTip();
+							 
+												errors = Ext.Array.from(errors);
+							 
+												// Update CSS class and tooltip content
+												if (errors.length) {
+													me.addCls(baseCls + '-invalid');
+													me.removeCls(baseCls + '-valid');
+													me.update(me.invalidText);
+													tip.setDisabled(false);
+													tip.update(me.tipTpl.apply(errors));
+												} else {
+													me.addCls(baseCls + '-valid');
+													me.removeCls(baseCls + '-invalid');
+													me.update(me.validText);
+													tip.setDisabled(true);
+													tip.hide();
+												}
+											}
+										}, {
+											xtype: 'button',
+											formBind: true,
+											disabled: true,
+											text: 'Submit Registration',
+											width: 140,
+											handler: function() {
+												var form = this.up('form').getForm();
+												
+												if (form.isValid()) {
+													username=form.getValues().username
+													email=form.getValues().email
+													password1=form.getValues().password1
+													password2=form.getValues().password2
+													acceptTerms=form.getValues().acceptTerms
+													
+													console.log(username)
+													
+													Ext.Ajax.request({
+														url: 'php/Geo_statByregion.php',
+														method: 'POST',
+														params : {type:25,login:username, password: password1,confirm:password2,email:email,name:"real nombre",info:""},
+														success: function(response, opts) {
+															resul=response.responseText
+															// if(resul.split("\n")[1]=="OK"){
+															// console.log(resul)
+															if(resul=="OK"){
+																// Ext.getCmp('btonLoginId').setText('Logout');
+																// ventana_login.hide();
+																// ventana_login.destroy();
+																// Ext.Msg.alert('OK',"Please check your e-mail and follow the instructions."); 
+																winInfo=Ext.MessageBox.show({
+																   title: 'Information',
+																   msg: 'Please check your e-mail and follow the instructions.',
+																   width:300,
+																   buttons: Ext.MessageBox.OK,
+																   animateTarget: 'info',
+																   icon: 'x-message-box-info'
+																});	
+																winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
+																
+															}else{
+																// Ext.Msg.alert('Login Failed!',"Sorry, a user with this login and/or e-mail address already exist."); 
+																winInfo=Ext.MessageBox.show({
+																   title: 'Information',
+																   msg: 'Sorry, a user with this login and/or e-mail address already exist.',
+																   width:300,
+																   buttons: Ext.MessageBox.OK,
+																   animateTarget: 'error',
+																   icon: 'x-message-box-error'
+																});	
+																winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
+															}
+														},
+														failure: function(response, opts) {
+															var responseText = (response.responseText ? response.responseText : 'Unable to contact the server.  Please try again later.');
+															panelLaunch({
+																iconClass: 'x-panel-action-icon-tick',
+																position: 'br',
+																actionMethod: ['hide']
+															}, responseText);
+														},
+														scope: this
+													});																
+													
+													/* Normally we would submit the form to the server here and handle the response...
+													form.submit({
+														clientValidation: true,
+														url: 'register.php',
+														success: function(form, action) {
+														   //...
+														},
+														failure: function(form, action) {
+															//...
+														}
+													});
+													*/
+							 
+												
+													// Ext.Msg.alert('Submitted Values', form.getValues(true));
+												}
+											}
+										}]
+									}]
+								});
+									
+								var Register = new Ext.Window({
+									iconCls: 'key',
+									title: 'Account Registration',
+									style: "font-family: 'Oswald', sans-serif;font-size: 14px;",
+									constrainHeader: true,
+									collapsible: true,
+									resizable: false,
+									frame:true, 
+									width: 350,
+									height: 280,
+									layout: 'fit', //fit
+									plain: true,
+									bodyStyle: 'padding:5px;',
+									buttonAlign: 'center',
+									x:mainPanelWidth/2,
+									y:mainPanelHeight/4,									
+									items: [formPanel]							
+								}); // fin windows											
+								Register.show();
+							} 									
+						},
+						{ 
+								// iconCls: 'key-go',
+								text:' Submit',
+								overCls : 'my-over',
+								formBind: true,	 
+								// icon: icons+'key-go-icon.png', 
+								scale: 'small',
+								// listeners : {
+									// click: function(button,event) {
+										// Ext.getCmp('btonLoginId').setText('Hide');
+									// }
+								// },										
+								handler:function(){ 
+										Ext.Ajax.request({
+											url: 'php/Geo_statByregion.php',
+											method: 'POST',
+											params : {type:23,login:Ext.getCmp('login').getValue(), password: Ext.getCmp('password').getValue()},
+											success: function(response, opts) {
+												resul=response.responseText
+												
+												// if(resul.split("\n")[1]=="OK"){
+												if(resul=="OK"){
+													Ext.getCmp('btonLoginId').setText('Logout');
+													// ventana_login.hide();
+													ventana_login.destroy();
+												}else if(resul==10){
+													winInfo=Ext.MessageBox.show({
+													   title: 'Warning',
+													   msg: 'Login and/or password did not match to the database.',
+													   width:300,
+													   buttons: Ext.MessageBox.OK,
+													   animateTarget: 'warning',
+													   icon: 'x-message-box-warning'
+													});	
+													winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);															
+												
+												}else{
+													winInfo=Ext.MessageBox.show({
+													   title: 'Warning',
+													   msg: 'Not stations found!',
+													   width:300,
+													   buttons: Ext.MessageBox.OK,
+													   animateTarget: 'warning',
+													   icon: 'x-message-box-warning'
+													});	
+													winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+
+												}
+											},
+											failure: function(response, opts) {
+												var responseText = (response.responseText ? response.responseText : 'Unable to contact the server.  Please try again later.');
+												panelLaunch({
+													iconClass: 'x-panel-action-icon-tick',
+													position: 'br',
+													actionMethod: ['hide']
+												}, responseText);
+											},
+											scope: this
+										});										
+								/*
+									login.getForm().submit({ 
+										method:'GET',//'POST', 
+										waitTitle:'Connecting', 
+										waitMsg:'Sending data...',
+										processResponse : function(response){
+											this.response = response;
+											if(!response.responseText){
+											return true;
+											}
+											this.result = this.handleResponse(response);
+
+											// so right here you could reassign the properties:
+											this.result.success = this.result.exito;//"exito";//
+											this.result.errors = "error"//this.result.yourErrorsProperty;
+											// this.result.failure = "error"//this.result.yourErrorsProperty;
+											// this.result.data = this.result.yourDataProperty;
+											return this.result;
+										},			 
+										success:function(){ 
+											// Ext.Msg.alert('Status', 'Login Successful!', function(btn, text){
+												// if (btn == 'ok'){
+
+													// selectFeature.enable();
+													// printBton.enable();
+													// bton_worldclim.enable();
+													// help.enable();
+
+													// Ext.getCmp('panel_uno').setDisabled(false);
+													// Ext.getCmp('panel_dos').setDisabled(false);
+													// Ext.getCmp('panel_tres').setDisabled(false);
+													// Ext.getCmp('panel_cuatro').setDisabled(false);
+													// Ext.getCmp('stationCmb').setDisabled(true);
+													// Ext.getCmp('stateCmb').setDisabled(true);
+													// Ext.getCmp('munCmb').setDisabled(true);
+													// Ext.getCmp('watershedCmb').setDisabled(true);
+													// Ext.getCmp('sdate').setDisabled(true);
+													// Ext.getCmp('edate').setDisabled(true);
+													
+														
+												// }
+											// });
+											ventana_login.hide();
+										},
+				 
+										failure:function(form, action){ 
+											if(action.failureType == 'server'){ 
+												// obj = Ext.util.JSON.decode(action.response.responseText); 
+												// Ext.Msg.alert('Login Failed!', obj.errors.reason); 
+												Ext.Msg.alert('Login Failed!'); 
+											}else{ 
+												Ext.Msg.alert('Warning!', 'Authentication server is unreachable : ' + action.response.responseText); 
+											} 
+											login.getForm().reset(); 
+										} 
+									}); */
+						} 
+					}] 
+		   });
+		   
+			btonLog=Ext.getCmp('btonLoginId').text
+			
+			var ventana_login = new Ext.Window({
+				iconCls: 'key',
+				title: 'Login',
+				id:'ventana_loginID',
+				style: "font-family: 'Oswald', sans-serif;font-size: 14px;",
+				constrainHeader: true,
+				collapsible: true,
+				resizable: false,
+				frame:true, 
+				width: 250,
+				height: 150,
+				layout: 'fit', //fit
+				plain: true,
+				bodyStyle: 'padding:5px;',
+				buttonAlign: 'center',
+				x:mainPanelWidth/2,
+				y:mainPanelHeight/3,									
+				items: [login]							
+			}); // fin windows
+				
+			if(btonLog=="Login"){		
+				ventana_login.show();
+			}else{
+				Ext.Ajax.request({
+					url: 'php/Geo_statByregion.php',
+					method: 'POST',
+					params : {type:24},
+					success: function(response, opts) {
+						resul=response.responseText
+						Ext.getCmp('btonLoginId').setText('Login');
+						ventana_login.hide();
+					},
+					failure: function(response, opts) {
+						var responseText = (response.responseText ? response.responseText : 'Unable to contact the server.  Please try again later.');
+						panelLaunch({
+							iconClass: 'x-panel-action-icon-tick',
+							position: 'br',
+							actionMethod: ['hide']
+						}, responseText);
+					},
+					scope: this
+				});						
+			
+			}
+		   
+		}// fin handler
+	})
+
+//===============================================================================================================
+		
 		
         var storeLayers = Ext.create('Ext.data.TreeStore', {
             model: 'GeoExt.data.LayerTreeModel',
@@ -346,9 +974,8 @@ Ext.application({
 					storestate.getStore().load({
 						params: {countryID: combo.getValue(),type:1}, // callback: function(records, operation, success) {console.log(records);} // para comprobar 
 					});
-					
-				}}                                
-			}			
+			}}                                
+		}			
     });
 	
 	Ext.define('modelState', { 
@@ -436,7 +1063,8 @@ Ext.application({
 				{ name: 'elev', type: 'string' },
 				{ name: 'country', type: 'string' },
 				{ name: 'state', type: 'string' },
-				{ name: 'city', type: 'string' }
+				{ name: 'city', type: 'string' },
+				{ name: 'copyright', type: 'string' }
 			]
 		});	
 		Ext.define('modelvarList', { 
@@ -467,7 +1095,7 @@ Ext.application({
 			]
 		});			
 		onZoomExtentALL = function () {
-			layerTemp=mapPanel.map.getLayersByName("FindStation")[0]
+			layerTemp=mapPanel.map.getLayersByName("Search station")[0]
 			var BoundALL = layerTemp.getDataExtent();
 			mapPanel.map.zoomToExtent(BoundALL);
 		}			
@@ -500,7 +1128,10 @@ Ext.application({
 				proxy: {
 					type: 'ajax',
 					url: 'php/statistics.php',
-					extraParams: {stations : selgrid, variable:varList},			
+					extraParams: {stations : selgrid, variable:varList},
+					actionMethods: {
+						read: 'POST'
+					},					
 					reader: {
 						type: 'json',
 						root: 'topics'
@@ -938,7 +1569,581 @@ Ext.application({
 
 		}// fin function generateGraps
 
+Ext.define('MyApp.ux.DisableCheckColumn', {
+    extend: 'Ext.ux.CheckColumn',
+    alias: 'widget.disablecheckcolumn',
 
+    /**
+     * Only process events for checkboxes that do not have a "disabled" class
+     */
+    processEvent: function(type, view, cell, recordIndex, cellIndex, e) {
+        var enabled = Ext.query('[class*=disabled]', cell).length == 0,
+            me = this;
+
+        if (enabled) {
+            me.callParent(arguments);
+        }
+    },
+
+});
+
+    var fieldsetLogin = {
+        xtype: 'fieldset',
+        title: 'Sign in with username and password   '+ '<img id="help_toolip" class="tooltipIcon" src='+icons+infoB+' data-qtip="'+toolip_fieldsetLogin+'" />',//<span data-qtip="hello">First Name</span>  
+		id:'Login',
+        layout: 'anchor',
+		width:fieldsetWidth,
+        defaults: {
+            anchor: '100%',
+			bodyStyle: 'padding:4px'
+        },
+        collapsible: true,
+        collapsed: false,
+		buttonAlign: 'right',
+		items: [
+			{
+				xtype: 'buttongroup',
+				// columns: 1,
+				// layout: 'column',
+				layout: {
+					type: 'hbox',
+					//columns: 2,
+					align: 'middle',
+					pack: 'center',
+						
+
+				},			
+				// style:'font-size: 10px;',
+				cls:'my-cls',
+				// layout: {
+					// type: 'vbox',
+					// align: 'center'
+				// },				
+				style: {
+					border: 0,
+					padding: 1
+				},				
+				defaults: {
+					scale: 'small',
+					// flex: 1
+				},
+				items: [		
+					{
+						xtype:'button',
+						id:'btonLoginId',
+						text:'Login',
+						icon: icons+'key-icon.png',
+						width:70,
+						handler: function(){
+							Ext.getCmp('mainpanelID').setDisabled(true);
+							var login = Ext.create('Ext.FormPanel', {
+								// url:'php/Login.php', 
+								// id:'formLoginId',
+								bodyPadding: 5,
+								cls: 'css_labels',
+								frame:true, 
+								// title:'Please Login', 
+								defaultType:'textfield',
+								monitorValid:true,
+								defaults: {
+									listeners:{
+										specialkey: function(field, e){
+											if (e.getKey() == e.ENTER){
+												var element = Ext.getCmp("Btn_Submit_id");
+												element.handler.call(element.scope);
+												// element.fireEvent('click',element); // field.up('form').getForm().submit({});
+											}
+										}									
+									}
+								},
+								items:[{ 
+										fieldLabel:'Login', 
+										name:'login', 
+										id:'login', 
+										labelWidth:60,
+										allowBlank:false,
+										minLength: 4, maxLength: 32
+									},{ 
+										fieldLabel:'Password', 
+										name:'password', 
+										id:'password', 
+										inputType:'password', 
+										labelWidth:60,
+										allowBlank:false, minLength: 4,
+										maxLength: 32, minLengthText: 'Password must be at least 4 characters long.' 
+									}],
+
+									buttons:[
+										{ 
+												// iconCls: 'key-go',
+												text:' Submit',
+												id:"Btn_Submit_id",
+												overCls : 'my-over',
+												formBind: true,	 
+												// icon: icons+'key-go-icon.png', 
+												scale: 'small',
+												// listeners : {
+													// click: function(button,event) {
+														// Ext.getCmp('btonLoginId').setText('Hide');
+													// }
+												// },										
+												handler:function(){ 
+														Ext.Ajax.request({
+															url: 'php/Geo_statByregion.php',
+															method: 'POST',
+															params : {type:23,login:Ext.getCmp('login').getValue(), password: Ext.getCmp('password').getValue()},
+															success: function(response, opts) {
+																resul=response.responseText
+																
+																// if(resul.split("\n")[1]=="OK"){
+																if(resul=="OK"){
+																	Ext.getCmp('btonLoginId').setText('Logout');
+																	// ventana_login.hide();
+																	ventana_login.destroy();
+																	Ext.getCmp('mainpanelID').enable()
+																}else if(resul==10){
+																	winInfo=Ext.MessageBox.show({
+																	   title: 'Warning',
+																	   msg: 'Login and/or password did not match to the database.',
+																	   width:300,
+																	   buttons: Ext.MessageBox.OK,
+																	   animateTarget: 'warning',
+																	   icon: 'x-message-box-warning'
+																	});	
+																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);															
+																
+																}else{
+																	winInfo=Ext.MessageBox.show({
+																	   title: 'Warning',
+																	   msg: 'Not stations found!',
+																	   width:300,
+																	   buttons: Ext.MessageBox.OK,
+																	   animateTarget: 'warning',
+																	   icon: 'x-message-box-warning'
+																	});	
+																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+
+																}
+															},
+															failure: function(response, opts) {
+																var responseText = (response.responseText ? response.responseText : 'Unable to contact the server.  Please try again later.');
+																panelLaunch({
+																	iconClass: 'x-panel-action-icon-tick',
+																	position: 'br',
+																	actionMethod: ['hide']
+																}, responseText);
+															},
+															scope: this
+														});										
+													
+										} 
+									}],
+									// keys: [{ key: Ext.EventObject.ENTER, fn: Ext.getCmp('Btn_Submit_id') }]
+									
+						   });
+						   
+							btonLog=Ext.getCmp('btonLoginId').text
+							
+							var ventana_login = new Ext.Window({
+								iconCls: 'key',
+								title: 'Login',
+								id:'ventana_loginID',
+								style: "font-family: 'Oswald', sans-serif;font-size: 14px;",
+								constrainHeader: true,
+								collapsible: true,
+								resizable: false,
+								frame:true, 
+								// keys: [{ key: Ext.EventObject.ENTER, scope: this, handler:function(){console.log("holaaa")} }],
+								width: 250,
+								height: 150,
+								layout: 'fit', //fit
+								plain: true,
+								bodyStyle: 'padding:5px;',
+								buttonAlign: 'center',
+								x:mainPanelWidth/2,
+								y:mainPanelHeight/3,									
+								items: [login],
+								enablekeyEvents: true,
+								listeners:{
+									'close':function(){
+										Ext.getCmp('mainpanelID').enable()
+									}									
+								}								
+							}); // fin windows
+								
+							if(btonLog=="Login"){		
+								ventana_login.show();
+							}else{
+								Ext.Ajax.request({
+									url: 'php/Geo_statByregion.php',
+									method: 'POST',
+									params : {type:24},
+									success: function(response, opts) {
+										resul=response.responseText
+										Ext.getCmp('btonLoginId').setText('Login');
+										ventana_login.hide();
+										Ext.getCmp('mainpanelID').enable()
+									},
+									failure: function(response, opts) {
+										var responseText = (response.responseText ? response.responseText : 'Unable to contact the server.  Please try again later.');
+										panelLaunch({
+											iconClass: 'x-panel-action-icon-tick',
+											position: 'br',
+											actionMethod: ['hide']
+										}, responseText);
+									},
+									scope: this
+								});						
+								
+							}						
+						} // fin handler Login
+					},
+					{
+						xtype:'button',
+						text:'Sign Up',
+						icon: icons+'forms-icon.png',
+						width:70,
+						margin: '5px 5px 0 5px',
+						handler: function(){
+							Ext.getCmp('mainpanelID').setDisabled(true);
+							
+							if(Ext.getCmp('ventana_loginID')){
+								Ext.getCmp('ventana_loginID').destroy();
+							}
+							
+							var formPanel = Ext.widget('form', {
+								// renderTo: Ext.getBody(),
+								frame: true,
+								width: 350,
+								labelWidth:260,
+								bodyPadding: 10,
+								bodyBorder: true,
+								// title: 'Account Registration',
+						 
+								defaults: {
+									anchor: '100%'
+								},
+								fieldDefaults: {
+									labelAlign: 'left',
+									msgTarget: 'none',
+									invalidCls: '' //unset the invalidCls so individual fields do not get styled as invalid
+								},
+						 
+								/*
+								 * Listen for validity change on the entire form and update the combined error icon
+								 */
+								listeners: {
+									fieldvaliditychange: function() {
+										this.updateErrorState();
+									},
+									fielderrorchange: function() {
+										this.updateErrorState();
+									}
+								},
+						 
+								updateErrorState: function() {
+									var me = this,
+										errorCmp, fields, errors;
+						 
+									if (me.hasBeenDirty || me.getForm().isDirty()) { //prevents showing global error when form first loads
+										errorCmp = me.down('#formErrorState');
+										fields = me.getForm().getFields();
+										errors = [];
+										fields.each(function(field) {
+											Ext.Array.forEach(field.getErrors(), function(error) {
+												errors.push({name: field.getFieldLabel(), error: error});
+											});
+										});
+										errorCmp.setErrors(errors);
+										me.hasBeenDirty = true;
+									}
+								},
+						 
+								items: [{
+									xtype: 'textfield',
+									name: 'username',
+									fieldLabel: 'User Name',
+									allowBlank: false,
+									minLength: 6
+								}, {
+									xtype: 'textfield',
+									name: 'email',
+									fieldLabel: 'Email Address',
+									vtype: 'email',
+									allowBlank: false
+								}, {
+									xtype: 'textfield',
+									name: 'password1',
+									fieldLabel: 'Password',
+									inputType: 'password',
+									style: 'margin-top:15px',
+									allowBlank: false,
+									minLength: 8
+								}, {
+									xtype: 'textfield',
+									name: 'password2',
+									fieldLabel: 'Repeat Password',
+									inputType: 'password',
+									allowBlank: false,
+									/**
+									 * Custom validator implementation - checks that the value matches what was entered into
+									 * the password1 field.
+									 */
+									validator: function(value) {
+										var password1 = this.previousSibling('[name=password1]');
+										return (value === password1.getValue()) ? true : 'Passwords do not match.'
+									}
+								},
+						 
+								/*
+								 * Terms of Use acceptance checkbox. Two things are special about this:
+								 * 1) The boxLabel contains a HTML link to the Terms of Use page; a special click listener opens this
+								 *    page in a modal Ext window for convenient viewing, and the Decline and Accept buttons in the window
+								 *    update the checkbox's state automatically.
+								 * 2) This checkbox is required, i.e. the form will not be able to be submitted unless the user has
+								 *    checked the box. Ext does not have this type of validation built in for checkboxes, so we add a
+								 *    custom getErrors method implementation.
+								 */
+								{
+									xtype: 'checkboxfield',
+									name: 'acceptTerms',
+									fieldLabel: 'Terms of Use',
+									hideLabel: true,
+									style: 'margin-top:15px',
+									// boxLabel: 'I have read and accept the <a href="http://172.22.52.48/downloads/docs/cordex_terms_of_use_stations.pdf" class="terms">Terms of Use</a>.',
+									boxLabel: 'I have read and accept the <a href="http://ccafs-climate.org/downloads/docs/cordex_terms_of_use_stations.pdf" class="terms">Terms of Use</a>.',
+						 
+									// Listener to open the Terms of Use page link in a modal window
+									listeners: {
+										click: {
+											element: 'boxLabelEl',
+											fn: function(e) {
+												var target = e.getTarget('.terms'),
+													win;
+												if (target) {
+													win = Ext.widget('window', {
+														title: 'Terms of Use',
+														modal: true,
+														html: '<iframe src="' + target.href + '" width="550" height="500" style="border:0"></iframe>',
+														x:0,
+														y:0,															
+														buttons: [{
+															text: 'Decline',
+															handler: function() {
+																this.up('window').close();
+																formPanel.down('[name=acceptTerms]').setValue(false);
+															}
+														}, {
+															text: 'Accept',
+															handler: function() {
+																this.up('window').close();
+																formPanel.down('[name=acceptTerms]').setValue(true);
+															}
+														}]
+													});
+													win.show();
+													e.preventDefault();
+												}
+											}
+										}
+									},
+						 
+									// Custom validation logic - requires the checkbox to be checked
+									getErrors: function() {
+										return this.getValue() ? [] : ['You must accept the Terms of Use']
+									}
+								}],
+						 
+								dockedItems: [{
+									xtype: 'container',
+									dock: 'bottom',
+									layout: {
+										type: 'hbox',
+										align: 'middle'
+									},
+									padding: '10 10 5',
+						 
+									items: [{
+										xtype: 'component',
+										id: 'formErrorState',
+										baseCls: 'form-error-state',
+										flex: 1,
+										validText: 'Form is valid',
+										invalidText: 'Form has errors',
+										tipTpl: Ext.create('Ext.XTemplate', '<ul><tpl for="."><li><span class="field-name">{name}</span>: <span class="error">{error}</span></li></tpl></ul>'),
+						 
+										getTip: function() {
+											var tip = this.tip;
+											if (!tip) {
+												tip = this.tip = Ext.widget('tooltip', {
+													target: this.el,
+													title: 'Error Details:',
+													id:"tooltipLoginRegisID",
+													autoHide: false,
+													anchor: 'top',
+													mouseOffset: [-11, -2],
+													closable: true,
+													constrainPosition: false,
+													cls: 'errors-tip'
+												});
+												tip.show();
+											}
+											return tip;
+										},
+						 
+										setErrors: function(errors) {
+											var me = this,
+												baseCls = me.baseCls,
+												tip = me.getTip();
+						 
+											errors = Ext.Array.from(errors);
+						 
+											// Update CSS class and tooltip content
+											if (errors.length) {
+												me.addCls(baseCls + '-invalid');
+												me.removeCls(baseCls + '-valid');
+												me.update(me.invalidText);
+												tip.setDisabled(false);
+												tip.update(me.tipTpl.apply(errors));
+											} else {
+												me.addCls(baseCls + '-valid');
+												me.removeCls(baseCls + '-invalid');
+												me.update(me.validText);
+												tip.setDisabled(true);
+												tip.hide();
+											}
+										}
+									}, {
+										xtype: 'button',
+										formBind: true,
+										disabled: true,
+										text: 'Submit Registration',
+										width: 140,
+										handler: function() {
+											var form = this.up('form').getForm();
+											
+											if (form.isValid()) {
+												username=form.getValues().username
+												email=form.getValues().email
+												password1=form.getValues().password1
+												password2=form.getValues().password2
+												acceptTerms=form.getValues().acceptTerms
+												
+												Ext.Ajax.request({
+													url: 'php/Geo_statByregion.php',
+													method: 'POST',
+													params : {type:25,login:username, password: password1,confirm:password2,email:email,name:"real nombre",info:""},
+													success: function(response, opts) {
+														resul=response.responseText
+														// if(resul.split("\n")[1]=="OK"){
+														// console.log(resul)
+														if(resul=="OK"){
+															// Ext.getCmp('btonLoginId').setText('Logout');
+															// ventana_login.hide();
+															// ventana_login.destroy();
+															// Ext.Msg.alert('OK',"Please check your e-mail and follow the instructions."); 
+															winInfo=Ext.MessageBox.show({
+															   title: 'Information',
+															   msg: 'Please check your e-mail and follow the instructions.',
+															   width:300,
+															   buttons: Ext.MessageBox.OK,
+															   animateTarget: 'info',
+															   icon: 'x-message-box-info',
+															   fn : function(btn) {
+																	if (btn == 'ok') {
+																		Ext.getCmp('registerID').destroy()
+																	}
+																}
+																
+															});	
+															winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
+															Ext.getCmp('mainpanelID').enable()
+															
+															
+														}else{
+															// Ext.Msg.alert('Login Failed!',"Sorry, a user with this login and/or e-mail address already exist."); 
+															winInfo=Ext.MessageBox.show({
+															   title: 'Information',
+															   msg: 'Sorry, a user with this login and/or e-mail address already exist.',
+															   width:300,
+															   buttons: Ext.MessageBox.OK,
+															   animateTarget: 'error',
+															   icon: 'x-message-box-error'
+															   
+															});	
+															winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
+														}
+													},
+													failure: function(response, opts) {
+														var responseText = (response.responseText ? response.responseText : 'Unable to contact the server.  Please try again later.');
+														panelLaunch({
+															iconClass: 'x-panel-action-icon-tick',
+															position: 'br',
+															actionMethod: ['hide']
+														}, responseText);
+													},
+													scope: this
+												});																
+												
+												/* Normally we would submit the form to the server here and handle the response...
+												form.submit({
+													clientValidation: true,
+													url: 'register.php',
+													success: function(form, action) {
+													   //...
+													},
+													failure: function(form, action) {
+														//...
+													}
+												});
+												*/
+						 
+											
+												// Ext.Msg.alert('Submitted Values', form.getValues(true));
+											}
+										}
+									}]
+								}]
+							});
+								
+							var Register = new Ext.Window({
+								iconCls: 'key',
+								id:"registerID",
+								title: 'Account Registration',
+								style: "font-family: 'Oswald', sans-serif;font-size: 14px;",
+								constrainHeader: true,
+								collapsible: true,
+								resizable: false,
+								frame:true, 
+								width: 350,
+								height: 280,
+								layout: 'fit', //fit
+								plain: true,
+								bodyStyle: 'padding:5px;',
+								buttonAlign: 'center',
+								x:mainPanelWidth/2,
+								y:mainPanelHeight/4,									
+								items: [formPanel],
+								listeners:{
+									'close':function(){
+										Ext.getCmp('mainpanelID').enable()
+										if(Ext.getCmp('tooltipLoginRegisID')){
+											Ext.getCmp('tooltipLoginRegisID').destroy()
+										}
+									}
+								}									
+							}); // fin windows											
+							Register.show();
+																
+						
+						}
+					}					
+				]
+			}
+		
+		]
+	}
+	
     var groupByRegion = {
         xtype: 'fieldset',
         title: 'Search by region   '+ '<img id="help_toolip" class="tooltipIcon" src='+icons+infoB+' data-qtip="'+toolip_groupByRegion+'" />',//<span data-qtip="hello">First Name</span>  
@@ -954,7 +2159,7 @@ Ext.application({
 			{	buttonAlign:'center',
 			   bodyStyle: 'padding-top:5px; border-bottom:1px solid #CCCCCC; width:80px;',
 			  buttons: [{
-				text: 'Execute',
+				text: 'Search',
 				style: {
 					// background: '#FF5566'
 				},				
@@ -968,10 +2173,10 @@ Ext.application({
 						stateVal = stateCmb.getValue()						
 						municipVal = cityCmb.getValue()	
 						
-						// layerTemp=mapPanel.map.getLayersByName("FindRegion")[0]
+						// layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 						// if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
 
-						// layerTemp=mapPanel.map.getLayersByName("FindStation")[0]
+						// layerTemp=mapPanel.map.getLayersByName("Search station")[0]
 						// if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
 							
 						if(Ext.getCmp('popupID')){
@@ -983,7 +2188,7 @@ Ext.application({
 							// handler: function(){if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}},
 							listeners : {        
 								beforerequest : function () {myMask.show();},
-								requestcomplete : function () {myMask.hide();}
+								// requestcomplete : function () {myMask.hide();}
 							}
 						});
 							
@@ -1004,14 +2209,14 @@ Ext.application({
 								params : { type:1,country : country, state:state, municip:municip},
 								method: 'GET',
 								success: function ( result, request ) {
-									layerTemp=mapPanel.map.getLayersByName("FindRegion")[0]
+									layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 									if(layerTemp){layerTemp.destroyFeatures();}
 									
 									geocapa = result.responseText;
 									var format = new OpenLayers.Format.GeoJSON({'internalProjection': new OpenLayers.Projection("EPSG:900913"), 'externalProjection': new OpenLayers.Projection("EPSG:4326")
 									});
 									mapPanel.map.addLayer(layerTempRegion);
-									layerTemp=mapPanel.map.getLayersByName("FindRegion")[0]
+									layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 									layerTemp.addFeatures(format.read(geocapa));
 									var bounds = layerTemp.getDataExtent();
 									if(bounds){ mapPanel.map.panTo(bounds.getCenterLonLat()); mapPanel.map.zoomToExtent(bounds);}
@@ -1026,7 +2231,7 @@ Ext.application({
 								params : { type:2,country : country, state:state, municip:municip},
 								method: 'GET',
 								success: function ( result, request ) {
-									layerTemp=mapPanel.map.getLayersByName("FindStation")[0]
+									layerTemp=mapPanel.map.getLayersByName("Search station")[0]
 									if(layerTemp){layerTemp.destroyFeatures();}
 								
 									geocapa = result.responseText;
@@ -1034,7 +2239,7 @@ Ext.application({
 									});
 									if(format.read(geocapa)[0]){
 										mapPanel.map.addLayer(layerTempStat);
-										layerTemp=mapPanel.map.getLayersByName("FindStation")[0]
+										layerTemp=mapPanel.map.getLayersByName("Search station")[0]
 										layerTemp.addFeatures(format.read(geocapa));
 									}
 								},
@@ -1109,12 +2314,70 @@ Ext.application({
 							});	
 							
 							var selModel2 = Ext.create('Ext.selection.CheckboxModel', {
+								mode: 'SIMPLE',
 								listeners: {
 									selectionchange: function(sm, selections) {
 										gridRegion.down('#removeButton').setDisabled(selections.length === 0);
 										gridRegion.down('#idstatistic').setDisabled(selections.length === 0);
+										
 									}
-								}
+								},
+								select: function(records, keepExisting, suppressEvent) {
+									if (Ext.isDefined(records)) {
+										this.doSelect(records, keepExisting, suppressEvent);
+									}
+								},
+								selectAll: function( suppressEvent ) {
+									var me = this,
+										selections = me.store.getRange();
+									countFree=[]
+									for( var key in selections ) {
+										// if( selections[key].data.copyright == 'Restricted' ||  selections[key].data.copyright == 'Request' ) {
+											// console.log(selections[key].data)
+											// gridRegionStore.remove(selections[key]);
+											// selections.splice( key, 1 );
+											// break;
+											if( selections[key].data.copyright == 'Free'){
+												countFree.push(selections[key].data.copyright)
+												// var currentUserRecord = gridRegion.store.getAt(key);
+												// gridRegion.store.removeAt(key);
+												// gridRegion.store.insert(0, [currentUserRecord]);												
+											}
+										// }
+									}
+									
+									if(countFree.length>150){
+										Ext.getCmp('mainTableID').collapse()
+										winInfo=Ext.MessageBox.show({
+										   title: 'Information',
+										   msg: 'Exceeds the maximum number (Max. 150) of downloads',
+										   width:300,
+										   buttons: Ext.MessageBox.OK,
+										   animateTarget: 'info',
+										   icon: 'x-message-box-info'
+										});	
+										winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+									}else{
+										var i = 0,
+											len = selections.length,
+											selLen = me.getSelection().length;
+											
+										// if( len != selLen ) {
+										if( selLen==0 ) {
+											me.bulkChange = true;
+											for (; i < len; i++) {
+												me.doSelect(selections[i], true, suppressEvent);
+											}
+											delete me.bulkChange;
+											me.maybeFireSelectionChange(me.getSelection().length !== selLen);
+										}
+										else {
+											me.deselectAll( suppressEvent );
+										}									
+									}
+
+								}								
+								
 							});
 							
 							btn_download = function () {
@@ -1123,15 +2386,27 @@ Ext.application({
 								for(var i = 0; i < selection.length; i++) {
 									selgrid.push(Number(selection[i].data.id));
 								}
-								Ext.DomHelper.append(document.body, {
-								  tag: 'iframe',
-								  id:'downloadIframe',
-								  frameBorder: 0,
-								  width: 0,
-								  height: 0,
-								  css: 'display:none;visibility:hidden;height: 0px;',
-								  src: 'php/dowloaddata.php?station='+Ext.encode(selgrid)+'&'+'country='+countryVal+'&'+'state='+stateVal+'&'+'municip='+municipVal+'&'+'variable='+Ext.encode(cmbVar.getValue())
-								});
+								if(selgrid.length>MaxFileDownload){
+									winInfo=Ext.MessageBox.show({
+									   title: 'Information',
+									   msg:"Exceeds the maximum number (Max. 150) of downloads",
+									   width:300,
+									   buttons: Ext.MessageBox.OK,
+									   animateTarget: 'info',
+									   icon: 'x-message-box-info'
+									});	
+									winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);								
+								}else{
+									Ext.DomHelper.append(document.body, {
+									  tag: 'iframe',
+									  id:'downloadIframe',
+									  frameBorder: 0,
+									  width: 0,
+									  height: 0,
+									  css: 'display:none;visibility:hidden;height: 0px;',
+									  src: 'php/dowloaddata.php?station='+Ext.encode(selgrid)+'&'+'country='+countryVal+'&'+'state='+stateVal+'&'+'municip='+municipVal+'&'+'variable='+Ext.encode(cmbVar.getValue())
+									});
+								}
 							}	
 
 							cmbVar= Ext.create('Ext.form.field.ComboBox', { 
@@ -1151,7 +2426,7 @@ Ext.application({
 								}
 							
 							});
-		
+
 							gridRegion = Ext.create('Ext.grid.Panel', {
 								id: 'gridRegionID',
 								border: true,
@@ -1165,6 +2440,29 @@ Ext.application({
 								selType: 'checkboxmodel',
 								autoHeight: true,
 								columns: [
+									// {
+										// xtype: 'disablecheckcolumn',
+										// text: 'copyright',
+										// dataIndex: 'copyright',
+										// renderer: function(value, meta, record) {
+											
+											// var cssPrefix = Ext.baseCSSPrefix,
+												// cls = [cssPrefix + 'grid-checkheader'],
+												// disabled ="" // logic to disable checkbox e.g.: !can_be_checked
+
+											// if (value && disabled) {
+												// cls.push(cssPrefix + 'grid-checkheader-checked-disabled');
+											// } else if (value) {
+												// cls.push(cssPrefix + 'grid-checkheader-checked');
+											// } else if (disabled) {
+												// cls.push(cssPrefix + 'grid-checkheader-disabled');
+											// }
+
+											// return '<div class="' + cls.join(' ') + '">&#160;</div>';
+
+										// }
+									// },								
+								
 									{
 										xtype: 'actioncolumn',
 										minWidth: 20,
@@ -1175,7 +2473,7 @@ Ext.application({
 											handler: function(grid, rowIndex, colIndex) {
 												var rec = gridRegionStore.getAt(rowIndex);
 												selectionID = rec.get('id');
-												layerTemp=mapPanel.map.getLayersByName("FindStation")[0]
+												layerTemp=mapPanel.map.getLayersByName("Search station")[0]
 												for (var i = layerTemp.features.length - 1; i >= 0; --i) {
 													if(layerTemp.features[i].attributes.id==selectionID){
 														featureSel=layerTemp.features[i].geometry
@@ -1194,7 +2492,6 @@ Ext.application({
 														// mapPanel.map.removeControl(selectFeature); // selectFeature.deactivate()
 													}
 												}											
-												
 											}
 										}]
 									},		
@@ -1208,6 +2505,7 @@ Ext.application({
 											handler: function(grid, rowIndex, colIndex) {
 												var rec = gridRegionStore.getAt(rowIndex);
 												selectionID = rec.get('id');
+												statName = rec.get('name');
 												
 												varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
 												var arrayvar =new Array() //varlist.split(',');
@@ -1235,7 +2533,7 @@ Ext.application({
 												cmbPeriod='cmbPeriod'+selectionID
 												cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
 													fieldLabel: 'Select graphic model',
-													id:'cmbPeriodID'+selectionID,
+													id:'cmbPeriodID',
 													labelWidth:150,
 													store: {
 														fields: ['value','name'], 
@@ -1254,51 +2552,67 @@ Ext.application({
 														select: function() {
 															var actTab = tabs.getActiveTab();
 															var idx = tabs.items.indexOf(actTab);
-															actTabId=parseInt((actTab.title).match(/\d+/)[0])
-															var idPeriod = Ext.getCmp('cmbPeriodID'+actTabId).getValue()
-															generateGraps(actTabId,idPeriod,Ext.encode(cmbVar.getValue()))
+															// actTabId=parseInt((actTab.title).match(/\d+/)[0])
+															var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
+															generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
 
 														}
 													}
+												});	
+												
+												btonReturn= new Ext.Button({
+													pressedCls : 'my-pressed',
+													overCls : 'my-over',
+													tooltip: "Return to map",
+													text:'Return to map',
+													icon: icons+'map.png', 
+													scale: 'small',
+													handler: function(){
+														tabs.setActiveTab(0);
+													}													
+												});	
+												if(Ext.getCmp('graphic_tab')){
+													tabs.remove(Ext.getCmp('graphic_tab'), true);
+												}												
+
+												tabs.add({
+													// contentEl: "desc",
+													// xtype: 'panel',
+													title: 'Graph '+statName,//'Graphic_id'+selectionID
+													name: 'graphic_tab',
+													// width:mainPanelWidth-15,
+													// height: mainPanelHeight,
+													autoScroll: true,
+													// height: 100,
+													// autoHeight: true,
+													// layout: 'fit',
+													id: 'graphic_tab',
+													 // html: new Ext.XTemplate(
+													 // tpl
+													 // '<div id="grap_tmin_'+selectionID+'" ></div>',
+													 // '<div id="grap_prec_'+selectionID+'"></div>'
+													 // ),
+													 // .apply({value: '2. HTML property of a panel generated by an XTemplate'}),
+													closable: true,
+													dockedItems: [
+														{
+														xtype: 'toolbar',
+														items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+														}
+													]													
 												});		
-												if(!Ext.getCmp('graphic'+selectionID)){
-													tabs.add({
-														// contentEl: "desc",
-														// xtype: 'panel',
-														title: 'Graphic_id'+selectionID,
-														name: 'graphic'+selectionID,
-														// width:mainPanelWidth-15,
-														// height: mainPanelHeight,
-														autoScroll: true,
-														// height: 100,
-														// autoHeight: true,
-														// layout: 'fit',
-														id: 'graphic'+selectionID,
-														 // html: new Ext.XTemplate(
-														 // tpl
-														 // '<div id="grap_tmin_'+selectionID+'" ></div>',
-														 // '<div id="grap_prec_'+selectionID+'"></div>'
-														 // ),
-														 // .apply({value: '2. HTML property of a panel generated by an XTemplate'}),
-														closable: true,
-														dockedItems: [
-															{
-															xtype: 'toolbar',
-															items: [cmbPeriod]
-															}
-														]													
-													});		
-												}
+												
 												var t = new Ext.XTemplate(tpl);
-												Ext.getCmp('graphic'+selectionID).update(t.apply(datatest));
+												Ext.getCmp('graphic_tab').update(t.apply(datatest));
 												// Ext.getCmp('graphic'+selectionID).update('This<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long');
 												
 												Ext.getCmp('mapPanelID').setHeight(0)
 												Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
 												// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
-												tabs.setActiveTab('graphic'+selectionID);
+												tabs.setActiveTab('graphic_tab');
 												
 												generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+												
 											} // handler
 										}]
 									},								
@@ -1310,18 +2624,19 @@ Ext.application({
 										// renderer : function(value, metaData, record, rowIndex)
 										// {return rowIndex+1;}
 									// },			
-									{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1},
-									{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1},
-									{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4},
-									{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3},
-									{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2},
+									{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
+									{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
+									{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
+									{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
+									{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
 									
 									// { text: 'category',minWidth: 100,dataIndex: 'category', flex: 4},
 
 									// { text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3},
 									// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
 									
-									{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4},
+									{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
+									{ text: 'status',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
 									// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 									// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
 									// { text: 'elev',minWidth: 80,dataIndex: 'elev', flex: 2},
@@ -1348,7 +2663,7 @@ Ext.application({
 									),		
 									expandOnRender: true,
 									expandOnDblClick: false		
-	/*							toggleRow: function(rowIdx) {
+			/*							toggleRow: function(rowIdx) {
 										var rowNode = this.view.getNode(rowIdx); 
 										row = Ext.get(rowNode);
 										nextBd = Ext.get(row).down(this.rowBodyTrSelector);
@@ -1419,20 +2734,58 @@ Ext.application({
 											this.view.fireEvent('collapsebody', rowNode, record, nextBd.dom);
 										}			
 									}		
-	*/							
+			*/							
 								}],							
 
 								stripeRows: true,
 								// margin: '0 0 20 0',
 								selModel: selModel2,
-								// viewConfig: { 
-									// stripeRows: false, 
-									// getRowClass: function(record) { 
-										// if(winRegion.width==winRegion.maxWidth){
-											// return 'regiongrid-max';
-										// }else{return 'regiongrid-min';}
-									// }	
-								// },
+								viewConfig: { 
+									stripeRows: false, 
+									getRowClass: function(record, index, rowParams, stor) {
+									   var c = record.get('copyright');
+									   // return id == '1' ? 'general-rule' : ''; // para desaparecer el check
+										if (c == 'Restricted' || c == 'Request') {
+											return 'price-fall';
+										} 
+									}	
+								},
+								listeners: {
+									beforeselect: function ( row, model, index ) {
+
+										if ( model.data.copyright == "Restricted" || model.data.copyright == 'Request') {
+											return false;
+										}
+									},
+									cellclick: function(view, td, cellIndex, record, tr, rowIndex, e, eOpts) {
+										// var selection = gridRegion.getView().getSelectionModel().getCount();//[0];
+										// console.log(view)									
+									},
+									callback: function (records, operation, success) {        
+									},
+									selectionchange: function(sm, selections){ // hay problema cuando se selecciona el cursor vuelve a la primera fila
+										// layerTempSel.removeAllFeatures();
+										layerTempSel.destroyFeatures();
+										gridRegion.down('#numRecordsSelected').setText('Selected: ' + selections.length);
+										feature = layerTempStat.features;
+										for (var i = feature.length - 1; i >= 0; --i) {
+											// for (var j = feature[i].cluster.length - 1; j >= 0; --j) {
+												idall=feature[i].attributes.id;
+												for (var k = selections.length - 1; k >= 0; --k) {
+													idsel=selections[k].data.id
+													if(idall==idsel){
+														var point = new OpenLayers.Feature.Vector(
+															new OpenLayers.Geometry.Point(feature[i].geometry.x, feature[i].geometry.y));	
+														layerTempSel.addFeatures([point]);
+														mapPanel.map.setLayerIndex(layerTempSel, 99); // 99 para colocar el layer de primero
+													}
+												}												
+											// }											
+										}
+									},
+									itemclick:function(view, record, item, index, e ) {
+									}
+								},
 								// inline buttons
 								dockedItems: [
 									{
@@ -1446,8 +2799,8 @@ Ext.application({
 										handler: btn_download 
 									},cmbVar,{
 										itemId: 'zoomExtentALL',
-										text:'zoomExtentALL',
-										tooltip:'zoomExtent to ALL',
+										text:'Zoom extent',
+										tooltip:'Zoom extent all stations',
 										icon   : iconGridzoomExtentALL,//iconCls:'add',
 										handler: onZoomExtentALL 
 									},{
@@ -1464,7 +2817,8 @@ Ext.application({
 										icon   : iconGridStatistics,
 										disabled: true,
 										handler: statistics 
-									},{ xtype: 'tbtext', itemId: 'numRecords' },{xtype: 'tbfill'},
+									},{ xtype: 'tbtext', itemId: 'numRecords' },
+									{ xtype: 'tbtext', itemId: 'numRecordsSelected' },{xtype: 'tbfill'},
 									{ 
 										itemId: 'idMaximo',
 										// text:'Maximize',
@@ -1477,6 +2831,7 @@ Ext.application({
 								}]
 								
 							});
+
 							
 							// para el mostrar el grid de variables cuando se da en el boton expandir
 							Ext.getCmp('gridRegionID').getView().on('expandbody', function(rowNode, record, expandbody,eNode){
@@ -1496,6 +2851,9 @@ Ext.application({
 										extraParams: {
 											idstat: record.get("id"), country : country, state:state, municip:municip,type:6
 										},
+										actionMethods: {
+											read: 'POST'
+										},										
 										reader: {
 											type: 'json',
 											root: 'topics'
@@ -1572,14 +2930,17 @@ Ext.application({
 
 							gridRegionStore.on('load', function(ds){
 								countRow=ds.getTotalCount()
+								
 								if(countRow>=1){
 									// winRegion.show()
 									// Ext.getCmp('gridRegionID').add(gridRegion);
 									// Ext.getCmp('gridRegionID').doLayout();
-									
 									Ext.getCmp('mainTableID').add(gridRegion);
 									gridRegion.down('#numRecords').setText('Records: ' + countRow);
+									gridRegion.down('#numRecordsSelected').setText('Selected: ' + 0);
 									Ext.getCmp('mainTableID').expand()
+									myMask.hide();
+									
 								}else{
 									Ext.getCmp('mainTableID').collapse()
 									winInfo=Ext.MessageBox.show({
@@ -1608,14 +2969,14 @@ Ext.application({
 					}				
 					selectControl.control.unselectAll();
 					tabSearchRegion.getForm().reset();
-					layerTempReg=mapPanel.map.getLayersByName("FindRegion")[0]
+					layerTempReg=mapPanel.map.getLayersByName("Search region")[0]
 					if(layerTempReg){mapPanel.map.removeLayer(layerTempReg);}
 					
-					layerTempStat=mapPanel.map.getLayersByName("FindStation")[0]
+					layerTempStat=mapPanel.map.getLayersByName("Search station")[0]
 					if(layerTempStat){mapPanel.map.removeLayer(layerTempStat);}				
 				}
 			}]
-		  }
+			}
 			
         ]
     };
@@ -1659,12 +3020,13 @@ Ext.application({
 		});
 	var statstore = Ext.create('Ext.data.Store', {
 		model: 'modelstatList',
-		// autoLoad: true,
-		// autoSync: true,
+		autoLoad: true,
+		autoSync: true,
 		// sorters: { property: 'name', direction : 'ASC' },
 		proxy: {
 			type: 'ajax',
 			url: 'php/Geo_statByregion.php',
+			extraParams: {radioCh: 2,type:8},
 			reader: {
 				type: 'json',
 				root: 'topics'
@@ -1678,7 +3040,7 @@ Ext.application({
 		displayField: 'name',
 		fieldLabel: 'Station',
 		labelWidth: 50,
-		disabled: true,
+		// disabled: true,
 		valueField: 'name', 
 		queryMode: 'local',
 		typeAhead: true,	
@@ -1700,24 +3062,24 @@ Ext.application({
         },
         collapsible: true,
         collapsed: false,
-        items: [radiosStat,cmbStat,
+        items: [/*radiosStat,*/cmbStat,
 		{	buttonAlign:'center',
 			bodyStyle: 'padding-top:5px; border-bottom:1px solid #CCCCCC; width:80px;',
 			buttons: [{
-				text: 'Execute',
+				text: 'Search',
 				handler: function(){
-					if(Ext.getCmp('radioBton').getChecked()[0]){//if(tabSearchStat.getForm().isValid()){
+					if(Ext.getCmp('cmbStatID').getValue()){//if(tabSearchStat.getForm().isValid()){
 						if(Ext.getCmp('popupID')){
 							Ext.getCmp('popupID').close()
 						}					
 						
-						radioCh = Ext.getCmp('radioBton').getChecked()[0].getGroupValue();
+						radioCh = 2//Ext.getCmp('radioBton').getChecked()[0].getGroupValue();
 					
 						getStat = cmbStat.getValue();
-						layerTemp=mapPanel.map.getLayersByName("FindRegion")[0]
+						layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 						if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
 						
-						// FindStation=mapPanel.map.getLayersByName("FindStation")[0]
+						// FindStation=mapPanel.map.getLayersByName("Search station")[0]
 						// if(FindStation){FindStation.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}		
 						
 						if(Ext.getCmp('popupID')){
@@ -1734,7 +3096,7 @@ Ext.application({
 								params : {type:9,getStat:getStat,radioCh:radioCh},
 								method: 'GET',
 								success: function ( result, request ) {
-									layerTemp=mapPanel.map.getLayersByName("FindStation")[0]
+									layerTemp=mapPanel.map.getLayersByName("Search station")[0]
 									if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
 									
 									geocapa = result.responseText;
@@ -1742,16 +3104,21 @@ Ext.application({
 									});
 									if(format.read(geocapa)[0]){
 										mapPanel.map.addLayer(layerTempStat);
-										layerTemp=mapPanel.map.getLayersByName("FindStation")[0]
+										layerTemp=mapPanel.map.getLayersByName("Search station")[0]
 										layerTemp.addFeatures(format.read(geocapa));
 									}
 									var BoundALL = layerTemp.getDataExtent();
-									mapPanel.map.zoomToExtent(BoundALL);									
+									// var bounds = layerTemp.getBounds();
+									// mapPanel.map.panTo(BoundALL.getCenterLonLat())
+									mapPanel.map.zoomToExtent(BoundALL);	
+									
+									
 								},
 								failure: function ( result, request) { 
 									Ext.MessageBox.alert('Failed', result.responseText);
 								}
 							});	
+							// mapPanel.map.zoomTo(13);
 							 ////////////////////////////////////////////////////////////////////////////////////////
 							// PARA EXTRAER LA INFORMACION DE LAS ESTACIONES EN UNA TABLA
 							 ////////////////////////////////////////////////////////////////////////////////////////
@@ -1782,6 +3149,9 @@ Ext.application({
 									type: 'ajax',
 									url: 'php/Geo_statByregion.php',
 									extraParams: {type:11,getStat:getStat,radioCh:radioCh},			
+									actionMethods: {
+										read: 'POST'
+									},									
 									reader: {
 										type: 'json',
 										root: 'topics'
@@ -1800,12 +3170,60 @@ Ext.application({
 							});	
 							
 							var selModel = Ext.create('Ext.selection.CheckboxModel', {
+								mode: 'SIMPLE',
 								listeners: {
 									selectionchange: function(sm, selections) {
 										gridRegion.down('#removeButton').setDisabled(selections.length === 0);
 										gridRegion.down('#idstatistic').setDisabled(selections.length === 0);
+										
 									}
-								}
+								},
+								select: function(records, keepExisting, suppressEvent) {
+									if (Ext.isDefined(records)) {
+										this.doSelect(records, keepExisting, suppressEvent);
+									}
+								},
+								selectAll: function( suppressEvent ) {
+									var me = this,
+										selections = me.store.getRange();
+									countFree=[]
+									for( var key in selections ) {
+										if( selections[key].data.copyright == 'Free'){
+											countFree.push(selections[key].data.copyright)
+										}
+									}
+									
+									if(countFree.length>150){
+										Ext.getCmp('mainTableID').collapse()
+										winInfo=Ext.MessageBox.show({
+										   title: 'Information',
+										   msg: 'Exceeds the maximum number (Max. 150) of downloads',
+										   width:300,
+										   buttons: Ext.MessageBox.OK,
+										   animateTarget: 'info',
+										   icon: 'x-message-box-info'
+										});	
+										winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+									}else{
+										var i = 0,
+											len = selections.length,
+											selLen = me.getSelection().length;
+											
+										// if( len != selLen ) {
+										if( selLen==0 ) {
+											me.bulkChange = true;
+											for (; i < len; i++) {
+												me.doSelect(selections[i], true, suppressEvent);
+											}
+											delete me.bulkChange;
+											me.maybeFireSelectionChange(me.getSelection().length !== selLen);
+										}
+										else {
+											me.deselectAll( suppressEvent );
+										}									
+									}
+								}//								
+								
 							});	
 							btn_download = function () {
 								var selection = gridRegion.getView().getSelectionModel().getSelection();//[0];
@@ -1866,7 +3284,7 @@ Ext.application({
 											handler: function(grid, rowIndex, colIndex) {
 												var rec = gridRegionStore.getAt(rowIndex);
 												selectionID = rec.get('id');
-												layerTemp=mapPanel.map.getLayersByName("FindStation")[0]
+												layerTemp=mapPanel.map.getLayersByName("Search station")[0]
 												for (var i = layerTemp.features.length - 1; i >= 0; --i) {
 													if(layerTemp.features[i].attributes.id==selectionID){
 														featureSel=layerTemp.features[i].geometry
@@ -1897,6 +3315,7 @@ Ext.application({
 											handler: function(grid, rowIndex, colIndex) {
 												var rec = gridRegionStore.getAt(rowIndex);
 												selectionID = rec.get('id');
+												statName = rec.get('name');
 												
 												varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
 												var arrayvar =new Array() //varlist.split(',');
@@ -1924,7 +3343,7 @@ Ext.application({
 												cmbPeriod='cmbPeriod'+selectionID
 												cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
 													fieldLabel: 'Select graphic model',
-													id:'cmbPeriodID'+selectionID,
+													id:'cmbPeriodID',
 													labelWidth:150,
 													store: {
 														fields: ['value','name'], 
@@ -1943,50 +3362,48 @@ Ext.application({
 														select: function() {
 															var actTab = tabs.getActiveTab();
 															var idx = tabs.items.indexOf(actTab);
-															actTabId=parseInt((actTab.title).match(/\d+/)[0])
-															var idPeriod = Ext.getCmp('cmbPeriodID'+actTabId).getValue()
-															console.log(actTab,idx,actTabId,idPeriod)
-															generateGraps(actTabId,idPeriod,Ext.encode(cmbVar.getValue()))
+															// actTabId=parseInt((actTab.title).match(/\d+/)[0])
+															var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
+															generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
 
 														}
 													}
 												});		
-												if(!Ext.getCmp('graphic'+selectionID)){
-													tabs.add({
-														// contentEl: "desc",
-														// xtype: 'panel',
-														title: 'Graphic_id'+selectionID,
-														name: 'graphic'+selectionID,
-														// width:mainPanelWidth-15,
-														// maxHeight: 100,
-														autoScroll: true,
-														// height: 100,
-														// autoHeight: true,
-														// layout: 'fit',
-														id: 'graphic'+selectionID,
-														 // html: new Ext.XTemplate(
-														 // tpl
-														 // '<div id="grap_tmin_'+selectionID+'" ></div>',
-														 // '<div id="grap_prec_'+selectionID+'"></div>'
-														 // ),
-														 // .apply({value: '2. HTML property of a panel generated by an XTemplate'}),
-														closable: true,
-														dockedItems: [
-															{
-															xtype: 'toolbar',
-															items: [cmbPeriod]
-															}
-														]													
-													});		
-												}
-												var t = new Ext.XTemplate(tpl);
-												Ext.getCmp('graphic'+selectionID).update(t.apply(datatest));
-												// Ext.getCmp('graphic'+selectionID).update('This<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long');
+
+												btonReturn= new Ext.Button({
+													pressedCls : 'my-pressed',
+													overCls : 'my-over',
+													tooltip: "Return to map",
+													text:'Return to map',
+													icon: icons+'map.png', 
+													scale: 'small',
+													handler: function(){
+														tabs.setActiveTab(0);
+													}													
+												});	
+												if(Ext.getCmp('graphic_tab')){
+													tabs.remove(Ext.getCmp('graphic_tab'), true);
+												}												
+
+												tabs.add({
+													title: 'Graph '+statName,//'Graphic_id'+selectionID
+													name: 'graphic_tab',
+													autoScroll: true,
+													id: 'graphic_tab',
+													closable: true,
+													dockedItems: [
+														{
+														xtype: 'toolbar',
+														items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+														}
+													]													
+												});		
 												
+												var t = new Ext.XTemplate(tpl);
+												Ext.getCmp('graphic_tab').update(t.apply(datatest));
 												Ext.getCmp('mapPanelID').setHeight(0)
 												Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
-												// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
-												tabs.setActiveTab('graphic'+selectionID);
+												tabs.setActiveTab('graphic_tab');												
 												
 												generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
 											} // handler
@@ -2000,18 +3417,20 @@ Ext.application({
 										// renderer : function(value, metaData, record, rowIndex)
 										// {return rowIndex+1;}
 									// },			
-									{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1},
-									{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1},
-									{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4},
-									{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3},
-									{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2},
+									{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
+									{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
+									{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
+									{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
+									{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
 									
 									// { text: 'category',minWidth: 100,dataIndex: 'category', flex: 4},
 
 									// { text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3},
 									// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
 									
-									{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4},
+									{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
+									{ text: 'status',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+									
 									// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 									// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
 									// { text: 'elev',minWidth: 80,dataIndex: 'elev', flex: 2},
@@ -2044,15 +3463,46 @@ Ext.application({
 								stripeRows: true,
 								// margin: '0 0 20 0',
 								selModel: selModel,
-								// viewConfig: { 
-									// stripeRows: false, 
-									// getRowClass: function(record) { 
-										// if(winRegion.width==winRegion.maxWidth){
-											// return 'regiongrid-max';
-										// }else{return 'regiongrid-min';}
-									// }	
-								// },
-								// inline buttons
+								viewConfig: { 
+									stripeRows: false, 
+									getRowClass: function(record, index, rowParams, stor) {
+									   var c = record.get('copyright');
+									   // return id == '1' ? 'general-rule' : ''; // para desaparecer el check
+										if (c == 'Restricted' || c == 'Request') {
+											return 'price-fall';
+										} 
+									}	
+								},
+								listeners: {
+									beforeselect: function ( row, model, index ) {
+										if ( model.data.copyright == "Restricted" || model.data.copyright == 'Request') {
+											return false;
+										}
+									},
+									selectionchange: function(sm, selections){ // hay problema cuando se selecciona el cursor vuelve a la primera fila
+										// layerTempSel.removeAllFeatures();
+										layerTempSel.destroyFeatures();
+										gridRegion.down('#numRecordsSelected').setText('Selected: ' + selections.length);
+										feature = layerTempStat.features;
+										for (var i = feature.length - 1; i >= 0; --i) {
+											// for (var j = feature[i].cluster.length - 1; j >= 0; --j) {
+												idall=feature[i].attributes.id;
+												for (var k = selections.length - 1; k >= 0; --k) {
+													idsel=selections[k].data.id
+													if(idall==idsel){
+														// feature[i].layer.styleMap.styles.default.rules[0].symbolizer.externalGraphic="iconosGIS/bloqE_16px.png" 
+														// layerTempSel.drawFeature(feature[i])
+														 // mapPanel.map.refresh();	
+														var point = new OpenLayers.Feature.Vector(
+															new OpenLayers.Geometry.Point(feature[i].geometry.x, feature[i].geometry.y));	
+														layerTempSel.addFeatures([point]);
+														mapPanel.map.setLayerIndex(layerTempSel, 99);
+													}
+												}												
+											// }											
+										}
+									}									
+								},
 								dockedItems: [
 									{
 									xtype: 'toolbar',
@@ -2065,8 +3515,8 @@ Ext.application({
 										handler: btn_download 
 									},cmbVar,{
 										itemId: 'zoomExtentALL',
-										text:'zoomExtentALL',
-										tooltip:'zoomExtent to ALL',
+										text:'Zoom extent',
+										tooltip:'Zoom extent all stations',
 										icon   : iconGridzoomExtentALL,//iconCls:'add',
 										handler: onZoomExtentALL 
 									},{
@@ -2082,7 +3532,8 @@ Ext.application({
 										icon   : iconGridStatistics,
 										disabled: true,
 										handler: statistics 
-									},{ xtype: 'tbtext', itemId: 'numRecords' },{xtype: 'tbfill'},
+									},{ xtype: 'tbtext', itemId: 'numRecords' },
+									{ xtype: 'tbtext', itemId: 'numRecordsSelected' },{xtype: 'tbfill'},
 									{ 
 										itemId: 'idMaximo',
 										// text:'Maximize',
@@ -2113,6 +3564,9 @@ Ext.application({
 										extraParams: {
 											idstat: record.get("id"),getStat:getStat,radioCh:radioCh,type:12
 										},
+										actionMethods: {
+											read: 'POST'
+										},										
 										reader: {
 											type: 'json',
 											root: 'topics'
@@ -2196,6 +3650,7 @@ Ext.application({
 									
 									Ext.getCmp('mainTableID').add(gridRegion);
 									gridRegion.down('#numRecords').setText('Records: ' + countRow);
+									gridRegion.down('#numRecordsSelected').setText('Selected: ' + 0);
 									Ext.getCmp('mainTableID').expand()
 								}else{
 									Ext.getCmp('mainTableID').collapse()
@@ -2228,10 +3683,10 @@ Ext.application({
 					selectControl.control.unselectAll();
 					Ext.getCmp("cmbStatID").reset();
 					tabSearchStat.getForm().reset();
-					layerTempReg=mapPanel.map.getLayersByName("FindRegion")[0]
+					layerTempReg=mapPanel.map.getLayersByName("Search region")[0]
 					if(layerTempReg){mapPanel.map.removeLayer(layerTempReg);}
 					
-					layerTempStat=mapPanel.map.getLayersByName("FindStation")[0]
+					layerTempStat=mapPanel.map.getLayersByName("Search station")[0]
 					if(layerTempStat){mapPanel.map.removeLayer(layerTempStat);}	
 				}		
 			}]
@@ -2255,6 +3710,7 @@ Ext.application({
 			{"id":"10","name": 'Country'}, 
 			{"id":"11","name": 'State'}, 
 			{"id":"12","name": 'Municipality'} 			
+						
 
 		] 
 	});	
@@ -2545,9 +4001,9 @@ Ext.application({
 				},
 				{
 					xtype:'button',
-					text:'Run',
+					text:'Search',
 					icon: icons+'find.png',
-					width:50,
+					width:65,
 					handler: function(){
 						Ext.getCmp('buttongroupCondID').doLayout();
 						if(Ext.getCmp('popupID')){
@@ -2560,7 +4016,7 @@ Ext.application({
 						// loading status
 						// var myMask = new Ext.LoadMask(Ext.getCmp('mapPanelID'), {msg:"Please wait..."});
 												
-						// layerTemp=mapPanel.map.getLayersByName("FindStation")[0]
+						// layerTemp=mapPanel.map.getLayersByName("Search station")[0]
 						// if(layerTemp){layerTemp.destroyFeatures()}
 						if(Ext.getCmp("cmbQueryID").getValue() && Ext.getCmp("cmbCondID").getValue() && Ext.getCmp("cmbCondValueID").getValue() && Ext.getCmp("cmbCondTypeID").getValue()){
 							// myMask.show();
@@ -2593,10 +4049,10 @@ Ext.application({
 							
 							var myMask = new Ext.LoadMask(Ext.getCmp('mapPanelID'), {msg:"Please wait..."});
 							var myAjax = new Ext.data.Connection({
-								handler: function(){if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}},
+								// handler: function(){if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}},
 								listeners : {        
 									beforerequest : function () {myMask.show();},
-									requestcomplete : function () {myMask.hide();}
+									// requestcomplete : function () {myMask.hide();}
 								}
 							});	
 							
@@ -2614,20 +4070,22 @@ Ext.application({
 								myAjax.request({ // PINTA EN EL MAPA LAS ESTACIONES INTERCEPTADAS
 									url : 'php/Geo_statByregion.php' , 
 									params : { type:19,condit : cond, children:Ext.encode(children)},
-									method: 'GET',
+									method: 'POST',
 									success: function ( result, request ) {
-										layerTemp=mapPanel.map.getLayersByName("FindStation")[0]
+										layerTemp=mapPanel.map.getLayersByName("Search station")[0]
 										if(layerTemp){layerTemp.destroyFeatures();}
-									
+										
+										layerTempRegion=mapPanel.map.getLayersByName("Search region")[0]
+										if(layerTempRegion){layerTempRegion.destroyFeatures();}		
+										
 										geocapa = result.responseText;
 										var format = new OpenLayers.Format.GeoJSON({'internalProjection': new OpenLayers.Projection("EPSG:900913"), 'externalProjection': new OpenLayers.Projection("EPSG:4326")
 										});
 
 										if(format.read(geocapa)[0]){
 											mapPanel.map.addLayer(layerTempStat);
-											layerTemp=mapPanel.map.getLayersByName("FindStation")[0]
+											layerTemp=mapPanel.map.getLayersByName("Search station")[0]
 											layerTemp.addFeatures(format.read(geocapa));
-										
 											selectID=[]
 											feature = layerTemp.features;
 											for (var i = feature.length - 1; i >= 0; --i) {
@@ -2645,7 +4103,10 @@ Ext.application({
 												proxy: {
 													type: 'ajax',
 													url: 'php/Geo_statByregion.php',
-													extraParams: {type:14,listStatSel:Ext.encode(selectID)},			
+													extraParams: {type:14,listStatSel:Ext.encode(selectID)},	
+													actionMethods: {
+														read: 'POST'
+													},													
 													reader: {
 														type: 'json',
 														root: 'topics'
@@ -2662,7 +4123,10 @@ Ext.application({
 												proxy: {
 													type: 'ajax',
 													url: 'php/Geo_statByregion.php',
-													extraParams: {type:15,listStatSel:Ext.encode(selectID)},			
+													extraParams: {type:15,listStatSel:Ext.encode(selectID)},
+													actionMethods: {
+														read: 'POST'
+													},													
 													reader: {
 														type: 'json',
 														root: 'topics'
@@ -2681,13 +4145,59 @@ Ext.application({
 											});	
 											
 											var selModel = Ext.create('Ext.selection.CheckboxModel', {
+												mode: 'SIMPLE',
 												listeners: {
 													selectionchange: function(sm, selections) {
 														gridRegion.down('#removeButton').setDisabled(selections.length === 0);
 														gridRegion.down('#idstatistic').setDisabled(selections.length === 0);
-														// gridRegion.down('#zoomExtent').setDisabled(selections.length === 0 || selections.length > 1);
+														
 													}
-												}
+												},
+												select: function(records, keepExisting, suppressEvent) {
+													if (Ext.isDefined(records)) {
+														this.doSelect(records, keepExisting, suppressEvent);
+													}
+												},
+												selectAll: function( suppressEvent ) {
+													var me = this,
+														selections = me.store.getRange();
+													countFree=[]
+													for( var key in selections ) {
+														if( selections[key].data.copyright == 'Free'){
+															countFree.push(selections[key].data.copyright)
+														}
+													}
+													
+													if(countFree.length>150){
+														Ext.getCmp('mainTableID').collapse()
+														winInfo=Ext.MessageBox.show({
+														   title: 'Information',
+														   msg: 'Exceeds the maximum number (Max. 150) of downloads',
+														   width:300,
+														   buttons: Ext.MessageBox.OK,
+														   animateTarget: 'info',
+														   icon: 'x-message-box-info'
+														});	
+														winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+													}else{
+														var i = 0,
+															len = selections.length,
+															selLen = me.getSelection().length;
+															
+														// if( len != selLen ) {
+														if( selLen==0 ) {
+															me.bulkChange = true;
+															for (; i < len; i++) {
+																me.doSelect(selections[i], true, suppressEvent);
+															}
+															delete me.bulkChange;
+															me.maybeFireSelectionChange(me.getSelection().length !== selLen);
+														}
+														else {
+															me.deselectAll( suppressEvent );
+														}									
+													}
+												}//														
 											});	
 											
 											btn_download = function () {
@@ -2707,7 +4217,7 @@ Ext.application({
 												});
 											}	
 											onZoomExtentALL = function () {
-												// layerTemp=mapPanel.map.getLayersByName("FindStation")[0]
+												// layerTemp=mapPanel.map.getLayersByName("Search station")[0]
 
 												FeatselectID=[]
 												for (var i = feature.length - 1; i >= 0; --i) {
@@ -2719,7 +4229,7 @@ Ext.application({
 														// }
 													}
 												}
-												console.log(FeatselectID)
+										
 												// var BoundALL = FeatselectID.getDataExtent();
 												var BoundALL = FeatselectID.getExtent();
 												// var BoundALL = FeatselectID.getSource().getExtent();;
@@ -2769,7 +4279,7 @@ Ext.application({
 																var rec = gridStatStore.getAt(rowIndex);
 																selectionID = rec.get('id');
 																// zoomToStation(selectionID);
-																layerTemp=mapPanel.map.getLayersByName("FindStation")[0]
+																layerTemp=mapPanel.map.getLayersByName("Search station")[0]
 																for (var i = layerTemp.features.length - 1; i >= 0; --i) {
 																	if(layerTemp.features[i].attributes.id==selectionID){
 																		featureSel=layerTemp.features[i].geometry
@@ -2797,6 +4307,7 @@ Ext.application({
 															handler: function(grid, rowIndex, colIndex) {
 																var rec = gridStatStore.getAt(rowIndex);
 																selectionID = rec.get('id');
+																statName = rec.get('name');
 																
 																varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
 																var arrayvar =new Array() //varlist.split(',');
@@ -2824,7 +4335,7 @@ Ext.application({
 																cmbPeriod='cmbPeriod'+selectionID
 																cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
 																	fieldLabel: 'Select graphic model',
-																	id:'cmbPeriodID'+selectionID,
+																	id:'cmbPeriodID',
 																	labelWidth:150,
 																	store: {
 																		fields: ['value','name'], 
@@ -2843,50 +4354,48 @@ Ext.application({
 																		select: function() {
 																			var actTab = tabs.getActiveTab();
 																			var idx = tabs.items.indexOf(actTab);
-																			actTabId=parseInt((actTab.title).match(/\d+/)[0])
-																			var idPeriod = Ext.getCmp('cmbPeriodID'+actTabId).getValue()
-																			console.log(actTab,idx,actTabId,idPeriod)
-																			generateGraps(actTabId,idPeriod,Ext.encode(cmbVar.getValue()))
+																			// actTabId=parseInt((actTab.title).match(/\d+/)[0])
+																			var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
+																			generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
 
 																		}
 																	}
 																});		
-																if(!Ext.getCmp('graphic'+selectionID)){
-																	tabs.add({
-																		// contentEl: "desc",
-																		// xtype: 'panel',
-																		title: 'Graphic_id'+selectionID,
-																		name: 'graphic'+selectionID,
-																		// width:mainPanelWidth-15,
-																		// maxHeight: 100,
-																		autoScroll: true,
-																		// height: 100,
-																		// autoHeight: true,
-																		// layout: 'fit',
-																		id: 'graphic'+selectionID,
-																		 // html: new Ext.XTemplate(
-																		 // tpl
-																		 // '<div id="grap_tmin_'+selectionID+'" ></div>',
-																		 // '<div id="grap_prec_'+selectionID+'"></div>'
-																		 // ),
-																		 // .apply({value: '2. HTML property of a panel generated by an XTemplate'}),
-																		closable: true,
-																		dockedItems: [
-																			{
-																			xtype: 'toolbar',
-																			items: [cmbPeriod]
-																			}
-																		]													
-																	});		
-																}
-																var t = new Ext.XTemplate(tpl);
-																Ext.getCmp('graphic'+selectionID).update(t.apply(datatest));
-																// Ext.getCmp('graphic'+selectionID).update('This<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long');
+
+																btonReturn= new Ext.Button({
+																	pressedCls : 'my-pressed',
+																	overCls : 'my-over',
+																	tooltip: "Return to map",
+																	text:'Return to map',
+																	icon: icons+'map.png', 
+																	scale: 'small',
+																	handler: function(){
+																		tabs.setActiveTab(0);
+																	}													
+																});	
+																if(Ext.getCmp('graphic_tab')){
+																	tabs.remove(Ext.getCmp('graphic_tab'), true);
+																}												
+
+																tabs.add({
+																	title: 'Graph '+statName,//'Graphic_id'+selectionID
+																	name: 'graphic_tab',
+																	autoScroll: true,
+																	id: 'graphic_tab',
+																	closable: true,
+																	dockedItems: [
+																		{
+																		xtype: 'toolbar',
+																		items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+																		}
+																	]													
+																});		
 																
+																var t = new Ext.XTemplate(tpl);
+																Ext.getCmp('graphic_tab').update(t.apply(datatest));
 																Ext.getCmp('mapPanelID').setHeight(0)
 																Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
-																// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
-																tabs.setActiveTab('graphic'+selectionID);
+																tabs.setActiveTab('graphic_tab');																
 																
 																generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
 															} // handler
@@ -2900,18 +4409,20 @@ Ext.application({
 														// renderer : function(value, metaData, record, rowIndex)
 														// {return rowIndex+1;}
 													// },			
-													{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1},
-													{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1},
-													{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4},
-													{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3},
-													{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2},
+													{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
+													{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
+													{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
+													{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
+													{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
 													
 													// { text: 'category',minWidth: 100,dataIndex: 'category', flex: 4},
 
 													// { text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3},
 													// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
 													
-													{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4},
+													{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
+													{ text: 'status',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+													
 													// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 													// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
 													// { text: 'elev',minWidth: 80,dataIndex: 'elev', flex: 2},
@@ -2944,15 +4455,46 @@ Ext.application({
 												stripeRows: true,
 												// margin: '0 0 20 0',
 												selModel: selModel,
-												// viewConfig: { 
-													// stripeRows: false, 
-													// getRowClass: function(record) { 
-														// if(winRegion.width==winRegion.maxWidth){
-															// return 'regiongrid-max';
-														// }else{return 'regiongrid-min';}
-													// }	
-												// },
-												// inline buttons
+												viewConfig: { 
+													stripeRows: false, 
+													getRowClass: function(record, index, rowParams, stor) {
+													   var c = record.get('copyright');
+													   // return id == '1' ? 'general-rule' : ''; // para desaparecer el check
+														if (c == 'Restricted' || c == 'Request') {
+															return 'price-fall';
+														} 
+													}	
+												},
+												listeners: {
+													beforeselect: function ( row, model, index ) {
+														if ( model.data.copyright == "Restricted" || model.data.copyright == 'Request') {
+															return false;
+														}
+													},
+													selectionchange: function(sm, selections){ // hay problema cuando se selecciona el cursor vuelve a la primera fila
+														// layerTempSel.removeAllFeatures();
+														layerTempSel.destroyFeatures();
+														gridRegion.down('#numRecordsSelected').setText('Selected: ' + selections.length);
+														feature = layerTempStat.features;
+														for (var i = feature.length - 1; i >= 0; --i) {
+															// for (var j = feature[i].cluster.length - 1; j >= 0; --j) {
+																idall=feature[i].attributes.id;
+																for (var k = selections.length - 1; k >= 0; --k) {
+																	idsel=selections[k].data.id
+																	if(idall==idsel){
+																		// feature[i].layer.styleMap.styles.default.rules[0].symbolizer.externalGraphic="iconosGIS/bloqE_16px.png" 
+																		// layerTempSel.drawFeature(feature[i])
+																		 // mapPanel.map.refresh();	
+																		var point = new OpenLayers.Feature.Vector(
+																			new OpenLayers.Geometry.Point(feature[i].geometry.x, feature[i].geometry.y));	
+																		layerTempSel.addFeatures([point]);
+																		mapPanel.map.setLayerIndex(layerTempSel, 99);
+																	}
+																}												
+															// }											
+														}
+													}													
+												},
 												dockedItems: [
 													{
 													xtype: 'toolbar',
@@ -2983,7 +4525,8 @@ Ext.application({
 														icon   : iconGridStatistics,
 														disabled: true,
 														handler: statistics 
-													},{ xtype: 'tbtext', itemId: 'numRecords' },{xtype: 'tbfill'},
+													},{ xtype: 'tbtext', itemId: 'numRecords' },
+													{ xtype: 'tbtext', itemId: 'numRecordsSelected' },{xtype: 'tbfill'},
 													{ 
 														itemId: 'idMaximo',
 														// text:'Maximize',
@@ -3014,6 +4557,9 @@ Ext.application({
 														extraParams: {
 															idstat: record.get("id"),type:17
 														},
+														actionMethods: {
+															read: 'POST'
+														},														
 														reader: {
 															type: 'json',
 															root: 'topics'
@@ -3096,6 +4642,7 @@ Ext.application({
 													// Ext.getCmp('gridRegionID').doLayout();
 													Ext.getCmp('mainTableID').add(gridRegion);
 													gridRegion.down('#numRecords').setText('Records: ' + countRow);
+													gridRegion.down('#numRecordsSelected').setText('Selected: ' + 0);
 													Ext.getCmp('mainTableID').expand()
 													
 													var bounds = layerTemp.getDataExtent();
@@ -3212,10 +4759,10 @@ Ext.application({
 						for (var i=0, l=condlistsel.length; i < l; i++) {
 								delete condlistsel[i];
 						}		
-						layerTempReg=mapPanel.map.getLayersByName("FindRegion")[0]
+						layerTempReg=mapPanel.map.getLayersByName("Search region")[0]
 						if(layerTempReg){mapPanel.map.removeLayer(layerTempReg);}
 						
-						layerTempStat=mapPanel.map.getLayersByName("FindStation")[0]
+						layerTempStat=mapPanel.map.getLayersByName("Search station")[0]
 						if(layerTempStat){mapPanel.map.removeLayer(layerTempStat);}	
 					}
 				}				
@@ -3262,6 +4809,17 @@ Ext.application({
         ]		
    });
 
+    var tabSearchLogin = Ext.create('Ext.FormPanel', {
+		// cls: 'css_labels',
+        // width: 250,
+		width:fieldsetWidth+10,//tabsWidth,
+        bodyPadding: 5,
+        items: [
+            fieldsetLogin
+            // radioGroup
+        ]		
+   });
+   
     var tabSearchStat = Ext.create('Ext.FormPanel', {
 		// cls: 'css_labels',
 		width:fieldsetWidth+10,//tabsWidth,
@@ -3284,14 +4842,17 @@ Ext.application({
 		// cls:"custom-slider",
 		width: 214,
 		increment: 5,
-		value: 20,
+		value: 40,
 		minValue: 0,
 		maxValue: 100,
 		listeners: {                    
 			change: function (slider, newValue, thumb, eOpts ) {
 				strategy.distance=slider.getValue();
 				mapPanel.map.removeLayer(clusters);
-				mapPanel.map.addLayer(clusters);					
+				mapPanel.map.addLayer(clusters);
+				layerTemp=mapPanel.map.getLayersByName("Search station")[0]
+				map.setLayerIndex(clusters, 0);
+				// map.raiseLayer(clusters, -1)
 			}
 		}			
 	});
@@ -3334,11 +4895,26 @@ Ext.application({
 		// },
 		{ 
 			xtype: "panel",
-			html: '<img src='+icons+'cluster.PNG height="25" width="25" style="vertical-align: middle;"/><span class="legendFond" style="vertical-align: middle;"> Cluster</span>'+
-				  '<div class="legendFond" id="ideam">IDEAM</div>'+
-				  '<div class="legendFond" id="cafenica">CAFENICA</div>'+
-				  '<div class="legendFond" id="cruz-roja">Cruz-Roja</div>'+
-				  '<div class="legendFond" id="afr-rising">Afr-Rising</div>'
+			// html: '<img src='+icons+'cluster.PNG height="25" width="25" style="vertical-align: middle;"/><span class="legendFond" style="vertical-align: middle;"> Cluster</span>'+
+				  // '<div class="legendFond" id="ideam">IDEAM</div>'+
+				  // '<div class="legendFond" id="cafenica">CAFENICA</div>'+
+				  // '<div class="legendFond" id="cruz-roja">Cruz-Roja</div>'+
+				  // '<div class="legendFond" id="afr-rising">Afr-Rising</div>'
+				  
+			html: '<table style="width:100%">'+
+					  '<tr>'+
+						'<td><img src='+icons+'cluster.PNG height="25" width="25" style="vertical-align: middle;"/><span class="legendFond" style="vertical-align: middle;"> Cluster</span></td>'+
+						'<td><div class="legendFond" id="ideam">IDEAM</div></td>'+
+						'<td><div class="legendFond" id="cafenica">CAFENICA</div></td>'+
+					  '</tr>'+
+					  '<tr>'+
+						'<td><img src='+icons+'map-marker-icon.png height="16" width="16" style="vertical-align: middle;"/><span class="legendFond" style="vertical-align: middle;"> Search</span></td>'+
+						'<td><div class="legendFond" id="cruz-roja">Cruz-Roja</div></td>'+
+						'<td><div class="legendFond" id="afr-rising">Afr-Rising</div></td>' +
+					  '</tr>'+
+					'</table>'				  
+				  
+				  
 		}]
 	}	
 	
@@ -3414,7 +4990,7 @@ Ext.application({
 	}
     var groupLayers = {
         xtype: 'fieldset',
-        title: 'Layers   '+ '<img id="help_toolip" class="tooltipIcon" src='+icons+infoB+' data-qtip="'+toolip_groupLayers+'" />',//<span data-qtip="hello">First Name</span>  
+        title: 'Layers map   '+ '<img id="help_toolip" class="tooltipIcon" src='+icons+infoB+' data-qtip="'+toolip_groupLayers+'" />',//<span data-qtip="hello">First Name</span>  
 		width:fieldsetWidthLayer,
         layout: 'anchor',
         defaults: {
@@ -3496,6 +5072,8 @@ Ext.application({
 			},*/
 			id: 'tabsID',
 			region: "west",
+			// border: true,
+			style: 'border: solid #E1E1E1 1px',
 			collapsible: true,
 			collapseMode: "mini",
 			scrollable: true,
@@ -3509,25 +5087,29 @@ Ext.application({
 			},Ext.create('Ext.ux.TabReorderer')],			
 			items: [{
 				// contentEl:'markup', 
-				title: 'Searchs',
-				items:[tabSearchRegion,tabSearchStat,tabSearchQuery]
+				title: 'Search',
+				items:[tabSearchLogin,tabSearchRegion,tabSearchStat,tabSearchQuery]
 			},{
 				// contentEl:'script', 
-				title: 'Layers',
+				title: 'Options',
 				items:[tabLayerTree,tabLayerLabels,tabLayerSlider,tabLayerLegendIMG]
 			}],//,{title: 'Graphics',autoScroll: true,id:'1000'}]
 			listeners: {
 				'tabchange': function (tabPanel, tab) {
 					var idx = tabs.items.indexOf(tab);
 					if(idx==0 || idx==1){
+						
 						Ext.getCmp('tabsID').setWidth(tabsWidth+5);
 						mapPanel.map.updateSize();
 						// mapPanel.map.onMapResize();
 						// mapPanel.map.refresh();						
 						Ext.getCmp('mapPanelID').doLayout();
 						Ext.getCmp('mainpanelID').doLayout();
-						layer = mapPanel.map.layers[2];
-						layer.redraw();
+						// layer = mapPanel.map.layers[2];
+						layerBase=mapPanel.map.getLayersByName("Streets Map")[0]
+						if(tabPanel.items.length>2){
+							layerBase.redraw();
+						}
 					}
 					else{Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);}
 									
@@ -3551,13 +5133,13 @@ Ext.application({
 // selectFeature.select(layerTemp.features[i]);	
 
 		mapPanel.map.addControl(new OpenLayers.Control.Navigation());
-		mapPanel.map.addControl(new OpenLayers.Control.PanZoomBar());
-		mapPanel.map.addControl(new OpenLayers.Control.Graticule(
-			{layerName: "Grid", visible: false, 
-				numPoints: 2, 
-				labelled: true
-			}
-		));
+		// mapPanel.map.addControl(new OpenLayers.Control.PanZoomBar());
+		// mapPanel.map.addControl(new OpenLayers.Control.Graticule(
+			// {layerName: "Grid", visible: false, 
+				// numPoints: 2, 
+				// labelled: true
+			// }
+		// ));
 		mapPanel.map.addControl(new OpenLayers.Control.MousePosition());
 		
 // ############################################## POPUP IDENTIFY ##############################################################################################################			
@@ -3572,13 +5154,13 @@ Ext.application({
 				params : {type:21,listStatSel: Ext.encode(ids)},
 				method: 'GET',
 				success: function ( result, request ) {
-					layerTemp=mapPanel.map.getLayersByName("FindRegion")[0]
+					layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 					if(layerTemp){layerTemp.destroyFeatures();}
 					geocapa = result.responseText;
 					var format = new OpenLayers.Format.GeoJSON({'internalProjection': new OpenLayers.Projection("EPSG:900913"), 'externalProjection': new OpenLayers.Projection("EPSG:4326")
 					});
 					mapPanel.map.addLayer(layerTempRegion);
-					layerTemp=mapPanel.map.getLayersByName("FindRegion")[0]
+					layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 					layerTemp.addFeatures(format.read(geocapa));
 					var bounds = layerTemp.getDataExtent();
 					if(bounds){mapPanel.map.zoomToExtent(bounds);}
@@ -3594,61 +5176,46 @@ Ext.application({
 		}
 
 		
-		function createPopup(feature,myFeatyures) {
+		function createPopupOne(feature,myFeatyures) {
 
 			selIds=new Array()
+			selname=new Array()
 			for(var i = 0; i < myFeatyures.length; i++) {
 				selIds.push(Number(myFeatyures[i].attributes.id));
+				selname.push(myFeatyures[i].attributes.name);
 			}
+
+			Ext.define('modelGridPopup', { 
+					extend: 'Ext.data.Model',
+					fields: ['name','attri']
+				});	
 			
 			var gridStatStore = Ext.create('Ext.data.Store', {
-				model: 'modelGridRegion',
+				// model: 'modelGridRegion',
+				model: 'modelGridPopup',
 				autoLoad: true,
 				autoSync: false,
 				// sorters: { property: 'name', direction : 'ASC' },
 				proxy: {
 					type: 'ajax',
 					url: 'php/Geo_statByregion.php',
-					extraParams: {type:14,listStatSel:Ext.encode(selIds)},			
+					// extraParams: {type:14,listStatSel:Ext.encode(selIds)},			
+					extraParams: {type:22,listStatSel:Ext.encode(selIds)},	
+					actionMethods: {
+						read: 'POST'
+					},					
 					reader: {
 						type: 'json',
 						root: 'topics'
 					}
 				}
 			});
-			gridRegionHover = Ext.create('Ext.grid.Panel', {
-				id: 'gridRegionIDHover',
-				border: true,
-				// layout: 'fit',
-				forceFit: true,
-				store: gridStatStore,
-				maxHeight: 150,
-				// width: 200,
-				cls: 'custom-gridPanelHover',
-				// height:273,
-				// maxHeight: mainPanelHeight*0.4,
-				autoHeight: true,
-				columns: [
-					{ text: 'code',minWidth: 50,dataIndex: 'code', flex: 1},
-					{ text: 'name',minWidth: 100,dataIndex: 'name', flex: 4},
-					// { text: 'institute',minWidth: 70,dataIndex: 'institute', flex: 3},
-					{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2},
-					{ text: 'variables',minWidth: 120,dataIndex: 'variables', flex: 4}
-				],
-				columnLines: true,
-				stripeRows: true,
-				// viewConfig: {
-					// loadMask: false
-				// },	
-				dockedItems: [
-					{
-					xtype: 'toolbar',
-					items: [{
-						itemId: 'removeButtonHover',
-						text:'Download data',
-						icon   : iconGridDownload,
-						scale: 'small',
-						handler: function(){
+
+
+
+			
+			
+			funcPupup = function(){
 							// selectControl.control.deactivate();
 							if(Ext.getCmp('gridRegionID')){
 								Ext.getCmp('mainTableID').collapse();
@@ -3658,10 +5225,10 @@ Ext.application({
 								Ext.getCmp('popupID').close()
 							}	
 							
-							layerTemp=mapPanel.map.getLayersByName("FindRegion")[0]
+							layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 							if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
 							
-							FindStation=mapPanel.map.getLayersByName("FindStation")[0]
+							FindStation=mapPanel.map.getLayersByName("Search station")[0]
 							if(FindStation){FindStation.destroyFeatures();}
 									
 							// loading status
@@ -3680,7 +5247,10 @@ Ext.application({
 											proxy: {
 												type: 'ajax',
 												url: 'php/Geo_statByregion.php',
-												extraParams: {type:14,listStatSel:Ext.encode(selectID)},			
+												extraParams: {type:14,listStatSel:Ext.encode(selectID)},	
+												actionMethods: {
+													read: 'POST'
+												},												
 												reader: {
 													type: 'json',
 													root: 'topics'
@@ -3697,7 +5267,10 @@ Ext.application({
 											proxy: {
 												type: 'ajax',
 												url: 'php/Geo_statByregion.php',
-												extraParams: {type:15,listStatSel:Ext.encode(selectID)},			
+												extraParams: {type:15,listStatSel:Ext.encode(selectID)},
+												actionMethods: {
+													read: 'POST'
+												},												
 												reader: {
 													type: 'json',
 													root: 'topics'
@@ -3716,13 +5289,59 @@ Ext.application({
 										});	
 										
 										var selModel = Ext.create('Ext.selection.CheckboxModel', {
+											mode: 'SIMPLE',
 											listeners: {
 												selectionchange: function(sm, selections) {
 													gridRegion.down('#removeButton').setDisabled(selections.length === 0);
 													gridRegion.down('#idstatistic').setDisabled(selections.length === 0);
-													// gridRegion.down('#zoomExtent').setDisabled(selections.length === 0 || selections.length > 1);
+													
 												}
-											}
+											},
+											select: function(records, keepExisting, suppressEvent) {
+												if (Ext.isDefined(records)) {
+													this.doSelect(records, keepExisting, suppressEvent);
+												}
+											},
+											selectAll: function( suppressEvent ) {
+												var me = this,
+													selections = me.store.getRange();
+												countFree=[]
+												for( var key in selections ) {
+													if( selections[key].data.copyright == 'Free'){
+														countFree.push(selections[key].data.copyright)
+													}
+												}
+												
+												if(countFree.length>150){
+													Ext.getCmp('mainTableID').collapse()
+													winInfo=Ext.MessageBox.show({
+													   title: 'Information',
+													   msg: 'Exceeds the maximum number (Max. 150) of downloads',
+													   width:300,
+													   buttons: Ext.MessageBox.OK,
+													   animateTarget: 'info',
+													   icon: 'x-message-box-info'
+													});	
+													winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+												}else{
+													var i = 0,
+														len = selections.length,
+														selLen = me.getSelection().length;
+														
+													// if( len != selLen ) {
+													if( selLen==0 ) {
+														me.bulkChange = true;
+														for (; i < len; i++) {
+															me.doSelect(selections[i], true, suppressEvent);
+														}
+														delete me.bulkChange;
+														me.maybeFireSelectionChange(me.getSelection().length !== selLen);
+													}
+													else {
+														me.deselectAll( suppressEvent );
+													}									
+												}
+											} //												
 										});	
 										
 										btn_download = function () {
@@ -3742,7 +5361,7 @@ Ext.application({
 											});
 										}	
 										onZoomExtentALL = function () {
-											// layerTemp=mapPanel.map.getLayersByName("FindStation")[0]
+											// layerTemp=mapPanel.map.getLayersByName("Search station")[0]
 
 											FeatselectID=[]
 											for (var i = feature.length - 1; i >= 0; --i) {
@@ -3813,6 +5432,7 @@ Ext.application({
 														handler: function(grid, rowIndex, colIndex) {
 															var rec = gridStatStore.getAt(rowIndex);
 															selectionID = rec.get('id');
+															statName = rec.get('name');
 															
 															varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
 															var arrayvar =new Array() //varlist.split(',');
@@ -3840,7 +5460,7 @@ Ext.application({
 															cmbPeriod='cmbPeriod'+selectionID
 															cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
 																fieldLabel: 'Select graphic model',
-																id:'cmbPeriodID'+selectionID,
+																id:'cmbPeriodID',
 																labelWidth:150,
 																store: {
 																	fields: ['value','name'], 
@@ -3859,50 +5479,47 @@ Ext.application({
 																	select: function() {
 																		var actTab = tabs.getActiveTab();
 																		var idx = tabs.items.indexOf(actTab);
-																		actTabId=parseInt((actTab.title).match(/\d+/)[0])
-																		var idPeriod = Ext.getCmp('cmbPeriodID'+actTabId).getValue()
-																		console.log(actTab,idx,actTabId,idPeriod)
-																		generateGraps(actTabId,idPeriod,Ext.encode(cmbVar.getValue()))
-
+																		// actTabId=parseInt((actTab.title).match(/\d+/)[0])
+																		var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
+																		generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
 																	}
 																}
 															});		
-															if(!Ext.getCmp('graphic'+selectionID)){
-																tabs.add({
-																	// contentEl: "desc",
-																	// xtype: 'panel',
-																	title: 'Graphic_id'+selectionID,
-																	name: 'graphic'+selectionID,
-																	// width:mainPanelWidth-15,
-																	// maxHeight: 100,
-																	autoScroll: true,
-																	// height: 100,
-																	// autoHeight: true,
-																	// layout: 'fit',
-																	id: 'graphic'+selectionID,
-																	 // html: new Ext.XTemplate(
-																	 // tpl
-																	 // '<div id="grap_tmin_'+selectionID+'" ></div>',
-																	 // '<div id="grap_prec_'+selectionID+'"></div>'
-																	 // ),
-																	 // .apply({value: '2. HTML property of a panel generated by an XTemplate'}),
-																	closable: true,
-																	dockedItems: [
-																		{
-																		xtype: 'toolbar',
-																		items: [cmbPeriod]
-																		}
-																	]													
-																});		
-															}
-															var t = new Ext.XTemplate(tpl);
-															Ext.getCmp('graphic'+selectionID).update(t.apply(datatest));
-															// Ext.getCmp('graphic'+selectionID).update('This<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long');
+
+															btonReturn= new Ext.Button({
+																pressedCls : 'my-pressed',
+																overCls : 'my-over',
+																tooltip: "Return to map",
+																text:'Return to map',
+																icon: icons+'map.png', 
+																scale: 'small',
+																handler: function(){
+																	tabs.setActiveTab(0);
+																}													
+															});	
+															if(Ext.getCmp('graphic_tab')){
+																tabs.remove(Ext.getCmp('graphic_tab'), true);
+															}												
+
+															tabs.add({
+																title: 'Graph '+statName,//'Graphic_id'+selectionID
+																name: 'graphic_tab',
+																autoScroll: true,
+																id: 'graphic_tab',
+																closable: true,
+																dockedItems: [
+																	{
+																	xtype: 'toolbar',
+																	items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+																	}
+																]													
+															});		
 															
+															var t = new Ext.XTemplate(tpl);
+															Ext.getCmp('graphic_tab').update(t.apply(datatest));
 															Ext.getCmp('mapPanelID').setHeight(0)
 															Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
-															// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
-															tabs.setActiveTab('graphic'+selectionID);
+															tabs.setActiveTab('graphic_tab');															
 															
 															generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
 														} // handler
@@ -3916,18 +5533,20 @@ Ext.application({
 													// renderer : function(value, metaData, record, rowIndex)
 													// {return rowIndex+1;}
 												// },			
-												{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1},
-												{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1},
-												{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4},
-												{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3},
-												{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2},
+												{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
+												{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
+												{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
+												{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
+												{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
 												
 												// { text: 'category',minWidth: 100,dataIndex: 'category', flex: 4},
 
 												// { text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3},
 												// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
 												
-												{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4},
+												{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
+												{ text: 'status',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+												
 												// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 												// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
 												// { text: 'elev',minWidth: 80,dataIndex: 'elev', flex: 2},
@@ -3960,15 +5579,910 @@ Ext.application({
 											stripeRows: true,
 											// margin: '0 0 20 0',
 											selModel: selModel,
-											// viewConfig: { 
-												// stripeRows: false, 
-												// getRowClass: function(record) { 
-													// if(winRegion.width==winRegion.maxWidth){
-														// return 'regiongrid-max';
-													// }else{return 'regiongrid-min';}
-												// }	
-											// },
-											// inline buttons
+											viewConfig: { 
+												stripeRows: false, 
+												getRowClass: function(record, index, rowParams, stor) {
+												   var c = record.get('copyright');
+												   // return id == '1' ? 'general-rule' : ''; // para desaparecer el check
+													if (c == 'Restricted' || c == 'Request') {
+														return 'price-fall';
+													} 
+												}	
+											},
+											listeners: {
+												beforeselect: function ( row, model, index ) {
+													if ( model.data.copyright == "Restricted" || model.data.copyright == 'Request') {
+														return false;
+													}
+												},
+												selectionchange: function(sm, selections){ // hay problema cuando se selecciona el cursor vuelve a la primera fila
+													// layerTempSel.removeAllFeatures();
+													layerTempSel.destroyFeatures();
+													gridRegion.down('#numRecordsSelected').setText('Selected: ' + selections.length);
+													feature = layerTempStat.features;
+													for (var i = feature.length - 1; i >= 0; --i) {
+														// for (var j = feature[i].cluster.length - 1; j >= 0; --j) {
+															idall=feature[i].attributes.id;
+															for (var k = selections.length - 1; k >= 0; --k) {
+																idsel=selections[k].data.id
+																if(idall==idsel){
+																	// feature[i].layer.styleMap.styles.default.rules[0].symbolizer.externalGraphic="iconosGIS/bloqE_16px.png" 
+																	// layerTempSel.drawFeature(feature[i])
+																	 // mapPanel.map.refresh();	
+																	var point = new OpenLayers.Feature.Vector(
+																		new OpenLayers.Geometry.Point(feature[i].geometry.x, feature[i].geometry.y));	
+																	layerTempSel.addFeatures([point]);
+																	mapPanel.map.setLayerIndex(layerTempSel, 99);
+																}
+															}												
+														// }											
+													}
+												}												
+											},
+											dockedItems: [
+												{
+												xtype: 'toolbar',
+												items: [{
+													itemId: 'removeButton',
+													text:'Download',
+													tooltip:'Download data',
+													icon   : iconGridDownload,
+													disabled: true,
+													handler: btn_download 
+												},cmbVar/*,{
+													itemId: 'zoomExtentALL',
+													text:'zoomExtentALL',
+													tooltip:'zoomExtent to ALL',
+													icon   : iconGridzoomExtentALL,//iconCls:'add',
+													handler: onZoomExtentALL 
+												}*/,{
+													itemId: 'idExpand',
+													text:'Expand all',
+													tooltip:'Expand all',
+													iconCls:iconGridExpand,
+													handler: expand 
+												},{
+												
+													itemId: 'idstatistic',
+													text:'Statistics',
+													tooltip:'Summary Statistic',
+													icon   : iconGridStatistics,
+													disabled: true,
+													handler: statistics 
+												},{ xtype: 'tbtext', itemId: 'numRecords' },
+												{ xtype: 'tbtext', itemId: 'numRecordsSelected' },{xtype: 'tbfill'},
+												{ 
+													itemId: 'idMaximo',
+													// text:'Maximize',
+													tooltip:'Maximize/Minimize table',
+													icon   : iconGridMaximize,
+													// stretch: false,
+													align: 'right',
+													handler: Maximize,
+												}]
+											}]		
+										});
+
+										// para el mostrar el grid de variables cuando se da en el boton expandir
+										Ext.getCmp('gridRegionID').getView().on('expandbody', function(rowNode, record, expandbody,eNode){
+
+											var dynamicStore  //the new store for the nested grid.
+											var row = "myrow-" + record.get("id");
+											var id2 = "mygrid-" + record.get("id");  
+											row2 = Ext.get(rowNode);
+											
+											var store = Ext.create('Ext.data.Store', {
+												model: 'modelGridVar',
+												autoSync: true,
+												storeId: 'store2',
+												proxy: {
+													type: 'ajax', 
+													url: 'php/Geo_statByregion.php',
+													extraParams: {
+														idstat: record.get("id"),type:17
+													},
+													actionMethods: {
+														read: 'POST'
+													},													
+													reader: {
+														type: 'json',
+														root: 'topics'
+													}
+												},
+												autoLoad: true// {callback: initData}
+											});
+												  
+											var grid = Ext.create('Ext.grid.Panel', {
+												// hideHeaders: true,
+												border: false,
+												height:100,
+												layout: 'fit',
+												// width:500,
+												autoWidth:true,
+												id: id2,
+												columns: [{
+														xtype: 'actioncolumn',
+														// flex: 0,
+														width: 150,
+														autoSizeColumn: true,
+														items: [{
+															icon   : icons+'buttons/download_off.gif',  // Use a URL in the icon config
+															tooltip: 'zoom extent2',
+															handler: function(grid, rowIndex, colIndex) {
+																var rec = store.getAt(rowIndex);
+																idstat=rec.get('idstat')
+																idvar=rec.get('idvar')
+																Ext.DomHelper.append(document.body, {
+																  tag: 'iframe',
+																  id:'downloadIframe',
+																  frameBorder: 0,
+																  width: 0,
+																  height: 0,
+																  css: 'display:none;visibility:hidden;height: 0px;',
+																  src: 'php/dowloaddata.php?typedwn=selection&station='+Ext.encode([idstat])+'&'+'variable='+Ext.encode([idvar])
+																});
+															
+															}
+														}]
+													},{ text: 'name',dataIndex: 'name'},
+													{ text: 'acronym',dataIndex: 'acronym'},
+													{ text: 'date_start',dataIndex: 'date_start'},
+													{ text: 'date_end',dataIndex: 'date_end'},
+													{ text: 'age',dataIndex: 'age',autoSizeColumn: true}],
+												store: store,
+												viewConfig: {
+													listeners: {
+														refresh: function(dataview) {
+															Ext.each(dataview.panel.columns, function(column) {
+																if (column.autoSizeColumn === true)
+																	column.autoSize();
+															})
+														}
+													}
+												}	
+											});
+											
+										   grid.render(row)
+											grid.getEl().swallowEvent([ 'mouseover', 'mousedown', 'click', 'dblclick' ]);
+											// grid.on('itemclick', function(view) {
+												// Ext.getCmp('gridRegionID').getView().getSelectionModel().deselectAll();
+											// });
+											
+												
+										});	
+										gridRegion.getView().on('collapsebody', function(rowNode, record, eNode) {
+											var row = "myrow-" + record.get("id");
+											var id2 = "mygrid-" + record.get("id");  
+											// Ext.getCmp(id2).getStore().removeAll();
+											$('#'+row).empty();
+											// Ext.get(rowNode).down('#'+row).down('div').destroy();
+										});
+
+										gridStatStore.on('load', function(ds){
+											countRow=ds.getTotalCount()
+											if(countRow>=1){
+												// winRegion.show()
+												// Ext.getCmp('gridRegionID').add(gridRegion);
+												// Ext.getCmp('gridRegionID').doLayout();
+												
+												Ext.getCmp('mainTableID').add(gridRegion);
+												gridRegion.down('#numRecords').setText('Records: ' + countRow);
+												gridRegion.down('#numRecordsSelected').setText('Selected: ' + 0);
+												Ext.getCmp('mainTableID').expand()
+												
+												// Ext.DomHelper.append(document.body, {
+												  // tag: 'iframe',
+												  // id:'downloadIframe',
+												  // frameBorder: 0,
+												  // width: 0,
+												  // height: 0,
+												  // css: 'display:none;visibility:hidden;height: 0px;',
+												  // src: 'php/dowloaddata.php?typedwn=selection&station='+encodeURIComponent(JSON.stringify(selectID))+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())
+												// });									
+												myMask.hide();
+											}else{
+												myMask.hide();
+												Ext.getCmp('mainTableID').collapse()
+												winInfo=Ext.MessageBox.show({
+												   title: 'Information',
+												   msg: 'Not stations found!',
+												   buttons: Ext.MessageBox.OK,
+												   animateTarget: 'info',
+												   icon: 'x-message-box-info'
+												});	
+												winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+											}	
+										});	
+								
+							
+							
+							// ################################################################################################################
+						
+						
+
+
+						} // fin handler boton hover
+
+			
+			gridRegionHover = Ext.create('Ext.grid.Panel', {
+				id: 'gridRegionIDHover',
+				border: true,
+				// layout: 'fit',
+				forceFit: true,
+				store: gridStatStore,
+				maxHeight: 150,
+				enableColumnHide: false,
+				hideHeaders: true,
+				// width: 200,
+				cls: 'custom-gridPanelHover',
+				// height:273,
+				// maxHeight: mainPanelHeight*0.4,
+				autoHeight: true,
+				columns: [
+					{ minWidth: 60,dataIndex: 'name', flex: 1,menuDisabled: true,tdCls: 'x-change-cell'},
+					{ minWidth: 100,dataIndex: 'attri', flex: 4,menuDisabled: true}
+				],
+				columnLines: false,
+				stripeRows: false,
+				viewConfig: {
+					getRowClass: function(record, index) {
+							//var c = record.get('name');
+							return 'gridRegionHover-1column';
+					}
+				}			
+				// dockedItems: [
+					// {
+					// xtype: 'toolbar',
+					// items: [{
+						// itemId: 'removeButtonHover',
+						// text:'Download data',
+						// icon   : iconGridDownload,
+						// scale: 'small',
+						// handler: funcPupup
+					// }]
+				// }]
+			});
+			
+			statName = selname[0];	
+			
+			var checkConstrOpt = "no-constrain", //constrain-full, constrain-header, no-constrain
+				undef,
+				constrainOpts = {
+					constrain: (checkConstrOpt === 'constrain-full') ? true : undef,
+					constrainHeader: (checkConstrOpt === 'constrain-header') ? true : undef
+				},
+				popupOpts = Ext.apply({
+					title: 'Information',
+					id:'popupID',
+					location: feature,
+					width:220,
+					maxHeight:300,
+					items: [gridRegionHover],
+					anchorPosition: 'auto',
+					tools: [
+						{
+							tooltip: 'Graphic',
+							scale: 'small',
+							cls:"toolGraph",
+							handler: function(){
+								selectionID = selIds[0];
+								
+
+								var arrayvar =["prec","tmax","tmean","tmin","sbright","rhum","srad","windd","wsmean"]//varlist.split(',');
+								
+								var datatest = {
+									rowTitleArr: arrayvar,
+									colTitleArr: ['a', 'b', 'c']
+								}
+								var tpl = [
+									'<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+									'<tpl for="rowTitleArr">',
+									'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+									'</tpl>'
+									];	
+
+								cmbPeriod='cmbPeriod'+selectionID
+								cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
+									fieldLabel: 'Select graphic model',
+									id:'cmbPeriodID',
+									labelWidth:150,
+									store: {
+										fields: ['value','name'], 
+										data: [ 
+											{value:1,name: 'Daily'}, 
+											{value:2,name: 'Monthly'}, 
+											{value:3,name: 'Yearly'}
+										]
+									},
+									displayField: 'name',
+									value: 1,
+									queryMode: 'local',
+									valueField: 'value', 								
+									typeAhead: true,
+									listeners: {
+										select: function() {
+											var actTab = tabs.getActiveTab();
+											var idx = tabs.items.indexOf(actTab);
+											// actTabId=parseInt((actTab.title).match(/\d+/)[0])
+											var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
+											generateGraps(selectionID,idPeriod,"ALL")
+
+										}
+									}
+								});		
+								
+								btonReturn= new Ext.Button({
+									pressedCls : 'my-pressed',
+									overCls : 'my-over',
+									tooltip: "Return to map",
+									text:'Return to map',
+									icon: icons+'map.png', 
+									scale: 'small',
+									handler: function(){
+										tabs.setActiveTab(0);
+									}													
+								});	
+								if(Ext.getCmp('graphic_tab')){
+									tabs.remove(Ext.getCmp('graphic_tab'), true);
+								}								
+								
+								tabs.add({
+									title: 'Graph '+statName,//'Graphic_id'+selectionID
+									name: 'graphic_tab',
+									autoScroll: true,
+									id: 'graphic_tab',
+									closable: true,
+									dockedItems: [
+										{
+										xtype: 'toolbar',
+										items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+										}
+									]													
+								});
+								
+								var t = new Ext.XTemplate(tpl);
+								Ext.getCmp('graphic_tab').update(t.apply(datatest));
+								Ext.getCmp('mapPanelID').setHeight(0)
+								Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
+								tabs.setActiveTab('graphic_tab');
+								
+								generateGraps(selectionID,cmbPeriod.getValue(),'ALL')
+							
+							}
+							
+						},	
+						{
+							tooltip: 'Statistic',
+							scale: 'small',
+							cls:"toolStatistic",
+							handler: function(){
+								if(Ext.getCmp('gridStatisticID')){
+									Ext.getCmp('gridStatisticID').destroy();	
+								}
+								selgrid=Ext.encode(selIds)
+								varList="ALL"
+
+								var statisticStore = Ext.create('Ext.data.Store', {
+									model: 'modelStatistic',
+									autoLoad: true,
+									// autoSync: true,
+									sorters: { property: 'name', direction : 'ASC' },
+									proxy: {
+										type: 'ajax',
+										url: 'php/statistics.php',
+										extraParams: {stations : selgrid, variable:varList},	
+										actionMethods: {
+											read: 'POST'
+										},										
+										reader: {
+											type: 'json',
+											root: 'topics'
+										}
+									}
+								});	
+								gridStatistic = Ext.create('Ext.grid.Panel', {
+									id: 'gridStatisticID',
+									border: true,
+									// layout: 'fit',
+									forceFit: true,
+									store: statisticStore,
+									maxHeight: 360,//Ext.getBody().getViewSize().height*0.3,
+									// width: mainPanelWidth-50,
+									// height:360,
+									// maxHeight: mainPanelHeight*0.4,
+									// selType: 'checkboxmodel',
+									autoHeight: true,
+									// autoScroll: false,
+									columns: [
+										{ text: 'id',minWidth: 50,dataIndex: 'idstat', flex: 1},
+										{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1},
+										{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4},
+										{ text: 'var',minWidth: 50,dataIndex: 'var', flex: 2},
+										{ text: 'count',minWidth: 60,dataIndex: 'count', flex: 2},
+										{ text: 'min',minWidth: 60,dataIndex: 'min', flex: 2},
+										{ text: 'max',minWidth: 60,dataIndex: 'max', flex: 2},
+										{ text: 'median',minWidth: 60,dataIndex: 'median', flex: 2},
+										{ text: 'mean',minWidth: 60,dataIndex: 'mean', flex: 2},
+										{ text: 'var(x)',minWidth: 60,dataIndex: 'variance', flex: 2},
+										{ text: 'sd',minWidth: 60,dataIndex: 'sd', flex: 2},
+										{ text: 'cv&#37;',minWidth: 60,dataIndex: 'cv_per', flex: 2},
+										{ text: 'na',minWidth: 60,dataIndex: 'na', flex: 2},
+										{ text: 'na&#37;',minWidth: 60,dataIndex: 'na_per', flex: 2}
+									],
+									columnLines: true,
+									stripeRows: true
+								});
+								if(!Ext.getCmp('statisticsID')){
+									tabs.add({
+										title: 'Summary statistic',
+										name: 'statisticsID',
+										// autoScroll: true,
+										id: 'statisticsID',
+										closable: true,
+									});		
+								}
+								
+								Ext.getCmp('statisticsID').add(gridStatistic);								
+								
+								Ext.getCmp('mapPanelID').setHeight(0)
+								Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
+								// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
+								tabs.setActiveTab('statisticsID');								
+							
+							
+							}
+						},						
+						{
+							tooltip: 'Download data',
+							scale: 'small',
+							cls:"toolDownload",
+							handler: funcPupup
+						}
+					],	
+					alwaysOnTop: true,					
+					maximizable: false,
+					collapsible: false,					
+					listeners:{		
+						resize: {
+						  fn: function(el) {
+							if(el.height){
+							  gridRegionHover.maxHeight=el.height-40
+							  // Ext.getCmp('popupID').maxHeight=el.height
+							  Ext.getCmp('gridRegionIDHover').getView().refresh();
+							} 
+						  }
+						},
+						afterrender : function(panel) {
+							var header = panel.header;
+							header.setHeight(36);
+						}						
+						
+					}
+				}, constrainOpts);
+
+			popup = Ext.create('GeoExt.window.Popup', popupOpts);
+			// unselect feature when the popup
+			// is closed
+			popup.on({
+				close: function() {
+					if(OpenLayers.Util.indexOf(clusters.selectedFeatures,
+											   this.feature) > -1) {
+						selectControl.control.unselect(this.feature);
+					}else {
+					this.destroy();}					
+				}
+			});
+			popup.show();
+		} // fin createPopupOne
+
+		
+		function createPopup(feature,myFeatyures) {
+
+			selIds=new Array()
+			for(var i = 0; i < myFeatyures.length; i++) {
+				selIds.push(Number(myFeatyures[i].attributes.id));
+			}
+			
+			var gridStatStore = Ext.create('Ext.data.Store', {
+				model: 'modelGridRegion',
+				autoLoad: true,
+				autoSync: false,
+				// sorters: { property: 'name', direction : 'ASC' },
+				proxy: {
+					type: 'ajax',
+					url: 'php/Geo_statByregion.php',
+					extraParams: {type:14,listStatSel:Ext.encode(selIds)},
+					actionMethods: {
+						read: 'POST'
+					},						
+					reader: {
+						type: 'json',
+						root: 'topics'
+					}
+				}
+			});
+			funcPupup = function(){
+							// selectControl.control.deactivate();
+							if(Ext.getCmp('gridRegionID')){
+								Ext.getCmp('mainTableID').collapse();
+								Ext.getCmp('gridRegionID').destroy();	
+							}				
+							if(Ext.getCmp('popupID')){
+								Ext.getCmp('popupID').close()
+							}	
+							
+							layerTemp=mapPanel.map.getLayersByName("Search region")[0]
+							if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
+							
+							FindStation=mapPanel.map.getLayersByName("Search station")[0]
+							if(FindStation){FindStation.destroyFeatures();}
+									
+							// loading status
+							var myMask = new Ext.LoadMask(Ext.getCmp('mapPanelID'), {msg:"Please wait..."});
+							myMask.show();
+							
+							selectID=selIds
+					
+							// ##############################################################    TABLA GRID ##################################
+							
+										var gridStatStore = Ext.create('Ext.data.Store', {
+											model: 'modelGridRegion',
+											autoLoad: true,
+											autoSync: true,
+											sorters: { property: 'name', direction : 'ASC' },
+											proxy: {
+												type: 'ajax',
+												url: 'php/Geo_statByregion.php',
+												extraParams: {type:14,listStatSel:Ext.encode(selectID)},	
+												actionMethods: {
+													read: 'POST'
+												},												
+												reader: {
+													type: 'json',
+													root: 'topics'
+												}
+											}
+										});								
+
+										var varstore = Ext.create('Ext.data.Store', {
+											model: 'modelvarList',
+											autoLoad: true,
+											autoSync: true,
+											sorters: { property: 'name', direction : 'ASC' },
+
+											proxy: {
+												type: 'ajax',
+												url: 'php/Geo_statByregion.php',
+												extraParams: {type:15,listStatSel:Ext.encode(selectID)},
+												actionMethods: {
+													read: 'POST'
+												},												
+												reader: {
+													type: 'json',
+													root: 'topics'
+												}
+											},
+											listeners: {
+												 load: function(store, records) {
+													  store.insert(0, [{
+														  id: 0,
+														  name: 'ALL',
+														  acronym: 'ALL'
+														  
+													  }]);
+												 }
+											  }								
+										});	
+										
+										var selModel = Ext.create('Ext.selection.CheckboxModel', {
+											listeners: {
+												selectionchange: function(sm, selections) {
+													gridRegion.down('#removeButton').setDisabled(selections.length === 0);
+													gridRegion.down('#idstatistic').setDisabled(selections.length === 0);
+													// gridRegion.down('#zoomExtent').setDisabled(selections.length === 0 || selections.length > 1);
+												}
+											},
+											mode: 'SIMPLE',
+											select: function(records, keepExisting, suppressEvent) {
+												if (Ext.isDefined(records)) {
+													this.doSelect(records, keepExisting, suppressEvent);
+												}
+											},
+											selectAll: function( suppressEvent ) {
+												var me = this,
+													selections = me.store.getRange();
+												countFree=[]
+												for( var key in selections ) {
+													if( selections[key].data.copyright == 'Free'){
+														countFree.push(selections[key].data.copyright)
+													}
+												}
+												
+												if(countFree.length>150){
+													Ext.getCmp('mainTableID').collapse()
+													winInfo=Ext.MessageBox.show({
+													   title: 'Information',
+													   msg: 'Exceeds the maximum number (Max. 150) of downloads',
+													   width:300,
+													   buttons: Ext.MessageBox.OK,
+													   animateTarget: 'info',
+													   icon: 'x-message-box-info'
+													});	
+													winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+												}else{
+													var i = 0,
+														len = selections.length,
+														selLen = me.getSelection().length;
+														
+													// if( len != selLen ) {
+													if( selLen==0 ) {
+														me.bulkChange = true;
+														for (; i < len; i++) {
+															me.doSelect(selections[i], true, suppressEvent);
+														}
+														delete me.bulkChange;
+														me.maybeFireSelectionChange(me.getSelection().length !== selLen);
+													}
+													else {
+														me.deselectAll( suppressEvent );
+													}									
+												}
+											}											
+										});	
+										
+										btn_download = function () {
+											var selection = gridRegion.getView().getSelectionModel().getSelection();//[0];
+											selgrid=new Array()
+											for(var i = 0; i < selection.length; i++) {
+												selgrid.push(Number(selection[i].data.id));
+											}
+											Ext.DomHelper.append(document.body, {
+											  tag: 'iframe',
+											  id:'downloadIframe',
+											  frameBorder: 0,
+											  width: 0,
+											  height: 0,
+											  css: 'display:none;visibility:hidden;height: 0px;',
+											  src: 'php/dowloaddata.php?typedwn=selection&station='+Ext.encode(selgrid)+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())+'&typedwn=selection'
+											});
+										}	
+										onZoomExtentALL = function () {
+											// layerTemp=mapPanel.map.getLayersByName("Search station")[0]
+
+											FeatselectID=[]
+											for (var i = feature.length - 1; i >= 0; --i) {
+												if(feature[i].renderIntent=='select'){
+														sel=feature[i]//.cluster[j]
+														FeatselectID.push(sel)
+												}
+											}
+											console.log(FeatselectID)
+											console.log(FeatselectID[0].geometry.getBounds())
+											var BoundALL = FeatselectID[0].geometry.getBounds();
+											// mapPanel.map.zoomToExtent(BoundALL);								
+											
+										}
+
+										cmbVar= Ext.create('Ext.form.field.ComboBox', { 
+											editable: false, 
+											value: 'ALL',
+											multiSelect: true, 
+											displayField: 'acronym',
+											valueField: 'id', 
+											id:'varCmbID',
+											queryMode: 'local',
+											typeAhead: true,	
+											store: varstore,
+											listConfig: {
+												getInnerTpl: function() {
+													return '<div data-qtip="{name}">{acronym}</div>';
+												}
+											}
+										
+										});		
+										
+										gridRegion = Ext.create('Ext.grid.Panel', {
+											id: 'gridRegionID',
+											border: true,
+											// layout: 'fit',
+											forceFit: true,
+											store: gridStatStore,
+											maxHeight: Ext.getBody().getViewSize().height*0.3,
+											width: mainPanelWidth,
+											// height:273,
+											// maxHeight: mainPanelHeight*0.4,
+											selType: 'checkboxmodel',
+											autoHeight: true,
+											columns: [
+												{
+													xtype: 'actioncolumn',
+													minWidth: 20,
+													flex: 1,
+													items: [{
+														icon   : icons+'buttons/zoomin_off.gif',  // Use a URL in the icon config
+														tooltip: 'zoom extent',
+														handler: function(grid, rowIndex, colIndex) {
+															var rec = gridStatStore.getAt(rowIndex);
+															selectionID = rec.get('id');
+															zoomToStation(selectionID)
+														}
+													}]
+												},		
+												{
+													xtype: 'actioncolumn',
+													minWidth: 20,
+													flex: 1,
+													items: [{
+														icon   : icons+'buttons/pie-chart-graph-icon.png',  // Use a URL in the icon config
+														tooltip: 'Graphic',
+														handler: function(grid, rowIndex, colIndex) {
+															var rec = gridStatStore.getAt(rowIndex);
+															selectionID = rec.get('id');
+															statName = rec.get('name');
+															
+															varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
+															var arrayvar =new Array() //varlist.split(',');
+
+															for(var i = 0; i < varstore.getCount(); i++) {
+																var record = varstore.getAt(i);
+																id=record.get('id')
+																acronym=record.get('acronym')
+																arrayvar.push(acronym)
+																// console.log(id,acronym)
+															}
+															
+															var datatest = {
+																name: 'xxx',
+																rowTitleArr: arrayvar,
+																colTitleArr: ['a', 'b', 'c']
+															}
+															var tpl = [
+																'<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+																'<tpl for="rowTitleArr">',
+																'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+																'</tpl>'
+															];	
+
+															cmbPeriod='cmbPeriod'+selectionID
+															cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
+																fieldLabel: 'Select graphic model',
+																id:'cmbPeriodID',
+																labelWidth:150,
+																store: {
+																	fields: ['value','name'], 
+																	data: [ 
+																		{value:1,name: 'Daily'}, 
+																		{value:2,name: 'Monthly'}, 
+																		{value:3,name: 'Yearly'}
+																	]
+																},
+																displayField: 'name',
+																value: 1,
+																queryMode: 'local',
+																valueField: 'value', 								
+																typeAhead: true,
+																listeners: {
+																	select: function() {
+																		var actTab = tabs.getActiveTab();
+																		var idx = tabs.items.indexOf(actTab);
+																		// actTabId=parseInt((actTab.title).match(/\d+/)[0])
+																		var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
+																		generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
+
+																	}
+																}
+															});		
+
+															btonReturn= new Ext.Button({
+																pressedCls : 'my-pressed',
+																overCls : 'my-over',
+																tooltip: "Return to map",
+																text:'Return to map',
+																icon: icons+'map.png', 
+																scale: 'small',
+																handler: function(){
+																	tabs.setActiveTab(0);
+																}													
+															});	
+															if(Ext.getCmp('graphic_tab')){
+																tabs.remove(Ext.getCmp('graphic_tab'), true);
+															}												
+
+															tabs.add({
+																title: 'Graph '+statName,//'Graphic_id'+selectionID
+																name: 'graphic_tab',
+																autoScroll: true,
+																id: 'graphic_tab',
+																closable: true,
+																dockedItems: [
+																	{
+																	xtype: 'toolbar',
+																	items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+																	}
+																]													
+															});		
+															
+															var t = new Ext.XTemplate(tpl);
+															Ext.getCmp('graphic_tab').update(t.apply(datatest));
+															Ext.getCmp('mapPanelID').setHeight(0)
+															Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
+															tabs.setActiveTab('graphic_tab');															
+															
+															generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+														} // handler
+													}]
+												},								
+												// {
+													// text : '&#8470;',
+													// dataIndex: 'rowIndex',
+													// flex: 1,
+													// minWidth: 20,
+													// renderer : function(value, metaData, record, rowIndex)
+													// {return rowIndex+1;}
+												// },			
+												{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
+												{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
+												{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
+												{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
+												{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
+												
+												// { text: 'category',minWidth: 100,dataIndex: 'category', flex: 4},
+
+												// { text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3},
+												// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
+												
+												{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
+												{ text: 'status',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+												
+												// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
+												// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
+												// { text: 'elev',minWidth: 80,dataIndex: 'elev', flex: 2},
+												// { text: 'country',minWidth: 80,dataIndex: 'country', flex: 4},
+												// { text: 'state',minWidth: 80,dataIndex: 'state', flex: 4},
+												// { text: 'city',minWidth: 90,dataIndex: 'city', flex: 4}
+												
+											],
+											columnLines: true,
+											plugins: [{
+												ptype: 'rowexpander',
+												pluginId: 'rowexpanderID',
+												selectRowOnExpand: true,			
+												rowBodyTpl : new Ext.XTemplate(
+													'<p><b>category:</b> {category} | <b>instalation:</b> {instalation} ', //&#x2016; doble linea vertical
+													'| <b>quality:</b> {quality} ',
+													'| <b>lon:</b> {lon} ',
+													'| <b>lat:</b> {lat} ',
+													'| <b>elev:</b> {elev} </p>',
+													'<p><b>country:</b> {country} ',
+													'| <b>state:</b> {state} ',
+													'| <b>city:</b> {city}</p> ',
+													'<div id="myrow-{id}" ></div>'
+												),		
+												expandOnRender: true,
+												expandOnDblClick: false		
+									
+											}],							
+
+											stripeRows: true,
+											// margin: '0 0 20 0',
+											selModel: selModel,
+											viewConfig: { 
+												stripeRows: false, 
+												getRowClass: function(record, index, rowParams, stor) {
+												   var c = record.get('copyright');
+												   // return id == '1' ? 'general-rule' : ''; // para desaparecer el check
+													if (c == 'Restricted' || c == 'Request') {
+														return 'price-fall';
+													} 
+												}	
+											},
+											listeners: {
+												beforeselect: function ( row, model, index ) {
+													if ( model.data.copyright == "Restricted" || model.data.copyright == 'Request') {
+														return false;
+													}
+												}								
+											},
 											dockedItems: [
 												{
 												xtype: 'toolbar',
@@ -4115,15 +6629,15 @@ Ext.application({
 												gridRegion.down('#numRecords').setText('Records: ' + countRow);
 												Ext.getCmp('mainTableID').expand()
 												
-												Ext.DomHelper.append(document.body, {
-												  tag: 'iframe',
-												  id:'downloadIframe',
-												  frameBorder: 0,
-												  width: 0,
-												  height: 0,
-												  css: 'display:none;visibility:hidden;height: 0px;',
-												  src: 'php/dowloaddata.php?typedwn=selection&station='+encodeURIComponent(JSON.stringify(selectID))+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())
-												});									
+												// Ext.DomHelper.append(document.body, {
+												  // tag: 'iframe',
+												  // id:'downloadIframe',
+												  // frameBorder: 0,
+												  // width: 0,
+												  // height: 0,
+												  // css: 'display:none;visibility:hidden;height: 0px;',
+												  // src: 'php/dowloaddata.php?typedwn=selection&station='+encodeURIComponent(JSON.stringify(selectID))+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())
+												// });									
 												myMask.hide();
 											}else{
 												myMask.hide();
@@ -4148,10 +6662,46 @@ Ext.application({
 
 						} // fin handler boton hover
 
-					}]
-				}]
+			
+			gridRegionHover = Ext.create('Ext.grid.Panel', {
+				id: 'gridRegionIDHover',
+				border: true,
+				// layout: 'fit',
+				forceFit: true,
+				store: gridStatStore,
+				maxHeight: 150,
+				enableColumnHide: false,
+				// width: 200,
+				cls: 'custom-gridPanelHover',
+				// height:273,
+				// maxHeight: mainPanelHeight*0.4,
+				autoHeight: true,
+				columns: [
+					{ text: 'cod',minWidth: 45,dataIndex: 'code', flex: 1,menuDisabled: true},
+					{ text: 'name',minWidth: 100,dataIndex: 'name', flex: 4,menuDisabled: true},
+					{ text: 'model',minWidth: 70,dataIndex: 'model', flex: 2,menuDisabled: true},
+					{ text: 'variables',minWidth: 120,dataIndex: 'variables', flex: 4,menuDisabled: true}
+				],
+				columnLines: true,
+				stripeRows: true,
+				listeners: {
+					cellclick: function(view, td, cellIndex, record, tr, rowIndex, e, eOpts) {
+						var rec = gridStatStore.getAt(rowIndex);
+						selectionID = rec.get('id');
+						for (var i = myFeatyures.length - 1; i >= 0; --i) {
+							if(myFeatyures[i].attributes.id==selectionID){
+								featureSel=myFeatyures[i].geometry
+								var bounds = featureSel.getBounds();
+								if(bounds){ mapPanel.map.panTo(bounds.getCenterLonLat()); mapPanel.map.zoomToExtent(bounds);}
+								mapPanel.map.zoomTo(13);
+								// mapPanel.map.zoomOut()
+							}
+						}						
+					
+					}
+				}
 			});
-								
+					
 			var checkConstrOpt = "no-constrain", //constrain-full, constrain-header, no-constrain
 				undef,
 				constrainOpts = {
@@ -4162,13 +6712,21 @@ Ext.application({
 					title: 'Information',
 					id:'popupID',
 					location: feature,
-					width:200,
+					width:220,
 					maxHeight:300,
 					items: [gridRegionHover],
-					maximizable: false,
-					collapsible: true,
 					anchorPosition: 'auto',
-					alwaysOnTop: true,
+					tools: [
+						{
+							tooltip: 'Download data',
+							scale: 'small',
+							cls:"toolDownload",
+							handler: funcPupup
+						}
+					],	
+					alwaysOnTop: true,					
+					maximizable: false,
+					collapsible: false,					
 					listeners:{		
 						resize: {
 						  fn: function(el) {
@@ -4178,7 +6736,12 @@ Ext.application({
 							  Ext.getCmp('gridRegionIDHover').getView().refresh();
 							} 
 						  }
-						}
+						},
+						afterrender : function(panel) {
+							var header = panel.header;
+							header.setHeight(36);
+						}						
+						
 					}
 				}, constrainOpts);
 
@@ -4212,47 +6775,57 @@ Ext.application({
 			fontSize: "12px"
 		};	
 
-		clusters.events.on({
+		/*clusters.events.on({
 		  'featureselected': function(event) {
 		  
 			var myFeatyures = event.feature.cluster;
 			var f = event.feature;
 			allfeatures=new Array()
-			if(myFeatyures.length>1){
-				for (var i = myFeatyures.length - 1; i >= 0; --i) {
-					// myFeatyures[i].style = defStyle 
-					vectorHover.drawFeature(myFeatyures[i]);
-					allfeatures.push(myFeatyures[i])
-				}
-			}
-			// vectorHover.addFeatures(allfeatures);
-			
 			if(Ext.getCmp('popupID')){
 				Ext.getCmp('popupID').close()
-			}			
-			createPopup(event.feature,myFeatyures);
-						
-				
+			}				
+			if(myFeatyures.length>1){
+				for (var i = myFeatyures.length - 1; i >= 0; --i) {
+					// vectorHover.drawFeature(myFeatyures[i]);
+					// allfeatures.push(myFeatyures[i])
+				}
+				createPopup(event.feature,myFeatyures);
+			}else{
+				createPopupOne(event.feature,myFeatyures);
+			}
+
 		  },
 		  'featureunselected': function(event) {
-				vectorHover.removeAllFeatures();
-				vectorHover.destroyFeatures();
-				// if(Ext.getCmp('popupID')){
-					// Ext.getCmp('popupID').close()
-				// }				
+				// vectorHover.removeAllFeatures();
+				// vectorHover.destroyFeatures();
+				
 		  }
-		});
+		});*/
 
 		var styleHoverNull = new OpenLayers.Style(null, {
 			fillColor: ""
 		});	
-		
+		function onFeatureSelect1(event) {
+			var myFeatyures = event.cluster;
+			allfeatures=new Array()
+			if(Ext.getCmp('popupID')){
+				Ext.getCmp('popupID').close()
+			}				
+			if(myFeatyures.length>1){
+				createPopup(event,myFeatyures);
+			}else{
+				createPopupOne(event,myFeatyures);
+			}		
+		}
 		var selectHover = new OpenLayers.Control.SelectFeature(
-			clusters, {hover: true, renderIntent: styleHoverNull}
+			clusters, {
+				hover: true,
+				onSelect: onFeatureSelect1
+			}//, renderIntent: styleHoverNull}
 		);
 		
 		mapPanel.map.addControl(selectHover);
-		// selectHover.activate();
+		selectHover.activate();
 
 		var oClickClose = new OpenLayers.Control.Click({eventMethods:{
 		 'click': function(e) {
@@ -4263,7 +6836,20 @@ Ext.application({
 			if (getWin) {
 				getWin.close()
 				getWin.destroy();
-			} 			
+			} 	
+			
+			selectControl.control.unselectAll();
+			selectControl.control.deactivate();
+			// selectHover.activate();
+			if(Ext.getCmp('gridRegionID')){
+				Ext.getCmp('mainTableID').collapse();
+				Ext.getCmp('gridRegionID').destroy();	
+			}
+			
+			// layerTemp=mapPanel.map.getLayersByName("Search region")[0]
+			if(layerTempRegion){layerTempRegion.removeAllFeatures()}			
+			// layerTempStat=mapPanel.map.getLayersByName("Search station")[0]
+			if(layerTempStat){layerTempStat.removeAllFeatures()}			
 		 }
 		}});
 		mapPanel.map.addControl(oClickClose)
@@ -4302,7 +6888,8 @@ Ext.application({
 			scale: 'medium',
 			enableToggle: true,
 			allowDepress: true,
-			// pressed:true,
+			toggleGroup: "draw",
+			pressed:true,
 			handler: function(toggled){
 				if(Ext.getCmp('popupID')){
 					Ext.getCmp('popupID').close()
@@ -4318,7 +6905,16 @@ Ext.application({
 					selectHover.deactivate();
 					vectorHover.removeAllFeatures();
 				}
-			}			
+			},
+			toggleHandler: function(btn, pressed){
+				if(pressed==true){
+					selectHover.activate();
+				}else{
+					selectHover.deactivate();
+					vectorHover.removeAllFeatures();
+				}			
+                // console.log('toggle', btn.text, pressed);
+            }			
 		});
 		
 		ctrl_zoomBox = Ext.create('GeoExt.Action', {
@@ -4338,7 +6934,8 @@ Ext.application({
 				}			
 				// if(toggled.pressed==true){
 					// selectHover.deactivate();
-				// }else{
+				// }
+				// else{
 					// selectHover.activate();
 				// }
 				getWin = Ext.getCmp('distanceID');
@@ -4415,16 +7012,39 @@ Ext.application({
 			scale: 'medium',
 			group: "draw"
 		});
-			
-		var bton_down = new Ext.Button({
-			pressedCls : 'my-pressed',
-			overCls : 'my-over',
-			tooltip: "Download stations selected",
-			icon: icons+'download.png',
-			scale: 'medium',
-			enableToggle: false,
-			handler: function(){
-				selectControl.control.deactivate();
+		
+		var something = (function(event) {
+			var executed = false;
+			return function (event) {
+				if (!executed) {
+					executed = true;
+					feature2 = clusters.features;
+				
+					selectID=[]
+					mergeFeature=[]
+					for (var i = feature2.length - 1; i >= 0; --i) {
+						// i=1
+						console.log(feature2[i].renderIntent)
+						console.log(clusters.selectedFeatures.indexOf(feature2[i]))
+						// if(clusters.selectedFeatures.indexOf(feature[i])==0){
+						if(feature2[i].renderIntent=='select'){
+							// console.log(clusters.selectedFeatures.indexOf(feature[i]))
+							// console.log(feature[i])
+							mergeFeature.push(feature2[i])
+							// for (var j = feature[i].cluster.length - 1; j >= 0; --j) {
+								// sel=feature[i].cluster[j].attributes.id;
+								// selectID.push(sel)
+								
+							// }
+						}
+					}					
+					
+					// console.log(event)
+				}
+			};
+		})();			
+
+		funcDownBySel=function(selectID){
 				if(Ext.getCmp('gridRegionID')){
 					Ext.getCmp('mainTableID').collapse();
 					Ext.getCmp('gridRegionID').destroy();	
@@ -4441,19 +7061,36 @@ Ext.application({
 				
 				// para obtener ids de estaciones seleccionadas
 				feature = clusters.features;
+				
 				selectID=[]
+				mergeFeature=[]
 				for (var i = feature.length - 1; i >= 0; --i) {
+					// i=1
+					// console.log(clusters.selectedFeatures.indexOf(feature[i]))
+					// if(clusters.selectedFeatures.indexOf(feature[i])==0){
 					if(feature[i].renderIntent=='select'){
 						// console.log(clusters.selectedFeatures.indexOf(feature[i]))
+						mergeFeature.push(feature[i])
 						for (var j = feature[i].cluster.length - 1; j >= 0; --j) {
 							sel=feature[i].cluster[j].attributes.id;
 							selectID.push(sel)
+							
 						}
 					}
-				}					
+				}		
+				something(mergeFeature);				
+
+				// console.log(mergeFeature)
+				// if(mergeFeature.length==2){
+					// console.log(mergeFeature)
+				// }
+				// else{
+					// console.log("hhola")
+					// }
 				
+				myMask.hide();
 				// ##############################################################    TABLA GRID ##################################
-				
+/*				
 							var gridStatStore = Ext.create('Ext.data.Store', {
 								model: 'modelGridRegion',
 								autoLoad: true,
@@ -4462,7 +7099,10 @@ Ext.application({
 								proxy: {
 									type: 'ajax',
 									url: 'php/Geo_statByregion.php',
-									extraParams: {type:14,listStatSel:Ext.encode(selectID)},			
+									extraParams: {type:14,listStatSel:Ext.encode(selectID)},
+									actionMethods: {
+										read: 'POST'
+									},								
 									reader: {
 										type: 'json',
 										root: 'topics'
@@ -4479,7 +7119,10 @@ Ext.application({
 								proxy: {
 									type: 'ajax',
 									url: 'php/Geo_statByregion.php',
-									extraParams: {type:15,listStatSel:Ext.encode(selectID)},			
+									extraParams: {type:15,listStatSel:Ext.encode(selectID)},	
+									actionMethods: {
+										read: 'POST'
+									},									
 									reader: {
 										type: 'json',
 										root: 'topics'
@@ -4504,7 +7147,41 @@ Ext.application({
 										gridRegion.down('#idstatistic').setDisabled(selections.length === 0);
 										// gridRegion.down('#zoomExtent').setDisabled(selections.length === 0 || selections.length > 1);
 									}
-								}
+								},
+								mode: 'SIMPLE',
+								select: function(records, keepExisting, suppressEvent) {
+									if (Ext.isDefined(records)) {
+										this.doSelect(records, keepExisting, suppressEvent);
+									}
+								},
+								selectAll: function( suppressEvent ) {
+									var me = this,
+										selections = me.store.getRange();
+
+									for( var key in selections ) {
+										if( selections[key].data.copyright == 'Restricted' ||  selections[key].data.copyright == 'Request' ) {
+											selections.splice( key, 1 );
+											break;
+										}
+									}
+
+									var i = 0,
+										len = selections.length,
+										selLen = me.getSelection().length;
+
+									if( len != selLen ) {
+										me.bulkChange = true;
+										for (; i < len; i++) {
+											me.doSelect(selections[i], true, suppressEvent);
+										}
+										delete me.bulkChange;
+
+										me.maybeFireSelectionChange(me.getSelection().length !== selLen);
+									}
+									else {
+										me.deselectAll( suppressEvent );
+									}
+								}								
 							});	
 							
 							btn_download = function () {
@@ -4524,7 +7201,7 @@ Ext.application({
 								});
 							}	
 							onZoomExtentALL = function () {
-								// layerTemp=mapPanel.map.getLayersByName("FindStation")[0]
+								// layerTemp=mapPanel.map.getLayersByName("Search station")[0]
 
 								FeatselectID=[]
 								for (var i = feature.length - 1; i >= 0; --i) {
@@ -4614,6 +7291,7 @@ Ext.application({
 											handler: function(grid, rowIndex, colIndex) {
 												var rec = gridStatStore.getAt(rowIndex);
 												selectionID = rec.get('id');
+												statName = rec.get('name');
 												
 												varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
 												var arrayvar =new Array() //varlist.split(',');
@@ -4641,7 +7319,7 @@ Ext.application({
 												cmbPeriod='cmbPeriod'+selectionID
 												cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
 													fieldLabel: 'Select graphic model',
-													id:'cmbPeriodID'+selectionID,
+													id:'cmbPeriodID',
 													labelWidth:150,
 													store: {
 														fields: ['value','name'], 
@@ -4660,50 +7338,48 @@ Ext.application({
 														select: function() {
 															var actTab = tabs.getActiveTab();
 															var idx = tabs.items.indexOf(actTab);
-															actTabId=parseInt((actTab.title).match(/\d+/)[0])
-															var idPeriod = Ext.getCmp('cmbPeriodID'+actTabId).getValue()
-															console.log(actTab,idx,actTabId,idPeriod)
-															generateGraps(actTabId,idPeriod,Ext.encode(cmbVar.getValue()))
+															// actTabId=parseInt((actTab.title).match(/\d+/)[0])
+															var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
+															generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
 
 														}
 													}
 												});		
-												if(!Ext.getCmp('graphic'+selectionID)){
-													tabs.add({
-														// contentEl: "desc",
-														// xtype: 'panel',
-														title: 'Graphic_id'+selectionID,
-														name: 'graphic'+selectionID,
-														// width:mainPanelWidth-15,
-														// maxHeight: 100,
-														autoScroll: true,
-														// height: 100,
-														// autoHeight: true,
-														// layout: 'fit',
-														id: 'graphic'+selectionID,
-														 // html: new Ext.XTemplate(
-														 // tpl
-														 // '<div id="grap_tmin_'+selectionID+'" ></div>',
-														 // '<div id="grap_prec_'+selectionID+'"></div>'
-														 // ),
-														 // .apply({value: '2. HTML property of a panel generated by an XTemplate'}),
-														closable: true,
-														dockedItems: [
-															{
-															xtype: 'toolbar',
-															items: [cmbPeriod]
-															}
-														]													
-													});		
-												}
-												var t = new Ext.XTemplate(tpl);
-												Ext.getCmp('graphic'+selectionID).update(t.apply(datatest));
-												// Ext.getCmp('graphic'+selectionID).update('This<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long');
+
+												btonReturn= new Ext.Button({
+													pressedCls : 'my-pressed',
+													overCls : 'my-over',
+													tooltip: "Return to map",
+													text:'Return to map',
+													icon: icons+'map.png', 
+													scale: 'small',
+													handler: function(){
+														tabs.setActiveTab(0);
+													}													
+												});	
+												if(Ext.getCmp('graphic_tab')){
+													tabs.remove(Ext.getCmp('graphic_tab'), true);
+												}												
+
+												tabs.add({
+													title: 'Graph '+statName,//'Graphic_id'+selectionID
+													name: 'graphic_tab',
+													autoScroll: true,
+													id: 'graphic_tab',
+													closable: true,
+													dockedItems: [
+														{
+														xtype: 'toolbar',
+														items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+														}
+													]													
+												});		
 												
+												var t = new Ext.XTemplate(tpl);
+												Ext.getCmp('graphic_tab').update(t.apply(datatest));
 												Ext.getCmp('mapPanelID').setHeight(0)
 												Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
-												// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
-												tabs.setActiveTab('graphic'+selectionID);
+												tabs.setActiveTab('graphic_tab');												
 												
 												generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
 											} // handler
@@ -4717,18 +7393,20 @@ Ext.application({
 										// renderer : function(value, metaData, record, rowIndex)
 										// {return rowIndex+1;}
 									// },			
-									{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1},
-									{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1},
-									{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4},
-									{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3},
-									{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2},
+									{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
+									{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
+									{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
+									{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
+									{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
 									
 									// { text: 'category',minWidth: 100,dataIndex: 'category', flex: 4},
 
 									// { text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3},
 									// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
 									
-									{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4},
+									{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
+									{ text: 'status',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+									
 									// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 									// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
 									// { text: 'elev',minWidth: 80,dataIndex: 'elev', flex: 2},
@@ -4761,15 +7439,23 @@ Ext.application({
 								stripeRows: true,
 								// margin: '0 0 20 0',
 								selModel: selModel,
-								// viewConfig: { 
-									// stripeRows: false, 
-									// getRowClass: function(record) { 
-										// if(winRegion.width==winRegion.maxWidth){
-											// return 'regiongrid-max';
-										// }else{return 'regiongrid-min';}
-									// }	
-								// },
-								// inline buttons
+								viewConfig: { 
+									stripeRows: false, 
+									getRowClass: function(record, index, rowParams, stor) {
+									   var c = record.get('copyright');
+									   // return id == '1' ? 'general-rule' : ''; // para desaparecer el check
+										if (c == 'Restricted' || c == 'Request') {
+											return 'price-fall';
+										} 
+									}	
+								},
+								listeners: {
+									beforeselect: function ( row, model, index ) {
+										if ( model.data.copyright == "Restricted" || model.data.copyright == 'Request') {
+											return false;
+										}
+									}								
+								},
 								dockedItems: [
 									{
 									xtype: 'toolbar',
@@ -4780,13 +7466,13 @@ Ext.application({
 										icon   : iconGridDownload,
 										disabled: true,
 										handler: btn_download 
-									},cmbVar/*,{
-										itemId: 'zoomExtentALL',
-										text:'zoomExtentALL',
-										tooltip:'zoomExtent to ALL',
-										icon   : iconGridzoomExtentALL,//iconCls:'add',
-										handler: onZoomExtentALL 
-									}*/,{
+									},cmbVar,{
+										// itemId: 'zoomExtentALL',
+										// text:'zoomExtentALL',
+										// tooltip:'zoomExtent to ALL',
+										// icon   : iconGridzoomExtentALL,//iconCls:'add',
+										// handler: onZoomExtentALL 
+									},{
 										itemId: 'idExpand',
 										text:'Expand all',
 										tooltip:'Expand all',
@@ -4812,7 +7498,7 @@ Ext.application({
 									}]
 								}]		
 							});
-
+		
 							// para el mostrar el grid de variables cuando se da en el boton expandir
 							Ext.getCmp('gridRegionID').getView().on('expandbody', function(rowNode, record, expandbody,eNode){
 
@@ -4916,15 +7602,15 @@ Ext.application({
 									gridRegion.down('#numRecords').setText('Records: ' + countRow);
 									Ext.getCmp('mainTableID').expand()
 									
-									Ext.DomHelper.append(document.body, {
-									  tag: 'iframe',
-									  id:'downloadIframe',
-									  frameBorder: 0,
-									  width: 0,
-									  height: 0,
-									  css: 'display:none;visibility:hidden;height: 0px;',
-									  src: 'php/dowloaddata.php?typedwn=selection&station='+encodeURIComponent(JSON.stringify(selectID))+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())
-									});									
+									// Ext.DomHelper.append(document.body, { // para descargar automaticamente
+									  // tag: 'iframe',
+									  // id:'downloadIframe',
+									  // frameBorder: 0,
+									  // width: 0,
+									  // height: 0,
+									  // css: 'display:none;visibility:hidden;height: 0px;',
+									  // src: 'php/dowloaddata.php?typedwn=selection&station='+encodeURIComponent(JSON.stringify(selectID))+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())
+									// });									
 									myMask.hide();
 								}else{
 									myMask.hide();
@@ -4945,18 +7631,30 @@ Ext.application({
 				// ################################################################################################################
 			
 			
+		*/
 
-
-			}
-		});		
+			// selectControl.control.deactivate();		
+		} // fin funcDownBySel
 				
+	
+			
+		var bton_down = new Ext.Button({
+			pressedCls : 'my-pressed',
+			overCls : 'my-over',
+			tooltip: "Download stations selected",
+			icon: icons+'download.png',
+			scale: 'medium',
+			enableToggle: false,
+			handler: funcDownBySel 			
+		});
 		
         function onPopupClose(evt) {
             selectControl.control.unselect(selectedFeature);
         }
-        function onFeatureSelect(event) {
-			// var myFeatyures = event.cluster;
-			// var f = event.feature;
+
+        function onFeatureSelect(feature) {
+/*			var myFeatyures = event.cluster;
+			var f = event.feature;
 			// if(myFeatyures.length>1){
 				// for (var i = myFeatyures.length - 1; i >= 0; --i) {
 					// vectorHover.drawFeature(myFeatyures[i]);
@@ -4968,8 +7666,31 @@ Ext.application({
 				Ext.getCmp('popupID').close()
 			}			
 
+			selectID= new Array()
+			// for (var i = feature.length - 1; i >= 0; --i) {
+				for (var i = myFeatyures.length - 1; i >= 0; --i) {
+					selectID.push(myFeatyures[i].data.id)
+					// console.log(myFeatyures[i].data.id)
+					// selectID[selectID.length] = myFeatyures[i].data.id
+					// selectID.concat(myFeatyures[i].data.id);
+				}				
+			// }	
+*/
+			wkt = new OpenLayers.Format.WKT({
+				  'internalProjection': new OpenLayers.Projection("EPSG:900913"),
+				  'externalProjection': new OpenLayers.Projection("EPSG:4326")
+				})
+				// var features = e.object.features;	
+				var str = wkt.write(feature);	
+
+	// var str = wkt.write(feature);
+			console.log(str)
+	
+			// funcDownBySel(event);
+			
         }
         function onFeatureUnselect(feature) {
+			selectControl.control.unselectAll();
             // mapPanel.map.removePopup(feature.popup);
             // feature.popup.destroy();
             // feature.popup = null;
@@ -5024,7 +7745,756 @@ Ext.application({
 		
 		var mySelectStyle = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style["default"]);
 		OpenLayers.Util.extend(mySelectStyle, {externalGraphic: iconZomm,graphicHeight: 32,graphicWidth: 32,fillOpacity: 0.8});	
+		
+
+		mapPanel.map.addLayer(polygonDraw);
+		
+		var customHandler = OpenLayers.Class(OpenLayers.Handler.Polygon, {
+			addPoint: function(pixel) {
+				// var popup;
+				var pops = mapPanel.map.popups;
+				var coor = mapPanel.map.getLonLatFromPixel(pixel);
+				
+				if (!this.drawingHole && this.holeModifier && this.evt && this.evt[this.holeModifier]) {
+					var geometry = this.point.geometry;
+					var features = this.control.layer.features;
+					var candidate,
+					polygon;
+					for (var i = features.length - 1; i >= 0; --i) {
+						candidate = features[i].geometry;
+						if ((candidate instanceof OpenLayers.Geometry.Polygon || candidate instanceof OpenLayers.Geometry.MultiPolygon) && candidate.intersects(geometry)) {
+							polygon = features[i];
+							this.control.layer.removeFeatures([polygon], {
+								silent: true
+							});
+							this.control.layer.events.registerPriority("sketchcomplete", this, this.finalizeInteriorRing);
+							this.control.layer.events.registerPriority("sketchmodified", this, this.enforceTopology);
+							polygon.geometry.addComponent(this.line.geometry);
+							this.polygon = polygon;
+							this.drawingHole = true;
+							break;
+						}
+					}
+				}
+				OpenLayers.Handler.Path.prototype.addPoint.apply(this, arguments);
+
+				if(pops==""){
+					popup = new OpenLayers.Popup.FramedCloud(
+											// "featurePopup",
+											"popup",
+											coor,//feature.geometry.getBounds().getCenterLonLat(),
+											null,//new OpenLayers.Size(5,5),
+											// '<div style="color:black;font-family: Trebuchet MS;font-size: 10px;">Double-click to finish</br>' + '</div>',
+											'Double-click to finish',
+											new OpenLayers.Icon(
+											'',
+												new OpenLayers.Size(0,0),
+												new OpenLayers.Pixel(0, 0)
+											),
+											true,
+											null
+										);
+					popup.minSize = new OpenLayers.Size(30, 30);
+					popup.maxSize = new OpenLayers.Size(145, 55);
+					popup.autoSize = true;
+					popup.offset = 5;											 
+								
+					popup.calculateNewPx = function(px){
+						if(popup.size !== null){
+							px = px.add(popup.size.w / 2 * -1 + popup.offset, popup.size.h * -1 + popup.offset);
+							return px;
+						}
+					};								
+					mapPanel.map.addPopup(popup, true);		
+				}
+
+			}
+		});
+		
+		var drawPolygon = Ext.create('GeoExt.Action', {
+			pressedCls : 'my-pressed',
+			overCls : 'my-over',
+			toggleGroup: "draw",
+			group: "draw",
+			icon: icons+'pg.png',
+			scale: 'medium',		
+			// control: new OpenLayers.Control.DrawFeature(polygonDraw, OpenLayers.Handler.Polygon),
+			control: new OpenLayers.Control.DrawFeature(polygonDraw, customHandler ),
+			map: mapPanel.map,
+			enableToggle: true,
+			allowDepress: true,
+			tooltip: "Download stations for a polygon",			
+			toggleHandler: function(btn, pressed){
+				if(pressed==false){
+					// selectControl.control.unselectAll();
+					if(Ext.getCmp('popupID')){
+						Ext.getCmp('popupID').close()
+					}					
+					
+					var pops = mapPanel.map.popups;
+					if(pops[0]){
+						pops[0].destroy()
+					}					
+					
+					polygonDraw.destroyFeatures()
+					if(Ext.getCmp('gridRegionID')){
+						Ext.getCmp('mainTableID').collapse();
+						Ext.getCmp('gridRegionID').destroy();	
+					}	
+					layerTempReg=mapPanel.map.getLayersByName("FindRegion")[0]
+					if(layerTempReg){mapPanel.map.removeLayer(layerTempReg);}
+					
+					layerTempStat=mapPanel.map.getLayersByName("Search station")[0]
+					if(layerTempStat){mapPanel.map.removeLayer(layerTempStat);}						
+				}			
+            }			
+		});
+		polygonDraw.events.register('featureadded',polygonDraw, onAdded);
+		// polygonDraw.events.register('sketchstarted',polygonDraw, onStart);
+		function onStart(ev){
+		}
+		function onAdded(ev){
+			var pops = mapPanel.map.popups;
+			if(pops){
+				pops[0].destroy()
+			}		
+			var polygon=ev.feature.geometry;
+			var bounds=polygon.getBounds();
+			if(polygonDraw.features.length>1){
+				polygonDraw.removeFeatures(polygonDraw.features[0])
+			}
+			wkt = new OpenLayers.Format.WKT({
+				  'internalProjection': new OpenLayers.Projection("EPSG:900913"),
+				  'externalProjection': new OpenLayers.Projection("EPSG:4326")
+			})
+				// var features = e.object.features;	
+			var str = wkt.write(ev.feature);	
+
+			var myMask = new Ext.LoadMask(Ext.getCmp('mapPanelID'), {msg:"Please wait..."});
+			var myAjax = new Ext.data.Connection({
+				// handler: function(){if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}},
+				listeners : {        
+					beforerequest : function () {myMask.show();},
+					// requestcomplete : function () {myMask.hide();}
+				}
+			});	
+			myAjax.request({ // PINTA EN EL MAPA LAS ESTACIONES INTERCEPTADAS
+				url : 'php/Geo_statByregion.php' , 
+				params : {type:26,wkt : str},
+				method: 'GET',
+				success: function ( result, request ) {
+					layerTemp=mapPanel.map.getLayersByName("Search station")[0]
+					if(layerTemp){layerTemp.destroyFeatures();}
+				
+					geocapa = result.responseText;
+					var format = new OpenLayers.Format.GeoJSON({'internalProjection': new OpenLayers.Projection("EPSG:900913"), 'externalProjection': new OpenLayers.Projection("EPSG:4326")
+					});
+					if(format.read(geocapa)[0]){
+						mapPanel.map.addLayer(layerTempStat);
+						layerTemp=mapPanel.map.getLayersByName("Search station")[0]
+						layerTemp.addFeatures(format.read(geocapa));
+					}
+				},
+				failure: function ( result, request) { 
+					Ext.MessageBox.alert('Failed', result.responseText);
+				}
+		
+
+			});		
+			
+			var gridStatStore = Ext.create('Ext.data.Store', {
+				model: 'modelGridRegion',
+				autoLoad: true,
+				autoSync: true,
+				sorters: { property: 'name', direction : 'ASC' },
+				proxy: {
+					type: 'ajax',
+					url: 'php/Geo_statByregion.php',
+					extraParams: {type:14,wkt : str},
+					actionMethods: {
+						read: 'POST'
+					},								
+					reader: {
+						type: 'json',
+						root: 'topics'
+					}
+				}
+			});								
+
+			var varstore = Ext.create('Ext.data.Store', {
+				model: 'modelvarList',
+				autoLoad: true,
+				autoSync: true,
+				sorters: { property: 'name', direction : 'ASC' },
+
+				proxy: {
+					type: 'ajax',
+					url: 'php/Geo_statByregion.php',
+					extraParams: {type:15,wkt : str},	
+					actionMethods: {
+						read: 'POST'
+					},									
+					reader: {
+						type: 'json',
+						root: 'topics'
+					}
+				},
+				listeners: {
+					 load: function(store, records) {
+						  store.insert(0, [{
+							  id: 0,
+							  name: 'ALL',
+							  acronym: 'ALL'
+							  
+						  }]);
+					 }
+				  }								
+			});	
+
+							
+							var selModel = Ext.create('Ext.selection.CheckboxModel', {
+								mode: 'SIMPLE',
+								listeners: {
+									selectionchange: function(sm, selections) {
+										gridRegion.down('#removeButton').setDisabled(selections.length === 0);
+										gridRegion.down('#idstatistic').setDisabled(selections.length === 0);
+										
+									}
+								},
+								select: function(records, keepExisting, suppressEvent) {
+									if (Ext.isDefined(records)) {
+										this.doSelect(records, keepExisting, suppressEvent);
+									}
+								},
+								selectAll: function( suppressEvent ) {
+									var me = this,
+										selections = me.store.getRange();
+									countFree=[]
+									for( var key in selections ) {
+										if( selections[key].data.copyright == 'Free'){
+											countFree.push(selections[key].data.copyright)
+										}
+									}
+									
+									if(countFree.length>150){
+										Ext.getCmp('mainTableID').collapse()
+										winInfo=Ext.MessageBox.show({
+										   title: 'Information',
+										   msg: 'Exceeds the maximum number (Max. 150) of downloads',
+										   width:300,
+										   buttons: Ext.MessageBox.OK,
+										   animateTarget: 'info',
+										   icon: 'x-message-box-info'
+										});	
+										winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+									}else{
+										var i = 0,
+											len = selections.length,
+											selLen = me.getSelection().length;
+											
+										// if( len != selLen ) {
+										if( selLen==0 ) {
+											me.bulkChange = true;
+											for (; i < len; i++) {
+												me.doSelect(selections[i], true, suppressEvent);
+											}
+											delete me.bulkChange;
+											me.maybeFireSelectionChange(me.getSelection().length !== selLen);
+										}
+										else {
+											me.deselectAll( suppressEvent );
+										}									
+									}
+								}								
+							});	
+							
+							btn_download = function () {
+								var selection = gridRegion.getView().getSelectionModel().getSelection();//[0];
+								selgrid=new Array()
+								for(var i = 0; i < selection.length; i++) {
+									selgrid.push(Number(selection[i].data.id));
+								}
+								
+								if(selgrid.length>MaxFileDownload){
+									winInfo=Ext.MessageBox.show({
+									   title: 'Information',
+									   msg:"Exceeds the maximum number (Max. 150) of downloads",
+									   width:300,
+									   buttons: Ext.MessageBox.OK,
+									   animateTarget: 'info',
+									   icon: 'x-message-box-info'
+									});	
+									winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);								
+								}else{
+									Ext.DomHelper.append(document.body, {
+									  tag: 'iframe',
+									  id:'downloadIframe',
+									  frameBorder: 0,
+									  width: 0,
+									  height: 0,
+									  css: 'display:none;visibility:hidden;height: 0px;',
+									  src: 'php/dowloaddata.php?typedwn=selection&station='+Ext.encode(selgrid)+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())+'&typedwn=selection'
+									});
+								}
+							}
+							onZoomExtentALL = function () {
+								// layerTemp=mapPanel.map.getLayersByName("Search station")[0]
+
+								FeatselectID=[]
+								for (var i = feature.length - 1; i >= 0; --i) {
+									if(feature[i].renderIntent=='select'){
+											sel=feature[i]//.cluster[j]
+											FeatselectID.push(sel)
+									}
+								}
+								console.log(FeatselectID)
+								console.log(FeatselectID[0].geometry.getBounds())
+								var BoundALL = FeatselectID[0].geometry.getBounds();
+								// mapPanel.map.zoomToExtent(BoundALL);								
+								
+							}
+
+							cmbVar= Ext.create('Ext.form.field.ComboBox', { 
+								editable: false, 
+								value: 'ALL',
+								multiSelect: true, 
+								displayField: 'acronym',
+								valueField: 'id', 
+								id:'varCmbID',
+								queryMode: 'local',
+								typeAhead: true,	
+								store: varstore,
+								listConfig: {
+									getInnerTpl: function() {
+										return '<div data-qtip="{name}">{acronym}</div>';
+									}
+								}
+							
+							});		
+							
+							gridRegion = Ext.create('Ext.grid.Panel', {
+								id: 'gridRegionID',
+								border: true,
+								// layout: 'fit',
+								forceFit: true,
+								store: gridStatStore,
+								maxHeight: Ext.getBody().getViewSize().height*0.3,
+								width: mainPanelWidth,
+								// height:273,
+								// maxHeight: mainPanelHeight*0.4,
+								selType: 'checkboxmodel',
+								autoHeight: true,
+								columns: [
+									{
+										xtype: 'actioncolumn',
+										minWidth: 20,
+										flex: 1,
+										items: [{
+											icon   : icons+'buttons/zoomin_off.gif',  // Use a URL in the icon config
+											tooltip: 'zoom extent',
+											handler: function(grid, rowIndex, colIndex) {
+												var rec = gridStatStore.getAt(rowIndex);
+												selectionID = rec.get('id');
+												zoomToStation(selectionID)
+												// layerTemp=mapPanel.map.getLayersByName("Stations")[0]
+												// for (var i = layerTemp.features.length - 1; i >= 0; --i) {
+													// for (var j = layerTemp.features[i].cluster.length - 1; j >= 0; --j) {
+														// sel=layerTemp.features[i].cluster[j].attributes.id;
+														// if(sel==selectionID){
+															// featureSel=layerTemp.features[i].cluster[j].geometry
+															// var bounds = featureSel.getBounds();
+															// if(bounds){ mapPanel.map.panTo(bounds.getCenterLonLat()); mapPanel.map.zoomToExtent(bounds);}
+
+															// var mySelectStyle = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style["default"]);
+															// OpenLayers.Util.extend(mySelectStyle, {pointRadius: 5,fillOpacity: 0.5,strokeColor: "#00FF00"});//{externalGraphic: iconZomm,graphicHeight: 32,graphicWidth: 32,fillOpacity: 0.8});	
+															
+															// var selectFeature = new OpenLayers.Control.SelectFeature(layerTemp,{selectStyle: mySelectStyle});
+															// mapPanel.map.addControl(selectFeature);
+															// selectFeature.activate();	
+															// selectFeature.select(layerTemp.features[i]);	
+														// }
+													// }
+												// }												
+											}
+										}]
+									},		
+									{
+										xtype: 'actioncolumn',
+										minWidth: 20,
+										flex: 1,
+										items: [{
+											icon   : icons+'buttons/pie-chart-graph-icon.png',  // Use a URL in the icon config
+											tooltip: 'Graphic',
+											handler: function(grid, rowIndex, colIndex) {
+												var rec = gridStatStore.getAt(rowIndex);
+												selectionID = rec.get('id');
+												statName = rec.get('name');
 												
+												varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
+												var arrayvar =new Array() //varlist.split(',');
+
+												for(var i = 0; i < varstore.getCount(); i++) {
+													var record = varstore.getAt(i);
+													id=record.get('id')
+													acronym=record.get('acronym')
+													arrayvar.push(acronym)
+													// console.log(id,acronym)
+												}
+												
+												var datatest = {
+													name: 'xxx',
+													rowTitleArr: arrayvar,
+													colTitleArr: ['a', 'b', 'c']
+												}
+												var tpl = [
+													'<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+													'<tpl for="rowTitleArr">',
+													'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+													'</tpl>'
+												];	
+
+												cmbPeriod='cmbPeriod'+selectionID
+												cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
+													fieldLabel: 'Select graphic model',
+													id:'cmbPeriodID',
+													labelWidth:150,
+													store: {
+														fields: ['value','name'], 
+														data: [ 
+															{value:1,name: 'Daily'}, 
+															{value:2,name: 'Monthly'}, 
+															{value:3,name: 'Yearly'}
+														]
+													},
+													displayField: 'name',
+													value: 1,
+													queryMode: 'local',
+													valueField: 'value', 								
+													typeAhead: true,
+													listeners: {
+														select: function() {
+															var actTab = tabs.getActiveTab();
+															var idx = tabs.items.indexOf(actTab);
+															// actTabId=parseInt((actTab.title).match(/\d+/)[0])
+															var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
+															generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
+
+														}
+													}
+												});		
+
+												btonReturn= new Ext.Button({
+													pressedCls : 'my-pressed',
+													overCls : 'my-over',
+													tooltip: "Return to map",
+													text:'Return to map',
+													icon: icons+'map.png', 
+													scale: 'small',
+													handler: function(){
+														tabs.setActiveTab(0);
+													}													
+												});	
+												if(Ext.getCmp('graphic_tab')){
+													tabs.remove(Ext.getCmp('graphic_tab'), true);
+												}												
+
+												tabs.add({
+													title: 'Graph '+statName,//'Graphic_id'+selectionID
+													name: 'graphic_tab',
+													autoScroll: true,
+													id: 'graphic_tab',
+													closable: true,
+													dockedItems: [
+														{
+														xtype: 'toolbar',
+														items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+														}
+													]													
+												});		
+												
+												var t = new Ext.XTemplate(tpl);
+												Ext.getCmp('graphic_tab').update(t.apply(datatest));
+												Ext.getCmp('mapPanelID').setHeight(0)
+												Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
+												tabs.setActiveTab('graphic_tab');												
+												
+												generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+											} // handler
+										}]
+									},								
+									// {
+										// text : '&#8470;',
+										// dataIndex: 'rowIndex',
+										// flex: 1,
+										// minWidth: 20,
+										// renderer : function(value, metaData, record, rowIndex)
+										// {return rowIndex+1;}
+									// },			
+									{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
+									{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
+									{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
+									{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
+									{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
+									
+									// { text: 'category',minWidth: 100,dataIndex: 'category', flex: 4},
+
+									// { text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3},
+									// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
+									
+									{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
+									{ text: 'status',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+									
+									// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
+									// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
+									// { text: 'elev',minWidth: 80,dataIndex: 'elev', flex: 2},
+									// { text: 'country',minWidth: 80,dataIndex: 'country', flex: 4},
+									// { text: 'state',minWidth: 80,dataIndex: 'state', flex: 4},
+									// { text: 'city',minWidth: 90,dataIndex: 'city', flex: 4}
+									
+								],
+								columnLines: true,
+								plugins: [{
+									ptype: 'rowexpander',
+									pluginId: 'rowexpanderID',
+									selectRowOnExpand: true,			
+									rowBodyTpl : new Ext.XTemplate(
+										'<p><b>category:</b> {category} | <b>instalation:</b> {instalation} ', //&#x2016; doble linea vertical
+										'| <b>quality:</b> {quality} ',
+										'| <b>lon:</b> {lon} ',
+										'| <b>lat:</b> {lat} ',
+										'| <b>elev:</b> {elev} </p>',
+										'<p><b>country:</b> {country} ',
+										'| <b>state:</b> {state} ',
+										'| <b>city:</b> {city}</p> ',
+										'<div id="myrow-{id}" ></div>'
+									),		
+									expandOnRender: true,
+									expandOnDblClick: false		
+						
+								}],							
+
+								stripeRows: true,
+								// margin: '0 0 20 0',
+								selModel: selModel,
+								viewConfig: { 
+									stripeRows: false, 
+									getRowClass: function(record, index, rowParams, stor) {
+									   var c = record.get('copyright');
+									   // return id == '1' ? 'general-rule' : ''; // para desaparecer el check
+										if (c == 'Restricted' || c == 'Request') {
+											return 'price-fall';
+										} 
+									}	
+								},
+								listeners: {
+									beforeselect: function ( row, model, index ) {
+										if ( model.data.copyright == "Restricted" || model.data.copyright == 'Request') {
+											return false;
+										}
+									},
+									selectionchange: function(sm, selections){ // hay problema cuando se selecciona el cursor vuelve a la primera fila
+										// layerTempSel.removeAllFeatures();
+										layerTempSel.destroyFeatures();
+										gridRegion.down('#numRecordsSelected').setText('Selected: ' + selections.length);
+										feature = layerTempStat.features;
+										for (var i = feature.length - 1; i >= 0; --i) {
+											// for (var j = feature[i].cluster.length - 1; j >= 0; --j) {
+												idall=feature[i].attributes.id;
+												for (var k = selections.length - 1; k >= 0; --k) {
+													idsel=selections[k].data.id
+													if(idall==idsel){
+														// feature[i].layer.styleMap.styles.default.rules[0].symbolizer.externalGraphic="iconosGIS/bloqE_16px.png" 
+														// layerTempSel.drawFeature(feature[i])
+														 // mapPanel.map.refresh();	
+														var point = new OpenLayers.Feature.Vector(
+															new OpenLayers.Geometry.Point(feature[i].geometry.x, feature[i].geometry.y));	
+														layerTempSel.addFeatures([point]);
+														mapPanel.map.setLayerIndex(layerTempSel, 99);
+													}
+												}												
+											// }											
+										}
+									}									
+								},
+								dockedItems: [
+									{
+									xtype: 'toolbar',
+									items: [{
+										itemId: 'removeButton',
+										text:'Download',
+										tooltip:'Download data',
+										icon   : iconGridDownload,
+										disabled: true,
+										handler: btn_download 
+									},cmbVar,{
+										// itemId: 'zoomExtentALL',
+										// text:'zoomExtentALL',
+										// tooltip:'zoomExtent to ALL',
+										// icon   : iconGridzoomExtentALL,//iconCls:'add',
+										// handler: onZoomExtentALL 
+									},{
+										itemId: 'idExpand',
+										text:'Expand all',
+										tooltip:'Expand all',
+										iconCls:iconGridExpand,
+										handler: expand 
+									},{
+									
+										itemId: 'idstatistic',
+										text:'Statistics',
+										tooltip:'Summary Statistic',
+										icon   : iconGridStatistics,
+										disabled: true,
+										handler: statistics 
+									},{ xtype: 'tbtext', itemId: 'numRecords' },
+									{ xtype: 'tbtext', itemId: 'numRecordsSelected' },{xtype: 'tbfill'},
+									{ 
+										itemId: 'idMaximo',
+										// text:'Maximize',
+										tooltip:'Maximize/Minimize table',
+										icon   : iconGridMaximize,
+										// stretch: false,
+										align: 'right',
+										handler: Maximize,
+									}]
+								}]		
+							});
+		
+							// para el mostrar el grid de variables cuando se da en el boton expandir
+							Ext.getCmp('gridRegionID').getView().on('expandbody', function(rowNode, record, expandbody,eNode){
+
+								var dynamicStore  //the new store for the nested grid.
+								var row = "myrow-" + record.get("id");
+								var id2 = "mygrid-" + record.get("id");  
+								row2 = Ext.get(rowNode);
+								
+								var store = Ext.create('Ext.data.Store', {
+									model: 'modelGridVar',
+									autoSync: true,
+									storeId: 'store2',
+									proxy: {
+										type: 'ajax', 
+										url: 'php/Geo_statByregion.php',
+										extraParams: {
+											idstat: record.get("id"),type:17
+										},
+										reader: {
+											type: 'json',
+											root: 'topics'
+										}
+									},
+									autoLoad: true// {callback: initData}
+								});
+									  
+								var grid = Ext.create('Ext.grid.Panel', {
+									// hideHeaders: true,
+									border: false,
+									height:100,
+									layout: 'fit',
+									// width:500,
+									autoWidth:true,
+									id: id2,
+									columns: [{
+											xtype: 'actioncolumn',
+											// flex: 0,
+											width: 150,
+											autoSizeColumn: true,
+											items: [{
+												icon   : icons+'buttons/download_off.gif',  // Use a URL in the icon config
+												tooltip: 'zoom extent2',
+												handler: function(grid, rowIndex, colIndex) {
+													var rec = store.getAt(rowIndex);
+													idstat=rec.get('idstat')
+													idvar=rec.get('idvar')
+													Ext.DomHelper.append(document.body, {
+													  tag: 'iframe',
+													  id:'downloadIframe',
+													  frameBorder: 0,
+													  width: 0,
+													  height: 0,
+													  css: 'display:none;visibility:hidden;height: 0px;',
+													  src: 'php/dowloaddata.php?typedwn=selection&station='+Ext.encode([idstat])+'&'+'variable='+Ext.encode([idvar])
+													});
+												
+												}
+											}]
+										},{ text: 'name',dataIndex: 'name'},
+										{ text: 'acronym',dataIndex: 'acronym'},
+										{ text: 'date_start',dataIndex: 'date_start'},
+										{ text: 'date_end',dataIndex: 'date_end'},
+										{ text: 'age',dataIndex: 'age',autoSizeColumn: true}],
+									store: store,
+									viewConfig: {
+										listeners: {
+											refresh: function(dataview) {
+												Ext.each(dataview.panel.columns, function(column) {
+													if (column.autoSizeColumn === true)
+														column.autoSize();
+												})
+											}
+										}
+									}	
+								});
+								
+							   grid.render(row)
+								grid.getEl().swallowEvent([ 'mouseover', 'mousedown', 'click', 'dblclick' ]);
+								// grid.on('itemclick', function(view) {
+									// Ext.getCmp('gridRegionID').getView().getSelectionModel().deselectAll();
+								// });
+								
+									
+							});	
+							gridRegion.getView().on('collapsebody', function(rowNode, record, eNode) {
+								var row = "myrow-" + record.get("id");
+								var id2 = "mygrid-" + record.get("id");  
+								// Ext.getCmp(id2).getStore().removeAll();
+								$('#'+row).empty();
+								// Ext.get(rowNode).down('#'+row).down('div').destroy();
+							});
+
+							gridStatStore.on('load', function(ds){
+								countRow=ds.getTotalCount()
+								if(countRow>=1){
+									// winRegion.show()
+									// Ext.getCmp('gridRegionID').add(gridRegion);
+									// Ext.getCmp('gridRegionID').doLayout();
+									
+									Ext.getCmp('mainTableID').add(gridRegion);
+									gridRegion.down('#numRecords').setText('Records: ' + countRow);
+									Ext.getCmp('mainTableID').expand()
+									
+									// Ext.DomHelper.append(document.body, { // para descargar automaticamente
+									  // tag: 'iframe',
+									  // id:'downloadIframe',
+									  // frameBorder: 0,
+									  // width: 0,
+									  // height: 0,
+									  // css: 'display:none;visibility:hidden;height: 0px;',
+									  // src: 'php/dowloaddata.php?typedwn=selection&station='+encodeURIComponent(JSON.stringify(selectID))+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())
+									// });									
+									myMask.hide();
+								}else{
+									myMask.hide();
+									Ext.getCmp('mainTableID').collapse()
+									winInfo=Ext.MessageBox.show({
+									   title: 'Information',
+									   msg: 'Not stations found!',
+									   buttons: Ext.MessageBox.OK,
+									   animateTarget: 'info',
+									   icon: 'x-message-box-info'
+									});	
+									winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+								}	
+							});	
+					
+							// selectHover.activate();
+							// selectControl.control.unselectAll();
+				// ################################################################################################################			
+			
+			
+		}	// FIN CONTROL DRAW POLYGON	
+		
+		
 		selectControl = Ext.create('GeoExt.Action', {
 			pressedCls : 'my-pressed',
 			overCls : 'my-over',
@@ -5045,7 +8515,7 @@ Ext.application({
 			map: mapPanel.map,
 			// button options
 			enableToggle: true,
-			tooltip: "select stations by box or use shift key to select stations individual and to download press the next button",
+			tooltip: "Download stations by box",
 			handler: function(toggled){
 				if(Ext.getCmp('popupID')){
 					Ext.getCmp('popupID').close()
@@ -5062,7 +8532,12 @@ Ext.application({
 					selectControl.control.unselectAll();					
 				}
 				
-			}		
+			},
+			toggleHandler: function(btn, pressed){
+				if(pressed==false){
+					selectControl.control.unselectAll();
+				}			
+            }			
 		});
 
 		//para desactivar el boton zoombox cuando se da click derecho
@@ -5200,22 +8675,24 @@ Ext.application({
 		}); // print bton
 */		
 		toolbarItems.push(Ext.create('Ext.button.Button', ctrl_zoomBox));		
-		toolbarItems.push(Ext.create('Ext.button.Button', selectControl));
+		// toolbarItems.push(Ext.create('Ext.button.Button', selectControl));
+		toolbarItems.push(Ext.create('Ext.button.Button', drawPolygon));
 		
 		// Ext.getCmp('toolbarID').add(medirDistancia);	
 		// Ext.getCmp('toolbarID').add({xtype: 'tbfill'});
-		Ext.getCmp('toolbarID').add(Ext.create('Ext.button.Button', medirDistancia));
+		// Ext.getCmp('toolbarID').add(Ext.create('Ext.button.Button', medirDistancia));
 		Ext.getCmp('toolbarID').add(btonZooExtent);	
 		Ext.getCmp('toolbarID').add(toolbarItems);	
-		Ext.getCmp('toolbarID').add(bton_down);	
+		// Ext.getCmp('toolbarID').add(bton_down);	
 		Ext.getCmp('toolbarID').add(btonIdentify);	
-		Ext.getCmp('toolbarID').add(
-			{
-				xtype: "gx_geocodercombo",
-				layer: locationLayer,
-				width: 200,
-			}
-		)
+	
+		// Ext.getCmp('toolbarID').add(
+			// {
+				// xtype: "gx_geocodercombo",
+				// layer: locationLayer,
+				// width: 200,
+			// }
+		// )
 		// Ext.getCmp('toolbarID').add(Ext.create('Ext.button.Button', printBton));
 		
 // #############################################################	'
@@ -5337,14 +8814,18 @@ var tabCount = 4;
             // html : 'Test 2',
             // closable: true
         // }]
-	// })		
+	// })	
+
+// private
+		mapPanel.map.addLayer(layerTempSel);
+		
 		 mainPanel=Ext.create('Ext.panel.Panel', {
 			id:'mainpanelID',
 			width: mainPanelWidth,
 			scrollable: true,
 			cls: 'css_labels',
 			height: mainPanelHeight,
-			title: 'Data',
+			// title: 'Data',
 			border:false,
 			layout: {
 				type: 'border',
@@ -5355,16 +8836,10 @@ var tabCount = 4;
 			},
 			tools: [
 				{xtype: 'tbfill'},
-				{
-					icon   : icons+'buttons/login24.png',
-					tooltip: 'Login',
-					scale: 'medium',
-					cls:"toolLogin",
-					handler: function(){
-						console.log("ghghg")
-					}
-				
-				}		
+				// bton_login,
+				// xtype:'button',
+
+						
 				// {
 					// type: 'maximize',
 					// tooltip: 'Agrandir la fenêtre',
@@ -5389,12 +8864,15 @@ var tabCount = 4;
 					// }
 				// }
 			],			
-			header: {
-				titlePosition: 1,
-				titleAlign: 'left',
-				height: 36,
+			// header: {
+				// titlePosition: 1,
+				// titleAlign: 'left',
+				// height: 36,
 				//cls: 'tabpanel-header'
-			},			
+			// },	
+			header : Ext.create('Ext.panel.Header', {
+				height : 500
+			}),			
 			items: [tabs,mapPanel,
 			{
 				region: 'south',

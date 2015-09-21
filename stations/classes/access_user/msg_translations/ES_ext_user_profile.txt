@@ -1,0 +1,5 @@
+			break;
+			case "es":			
+			$extra_msg[1] = "No hay un perfil establecido por el momento.";
+			$extra_msg[2] = "Su perfil está actualizado.";
+			$extra_msg[3] = "Hubo un error al actualizar, intente de nuevo

@@ -16,7 +16,7 @@
 
 		<link rel="stylesheet" type="text/css" href="css/tabs.css" />
 		<link rel="stylesheet" type="text/css" href="../libs/ext-4.2.2/examples/ux/css/TabScrollerMenu.css" />
-		<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+		<!--<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'> -->
 	
         <!-- Load specific css based on selected theme  -->
         <script src="shared/theme.js"></script> 
@@ -55,7 +55,7 @@
 		<link rel="stylesheet" type="text/css" href="css/map.css" />
 	
     </head>
-    <body>
+    <body onload="checkFirstVisit()">
 
 		<!-- <div id="geomap" style="width:100%;height:100%;"></div>-->
 		

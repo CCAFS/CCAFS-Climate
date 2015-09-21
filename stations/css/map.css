@@ -1,3 +1,16 @@
+
+			 @import url(http://fonts.googleapis.com/css?family=Oswald:400,300);
+			ul{margin:0;padding:0;list-style:none} 
+			.skin-minimal .skin-section .list li{padding-left:0px}
+
+			#search_form {
+				font-family: 'Oswald', sans-serif;
+				font-size: 17px;
+				/*background: url(../images/search-form.png);*/
+				min-height: 510px;
+			}
+
+
 			.icon-grid {
 				background-image:url(../../libs/ext-4.2.2/examples/shared/icons/fam/grid.png) !important;
 			}
@@ -26,14 +39,14 @@
 			}
 			.css_labels .x-fieldset-header-text{
 			color:rgb(19, 90, 146);
-			font-family: 'Oswald';
+			font-family: 'Oswald', sans-serif !important;
 			font-size: 13px;
 			}
-			.css_labels  .x-tab-default-active .x-tab-inner{
+			/*.css_labels  .x-tab-default-active .x-tab-inner{
 			font-family: 'Oswald';
 			font-size: 14px;
 			color:#135A92;
-			}
+			}*/
 
 			.css_labels .x-form-text {
 			font-family: 'Oswald';
@@ -65,23 +78,40 @@
 
 			.x-panel-header-default {
 			  background-image: none;
-			  background-color: #4D545E;
+			  background-color: #EFEFEF;/*#4D545E;*/
 			}
-			.css_labels .x-tab-bar-default {
-			background-color: #323a45;
+			
+			/*================================= TABS =============================================*/
+			
+			.css_labels .x-tab-bar-default { 
+			background-color: #EFEFEF;/*#323a45;*/
 			}
 			.css_labels .x-tab-default-top {
-			background-color: #83939E;
+			background-color:#323a45;
 			}
-			.x-tab-default-active {
-			background-color: #B1EDAD;
-			}
+			.x-tab-bar-default-horizontal { /*quita la linea del tab*/
+				height: 33px;
+			}	
 			.x-tab-bar-strip-default {
 			  border-style: solid;
 			  border-color: #157fcc;
-			  background-color: #83939E;
+			  background-color: #EFEFEF;/*#2F4056;/*#83939E;*/
 			}
-
+			
+			.x-tab-default .x-tab-inner {
+				font-size: 16px;
+				color: #95999A;
+				font-family: 'Oswald', sans-serif;
+				min-width: 53px;				
+			}
+			.x-tab-default-active .x-tab-inner {
+				font-size: 16px;
+				color: white;
+				font-family: 'Oswald', sans-serif;
+				min-width: 53px;
+			}
+	
+			/*================================= TABS FIN =============================================*/
 			.x-btn-default-small {
 			border-radius: 3px;
 			padding: 3px 3px 3px 3px;
@@ -112,7 +142,7 @@
 			.x-splitter-horizontal {
 			cursor: e-resize;
 			cursor: row-resize;
-			background-color: #323a45;
+			background-color: #EFEFEF;/*#323a45;*/
 			}
 			.x-panel-header-default .x-tool-img {
 			background-color: #4D545E;
@@ -199,6 +229,7 @@
 			padding: 1px 0 0;
 			text-transform: none;
 			}
+		
 			.gx-popup-anc.top {
 			background: transparent url(../../libs/geoext2-2.0.3/resources/images/default/anchor-top-access.png) no-repeat 0 0 !important;
 			}	
@@ -270,8 +301,17 @@
 			}
 
 			.my_css_toolbar .x-toolbar .x-docked{
-				width: 100px;
+				width: 130px !important;
 			}
+			.my_css_toolbar{
+				margin-left: 50px;
+				width: 130px !important;
+				right: auto;
+				left: 0px;
+				top: 0px;
+				background-color: transparent;
+			}		
+			
 			.active-button-icon {
 			  background-color: yellow;
 			  background-image: none;
@@ -324,7 +364,7 @@
 			}			
 			
 			.legendFond{
-				font-family: Oswald,sans-serif;
+				font-family: Trebuchet MS;/*Oswald,sans-serif;*/
 				font-size: 10px !important;
 				/*height: 28px; */
 
@@ -349,6 +389,14 @@
 			/*#######################################################*/	
 
 			.tabTreeCSS .x-panel-default-outer-border-trl {
+			border-top-color: silver !important;
+			border-top-width: 1px !important;
+			border-right-color: silver !important;
+			border-right-width: 1px !important;
+			border-left-color: silver !important;
+			border-left-width: 1px !important;
+			}			
+			.custom-gridPanelHover .x-panel-default-outer-border-trl {
 			border-top-color: silver !important;
 			border-top-width: 1px !important;
 			border-right-color: silver !important;
@@ -382,7 +430,8 @@
 			}
 
 			.toolLogin .x-tool-img {
-				overflow: hidden;
+				/*overflow: hidden;*/
+				overflow: inherit;
 				width: 18px;
 				height: 18px;
 				background-image: url(../iconosGIS/buttons/login16.png);
@@ -391,4 +440,239 @@
 			.toolLogin .x-tool-img {
 				opacity: 10;
 			}
+			.toolDownload .x-tool-img {
+				overflow: hidden;
+				width: 20px;
+				height: 16px;
+				background-image: url(../iconosGIS/buttons/Cloud-Download-Off-icon.png);
+				margin: 0;
+			}	
+			.toolDownload .x-tool-img {
+				opacity: 10;
+			}		
+			.toolGraph .x-tool-img {
+				overflow: hidden;
+				width: 16px;
+				height: 16px;
+				background-image: url(../iconosGIS/buttons/pie-chart-graph-icon16.png);
+				margin: 0;
+			}	
+			.toolGraph .x-tool-img {
+				opacity: 10;
+			}	
+			.toolStatistic .x-tool-img {
+				overflow: hidden;
+				width: 16px;
+				height: 16px;
+				background-image: url(../iconosGIS/Table-icon.png);
+				margin: 0;
+			}	
+			.toolStatistic .x-tool-img {
+				opacity: 10;
+			}			
+			/* para cambiar el alto de la fila header*/
+			#gridRegionIDHover .x-column-header-inner .x-column-header-text {
+				white-space: normal;
+			}
+			 
+			#gridRegionIDHover .x-column-header-inner {
+				line-height: normal;
+				padding-top: 2px !important;
+				padding-bottom: 2px !important;
+				text-align: center;
+				top: 15%;
+			}		
+
+			.custom-gridPanelHover .gridRegionHover-1column .x-change-cell {
+				font-weight: bold;
+			}
 			
+			.olControlPanZoomBar {
+				/*width: 7px !important;
+				 top: 58px !important;
+				left: 48px !important;
+			   height: 214px;
+				background: transparent url(../iconosGIS/zoombar.png) no-repeat 50% 100%; */
+			}				
+			div.olControlZoom a {
+				display: block;
+				margin: 1px;
+				padding: 0;
+				color: white;
+				font-size: 18px;
+				font-family: 'Lucida Grande', Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif;
+				font-weight: bold;
+				text-decoration: none;
+				text-align: center;
+				height: 22px;
+				width: 22px;
+				line-height: 19px;
+				background: #130085;
+				background: rgba(51, 60, 72, 0.5);
+				filter: alpha(opacity=80);
+			}	
+	
+	
+			
+			.x-panel-default-framed {
+				-webkit-border-radius: 4px;
+				-moz-border-radius: 4px;
+				-ms-border-radius: 4px;
+				-o-border-radius: 4px;
+				border-radius: 4px;
+				padding: 0px 0px 0px 0px;
+				border-width: 1px;
+				border-style: solid;
+				background-color: white;
+				border-color: silver;
+			}	
+
+			.key {
+			  background-image:url('../iconosGIS/key-icon.png') !important;
+			}			
+			.key-go {
+			  background-image:url('../iconosGIS/key-go-icon.png') !important;
+			}	
+
+			.mainpanelID_header-body{
+				height: 25px;
+			}
+			
+			.x-box-layout-ct {
+				/* overflow: hidden; */
+				/* zoom: 1; */
+			}	
+
+			.price-fall .x-change-cell {
+				color:#83939E;
+			}
+			.price-rise .x-grid-row-checker {
+				background-position: 0 -30px;
+			}	
+			.general-rule .x-grid-row-checker {
+				left: -9999px !important;
+				position: relative;
+			}			
+
+/*  ==============================================                  */
+
+.x-grid-cell-checkcolumn .x-grid-cell-inner {
+    padding-top: 4px;
+    padding-bottom: 2px;
+    line-height: 14px;
+}
+.x-grid-with-row-lines .x-grid-cell-checkcolumn .x-grid-cell-inner {
+    padding-top: 3px;
+}
+
+.x-grid-checkheader {
+    width: 15px;
+    height: 15px;
+    background-image: url('../../libs/ext-4.2.2/resources/ext-theme-neptune/images/form/checkbox.png');
+    background-repeat: no-repeat;
+    background-color: transparent;
+    overflow: hidden;
+    padding: 0;
+    border: 0;
+    display: block;
+    margin: auto;
+}
+
+.x-grid-checkheader-checked {
+    background-position: 0 -15px;
+}
+
+.x-grid-checkheader-disabled {
+    background-position: 0 -30px;
+}
+
+.x-grid-checkheader-checked-disabled {
+    background-position: 0 -30px;
+}
+
+.x-grid-checkheader-editor .x-form-cb-wrap {
+    text-align: center;
+}			
+			
+	
+
+.x-panel-body-default-framed {
+    background: white;
+    border-color: #DFDFDF;
+    color: black;
+    font-size: 13px;
+    font-weight: normal;
+    font-family: helvetica, arial, verdana, sans-serif;
+    border-width: 1px;
+    border-style: solid;
+}
+		
+/*================================================== POPUP=======================================================*/	
+#popup_FrameDecorationDiv_0 img, #popup_FrameDecorationDiv_1 img,
+#popup_FrameDecorationDiv_2 img, #popup_FrameDecorationDiv_3 img,
+#popup_FrameDecorationDiv_4 img{
+    display: none;
+}
+.olPopupCloseBox {
+    background: url("../iconosGIS/popup_images/gmap_ui.png") no-repeat;
+    background-position: 0px -334px;
+    cursor: pointer;
+    top: 10px !important;
+    right: 10px !important;
+}
+.olFramedCloudPopupContent {
+    padding: 5px;
+    overflow: auto;
+    /*font-family: Verdana, Tahoma, "DejaVu Sans", sans-serif;*/
+    font-family: Trebuchet MS;
+    font-size: 10px;
+    top: 5px !important;
+    right: 5px;
+    bottom: 20px;
+    left: 5px !important;
+    width: auto !important;
+    height: auto !important;
+    background: white;
+    border-radius: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.298039) !important;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    box-shadow: 0px 1px 4px -1px rgba(0, 0, 0, 0.298039);
+    line-height: 1.5em;
+	opacity: 0.8;
+}
+.olFramedCloudPopupContent .title{
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+.olFramedCloudPopupContent .spacer{
+    margin-left: 40px;
+}
+#popup_FrameDecorationDiv_2{
+    /*width: 100% !important;*/
+    width: 100% !important;
+    background: url('../iconosGIS/popup_images/tail.png') no-repeat center center;
+    z-index: 10;
+    height: 21px !important;
+    bottom: 0px !important;
+	opacity: 0.5;
+}
+
+
+/*=========================================================================================================*/	
+		
+/* 			
+.x-grid-hd-checker-on .x-column-header-text, .x-grid-row-selected .x-grid-row-checker, .x-grid-row-checked .x-grid-row-checker {
+    background-position: 0 -15px;
+}	
+
+.x-grid-row-checker, .x-column-header-checkbox .x-column-header-text {
+    height: 15px;
+    width: 15px;
+    background-image: url(images/form/checkbox.png);
+    line-height: 15px;
+}
+
+*/

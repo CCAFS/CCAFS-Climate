@@ -3,6 +3,11 @@
 /* require_once '../../config/db.php';
   require_once '../../config/smarty.php'; */
 include_once('../config/db_ccafs_climate.php');
+include($_SERVER['DOCUMENT_ROOT']."/stations/classes/access_user/access_user_class.php");
+
+//user info
+$user = new Access_user;
+$user->get_user_info();
 
 //global $db;
 $where = "";
@@ -112,26 +117,43 @@ $sql = "SELECT a.id, a.code, a.name, b.name as institute, c.name as model, d.nam
 			inner join station_file h on (a.id = h.station_id)
 			inner join station_variable i ON (i.id = h.station_variable_id) 
 			WHERE TRUE $whereStation group by a.id, a.code, a.name, b.name , c.name , d.name , a.instalation, a.lon, a.lat, a.elev, e.name , f.name , g.name ";
-$ret = pg_query($dbcon, $sql);
-if (!$ret) {
-  echo pg_last_error($dbcon);
-  exit;
-}
-$stations = pg_fetch_all($ret);
-$output = "";
-$output .= implode(",", array_keys($stations[0])) . "\r\n";
-foreach ($stations as $station) {
-  $output .= implode(",", $station) . "\r\n";
-}
-file_put_contents('stations.txt', $output);
-//echo "Operation done successfully\n";
-pg_close($dbcon);
-$files = array();
-$files[] = 'stations.txt';
-foreach ($filesArray as $file) {
-  $files[] = $dirfilesStations . $file['local_url'] . "/" . $file['file_name'];
-  echo $dirfilesStations;
-}
+   $ret = pg_query($dbcon, $sql);
+   if(!$ret){
+      echo pg_last_error($dbcon);
+      exit;
+   } 
+   $stations = pg_fetch_all($ret);
+   $output = "";
+   $output .= implode(",", array_keys($stations[0]))."\r\n";
+   foreach ($stations as $station) {
+	$output .= implode(",", $station)."\r\n";
+   }
+   file_put_contents('stations.txt', $output);
+   //echo "Operation done successfully\n";
+   pg_close($dbcon);
+	$files = array();
+	$files[] = 'stations.txt';
+	//echo "files found: ".count($filesArray);
+	foreach ($filesArray as $file) {
+		$files[] = $dirfilesStations.$file['local_url'] . "/" . $file['file_name'];
+		//echo $dirfilesStations."<br>";
+	}
+	
+	$db = pg_connect("dbname=".PG_DB." host=".PG_HOST." user=".PG_USER." password=".PG_PASS." port=".PG_PORT);
+//$query = "SELECT * FROM Quote WHERE estid='$poid' AND distid='$distid'";
+	$id = 0;
+	if ($user->id) {
+		$id = $user->id;
+	}
+	$sqli ="INSERT INTO station_downloads (user_id, stations, variables) VALUES
+	(".$id.", '".serialize($statList)."', '".serialize($varList)."'); ";
+   //$ret = pg_query($dbcon, $sqli);
+   $ret = pg_exec($db, $sqli);
+	pg_close($db);
+   if(!$ret){
+      echo pg_last_error($dbcon);
+	  exit;
+   }
 //stationReadFile($file['local_url'], $file['file_name'], $period);
 /* function stationReadFile($url, $name, $period) {
   //  global $smarty;
