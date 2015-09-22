@@ -1,8 +1,10 @@
 <html>
     <head>
         <title>Weather Stations</title>
-		<!-- <script src="http://maps.google.com/maps/api/js?v=3&amp;sensor=false"></script> -->
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGkYt6T3eVNusLjkov8jmxdQGT2YuSgJw&sensor=false"> </script>		
+		<!-- <script src="http://maps.google.com/maps/api/js?v=3&amp;sensor=false"></script> 
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGkYt6T3eVNusLjkov8jmxdQGT2YuSgJw&sensor=false"> </script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTC15VqenY93jEFMYO8F-mcWc-cXUZ_Mw&sensor=false"></script> -->
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&v=3.2"></script>
 		
         <!-- ExtJS -->
 		<!-- <script type="text/javascript" src="../libs/ext-4.2.2/examples/shared/include-ext.js"></script>

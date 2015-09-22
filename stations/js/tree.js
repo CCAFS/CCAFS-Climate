@@ -157,7 +157,20 @@ Ext.application({
             layers: [
 				// new OpenLayers.Layer.OSM("OSM"),
 				clusters,
-                new OpenLayers.Layer.WMS("Streets Map",
+				new OpenLayers.Layer.Google(
+							"Google Streets",
+							{type: google.maps.MapTypeId.STREETS}
+						),				
+				new OpenLayers.Layer.Google(
+							"Google Physical",
+							{type: google.maps.MapTypeId.PHYSICAL}
+						),				
+				new OpenLayers.Layer.Google(
+							"Google Hybrid",
+							{type: google.maps.MapTypeId.HYBRID}
+						)				
+				// gphy,ghyb,
+                /*new OpenLayers.Layer.WMS("Streets Map",
                     "http://ows.terrestris.de/osm/service?",
                     {layers: 'OSM-WMS'}
                     // ,{
@@ -166,7 +179,7 @@ Ext.application({
                             // '<a href="http://www.openstreetmap.org/copyright/en"' +
                             // 'target="_blank">contributors<a>'
                     // }
-                ),				
+                ),	*/			
                 // new OpenLayers.Layer.WMS("Global Imagery",
                     // "http://maps.opengeo.org/geowebcache/service/wms", {
                         // layers: "bluemarble",
@@ -177,7 +190,7 @@ Ext.application({
                     // }
                 // ),
 				//gsat,
-				gphy,ghyb
+				
 
             ],
 			// tbar: [{
@@ -6883,7 +6896,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 		var btonIdentify = new Ext.Button({
 			pressedCls : 'my-pressed',
 			overCls : 'my-over',
-			tooltip: "Identify stations with hover mouse. Shows a attribute table summary",
+			tooltip: "Identify stations with hover mouse. Shows an attribute table summary",
 			icon: icons+'identify_off.gif', 
 			scale: 'medium',
 			enableToggle: true,

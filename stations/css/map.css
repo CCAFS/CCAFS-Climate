@@ -662,7 +662,16 @@
 
 
 /*=========================================================================================================*/	
-		
+	
+.x-tab-bar-default .x-box-scroller {
+    cursor: pointer;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+    opacity: 0.5;
+    background-color: #959396;
+}
+
+
+
 /* 			
 .x-grid-hd-checker-on .x-column-header-text, .x-grid-row-selected .x-grid-row-checker, .x-grid-row-checked .x-grid-row-checker {
     background-position: 0 -15px;

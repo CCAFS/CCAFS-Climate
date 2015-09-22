@@ -65,7 +65,7 @@
 
 		})
 	});
-	var layerTempSel = new OpenLayers.Layer.Vector('SelSation', {//'displayInLayerSwitcher':false,
+	var layerTempSel = new OpenLayers.Layer.Vector('SelSation', {'displayInLayerSwitcher':false,
 		renderers: renderer,
 		styleMap: new OpenLayers.StyleMap({
 			"default": new OpenLayers.Style({
