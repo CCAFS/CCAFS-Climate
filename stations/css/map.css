@@ -99,16 +99,18 @@
 			}
 			
 			.x-tab-default .x-tab-inner {
-				font-size: 16px;
+				font-size: 17px;
 				color: #95999A;
 				font-family: 'Oswald', sans-serif;
-				min-width: 53px;				
+				min-width: 53px;
+				font-weight: normal !important;
 			}
 			.x-tab-default-active .x-tab-inner {
-				font-size: 16px;
+				font-size: 17px;
 				color: white;
 				font-family: 'Oswald', sans-serif;
 				min-width: 53px;
+				font-weight: normal !important;
 			}
 	
 			/*================================= TABS FIN =============================================*/
@@ -250,9 +252,8 @@
 			border-color: silver !important;
 			color: black;
 			font-size: 13px;
-			font-weight: normal;
 			font-family: Trebuchet MS;
-			font-weight: bold;
+			/*font-weight: bold;*/
 			border-width: 1px;
 			border-style: solid;
 			}
