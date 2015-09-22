@@ -2983,10 +2983,10 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 					selectControl.control.unselectAll();
 					tabSearchRegion.getForm().reset();
 					layerTempReg=mapPanel.map.getLayersByName("Search region")[0]
-					if(layerTempReg){mapPanel.map.removeLayer(layerTempReg);}
+					if(layerTempReg){layerTempReg.destroyFeatures();mapPanel.map.removeLayer(layerTempReg);}
 					
 					layerTempStat=mapPanel.map.getLayersByName("Search station")[0]
-					if(layerTempStat){mapPanel.map.removeLayer(layerTempStat);}				
+					if(layerTempStat){layerTempStat.destroyFeatures();mapPanel.map.removeLayer(layerTempStat);}				
 				}
 			}]
 			}
@@ -3697,10 +3697,10 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 					Ext.getCmp("cmbStatID").reset();
 					tabSearchStat.getForm().reset();
 					layerTempReg=mapPanel.map.getLayersByName("Search region")[0]
-					if(layerTempReg){mapPanel.map.removeLayer(layerTempReg);}
+					if(layerTempReg){layerTempReg.destroyFeatures();mapPanel.map.removeLayer(layerTempReg);}
 					
 					layerTempStat=mapPanel.map.getLayersByName("Search station")[0]
-					if(layerTempStat){mapPanel.map.removeLayer(layerTempStat);}	
+					if(layerTempStat){layerTempStat.destroyFeatures();mapPanel.map.removeLayer(layerTempStat);}	
 				}		
 			}]
 		}]
