@@ -108,14 +108,14 @@ Ext.application({
 			// anchorOffset: 110,	
 		});
 
-		toolip_groupByRegion='Find weather stations in a region. To clear the map search using the reset button'
-		toolip_groupByStation='Find stations weather by name or id'
-		toolip_groupByQuery='Find weather stations with a custom search. Can add and remove search conditions'		
-		toolip_groupSlider='Change size cluster of stations. Resize view cluster'		
-		toolip_groupLegendIMG='Legend by institutes of each country'		
-		toolip_groupLabels='Select an attribute to add labels to stations in the map'		
-		toolip_groupLayers='Base layers of map. Can select a layer by clicking in the radio button'		
-		toolip_fieldsetLogin='According to the terms of use some stations are restricted for users not authorized'		
+		toolip_groupByRegion='Find weather stations by region. To clear the map, use the reset button'
+		toolip_groupByStation='Find weather stations by name'
+		toolip_groupByQuery='Find weather stations with a custom search. Add as many conditions as needed'		
+		toolip_groupSlider='Change number of stations per cluster'		
+		toolip_groupLegendIMG='Legend by data source'		
+		toolip_groupLabels='Change weather station labels'		
+		toolip_groupLayers='Base layers of map. Select a layer by clicking the radio button'		
+		toolip_fieldsetLogin='According to the terms of use, some stations are restricted for unauthorized users'		
 
 		// para corregir cuando se desplega en el boton + las varaibles aparece error en property 'isGroupHeader'
 		Ext.define('SystemFox.overrides.view.Table', {
@@ -163,7 +163,7 @@ Ext.application({
 						),				
 				new OpenLayers.Layer.Google(
 							"Google Physical",
-							{type: google.maps.MapTypeId.PHYSICAL}
+							{type: google.maps.MapTypeId.TERRAIN}
 						),				
 				new OpenLayers.Layer.Google(
 							"Google Hybrid",
@@ -6874,7 +6874,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 		var btonZooExtent = new Ext.Button({
 			pressedCls : 'my-pressed',
 			overCls : 'my-over',
-			tooltip: "Zoom Extent to all stations",
+			tooltip: "Zoom out to all weather station",
 			icon: icons+'ze.png', 
 			scale: 'medium',
 			enableToggle: false,
@@ -6896,7 +6896,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 		var btonIdentify = new Ext.Button({
 			pressedCls : 'my-pressed',
 			overCls : 'my-over',
-			tooltip: "Identify stations with hover mouse. Shows an attribute table summary",
+			tooltip: "Identify stations with hover mouse. Show weather station summary",
 			icon: icons+'identify_off.gif', 
 			scale: 'medium',
 			enableToggle: true,
@@ -6938,7 +6938,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 			group: "draw",
 			map: mapPanel.map,
 			enableToggle: true,
-			tooltip: "Zoom Box",
+			tooltip: "Draw a box to zoom in",
 			icon: icons+'zb.png',
 			scale: 'medium',
 			handler: function(toggled){
@@ -7829,14 +7829,14 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 			overCls : 'my-over',
 			toggleGroup: "draw",
 			group: "draw",
-			icon: icons+'pg.png',
+			icon: icons+'shape_poly.png',
 			scale: 'medium',		
 			// control: new OpenLayers.Control.DrawFeature(polygonDraw, OpenLayers.Handler.Polygon),
 			control: new OpenLayers.Control.DrawFeature(polygonDraw, customHandler ),
 			map: mapPanel.map,
 			enableToggle: true,
 			allowDepress: true,
-			tooltip: "Download stations for a polygon",			
+			tooltip: "Draw a polygon to download weather station data",			
 			toggleHandler: function(btn, pressed){
 				if(pressed==false){
 					// selectControl.control.unselectAll();

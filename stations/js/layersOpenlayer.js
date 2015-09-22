@@ -76,7 +76,7 @@
                     fontOpacity: 0.8,
 					fontFamily: "Trebuchet MS",
 					fontWeight: "bold",					
-                    fontSize: "10px"
+                    fontSize: "11px"
                 }
             });			
 			// var instRule = new OpenLayers.Rule({
