@@ -1,18 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
-        <title>OAI-PMH - AMKN</title>
+        <title>OAI-PMH - CCAFS Climate</title>
         <meta http-equiv="Content-Type" content="text/html;" charset="Windows-1252" />
         <link rel="shortcut icon" href="images/favicon.ico" />
         <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
-        <meta content="OAI-PMH - AMKN" name="DC.Title" />
+        <meta content="OAI-PMH - CCAFS Climate" name="DC.Title" />
         <meta content="Data Query,Web Page OAI2 " name="DC.Title.alternative" />
         <meta name="DC.Subject" content="Query" /><meta name="DC.Subject" content="búsqueda" />
         <meta name="DC.Subject" content="Agricultural Trial" />
-        <meta content="OAI-PMH - AgTrials" name="DC.Publisher" />
+        <meta content="OAI-PMH - CCAFS Climate" name="DC.Publisher" />
         <meta content="2030-12-31 16:3030" name="DC.Date" />
         <meta content="text/html; charset=iso-8859-1" name="DC.Type" />
-        <meta content="http://oai2.agtrials.org" name="DC.Identifier" />
+        <meta content="http://oai2.CCAFS-Climate.org" name="DC.Identifier" />
         <meta content="En" name="DC.Language" />
         <link href="css/style.css" rel="stylesheet" type="text/css" />
         <script>
@@ -65,7 +65,7 @@
             <table class="lista2" >
                 <tr class="FPar">
                     <td><a href="oai2.php?verb=Identify" target="_blank">Server address</a></td>
-                    <td>http://oai2.agtrials.org/oai2.php</td>
+                    <td>http://ccafs-climate.org/pages/oai2/oai2.php</td>
                 </tr>
                 <tr class="FImpar">
                     <td width="20%"><a href="oai2.php?verb=Identify" target="_blank">Identify</a></td>
@@ -132,7 +132,7 @@
                             <li>
                                 <div class="columna1">Identifiers</div>
                                 <div class="columnita">
-                                    <input type="text"  name='identifier' id='identifier' size='80' maxlength='80' value=''  style="width:250px;" class="grande"   placeholder="oai:agtrials.org:60"  />
+                                    <input type="text"  name='identifier' id='identifier' size='80' maxlength='80' value=''  style="width:250px;" class="grande"   placeholder="oai:ccafs-climate.org:2"  />
                                 </div>
                             </li>
                             <div class="vacio">&nbsp;</div>
