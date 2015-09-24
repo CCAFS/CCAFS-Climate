@@ -59,9 +59,10 @@
 			color:#555555;
 			}
 			.css_labels .x-column-header-text{
-			font-family: 'Oswald';
-			font-size: 14px;
-			color:#555555;
+				font-family: 'Oswald';
+				font-size: 14px;
+				color:#555555;
+				font-weight: normal !important;
 			}
 			.css_labels .x-border-layout-ct{
 			background-color: white;
@@ -99,14 +100,14 @@
 			}
 			
 			.x-tab-default .x-tab-inner {
-				font-size: 17px;
+				font-size: 16px;
 				color: #95999A;
 				font-family: 'Oswald', sans-serif;
 				min-width: 53px;
 				font-weight: normal !important;
 			}
 			.x-tab-default-active .x-tab-inner {
-				font-size: 17px;
+				font-size: 16px;
 				color: white;
 				font-family: 'Oswald', sans-serif;
 				min-width: 53px;

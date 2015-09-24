@@ -957,6 +957,7 @@ Ext.application({
 		extend: 'Ext.data.Model',
 		fields: [
 			{ name: 'idstat', type: 'integer' },
+			{ name: 'copyrigth', type: 'integer' },
 			{ name: 'idvar', type: 'integer' },
 			{ name: 'name', type: 'string' },
 			{ name: 'acronym', type: 'string' },
@@ -1068,6 +1069,7 @@ Ext.application({
 				{ name: 'category', type: 'string' },
 				{ name: 'institute', type: 'string' },
 				{ name: 'instalation', type: 'string' },
+				{ name: 'suspension', type: 'string' },
 				{ name: 'quality', type: 'string' },
 				{ name: 'model', type: 'string' },
 				{ name: 'variables', type: 'string' },
@@ -1228,7 +1230,7 @@ Ext.application({
 			} else{gridRegion.down('#idExpand').setText('Collapse all');}  
 			
 		}							
-	
+
 		
 		Maximize	 = function () {
 			mainTableH=Ext.getCmp('mainTableID').height;
@@ -1248,15 +1250,15 @@ Ext.application({
 				Ext.getCmp('mainpanelID').doLayout();
 				// console.log("fgfgf",Ext.getCmp('mainTableID').maxHeight,mainPanelHeight,Ext.getCmp('gridRegionID').maxHeight)
 			}
-			var store = gridRegion.getStore();
-			var expander = gridRegion.plugins[0];
-			for(var i = 0; i < store.getCount(); i++) {
-				var record = store.getAt(i);
-				expanded=!expander.recordsExpanded[record.internalId]
-				if(expanded==false){
-					expander.toggleRow(i,gridRegion.store.getAt(i))
-				}
-			}				
+			// var store = gridRegion.getStore();
+			// var expander = gridRegion.plugins[0];
+			// for(var i = 0; i < store.getCount(); i++) {
+				// var record = store.getAt(i);
+				// expanded=!expander.recordsExpanded[record.internalId]
+				// if(expanded==false){
+					// expander.toggleRow(i,gridRegion.store.getAt(i))
+				// }
+			// }				
 		}
 
 		
@@ -1275,7 +1277,7 @@ Ext.application({
 				  if (result != null) {
 					objJSON = eval("(function(){return " + result + ";})()");
 				  } else {
-			//        objJSON = null;
+
 				  }
 				  var data = objJSON;
 				  // var period = period;
@@ -1582,23 +1584,23 @@ Ext.application({
 
 		}// fin function generateGraps
 
-Ext.define('MyApp.ux.DisableCheckColumn', {
-    extend: 'Ext.ux.CheckColumn',
-    alias: 'widget.disablecheckcolumn',
+// Ext.define('MyApp.ux.DisableCheckColumn', {
+    // extend: 'Ext.ux.CheckColumn',
+    // alias: 'widget.disablecheckcolumn',
 
-    /**
-     * Only process events for checkboxes that do not have a "disabled" class
-     */
-    processEvent: function(type, view, cell, recordIndex, cellIndex, e) {
-        var enabled = Ext.query('[class*=disabled]', cell).length == 0,
-            me = this;
+    // /**
+     // * Only process events for checkboxes that do not have a "disabled" class
+     // */
+    // processEvent: function(type, view, cell, recordIndex, cellIndex, e) {
+        // var enabled = Ext.query('[class*=disabled]', cell).length == 0,
+            // me = this;
 
-        if (enabled) {
-            me.callParent(arguments);
-        }
-    },
+        // if (enabled) {
+            // me.callParent(arguments);
+        // }
+    // },
 
-});
+// });
 
     var fieldsetLogin = {
         xtype: 'fieldset',
@@ -2057,7 +2059,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 															// Ext.Msg.alert('OK',"Please check your e-mail and follow the instructions."); 
 															winInfo=Ext.MessageBox.show({
 															   title: 'Information',
-															   msg: 'Please check your e-mail and follow the instructions.',
+															   msg: 'The registration was successful!.',
 															   width:300,
 															   buttons: Ext.MessageBox.OK,
 															   animateTarget: 'info',
@@ -2280,8 +2282,13 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 										root: 'topics'
 									}
 								}
+								// listeners: {
+									// load: function(store, records, successful) {
+										// Ext.getCmp('numRecords').setText('Records: ' + store.getCount());
+									// }
+								// }								
 							});	
-							
+
 							var gridStandar = Ext.create('Ext.data.Store', {
 								model: 'modelGridRegion',
 								autoLoad: false,
@@ -2360,7 +2367,6 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 									}
 									
 									if(countFree.length>150){
-										Ext.getCmp('mainTableID').collapse()
 										winInfo=Ext.MessageBox.show({
 										   title: 'Information',
 										   msg: 'Exceeds the maximum number (Max. 150) of downloads',
@@ -2478,7 +2484,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 								
 									{
 										xtype: 'actioncolumn',
-										minWidth: 20,
+										minWidth: 30,
 										flex: 1,
 										items: [{
 											icon   : icons+'buttons/zoomin_off.gif',  // Use a URL in the icon config
@@ -2510,7 +2516,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 									},		
 									{
 										xtype: 'actioncolumn',
-										minWidth: 20,
+										minWidth: 30,
 										flex: 1,
 										items: [{
 											icon   : icons+'buttons/pie-chart-graph-icon.png',  // Use a URL in the icon config
@@ -2521,7 +2527,6 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 												selectionID = rec.get('id');
 												statName = rec.get('name');
 												copyrightN = rec.get('copyright');
-												
 												if (copyrightN == 'Free') {
 												
 													varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
@@ -2652,118 +2657,49 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 										// renderer : function(value, metaData, record, rowIndex)
 										// {return rowIndex+1;}
 									// },			
-									{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
-									{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
+									// { text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
+									{ text: 'code',minWidth: 70,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
 									{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
-									{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
+									{ text: 'institute',minWidth: 70,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
 									{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
 									
-									// { text: 'category',minWidth: 100,dataIndex: 'category', flex: 4},
 
-									// { text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3},
-									// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
 									
-									{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-									{ text: 'status',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+									{ text: 'variables',minWidth: 120,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
+									{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+									
 									// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 									// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
-									// { text: 'elev',minWidth: 80,dataIndex: 'elev', flex: 2},
-									// { text: 'country',minWidth: 80,dataIndex: 'country', flex: 4},
-									// { text: 'state',minWidth: 80,dataIndex: 'state', flex: 4},
-									// { text: 'city',minWidth: 90,dataIndex: 'city', flex: 4}
+									{ text: 'elevation',minWidth: 80,dataIndex: 'elev', flex: 2,tdCls: 'x-change-cell'},
+									{ text: 'category',minWidth: 100,dataIndex: 'category', flex: 3,tdCls: 'x-change-cell'},
+									{ text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3,tdCls: 'x-change-cell'},
+									{ text: 'suspension',minWidth: 80,dataIndex: 'suspension', flex: 3,tdCls: 'x-change-cell'},
+									{ text: 'quality',minWidth: 70,dataIndex: 'quality', flex: 1,tdCls: 'x-change-cell'},									
+									{ text: 'country',minWidth: 80,dataIndex: 'country', flex: 4,tdCls: 'x-change-cell'},
+									{ text: 'state',minWidth: 80,dataIndex: 'state', flex: 4,tdCls: 'x-change-cell'},
+									{ text: 'city',minWidth: 90,dataIndex: 'city', flex: 4,tdCls: 'x-change-cell'}
 									
 								],
 								columnLines: true,
-								plugins: [{
-									ptype: 'rowexpander',
-									pluginId: 'rowexpanderID',
-									selectRowOnExpand: true,			
-									rowBodyTpl : new Ext.XTemplate(
-										'<p><b>category:</b> {category} | <b>instalation:</b> {instalation} ', //&#x2016; doble linea vertical
-										'| <b>quality:</b> {quality} ',
-										'| <b>lon:</b> {lon} ',
-										'| <b>lat:</b> {lat} ',
-										'| <b>elev:</b> {elev} </p>',
-										'<p><b>country:</b> {country} ',
-										'| <b>state:</b> {state} ',
-										'| <b>city:</b> {city}</p> ',
-										'<div id="myrow-{id}" ></div>'
-									),		
-									expandOnRender: true,
-									expandOnDblClick: false		
-			/*							toggleRow: function(rowIdx) {
-										var rowNode = this.view.getNode(rowIdx); 
-										row = Ext.get(rowNode);
-										nextBd = Ext.get(row).down(this.rowBodyTrSelector);
-										hiddenCls = this.rowBodyHiddenCls;
-										record = this.view.getRecord(rowNode);
-										grid = this.getCmp();
-										acctNo = record.get('id');
-										targetId = 'AccountGridRow-' + acctNo;			
-										if (row.hasCls(this.rowCollapsedCls)) {
-											row.removeCls(this.rowCollapsedCls);
-											this.recordsExpanded[record.internalId] = true;
-											this.view.fireEvent('expandbody', rowNode, record, nextBd.dom);
-											if (rowNode.grid) {
-												nextBd.removeCls(hiddenCls);
-												rowNode.grid.doComponentLayout();
-												rowNode.grid.view.refresh();
-											} else {
-												
-												var store = Ext.create('Ext.data.Store', {
-													model: 'modelGridVar',
-													autoSync: true,
-													proxy: {
-														type: 'ajax', 
-														url: 'php/Geo_statByregion.php',
-														extraParams: {
-															country : 'Nicaragua', state:'', municip:'',type:6
-														},
-														reader: {
-															type: 'json',
-															root: 'topics'
-														}
-													},
-													autoLoad: {
-														callback: function(records, operation, success) {
-															nextBd.removeCls(hiddenCls);
-															var grid = Ext.create('Ext.grid.Panel', { // <-- this is my "inner" grid view
-																	renderTo: Ext.get(targetId),// Ext.getElementById(targetId) //targetId,Ext.get(targetId)
-																	store: store,
-																	height:100,
-																	width:300,
-																	columns: [
-																		{
-																			xtype: 'actioncolumn',
-																			flex: 1,width:60,
-																			items: [{
-																				icon   : icons+'buttons/download_off.gif',  // Use a URL in the icon config
-																				tooltip: 'zoom extent',
-																				handler: function(grid, rowIndex, colIndex) {
-																					var rec = store.getAt(rowIndex);
-																					alert("Sell " + rec.get('name'));
-																				}
-																			}]
-																		},												
-																		{ text: 'name',dataIndex: 'name',width:80,flex: 1},{ text: 'date_start',dataIndex: 'date_start',width:80,flex: 1}],
-																	row: row,
-																});
-															
-															rowNode.grid = grid;
-															grid.suspendEvents(); 
-														}
-													}
-												});
-											}
-										}else {
-											row.addCls(this.rowCollapsedCls);
-											nextBd.addCls(this.rowBodyHiddenCls);
-											this.recordsExpanded[record.internalId] = false;
-											this.view.fireEvent('collapsebody', rowNode, record, nextBd.dom);
-										}			
-									}		
-			*/							
-								}],							
+								// plugins: [{
+									// ptype: 'rowexpander',
+									// pluginId: 'rowexpanderID',
+									// selectRowOnExpand: true,			
+									// rowBodyTpl : new Ext.XTemplate(
+										// '<p><b>category:</b> {category} | <b>instalation:</b> {instalation} ', //&#x2016; doble linea vertical
+										// '| <b>quality:</b> {quality} ',
+										// '| <b>lon:</b> {lon} ',
+										// '| <b>lat:</b> {lat} ',
+										// '| <b>elev:</b> {elev} </p>',
+										// '<p><b>country:</b> {country} ',
+										// '| <b>state:</b> {state} ',
+										// '| <b>city:</b> {city}</p> ',
+										// '<div id="myrow-{id}" ></div>'
+									// ),		
+									// expandOnRender: true,
+									// expandOnDblClick: false		
+							
+								// }],							
 
 								stripeRows: true,
 								// margin: '0 0 20 0',
@@ -2810,7 +2746,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 										}
 									},
 									itemclick:function(view, record, item, index, e ) {
-									}
+									}									
 								},
 								// inline buttons
 								dockedItems: [
@@ -2829,13 +2765,15 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 										tooltip:'Zoom extent all stations',
 										icon   : iconGridzoomExtentALL,//iconCls:'add',
 										handler: onZoomExtentALL 
-									},{
-										itemId: 'idExpand',
-										text:'Expand all',
-										tooltip:'Expand all',
-										iconCls:iconGridExpand,
-										handler: expand 
-									},{
+									}
+									// ,{
+										// itemId: 'idExpand',
+										// text:'Expand all',
+										// tooltip:'Expand all',
+										// iconCls:iconGridExpand,
+										// handler: expand 
+									// }
+									,{
 									
 										itemId: 'idstatistic',
 										text:'Statistics',
@@ -2843,7 +2781,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 										icon   : iconGridStatistics,
 										disabled: true,
 										handler: statistics 
-									},{ xtype: 'tbtext', itemId: 'numRecords' },
+									},{ xtype: 'tbtext', itemId: 'numRecords', id:'numRecords' },
 									// { xtype: 'tbtext', itemId: 'numRecordsSelected', id: 'IDnumRecordsSelected'},
 									{xtype: 'tbfill'},
 									{ 
@@ -2857,102 +2795,6 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 									}]
 								}]
 								
-							});
-
-							
-							// para el mostrar el grid de variables cuando se da en el boton expandir
-							Ext.getCmp('gridRegionID').getView().on('expandbody', function(rowNode, record, expandbody,eNode){
-
-								var dynamicStore  //the new store for the nested grid.
-								var row = "myrow-" + record.get("id");
-								var id2 = "mygrid-" + record.get("id");  
-								row2 = Ext.get(rowNode);
-								
-								var store = Ext.create('Ext.data.Store', {
-									model: 'modelGridVar',
-									autoSync: true,
-									storeId: 'store2',
-									proxy: {
-										type: 'ajax', 
-										url: 'php/Geo_statByregion.php',
-										extraParams: {
-											idstat: record.get("id"), country : country, state:state, municip:municip,type:6
-										},
-										actionMethods: {
-											read: 'POST'
-										},										
-										reader: {
-											type: 'json',
-											root: 'topics'
-										}
-									},
-									autoLoad: true// {callback: initData}
-								});
-									  
-								var grid = Ext.create('Ext.grid.Panel', {
-									// hideHeaders: true,
-									border: false,
-									height:100,
-									layout: 'fit',
-									// width:500,
-									autoWidth:true,
-									id: id2,
-									columns: [{
-											xtype: 'actioncolumn',
-											// flex: 0,
-											width: 150,
-											autoSizeColumn: true,
-											items: [{
-												icon   : icons+'buttons/download_off.gif',  // Use a URL in the icon config
-												tooltip: 'zoom extent2',
-												handler: function(grid, rowIndex, colIndex) {
-													var rec = store.getAt(rowIndex);
-													idstat=rec.get('idstat')
-													idvar=rec.get('idvar')
-													Ext.DomHelper.append(document.body, {
-													  tag: 'iframe',
-													  id:'downloadIframe',
-													  frameBorder: 0,
-													  width: 0,
-													  height: 0,
-													  css: 'display:none;visibility:hidden;height: 0px;',
-													  src: 'php/dowloaddata.php?typedwn=selection&station='+Ext.encode([idstat])+'&'+'variable='+Ext.encode([idvar])
-													});
-												
-												}
-											}]
-										},{ text: 'name',dataIndex: 'name'},
-										{ text: 'acronym',dataIndex: 'acronym'},
-										{ text: 'date_start',dataIndex: 'date_start'},
-										{ text: 'date_end',dataIndex: 'date_end'},
-										{ text: 'age',dataIndex: 'age',autoSizeColumn: true}],
-									store: store,
-									viewConfig: {
-										listeners: {
-											refresh: function(dataview) {
-												Ext.each(dataview.panel.columns, function(column) {
-													if (column.autoSizeColumn === true)
-														column.autoSize();
-												})
-											}
-										}
-									}	
-								});
-								
-							   grid.render(row)
-								grid.getEl().swallowEvent([ 'mouseover', 'mousedown', 'click', 'dblclick' ]);
-								// grid.on('itemclick', function(view) {
-									// Ext.getCmp('gridRegionID').getView().getSelectionModel().deselectAll();
-								// });
-								
-									
-							});	
-							gridRegion.getView().on('collapsebody', function(rowNode, record, eNode) {
-								var row = "myrow-" + record.get("id");
-								var id2 = "mygrid-" + record.get("id");  
-								// Ext.getCmp(id2).getStore().removeAll();
-								$('#'+row).empty();
-								// Ext.get(rowNode).down('#'+row).down('div').destroy();
 							});
 
 							gridRegionStore.on('load', function(ds){
@@ -2982,7 +2824,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 							});	
 
 						}	
-					}
+					} // fin if
 				}
 			},{
 				text: 'Reset',
@@ -3197,7 +3039,34 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 									 }
 								  }								
 							});	
-							
+							MaximizeSta	 = function () {
+								mainTableH=Ext.getCmp('mainTableID').height;
+								if(mainTableH==mainPanelHeight-46){
+									// Ext.getCmp('tabsID').setHeight(0);
+									// Ext.getCmp('mapPanelID').setHeight(0);
+									Ext.getCmp('mainTableID').maxHeight=mainPanelHeight*0.4;
+									Ext.getCmp('mainTableID').setHeight(mainPanelHeight*0.4);
+									// console.log(mainTableH);
+								}else{
+									Ext.getCmp('tabsID').setHeight(0);
+									Ext.getCmp('mapPanelID').setHeight(0);
+									Ext.getCmp('mainTableID').maxHeight=mainPanelHeight-46;
+									Ext.getCmp('gridRegionID').maxHeight=mainPanelHeight;
+									Ext.getCmp('mainTableID').setHeight(mainPanelHeight);
+									Ext.getCmp('gridRegionID').getView().refresh();
+									Ext.getCmp('mainpanelID').doLayout();
+									// console.log("fgfgf",Ext.getCmp('mainTableID').maxHeight,mainPanelHeight,Ext.getCmp('gridRegionID').maxHeight)
+								}
+								var store = gridRegion.getStore();
+								var expander = gridRegion.plugins[0];
+								for(var i = 0; i < store.getCount(); i++) {
+									var record = store.getAt(i);
+									expanded=!expander.recordsExpanded[record.internalId]
+									if(expanded==false){
+										expander.toggleRow(i,gridRegion.store.getAt(i))
+									}
+								}				
+							}							
 							var selModel = Ext.create('Ext.selection.CheckboxModel', {
 								mode: 'SIMPLE',
 								listeners: {
@@ -3223,7 +3092,6 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 									}
 									
 									if(countFree.length>150){
-										Ext.getCmp('mainTableID').collapse()
 										winInfo=Ext.MessageBox.show({
 										   title: 'Information',
 										   msg: 'Exceeds the maximum number (Max. 150) of downloads',
@@ -3345,97 +3213,117 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 												var rec = gridRegionStore.getAt(rowIndex);
 												selectionID = rec.get('id');
 												statName = rec.get('name');
+												copyrightN = rec.get('copyright');
+												if (copyrightN == 'Free') {
 												
-												varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
-												var arrayvar =new Array() //varlist.split(',');
+													varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
+													var arrayvar =new Array() //varlist.split(',');
 
-												for(var i = 0; i < varstore.getCount(); i++) {
-													var record = varstore.getAt(i);
-													id=record.get('id')
-													acronym=record.get('acronym')
-													arrayvar.push(acronym)
-													// console.log(id,acronym)
-												}
-												
-												var datatest = {
-													name: 'xxx',
-													rowTitleArr: arrayvar,
-													colTitleArr: ['a', 'b', 'c']
-												}
-												var tpl = [
-													'<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-													'<tpl for="rowTitleArr">',
-													'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-													'</tpl>'
-													];	
-
-												cmbPeriod='cmbPeriod'+selectionID
-												cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
-													fieldLabel: 'Select graphic model',
-													id:'cmbPeriodID',
-													labelWidth:150,
-													store: {
-														fields: ['value','name'], 
-														data: [ 
-															{value:1,name: 'Daily'}, 
-															{value:2,name: 'Monthly'}, 
-															{value:3,name: 'Yearly'}
-														]
-													},
-													displayField: 'name',
-													value: 1,
-													queryMode: 'local',
-													valueField: 'value', 								
-													typeAhead: true,
-													listeners: {
-														select: function() {
-															var actTab = tabs.getActiveTab();
-															var idx = tabs.items.indexOf(actTab);
-															// actTabId=parseInt((actTab.title).match(/\d+/)[0])
-															var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
-															generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
-
-														}
+													for(var i = 0; i < varstore.getCount(); i++) {
+														var record = varstore.getAt(i);
+														id=record.get('id')
+														acronym=record.get('acronym')
+														arrayvar.push(acronym)
+														// console.log(id,acronym)
 													}
-												});		
+													
+													var datatest = {
+														name: 'xxx',
+														rowTitleArr: arrayvar,
+														colTitleArr: ['a', 'b', 'c']
+													}
+													var tpl = [
+														'<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+														'<tpl for="rowTitleArr">',
+														'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+														'</tpl>'
+														];	
 
-												btonReturn= new Ext.Button({
-													pressedCls : 'my-pressed',
-													overCls : 'my-over',
-													tooltip: "Return to map",
-													text:'Return to map',
-													icon: icons+'map.png', 
-													scale: 'small',
-													handler: function(){
-														tabs.setActiveTab(0);
-													}													
-												});	
-												if(Ext.getCmp('graphic_tab')){
-													tabs.remove(Ext.getCmp('graphic_tab'), true);
-												}												
+													cmbPeriod='cmbPeriod'+selectionID
+													cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
+														fieldLabel: 'Select graphic model',
+														id:'cmbPeriodID',
+														labelWidth:150,
+														store: {
+															fields: ['value','name'], 
+															data: [ 
+																{value:1,name: 'Daily'}, 
+																{value:2,name: 'Monthly'}, 
+																{value:3,name: 'Yearly'}
+															]
+														},
+														displayField: 'name',
+														value: 1,
+														queryMode: 'local',
+														valueField: 'value', 								
+														typeAhead: true,
+														listeners: {
+															select: function() {
+																var actTab = tabs.getActiveTab();
+																var idx = tabs.items.indexOf(actTab);
+																// actTabId=parseInt((actTab.title).match(/\d+/)[0])
+																var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
+																generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
 
-												tabs.add({
-													title: 'Graph '+statName,//'Graphic_id'+selectionID
-													name: 'graphic_tab',
-													autoScroll: true,
-													id: 'graphic_tab',
-													closable: true,
-													dockedItems: [
-														{
-														xtype: 'toolbar',
-														items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+															}
 														}
-													]													
-												});		
+													});	
+													
+													btonReturn= new Ext.Button({
+														pressedCls : 'my-pressed',
+														overCls : 'my-over',
+														tooltip: "Return to map",
+														text:'Return to map',
+														icon: icons+'map.png', 
+														scale: 'small',
+														handler: function(){
+															tabs.setActiveTab(0);
+														}													
+													});	
+													if(Ext.getCmp('graphic_tab')){
+														tabs.remove(Ext.getCmp('graphic_tab'), true);
+													}												
+
+													tabs.add({
+														// contentEl: "desc",
+														// xtype: 'panel',
+														title: 'Graph '+statName,//'Graphic_id'+selectionID
+														name: 'graphic_tab',
+														// width:mainPanelWidth-15,
+														// height: mainPanelHeight,
+														autoScroll: true,
+														// height: 100,
+														// autoHeight: true,
+														// layout: 'fit',
+														id: 'graphic_tab',
+														 // html: new Ext.XTemplate(
+														 // tpl
+														 // '<div id="grap_tmin_'+selectionID+'" ></div>',
+														 // '<div id="grap_prec_'+selectionID+'"></div>'
+														 // ),
+														 // .apply({value: '2. HTML property of a panel generated by an XTemplate'}),
+														closable: true,
+														dockedItems: [
+															{
+															xtype: 'toolbar',
+															items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+															}
+														]													
+													});		
+													
+													var t = new Ext.XTemplate(tpl);
+													Ext.getCmp('graphic_tab').update(t.apply(datatest));
+													// Ext.getCmp('graphic'+selectionID).update('This<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long');
+													
+													Ext.getCmp('mapPanelID').setHeight(0)
+													Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
+													// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
+													tabs.setActiveTab('graphic_tab');
+													
+													generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+												}
 												
-												var t = new Ext.XTemplate(tpl);
-												Ext.getCmp('graphic_tab').update(t.apply(datatest));
-												Ext.getCmp('mapPanelID').setHeight(0)
-												Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
-												tabs.setActiveTab('graphic_tab');												
-												
-												generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
-											} // handler
+											}, // handler											
 										}]
 									},								
 									// {
@@ -3458,7 +3346,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 									// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
 									
 									{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-									{ text: 'status',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+									{ text: 'download',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
 									
 									// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 									// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
@@ -3475,6 +3363,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 									selectRowOnExpand: true,			
 									rowBodyTpl : new Ext.XTemplate(
 										'<p><b>category:</b> {category} | <b>instalation:</b> {instalation} ', //&#x2016; doble linea vertical
+										'| <b>suspension:</b> {suspension} ',
 										'| <b>quality:</b> {quality} ',
 										'| <b>lon:</b> {lon} ',
 										'| <b>lat:</b> {lat} ',
@@ -3571,7 +3460,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 										icon   : iconGridMaximize,
 										// stretch: false,
 										align: 'right',
-										handler: Maximize,
+										handler: MaximizeSta,
 									}]
 								}]		
 							});
@@ -3613,31 +3502,32 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 									// width:500,
 									autoWidth:true,
 									id: id2,
-									columns: [{
-											xtype: 'actioncolumn',
-											// flex: 0,
-											width: 150,
-											autoSizeColumn: true,
-											items: [{
-												icon   : icons+'buttons/download_off.gif',  // Use a URL in the icon config
-												tooltip: 'zoom extent2',
-												handler: function(grid, rowIndex, colIndex) {
-													var rec = store.getAt(rowIndex);
-													idstat=rec.get('idstat')
-													idvar=rec.get('idvar')
-													Ext.DomHelper.append(document.body, {
-													  tag: 'iframe',
-													  id:'downloadIframe',
-													  frameBorder: 0,
-													  width: 0,
-													  height: 0,
-													  css: 'display:none;visibility:hidden;height: 0px;',
-													  src: 'php/dowloaddata.php?typedwn=selection&station='+Ext.encode([idstat])+'&'+'variable='+Ext.encode([idvar])
-													});
+									columns: [
+									// {
+											// xtype: 'actioncolumn',
+											// width: 150,
+											// autoSizeColumn: true,
+											// items: [{
+												// icon   : icons+'buttons/download_off.gif',  // Use a URL in the icon config
+												// tooltip: 'zoom extent2',
+												// handler: function(grid, rowIndex, colIndex) {
+													// var rec = store.getAt(rowIndex);
+													// idstat=rec.get('idstat')
+													// idvar=rec.get('idvar')
+													// Ext.DomHelper.append(document.body, {
+													  // tag: 'iframe',
+													  // id:'downloadIframe',
+													  // frameBorder: 0,
+													  // width: 0,
+													  // height: 0,
+													  // css: 'display:none;visibility:hidden;height: 0px;',
+													  // src: 'php/dowloaddata.php?typedwn=selection&station='+Ext.encode([idstat])+'&'+'variable='+Ext.encode([idvar])
+													// });
 												
-												}
-											}]
-										},{ text: 'name',dataIndex: 'name'},
+												// }
+											// }]
+										// },
+										{ text: 'name',dataIndex: 'name'},
 										{ text: 'acronym',dataIndex: 'acronym'},
 										{ text: 'date_start',dataIndex: 'date_start'},
 										{ text: 'date_end',dataIndex: 'date_end'},
@@ -4201,7 +4091,6 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 													}
 													
 													if(countFree.length>150){
-														Ext.getCmp('mainTableID').collapse()
 														winInfo=Ext.MessageBox.show({
 														   title: 'Information',
 														   msg: 'Exceeds the maximum number (Max. 150) of downloads',
@@ -4340,97 +4229,117 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 																var rec = gridStatStore.getAt(rowIndex);
 																selectionID = rec.get('id');
 																statName = rec.get('name');
+																copyrightN = rec.get('copyright');
+																if (copyrightN == 'Free') {
 																
-																varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
-																var arrayvar =new Array() //varlist.split(',');
+																	varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
+																	var arrayvar =new Array() //varlist.split(',');
 
-																for(var i = 0; i < varstore.getCount(); i++) {
-																	var record = varstore.getAt(i);
-																	id=record.get('id')
-																	acronym=record.get('acronym')
-																	arrayvar.push(acronym)
-																	// console.log(id,acronym)
-																}
-																
-																var datatest = {
-																	name: 'xxx',
-																	rowTitleArr: arrayvar,
-																	colTitleArr: ['a', 'b', 'c']
-																}
-																var tpl = [
-																	'<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-																	'<tpl for="rowTitleArr">',
-																	'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-																	'</tpl>'
-																];	
-
-																cmbPeriod='cmbPeriod'+selectionID
-																cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
-																	fieldLabel: 'Select graphic model',
-																	id:'cmbPeriodID',
-																	labelWidth:150,
-																	store: {
-																		fields: ['value','name'], 
-																		data: [ 
-																			{value:1,name: 'Daily'}, 
-																			{value:2,name: 'Monthly'}, 
-																			{value:3,name: 'Yearly'}
-																		]
-																	},
-																	displayField: 'name',
-																	value: 1,
-																	queryMode: 'local',
-																	valueField: 'value', 								
-																	typeAhead: true,
-																	listeners: {
-																		select: function() {
-																			var actTab = tabs.getActiveTab();
-																			var idx = tabs.items.indexOf(actTab);
-																			// actTabId=parseInt((actTab.title).match(/\d+/)[0])
-																			var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
-																			generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
-
-																		}
+																	for(var i = 0; i < varstore.getCount(); i++) {
+																		var record = varstore.getAt(i);
+																		id=record.get('id')
+																		acronym=record.get('acronym')
+																		arrayvar.push(acronym)
+																		// console.log(id,acronym)
 																	}
-																});		
+																	
+																	var datatest = {
+																		name: 'xxx',
+																		rowTitleArr: arrayvar,
+																		colTitleArr: ['a', 'b', 'c']
+																	}
+																	var tpl = [
+																		'<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+																		'<tpl for="rowTitleArr">',
+																		'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+																		'</tpl>'
+																		];	
 
-																btonReturn= new Ext.Button({
-																	pressedCls : 'my-pressed',
-																	overCls : 'my-over',
-																	tooltip: "Return to map",
-																	text:'Return to map',
-																	icon: icons+'map.png', 
-																	scale: 'small',
-																	handler: function(){
-																		tabs.setActiveTab(0);
-																	}													
-																});	
-																if(Ext.getCmp('graphic_tab')){
-																	tabs.remove(Ext.getCmp('graphic_tab'), true);
-																}												
+																	cmbPeriod='cmbPeriod'+selectionID
+																	cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
+																		fieldLabel: 'Select graphic model',
+																		id:'cmbPeriodID',
+																		labelWidth:150,
+																		store: {
+																			fields: ['value','name'], 
+																			data: [ 
+																				{value:1,name: 'Daily'}, 
+																				{value:2,name: 'Monthly'}, 
+																				{value:3,name: 'Yearly'}
+																			]
+																		},
+																		displayField: 'name',
+																		value: 1,
+																		queryMode: 'local',
+																		valueField: 'value', 								
+																		typeAhead: true,
+																		listeners: {
+																			select: function() {
+																				var actTab = tabs.getActiveTab();
+																				var idx = tabs.items.indexOf(actTab);
+																				// actTabId=parseInt((actTab.title).match(/\d+/)[0])
+																				var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
+																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
 
-																tabs.add({
-																	title: 'Graph '+statName,//'Graphic_id'+selectionID
-																	name: 'graphic_tab',
-																	autoScroll: true,
-																	id: 'graphic_tab',
-																	closable: true,
-																	dockedItems: [
-																		{
-																		xtype: 'toolbar',
-																		items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+																			}
 																		}
-																	]													
-																});		
+																	});	
+																	
+																	btonReturn= new Ext.Button({
+																		pressedCls : 'my-pressed',
+																		overCls : 'my-over',
+																		tooltip: "Return to map",
+																		text:'Return to map',
+																		icon: icons+'map.png', 
+																		scale: 'small',
+																		handler: function(){
+																			tabs.setActiveTab(0);
+																		}													
+																	});	
+																	if(Ext.getCmp('graphic_tab')){
+																		tabs.remove(Ext.getCmp('graphic_tab'), true);
+																	}												
+
+																	tabs.add({
+																		// contentEl: "desc",
+																		// xtype: 'panel',
+																		title: 'Graph '+statName,//'Graphic_id'+selectionID
+																		name: 'graphic_tab',
+																		// width:mainPanelWidth-15,
+																		// height: mainPanelHeight,
+																		autoScroll: true,
+																		// height: 100,
+																		// autoHeight: true,
+																		// layout: 'fit',
+																		id: 'graphic_tab',
+																		 // html: new Ext.XTemplate(
+																		 // tpl
+																		 // '<div id="grap_tmin_'+selectionID+'" ></div>',
+																		 // '<div id="grap_prec_'+selectionID+'"></div>'
+																		 // ),
+																		 // .apply({value: '2. HTML property of a panel generated by an XTemplate'}),
+																		closable: true,
+																		dockedItems: [
+																			{
+																			xtype: 'toolbar',
+																			items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+																			}
+																		]													
+																	});		
+																	
+																	var t = new Ext.XTemplate(tpl);
+																	Ext.getCmp('graphic_tab').update(t.apply(datatest));
+																	// Ext.getCmp('graphic'+selectionID).update('This<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long');
+																	
+																	Ext.getCmp('mapPanelID').setHeight(0)
+																	Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
+																	// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
+																	tabs.setActiveTab('graphic_tab');
+																	
+																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+																}
 																
-																var t = new Ext.XTemplate(tpl);
-																Ext.getCmp('graphic_tab').update(t.apply(datatest));
-																Ext.getCmp('mapPanelID').setHeight(0)
-																Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
-																tabs.setActiveTab('graphic_tab');																
-																
-																generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
-															} // handler
+															}, // handler															
 														}]
 													},								
 													// {
@@ -4441,19 +4350,26 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 														// renderer : function(value, metaData, record, rowIndex)
 														// {return rowIndex+1;}
 													// },			
-													{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
-													{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
-													{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
-													{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
-													{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
-													
-													// { text: 'category',minWidth: 100,dataIndex: 'category', flex: 4},
+														{ text: 'code',minWidth: 70,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
+														{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
+														{ text: 'institute',minWidth: 70,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
+														{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
+														
 
-													// { text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3},
-													// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
-													
-													{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-													{ text: 'status',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+														
+														{ text: 'variables',minWidth: 120,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
+														{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+														
+														// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
+														// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
+														{ text: 'elevation',minWidth: 80,dataIndex: 'elev', flex: 2,tdCls: 'x-change-cell'},
+														{ text: 'category',minWidth: 100,dataIndex: 'category', flex: 3,tdCls: 'x-change-cell'},
+														{ text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3,tdCls: 'x-change-cell'},
+														{ text: 'suspension',minWidth: 80,dataIndex: 'suspension', flex: 3,tdCls: 'x-change-cell'},
+														{ text: 'quality',minWidth: 70,dataIndex: 'quality', flex: 1,tdCls: 'x-change-cell'},									
+														{ text: 'country',minWidth: 80,dataIndex: 'country', flex: 4,tdCls: 'x-change-cell'},
+														{ text: 'state',minWidth: 80,dataIndex: 'state', flex: 4,tdCls: 'x-change-cell'},
+														{ text: 'city',minWidth: 90,dataIndex: 'city', flex: 4,tdCls: 'x-change-cell'}
 													
 													// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 													// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
@@ -4464,25 +4380,27 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 													
 												],
 												columnLines: true,
-												plugins: [{
-													ptype: 'rowexpander',
-													pluginId: 'rowexpanderID',
-													selectRowOnExpand: true,			
-													rowBodyTpl : new Ext.XTemplate(
-														'<p><b>category:</b> {category} | <b>instalation:</b> {instalation} ', //&#x2016; doble linea vertical
-														'| <b>quality:</b> {quality} ',
-														'| <b>lon:</b> {lon} ',
-														'| <b>lat:</b> {lat} ',
-														'| <b>elev:</b> {elev} </p>',
-														'<p><b>country:</b> {country} ',
-														'| <b>state:</b> {state} ',
-														'| <b>city:</b> {city}</p> ',
-														'<div id="myrow-{id}" ></div>'
-													),		
-													expandOnRender: true,
-													expandOnDblClick: false		
+												// plugins: [
+												// {
+													// ptype: 'rowexpander',
+													// pluginId: 'rowexpanderID',
+													// selectRowOnExpand: true,			
+													// rowBodyTpl : new Ext.XTemplate(
+														// '<p><b>category:</b> {category} | <b>instalation:</b> {instalation} ', //&#x2016; doble linea vertical
+														// '| <b>quality:</b> {quality} ',
+														// '| <b>lon:</b> {lon} ',
+														// '| <b>lat:</b> {lat} ',
+														// '| <b>elev:</b> {elev} </p>',
+														// '<p><b>country:</b> {country} ',
+														// '| <b>state:</b> {state} ',
+														// '| <b>city:</b> {city}</p> ',
+														// '<div id="myrow-{id}" ></div>'
+													// ),		
+													// expandOnRender: true,
+													// expandOnDblClick: false		
 										
-												}],							
+												// }
+												// ],							
 
 												stripeRows: true,
 												// margin: '0 0 20 0',
@@ -4570,101 +4488,6 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 														handler: Maximize,
 													}]
 												}]		
-											});
-
-											// para el mostrar el grid de variables cuando se da en el boton expandir
-											Ext.getCmp('gridRegionID').getView().on('expandbody', function(rowNode, record, expandbody,eNode){
-
-												var dynamicStore  //the new store for the nested grid.
-												var row = "myrow-" + record.get("id");
-												var id2 = "mygrid-" + record.get("id");  
-												row2 = Ext.get(rowNode);
-												
-												var store = Ext.create('Ext.data.Store', {
-													model: 'modelGridVar',
-													autoSync: true,
-													storeId: 'store2',
-													proxy: {
-														type: 'ajax', 
-														url: 'php/Geo_statByregion.php',
-														extraParams: {
-															idstat: record.get("id"),type:17
-														},
-														actionMethods: {
-															read: 'POST'
-														},														
-														reader: {
-															type: 'json',
-															root: 'topics'
-														}
-													},
-													autoLoad: true// {callback: initData}
-												});
-													  
-												var grid = Ext.create('Ext.grid.Panel', {
-													// hideHeaders: true,
-													border: false,
-													height:100,
-													layout: 'fit',
-													// width:500,
-													autoWidth:true,
-													id: id2,
-													columns: [{
-															xtype: 'actioncolumn',
-															// flex: 0,
-															width: 150,
-															autoSizeColumn: true,
-															items: [{
-																icon   : icons+'buttons/download_off.gif',  // Use a URL in the icon config
-																tooltip: 'zoom extent2',
-																handler: function(grid, rowIndex, colIndex) {
-																	var rec = store.getAt(rowIndex);
-																	idstat=rec.get('idstat')
-																	idvar=rec.get('idvar')
-																	Ext.DomHelper.append(document.body, {
-																	  tag: 'iframe',
-																	  id:'downloadIframe',
-																	  frameBorder: 0,
-																	  width: 0,
-																	  height: 0,
-																	  css: 'display:none;visibility:hidden;height: 0px;',
-																	  src: 'php/dowloaddata.php?typedwn=selection&station='+Ext.encode([idstat])+'&'+'variable='+Ext.encode([idvar])
-																	});
-																
-																}
-															}]
-														},{ text: 'name',dataIndex: 'name'},
-														{ text: 'acronym',dataIndex: 'acronym'},
-														{ text: 'date_start',dataIndex: 'date_start'},
-														{ text: 'date_end',dataIndex: 'date_end'},
-														{ text: 'age',dataIndex: 'age',autoSizeColumn: true}],
-													store: store,
-													viewConfig: {
-														listeners: {
-															refresh: function(dataview) {
-																Ext.each(dataview.panel.columns, function(column) {
-																	if (column.autoSizeColumn === true)
-																		column.autoSize();
-																})
-															}
-														}
-													}	
-												});
-												
-											   grid.render(row)
-												grid.getEl().swallowEvent([ 'mouseover', 'mousedown', 'click', 'dblclick' ]);
-												// grid.on('itemclick', function(view) {
-													// Ext.getCmp('gridRegionID').getView().getSelectionModel().deselectAll();
-												// });
-												
-													
-											});	
-											gridRegion.getView().on('collapsebody', function(rowNode, record, eNode) {
-												var row = "myrow-" + record.get("id");
-												var id2 = "mygrid-" + record.get("id");  
-												// Ext.getCmp(id2).getStore().removeAll();
-												$('#'+row).empty();
-												// Ext.get(rowNode).down('#'+row).down('div').destroy();
 											});
 
 											gridStatStore.on('load', function(ds){
@@ -5187,13 +5010,13 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 				params : {type:21,listStatSel: Ext.encode(ids)},
 				method: 'GET',
 				success: function ( result, request ) {
-					layerTemp=mapPanel.map.getLayersByName("Search region")[0]
+					layerTemp=mapPanel.map.getLayersByName("SelSation")[0]
 					if(layerTemp){layerTemp.destroyFeatures();}
 					geocapa = result.responseText;
 					var format = new OpenLayers.Format.GeoJSON({'internalProjection': new OpenLayers.Projection("EPSG:900913"), 'externalProjection': new OpenLayers.Projection("EPSG:4326")
 					});
-					mapPanel.map.addLayer(layerTempRegion);
-					layerTemp=mapPanel.map.getLayersByName("Search region")[0]
+					// mapPanel.map.addLayer(layerTempRegion);
+					// layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 					layerTemp.addFeatures(format.read(geocapa));
 					var bounds = layerTemp.getDataExtent();
 					if(bounds){mapPanel.map.zoomToExtent(bounds);}
@@ -5244,600 +5067,594 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 				}
 			});
 
-
-
-			
-			
-			funcPupup = function(){
-							// selectControl.control.deactivate();
-							if(Ext.getCmp('gridRegionID')){
-								Ext.getCmp('mainTableID').collapse();
-								Ext.getCmp('gridRegionID').destroy();	
-							}				
-							if(Ext.getCmp('popupID')){
-								Ext.getCmp('popupID').close()
-							}	
-							
-							layerTemp=mapPanel.map.getLayersByName("Search region")[0]
-							if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
-							
-							FindStation=mapPanel.map.getLayersByName("Search station")[0]
-							if(FindStation){FindStation.destroyFeatures();}
-									
-							// loading status
-							var myMask = new Ext.LoadMask(Ext.getCmp('mapPanelID'), {msg:"Please wait..."});
-							myMask.show();
-							
-							selectID=selIds
-					
-							// ##############################################################    TABLA GRID ##################################
-							
-										var gridStatStore = Ext.create('Ext.data.Store', {
-											model: 'modelGridRegion',
-											autoLoad: true,
-											autoSync: true,
-											sorters: { property: 'name', direction : 'ASC' },
-											proxy: {
-												type: 'ajax',
-												url: 'php/Geo_statByregion.php',
-												extraParams: {type:14,listStatSel:Ext.encode(selectID)},	
-												actionMethods: {
-													read: 'POST'
-												},												
-												reader: {
-													type: 'json',
-													root: 'topics'
-												}
-											}
-										});								
-
-										var varstore = Ext.create('Ext.data.Store', {
-											model: 'modelvarList',
-											autoLoad: true,
-											autoSync: true,
-											sorters: { property: 'name', direction : 'ASC' },
-
-											proxy: {
-												type: 'ajax',
-												url: 'php/Geo_statByregion.php',
-												extraParams: {type:15,listStatSel:Ext.encode(selectID)},
-												actionMethods: {
-													read: 'POST'
-												},												
-												reader: {
-													type: 'json',
-													root: 'topics'
-												}
-											},
-											listeners: {
-												 load: function(store, records) {
-													  store.insert(0, [{
-														  id: 0,
-														  name: 'ALL',
-														  acronym: 'ALL'
-														  
-													  }]);
-												 }
-											  }								
-										});	
+				funcPupup = function(){
+								// selectControl.control.deactivate();
+								if(Ext.getCmp('gridRegionID')){
+									Ext.getCmp('mainTableID').collapse();
+									Ext.getCmp('gridRegionID').destroy();	
+								}				
+								if(Ext.getCmp('popupID')){
+									Ext.getCmp('popupID').close()
+								}	
+								
+								layerTemp=mapPanel.map.getLayersByName("Search region")[0]
+								if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
+								
+								FindStation=mapPanel.map.getLayersByName("Search station")[0]
+								if(FindStation){FindStation.destroyFeatures();}
 										
-										var selModel = Ext.create('Ext.selection.CheckboxModel', {
-											mode: 'SIMPLE',
-											listeners: {
-												selectionchange: function(sm, selections) {
-													gridRegion.down('#removeButton').setDisabled(selections.length === 0);
-													gridRegion.down('#idstatistic').setDisabled(selections.length === 0);
-													
-												}
-											},
-											select: function(records, keepExisting, suppressEvent) {
-												if (Ext.isDefined(records)) {
-													this.doSelect(records, keepExisting, suppressEvent);
-												}
-											},
-											selectAll: function( suppressEvent ) {
-												var me = this,
-													selections = me.store.getRange();
-												countFree=[]
-												for( var key in selections ) {
-													if( selections[key].data.copyright == 'Free'){
-														countFree.push(selections[key].data.copyright)
-													}
-												}
-												
-												if(countFree.length>150){
-													Ext.getCmp('mainTableID').collapse()
-													winInfo=Ext.MessageBox.show({
-													   title: 'Information',
-													   msg: 'Exceeds the maximum number (Max. 150) of downloads',
-													   width:300,
-													   buttons: Ext.MessageBox.OK,
-													   animateTarget: 'info',
-													   icon: 'x-message-box-info'
-													});	
-													winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
-												}else{
-													var i = 0,
-														len = selections.length,
-														selLen = me.getSelection().length;
-														
-													// if( len != selLen ) {
-													if( selLen==0 ) {
-														me.bulkChange = true;
-														for (; i < len; i++) {
-															me.doSelect(selections[i], true, suppressEvent);
-														}
-														delete me.bulkChange;
-														me.maybeFireSelectionChange(me.getSelection().length !== selLen);
-													}
-													else {
-														me.deselectAll( suppressEvent );
-													}									
-												}
-											} //												
-										});	
-										
-										btn_download = function () {
-											var selection = gridRegion.getView().getSelectionModel().getSelection();//[0];
-											selgrid=new Array()
-											for(var i = 0; i < selection.length; i++) {
-												selgrid.push(Number(selection[i].data.id));
-											}
-											Ext.DomHelper.append(document.body, {
-											  tag: 'iframe',
-											  id:'downloadIframe',
-											  frameBorder: 0,
-											  width: 0,
-											  height: 0,
-											  css: 'display:none;visibility:hidden;height: 0px;',
-											  src: 'php/dowloaddata.php?typedwn=selection&station='+Ext.encode(selgrid)+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())+'&typedwn=selection'
-											});
-										}	
-										onZoomExtentALL = function () {
-											// layerTemp=mapPanel.map.getLayersByName("Search station")[0]
-
-											FeatselectID=[]
-											for (var i = feature.length - 1; i >= 0; --i) {
-												if(feature[i].renderIntent=='select'){
-														sel=feature[i]//.cluster[j]
-														FeatselectID.push(sel)
-												}
-											}
-											console.log(FeatselectID)
-											console.log(FeatselectID[0].geometry.getBounds())
-											var BoundALL = FeatselectID[0].geometry.getBounds();
-											// mapPanel.map.zoomToExtent(BoundALL);								
-											
-										}
-
-										cmbVar= Ext.create('Ext.form.field.ComboBox', { 
-											editable: false, 
-											value: 'ALL',
-											multiSelect: true, 
-											displayField: 'acronym',
-											valueField: 'id', 
-											id:'varCmbID',
-											queryMode: 'local',
-											typeAhead: true,	
-											store: varstore,
-											listConfig: {
-												getInnerTpl: function() {
-													return '<div data-qtip="{name}">{acronym}</div>';
-												}
-											}
-										
-										});		
-										
-										gridRegion = Ext.create('Ext.grid.Panel', {
-											id: 'gridRegionID',
-											border: true,
-											// layout: 'fit',
-											forceFit: true,
-											store: gridStatStore,
-											maxHeight: Ext.getBody().getViewSize().height*0.3,
-											width: mainPanelWidth,
-											// height:273,
-											// maxHeight: mainPanelHeight*0.4,
-											selType: 'checkboxmodel',
-											autoHeight: true,
-											columns: [
-												{
-													xtype: 'actioncolumn',
-													minWidth: 20,
-													flex: 1,
-													items: [{
-														icon   : icons+'buttons/zoomin_off.gif',  // Use a URL in the icon config
-														tooltip: 'zoom extent',
-														handler: function(grid, rowIndex, colIndex) {
-															var rec = gridStatStore.getAt(rowIndex);
-															selectionID = rec.get('id');
-															zoomToStation(selectionID)
-														}
-													}]
-												},		
-												{
-													xtype: 'actioncolumn',
-													minWidth: 20,
-													flex: 1,
-													items: [{
-														icon   : icons+'buttons/pie-chart-graph-icon.png',  // Use a URL in the icon config
-														tooltip: 'Graphic',
-														handler: function(grid, rowIndex, colIndex) {
-															var rec = gridStatStore.getAt(rowIndex);
-															selectionID = rec.get('id');
-															statName = rec.get('name');
-															
-															varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
-															var arrayvar =new Array() //varlist.split(',');
-
-															for(var i = 0; i < varstore.getCount(); i++) {
-																var record = varstore.getAt(i);
-																id=record.get('id')
-																acronym=record.get('acronym')
-																arrayvar.push(acronym)
-																// console.log(id,acronym)
-															}
-															
-															var datatest = {
-																name: 'xxx',
-																rowTitleArr: arrayvar,
-																colTitleArr: ['a', 'b', 'c']
-															}
-															var tpl = [
-																'<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-																'<tpl for="rowTitleArr">',
-																'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-																'</tpl>'
-															];	
-
-															cmbPeriod='cmbPeriod'+selectionID
-															cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
-																fieldLabel: 'Select graphic model',
-																id:'cmbPeriodID',
-																labelWidth:150,
-																store: {
-																	fields: ['value','name'], 
-																	data: [ 
-																		{value:1,name: 'Daily'}, 
-																		{value:2,name: 'Monthly'}, 
-																		{value:3,name: 'Yearly'}
-																	]
-																},
-																displayField: 'name',
-																value: 1,
-																queryMode: 'local',
-																valueField: 'value', 								
-																typeAhead: true,
-																listeners: {
-																	select: function() {
-																		var actTab = tabs.getActiveTab();
-																		var idx = tabs.items.indexOf(actTab);
-																		// actTabId=parseInt((actTab.title).match(/\d+/)[0])
-																		var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
-																		generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
-																	}
-																}
-															});		
-
-															btonReturn= new Ext.Button({
-																pressedCls : 'my-pressed',
-																overCls : 'my-over',
-																tooltip: "Return to map",
-																text:'Return to map',
-																icon: icons+'map.png', 
-																scale: 'small',
-																handler: function(){
-																	tabs.setActiveTab(0);
-																}													
-															});	
-															if(Ext.getCmp('graphic_tab')){
-																tabs.remove(Ext.getCmp('graphic_tab'), true);
-															}												
-
-															tabs.add({
-																title: 'Graph '+statName,//'Graphic_id'+selectionID
-																name: 'graphic_tab',
-																autoScroll: true,
-																id: 'graphic_tab',
-																closable: true,
-																dockedItems: [
-																	{
-																	xtype: 'toolbar',
-																	items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
-																	}
-																]													
-															});		
-															
-															var t = new Ext.XTemplate(tpl);
-															Ext.getCmp('graphic_tab').update(t.apply(datatest));
-															Ext.getCmp('mapPanelID').setHeight(0)
-															Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
-															tabs.setActiveTab('graphic_tab');															
-															
-															generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
-														} // handler
-													}]
-												},								
-												// {
-													// text : '&#8470;',
-													// dataIndex: 'rowIndex',
-													// flex: 1,
-													// minWidth: 20,
-													// renderer : function(value, metaData, record, rowIndex)
-													// {return rowIndex+1;}
-												// },			
-												{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
-												{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
-												{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
-												{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
-												{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
-												
-												// { text: 'category',minWidth: 100,dataIndex: 'category', flex: 4},
-
-												// { text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3},
-												// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
-												
-												{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-												{ text: 'status',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
-												
-												// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
-												// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
-												// { text: 'elev',minWidth: 80,dataIndex: 'elev', flex: 2},
-												// { text: 'country',minWidth: 80,dataIndex: 'country', flex: 4},
-												// { text: 'state',minWidth: 80,dataIndex: 'state', flex: 4},
-												// { text: 'city',minWidth: 90,dataIndex: 'city', flex: 4}
-												
-											],
-											columnLines: true,
-											plugins: [{
-												ptype: 'rowexpander',
-												pluginId: 'rowexpanderID',
-												selectRowOnExpand: true,			
-												rowBodyTpl : new Ext.XTemplate(
-													'<p><b>category:</b> {category} | <b>instalation:</b> {instalation} ', //&#x2016; doble linea vertical
-													'| <b>quality:</b> {quality} ',
-													'| <b>lon:</b> {lon} ',
-													'| <b>lat:</b> {lat} ',
-													'| <b>elev:</b> {elev} </p>',
-													'<p><b>country:</b> {country} ',
-													'| <b>state:</b> {state} ',
-													'| <b>city:</b> {city}</p> ',
-													'<div id="myrow-{id}" ></div>'
-												),		
-												expandOnRender: true,
-												expandOnDblClick: false		
-									
-											}],							
-
-											stripeRows: true,
-											// margin: '0 0 20 0',
-											selModel: selModel,
-											viewConfig: { 
-												stripeRows: false, 
-												getRowClass: function(record, index, rowParams, stor) {
-												   var c = record.get('copyright');
-												   // return id == '1' ? 'general-rule' : ''; // para desaparecer el check
-													if (c == 'Restricted' || c == 'Request') {
-														return 'price-fall';
-													} 
-												}	
-											},
-											listeners: {
-												beforeselect: function ( row, model, index ) {
-													if ( model.data.copyright == "Restricted" || model.data.copyright == 'Request') {
-														return false;
-													}
-												},
-												selectionchange: function(sm, selections){ // hay problema cuando se selecciona el cursor vuelve a la primera fila
-													// layerTempSel.removeAllFeatures();
-													layerTempSel.destroyFeatures();
-													// gridRegion.down('#numRecordsSelected').setText('Selected: ' + selections.length);
-													feature = layerTempStat.features;
-													for (var i = feature.length - 1; i >= 0; --i) {
-														// for (var j = feature[i].cluster.length - 1; j >= 0; --j) {
-															idall=feature[i].attributes.id;
-															for (var k = selections.length - 1; k >= 0; --k) {
-																idsel=selections[k].data.id
-																if(idall==idsel){
-																	// feature[i].layer.styleMap.styles.default.rules[0].symbolizer.externalGraphic="iconosGIS/bloqE_16px.png" 
-																	// layerTempSel.drawFeature(feature[i])
-																	 // mapPanel.map.refresh();	
-																	var point = new OpenLayers.Feature.Vector(
-																		new OpenLayers.Geometry.Point(feature[i].geometry.x, feature[i].geometry.y));	
-																	layerTempSel.addFeatures([point]);
-																	mapPanel.map.setLayerIndex(layerTempSel, 99);
-																}
-															}												
-														// }											
-													}
-												}												
-											},
-											dockedItems: [
-												{
-												xtype: 'toolbar',
-												items: [{
-													itemId: 'removeButton',
-													text:'Download',
-													tooltip:'Download data',
-													icon   : iconGridDownload,
-													disabled: true,
-													handler: btn_download 
-												},cmbVar/*,{
-													itemId: 'zoomExtentALL',
-													text:'zoomExtentALL',
-													tooltip:'zoomExtent to ALL',
-													icon   : iconGridzoomExtentALL,//iconCls:'add',
-													handler: onZoomExtentALL 
-												}*/,{
-													itemId: 'idExpand',
-													text:'Expand all',
-													tooltip:'Expand all',
-													iconCls:iconGridExpand,
-													handler: expand 
-												},{
-												
-													itemId: 'idstatistic',
-													text:'Statistics',
-													tooltip:'Summary Statistic',
-													icon   : iconGridStatistics,
-													disabled: true,
-													handler: statistics 
-												},{ xtype: 'tbtext', itemId: 'numRecords' },
-												// { xtype: 'tbtext', itemId: 'numRecordsSelected' },
-												{xtype: 'tbfill'},
-												{ 
-													itemId: 'idMaximo',
-													// text:'Maximize',
-													tooltip:'Maximize/Minimize table',
-													icon   : iconGridMaximize,
-													// stretch: false,
-													align: 'right',
-													handler: Maximize,
-												}]
-											}]		
-										});
-
-										// para el mostrar el grid de variables cuando se da en el boton expandir
-										Ext.getCmp('gridRegionID').getView().on('expandbody', function(rowNode, record, expandbody,eNode){
-
-											var dynamicStore  //the new store for the nested grid.
-											var row = "myrow-" + record.get("id");
-											var id2 = "mygrid-" + record.get("id");  
-											row2 = Ext.get(rowNode);
-											
-											var store = Ext.create('Ext.data.Store', {
-												model: 'modelGridVar',
+								// loading status
+								var myMask = new Ext.LoadMask(Ext.getCmp('mapPanelID'), {msg:"Please wait..."});
+								myMask.show();
+								
+								selectID=selIds
+						
+								// ##############################################################    TABLA GRID ##################################
+								
+											var gridStatStore = Ext.create('Ext.data.Store', {
+												model: 'modelGridRegion',
+												autoLoad: true,
 												autoSync: true,
-												storeId: 'store2',
+												sorters: { property: 'name', direction : 'ASC' },
 												proxy: {
-													type: 'ajax', 
+													type: 'ajax',
 													url: 'php/Geo_statByregion.php',
-													extraParams: {
-														idstat: record.get("id"),type:17
-													},
+													extraParams: {type:14,listStatSel:Ext.encode(selectID)},	
 													actionMethods: {
 														read: 'POST'
-													},													
+													},												
+													reader: {
+														type: 'json',
+														root: 'topics'
+													}
+												}
+											});								
+
+											var varstore = Ext.create('Ext.data.Store', {
+												model: 'modelvarList',
+												autoLoad: true,
+												autoSync: true,
+												sorters: { property: 'name', direction : 'ASC' },
+
+												proxy: {
+													type: 'ajax',
+													url: 'php/Geo_statByregion.php',
+													extraParams: {type:15,listStatSel:Ext.encode(selectID)},
+													actionMethods: {
+														read: 'POST'
+													},												
 													reader: {
 														type: 'json',
 														root: 'topics'
 													}
 												},
-												autoLoad: true// {callback: initData}
-											});
-												  
-											var grid = Ext.create('Ext.grid.Panel', {
-												// hideHeaders: true,
-												border: false,
-												height:100,
-												layout: 'fit',
-												// width:500,
-												autoWidth:true,
-												id: id2,
-												columns: [{
-														xtype: 'actioncolumn',
-														// flex: 0,
-														width: 150,
-														autoSizeColumn: true,
-														items: [{
-															icon   : icons+'buttons/download_off.gif',  // Use a URL in the icon config
-															tooltip: 'zoom extent2',
-															handler: function(grid, rowIndex, colIndex) {
-																var rec = store.getAt(rowIndex);
-																idstat=rec.get('idstat')
-																idvar=rec.get('idvar')
-																Ext.DomHelper.append(document.body, {
-																  tag: 'iframe',
-																  id:'downloadIframe',
-																  frameBorder: 0,
-																  width: 0,
-																  height: 0,
-																  css: 'display:none;visibility:hidden;height: 0px;',
-																  src: 'php/dowloaddata.php?typedwn=selection&station='+Ext.encode([idstat])+'&'+'variable='+Ext.encode([idvar])
-																});
-															
-															}
-														}]
-													},{ text: 'name',dataIndex: 'name'},
-													{ text: 'acronym',dataIndex: 'acronym'},
-													{ text: 'date_start',dataIndex: 'date_start'},
-													{ text: 'date_end',dataIndex: 'date_end'},
-													{ text: 'age',dataIndex: 'age',autoSizeColumn: true}],
-												store: store,
-												viewConfig: {
-													listeners: {
-														refresh: function(dataview) {
-															Ext.each(dataview.panel.columns, function(column) {
-																if (column.autoSizeColumn === true)
-																	column.autoSize();
-															})
+												listeners: {
+													 load: function(store, records) {
+														  store.insert(0, [{
+															  id: 0,
+															  name: 'ALL',
+															  acronym: 'ALL'
+															  
+														  }]);
+													 }
+												  }								
+											});	
+											
+											var selModel = Ext.create('Ext.selection.CheckboxModel', {
+												mode: 'SIMPLE',
+												listeners: {
+													selectionchange: function(sm, selections) {
+														gridRegion.down('#removeButton').setDisabled(selections.length === 0);
+														gridRegion.down('#idstatistic').setDisabled(selections.length === 0);
+														
+													}
+												},
+												select: function(records, keepExisting, suppressEvent) {
+													if (Ext.isDefined(records)) {
+														this.doSelect(records, keepExisting, suppressEvent);
+													}
+												},
+												selectAll: function( suppressEvent ) {
+													var me = this,
+														selections = me.store.getRange();
+													countFree=[]
+													for( var key in selections ) {
+														if( selections[key].data.copyright == 'Free'){
+															countFree.push(selections[key].data.copyright)
 														}
 													}
-												}	
-											});
+													
+													if(countFree.length>150){
+														winInfo=Ext.MessageBox.show({
+														   title: 'Information',
+														   msg: 'Exceeds the maximum number (Max. 150) of downloads',
+														   width:300,
+														   buttons: Ext.MessageBox.OK,
+														   animateTarget: 'info',
+														   icon: 'x-message-box-info'
+														});	
+														winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+													}else{
+														var i = 0,
+															len = selections.length,
+															selLen = me.getSelection().length;
+															
+														// if( len != selLen ) {
+														if( selLen==0 ) {
+															me.bulkChange = true;
+															for (; i < len; i++) {
+																me.doSelect(selections[i], true, suppressEvent);
+															}
+															delete me.bulkChange;
+															me.maybeFireSelectionChange(me.getSelection().length !== selLen);
+														}
+														else {
+															me.deselectAll( suppressEvent );
+														}									
+													}
+												} //												
+											});	
 											
-										   grid.render(row)
-											grid.getEl().swallowEvent([ 'mouseover', 'mousedown', 'click', 'dblclick' ]);
-											// grid.on('itemclick', function(view) {
-												// Ext.getCmp('gridRegionID').getView().getSelectionModel().deselectAll();
-											// });
-											
-												
-										});	
-										gridRegion.getView().on('collapsebody', function(rowNode, record, eNode) {
-											var row = "myrow-" + record.get("id");
-											var id2 = "mygrid-" + record.get("id");  
-											// Ext.getCmp(id2).getStore().removeAll();
-											$('#'+row).empty();
-											// Ext.get(rowNode).down('#'+row).down('div').destroy();
-										});
-
-										gridStatStore.on('load', function(ds){
-											countRow=ds.getTotalCount()
-											if(countRow>=1){
-												// winRegion.show()
-												// Ext.getCmp('gridRegionID').add(gridRegion);
-												// Ext.getCmp('gridRegionID').doLayout();
-												
-												Ext.getCmp('mainTableID').add(gridRegion);
-												gridRegion.down('#numRecords').setText('Records: ' + countRow);
-												// gridRegion.down('#numRecordsSelected').setText('Selected: ' + 0);
-												Ext.getCmp('mainTableID').expand()
-												
-												// Ext.DomHelper.append(document.body, {
-												  // tag: 'iframe',
-												  // id:'downloadIframe',
-												  // frameBorder: 0,
-												  // width: 0,
-												  // height: 0,
-												  // css: 'display:none;visibility:hidden;height: 0px;',
-												  // src: 'php/dowloaddata.php?typedwn=selection&station='+encodeURIComponent(JSON.stringify(selectID))+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())
-												// });									
-												myMask.hide();
-											}else{
-												myMask.hide();
-												Ext.getCmp('mainTableID').collapse()
-												winInfo=Ext.MessageBox.show({
-												   title: 'Information',
-												   msg: 'Not stations found!',
-												   buttons: Ext.MessageBox.OK,
-												   animateTarget: 'info',
-												   icon: 'x-message-box-info'
-												});	
-												winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+											btn_download = function () {
+												var selection = gridRegion.getView().getSelectionModel().getSelection();//[0];
+												selgrid=new Array()
+												for(var i = 0; i < selection.length; i++) {
+													selgrid.push(Number(selection[i].data.id));
+												}
+												Ext.DomHelper.append(document.body, {
+												  tag: 'iframe',
+												  id:'downloadIframe',
+												  frameBorder: 0,
+												  width: 0,
+												  height: 0,
+												  css: 'display:none;visibility:hidden;height: 0px;',
+												  src: 'php/dowloaddata.php?typedwn=selection&station='+Ext.encode(selgrid)+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())+'&typedwn=selection'
+												});
 											}	
-										});	
+											onZoomExtentALL = function () {
+												// layerTemp=mapPanel.map.getLayersByName("Search station")[0]
+
+												FeatselectID=[]
+												for (var i = feature.length - 1; i >= 0; --i) {
+													if(feature[i].renderIntent=='select'){
+															sel=feature[i]//.cluster[j]
+															FeatselectID.push(sel)
+													}
+												}
+												console.log(FeatselectID)
+												console.log(FeatselectID[0].geometry.getBounds())
+												var BoundALL = FeatselectID[0].geometry.getBounds();
+												// mapPanel.map.zoomToExtent(BoundALL);								
+												
+											}
+
+											cmbVar= Ext.create('Ext.form.field.ComboBox', { 
+												editable: false, 
+												value: 'ALL',
+												multiSelect: true, 
+												displayField: 'acronym',
+												valueField: 'id', 
+												id:'varCmbID',
+												queryMode: 'local',
+												typeAhead: true,	
+												store: varstore,
+												listConfig: {
+													getInnerTpl: function() {
+														return '<div data-qtip="{name}">{acronym}</div>';
+													}
+												}
+											
+											});		
+											
+											gridRegion = Ext.create('Ext.grid.Panel', {
+												id: 'gridRegionID',
+												border: true,
+												// layout: 'fit',
+												forceFit: true,
+												store: gridStatStore,
+												maxHeight: Ext.getBody().getViewSize().height*0.3,
+												width: mainPanelWidth,
+												// height:273,
+												// maxHeight: mainPanelHeight*0.4,
+												selType: 'checkboxmodel',
+												autoHeight: true,
+												columns: [
+													{
+														xtype: 'actioncolumn',
+														minWidth: 20,
+														flex: 1,
+														items: [{
+															icon   : icons+'buttons/zoomin_off.gif',  // Use a URL in the icon config
+															tooltip: 'zoom extent',
+															handler: function(grid, rowIndex, colIndex) {
+																var rec = gridStatStore.getAt(rowIndex);
+																selectionID = rec.get('id');
+																zoomToStation(selectionID)
+															}
+														}]
+													},		
+													{
+														xtype: 'actioncolumn',
+														minWidth: 20,
+														flex: 1,
+														items: [{
+															icon   : icons+'buttons/pie-chart-graph-icon.png',  // Use a URL in the icon config
+															tooltip: 'Graphic',
+															tooltip: 'Graphic',
+															handler: function(grid, rowIndex, colIndex) {
+																var rec = gridStatStore.getAt(rowIndex);
+																selectionID = rec.get('id');
+																statName = rec.get('name');
+																copyrightN = rec.get('copyright');
+																if (copyrightN == 'Free') {
+																
+																	varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
+																	var arrayvar =new Array() //varlist.split(',');
+
+																	for(var i = 0; i < varstore.getCount(); i++) {
+																		var record = varstore.getAt(i);
+																		id=record.get('id')
+																		acronym=record.get('acronym')
+																		arrayvar.push(acronym)
+																		// console.log(id,acronym)
+																	}
+																	
+																	var datatest = {
+																		name: 'xxx',
+																		rowTitleArr: arrayvar,
+																		colTitleArr: ['a', 'b', 'c']
+																	}
+																	var tpl = [
+																		'<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+																		'<tpl for="rowTitleArr">',
+																		'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+																		'</tpl>'
+																		];	
+
+																	cmbPeriod='cmbPeriod'+selectionID
+																	cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
+																		fieldLabel: 'Select graphic model',
+																		id:'cmbPeriodID',
+																		labelWidth:150,
+																		store: {
+																			fields: ['value','name'], 
+																			data: [ 
+																				{value:1,name: 'Daily'}, 
+																				{value:2,name: 'Monthly'}, 
+																				{value:3,name: 'Yearly'}
+																			]
+																		},
+																		displayField: 'name',
+																		value: 1,
+																		queryMode: 'local',
+																		valueField: 'value', 								
+																		typeAhead: true,
+																		listeners: {
+																			select: function() {
+																				var actTab = tabs.getActiveTab();
+																				var idx = tabs.items.indexOf(actTab);
+																				// actTabId=parseInt((actTab.title).match(/\d+/)[0])
+																				var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
+																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
+
+																			}
+																		}
+																	});	
+																	
+																	btonReturn= new Ext.Button({
+																		pressedCls : 'my-pressed',
+																		overCls : 'my-over',
+																		tooltip: "Return to map",
+																		text:'Return to map',
+																		icon: icons+'map.png', 
+																		scale: 'small',
+																		handler: function(){
+																			tabs.setActiveTab(0);
+																		}													
+																	});	
+																	if(Ext.getCmp('graphic_tab')){
+																		tabs.remove(Ext.getCmp('graphic_tab'), true);
+																	}												
+
+																	tabs.add({
+																		// contentEl: "desc",
+																		// xtype: 'panel',
+																		title: 'Graph '+statName,//'Graphic_id'+selectionID
+																		name: 'graphic_tab',
+																		// width:mainPanelWidth-15,
+																		// height: mainPanelHeight,
+																		autoScroll: true,
+																		// height: 100,
+																		// autoHeight: true,
+																		// layout: 'fit',
+																		id: 'graphic_tab',
+																		 // html: new Ext.XTemplate(
+																		 // tpl
+																		 // '<div id="grap_tmin_'+selectionID+'" ></div>',
+																		 // '<div id="grap_prec_'+selectionID+'"></div>'
+																		 // ),
+																		 // .apply({value: '2. HTML property of a panel generated by an XTemplate'}),
+																		closable: true,
+																		dockedItems: [
+																			{
+																			xtype: 'toolbar',
+																			items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+																			}
+																		]													
+																	});		
+																	
+																	var t = new Ext.XTemplate(tpl);
+																	Ext.getCmp('graphic_tab').update(t.apply(datatest));
+																	// Ext.getCmp('graphic'+selectionID).update('This<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long');
+																	
+																	Ext.getCmp('mapPanelID').setHeight(0)
+																	Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
+																	// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
+																	tabs.setActiveTab('graphic_tab');
+																	
+																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+																}
+																
+															}, // handler
+															
+														}]
+													},								
+													// {
+														// text : '&#8470;',
+														// dataIndex: 'rowIndex',
+														// flex: 1,
+														// minWidth: 20,
+														// renderer : function(value, metaData, record, rowIndex)
+														// {return rowIndex+1;}
+													// },			
+													{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
+													{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
+													{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
+													{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
+													{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
+													
+													// { text: 'category',minWidth: 100,dataIndex: 'category', flex: 4},
+
+													// { text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3},
+													// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
+													
+													{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
+													{ text: 'download',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+													
+													// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
+													// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
+													// { text: 'elev',minWidth: 80,dataIndex: 'elev', flex: 2},
+													// { text: 'country',minWidth: 80,dataIndex: 'country', flex: 4},
+													// { text: 'state',minWidth: 80,dataIndex: 'state', flex: 4},
+													// { text: 'city',minWidth: 90,dataIndex: 'city', flex: 4}
+													
+												],
+												columnLines: true,
+												plugins: [{
+													ptype: 'rowexpander',
+													pluginId: 'rowexpanderID',
+													selectRowOnExpand: true,			
+													rowBodyTpl : new Ext.XTemplate(
+														'<p><b>category:</b> {category} | <b>instalation:</b> {instalation} ', //&#x2016; doble linea vertical
+														'| <b>quality:</b> {quality} ',
+														'| <b>lon:</b> {lon} ',
+														'| <b>lat:</b> {lat} ',
+														'| <b>elev:</b> {elev} </p>',
+														'<p><b>country:</b> {country} ',
+														'| <b>state:</b> {state} ',
+														'| <b>city:</b> {city}</p> ',
+														'<div id="myrow-{id}" ></div>'
+													),		
+													expandOnRender: true,
+													expandOnDblClick: false		
+										
+												}],							
+
+												stripeRows: true,
+												// margin: '0 0 20 0',
+												selModel: selModel,
+												viewConfig: { 
+													stripeRows: false, 
+													getRowClass: function(record, index, rowParams, stor) {
+													   var c = record.get('copyright');
+													   // return id == '1' ? 'general-rule' : ''; // para desaparecer el check
+														if (c == 'Restricted' || c == 'Request') {
+															return 'price-fall';
+														} 
+													}	
+												},
+												listeners: {
+													beforeselect: function ( row, model, index ) {
+														if ( model.data.copyright == "Restricted" || model.data.copyright == 'Request') {
+															return false;
+														}
+													},
+													selectionchange: function(sm, selections){ // hay problema cuando se selecciona el cursor vuelve a la primera fila
+														// layerTempSel.removeAllFeatures();
+														layerTempSel.destroyFeatures();
+														// gridRegion.down('#numRecordsSelected').setText('Selected: ' + selections.length);
+														feature = layerTempStat.features;
+														for (var i = feature.length - 1; i >= 0; --i) {
+															// for (var j = feature[i].cluster.length - 1; j >= 0; --j) {
+																idall=feature[i].attributes.id;
+																for (var k = selections.length - 1; k >= 0; --k) {
+																	idsel=selections[k].data.id
+																	if(idall==idsel){
+																		// feature[i].layer.styleMap.styles.default.rules[0].symbolizer.externalGraphic="iconosGIS/bloqE_16px.png" 
+																		// layerTempSel.drawFeature(feature[i])
+																		 // mapPanel.map.refresh();	
+																		var point = new OpenLayers.Feature.Vector(
+																			new OpenLayers.Geometry.Point(feature[i].geometry.x, feature[i].geometry.y));	
+																		layerTempSel.addFeatures([point]);
+																		mapPanel.map.setLayerIndex(layerTempSel, 99);
+																	}
+																}												
+															// }											
+														}
+													}												
+												},
+												dockedItems: [
+													{
+													xtype: 'toolbar',
+													items: [{
+														itemId: 'removeButton',
+														text:'Download',
+														tooltip:'Download data',
+														icon   : iconGridDownload,
+														disabled: true,
+														handler: btn_download 
+													},cmbVar/*,{
+														itemId: 'zoomExtentALL',
+														text:'zoomExtentALL',
+														tooltip:'zoomExtent to ALL',
+														icon   : iconGridzoomExtentALL,//iconCls:'add',
+														handler: onZoomExtentALL 
+													}*/,{
+														itemId: 'idExpand',
+														text:'Expand all',
+														tooltip:'Expand all',
+														iconCls:iconGridExpand,
+														handler: expand 
+													},{
+													
+														itemId: 'idstatistic',
+														text:'Statistics',
+														tooltip:'Summary Statistic',
+														icon   : iconGridStatistics,
+														disabled: true,
+														handler: statistics 
+													},{ xtype: 'tbtext', itemId: 'numRecords' },
+													// { xtype: 'tbtext', itemId: 'numRecordsSelected' },
+													{xtype: 'tbfill'},
+													{ 
+														itemId: 'idMaximo',
+														// text:'Maximize',
+														tooltip:'Maximize/Minimize table',
+														icon   : iconGridMaximize,
+														// stretch: false,
+														align: 'right',
+														handler: Maximize,
+													}]
+												}]		
+											});
+
+											// para el mostrar el grid de variables cuando se da en el boton expandir
+											Ext.getCmp('gridRegionID').getView().on('expandbody', function(rowNode, record, expandbody,eNode){
+
+												var dynamicStore  //the new store for the nested grid.
+												var row = "myrow-" + record.get("id");
+												var id2 = "mygrid-" + record.get("id");  
+												row2 = Ext.get(rowNode);
+												
+												var store = Ext.create('Ext.data.Store', {
+													model: 'modelGridVar',
+													autoSync: true,
+													storeId: 'store2',
+													proxy: {
+														type: 'ajax', 
+														url: 'php/Geo_statByregion.php',
+														extraParams: {
+															idstat: record.get("id"),type:17
+														},
+														actionMethods: {
+															read: 'POST'
+														},													
+														reader: {
+															type: 'json',
+															root: 'topics'
+														}
+													},
+													autoLoad: true// {callback: initData}
+												});
+													  
+												var grid = Ext.create('Ext.grid.Panel', {
+													// hideHeaders: true,
+													border: false,
+													height:100,
+													layout: 'fit',
+													// width:500,
+													autoWidth:true,
+													id: id2,
+													columns: [
+														{ text: 'name',dataIndex: 'name'},
+														{ text: 'acronym',dataIndex: 'acronym'},
+														{ text: 'date_start',dataIndex: 'date_start'},
+														{ text: 'date_end',dataIndex: 'date_end'},
+														{ text: 'age',dataIndex: 'age',autoSizeColumn: true}],
+													store: store,
+													viewConfig: {
+														listeners: {
+															refresh: function(dataview) {
+																Ext.each(dataview.panel.columns, function(column) {
+																	if (column.autoSizeColumn === true)
+																		column.autoSize();
+																})
+															}
+														}
+													}	
+												});
+												
+											   grid.render(row)
+												grid.getEl().swallowEvent([ 'mouseover', 'mousedown', 'click', 'dblclick' ]);
+												// grid.on('itemclick', function(view) {
+													// Ext.getCmp('gridRegionID').getView().getSelectionModel().deselectAll();
+												// });
+												
+													
+											});	
+											gridRegion.getView().on('collapsebody', function(rowNode, record, eNode) {
+												var row = "myrow-" + record.get("id");
+												var id2 = "mygrid-" + record.get("id");  
+												// Ext.getCmp(id2).getStore().removeAll();
+												$('#'+row).empty();
+												// Ext.get(rowNode).down('#'+row).down('div').destroy();
+											});
+
+											gridStatStore.on('load', function(ds){
+												countRow=ds.getTotalCount()
+												if(countRow>=1){
+													// winRegion.show()
+													// Ext.getCmp('gridRegionID').add(gridRegion);
+													// Ext.getCmp('gridRegionID').doLayout();
+													
+													Ext.getCmp('mainTableID').add(gridRegion);
+													gridRegion.down('#numRecords').setText('Records: ' + countRow);
+													// gridRegion.down('#numRecordsSelected').setText('Selected: ' + 0);
+													Ext.getCmp('mainTableID').expand()
+													
+													// Ext.DomHelper.append(document.body, {
+													  // tag: 'iframe',
+													  // id:'downloadIframe',
+													  // frameBorder: 0,
+													  // width: 0,
+													  // height: 0,
+													  // css: 'display:none;visibility:hidden;height: 0px;',
+													  // src: 'php/dowloaddata.php?typedwn=selection&station='+encodeURIComponent(JSON.stringify(selectID))+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())
+													// });									
+													myMask.hide();
+												}else{
+													myMask.hide();
+													Ext.getCmp('mainTableID').collapse()
+													winInfo=Ext.MessageBox.show({
+													   title: 'Information',
+													   msg: 'Not stations found!',
+													   buttons: Ext.MessageBox.OK,
+													   animateTarget: 'info',
+													   icon: 'x-message-box-info'
+													});	
+													winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+												}	
+											});	
+									
 								
+								
+								// ################################################################################################################
 							
 							
-							// ################################################################################################################
-						
-						
 
 
-						} // fin handler boton hover
+							} // fin handler boton hover
 
-			
 			gridRegionHover = Ext.create('Ext.grid.Panel', {
 				id: 'gridRegionIDHover',
 				border: true,
@@ -5901,86 +5718,121 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 							handler: function(){
 								selectionID = selIds[0];
 								
-
-								var arrayvar =["prec","tmax","tmean","tmin","sbright","rhum","srad","windd","wsmean"]//varlist.split(',');
 								
-								var datatest = {
-									rowTitleArr: arrayvar,
-									colTitleArr: ['a', 'b', 'c']
-								}
-								var tpl = [
-									'<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-									'<tpl for="rowTitleArr">',
-									'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-									'</tpl>'
-									];	
+								Ext.Ajax.request({
+									url: 'php/Geo_statByregion.php',
+									method: 'POST',
+									params : {type:27,idstat:selectionID},
+									success: function(response, opts) {
+										resul=response.responseText
+										if(resul=="OK"){
+											var arrayvar =["prec","tmax","tmean","tmin","sbright","rhum","srad","windd","wsmean"]//varlist.split(',');
+											
+											var datatest = {
+												rowTitleArr: arrayvar,
+												colTitleArr: ['a', 'b', 'c']
+											}
+											var tpl = [
+												'<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+												'<tpl for="rowTitleArr">',
+												'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+												'</tpl>'
+												];	
 
-								cmbPeriod='cmbPeriod'+selectionID
-								cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
-									fieldLabel: 'Select graphic model',
-									id:'cmbPeriodID',
-									labelWidth:150,
-									store: {
-										fields: ['value','name'], 
-										data: [ 
-											{value:1,name: 'Daily'}, 
-											{value:2,name: 'Monthly'}, 
-											{value:3,name: 'Yearly'}
-										]
+											cmbPeriod='cmbPeriod'+selectionID
+											cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
+												fieldLabel: 'Select graphic model',
+												id:'cmbPeriodID',
+												labelWidth:150,
+												store: {
+													fields: ['value','name'], 
+													data: [ 
+														{value:1,name: 'Daily'}, 
+														{value:2,name: 'Monthly'}, 
+														{value:3,name: 'Yearly'}
+													]
+												},
+												displayField: 'name',
+												value: 1,
+												queryMode: 'local',
+												valueField: 'value', 								
+												typeAhead: true,
+												listeners: {
+													select: function() {
+														var actTab = tabs.getActiveTab();
+														var idx = tabs.items.indexOf(actTab);
+														// actTabId=parseInt((actTab.title).match(/\d+/)[0])
+														var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
+														generateGraps(selectionID,idPeriod,"ALL")
+
+													}
+												}
+											});		
+											
+											btonReturn= new Ext.Button({
+												pressedCls : 'my-pressed',
+												overCls : 'my-over',
+												tooltip: "Return to map",
+												text:'Return to map',
+												icon: icons+'map.png', 
+												scale: 'small',
+												handler: function(){
+													tabs.setActiveTab(0);
+												}													
+											});	
+											if(Ext.getCmp('graphic_tab')){
+												tabs.remove(Ext.getCmp('graphic_tab'), true);
+											}								
+											
+											tabs.add({
+												title: 'Graph '+statName,//'Graphic_id'+selectionID
+												name: 'graphic_tab',
+												autoScroll: true,
+												id: 'graphic_tab',
+												closable: true,
+												dockedItems: [
+													{
+													xtype: 'toolbar',
+													items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+													}
+												]													
+											});
+											
+											var t = new Ext.XTemplate(tpl);
+											Ext.getCmp('graphic_tab').update(t.apply(datatest));
+											Ext.getCmp('mapPanelID').setHeight(0)
+											Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
+											tabs.setActiveTab('graphic_tab');
+											
+											generateGraps(selectionID,cmbPeriod.getValue(),'ALL')
+											
+										}else{
+											// Ext.Msg.alert('Login Failed!',"Sorry, a user with this login and/or e-mail address already exist."); 
+											winInfo=Ext.MessageBox.show({
+											   title: 'Information',
+											   msg: 'Sorry, You are not authorized to download data.',
+											   width:300,
+											   buttons: Ext.MessageBox.OK,
+											   animateTarget: 'error',
+											   icon: 'x-message-box-error'
+											   
+											});	
+											winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
+										}
 									},
-									displayField: 'name',
-									value: 1,
-									queryMode: 'local',
-									valueField: 'value', 								
-									typeAhead: true,
-									listeners: {
-										select: function() {
-											var actTab = tabs.getActiveTab();
-											var idx = tabs.items.indexOf(actTab);
-											// actTabId=parseInt((actTab.title).match(/\d+/)[0])
-											var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
-											generateGraps(selectionID,idPeriod,"ALL")
+									failure: function(response, opts) {
+										var responseText = (response.responseText ? response.responseText : 'Unable to contact the server.  Please try again later.');
+										panelLaunch({
+											iconClass: 'x-panel-action-icon-tick',
+											position: 'br',
+											actionMethod: ['hide']
+										}, responseText);
+									},
+									scope: this
+								});																
+										
 
-										}
-									}
-								});		
-								
-								btonReturn= new Ext.Button({
-									pressedCls : 'my-pressed',
-									overCls : 'my-over',
-									tooltip: "Return to map",
-									text:'Return to map',
-									icon: icons+'map.png', 
-									scale: 'small',
-									handler: function(){
-										tabs.setActiveTab(0);
-									}													
-								});	
-								if(Ext.getCmp('graphic_tab')){
-									tabs.remove(Ext.getCmp('graphic_tab'), true);
-								}								
-								
-								tabs.add({
-									title: 'Graph '+statName,//'Graphic_id'+selectionID
-									name: 'graphic_tab',
-									autoScroll: true,
-									id: 'graphic_tab',
-									closable: true,
-									dockedItems: [
-										{
-										xtype: 'toolbar',
-										items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
-										}
-									]													
-								});
-								
-								var t = new Ext.XTemplate(tpl);
-								Ext.getCmp('graphic_tab').update(t.apply(datatest));
-								Ext.getCmp('mapPanelID').setHeight(0)
-								Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
-								tabs.setActiveTab('graphic_tab');
-								
-								generateGraps(selectionID,cmbPeriod.getValue(),'ALL')
+
 							
 							}
 							
@@ -6135,567 +5987,500 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 					}
 				}
 			});
-			funcPupup = function(){
-							// selectControl.control.deactivate();
-							if(Ext.getCmp('gridRegionID')){
-								Ext.getCmp('mainTableID').collapse();
-								Ext.getCmp('gridRegionID').destroy();	
-							}				
-							if(Ext.getCmp('popupID')){
-								Ext.getCmp('popupID').close()
-							}	
-							
-							layerTemp=mapPanel.map.getLayersByName("Search region")[0]
-							if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
-							
-							FindStation=mapPanel.map.getLayersByName("Search station")[0]
-							if(FindStation){FindStation.destroyFeatures();}
-									
-							// loading status
-							var myMask = new Ext.LoadMask(Ext.getCmp('mapPanelID'), {msg:"Please wait..."});
-							myMask.show();
-							
-							selectID=selIds
-					
-							// ##############################################################    TABLA GRID ##################################
-							
-										var gridStatStore = Ext.create('Ext.data.Store', {
-											model: 'modelGridRegion',
-											autoLoad: true,
-											autoSync: true,
-											sorters: { property: 'name', direction : 'ASC' },
-											proxy: {
-												type: 'ajax',
-												url: 'php/Geo_statByregion.php',
-												extraParams: {type:14,listStatSel:Ext.encode(selectID)},	
-												actionMethods: {
-													read: 'POST'
-												},												
-												reader: {
-													type: 'json',
-													root: 'topics'
-												}
-											}
-										});								
-
-										var varstore = Ext.create('Ext.data.Store', {
-											model: 'modelvarList',
-											autoLoad: true,
-											autoSync: true,
-											sorters: { property: 'name', direction : 'ASC' },
-
-											proxy: {
-												type: 'ajax',
-												url: 'php/Geo_statByregion.php',
-												extraParams: {type:15,listStatSel:Ext.encode(selectID)},
-												actionMethods: {
-													read: 'POST'
-												},												
-												reader: {
-													type: 'json',
-													root: 'topics'
-												}
-											},
-											listeners: {
-												 load: function(store, records) {
-													  store.insert(0, [{
-														  id: 0,
-														  name: 'ALL',
-														  acronym: 'ALL'
-														  
-													  }]);
-												 }
-											  }								
-										});	
+			
+				funcPupup = function(){
+								// selectControl.control.deactivate();
+								if(Ext.getCmp('gridRegionID')){
+									Ext.getCmp('mainTableID').collapse();
+									Ext.getCmp('gridRegionID').destroy();	
+								}				
+								if(Ext.getCmp('popupID')){
+									Ext.getCmp('popupID').close()
+								}	
+								
+								layerTemp=mapPanel.map.getLayersByName("Search region")[0]
+								if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
+								
+								FindStation=mapPanel.map.getLayersByName("Search station")[0]
+								if(FindStation){FindStation.destroyFeatures();}
 										
-										var selModel = Ext.create('Ext.selection.CheckboxModel', {
-											listeners: {
-												selectionchange: function(sm, selections) {
-													gridRegion.down('#removeButton').setDisabled(selections.length === 0);
-													gridRegion.down('#idstatistic').setDisabled(selections.length === 0);
-													// gridRegion.down('#zoomExtent').setDisabled(selections.length === 0 || selections.length > 1);
-												}
-											},
-											mode: 'SIMPLE',
-											select: function(records, keepExisting, suppressEvent) {
-												if (Ext.isDefined(records)) {
-													this.doSelect(records, keepExisting, suppressEvent);
-												}
-											},
-											selectAll: function( suppressEvent ) {
-												var me = this,
-													selections = me.store.getRange();
-												countFree=[]
-												for( var key in selections ) {
-													if( selections[key].data.copyright == 'Free'){
-														countFree.push(selections[key].data.copyright)
-													}
-												}
-												
-												if(countFree.length>150){
-													Ext.getCmp('mainTableID').collapse()
-													winInfo=Ext.MessageBox.show({
-													   title: 'Information',
-													   msg: 'Exceeds the maximum number (Max. 150) of downloads',
-													   width:300,
-													   buttons: Ext.MessageBox.OK,
-													   animateTarget: 'info',
-													   icon: 'x-message-box-info'
-													});	
-													winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
-												}else{
-													var i = 0,
-														len = selections.length,
-														selLen = me.getSelection().length;
-														
-													// if( len != selLen ) {
-													if( selLen==0 ) {
-														me.bulkChange = true;
-														for (; i < len; i++) {
-															me.doSelect(selections[i], true, suppressEvent);
-														}
-														delete me.bulkChange;
-														me.maybeFireSelectionChange(me.getSelection().length !== selLen);
-													}
-													else {
-														me.deselectAll( suppressEvent );
-													}									
-												}
-											}											
-										});	
-										
-										btn_download = function () {
-											var selection = gridRegion.getView().getSelectionModel().getSelection();//[0];
-											selgrid=new Array()
-											for(var i = 0; i < selection.length; i++) {
-												selgrid.push(Number(selection[i].data.id));
-											}
-											Ext.DomHelper.append(document.body, {
-											  tag: 'iframe',
-											  id:'downloadIframe',
-											  frameBorder: 0,
-											  width: 0,
-											  height: 0,
-											  css: 'display:none;visibility:hidden;height: 0px;',
-											  src: 'php/dowloaddata.php?typedwn=selection&station='+Ext.encode(selgrid)+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())+'&typedwn=selection'
-											});
-										}	
-										onZoomExtentALL = function () {
-											// layerTemp=mapPanel.map.getLayersByName("Search station")[0]
-
-											FeatselectID=[]
-											for (var i = feature.length - 1; i >= 0; --i) {
-												if(feature[i].renderIntent=='select'){
-														sel=feature[i]//.cluster[j]
-														FeatselectID.push(sel)
-												}
-											}
-											console.log(FeatselectID)
-											console.log(FeatselectID[0].geometry.getBounds())
-											var BoundALL = FeatselectID[0].geometry.getBounds();
-											// mapPanel.map.zoomToExtent(BoundALL);								
-											
-										}
-
-										cmbVar= Ext.create('Ext.form.field.ComboBox', { 
-											editable: false, 
-											value: 'ALL',
-											multiSelect: true, 
-											displayField: 'acronym',
-											valueField: 'id', 
-											id:'varCmbID',
-											queryMode: 'local',
-											typeAhead: true,	
-											store: varstore,
-											listConfig: {
-												getInnerTpl: function() {
-													return '<div data-qtip="{name}">{acronym}</div>';
-												}
-											}
-										
-										});		
-										
-										gridRegion = Ext.create('Ext.grid.Panel', {
-											id: 'gridRegionID',
-											border: true,
-											// layout: 'fit',
-											forceFit: true,
-											store: gridStatStore,
-											maxHeight: Ext.getBody().getViewSize().height*0.3,
-											width: mainPanelWidth,
-											// height:273,
-											// maxHeight: mainPanelHeight*0.4,
-											selType: 'checkboxmodel',
-											autoHeight: true,
-											columns: [
-												{
-													xtype: 'actioncolumn',
-													minWidth: 20,
-													flex: 1,
-													items: [{
-														icon   : icons+'buttons/zoomin_off.gif',  // Use a URL in the icon config
-														tooltip: 'zoom extent',
-														handler: function(grid, rowIndex, colIndex) {
-															var rec = gridStatStore.getAt(rowIndex);
-															selectionID = rec.get('id');
-															zoomToStation(selectionID)
-														}
-													}]
-												},		
-												{
-													xtype: 'actioncolumn',
-													minWidth: 20,
-													flex: 1,
-													items: [{
-														icon   : icons+'buttons/pie-chart-graph-icon.png',  // Use a URL in the icon config
-														tooltip: 'Graphic',
-														handler: function(grid, rowIndex, colIndex) {
-															var rec = gridStatStore.getAt(rowIndex);
-															selectionID = rec.get('id');
-															statName = rec.get('name');
-															
-															varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
-															var arrayvar =new Array() //varlist.split(',');
-
-															for(var i = 0; i < varstore.getCount(); i++) {
-																var record = varstore.getAt(i);
-																id=record.get('id')
-																acronym=record.get('acronym')
-																arrayvar.push(acronym)
-																// console.log(id,acronym)
-															}
-															
-															var datatest = {
-																name: 'xxx',
-																rowTitleArr: arrayvar,
-																colTitleArr: ['a', 'b', 'c']
-															}
-															var tpl = [
-																'<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-																'<tpl for="rowTitleArr">',
-																'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-																'</tpl>'
-															];	
-
-															cmbPeriod='cmbPeriod'+selectionID
-															cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
-																fieldLabel: 'Select graphic model',
-																id:'cmbPeriodID',
-																labelWidth:150,
-																store: {
-																	fields: ['value','name'], 
-																	data: [ 
-																		{value:1,name: 'Daily'}, 
-																		{value:2,name: 'Monthly'}, 
-																		{value:3,name: 'Yearly'}
-																	]
-																},
-																displayField: 'name',
-																value: 1,
-																queryMode: 'local',
-																valueField: 'value', 								
-																typeAhead: true,
-																listeners: {
-																	select: function() {
-																		var actTab = tabs.getActiveTab();
-																		var idx = tabs.items.indexOf(actTab);
-																		// actTabId=parseInt((actTab.title).match(/\d+/)[0])
-																		var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
-																		generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
-
-																	}
-																}
-															});		
-
-															btonReturn= new Ext.Button({
-																pressedCls : 'my-pressed',
-																overCls : 'my-over',
-																tooltip: "Return to map",
-																text:'Return to map',
-																icon: icons+'map.png', 
-																scale: 'small',
-																handler: function(){
-																	tabs.setActiveTab(0);
-																}													
-															});	
-															if(Ext.getCmp('graphic_tab')){
-																tabs.remove(Ext.getCmp('graphic_tab'), true);
-															}												
-
-															tabs.add({
-																title: 'Graph '+statName,//'Graphic_id'+selectionID
-																name: 'graphic_tab',
-																autoScroll: true,
-																id: 'graphic_tab',
-																closable: true,
-																dockedItems: [
-																	{
-																	xtype: 'toolbar',
-																	items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
-																	}
-																]													
-															});		
-															
-															var t = new Ext.XTemplate(tpl);
-															Ext.getCmp('graphic_tab').update(t.apply(datatest));
-															Ext.getCmp('mapPanelID').setHeight(0)
-															Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
-															tabs.setActiveTab('graphic_tab');															
-															
-															generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
-														} // handler
-													}]
-												},								
-												// {
-													// text : '&#8470;',
-													// dataIndex: 'rowIndex',
-													// flex: 1,
-													// minWidth: 20,
-													// renderer : function(value, metaData, record, rowIndex)
-													// {return rowIndex+1;}
-												// },			
-												{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
-												{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
-												{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
-												{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
-												{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
-												
-												// { text: 'category',minWidth: 100,dataIndex: 'category', flex: 4},
-
-												// { text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3},
-												// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
-												
-												{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-												{ text: 'status',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
-												
-												// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
-												// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
-												// { text: 'elev',minWidth: 80,dataIndex: 'elev', flex: 2},
-												// { text: 'country',minWidth: 80,dataIndex: 'country', flex: 4},
-												// { text: 'state',minWidth: 80,dataIndex: 'state', flex: 4},
-												// { text: 'city',minWidth: 90,dataIndex: 'city', flex: 4}
-												
-											],
-											columnLines: true,
-											plugins: [{
-												ptype: 'rowexpander',
-												pluginId: 'rowexpanderID',
-												selectRowOnExpand: true,			
-												rowBodyTpl : new Ext.XTemplate(
-													'<p><b>category:</b> {category} | <b>instalation:</b> {instalation} ', //&#x2016; doble linea vertical
-													'| <b>quality:</b> {quality} ',
-													'| <b>lon:</b> {lon} ',
-													'| <b>lat:</b> {lat} ',
-													'| <b>elev:</b> {elev} </p>',
-													'<p><b>country:</b> {country} ',
-													'| <b>state:</b> {state} ',
-													'| <b>city:</b> {city}</p> ',
-													'<div id="myrow-{id}" ></div>'
-												),		
-												expandOnRender: true,
-												expandOnDblClick: false		
-									
-											}],							
-
-											stripeRows: true,
-											// margin: '0 0 20 0',
-											selModel: selModel,
-											viewConfig: { 
-												stripeRows: false, 
-												getRowClass: function(record, index, rowParams, stor) {
-												   var c = record.get('copyright');
-												   // return id == '1' ? 'general-rule' : ''; // para desaparecer el check
-													if (c == 'Restricted' || c == 'Request') {
-														return 'price-fall';
-													} 
-												}	
-											},
-											listeners: {
-												beforeselect: function ( row, model, index ) {
-													if ( model.data.copyright == "Restricted" || model.data.copyright == 'Request') {
-														return false;
-													}
-												}								
-											},
-											dockedItems: [
-												{
-												xtype: 'toolbar',
-												items: [{
-													itemId: 'removeButton',
-													text:'Download',
-													tooltip:'Download data',
-													icon   : iconGridDownload,
-													disabled: true,
-													handler: btn_download 
-												},cmbVar/*,{
-													itemId: 'zoomExtentALL',
-													text:'zoomExtentALL',
-													tooltip:'zoomExtent to ALL',
-													icon   : iconGridzoomExtentALL,//iconCls:'add',
-													handler: onZoomExtentALL 
-												}*/,{
-													itemId: 'idExpand',
-													text:'Expand all',
-													tooltip:'Expand all',
-													iconCls:iconGridExpand,
-													handler: expand 
-												},{
-												
-													itemId: 'idstatistic',
-													text:'Statistics',
-													tooltip:'Summary Statistic',
-													icon   : iconGridStatistics,
-													disabled: true,
-													handler: statistics 
-												},{ xtype: 'tbtext', itemId: 'numRecords' },{xtype: 'tbfill'},
-												{ 
-													itemId: 'idMaximo',
-													// text:'Maximize',
-													tooltip:'Maximize/Minimize table',
-													icon   : iconGridMaximize,
-													// stretch: false,
-													align: 'right',
-													handler: Maximize,
-												}]
-											}]		
-										});
-
-										// para el mostrar el grid de variables cuando se da en el boton expandir
-										Ext.getCmp('gridRegionID').getView().on('expandbody', function(rowNode, record, expandbody,eNode){
-
-											var dynamicStore  //the new store for the nested grid.
-											var row = "myrow-" + record.get("id");
-											var id2 = "mygrid-" + record.get("id");  
-											row2 = Ext.get(rowNode);
-											
-											var store = Ext.create('Ext.data.Store', {
-												model: 'modelGridVar',
+								// loading status
+								var myMask = new Ext.LoadMask(Ext.getCmp('mapPanelID'), {msg:"Please wait..."});
+								myMask.show();
+								
+								selectID=selIds
+						
+								// ##############################################################    TABLA GRID ##################################
+								
+											var gridStatStore = Ext.create('Ext.data.Store', {
+												model: 'modelGridRegion',
+												autoLoad: true,
 												autoSync: true,
-												storeId: 'store2',
+												sorters: { property: 'name', direction : 'ASC' },
 												proxy: {
-													type: 'ajax', 
+													type: 'ajax',
 													url: 'php/Geo_statByregion.php',
-													extraParams: {
-														idstat: record.get("id"),type:17
-													},
+													extraParams: {type:14,listStatSel:Ext.encode(selectID)},	
+													actionMethods: {
+														read: 'POST'
+													},												
+													reader: {
+														type: 'json',
+														root: 'topics'
+													}
+												}
+											});								
+
+											var varstore = Ext.create('Ext.data.Store', {
+												model: 'modelvarList',
+												autoLoad: true,
+												autoSync: true,
+												sorters: { property: 'name', direction : 'ASC' },
+
+												proxy: {
+													type: 'ajax',
+													url: 'php/Geo_statByregion.php',
+													extraParams: {type:15,listStatSel:Ext.encode(selectID)},
+													actionMethods: {
+														read: 'POST'
+													},												
 													reader: {
 														type: 'json',
 														root: 'topics'
 													}
 												},
-												autoLoad: true// {callback: initData}
-											});
-												  
-											var grid = Ext.create('Ext.grid.Panel', {
-												// hideHeaders: true,
-												border: false,
-												height:100,
-												layout: 'fit',
-												// width:500,
-												autoWidth:true,
-												id: id2,
-												columns: [{
-														xtype: 'actioncolumn',
-														// flex: 0,
-														width: 150,
-														autoSizeColumn: true,
-														items: [{
-															icon   : icons+'buttons/download_off.gif',  // Use a URL in the icon config
-															tooltip: 'zoom extent2',
-															handler: function(grid, rowIndex, colIndex) {
-																var rec = store.getAt(rowIndex);
-																idstat=rec.get('idstat')
-																idvar=rec.get('idvar')
-																Ext.DomHelper.append(document.body, {
-																  tag: 'iframe',
-																  id:'downloadIframe',
-																  frameBorder: 0,
-																  width: 0,
-																  height: 0,
-																  css: 'display:none;visibility:hidden;height: 0px;',
-																  src: 'php/dowloaddata.php?typedwn=selection&station='+Ext.encode([idstat])+'&'+'variable='+Ext.encode([idvar])
-																});
-															
-															}
-														}]
-													},{ text: 'name',dataIndex: 'name'},
-													{ text: 'acronym',dataIndex: 'acronym'},
-													{ text: 'date_start',dataIndex: 'date_start'},
-													{ text: 'date_end',dataIndex: 'date_end'},
-													{ text: 'age',dataIndex: 'age',autoSizeColumn: true}],
-												store: store,
-												viewConfig: {
-													listeners: {
-														refresh: function(dataview) {
-															Ext.each(dataview.panel.columns, function(column) {
-																if (column.autoSizeColumn === true)
-																	column.autoSize();
-															})
+												listeners: {
+													 load: function(store, records) {
+														  store.insert(0, [{
+															  id: 0,
+															  name: 'ALL',
+															  acronym: 'ALL'
+															  
+														  }]);
+													 }
+												  }								
+											});	
+											
+											var selModel = Ext.create('Ext.selection.CheckboxModel', {
+												mode: 'SIMPLE',
+												listeners: {
+													selectionchange: function(sm, selections) {
+														gridRegion.down('#removeButton').setDisabled(selections.length === 0);
+														gridRegion.down('#idstatistic').setDisabled(selections.length === 0);
+														
+													}
+												},
+												select: function(records, keepExisting, suppressEvent) {
+													if (Ext.isDefined(records)) {
+														this.doSelect(records, keepExisting, suppressEvent);
+													}
+												},
+												selectAll: function( suppressEvent ) {
+													var me = this,
+														selections = me.store.getRange();
+													countFree=[]
+													for( var key in selections ) {
+														if( selections[key].data.copyright == 'Free'){
+															countFree.push(selections[key].data.copyright)
 														}
 													}
-												}	
-											});
+													
+													if(countFree.length>150){
+														winInfo=Ext.MessageBox.show({
+														   title: 'Information',
+														   msg: 'Exceeds the maximum number (Max. 150) of downloads',
+														   width:300,
+														   buttons: Ext.MessageBox.OK,
+														   animateTarget: 'info',
+														   icon: 'x-message-box-info'
+														});	
+														winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+													}else{
+														var i = 0,
+															len = selections.length,
+															selLen = me.getSelection().length;
+															
+														// if( len != selLen ) {
+														if( selLen==0 ) {
+															me.bulkChange = true;
+															for (; i < len; i++) {
+																me.doSelect(selections[i], true, suppressEvent);
+															}
+															delete me.bulkChange;
+															me.maybeFireSelectionChange(me.getSelection().length !== selLen);
+														}
+														else {
+															me.deselectAll( suppressEvent );
+														}									
+													}
+												} //												
+											});	
 											
-										   grid.render(row)
-											grid.getEl().swallowEvent([ 'mouseover', 'mousedown', 'click', 'dblclick' ]);
-											// grid.on('itemclick', function(view) {
-												// Ext.getCmp('gridRegionID').getView().getSelectionModel().deselectAll();
-											// });
-											
-												
-										});	
-										gridRegion.getView().on('collapsebody', function(rowNode, record, eNode) {
-											var row = "myrow-" + record.get("id");
-											var id2 = "mygrid-" + record.get("id");  
-											// Ext.getCmp(id2).getStore().removeAll();
-											$('#'+row).empty();
-											// Ext.get(rowNode).down('#'+row).down('div').destroy();
-										});
-
-										gridStatStore.on('load', function(ds){
-											countRow=ds.getTotalCount()
-											if(countRow>=1){
-												// winRegion.show()
-												// Ext.getCmp('gridRegionID').add(gridRegion);
-												// Ext.getCmp('gridRegionID').doLayout();
-												
-												Ext.getCmp('mainTableID').add(gridRegion);
-												gridRegion.down('#numRecords').setText('Records: ' + countRow);
-												Ext.getCmp('mainTableID').expand()
-												
-												// Ext.DomHelper.append(document.body, {
-												  // tag: 'iframe',
-												  // id:'downloadIframe',
-												  // frameBorder: 0,
-												  // width: 0,
-												  // height: 0,
-												  // css: 'display:none;visibility:hidden;height: 0px;',
-												  // src: 'php/dowloaddata.php?typedwn=selection&station='+encodeURIComponent(JSON.stringify(selectID))+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())
-												// });									
-												myMask.hide();
-											}else{
-												myMask.hide();
-												Ext.getCmp('mainTableID').collapse()
-												winInfo=Ext.MessageBox.show({
-												   title: 'Information',
-												   msg: 'Not stations found!',
-												   buttons: Ext.MessageBox.OK,
-												   animateTarget: 'info',
-												   icon: 'x-message-box-info'
-												});	
-												winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+											btn_download = function () {
+												var selection = gridRegion.getView().getSelectionModel().getSelection();//[0];
+												selgrid=new Array()
+												for(var i = 0; i < selection.length; i++) {
+													selgrid.push(Number(selection[i].data.id));
+												}
+												Ext.DomHelper.append(document.body, {
+												  tag: 'iframe',
+												  id:'downloadIframe',
+												  frameBorder: 0,
+												  width: 0,
+												  height: 0,
+												  css: 'display:none;visibility:hidden;height: 0px;',
+												  src: 'php/dowloaddata.php?typedwn=selection&station='+Ext.encode(selgrid)+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())+'&typedwn=selection'
+												});
 											}	
-										});	
+											onZoomExtentALL = function () {
+												// layerTemp=mapPanel.map.getLayersByName("Search station")[0]
+
+												FeatselectID=[]
+												for (var i = feature.length - 1; i >= 0; --i) {
+													if(feature[i].renderIntent=='select'){
+															sel=feature[i]//.cluster[j]
+															FeatselectID.push(sel)
+													}
+												}
+												console.log(FeatselectID)
+												console.log(FeatselectID[0].geometry.getBounds())
+												var BoundALL = FeatselectID[0].geometry.getBounds();
+												// mapPanel.map.zoomToExtent(BoundALL);								
+												
+											}
+
+											cmbVar= Ext.create('Ext.form.field.ComboBox', { 
+												editable: false, 
+												value: 'ALL',
+												multiSelect: true, 
+												displayField: 'acronym',
+												valueField: 'id', 
+												id:'varCmbID',
+												queryMode: 'local',
+												typeAhead: true,	
+												store: varstore,
+												listConfig: {
+													getInnerTpl: function() {
+														return '<div data-qtip="{name}">{acronym}</div>';
+													}
+												}
+											
+											});		
+											
+											gridRegion = Ext.create('Ext.grid.Panel', {
+												id: 'gridRegionID',
+												border: true,
+												// layout: 'fit',
+												forceFit: true,
+												store: gridStatStore,
+												maxHeight: Ext.getBody().getViewSize().height*0.3,
+												width: mainPanelWidth,
+												// height:273,
+												// maxHeight: mainPanelHeight*0.4,
+												selType: 'checkboxmodel',
+												autoHeight: true,
+												columns: [
+													{
+														xtype: 'actioncolumn',
+														minWidth: 20,
+														flex: 1,
+														items: [{
+															icon   : icons+'buttons/zoomin_off.gif',  // Use a URL in the icon config
+															tooltip: 'zoom extent',
+															handler: function(grid, rowIndex, colIndex) {
+																var rec = gridStatStore.getAt(rowIndex);
+																selectionID = rec.get('id');
+																zoomToStation(selectionID)
+															}
+														}]
+													},		
+													{
+														xtype: 'actioncolumn',
+														minWidth: 20,
+														flex: 1,
+														items: [{
+															icon   : icons+'buttons/pie-chart-graph-icon.png',  // Use a URL in the icon config
+															tooltip: 'Graphic',
+															handler: function(grid, rowIndex, colIndex) {
+																var rec = gridStatStore.getAt(rowIndex);
+																selectionID = rec.get('id');
+																statName = rec.get('name');
+																copyrightN = rec.get('copyright');
+																if (copyrightN == 'Free') {
+																
+																	varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
+																	var arrayvar =new Array() //varlist.split(',');
+
+																	for(var i = 0; i < varstore.getCount(); i++) {
+																		var record = varstore.getAt(i);
+																		id=record.get('id')
+																		acronym=record.get('acronym')
+																		arrayvar.push(acronym)
+																		// console.log(id,acronym)
+																	}
+																	
+																	var datatest = {
+																		name: 'xxx',
+																		rowTitleArr: arrayvar,
+																		colTitleArr: ['a', 'b', 'c']
+																	}
+																	var tpl = [
+																		'<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+																		'<tpl for="rowTitleArr">',
+																		'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+																		'</tpl>'
+																		];	
+
+																	cmbPeriod='cmbPeriod'+selectionID
+																	cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
+																		fieldLabel: 'Select graphic model',
+																		id:'cmbPeriodID',
+																		labelWidth:150,
+																		store: {
+																			fields: ['value','name'], 
+																			data: [ 
+																				{value:1,name: 'Daily'}, 
+																				{value:2,name: 'Monthly'}, 
+																				{value:3,name: 'Yearly'}
+																			]
+																		},
+																		displayField: 'name',
+																		value: 1,
+																		queryMode: 'local',
+																		valueField: 'value', 								
+																		typeAhead: true,
+																		listeners: {
+																			select: function() {
+																				var actTab = tabs.getActiveTab();
+																				var idx = tabs.items.indexOf(actTab);
+																				// actTabId=parseInt((actTab.title).match(/\d+/)[0])
+																				var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
+																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
+
+																			}
+																		}
+																	});	
+																	
+																	btonReturn= new Ext.Button({
+																		pressedCls : 'my-pressed',
+																		overCls : 'my-over',
+																		tooltip: "Return to map",
+																		text:'Return to map',
+																		icon: icons+'map.png', 
+																		scale: 'small',
+																		handler: function(){
+																			tabs.setActiveTab(0);
+																		}													
+																	});	
+																	if(Ext.getCmp('graphic_tab')){
+																		tabs.remove(Ext.getCmp('graphic_tab'), true);
+																	}												
+
+																	tabs.add({
+																		// contentEl: "desc",
+																		// xtype: 'panel',
+																		title: 'Graph '+statName,//'Graphic_id'+selectionID
+																		name: 'graphic_tab',
+																		// width:mainPanelWidth-15,
+																		// height: mainPanelHeight,
+																		autoScroll: true,
+																		// height: 100,
+																		// autoHeight: true,
+																		// layout: 'fit',
+																		id: 'graphic_tab',
+																		 // html: new Ext.XTemplate(
+																		 // tpl
+																		 // '<div id="grap_tmin_'+selectionID+'" ></div>',
+																		 // '<div id="grap_prec_'+selectionID+'"></div>'
+																		 // ),
+																		 // .apply({value: '2. HTML property of a panel generated by an XTemplate'}),
+																		closable: true,
+																		dockedItems: [
+																			{
+																			xtype: 'toolbar',
+																			items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+																			}
+																		]													
+																	});		
+																	
+																	var t = new Ext.XTemplate(tpl);
+																	Ext.getCmp('graphic_tab').update(t.apply(datatest));
+																	// Ext.getCmp('graphic'+selectionID).update('This<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long');
+																	
+																	Ext.getCmp('mapPanelID').setHeight(0)
+																	Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
+																	// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
+																	tabs.setActiveTab('graphic_tab');
+																	
+																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+																}
+																
+															}, // handler
+														}]
+													},								
+													// {
+														// text : '&#8470;',
+														// dataIndex: 'rowIndex',
+														// flex: 1,
+														// minWidth: 20,
+														// renderer : function(value, metaData, record, rowIndex)
+														// {return rowIndex+1;}
+													// },			
+													{ text: 'code',minWidth: 70,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
+													{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
+													{ text: 'institute',minWidth: 70,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
+													{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
+													
+
+													
+													{ text: 'variables',minWidth: 120,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
+													{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+													
+													// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
+													// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
+													{ text: 'elevation',minWidth: 80,dataIndex: 'elev', flex: 2,tdCls: 'x-change-cell'},
+													{ text: 'category',minWidth: 100,dataIndex: 'category', flex: 3,tdCls: 'x-change-cell'},
+													{ text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3,tdCls: 'x-change-cell'},
+													{ text: 'suspension',minWidth: 80,dataIndex: 'suspension', flex: 3,tdCls: 'x-change-cell'},
+													{ text: 'quality',minWidth: 70,dataIndex: 'quality', flex: 1,tdCls: 'x-change-cell'},									
+													{ text: 'country',minWidth: 80,dataIndex: 'country', flex: 4,tdCls: 'x-change-cell'},
+													{ text: 'state',minWidth: 80,dataIndex: 'state', flex: 4,tdCls: 'x-change-cell'},
+													{ text: 'city',minWidth: 90,dataIndex: 'city', flex: 4,tdCls: 'x-change-cell'}
+													
+												],
+												columnLines: true,
+												stripeRows: true,
+												// margin: '0 0 20 0',
+												selModel: selModel,
+												viewConfig: { 
+													stripeRows: false, 
+													getRowClass: function(record, index, rowParams, stor) {
+													   var c = record.get('copyright');
+													   // return id == '1' ? 'general-rule' : ''; // para desaparecer el check
+														if (c == 'Restricted' || c == 'Request') {
+															return 'price-fall';
+														} 
+													}	
+												},
+												listeners: {
+													beforeselect: function ( row, model, index ) {
+														if ( model.data.copyright == "Restricted" || model.data.copyright == 'Request') {
+															return false;
+														}
+													},
+													selectionchange: function(sm, selections){ // hay problema cuando se selecciona el cursor vuelve a la primera fila
+														// layerTempSel.removeAllFeatures();
+														layerTempSel.destroyFeatures();
+														// gridRegion.down('#numRecordsSelected').setText('Selected: ' + selections.length);
+														feature = layerTempStat.features;
+														for (var i = feature.length - 1; i >= 0; --i) {
+															// for (var j = feature[i].cluster.length - 1; j >= 0; --j) {
+																idall=feature[i].attributes.id;
+																for (var k = selections.length - 1; k >= 0; --k) {
+																	idsel=selections[k].data.id
+																	if(idall==idsel){
+																		// feature[i].layer.styleMap.styles.default.rules[0].symbolizer.externalGraphic="iconosGIS/bloqE_16px.png" 
+																		// layerTempSel.drawFeature(feature[i])
+																		 // mapPanel.map.refresh();	
+																		var point = new OpenLayers.Feature.Vector(
+																			new OpenLayers.Geometry.Point(feature[i].geometry.x, feature[i].geometry.y));	
+																		layerTempSel.addFeatures([point]);
+																		mapPanel.map.setLayerIndex(layerTempSel, 99);
+																	}
+																}												
+															// }											
+														}
+													}												
+												},
+												dockedItems: [
+													{
+													xtype: 'toolbar',
+													items: [{
+														itemId: 'removeButton',
+														text:'Download',
+														tooltip:'Download data',
+														icon   : iconGridDownload,
+														disabled: true,
+														handler: btn_download 
+													},cmbVar/*,{
+														itemId: 'zoomExtentALL',
+														text:'zoomExtentALL',
+														tooltip:'zoomExtent to ALL',
+														icon   : iconGridzoomExtentALL,//iconCls:'add',
+														handler: onZoomExtentALL 
+													}*/,{
+														itemId: 'idExpand',
+														text:'Expand all',
+														tooltip:'Expand all',
+														iconCls:iconGridExpand,
+														handler: expand 
+													},{
+													
+														itemId: 'idstatistic',
+														text:'Statistics',
+														tooltip:'Summary Statistic',
+														icon   : iconGridStatistics,
+														disabled: true,
+														handler: statistics 
+													},{ xtype: 'tbtext', itemId: 'numRecords' },
+													// { xtype: 'tbtext', itemId: 'numRecordsSelected' },
+													{xtype: 'tbfill'},
+													{ 
+														itemId: 'idMaximo',
+														// text:'Maximize',
+														tooltip:'Maximize/Minimize table',
+														icon   : iconGridMaximize,
+														// stretch: false,
+														align: 'right',
+														handler: Maximize,
+													}]
+												}]		
+											});
+
+											gridStatStore.on('load', function(ds){
+												countRow=ds.getTotalCount()
+												if(countRow>=1){
+													// winRegion.show()
+													// Ext.getCmp('gridRegionID').add(gridRegion);
+													// Ext.getCmp('gridRegionID').doLayout();
+													
+													Ext.getCmp('mainTableID').add(gridRegion);
+													gridRegion.down('#numRecords').setText('Records: ' + countRow);
+													// gridRegion.down('#numRecordsSelected').setText('Selected: ' + 0);
+													Ext.getCmp('mainTableID').expand()
+													
+													// Ext.DomHelper.append(document.body, {
+													  // tag: 'iframe',
+													  // id:'downloadIframe',
+													  // frameBorder: 0,
+													  // width: 0,
+													  // height: 0,
+													  // css: 'display:none;visibility:hidden;height: 0px;',
+													  // src: 'php/dowloaddata.php?typedwn=selection&station='+encodeURIComponent(JSON.stringify(selectID))+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())
+													// });									
+													myMask.hide();
+												}else{
+													myMask.hide();
+													Ext.getCmp('mainTableID').collapse()
+													winInfo=Ext.MessageBox.show({
+													   title: 'Information',
+													   msg: 'Not stations found!',
+													   buttons: Ext.MessageBox.OK,
+													   animateTarget: 'info',
+													   icon: 'x-message-box-info'
+													});	
+													winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+												}	
+											});	
+									
 								
+								
+								// ################################################################################################################
 							
 							
-							// ################################################################################################################
-						
-						
 
 
-						} // fin handler boton hover
-
+							} // fin handler boton hover
 			
 			gridRegionHover = Ext.create('Ext.grid.Panel', {
 				id: 'gridRegionIDHover',
@@ -6851,12 +6636,1139 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 				createPopupOne(event,myFeatyures);
 			}		
 		}
+		function onFeatureSelect1Click(event) {
+			var myFeatyures = event.cluster;
+			if(Ext.getCmp('popupID')){
+				Ext.getCmp('popupID').close()
+			}	
+
+			selIds=new Array()
+			// selname=new Array()
+			for(var i = 0; i < myFeatyures.length; i++) {
+				selIds.push(Number(myFeatyures[i].attributes.id));
+				// selname.push(myFeatyures[i].attributes.name);
+			}
+			
+			if(myFeatyures.length>1){
+				funcPupup = function(){
+								// selectControl.control.deactivate();
+								if(Ext.getCmp('gridRegionID')){
+									Ext.getCmp('mainTableID').collapse();
+									Ext.getCmp('gridRegionID').destroy();	
+								}				
+								if(Ext.getCmp('popupID')){
+									Ext.getCmp('popupID').close()
+								}	
+								
+								layerTemp=mapPanel.map.getLayersByName("Search region")[0]
+								if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
+								
+								FindStation=mapPanel.map.getLayersByName("Search station")[0]
+								if(FindStation){FindStation.destroyFeatures();}
+										
+								// loading status
+								var myMask = new Ext.LoadMask(Ext.getCmp('mapPanelID'), {msg:"Please wait..."});
+								myMask.show();
+								
+								selectID=selIds
+						
+								// ##############################################################    TABLA GRID ##################################
+								
+											var gridStatStore = Ext.create('Ext.data.Store', {
+												model: 'modelGridRegion',
+												autoLoad: true,
+												autoSync: true,
+												sorters: { property: 'name', direction : 'ASC' },
+												proxy: {
+													type: 'ajax',
+													url: 'php/Geo_statByregion.php',
+													extraParams: {type:14,listStatSel:Ext.encode(selectID)},	
+													actionMethods: {
+														read: 'POST'
+													},												
+													reader: {
+														type: 'json',
+														root: 'topics'
+													}
+												}
+											});								
+
+											var varstore = Ext.create('Ext.data.Store', {
+												model: 'modelvarList',
+												autoLoad: true,
+												autoSync: true,
+												sorters: { property: 'name', direction : 'ASC' },
+
+												proxy: {
+													type: 'ajax',
+													url: 'php/Geo_statByregion.php',
+													extraParams: {type:15,listStatSel:Ext.encode(selectID)},
+													actionMethods: {
+														read: 'POST'
+													},												
+													reader: {
+														type: 'json',
+														root: 'topics'
+													}
+												},
+												listeners: {
+													 load: function(store, records) {
+														  store.insert(0, [{
+															  id: 0,
+															  name: 'ALL',
+															  acronym: 'ALL'
+															  
+														  }]);
+													 }
+												  }								
+											});	
+											
+											var selModel = Ext.create('Ext.selection.CheckboxModel', {
+												mode: 'SIMPLE',
+												listeners: {
+													selectionchange: function(sm, selections) {
+														gridRegion.down('#removeButton').setDisabled(selections.length === 0);
+														gridRegion.down('#idstatistic').setDisabled(selections.length === 0);
+														
+													}
+												},
+												select: function(records, keepExisting, suppressEvent) {
+													if (Ext.isDefined(records)) {
+														this.doSelect(records, keepExisting, suppressEvent);
+													}
+												},
+												selectAll: function( suppressEvent ) {
+													var me = this,
+														selections = me.store.getRange();
+													countFree=[]
+													for( var key in selections ) {
+														if( selections[key].data.copyright == 'Free'){
+															countFree.push(selections[key].data.copyright)
+														}
+													}
+													
+													if(countFree.length>150){
+														winInfo=Ext.MessageBox.show({
+														   title: 'Information',
+														   msg: 'Exceeds the maximum number (Max. 150) of downloads',
+														   width:300,
+														   buttons: Ext.MessageBox.OK,
+														   animateTarget: 'info',
+														   icon: 'x-message-box-info'
+														});	
+														winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+													}else{
+														var i = 0,
+															len = selections.length,
+															selLen = me.getSelection().length;
+															
+														// if( len != selLen ) {
+														if( selLen==0 ) {
+															me.bulkChange = true;
+															for (; i < len; i++) {
+																me.doSelect(selections[i], true, suppressEvent);
+															}
+															delete me.bulkChange;
+															me.maybeFireSelectionChange(me.getSelection().length !== selLen);
+														}
+														else {
+															me.deselectAll( suppressEvent );
+														}									
+													}
+												} //												
+											});	
+											
+											btn_download = function () {
+												var selection = gridRegion.getView().getSelectionModel().getSelection();//[0];
+												selgrid=new Array()
+												for(var i = 0; i < selection.length; i++) {
+													selgrid.push(Number(selection[i].data.id));
+												}
+												Ext.DomHelper.append(document.body, {
+												  tag: 'iframe',
+												  id:'downloadIframe',
+												  frameBorder: 0,
+												  width: 0,
+												  height: 0,
+												  css: 'display:none;visibility:hidden;height: 0px;',
+												  src: 'php/dowloaddata.php?typedwn=selection&station='+Ext.encode(selgrid)+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())+'&typedwn=selection'
+												});
+											}	
+											onZoomExtentALL = function () {
+												// layerTemp=mapPanel.map.getLayersByName("Search station")[0]
+
+												FeatselectID=[]
+												for (var i = feature.length - 1; i >= 0; --i) {
+													if(feature[i].renderIntent=='select'){
+															sel=feature[i]//.cluster[j]
+															FeatselectID.push(sel)
+													}
+												}
+												console.log(FeatselectID)
+												console.log(FeatselectID[0].geometry.getBounds())
+												var BoundALL = FeatselectID[0].geometry.getBounds();
+												// mapPanel.map.zoomToExtent(BoundALL);								
+												
+											}
+
+											cmbVar= Ext.create('Ext.form.field.ComboBox', { 
+												editable: false, 
+												value: 'ALL',
+												multiSelect: true, 
+												displayField: 'acronym',
+												valueField: 'id', 
+												id:'varCmbID',
+												queryMode: 'local',
+												typeAhead: true,	
+												store: varstore,
+												listConfig: {
+													getInnerTpl: function() {
+														return '<div data-qtip="{name}">{acronym}</div>';
+													}
+												}
+											
+											});		
+											
+											gridRegion = Ext.create('Ext.grid.Panel', {
+												id: 'gridRegionID',
+												border: true,
+												// layout: 'fit',
+												forceFit: true,
+												store: gridStatStore,
+												maxHeight: Ext.getBody().getViewSize().height*0.3,
+												width: mainPanelWidth,
+												// height:273,
+												// maxHeight: mainPanelHeight*0.4,
+												selType: 'checkboxmodel',
+												autoHeight: true,
+												columns: [
+													{
+														xtype: 'actioncolumn',
+														minWidth: 20,
+														flex: 1,
+														items: [{
+															icon   : icons+'buttons/zoomin_off.gif',  // Use a URL in the icon config
+															tooltip: 'zoom extent',
+															handler: function(grid, rowIndex, colIndex) {
+																var rec = gridStatStore.getAt(rowIndex);
+																selectionID = rec.get('id');
+																zoomToStation(selectionID)
+															}
+														}]
+													},		
+													{
+														xtype: 'actioncolumn',
+														minWidth: 20,
+														flex: 1,
+														items: [{
+															icon   : icons+'buttons/pie-chart-graph-icon.png',  // Use a URL in the icon config
+															tooltip: 'Graphic',
+															handler: function(grid, rowIndex, colIndex) {
+																var rec = gridStatStore.getAt(rowIndex);
+																selectionID = rec.get('id');
+																statName = rec.get('name');
+																copyrightN = rec.get('copyright');
+																if (copyrightN == 'Free') {
+																
+																	varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
+																	var arrayvar =new Array() //varlist.split(',');
+
+																	for(var i = 0; i < varstore.getCount(); i++) {
+																		var record = varstore.getAt(i);
+																		id=record.get('id')
+																		acronym=record.get('acronym')
+																		arrayvar.push(acronym)
+																		// console.log(id,acronym)
+																	}
+																	
+																	var datatest = {
+																		name: 'xxx',
+																		rowTitleArr: arrayvar,
+																		colTitleArr: ['a', 'b', 'c']
+																	}
+																	var tpl = [
+																		'<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+																		'<tpl for="rowTitleArr">',
+																		'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+																		'</tpl>'
+																		];	
+
+																	cmbPeriod='cmbPeriod'+selectionID
+																	cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
+																		fieldLabel: 'Select graphic model',
+																		id:'cmbPeriodID',
+																		labelWidth:150,
+																		store: {
+																			fields: ['value','name'], 
+																			data: [ 
+																				{value:1,name: 'Daily'}, 
+																				{value:2,name: 'Monthly'}, 
+																				{value:3,name: 'Yearly'}
+																			]
+																		},
+																		displayField: 'name',
+																		value: 1,
+																		queryMode: 'local',
+																		valueField: 'value', 								
+																		typeAhead: true,
+																		listeners: {
+																			select: function() {
+																				var actTab = tabs.getActiveTab();
+																				var idx = tabs.items.indexOf(actTab);
+																				// actTabId=parseInt((actTab.title).match(/\d+/)[0])
+																				var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
+																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
+
+																			}
+																		}
+																	});	
+																	
+																	btonReturn= new Ext.Button({
+																		pressedCls : 'my-pressed',
+																		overCls : 'my-over',
+																		tooltip: "Return to map",
+																		text:'Return to map',
+																		icon: icons+'map.png', 
+																		scale: 'small',
+																		handler: function(){
+																			tabs.setActiveTab(0);
+																		}													
+																	});	
+																	if(Ext.getCmp('graphic_tab')){
+																		tabs.remove(Ext.getCmp('graphic_tab'), true);
+																	}												
+
+																	tabs.add({
+																		// contentEl: "desc",
+																		// xtype: 'panel',
+																		title: 'Graph '+statName,//'Graphic_id'+selectionID
+																		name: 'graphic_tab',
+																		// width:mainPanelWidth-15,
+																		// height: mainPanelHeight,
+																		autoScroll: true,
+																		// height: 100,
+																		// autoHeight: true,
+																		// layout: 'fit',
+																		id: 'graphic_tab',
+																		 // html: new Ext.XTemplate(
+																		 // tpl
+																		 // '<div id="grap_tmin_'+selectionID+'" ></div>',
+																		 // '<div id="grap_prec_'+selectionID+'"></div>'
+																		 // ),
+																		 // .apply({value: '2. HTML property of a panel generated by an XTemplate'}),
+																		closable: true,
+																		dockedItems: [
+																			{
+																			xtype: 'toolbar',
+																			items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+																			}
+																		]													
+																	});		
+																	
+																	var t = new Ext.XTemplate(tpl);
+																	Ext.getCmp('graphic_tab').update(t.apply(datatest));
+																	// Ext.getCmp('graphic'+selectionID).update('This<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long');
+																	
+																	Ext.getCmp('mapPanelID').setHeight(0)
+																	Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
+																	// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
+																	tabs.setActiveTab('graphic_tab');
+																	
+																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+																}
+																
+															}, // handler
+														}]
+													},								
+													// {
+														// text : '&#8470;',
+														// dataIndex: 'rowIndex',
+														// flex: 1,
+														// minWidth: 20,
+														// renderer : function(value, metaData, record, rowIndex)
+														// {return rowIndex+1;}
+													// },			
+													{ text: 'code',minWidth: 70,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
+													{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
+													{ text: 'institute',minWidth: 70,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
+													{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
+													
+
+													
+													{ text: 'variables',minWidth: 120,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
+													{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+													
+													// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
+													// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
+													{ text: 'elevation',minWidth: 80,dataIndex: 'elev', flex: 2,tdCls: 'x-change-cell'},
+													{ text: 'category',minWidth: 100,dataIndex: 'category', flex: 3,tdCls: 'x-change-cell'},
+													{ text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3,tdCls: 'x-change-cell'},
+													{ text: 'suspension',minWidth: 80,dataIndex: 'suspension', flex: 3,tdCls: 'x-change-cell'},
+													{ text: 'quality',minWidth: 70,dataIndex: 'quality', flex: 1,tdCls: 'x-change-cell'},									
+													{ text: 'country',minWidth: 80,dataIndex: 'country', flex: 4,tdCls: 'x-change-cell'},
+													{ text: 'state',minWidth: 80,dataIndex: 'state', flex: 4,tdCls: 'x-change-cell'},
+													{ text: 'city',minWidth: 90,dataIndex: 'city', flex: 4,tdCls: 'x-change-cell'}
+													
+												],
+												columnLines: true,
+												stripeRows: true,
+												// margin: '0 0 20 0',
+												selModel: selModel,
+												viewConfig: { 
+													stripeRows: false, 
+													getRowClass: function(record, index, rowParams, stor) {
+													   var c = record.get('copyright');
+													   // return id == '1' ? 'general-rule' : ''; // para desaparecer el check
+														if (c == 'Restricted' || c == 'Request') {
+															return 'price-fall';
+														} 
+													}	
+												},
+												listeners: {
+													beforeselect: function ( row, model, index ) {
+														if ( model.data.copyright == "Restricted" || model.data.copyright == 'Request') {
+															return false;
+														}
+													},
+													selectionchange: function(sm, selections){ // hay problema cuando se selecciona el cursor vuelve a la primera fila
+														// layerTempSel.removeAllFeatures();
+														layerTempSel.destroyFeatures();
+														// gridRegion.down('#numRecordsSelected').setText('Selected: ' + selections.length);
+														feature = layerTempStat.features;
+														for (var i = feature.length - 1; i >= 0; --i) {
+															// for (var j = feature[i].cluster.length - 1; j >= 0; --j) {
+																idall=feature[i].attributes.id;
+																for (var k = selections.length - 1; k >= 0; --k) {
+																	idsel=selections[k].data.id
+																	if(idall==idsel){
+																		// feature[i].layer.styleMap.styles.default.rules[0].symbolizer.externalGraphic="iconosGIS/bloqE_16px.png" 
+																		// layerTempSel.drawFeature(feature[i])
+																		 // mapPanel.map.refresh();	
+																		var point = new OpenLayers.Feature.Vector(
+																			new OpenLayers.Geometry.Point(feature[i].geometry.x, feature[i].geometry.y));	
+																		layerTempSel.addFeatures([point]);
+																		mapPanel.map.setLayerIndex(layerTempSel, 99);
+																	}
+																}												
+															// }											
+														}
+													}												
+												},
+												dockedItems: [
+													{
+													xtype: 'toolbar',
+													items: [{
+														itemId: 'removeButton',
+														text:'Download',
+														tooltip:'Download data',
+														icon   : iconGridDownload,
+														disabled: true,
+														handler: btn_download 
+													},cmbVar/*,{
+														itemId: 'zoomExtentALL',
+														text:'zoomExtentALL',
+														tooltip:'zoomExtent to ALL',
+														icon   : iconGridzoomExtentALL,//iconCls:'add',
+														handler: onZoomExtentALL 
+													}*/,{
+														itemId: 'idExpand',
+														text:'Expand all',
+														tooltip:'Expand all',
+														iconCls:iconGridExpand,
+														handler: expand 
+													},{
+													
+														itemId: 'idstatistic',
+														text:'Statistics',
+														tooltip:'Summary Statistic',
+														icon   : iconGridStatistics,
+														disabled: true,
+														handler: statistics 
+													},{ xtype: 'tbtext', itemId: 'numRecords' },
+													// { xtype: 'tbtext', itemId: 'numRecordsSelected' },
+													{xtype: 'tbfill'},
+													{ 
+														itemId: 'idMaximo',
+														// text:'Maximize',
+														tooltip:'Maximize/Minimize table',
+														icon   : iconGridMaximize,
+														// stretch: false,
+														align: 'right',
+														handler: Maximize,
+													}]
+												}]		
+											});
+
+											gridStatStore.on('load', function(ds){
+												countRow=ds.getTotalCount()
+												if(countRow>=1){
+													// winRegion.show()
+													// Ext.getCmp('gridRegionID').add(gridRegion);
+													// Ext.getCmp('gridRegionID').doLayout();
+													
+													Ext.getCmp('mainTableID').add(gridRegion);
+													gridRegion.down('#numRecords').setText('Records: ' + countRow);
+													// gridRegion.down('#numRecordsSelected').setText('Selected: ' + 0);
+													Ext.getCmp('mainTableID').expand()
+													
+													// Ext.DomHelper.append(document.body, {
+													  // tag: 'iframe',
+													  // id:'downloadIframe',
+													  // frameBorder: 0,
+													  // width: 0,
+													  // height: 0,
+													  // css: 'display:none;visibility:hidden;height: 0px;',
+													  // src: 'php/dowloaddata.php?typedwn=selection&station='+encodeURIComponent(JSON.stringify(selectID))+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())
+													// });									
+													myMask.hide();
+												}else{
+													myMask.hide();
+													Ext.getCmp('mainTableID').collapse()
+													winInfo=Ext.MessageBox.show({
+													   title: 'Information',
+													   msg: 'Not stations found!',
+													   buttons: Ext.MessageBox.OK,
+													   animateTarget: 'info',
+													   icon: 'x-message-box-info'
+													});	
+													winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+												}	
+											});	
+									
+								
+								
+								// ################################################################################################################
+							
+							
+
+
+							} // fin handler boton hover
+
+				funcPupup();
+			}else{
+				funcPupup = function(){
+								// selectControl.control.deactivate();
+								if(Ext.getCmp('gridRegionID')){
+									Ext.getCmp('mainTableID').collapse();
+									Ext.getCmp('gridRegionID').destroy();	
+								}				
+								if(Ext.getCmp('popupID')){
+									Ext.getCmp('popupID').close()
+								}	
+								
+								layerTemp=mapPanel.map.getLayersByName("Search region")[0]
+								if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
+								
+								FindStation=mapPanel.map.getLayersByName("Search station")[0]
+								if(FindStation){FindStation.destroyFeatures();}
+										
+								// loading status
+								var myMask = new Ext.LoadMask(Ext.getCmp('mapPanelID'), {msg:"Please wait..."});
+								myMask.show();
+								
+								selectID=selIds
+						
+								// ##############################################################    TABLA GRID ##################################
+								
+											var gridStatStore = Ext.create('Ext.data.Store', {
+												model: 'modelGridRegion',
+												autoLoad: true,
+												autoSync: true,
+												sorters: { property: 'name', direction : 'ASC' },
+												proxy: {
+													type: 'ajax',
+													url: 'php/Geo_statByregion.php',
+													extraParams: {type:14,listStatSel:Ext.encode(selectID)},	
+													actionMethods: {
+														read: 'POST'
+													},												
+													reader: {
+														type: 'json',
+														root: 'topics'
+													}
+												}
+											});								
+
+											var varstore = Ext.create('Ext.data.Store', {
+												model: 'modelvarList',
+												autoLoad: true,
+												autoSync: true,
+												sorters: { property: 'name', direction : 'ASC' },
+
+												proxy: {
+													type: 'ajax',
+													url: 'php/Geo_statByregion.php',
+													extraParams: {type:15,listStatSel:Ext.encode(selectID)},
+													actionMethods: {
+														read: 'POST'
+													},												
+													reader: {
+														type: 'json',
+														root: 'topics'
+													}
+												},
+												listeners: {
+													 load: function(store, records) {
+														  store.insert(0, [{
+															  id: 0,
+															  name: 'ALL',
+															  acronym: 'ALL'
+															  
+														  }]);
+													 }
+												  }								
+											});	
+											
+											var selModel = Ext.create('Ext.selection.CheckboxModel', {
+												mode: 'SIMPLE',
+												listeners: {
+													selectionchange: function(sm, selections) {
+														gridRegion.down('#removeButton').setDisabled(selections.length === 0);
+														gridRegion.down('#idstatistic').setDisabled(selections.length === 0);
+														
+													}
+												},
+												select: function(records, keepExisting, suppressEvent) {
+													if (Ext.isDefined(records)) {
+														this.doSelect(records, keepExisting, suppressEvent);
+													}
+												},
+												selectAll: function( suppressEvent ) {
+													var me = this,
+														selections = me.store.getRange();
+													countFree=[]
+													for( var key in selections ) {
+														if( selections[key].data.copyright == 'Free'){
+															countFree.push(selections[key].data.copyright)
+														}
+													}
+													
+													if(countFree.length>150){
+														winInfo=Ext.MessageBox.show({
+														   title: 'Information',
+														   msg: 'Exceeds the maximum number (Max. 150) of downloads',
+														   width:300,
+														   buttons: Ext.MessageBox.OK,
+														   animateTarget: 'info',
+														   icon: 'x-message-box-info'
+														});	
+														winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+													}else{
+														var i = 0,
+															len = selections.length,
+															selLen = me.getSelection().length;
+															
+														// if( len != selLen ) {
+														if( selLen==0 ) {
+															me.bulkChange = true;
+															for (; i < len; i++) {
+																me.doSelect(selections[i], true, suppressEvent);
+															}
+															delete me.bulkChange;
+															me.maybeFireSelectionChange(me.getSelection().length !== selLen);
+														}
+														else {
+															me.deselectAll( suppressEvent );
+														}									
+													}
+												} //												
+											});	
+											
+											btn_download = function () {
+												var selection = gridRegion.getView().getSelectionModel().getSelection();//[0];
+												selgrid=new Array()
+												for(var i = 0; i < selection.length; i++) {
+													selgrid.push(Number(selection[i].data.id));
+												}
+												Ext.DomHelper.append(document.body, {
+												  tag: 'iframe',
+												  id:'downloadIframe',
+												  frameBorder: 0,
+												  width: 0,
+												  height: 0,
+												  css: 'display:none;visibility:hidden;height: 0px;',
+												  src: 'php/dowloaddata.php?typedwn=selection&station='+Ext.encode(selgrid)+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())+'&typedwn=selection'
+												});
+											}	
+											onZoomExtentALL = function () {
+												// layerTemp=mapPanel.map.getLayersByName("Search station")[0]
+
+												FeatselectID=[]
+												for (var i = feature.length - 1; i >= 0; --i) {
+													if(feature[i].renderIntent=='select'){
+															sel=feature[i]//.cluster[j]
+															FeatselectID.push(sel)
+													}
+												}
+												console.log(FeatselectID)
+												console.log(FeatselectID[0].geometry.getBounds())
+												var BoundALL = FeatselectID[0].geometry.getBounds();
+												// mapPanel.map.zoomToExtent(BoundALL);								
+												
+											}
+
+											cmbVar= Ext.create('Ext.form.field.ComboBox', { 
+												editable: false, 
+												value: 'ALL',
+												multiSelect: true, 
+												displayField: 'acronym',
+												valueField: 'id', 
+												id:'varCmbID',
+												queryMode: 'local',
+												typeAhead: true,	
+												store: varstore,
+												listConfig: {
+													getInnerTpl: function() {
+														return '<div data-qtip="{name}">{acronym}</div>';
+													}
+												}
+											
+											});		
+											
+											gridRegion = Ext.create('Ext.grid.Panel', {
+												id: 'gridRegionID',
+												border: true,
+												// layout: 'fit',
+												forceFit: true,
+												store: gridStatStore,
+												maxHeight: Ext.getBody().getViewSize().height*0.3,
+												width: mainPanelWidth,
+												// height:273,
+												// maxHeight: mainPanelHeight*0.4,
+												selType: 'checkboxmodel',
+												autoHeight: true,
+												columns: [
+													{
+														xtype: 'actioncolumn',
+														minWidth: 20,
+														flex: 1,
+														items: [{
+															icon   : icons+'buttons/zoomin_off.gif',  // Use a URL in the icon config
+															tooltip: 'zoom extent',
+															handler: function(grid, rowIndex, colIndex) {
+																var rec = gridStatStore.getAt(rowIndex);
+																selectionID = rec.get('id');
+																zoomToStation(selectionID)
+															}
+														}]
+													},		
+													{
+														xtype: 'actioncolumn',
+														minWidth: 20,
+														flex: 1,
+														items: [{
+															icon   : icons+'buttons/pie-chart-graph-icon.png',  // Use a URL in the icon config
+															tooltip: 'Graphic',
+															tooltip: 'Graphic',
+															handler: function(grid, rowIndex, colIndex) {
+																var rec = gridStatStore.getAt(rowIndex);
+																selectionID = rec.get('id');
+																statName = rec.get('name');
+																copyrightN = rec.get('copyright');
+																if (copyrightN == 'Free') {
+																
+																	varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
+																	var arrayvar =new Array() //varlist.split(',');
+
+																	for(var i = 0; i < varstore.getCount(); i++) {
+																		var record = varstore.getAt(i);
+																		id=record.get('id')
+																		acronym=record.get('acronym')
+																		arrayvar.push(acronym)
+																		// console.log(id,acronym)
+																	}
+																	
+																	var datatest = {
+																		name: 'xxx',
+																		rowTitleArr: arrayvar,
+																		colTitleArr: ['a', 'b', 'c']
+																	}
+																	var tpl = [
+																		'<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+																		'<tpl for="rowTitleArr">',
+																		'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+																		'</tpl>'
+																		];	
+
+																	cmbPeriod='cmbPeriod'+selectionID
+																	cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
+																		fieldLabel: 'Select graphic model',
+																		id:'cmbPeriodID',
+																		labelWidth:150,
+																		store: {
+																			fields: ['value','name'], 
+																			data: [ 
+																				{value:1,name: 'Daily'}, 
+																				{value:2,name: 'Monthly'}, 
+																				{value:3,name: 'Yearly'}
+																			]
+																		},
+																		displayField: 'name',
+																		value: 1,
+																		queryMode: 'local',
+																		valueField: 'value', 								
+																		typeAhead: true,
+																		listeners: {
+																			select: function() {
+																				var actTab = tabs.getActiveTab();
+																				var idx = tabs.items.indexOf(actTab);
+																				// actTabId=parseInt((actTab.title).match(/\d+/)[0])
+																				var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
+																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
+
+																			}
+																		}
+																	});	
+																	
+																	btonReturn= new Ext.Button({
+																		pressedCls : 'my-pressed',
+																		overCls : 'my-over',
+																		tooltip: "Return to map",
+																		text:'Return to map',
+																		icon: icons+'map.png', 
+																		scale: 'small',
+																		handler: function(){
+																			tabs.setActiveTab(0);
+																		}													
+																	});	
+																	if(Ext.getCmp('graphic_tab')){
+																		tabs.remove(Ext.getCmp('graphic_tab'), true);
+																	}												
+
+																	tabs.add({
+																		// contentEl: "desc",
+																		// xtype: 'panel',
+																		title: 'Graph '+statName,//'Graphic_id'+selectionID
+																		name: 'graphic_tab',
+																		// width:mainPanelWidth-15,
+																		// height: mainPanelHeight,
+																		autoScroll: true,
+																		// height: 100,
+																		// autoHeight: true,
+																		// layout: 'fit',
+																		id: 'graphic_tab',
+																		 // html: new Ext.XTemplate(
+																		 // tpl
+																		 // '<div id="grap_tmin_'+selectionID+'" ></div>',
+																		 // '<div id="grap_prec_'+selectionID+'"></div>'
+																		 // ),
+																		 // .apply({value: '2. HTML property of a panel generated by an XTemplate'}),
+																		closable: true,
+																		dockedItems: [
+																			{
+																			xtype: 'toolbar',
+																			items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+																			}
+																		]													
+																	});		
+																	
+																	var t = new Ext.XTemplate(tpl);
+																	Ext.getCmp('graphic_tab').update(t.apply(datatest));
+																	// Ext.getCmp('graphic'+selectionID).update('This<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long');
+																	
+																	Ext.getCmp('mapPanelID').setHeight(0)
+																	Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
+																	// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
+																	tabs.setActiveTab('graphic_tab');
+																	
+																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+																}
+																
+															}, // handler
+															
+														}]
+													},								
+													// {
+														// text : '&#8470;',
+														// dataIndex: 'rowIndex',
+														// flex: 1,
+														// minWidth: 20,
+														// renderer : function(value, metaData, record, rowIndex)
+														// {return rowIndex+1;}
+													// },			
+													{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
+													{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
+													{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
+													{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
+													{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
+													
+													// { text: 'category',minWidth: 100,dataIndex: 'category', flex: 4},
+
+													// { text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3},
+													// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
+													
+													{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
+													{ text: 'download',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+													
+													// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
+													// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
+													// { text: 'elev',minWidth: 80,dataIndex: 'elev', flex: 2},
+													// { text: 'country',minWidth: 80,dataIndex: 'country', flex: 4},
+													// { text: 'state',minWidth: 80,dataIndex: 'state', flex: 4},
+													// { text: 'city',minWidth: 90,dataIndex: 'city', flex: 4}
+													
+												],
+												columnLines: true,
+												plugins: [{
+													ptype: 'rowexpander',
+													pluginId: 'rowexpanderID',
+													selectRowOnExpand: true,			
+													rowBodyTpl : new Ext.XTemplate(
+														'<p><b>category:</b> {category} | <b>instalation:</b> {instalation} ', //&#x2016; doble linea vertical
+														'| <b>quality:</b> {quality} ',
+														'| <b>lon:</b> {lon} ',
+														'| <b>lat:</b> {lat} ',
+														'| <b>elev:</b> {elev} </p>',
+														'<p><b>country:</b> {country} ',
+														'| <b>state:</b> {state} ',
+														'| <b>city:</b> {city}</p> ',
+														'<div id="myrow-{id}" ></div>'
+													),		
+													expandOnRender: true,
+													expandOnDblClick: false		
+										
+												}],							
+
+												stripeRows: true,
+												// margin: '0 0 20 0',
+												selModel: selModel,
+												viewConfig: { 
+													stripeRows: false, 
+													getRowClass: function(record, index, rowParams, stor) {
+													   var c = record.get('copyright');
+													   // return id == '1' ? 'general-rule' : ''; // para desaparecer el check
+														if (c == 'Restricted' || c == 'Request') {
+															return 'price-fall';
+														} 
+													}	
+												},
+												listeners: {
+													beforeselect: function ( row, model, index ) {
+														if ( model.data.copyright == "Restricted" || model.data.copyright == 'Request') {
+															return false;
+														}
+													},
+													selectionchange: function(sm, selections){ // hay problema cuando se selecciona el cursor vuelve a la primera fila
+														// layerTempSel.removeAllFeatures();
+														layerTempSel.destroyFeatures();
+														// gridRegion.down('#numRecordsSelected').setText('Selected: ' + selections.length);
+														feature = layerTempStat.features;
+														for (var i = feature.length - 1; i >= 0; --i) {
+															// for (var j = feature[i].cluster.length - 1; j >= 0; --j) {
+																idall=feature[i].attributes.id;
+																for (var k = selections.length - 1; k >= 0; --k) {
+																	idsel=selections[k].data.id
+																	if(idall==idsel){
+																		// feature[i].layer.styleMap.styles.default.rules[0].symbolizer.externalGraphic="iconosGIS/bloqE_16px.png" 
+																		// layerTempSel.drawFeature(feature[i])
+																		 // mapPanel.map.refresh();	
+																		var point = new OpenLayers.Feature.Vector(
+																			new OpenLayers.Geometry.Point(feature[i].geometry.x, feature[i].geometry.y));	
+																		layerTempSel.addFeatures([point]);
+																		mapPanel.map.setLayerIndex(layerTempSel, 99);
+																	}
+																}												
+															// }											
+														}
+													}												
+												},
+												dockedItems: [
+													{
+													xtype: 'toolbar',
+													items: [{
+														itemId: 'removeButton',
+														text:'Download',
+														tooltip:'Download data',
+														icon   : iconGridDownload,
+														disabled: true,
+														handler: btn_download 
+													},cmbVar/*,{
+														itemId: 'zoomExtentALL',
+														text:'zoomExtentALL',
+														tooltip:'zoomExtent to ALL',
+														icon   : iconGridzoomExtentALL,//iconCls:'add',
+														handler: onZoomExtentALL 
+													}*/,{
+														itemId: 'idExpand',
+														text:'Expand all',
+														tooltip:'Expand all',
+														iconCls:iconGridExpand,
+														handler: expand 
+													},{
+													
+														itemId: 'idstatistic',
+														text:'Statistics',
+														tooltip:'Summary Statistic',
+														icon   : iconGridStatistics,
+														disabled: true,
+														handler: statistics 
+													},{ xtype: 'tbtext', itemId: 'numRecords' },
+													// { xtype: 'tbtext', itemId: 'numRecordsSelected' },
+													{xtype: 'tbfill'},
+													{ 
+														itemId: 'idMaximo',
+														// text:'Maximize',
+														tooltip:'Maximize/Minimize table',
+														icon   : iconGridMaximize,
+														// stretch: false,
+														align: 'right',
+														handler: Maximize,
+													}]
+												}]		
+											});
+
+											// para el mostrar el grid de variables cuando se da en el boton expandir
+											Ext.getCmp('gridRegionID').getView().on('expandbody', function(rowNode, record, expandbody,eNode){
+
+												var dynamicStore  //the new store for the nested grid.
+												var row = "myrow-" + record.get("id");
+												var id2 = "mygrid-" + record.get("id");  
+												row2 = Ext.get(rowNode);
+												
+												var store = Ext.create('Ext.data.Store', {
+													model: 'modelGridVar',
+													autoSync: true,
+													storeId: 'store2',
+													proxy: {
+														type: 'ajax', 
+														url: 'php/Geo_statByregion.php',
+														extraParams: {
+															idstat: record.get("id"),type:17
+														},
+														actionMethods: {
+															read: 'POST'
+														},													
+														reader: {
+															type: 'json',
+															root: 'topics'
+														}
+													},
+													autoLoad: true// {callback: initData}
+												});
+													  
+												var grid = Ext.create('Ext.grid.Panel', {
+													// hideHeaders: true,
+													border: false,
+													height:100,
+													layout: 'fit',
+													// width:500,
+													autoWidth:true,
+													id: id2,
+													columns: [
+														{ text: 'name',dataIndex: 'name'},
+														{ text: 'acronym',dataIndex: 'acronym'},
+														{ text: 'date_start',dataIndex: 'date_start'},
+														{ text: 'date_end',dataIndex: 'date_end'},
+														{ text: 'age',dataIndex: 'age',autoSizeColumn: true}],
+													store: store,
+													viewConfig: {
+														listeners: {
+															refresh: function(dataview) {
+																Ext.each(dataview.panel.columns, function(column) {
+																	if (column.autoSizeColumn === true)
+																		column.autoSize();
+																})
+															}
+														}
+													}	
+												});
+												
+											   grid.render(row)
+												grid.getEl().swallowEvent([ 'mouseover', 'mousedown', 'click', 'dblclick' ]);
+												// grid.on('itemclick', function(view) {
+													// Ext.getCmp('gridRegionID').getView().getSelectionModel().deselectAll();
+												// });
+												
+													
+											});	
+											gridRegion.getView().on('collapsebody', function(rowNode, record, eNode) {
+												var row = "myrow-" + record.get("id");
+												var id2 = "mygrid-" + record.get("id");  
+												// Ext.getCmp(id2).getStore().removeAll();
+												$('#'+row).empty();
+												// Ext.get(rowNode).down('#'+row).down('div').destroy();
+											});
+
+											gridStatStore.on('load', function(ds){
+												countRow=ds.getTotalCount()
+												if(countRow>=1){
+													// winRegion.show()
+													// Ext.getCmp('gridRegionID').add(gridRegion);
+													// Ext.getCmp('gridRegionID').doLayout();
+													
+													Ext.getCmp('mainTableID').add(gridRegion);
+													gridRegion.down('#numRecords').setText('Records: ' + countRow);
+													// gridRegion.down('#numRecordsSelected').setText('Selected: ' + 0);
+													Ext.getCmp('mainTableID').expand()
+													
+													// Ext.DomHelper.append(document.body, {
+													  // tag: 'iframe',
+													  // id:'downloadIframe',
+													  // frameBorder: 0,
+													  // width: 0,
+													  // height: 0,
+													  // css: 'display:none;visibility:hidden;height: 0px;',
+													  // src: 'php/dowloaddata.php?typedwn=selection&station='+encodeURIComponent(JSON.stringify(selectID))+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())
+													// });									
+													myMask.hide();
+												}else{
+													myMask.hide();
+													Ext.getCmp('mainTableID').collapse()
+													winInfo=Ext.MessageBox.show({
+													   title: 'Information',
+													   msg: 'Not stations found!',
+													   buttons: Ext.MessageBox.OK,
+													   animateTarget: 'info',
+													   icon: 'x-message-box-info'
+													});	
+													winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+												}	
+											});	
+									
+								
+								
+								// ################################################################################################################
+							
+							
+
+
+							} // fin handler boton hover
+
+				funcPupup();
+			}				
+			
+
+		
+		}	
+
+        function onFeatureUnselectClick(feature) {
+			// selectClick.control.unselectAll();
+			if(Ext.getCmp('gridRegionID')){
+				Ext.getCmp('mainTableID').collapse();
+				Ext.getCmp('gridRegionID').destroy();	
+			}			
+        } 		
+
 		var selectHover = new OpenLayers.Control.SelectFeature(
 			clusters, {
 				hover: true,
 				onSelect: onFeatureSelect1
 			}//, renderIntent: styleHoverNull}
 		);
+
+		var selectClick = new OpenLayers.Control.SelectFeature(
+			clusters, {
+				clickout: true, toggle: false,
+				multiple: false, hover: false,
+				toggleKey: "ctrlKey", // ctrl key removes from selection
+				multipleKey: "shiftKey", // shift key adds to selection
+				onSelect: onFeatureSelect1Click,
+				onUnselect: onFeatureUnselectClick
+			}//, renderIntent: styleHoverNull}
+		);	
+		
+		mapPanel.map.addControl(selectClick);
+		selectClick.activate();
 		
 		mapPanel.map.addControl(selectHover);
 		selectHover.activate();
@@ -6872,13 +7784,13 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 				getWin.destroy();
 			} 	
 			
-			selectControl.control.unselectAll();
-			selectControl.control.deactivate();
+			// selectControl.control.unselectAll();
+			// selectControl.control.deactivate();
 			// selectHover.activate();
-			if(Ext.getCmp('gridRegionID')){
-				Ext.getCmp('mainTableID').collapse();
-				Ext.getCmp('gridRegionID').destroy();	
-			}
+			// if(Ext.getCmp('gridRegionID')){
+				// Ext.getCmp('mainTableID').collapse();
+				// Ext.getCmp('gridRegionID').destroy();	
+			// }
 			
 			// layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 			if(layerTempRegion){layerTempRegion.removeAllFeatures()}			
@@ -6887,8 +7799,9 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 			layerTempSel.destroyFeatures()
 		 }
 		}});
-		mapPanel.map.addControl(oClickClose)
-		oClickClose.activate();		
+		
+		// mapPanel.map.addControl(oClickClose)
+		// oClickClose.activate();		
 // ############################################## FIN POPUP IDENTIFY ##############################################################################################################		
 	
 		var ctrl, toolbarItems = [], action, actions = {};	            
@@ -6945,8 +7858,13 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 				if(pressed==true){
 					selectHover.activate();
 				}else{
+					layerTempSel.destroyFeatures();
 					selectHover.deactivate();
 					vectorHover.removeAllFeatures();
+					if(Ext.getCmp('gridRegionID')){
+						Ext.getCmp('mainTableID').collapse();
+						Ext.getCmp('gridRegionID').destroy();	
+					}					
 				}			
                 // console.log('toggle', btn.text, pressed);
             }			
@@ -7862,6 +8780,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 			toggleHandler: function(btn, pressed){
 				if(pressed==false){
 					// selectControl.control.unselectAll();
+					layerTempSel.destroyFeatures();
 					if(Ext.getCmp('popupID')){
 						Ext.getCmp('popupID').close()
 					}					
@@ -7889,6 +8808,10 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 		function onStart(ev){
 		}
 		function onAdded(ev){
+			if(Ext.getCmp('gridRegionID')){
+				Ext.getCmp('mainTableID').collapse();
+				Ext.getCmp('gridRegionID').destroy();	
+			}			
 			var pops = mapPanel.map.popups;
 			if(pops){
 				pops[0].destroy()
@@ -8012,7 +8935,6 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 									}
 									
 									if(countFree.length>150){
-										Ext.getCmp('mainTableID').collapse()
 										winInfo=Ext.MessageBox.show({
 										   title: 'Information',
 										   msg: 'Exceeds the maximum number (Max. 150) of downloads',
@@ -8164,97 +9086,117 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 												var rec = gridStatStore.getAt(rowIndex);
 												selectionID = rec.get('id');
 												statName = rec.get('name');
+												copyrightN = rec.get('copyright');
+												if (copyrightN == 'Free') {
 												
-												varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
-												var arrayvar =new Array() //varlist.split(',');
+													varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
+													var arrayvar =new Array() //varlist.split(',');
 
-												for(var i = 0; i < varstore.getCount(); i++) {
-													var record = varstore.getAt(i);
-													id=record.get('id')
-													acronym=record.get('acronym')
-													arrayvar.push(acronym)
-													// console.log(id,acronym)
-												}
-												
-												var datatest = {
-													name: 'xxx',
-													rowTitleArr: arrayvar,
-													colTitleArr: ['a', 'b', 'c']
-												}
-												var tpl = [
-													'<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-													'<tpl for="rowTitleArr">',
-													'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-													'</tpl>'
-												];	
-
-												cmbPeriod='cmbPeriod'+selectionID
-												cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
-													fieldLabel: 'Select graphic model',
-													id:'cmbPeriodID',
-													labelWidth:150,
-													store: {
-														fields: ['value','name'], 
-														data: [ 
-															{value:1,name: 'Daily'}, 
-															{value:2,name: 'Monthly'}, 
-															{value:3,name: 'Yearly'}
-														]
-													},
-													displayField: 'name',
-													value: 1,
-													queryMode: 'local',
-													valueField: 'value', 								
-													typeAhead: true,
-													listeners: {
-														select: function() {
-															var actTab = tabs.getActiveTab();
-															var idx = tabs.items.indexOf(actTab);
-															// actTabId=parseInt((actTab.title).match(/\d+/)[0])
-															var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
-															generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
-
-														}
+													for(var i = 0; i < varstore.getCount(); i++) {
+														var record = varstore.getAt(i);
+														id=record.get('id')
+														acronym=record.get('acronym')
+														arrayvar.push(acronym)
+														// console.log(id,acronym)
 													}
-												});		
+													
+													var datatest = {
+														name: 'xxx',
+														rowTitleArr: arrayvar,
+														colTitleArr: ['a', 'b', 'c']
+													}
+													var tpl = [
+														'<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+														'<tpl for="rowTitleArr">',
+														'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+														'</tpl>'
+														];	
 
-												btonReturn= new Ext.Button({
-													pressedCls : 'my-pressed',
-													overCls : 'my-over',
-													tooltip: "Return to map",
-													text:'Return to map',
-													icon: icons+'map.png', 
-													scale: 'small',
-													handler: function(){
-														tabs.setActiveTab(0);
-													}													
-												});	
-												if(Ext.getCmp('graphic_tab')){
-													tabs.remove(Ext.getCmp('graphic_tab'), true);
-												}												
+													cmbPeriod='cmbPeriod'+selectionID
+													cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
+														fieldLabel: 'Select graphic model',
+														id:'cmbPeriodID',
+														labelWidth:150,
+														store: {
+															fields: ['value','name'], 
+															data: [ 
+																{value:1,name: 'Daily'}, 
+																{value:2,name: 'Monthly'}, 
+																{value:3,name: 'Yearly'}
+															]
+														},
+														displayField: 'name',
+														value: 1,
+														queryMode: 'local',
+														valueField: 'value', 								
+														typeAhead: true,
+														listeners: {
+															select: function() {
+																var actTab = tabs.getActiveTab();
+																var idx = tabs.items.indexOf(actTab);
+																// actTabId=parseInt((actTab.title).match(/\d+/)[0])
+																var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
+																generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
 
-												tabs.add({
-													title: 'Graph '+statName,//'Graphic_id'+selectionID
-													name: 'graphic_tab',
-													autoScroll: true,
-													id: 'graphic_tab',
-													closable: true,
-													dockedItems: [
-														{
-														xtype: 'toolbar',
-														items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+															}
 														}
-													]													
-												});		
+													});	
+													
+													btonReturn= new Ext.Button({
+														pressedCls : 'my-pressed',
+														overCls : 'my-over',
+														tooltip: "Return to map",
+														text:'Return to map',
+														icon: icons+'map.png', 
+														scale: 'small',
+														handler: function(){
+															tabs.setActiveTab(0);
+														}													
+													});	
+													if(Ext.getCmp('graphic_tab')){
+														tabs.remove(Ext.getCmp('graphic_tab'), true);
+													}												
+
+													tabs.add({
+														// contentEl: "desc",
+														// xtype: 'panel',
+														title: 'Graph '+statName,//'Graphic_id'+selectionID
+														name: 'graphic_tab',
+														// width:mainPanelWidth-15,
+														// height: mainPanelHeight,
+														autoScroll: true,
+														// height: 100,
+														// autoHeight: true,
+														// layout: 'fit',
+														id: 'graphic_tab',
+														 // html: new Ext.XTemplate(
+														 // tpl
+														 // '<div id="grap_tmin_'+selectionID+'" ></div>',
+														 // '<div id="grap_prec_'+selectionID+'"></div>'
+														 // ),
+														 // .apply({value: '2. HTML property of a panel generated by an XTemplate'}),
+														closable: true,
+														dockedItems: [
+															{
+															xtype: 'toolbar',
+															items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+															}
+														]													
+													});		
+													
+													var t = new Ext.XTemplate(tpl);
+													Ext.getCmp('graphic_tab').update(t.apply(datatest));
+													// Ext.getCmp('graphic'+selectionID).update('This<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long<br/>is<br/>extra<br/>extra<br/>extra<br/>extra<br/>long');
+													
+													Ext.getCmp('mapPanelID').setHeight(0)
+													Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
+													// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
+													tabs.setActiveTab('graphic_tab');
+													
+													generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+												}
 												
-												var t = new Ext.XTemplate(tpl);
-												Ext.getCmp('graphic_tab').update(t.apply(datatest));
-												Ext.getCmp('mapPanelID').setHeight(0)
-												Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
-												tabs.setActiveTab('graphic_tab');												
-												
-												generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
-											} // handler
+											}, // handler											
 										}]
 									},								
 									// {
@@ -8264,20 +9206,27 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 										// minWidth: 20,
 										// renderer : function(value, metaData, record, rowIndex)
 										// {return rowIndex+1;}
-									// },			
-									{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
-									{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
-									{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
-									{ text: 'institute',minWidth: 50,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
-									{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
-									
-									// { text: 'category',minWidth: 100,dataIndex: 'category', flex: 4},
+										// },			
+										{ text: 'code',minWidth: 70,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
+										{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
+										{ text: 'institute',minWidth: 70,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
+										{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
+										
 
-									// { text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3},
-									// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
-									
-									{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-									{ text: 'status',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+										
+										{ text: 'variables',minWidth: 120,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
+										{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+										
+										// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
+										// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
+										{ text: 'elevation',minWidth: 80,dataIndex: 'elev', flex: 2,tdCls: 'x-change-cell'},
+										{ text: 'category',minWidth: 100,dataIndex: 'category', flex: 3,tdCls: 'x-change-cell'},
+										{ text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3,tdCls: 'x-change-cell'},
+										{ text: 'suspension',minWidth: 80,dataIndex: 'suspension', flex: 3,tdCls: 'x-change-cell'},
+										{ text: 'quality',minWidth: 70,dataIndex: 'quality', flex: 1,tdCls: 'x-change-cell'},									
+										{ text: 'country',minWidth: 80,dataIndex: 'country', flex: 4,tdCls: 'x-change-cell'},
+										{ text: 'state',minWidth: 80,dataIndex: 'state', flex: 4,tdCls: 'x-change-cell'},
+										{ text: 'city',minWidth: 90,dataIndex: 'city', flex: 4,tdCls: 'x-change-cell'}
 									
 									// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 									// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
@@ -8288,25 +9237,25 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 									
 								],
 								columnLines: true,
-								plugins: [{
-									ptype: 'rowexpander',
-									pluginId: 'rowexpanderID',
-									selectRowOnExpand: true,			
-									rowBodyTpl : new Ext.XTemplate(
-										'<p><b>category:</b> {category} | <b>instalation:</b> {instalation} ', //&#x2016; doble linea vertical
-										'| <b>quality:</b> {quality} ',
-										'| <b>lon:</b> {lon} ',
-										'| <b>lat:</b> {lat} ',
-										'| <b>elev:</b> {elev} </p>',
-										'<p><b>country:</b> {country} ',
-										'| <b>state:</b> {state} ',
-										'| <b>city:</b> {city}</p> ',
-										'<div id="myrow-{id}" ></div>'
-									),		
-									expandOnRender: true,
-									expandOnDblClick: false		
+								// plugins: [{
+									// ptype: 'rowexpander',
+									// pluginId: 'rowexpanderID',
+									// selectRowOnExpand: true,			
+									// rowBodyTpl : new Ext.XTemplate(
+										// '<p><b>category:</b> {category} | <b>instalation:</b> {instalation} ', //&#x2016; doble linea vertical
+										// '| <b>quality:</b> {quality} ',
+										// '| <b>lon:</b> {lon} ',
+										// '| <b>lat:</b> {lat} ',
+										// '| <b>elev:</b> {elev} </p>',
+										// '<p><b>country:</b> {country} ',
+										// '| <b>state:</b> {state} ',
+										// '| <b>city:</b> {city}</p> ',
+										// '<div id="myrow-{id}" ></div>'
+									// ),		
+									// expandOnRender: true,
+									// expandOnDblClick: false		
 						
-								}],							
+								// }],							
 
 								stripeRows: true,
 								// margin: '0 0 20 0',
@@ -8396,97 +9345,6 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 								}]		
 							});
 		
-							// para el mostrar el grid de variables cuando se da en el boton expandir
-							Ext.getCmp('gridRegionID').getView().on('expandbody', function(rowNode, record, expandbody,eNode){
-
-								var dynamicStore  //the new store for the nested grid.
-								var row = "myrow-" + record.get("id");
-								var id2 = "mygrid-" + record.get("id");  
-								row2 = Ext.get(rowNode);
-								
-								var store = Ext.create('Ext.data.Store', {
-									model: 'modelGridVar',
-									autoSync: true,
-									storeId: 'store2',
-									proxy: {
-										type: 'ajax', 
-										url: 'php/Geo_statByregion.php',
-										extraParams: {
-											idstat: record.get("id"),type:17
-										},
-										reader: {
-											type: 'json',
-											root: 'topics'
-										}
-									},
-									autoLoad: true// {callback: initData}
-								});
-									  
-								var grid = Ext.create('Ext.grid.Panel', {
-									// hideHeaders: true,
-									border: false,
-									height:100,
-									layout: 'fit',
-									// width:500,
-									autoWidth:true,
-									id: id2,
-									columns: [{
-											xtype: 'actioncolumn',
-											// flex: 0,
-											width: 150,
-											autoSizeColumn: true,
-											items: [{
-												icon   : icons+'buttons/download_off.gif',  // Use a URL in the icon config
-												tooltip: 'zoom extent2',
-												handler: function(grid, rowIndex, colIndex) {
-													var rec = store.getAt(rowIndex);
-													idstat=rec.get('idstat')
-													idvar=rec.get('idvar')
-													Ext.DomHelper.append(document.body, {
-													  tag: 'iframe',
-													  id:'downloadIframe',
-													  frameBorder: 0,
-													  width: 0,
-													  height: 0,
-													  css: 'display:none;visibility:hidden;height: 0px;',
-													  src: 'php/dowloaddata.php?typedwn=selection&station='+Ext.encode([idstat])+'&'+'variable='+Ext.encode([idvar])
-													});
-												
-												}
-											}]
-										},{ text: 'name',dataIndex: 'name'},
-										{ text: 'acronym',dataIndex: 'acronym'},
-										{ text: 'date_start',dataIndex: 'date_start'},
-										{ text: 'date_end',dataIndex: 'date_end'},
-										{ text: 'age',dataIndex: 'age',autoSizeColumn: true}],
-									store: store,
-									viewConfig: {
-										listeners: {
-											refresh: function(dataview) {
-												Ext.each(dataview.panel.columns, function(column) {
-													if (column.autoSizeColumn === true)
-														column.autoSize();
-												})
-											}
-										}
-									}	
-								});
-								
-							   grid.render(row)
-								grid.getEl().swallowEvent([ 'mouseover', 'mousedown', 'click', 'dblclick' ]);
-								// grid.on('itemclick', function(view) {
-									// Ext.getCmp('gridRegionID').getView().getSelectionModel().deselectAll();
-								// });
-								
-									
-							});	
-							gridRegion.getView().on('collapsebody', function(rowNode, record, eNode) {
-								var row = "myrow-" + record.get("id");
-								var id2 = "mygrid-" + record.get("id");  
-								// Ext.getCmp(id2).getStore().removeAll();
-								$('#'+row).empty();
-								// Ext.get(rowNode).down('#'+row).down('div').destroy();
-							});
 
 							gridStatStore.on('load', function(ds){
 								countRow=ds.getTotalCount()
@@ -8565,7 +9423,7 @@ Ext.define('MyApp.ux.DisableCheckColumn', {
 					// selectHover.deactivate();
 				}else{
 					// selectHover.activate();
-					selectControl.control.unselectAll();					
+					selectControl.control.unselectAll();
 				}
 				
 			},
