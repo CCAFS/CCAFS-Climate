@@ -1153,6 +1153,17 @@ Ext.application({
 					}
 				}
 			});	
+			btonReturn= new Ext.Button({
+				pressedCls : 'my-pressed',
+				overCls : 'my-over',
+				tooltip: "Return to map",
+				text:'Return to map',
+				icon: icons+'map.png', 
+				scale: 'small',
+				handler: function(){
+					tabs.setActiveTab(0);
+				}													
+			});			
 			gridStatistic = Ext.create('Ext.grid.Panel', {
 				id: 'gridStatisticID',
 				border: true,
@@ -1184,7 +1195,8 @@ Ext.application({
 					{ text: 'na&#37;',minWidth: 60,dataIndex: 'na_per', flex: 2}
 				],
 				columnLines: true,
-				stripeRows: true
+				stripeRows: true,
+				dockedItems: [{xtype: 'toolbar',items: [{xtype: 'tbfill'},btonReturn]}]
 			});
 			if(!Ext.getCmp('statisticsID')){
 				tabs.add({
@@ -3622,7 +3634,8 @@ Ext.application({
 		data: [ 
 			{"id":"1","name": 'Age'}, 
 			{"id":"2","name": 'Variables'}, 
-			{"id":"3","name": 'Status'}, 
+			{"id":"3","name": 'Download'}, 
+			{"id":"13","name": 'Status'}, 
 			{"id":"4","name": 'Elevation'}, 
 			// {"id":"5","name": 'Coordinates'}, 
 			{"id":"6","name": 'Institute'},
@@ -4137,26 +4150,19 @@ Ext.application({
 												  src: 'php/dowloaddata.php?typedwn=selection&station='+Ext.encode(selgrid)+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+Ext.encode(cmbVar.getValue())+'&typedwn=selection'
 												});
 											}	
-											onZoomExtentALL = function () {
-												// layerTemp=mapPanel.map.getLayersByName("Search station")[0]
-
-												FeatselectID=[]
-												for (var i = feature.length - 1; i >= 0; --i) {
-													if(feature[i].renderIntent=='select'){
-														// console.log(clusters.selectedFeatures.indexOf(feature[i]))
-														// for (var j = feature[i].cluster.length - 1; j >= 0; --j) {
-															sel=feature[i]//.cluster[j]
-															FeatselectID.push(sel)
-														// }
-													}
-												}
+											// onZoomExtentALL = function () {
+												// FeatselectID=[]
+												// for (var i = feature.length - 1; i >= 0; --i) {
+													// if(feature[i].renderIntent=='select'){
+															// sel=feature[i]//.cluster[j]
+															// FeatselectID.push(sel)
+													// }
+												// }
 										
-												// var BoundALL = FeatselectID.getDataExtent();
-												var BoundALL = FeatselectID.getExtent();
-												// var BoundALL = FeatselectID.getSource().getExtent();;
-												mapPanel.map.zoomToExtent(BoundALL);								
+												// var BoundALL = FeatselectID.getExtent();
+												// mapPanel.map.zoomToExtent(BoundALL);								
 												
-											}
+											// }
 
 											cmbVar= Ext.create('Ext.form.field.ComboBox', { 
 												editable: false, 
@@ -4455,19 +4461,19 @@ Ext.application({
 														icon   : iconGridDownload,
 														disabled: true,
 														handler: btn_download 
-													},cmbVar/*{
+													},cmbVar,{
 														itemId: 'zoomExtentALL',
 														text:'zoomExtentALL',
 														tooltip:'zoomExtent to ALL',
 														icon   : iconGridzoomExtentALL,//iconCls:'add',
 														handler: onZoomExtentALL 
-													}*/,{
+													}/*,{
 														itemId: 'idExpand',
 														text:'Expand all',
 														tooltip:'Expand all',
 														iconCls:iconGridExpand,
 														handler: expand 
-													},{
+													}*/,{
 													
 														itemId: 'idstatistic',
 														text:'Statistics',
@@ -7800,8 +7806,8 @@ Ext.application({
 		 }
 		}});
 		
-		// mapPanel.map.addControl(oClickClose)
-		// oClickClose.activate();		
+		mapPanel.map.addControl(oClickClose)
+		oClickClose.activate();		
 // ############################################## FIN POPUP IDENTIFY ##############################################################################################################		
 	
 		var ctrl, toolbarItems = [], action, actions = {};	            
@@ -8781,10 +8787,6 @@ Ext.application({
 				if(pressed==false){
 					// selectControl.control.unselectAll();
 					layerTempSel.destroyFeatures();
-					if(Ext.getCmp('popupID')){
-						Ext.getCmp('popupID').close()
-					}					
-					
 					var pops = mapPanel.map.popups;
 					if(pops[0]){
 						pops[0].destroy()
@@ -8800,7 +8802,11 @@ Ext.application({
 					
 					layerTempStat=mapPanel.map.getLayersByName("Search station")[0]
 					if(layerTempStat){mapPanel.map.removeLayer(layerTempStat);}						
-				}			
+				}else{
+					if(Ext.getCmp('popupID')){
+						Ext.getCmp('popupID').close()
+					}				
+				}		
             }			
 		});
 		polygonDraw.events.register('featureadded',polygonDraw, onAdded);
@@ -8811,6 +8817,9 @@ Ext.application({
 			if(Ext.getCmp('gridRegionID')){
 				Ext.getCmp('mainTableID').collapse();
 				Ext.getCmp('gridRegionID').destroy();	
+			}	
+			if(Ext.getCmp('popupID')){
+				Ext.getCmp('popupID').close()
 			}			
 			var pops = mapPanel.map.popups;
 			if(pops){

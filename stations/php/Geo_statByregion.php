@@ -950,8 +950,11 @@ if($type==18){
 		// $sql_tabla ="SELECT id, name,acronym FROM station_variable;";	
 		$sql_tabla ="select v.id, v.acronym as name from geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) group by v.id;";	
 	}
-	if($idCond==3){ // status
+	if($idCond==3){ // download
 		$sql_tabla ="SELECT id, name FROM station_copyright;";	
+	}	
+	if($idCond==13){ // status
+		$sql_tabla ="SELECT id, name FROM station_status;";	
 	}
 	if($idCond==6){ // Institute
 		$sql_tabla ="SELECT id, name FROM station_institute;";	
@@ -974,7 +977,7 @@ if($type==18){
 	if($idCond==12){ // Municipality
 		$sql_tabla ="SELECT id_2 as id, name_2 as name FROM gadm_lev2 group by id_2,name_2 order by name_2 ASC;";	
 	}
-	// if($idCond==13){ // timespet
+	// if($idCond==14){ // timespet
 		// $sql_tabla ="SELECT id, name FROM station_time_step;";	
 	// }
 	
@@ -1082,10 +1085,13 @@ if($type==19){
 			}
 			if($xc[$i][0]==12){
 				array_push($sqltemp,"s.city".$xc[$i][1]." ".$xc[$i][2]);
-			}		
+			}	
+			if($xc[$i][0]==13){
+				array_push($sqltemp,"sta.id".$xc[$i][1]." ".$xc[$i][2]);
+			}			
 	}
 	
-	$sql_tabla1="SELECT s.id,st_asgeojson(s.geom) FROM station_file as f JOIN geostation as s ON (f.station_id=s.id) JOIN station_copyright as st ON (s.copyrigth=st.id)".
+	$sql_tabla1="SELECT s.id,st_asgeojson(s.geom) FROM station_file as f JOIN geostation as s ON (f.station_id=s.id) JOIN station_copyright as st ON (s.copyrigth=st.id) JOIN station_status as sta ON (s.status=sta.id)".
 	"JOIN station_institute as i ON (s.institute=i.id) JOIN station_variable as v ON (f.station_variable_id=v.id)".
 	"JOIN station_time_step as a ON (f.station_time_step_id=a.id) JOIN station_ctrl_quality as q ON (f.station_ctrl_quality_id=q.id)".
 	"JOIN station_category as c ON (s.category=c.id) JOIN station_type as t ON (s.type=t.id) where ".implode(" ".$typeCon." ",$sqltemp).' group by s.id;';
