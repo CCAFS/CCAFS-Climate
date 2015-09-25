@@ -7793,15 +7793,15 @@ Ext.application({
 			// selectControl.control.unselectAll();
 			// selectControl.control.deactivate();
 			// selectHover.activate();
-			if(Ext.getCmp('gridRegionID')){
-				Ext.getCmp('mainTableID').collapse();
-				Ext.getCmp('gridRegionID').destroy();	
-			}
+			// if(Ext.getCmp('gridRegionID')){
+				// Ext.getCmp('mainTableID').collapse();
+				// Ext.getCmp('gridRegionID').destroy();	
+			// }
 			
 			// layerTemp=mapPanel.map.getLayersByName("Search region")[0]
-			if(layerTempRegion){layerTempRegion.removeAllFeatures()}			
+			// if(layerTempRegion){layerTempRegion.removeAllFeatures()}			
 			// layerTempStat=mapPanel.map.getLayersByName("Search station")[0]
-			if(layerTempStat){layerTempStat.removeAllFeatures()}			
+			// if(layerTempStat){layerTempStat.removeAllFeatures()}			
 			layerTempSel.destroyFeatures()
 		 }
 		}});
