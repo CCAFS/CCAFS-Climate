@@ -3633,7 +3633,7 @@ Ext.application({
 		fields: ['id','name'], 
 		data: [ 
 			{"id":"1","name": 'Age'}, 
-			{"id":"2","name": 'Variables'}, 
+			{"id":"2","name": 'Variable'}, 
 			{"id":"3","name": 'Download'}, 
 			{"id":"13","name": 'Status'}, 
 			{"id":"4","name": 'Elevation'}, 
@@ -4509,7 +4509,7 @@ Ext.application({
 													
 													var bounds = layerTemp.getDataExtent();
 													if(bounds){mapPanel.map.zoomToExtent(bounds);}
-													
+								
 													// Ext.DomHelper.append(document.body, {
 													  // tag: 'iframe',
 													  // id:'downloadIframe',
@@ -7793,10 +7793,10 @@ Ext.application({
 			// selectControl.control.unselectAll();
 			// selectControl.control.deactivate();
 			// selectHover.activate();
-			// if(Ext.getCmp('gridRegionID')){
-				// Ext.getCmp('mainTableID').collapse();
-				// Ext.getCmp('gridRegionID').destroy();	
-			// }
+			if(Ext.getCmp('gridRegionID')){
+				Ext.getCmp('mainTableID').collapse();
+				Ext.getCmp('gridRegionID').destroy();	
+			}
 			
 			// layerTemp=mapPanel.map.getLayersByName("Search region")[0]
 			if(layerTempRegion){layerTempRegion.removeAllFeatures()}			
