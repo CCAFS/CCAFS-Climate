@@ -25,7 +25,7 @@
 			
             var colorsCluster = {
 			    one: "rgb(0, 0, 0)",
-                low: "rgb(181, 226, 140)", 
+                low: "rgb(78, 32, 218)",//"rgb(181, 226, 140)" 
                 middle: "rgb(241, 211, 87)", 
                 high: "rgb(253, 156, 115)"
             };
