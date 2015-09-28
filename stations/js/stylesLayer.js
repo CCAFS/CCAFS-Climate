@@ -135,7 +135,7 @@
 			strokeOpacity: 0.3,
 			strokeWidth: 1,
 			pointRadius: 5,
-			labelOutlineWidth:0.5,
+			labelOutlineWidth:0.5
 		}
 	});	
 	contextHover= {

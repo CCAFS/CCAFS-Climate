@@ -64,9 +64,9 @@
                 symbolizer:{
                     fillColor: "${styleFunction}",
                     fillOpacity: 0.9, 
-					labelYOffset: -5, // no efunciona cuando se usa renderers: ['Canvas','SVG']
-					labelAlign:'lb', // lb,cb,rb,cm
-                    strokeColor: "#00FF00",//colorsCluster.low,
+					labelYOffset: -15, // no efunciona cuando se usa renderers: ['Canvas','SVG']
+					labelAlign:'cb', // lb,cb,rb,cm
+                    strokeColor: "#ff0000", //"#00FF00",//colorsCluster.low,
                     strokeOpacity: 0.3,
                     strokeWidth: 1,
                     pointRadius: 5,
@@ -76,7 +76,8 @@
                     fontOpacity: 0.8,
 					fontFamily: "Trebuchet MS",
 					fontWeight: "bold",					
-                    fontSize: "11px"
+                    fontSize: "11px",
+					labelOutlineColor:"#0B3B0B"
                 }
             });			
 			// var instRule = new OpenLayers.Rule({
@@ -265,7 +266,7 @@
 					params : { type:4},
                     format: new OpenLayers.Format.GeoJSON()
                 }),
-                renderers: ['Canvas','SVG'],
+                // renderers: ['Canvas','SVG'],
                 strategies: [new OpenLayers.Strategy.Fixed(),strategy],
                 isBaseLayer: false,
                 styleMap:  new OpenLayers.StyleMap({
