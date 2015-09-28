@@ -2646,6 +2646,17 @@ Ext.application({
 													tabs.setActiveTab('graphic_tab');
 													
 													generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+												}else{
+													winInfo=Ext.MessageBox.show({
+													   title: 'Information',
+													   msg: 'Sorry, You are not authorized to download data.',
+													   width:300,
+													   buttons: Ext.MessageBox.OK,
+													   animateTarget: 'error',
+													   icon: 'x-message-box-error'
+													   
+													});	
+													winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);												
 												}
 												
 											}, // handler
@@ -2682,7 +2693,7 @@ Ext.application({
 									
 									// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 									// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
-									{ text: 'elevation',minWidth: 80,dataIndex: 'elev', flex: 2,tdCls: 'x-change-cell'},
+									{ text: 'elevation (m)',minWidth: 80,dataIndex: 'elev', flex: 2,tdCls: 'x-change-cell'},
 									{ text: 'category',minWidth: 100,dataIndex: 'category', flex: 3,tdCls: 'x-change-cell'},
 									{ text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3,tdCls: 'x-change-cell'},
 									{ text: 'suspension',minWidth: 80,dataIndex: 'suspension', flex: 3,tdCls: 'x-change-cell'},
@@ -3333,6 +3344,17 @@ Ext.application({
 													tabs.setActiveTab('graphic_tab');
 													
 													generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+												}else{
+													winInfo=Ext.MessageBox.show({
+													   title: 'Information',
+													   msg: 'Sorry, You are not authorized to download data.',
+													   width:300,
+													   buttons: Ext.MessageBox.OK,
+													   animateTarget: 'error',
+													   icon: 'x-message-box-error'
+													   
+													});	
+													winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
 												}
 												
 											}, // handler											
@@ -4343,6 +4365,17 @@ Ext.application({
 																	tabs.setActiveTab('graphic_tab');
 																	
 																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+																}else{
+																	winInfo=Ext.MessageBox.show({
+																	   title: 'Information',
+																	   msg: 'Sorry, You are not authorized to download data.',
+																	   width:300,
+																	   buttons: Ext.MessageBox.OK,
+																	   animateTarget: 'error',
+																	   icon: 'x-message-box-error'
+																	   
+																	});	
+																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
 																}
 																
 															}, // handler															
@@ -4368,7 +4401,7 @@ Ext.application({
 														
 														// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 														// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
-														{ text: 'elevation',minWidth: 80,dataIndex: 'elev', flex: 2,tdCls: 'x-change-cell'},
+														{ text: 'elevation (m)',minWidth: 80,dataIndex: 'elev', flex: 2,tdCls: 'x-change-cell'},
 														{ text: 'category',minWidth: 100,dataIndex: 'category', flex: 3,tdCls: 'x-change-cell'},
 														{ text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3,tdCls: 'x-change-cell'},
 														{ text: 'suspension',minWidth: 80,dataIndex: 'suspension', flex: 3,tdCls: 'x-change-cell'},
@@ -5399,6 +5432,17 @@ Ext.application({
 																	tabs.setActiveTab('graphic_tab');
 																	
 																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+																}else{
+																	winInfo=Ext.MessageBox.show({
+																	   title: 'Information',
+																	   msg: 'Sorry, You are not authorized to download data.',
+																	   width:300,
+																	   buttons: Ext.MessageBox.OK,
+																	   animateTarget: 'error',
+																	   icon: 'x-message-box-error'
+																	   
+																	});	
+																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
 																}
 																
 															}, // handler
@@ -6319,6 +6363,17 @@ Ext.application({
 																	tabs.setActiveTab('graphic_tab');
 																	
 																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+																}else{
+																	winInfo=Ext.MessageBox.show({
+																	   title: 'Information',
+																	   msg: 'Sorry, You are not authorized to download data.',
+																	   width:300,
+																	   buttons: Ext.MessageBox.OK,
+																	   animateTarget: 'error',
+																	   icon: 'x-message-box-error'
+																	   
+																	});	
+																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
 																}
 																
 															}, // handler
@@ -6344,7 +6399,7 @@ Ext.application({
 													
 													// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 													// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
-													{ text: 'elevation',minWidth: 80,dataIndex: 'elev', flex: 2,tdCls: 'x-change-cell'},
+													{ text: 'elevation (m)',minWidth: 80,dataIndex: 'elev', flex: 2,tdCls: 'x-change-cell'},
 													{ text: 'category',minWidth: 100,dataIndex: 'category', flex: 3,tdCls: 'x-change-cell'},
 													{ text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3,tdCls: 'x-change-cell'},
 													{ text: 'suspension',minWidth: 80,dataIndex: 'suspension', flex: 3,tdCls: 'x-change-cell'},
@@ -6981,6 +7036,17 @@ Ext.application({
 																	tabs.setActiveTab('graphic_tab');
 																	
 																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+																}else{
+																	winInfo=Ext.MessageBox.show({
+																	   title: 'Information',
+																	   msg: 'Sorry, You are not authorized to download data.',
+																	   width:300,
+																	   buttons: Ext.MessageBox.OK,
+																	   animateTarget: 'error',
+																	   icon: 'x-message-box-error'
+																	   
+																	});	
+																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
 																}
 																
 															}, // handler
@@ -7006,7 +7072,7 @@ Ext.application({
 													
 													// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 													// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
-													{ text: 'elevation',minWidth: 80,dataIndex: 'elev', flex: 2,tdCls: 'x-change-cell'},
+													{ text: 'elevation (m)',minWidth: 80,dataIndex: 'elev', flex: 2,tdCls: 'x-change-cell'},
 													{ text: 'category',minWidth: 100,dataIndex: 'category', flex: 3,tdCls: 'x-change-cell'},
 													{ text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3,tdCls: 'x-change-cell'},
 													{ text: 'suspension',minWidth: 80,dataIndex: 'suspension', flex: 3,tdCls: 'x-change-cell'},
@@ -7478,6 +7544,17 @@ Ext.application({
 																	tabs.setActiveTab('graphic_tab');
 																	
 																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+																}else{
+																	winInfo=Ext.MessageBox.show({
+																	   title: 'Information',
+																	   msg: 'Sorry, You are not authorized to download data.',
+																	   width:300,
+																	   buttons: Ext.MessageBox.OK,
+																	   animateTarget: 'error',
+																	   icon: 'x-message-box-error'
+																	   
+																	});	
+																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
 																}
 																
 															}, // handler
@@ -9203,6 +9280,17 @@ Ext.application({
 													tabs.setActiveTab('graphic_tab');
 													
 													generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+												}else{
+													winInfo=Ext.MessageBox.show({
+													   title: 'Information',
+													   msg: 'Sorry, You are not authorized to download data.',
+													   width:300,
+													   buttons: Ext.MessageBox.OK,
+													   animateTarget: 'error',
+													   icon: 'x-message-box-error'
+													   
+													});	
+													winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
 												}
 												
 											}, // handler											
@@ -9228,7 +9316,7 @@ Ext.application({
 										
 										// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 										// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
-										{ text: 'elevation',minWidth: 80,dataIndex: 'elev', flex: 2,tdCls: 'x-change-cell'},
+										{ text: 'elevation (m)',minWidth: 80,dataIndex: 'elev', flex: 2,tdCls: 'x-change-cell'},
 										{ text: 'category',minWidth: 100,dataIndex: 'category', flex: 3,tdCls: 'x-change-cell'},
 										{ text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3,tdCls: 'x-change-cell'},
 										{ text: 'suspension',minWidth: 80,dataIndex: 'suspension', flex: 3,tdCls: 'x-change-cell'},
