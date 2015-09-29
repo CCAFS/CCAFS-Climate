@@ -9107,20 +9107,9 @@ Ext.application({
 								}
 							}
 							onZoomExtentALL = function () {
-								// layerTemp=mapPanel.map.getLayersByName("Search station")[0]
-
-								FeatselectID=[]
-								for (var i = feature.length - 1; i >= 0; --i) {
-									if(feature[i].renderIntent=='select'){
-											sel=feature[i]//.cluster[j]
-											FeatselectID.push(sel)
-									}
-								}
-								console.log(FeatselectID)
-								console.log(FeatselectID[0].geometry.getBounds())
-								var BoundALL = FeatselectID[0].geometry.getBounds();
-								// mapPanel.map.zoomToExtent(BoundALL);								
-								
+								layerTemp=mapPanel.map.getLayersByName("Search station")[0]
+								var BoundALL = layerTemp.getDataExtent();
+								mapPanel.map.zoomToExtent(BoundALL);
 							}
 
 							cmbVar= Ext.create('Ext.form.field.ComboBox', { 
@@ -9434,18 +9423,20 @@ Ext.application({
 										disabled: true,
 										handler: btn_download 
 									},cmbVar,{
-										// itemId: 'zoomExtentALL',
-										// text:'zoomExtentALL',
-										// tooltip:'zoomExtent to ALL',
-										// icon   : iconGridzoomExtentALL,//iconCls:'add',
-										// handler: onZoomExtentALL 
-									},{
-										itemId: 'idExpand',
-										text:'Expand all',
-										tooltip:'Expand all',
-										iconCls:iconGridExpand,
-										handler: expand 
-									},{
+										itemId: 'zoomExtentALL',
+										text:'zoomExtentALL',
+										tooltip:'zoomExtent to ALL',
+										icon   : iconGridzoomExtentALL,//iconCls:'add',
+										handler: onZoomExtentALL 
+									}
+									// ,{
+										// itemId: 'idExpand',
+										// text:'Expand all',
+										// tooltip:'Expand all',
+										// iconCls:iconGridExpand,
+										// handler: expand 
+									// }
+									,{
 									
 										itemId: 'idstatistic',
 										text:'Statistics',
