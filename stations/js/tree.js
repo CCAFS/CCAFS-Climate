@@ -2074,7 +2074,7 @@ Ext.application({
 															// Ext.Msg.alert('OK',"Please check your e-mail and follow the instructions."); 
 															winInfo=Ext.MessageBox.show({
 															   title: 'Information',
-															   msg: 'The registration was successful!.',
+															   msg: 'The registration was successful. If you have privileges to download the data please contact us.',
 															   width:300,
 															   buttons: Ext.MessageBox.OK,
 															   animateTarget: 'info',
