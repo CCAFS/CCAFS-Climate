@@ -6880,7 +6880,7 @@ Ext.application({
 											}	
 											onZoomExtentALL = function () {
 												// layerTemp=mapPanel.map.getLayersByName("Search station")[0]
-
+												feature = clusters.features;
 												FeatselectID=[]
 												for (var i = feature.length - 1; i >= 0; --i) {
 													if(feature[i].renderIntent=='select'){
@@ -6888,10 +6888,10 @@ Ext.application({
 															FeatselectID.push(sel)
 													}
 												}
-												console.log(FeatselectID)
-												console.log(FeatselectID[0].geometry.getBounds())
+												// console.log(feature,FeatselectID)
+												// console.log(FeatselectID[0].geometry.getBounds())
 												var BoundALL = FeatselectID[0].geometry.getBounds();
-												// mapPanel.map.zoomToExtent(BoundALL);								
+												mapPanel.map.zoomToExtent(BoundALL);								
 												
 											}
 
@@ -7159,19 +7159,19 @@ Ext.application({
 														icon   : iconGridDownload,
 														disabled: true,
 														handler: btn_download 
-													},cmbVar/*,{
+													},/*cmbVar,{
 														itemId: 'zoomExtentALL',
 														text:'zoomExtentALL',
 														tooltip:'zoomExtent to ALL',
 														icon   : iconGridzoomExtentALL,//iconCls:'add',
 														handler: onZoomExtentALL 
-													}*/,{
+													},{
 														itemId: 'idExpand',
 														text:'Expand all',
 														tooltip:'Expand all',
 														iconCls:iconGridExpand,
 														handler: expand 
-													},{
+													},*/{
 													
 														itemId: 'idstatistic',
 														text:'Statistics',
