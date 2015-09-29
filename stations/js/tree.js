@@ -239,6 +239,7 @@ Ext.application({
 //===============================================================================================================
 	
 	mapPanel.map.addLayer(layerTempRegion);
+	mapPanel.map.addLayer(layerTempStat);
 	
 	var bton_login = new Ext.Button({	
 		text:'Login',
@@ -2266,7 +2267,6 @@ Ext.application({
 									var format = new OpenLayers.Format.GeoJSON({'internalProjection': new OpenLayers.Projection("EPSG:900913"), 'externalProjection': new OpenLayers.Projection("EPSG:4326")
 									});
 									if(format.read(geocapa)[0]){
-										mapPanel.map.addLayer(layerTempStat);
 										layerTemp=mapPanel.map.getLayersByName("Search station")[0]
 										layerTemp.addFeatures(format.read(geocapa));
 									}
