@@ -396,7 +396,7 @@ class Access_user {
 							$this->id = pg_fetch_row($ins_res)[0];
 							$this->user_pw = $first_password; //md5($first_password);   ver. 1.86
 							if ($this->send_mail($this->user_email)){   //, 29, 28)) {
-								$this->the_msg = $this->messages(13);
+								// $this->the_msg = $this->messages(13);
 								echo "OK";
 							} else {
 								// mysql_query(sprintf("DELETE FROM %s WHERE id = %d", $this->table_name, $this->id));
