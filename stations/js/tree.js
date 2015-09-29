@@ -238,8 +238,8 @@ Ext.application({
 
 //===============================================================================================================
 	
+	mapPanel.map.addLayer(layerTempRegion);
 	
-
 	var bton_login = new Ext.Button({	
 		text:'Login',
 		icon   : icons+'buttons/login16.png',//'buttons/login24.png',
@@ -2200,7 +2200,8 @@ Ext.application({
 						stateVal = stateCmb.getValue()						
 						municipVal = cityCmb.getValue()	
 						
-						// layerTemp=mapPanel.map.getLayersByName("Search region")[0]
+						polygonDraw.destroyFeatures();
+						// layerTemp=mapPanel.map.getLayersByName("Search_region")[0]
 						// if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
 
 						// layerTemp=mapPanel.map.getLayersByName("Search station")[0]
@@ -2236,16 +2237,16 @@ Ext.application({
 								params : { type:1,country : country, state:state, municip:municip},
 								method: 'GET',
 								success: function ( result, request ) {
-									layerTemp=mapPanel.map.getLayersByName("Search region")[0]
-									if(layerTemp){layerTemp.destroyFeatures();}
+									// layerTemp=mapPanel.map.getLayersByName("Search_region")[0]
+									// if(layerTemp){layerTemp.destroyFeatures();}
+									layerTempRegion.destroyFeatures();
 									
 									geocapa = result.responseText;
 									var format = new OpenLayers.Format.GeoJSON({'internalProjection': new OpenLayers.Projection("EPSG:900913"), 'externalProjection': new OpenLayers.Projection("EPSG:4326")
 									});
-									mapPanel.map.addLayer(layerTempRegion);
-									layerTemp=mapPanel.map.getLayersByName("Search region")[0]
-									layerTemp.addFeatures(format.read(geocapa));
-									var bounds = layerTemp.getDataExtent();
+									// layerTemp=mapPanel.map.getLayersByName("Search_region")[0]
+									layerTempRegion.addFeatures(format.read(geocapa));
+									var bounds = layerTempRegion.getDataExtent();
 									if(bounds){ mapPanel.map.panTo(bounds.getCenterLonLat()); mapPanel.map.zoomToExtent(bounds);}
 								},
 								failure: function ( result, request) { 
@@ -2861,11 +2862,15 @@ Ext.application({
 					}				
 					selectControl.control.unselectAll();
 					tabSearchRegion.getForm().reset();
-					layerTempReg=mapPanel.map.getLayersByName("Search region")[0]
-					if(layerTempReg){layerTempReg.destroyFeatures();mapPanel.map.removeLayer(layerTempReg);}
+					// layerTempReg=mapPanel.map.getLayersByName("Search_region")[0]
+					// if(layerTempReg){layerTempReg.destroyFeatures();mapPanel.map.removeLayer(layerTempReg);}
+					layerTempRegion.destroyFeatures();
 					
 					layerTempStat=mapPanel.map.getLayersByName("Search station")[0]
-					if(layerTempStat){layerTempStat.destroyFeatures();mapPanel.map.removeLayer(layerTempStat);}	
+					if(layerTempStat){
+						layerTempStat.destroyFeatures();
+						// mapPanel.map.removeLayer(layerTempStat);
+					}	
 
 					layerTempSel.destroyFeatures()
 				}
@@ -2966,12 +2971,13 @@ Ext.application({
 						if(Ext.getCmp('popupID')){
 							Ext.getCmp('popupID').close()
 						}					
-						
+						polygonDraw.destroyFeatures();
 						radioCh = 2//Ext.getCmp('radioBton').getChecked()[0].getGroupValue();
 					
 						getStat = cmbStat.getValue();
-						layerTemp=mapPanel.map.getLayersByName("Search region")[0]
-						if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
+						// layerTemp=mapPanel.map.getLayersByName("Search_region")[0]
+						// if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
+						layerTempRegion.destroyFeatures();
 						
 						// FindStation=mapPanel.map.getLayersByName("Search station")[0]
 						// if(FindStation){FindStation.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}		
@@ -2991,7 +2997,10 @@ Ext.application({
 								method: 'GET',
 								success: function ( result, request ) {
 									layerTemp=mapPanel.map.getLayersByName("Search station")[0]
-									if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
+									if(layerTemp){
+										layerTemp.destroyFeatures();
+										// mapPanel.map.removeLayer(layerTemp);
+									}
 									
 									geocapa = result.responseText;
 									var format = new OpenLayers.Format.GeoJSON({'internalProjection': new OpenLayers.Projection("EPSG:900913"), 'externalProjection': new OpenLayers.Projection("EPSG:4326")
@@ -3637,11 +3646,15 @@ Ext.application({
 					selectControl.control.unselectAll();
 					Ext.getCmp("cmbStatID").reset();
 					tabSearchStat.getForm().reset();
-					layerTempReg=mapPanel.map.getLayersByName("Search region")[0]
-					if(layerTempReg){layerTempReg.destroyFeatures();mapPanel.map.removeLayer(layerTempReg);}
+					// layerTempReg=mapPanel.map.getLayersByName("Search_region")[0]
+					// if(layerTempReg){layerTempReg.destroyFeatures();mapPanel.map.removeLayer(layerTempReg);}
+					layerTempRegion.destroyFeatures();
 					
 					layerTempStat=mapPanel.map.getLayersByName("Search station")[0]
-					if(layerTempStat){layerTempStat.destroyFeatures();mapPanel.map.removeLayer(layerTempStat);}
+					if(layerTempStat){
+						layerTempStat.destroyFeatures();
+						// mapPanel.map.removeLayer(layerTempStat);
+					}
 					
 					layerTempSel.destroyFeatures()
 				}		
@@ -3963,6 +3976,7 @@ Ext.application({
 					width:65,
 					handler: function(){
 						Ext.getCmp('buttongroupCondID').doLayout();
+						polygonDraw.destroyFeatures();
 						if(Ext.getCmp('popupID')){
 							Ext.getCmp('popupID').close()
 						}		
@@ -4032,8 +4046,9 @@ Ext.application({
 										layerTemp=mapPanel.map.getLayersByName("Search station")[0]
 										if(layerTemp){layerTemp.destroyFeatures();}
 										
-										layerTempRegion=mapPanel.map.getLayersByName("Search region")[0]
-										if(layerTempRegion){layerTempRegion.destroyFeatures();}		
+										// layerTempRegion=mapPanel.map.getLayersByName("Search_region")[0]
+										// if(layerTempRegion){layerTempRegion.destroyFeatures();}	
+										layerTempRegion.destroyFeatures();
 										
 										geocapa = result.responseText;
 										var format = new OpenLayers.Format.GeoJSON({'internalProjection': new OpenLayers.Projection("EPSG:900913"), 'externalProjection': new OpenLayers.Projection("EPSG:4326")
@@ -4654,11 +4669,16 @@ Ext.application({
 						for (var i=0, l=condlistsel.length; i < l; i++) {
 								delete condlistsel[i];
 						}		
-						layerTempReg=mapPanel.map.getLayersByName("Search region")[0]
-						if(layerTempReg){mapPanel.map.removeLayer(layerTempReg);}
+						// layerTempReg=mapPanel.map.getLayersByName("Search_region")[0]
+						// if(layerTempReg){mapPanel.map.removeLayer(layerTempReg);}
+						layerTempRegion.destroyFeatures();
 						
 						layerTempStat=mapPanel.map.getLayersByName("Search station")[0]
-						if(layerTempStat){mapPanel.map.removeLayer(layerTempStat);}	
+						if(layerTempStat){
+							// mapPanel.map.removeLayer(layerTempStat);
+							layerTempStat.destroyFeatures();
+
+						}	
 					}
 				}				
 			]
@@ -5055,7 +5075,7 @@ Ext.application({
 					var format = new OpenLayers.Format.GeoJSON({'internalProjection': new OpenLayers.Projection("EPSG:900913"), 'externalProjection': new OpenLayers.Projection("EPSG:4326")
 					});
 					// mapPanel.map.addLayer(layerTempRegion);
-					// layerTemp=mapPanel.map.getLayersByName("Search region")[0]
+					// layerTemp=mapPanel.map.getLayersByName("Search_region")[0]
 					layerTemp.addFeatures(format.read(geocapa));
 					var bounds = layerTemp.getDataExtent();
 					if(bounds){mapPanel.map.zoomToExtent(bounds);}
@@ -5116,8 +5136,9 @@ Ext.application({
 									Ext.getCmp('popupID').close()
 								}	
 								
-								layerTemp=mapPanel.map.getLayersByName("Search region")[0]
-								if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
+								// layerTemp=mapPanel.map.getLayersByName("Search_region")[0]
+								// if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
+								layerTempRegion.destroyFeatures();
 								
 								FindStation=mapPanel.map.getLayersByName("Search station")[0]
 								if(FindStation){FindStation.destroyFeatures();}
@@ -6048,8 +6069,9 @@ Ext.application({
 									Ext.getCmp('popupID').close()
 								}	
 								
-								layerTemp=mapPanel.map.getLayersByName("Search region")[0]
-								if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
+								// layerTemp=mapPanel.map.getLayersByName("Search_region")[0]
+								// if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
+								layerTempRegion.destroyFeatures();
 								
 								FindStation=mapPanel.map.getLayersByName("Search station")[0]
 								if(FindStation){FindStation.destroyFeatures();}
@@ -6721,8 +6743,9 @@ Ext.application({
 									Ext.getCmp('popupID').close()
 								}	
 								
-								layerTemp=mapPanel.map.getLayersByName("Search region")[0]
-								if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
+								// layerTemp=mapPanel.map.getLayersByName("Search_region")[0]
+								// if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
+								layerTempRegion.destroyFeatures();
 								
 								FindStation=mapPanel.map.getLayersByName("Search station")[0]
 								if(FindStation){FindStation.destroyFeatures();}
@@ -7228,8 +7251,9 @@ Ext.application({
 									Ext.getCmp('popupID').close()
 								}	
 								
-								layerTemp=mapPanel.map.getLayersByName("Search region")[0]
-								if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
+								// layerTemp=mapPanel.map.getLayersByName("Search_region")[0]
+								// if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
+								layerTempRegion.destroyFeatures();
 								
 								FindStation=mapPanel.map.getLayersByName("Search station")[0]
 								if(FindStation){FindStation.destroyFeatures();}
@@ -7875,7 +7899,7 @@ Ext.application({
 				// Ext.getCmp('gridRegionID').destroy();	
 			// }
 			
-			// layerTemp=mapPanel.map.getLayersByName("Search region")[0]
+			// layerTemp=mapPanel.map.getLayersByName("Search_region")[0]
 			// if(layerTempRegion){layerTempRegion.removeAllFeatures()}			
 			// layerTempStat=mapPanel.map.getLayersByName("Search station")[0]
 			// if(layerTempStat){layerTempStat.removeAllFeatures()}			
@@ -7930,12 +7954,12 @@ Ext.application({
 					getWin.close()
 					getWin.destroy();
 				} 				
-				if(toggled.pressed==true){
-					selectHover.activate();
-				}else{
-					selectHover.deactivate();
-					vectorHover.removeAllFeatures();
-				}
+				// if(toggled.pressed==true){
+					// selectHover.activate();
+				// }else{
+					// selectHover.deactivate();
+					// vectorHover.removeAllFeatures();
+				// }
 			},
 			toggleHandler: function(btn, pressed){
 				if(pressed==true){
@@ -7944,10 +7968,10 @@ Ext.application({
 					layerTempSel.destroyFeatures();
 					selectHover.deactivate();
 					vectorHover.removeAllFeatures();
-					if(Ext.getCmp('gridRegionID')){
-						Ext.getCmp('mainTableID').collapse();
-						Ext.getCmp('gridRegionID').destroy();	
-					}					
+					// if(Ext.getCmp('gridRegionID')){
+						// Ext.getCmp('mainTableID').collapse();
+						// Ext.getCmp('gridRegionID').destroy();	
+					// }					
 				}			
                 // console.log('toggle', btn.text, pressed);
             }			
@@ -8874,11 +8898,12 @@ Ext.application({
 						Ext.getCmp('mainTableID').collapse();
 						Ext.getCmp('gridRegionID').destroy();	
 					}	
-					layerTempReg=mapPanel.map.getLayersByName("FindRegion")[0]
-					if(layerTempReg){mapPanel.map.removeLayer(layerTempReg);}
+					// layerTempReg=mapPanel.map.getLayersByName("FindRegion")[0]
+					// if(layerTempReg){mapPanel.map.removeLayer(layerTempReg);}
+					layerTempRegion.destroyFeatures();
 					
 					layerTempStat=mapPanel.map.getLayersByName("Search station")[0]
-					if(layerTempStat){mapPanel.map.removeLayer(layerTempStat);}						
+					if(layerTempStat){layerTempStat.destroyFeatures();}						
 				}else{
 					if(Ext.getCmp('popupID')){
 						Ext.getCmp('popupID').close()
@@ -8891,6 +8916,7 @@ Ext.application({
 		function onStart(ev){
 		}
 		function onAdded(ev){
+			layerTempRegion.destroyFeatures();
 			if(Ext.getCmp('gridRegionID')){
 				Ext.getCmp('mainTableID').collapse();
 				Ext.getCmp('gridRegionID').destroy();	

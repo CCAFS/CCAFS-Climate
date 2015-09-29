@@ -116,7 +116,7 @@
 		pointRadius: 10
 	}, {rules: rulesRegion});
 			
-	var layerTempRegion = new OpenLayers.Layer.Vector('Search region', {'displayInLayerSwitcher':false,
+	var layerTempRegion = new OpenLayers.Layer.Vector('Search_region', {'displayInLayerSwitcher':false,
 		// renderers: renderer,
 		projection: new OpenLayers.Projection("EPSG:4326"),
 		displayProjection: new OpenLayers.Projection("EPSG:900913"),						
