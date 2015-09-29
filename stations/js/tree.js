@@ -2067,7 +2067,6 @@ Ext.application({
 													success: function(response, opts) {
 														resul=response.responseText
 														// if(resul.split("\n")[1]=="OK"){
-														console.log(resul)
 														if(resul=="OK"){
 															// Ext.getCmp('btonLoginId').setText('Logout');
 															// ventana_login.hide();
