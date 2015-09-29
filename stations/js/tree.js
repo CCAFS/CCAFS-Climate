@@ -1834,6 +1834,9 @@ Ext.application({
 						margin: '5px 5px 0 5px',
 						handler: function(){
 							Ext.getCmp('mainpanelID').setDisabled(true);
+							if(Ext.getCmp('popupID')){
+								Ext.getCmp('popupID').close()
+							}	
 							
 							if(Ext.getCmp('ventana_loginID')){
 								Ext.getCmp('ventana_loginID').destroy();
