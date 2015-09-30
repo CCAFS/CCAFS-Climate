@@ -214,7 +214,7 @@ if($type==5){
 							JOIN station_type as p ON (p.id = s.type)  JOIN station_time_step as a ON (a.id = s.time_step) JOIN station_ctrl_quality as q ON (q.id = s.ctrl_quali)
 							JOIN station_category as c ON (c.id = s.category) JOIN station_institute as i ON (i.id = s.institute) JOIN station_copyright as cop ON (s.copyrigth=cop.id)	
 							where st_intersects(s.geom , l.geom) and l.NAME_0='".$country."' and l.NAME_1='".$state."' and l.NAME_2='".$municip."'";
-					
+							
 	}
 	elseif($country and $state and !$municip){
 		// $sql_tabla = "select s.id,s.code,s.name, c.name category,i.name institute,s.instalation,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
@@ -242,6 +242,14 @@ if($type==5){
 							JOIN station_type as p ON (p.id = s.type)  JOIN station_time_step as a ON (a.id = s.time_step) JOIN station_ctrl_quality as q ON (q.id = s.ctrl_quali)
 							JOIN station_category as c ON (c.id = s.category) JOIN station_institute as i ON (i.id = s.institute) JOIN station_copyright as cop ON (s.copyrigth=cop.id)	
 							where st_intersects(s.geom , l.geom) and l.NAME_0='".$country."';";
+
+							
+		// $sql_tabla ="select DISTINCT s.id, s.code,s.name, c.name category,i.name institute,s.instalation,s.suspension,s.access_level,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,cop.name copyright, l.NAME_1 state
+						 // from gadm_lev1 as l, geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_status as t ON (t.id = s.status)
+						// JOIN station_type as p ON (p.id = s.type)  JOIN station_time_step as a ON (a.id = s.time_step) JOIN station_ctrl_quality as q ON (q.id = s.ctrl_quali)
+						// JOIN station_category as c ON (c.id = s.category) JOIN station_institute as i ON (i.id = s.institute) JOIN station_copyright as cop ON (s.copyrigth=cop.id)	
+						// where st_intersects(s.geom , l.geom) and l.NAME_0='".$country."';";							
+
 	}
   
 
@@ -458,7 +466,7 @@ if($type==8){
 			$i++;
 		}		
 	}else{
-		$sql_tabla ="select v.id,v.name,f.name as inst from geostation as v JOIN station_institute as f ON (f.id=v.institute);";	
+		$sql_tabla ="select DISTINCT v.id,v.name,g.iso,f.name as inst from geostation as v JOIN station_institute as f ON (f.id=v.institute) JOIN gadm_lev0 as g ON (g.id_0=v.country);";	
 		$result = pg_query($dbcon, $sql_tabla);
 
 
@@ -470,6 +478,7 @@ if($type==8){
 			$feature = array(
 							'id' => $line['id'],
 							'name' => $line['name'],
+							'iso' => $line['iso'],
 							'inst' => $line['inst']
 						);
 			array_push($geojson['topics'],$feature);

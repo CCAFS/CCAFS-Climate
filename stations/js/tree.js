@@ -2701,7 +2701,7 @@ Ext.application({
 									{ text: 'instalation',minWidth: 80,dataIndex: 'instalation', flex: 3,tdCls: 'x-change-cell'},
 									{ text: 'suspension',minWidth: 80,dataIndex: 'suspension', flex: 3,tdCls: 'x-change-cell'},
 									{ text: 'quality',minWidth: 70,dataIndex: 'quality', flex: 1,tdCls: 'x-change-cell'},									
-									{ text: 'country',minWidth: 80,dataIndex: 'country', flex: 4,tdCls: 'x-change-cell'},
+									// { text: 'country',minWidth: 80,dataIndex: 'country', flex: 4,tdCls: 'x-change-cell'},
 									{ text: 'state',minWidth: 80,dataIndex: 'state', flex: 4,tdCls: 'x-change-cell'},
 									{ text: 'city',minWidth: 90,dataIndex: 'city', flex: 4,tdCls: 'x-change-cell'}
 									
@@ -2846,6 +2846,7 @@ Ext.application({
 									   icon: 'x-message-box-info'
 									});	
 									winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+									myMask.hide();
 								}	
 							});	
 
@@ -2916,6 +2917,7 @@ Ext.application({
 			fields: [
 				{ name: 'id', type: 'string' },
 				{ name: 'name', type: 'string' },
+				{ name: 'iso', type: 'string' },
 				{ name: 'inst', type: 'string' }
 			]
 		});
@@ -2948,7 +2950,7 @@ Ext.application({
 		store: statstore,
 		listConfig: {
 			getInnerTpl: function() {
-				return '<div data-qtip="id:{id}|{inst}">{name}</div>';
+				return '<div data-qtip="id:{id}|{iso}|{inst}">{name}</div>';
 			}
 		}		
 	});	
@@ -3015,7 +3017,9 @@ Ext.application({
 									var BoundALL = layerTemp.getDataExtent();
 									// var bounds = layerTemp.getBounds();
 									// mapPanel.map.panTo(BoundALL.getCenterLonLat())
-									mapPanel.map.zoomToExtent(BoundALL);	
+									// mapPanel.map.zoomToExtent(BoundALL);	
+									// mapPanel.map.zoomTo(13);
+									mapPanel.map.setCenter(BoundALL.getCenterLonLat(), 12);
 									
 									
 								},
@@ -3627,6 +3631,7 @@ Ext.application({
 									   icon: 'x-message-box-info'
 									});	
 									winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+									myMask.hide();
 								}	
 							});	
 							
@@ -4591,7 +4596,6 @@ Ext.application({
 														}										   
 													});	
 													winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
-													
 												}	
 											});	
 										
