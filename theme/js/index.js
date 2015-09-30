@@ -34,57 +34,86 @@ $(document).ready(function() {
       data: {profile: 0},
       success: function(data) {
         $("#whatisamkn").html(data);
+        $("#goback1").show();
       }
     });
   });
-
-  $(".policy").on('click', function() {
+  
+  $("#goback").on('click', function() {
     $.ajax({
       type: "POST",
       dataType: "text",
       url: "/ajax/user-profiles.php",
-      data: {profile: 1},
+      data: {profile: 0},
       success: function(data) {
         $("#whatisamkn").html(data);
+        $("#goback").hide();
+        $("#goback1").show();
       }
     });
   });
-
-  $("#govermental").on('click', function() {
+  
+  $("#goback1").on('click', function() {
     $.ajax({
       type: "POST",
       dataType: "text",
       url: "/ajax/user-profiles.php",
-      data: {profile: 2},
+      data: {profile: -1},
       success: function(data) {
         $("#whatisamkn").html(data);
+        $("#goback").hide();
+        $("#goback1").hide();
       }
     });
   });
 
-  $("#academic").on('click', function() {
-    $.ajax({
-      type: "POST",
-      dataType: "text",
-      url: "/ajax/user-profiles.php",
-      data: {profile: 3},
-      success: function(data) {
-        $("#whatisamkn").html(data);
-      }
-    });
-  });
+//  $(".policy").on('click', function() {
+//    $.ajax({
+//      type: "POST",
+//      dataType: "text",
+//      url: "/ajax/user-profiles.php",
+//      data: {profile: 1},
+//      success: function(data) {
+//        $("#whatisamkn").html(data);
+//      }
+//    });
+//  });
 
-  $("#researcher").on('click', function() {
-    $.ajax({
-      type: "POST",
-      dataType: "text",
-      url: "/ajax/user-profiles.php",
-      data: {profile: 4},
-      success: function(data) {
-        $("#whatisamkn").html(data);
-      }
-    });
-  });
+//  $("#govermental").on('click', function() {
+//    $.ajax({
+//      type: "POST",
+//      dataType: "text",
+//      url: "/ajax/user-profiles.php",
+//      data: {profile: 2},
+//      success: function(data) {
+//        $("#whatisamkn").html(data);
+//      }
+//    });
+//  });
+
+//  $("#academic").on('click', function() {
+//    $.ajax({
+//      type: "POST",
+//      dataType: "text",
+//      url: "/ajax/user-profiles.php",
+//      data: {profile: 3},
+//      success: function(data) {
+//        $("#whatisamkn").html(data);
+//      }
+//    });
+//  });
+//
+//  $("#researcher").on('click', function() {
+//    $.ajax({
+//      type: "POST",
+//      dataType: "text",
+//      url: "/ajax/user-profiles.php",
+//      data: {profile: 4},
+//      success: function(data) {
+//        $("#whatisamkn").html(data);
+//      }
+//    });
+//  });
 
   $("#chk_showmsg").on('change', function() {
     applyShowMsg();

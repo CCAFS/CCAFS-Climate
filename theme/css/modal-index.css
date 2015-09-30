@@ -12,7 +12,7 @@ and open the template in the editor.
   color: #fff;
   border-radius: 10px;
   font-weight: bold;
-  padding: 1.5em;
+  padding: 1em 1.5em;
   /*float: right;*/
   margin-left: 20px;
   /*width: 150px;*/
@@ -21,7 +21,8 @@ and open the template in the editor.
 }
 
 .remodal #info {
-  width: 100%;
+  width: 50%;
+  float: left;
   position: relative;
   min-height: 50px;
   text-align: center;
@@ -32,9 +33,9 @@ and open the template in the editor.
 }
 
 .buttons {
-  width: 100%;
+  width: 50%;
   float:left;
-  margin-top: 30px;
+  /*margin-top: 30px;*/
   min-height: 50px;
   text-align: left;
 }
@@ -58,7 +59,7 @@ and open the template in the editor.
 
 .modal a {
   color: #275C03;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .modal-first {
@@ -264,7 +265,7 @@ and open the template in the editor.
   color: white;
   /*background-color: yellow!important;*/
   border-radius: 30px!important;
-  font: 8px "Helvetica Neue", Sans-Serif;
+  font: 6px "Helvetica Neue", Sans-Serif;
   /*text-transform: uppercase;*/
   box-shadow: 0 0 7px black;
   text-align: left;
@@ -301,5 +302,9 @@ and open the template in the editor.
 .arrow.top:after {
   bottom: -20px;
   top: auto;
+}
+
+.ui-widget .ui-tooltip-content ul li {
+  font-size: 14px;
 }
 

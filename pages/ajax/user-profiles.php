@@ -96,48 +96,61 @@ $profile = $_REQUEST['profile'];
     });
   });
 
-  $(".policy").on('click', function() {
-    $.ajax({
-      type: "POST",
-      dataType: "text",
-      url: "/ajax/user-profiles.php",
-      data: {profile: 1},
-      success: function(data) {
-        $("#whatisamkn").html(data);
-      }
-    });
-  });
+//  $(".policy").on('click', function() {
+//    $.ajax({
+//      type: "POST",
+//      dataType: "text",
+//      url: "/ajax/user-profiles.php",
+//      data: {profile: 1},
+//      success: function(data) {
+//        $("#whatisamkn").html(data);
+//      }
+//    });
+//  });
+//
+//  $("#govermental").on('click', function() {
+//    $.ajax({
+//      type: "POST",
+//      dataType: "text",
+//      url: "/ajax/user-profiles.php",
+//      data: {profile: 2},
+//      success: function(data) {
+//        $("#whatisamkn").html(data);
+//      }
+//    });
+//  });
 
-  $("#govermental").on('click', function() {
+//  $("#academic").on('click', function() {
+//    $.ajax({
+//      type: "POST",
+//      dataType: "text",
+//      url: "/ajax/user-profiles.php",
+//      data: {profile: 3},
+//      success: function(data) {
+//        $("#whatisamkn").html(data);
+//      }
+//    });
+//  });
+//
+//  $("#researcher").on('click', function() {
+//    $.ajax({
+//      type: "POST",
+//      dataType: "text",
+//      url: "/ajax/user-profiles.php",
+//      data: {profile: 4},
+//      success: function(data) {
+//        $("#whatisamkn").html(data);
+//      }
+//    });
+//  });
+  
+  $("#profiles").on('click', function() {
+    $("#goback1").show();
     $.ajax({
       type: "POST",
       dataType: "text",
       url: "/ajax/user-profiles.php",
-      data: {profile: 2},
-      success: function(data) {
-        $("#whatisamkn").html(data);
-      }
-    });
-  });
-
-  $("#academic").on('click', function() {
-    $.ajax({
-      type: "POST",
-      dataType: "text",
-      url: "/ajax/user-profiles.php",
-      data: {profile: 3},
-      success: function(data) {
-        $("#whatisamkn").html(data);
-      }
-    });
-  });
-
-  $("#researcher").on('click', function() {
-    $.ajax({
-      type: "POST",
-      dataType: "text",
-      url: "/ajax/user-profiles.php",
-      data: {profile: 4},
+      data: {profile: 0},
       success: function(data) {
         $("#whatisamkn").html(data);
       }
@@ -189,11 +202,11 @@ switch ($profile) {
         </div>
       </div>
     </div>
-    <div class="buttons">
+<!--    <div class="buttons">
       <div class="buttons-c">
         <a id="gotoclimate" class="gotoclimate">Return to Website</a>
       </div>
-    </div>
+    </div>-->
 <?php
     break;
   case 0:
@@ -229,12 +242,12 @@ switch ($profile) {
           Researcher
         </div>
       </div>
-      <div class="buttons">
+<!--      <div class="buttons">
           <div class="buttons-c">
           <a id="goback1" class="gotoclimate">Back</a>
           <a id="gotoclimate" class="gotoclimate">Return to Website</a>
           </div>
-        </div>
+        </div>-->
     </div>
     <?php
     break;
@@ -312,12 +325,12 @@ switch ($profile) {
             </div>
           </div>
         </div>
-        <div class="buttons">
+<!--        <div class="buttons">
           <div class="buttons-c">
           <a id="goback" class="gotoclimate">Back</a>
           <a id="gotoclimate" class="gotoclimate">Return to Website</a>
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
     <!--    <div class="profile-detail">
@@ -418,12 +431,12 @@ switch ($profile) {
             </div>
           </div>
         </div>
-        <div class="buttons">
+<!--        <div class="buttons">
           <div class="buttons-c">
           <a id="goback" class="gotoclimate">Back</a>
           <a id="gotoclimate" class="gotoclimate">Return to Website</a>
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
     <?php
@@ -512,12 +525,12 @@ switch ($profile) {
             </div>
           </div>
         </div>
-        <div class="buttons">
+<!--        <div class="buttons">
           <div class="buttons-c">
           <a id="goback" class="gotoclimate">Back</a>
           <a id="gotoclimate" class="gotoclimate">Return to Website</a>
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
     <?php
@@ -598,12 +611,12 @@ switch ($profile) {
             </div>
           </div>
         </div>
-        <div class="buttons">
+<!--        <div class="buttons">
           <div class="buttons-c">
           <a id="goback" class="gotoclimate">Back</a>
           <a id="gotoclimate" class="gotoclimate">Return to Website</a>
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
     <?php

@@ -106,7 +106,7 @@ body.remodal_active .remodal-overlay {
 .remodal {
     width: 100%;
     min-height: 100%;
-    padding: 35px;
+    padding: 20px 35px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -148,8 +148,8 @@ body.remodal_active .remodal {
     position: absolute;
     top: 5px;
     left: 5px;
-    width: 28px;
-    height: 28px;
+    width: 20px;
+    height: 20px;
     text-decoration: none;
     -webkit-border-radius: 50%;
     border-radius: 50%;
@@ -163,10 +163,10 @@ body.remodal_active .remodal {
 .remodal-close:after {
     display: block;
 
-    font-size: 28px;
+    font-size: 22px;
     font-family: Arial, 'Helvetica CY', 'Nimbus Sans L', sans-serif !important;
     content: "×";
-    line-height: 28px;
+    line-height: 22px;
     cursor: pointer;
     text-decoration: none;
     color: #3e5368;
