@@ -26,10 +26,19 @@ and open the template in the editor.
   position: relative;
   min-height: 50px;
   text-align: center;
+  font-size: 12px;
 }
 
 .remodal #info p {
   text-align: center;
+}
+
+.chkmsg {
+  font-size: 12px;
+}
+
+.ui-tooltip {
+  padding: 0px!important;
 }
 
 .buttons {
@@ -80,7 +89,6 @@ and open the template in the editor.
 
 #whatisamkn {
   overflow: hidden;
-  margin-bottom: 30px;
 }
 
 .icon {
@@ -229,6 +237,7 @@ and open the template in the editor.
 .profiles-container {
   width: 100%;
   float:left;
+  padding-bottom: 30px;
 }
 
 .icon-detail-container {

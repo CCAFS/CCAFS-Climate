@@ -92,14 +92,14 @@
       Applications of CCAFS-Climate data include assessing  agriculture, ecosystem functioning, options for policy-making, food security and adaptation planning, in others. 
       <a id="profiles" href="#">See how CCAFS-Climate can help to your specific field</a>
       {*    <p>*}
-      <p class="chkmsg"><input type="checkbox" id="chk_showmsg">&nbsp;Do not show this message again</p>
+      <p class="chkmsg"><input type="checkbox" id="chk_showmsg">&nbsp;Don't show this message again</p>
     </div>
     <div class="modal-first modal-whoare modal-icons">
       <div id="policy" class="icon-container">
         <div class="policy icon">
         </div>
         <div class="icon-text">
-          Policy/Deciton-Maker
+          Policy/Decision Maker
         </div>
       </div>
       <div id="govermental" class="icon-container">

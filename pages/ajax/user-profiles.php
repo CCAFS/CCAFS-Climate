@@ -12,29 +12,33 @@ $profile = $_REQUEST['profile'];
     $(".remodal-overlay").hide();
   });
 
-  $("#goback").on('click', function() {
-    $.ajax({
-      type: "POST",
-      dataType: "text",
-      url: "/ajax/user-profiles.php",
-      data: {profile: 0},
-      success: function(data) {
-        $("#whatisamkn").html(data);
-      }
-    });
-  });
-  
-  $("#goback1").on('click', function() {
-    $.ajax({
-      type: "POST",
-      dataType: "text",
-      url: "/ajax/user-profiles.php",
-      data: {profile: -1},
-      success: function(data) {
-        $("#whatisamkn").html(data);
-      }
-    });
-  });
+//  $("#goback").on('click', function() {
+//    $.ajax({
+//      type: "POST",
+//      dataType: "text",
+//      url: "/ajax/user-profiles.php",
+//      data: {profile: 0},
+//      success: function(data) {
+//        $("#whatisamkn").html(data);
+//        $("#goback").hide();
+//        $("#goback1").show();
+//      }
+//    });
+//  });
+//  
+//  $("#goback1").on('click', function() {
+//    $.ajax({
+//      type: "POST",
+//      dataType: "text",
+//      url: "/ajax/user-profiles.php",
+//      data: {profile: -1},
+//      success: function(data) {
+//        $("#whatisamkn").html(data);
+////        $("#goback").hide();
+//        $("#goback1").hide();
+//      }
+//    });
+//  });
   
   $("#policy-l").on('click', function() {
     $.ajax({
@@ -44,6 +48,8 @@ $profile = $_REQUEST['profile'];
       data: {profile: 1},
       success: function(data) {
         $("#whatisamkn").html(data);
+        $("#goback").show();
+        $("#goback1").hide();
       }
     });
   });
@@ -56,6 +62,8 @@ $profile = $_REQUEST['profile'];
       data: {profile: 2},
       success: function(data) {
         $("#whatisamkn").html(data);
+        $("#goback").show();
+        $("#goback1").hide();
       }
     });
   });
@@ -68,6 +76,8 @@ $profile = $_REQUEST['profile'];
       data: {profile: 3},
       success: function(data) {
         $("#whatisamkn").html(data);
+        $("#goback").show();
+        $("#goback1").hide();
       }
     });
   });
@@ -80,21 +90,23 @@ $profile = $_REQUEST['profile'];
       data: {profile: 4},
       success: function(data) {
         $("#whatisamkn").html(data);
+        $("#goback").show();
+        $("#goback1").hide();
       }
     });
   });
   
-  $("#profiles").on('click', function() {
-    $.ajax({
-      type: "POST",
-      dataType: "text",
-      url: "/ajax/user-profiles.php",
-      data: {profile: 0},
-      success: function(data) {
-        $("#whatisamkn").html(data);
-      }
-    });
-  });
+//  $("#profiles").on('click', function() {
+//    $.ajax({
+//      type: "POST",
+//      dataType: "text",
+//      url: "/ajax/user-profiles.php",
+//      data: {profile: 0},
+//      success: function(data) {
+//        $("#whatisamkn").html(data);
+//      }
+//    });
+//  });
 
 //  $(".policy").on('click', function() {
 //    $.ajax({
@@ -171,13 +183,14 @@ switch ($profile) {
     <div class="modal-first modal-whoare">
       Applications of CCAFS-Climate data include assessing  agriculture, ecosystem functioning, options for policy-making, food security and adaptation planning, in others. 
       <a id="profiles" href="#">See how CCAFS-Climate can help to your specific field</a>
+      <p class="chkmsg"><input type="checkbox" id="chk_showmsg">&nbsp;Don't show this message again</p>
     </div>
     <div class="modal-first modal-whoare modal-icons">
       <div id="policy" class="icon-container">
         <div class="policy icon">
         </div>
         <div class="icon-text">
-          Policy/Deciton-Maker
+          Policy/Decision Maker
         </div>
       </div>
       <div id="govermental" class="icon-container">
@@ -218,7 +231,7 @@ switch ($profile) {
         <div class="policy icon-l">
         </div>
         <div class="icon-text-l">
-          Policy/Deciton-Maker
+          Policy/Decision Maker
         </div>
       </div>
       <div id="govermental-l" class="icon-container">
@@ -261,7 +274,7 @@ switch ($profile) {
           <div class="policy icon-l">
           </div>
           <div class="icon-text-l">
-            Policy/Deciton-Maker
+            Policy/Decision Maker
           </div>
         </div>
       </div>
