@@ -222,6 +222,11 @@ and open the template in the editor.
   cursor: pointer;
 }
 
+.icon-container-p{
+  width: 25%;
+  float:left;
+}
+
 .icon-container-d1{
   width: 33%;
   float:left;

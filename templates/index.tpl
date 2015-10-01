@@ -95,28 +95,28 @@
       <p class="chkmsg"><input type="checkbox" id="chk_showmsg">&nbsp;Don't show this message again</p>
     </div>
     <div class="modal-first modal-whoare modal-icons">
-      <div id="policy" class="icon-container">
+      <div id="policy" class="icon-container-p">
         <div class="policy icon">
         </div>
         <div class="icon-text">
           Policy/Decision Maker
         </div>
       </div>
-      <div id="govermental" class="icon-container">
+      <div id="govermental" class="icon-container-p">
         <div class="govermental icon">
         </div>
         <div class="icon-text">
           Governmental Staff
         </div>
       </div>
-      <div id="academic" class="icon-container">
+      <div id="academic" class="icon-container-p">
         <div class="academic icon">
         </div>
         <div class="icon-text">
           Academic
         </div>
       </div>
-      <div id="researcher" class="icon-container">
+      <div id="researcher" class="icon-container-p">
         <div class="researcher icon">
         </div>
         <div class="icon-text">
