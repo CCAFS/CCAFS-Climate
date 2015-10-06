@@ -247,14 +247,14 @@
 			border-left-color: silver !important;
 			border-left-width: 1px !important;
 			}
-
-			.x-panel-body-default { /*para los xtype: 'label'*/
+			
+			
+			.x-panel-body-default { 
 			background: white;
 			border-color: silver !important;
 			color: black;
 			font-size: 13px;
 			font-family: Trebuchet MS;
-			/*font-weight: bold;*/
 			border-width: 1px;
 			border-style: solid;
 			}
@@ -444,9 +444,9 @@
 			}
 			.toolDownload .x-tool-img {
 				overflow: hidden;
-				width: 20px;
+				width: 16px;
 				height: 16px;
-				background-image: url(../iconosGIS/buttons/Cloud-Download-Off-icon.png);
+				background-image: url(../iconosGIS/buttons/file-info-icon.png); /*Cloud-Download-Off-icon.png*/
 				margin: 0;
 			}	
 			.toolDownload .x-tool-img {
@@ -548,8 +548,9 @@
 			.price-fall .x-change-cell {
 				color:#83939E;
 			}
-			.price-rise .x-grid-row-checker {
-				background-position: 0 -30px;
+
+			.price-fall .x-grid-row-checker {
+				background-position: 0 15px;
 			}	
 			.general-rule .x-grid-row-checker {
 				left: -9999px !important;
@@ -673,7 +674,17 @@
 }
 
 
-
+.myFieldIdLog {
+    background: white;
+    border-color: silver !important;
+	text-align:center;
+    color: #135A92;
+    font-size: 10px !important;
+    font-family: Trebuchet MS;
+    /* font-weight: bold; */
+    border-width: 1px;
+    border-style: none;
+}
 /* 			
 .x-grid-hd-checker-on .x-column-header-text, .x-grid-row-selected .x-grid-row-checker, .x-grid-row-checked .x-grid-row-checker {
     background-position: 0 -15px;
