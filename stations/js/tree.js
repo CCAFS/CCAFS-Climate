@@ -1742,7 +1742,7 @@ var bton_sign_Up = new Ext.Button({
 									// collapsible: true,
 									// collapsed: false,
 									// buttonAlign: 'right',
-									html: '<p style="color:#95999A">If you want to access restricted data of weather stations please contact us.</p>'
+									html: '<p style="color:#95999A">If you want to access restricted weather stations data please <a href="http://ccafs-climate.org/contact/" target="_blank">contact us.</a></p>'
 									// items: []								
 									/*
 									xtype: 'checkboxfield',
@@ -2735,15 +2735,13 @@ var bton_sign_Up = new Ext.Button({
 										// {return rowIndex+1;}
 									// },			
 									// { text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
+									{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
 									{ text: 'code',minWidth: 70,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
 									{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
 									{ text: 'institute',minWidth: 70,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
 									{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
-									
-
-									
 									{ text: 'variables',minWidth: 120,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-									{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+									
 									
 									// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 									// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
@@ -3435,7 +3433,8 @@ var bton_sign_Up = new Ext.Button({
 										// minWidth: 20,
 										// renderer : function(value, metaData, record, rowIndex)
 										// {return rowIndex+1;}
-									// },			
+									// },
+									{ text: 'download',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
 									{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
 									{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
 									{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
@@ -3448,7 +3447,7 @@ var bton_sign_Up = new Ext.Button({
 									// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
 									
 									{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-									{ text: 'download',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+									
 									
 									// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 									// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
@@ -4466,7 +4465,8 @@ var bton_sign_Up = new Ext.Button({
 														// minWidth: 20,
 														// renderer : function(value, metaData, record, rowIndex)
 														// {return rowIndex+1;}
-													// },			
+													// },	
+														{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
 														{ text: 'code',minWidth: 70,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
 														{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
 														{ text: 'institute',minWidth: 70,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
@@ -4475,7 +4475,7 @@ var bton_sign_Up = new Ext.Button({
 
 														
 														{ text: 'variables',minWidth: 120,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-														{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+														
 														
 														// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 														// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
@@ -5540,7 +5540,8 @@ var bton_sign_Up = new Ext.Button({
 														// minWidth: 20,
 														// renderer : function(value, metaData, record, rowIndex)
 														// {return rowIndex+1;}
-													// },			
+													// },	
+													{ text: 'download',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
 													{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
 													{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
 													{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
@@ -5553,7 +5554,7 @@ var bton_sign_Up = new Ext.Button({
 													// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
 													
 													{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-													{ text: 'download',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+													
 													
 													// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 													// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
@@ -6471,7 +6472,8 @@ var bton_sign_Up = new Ext.Button({
 														// minWidth: 20,
 														// renderer : function(value, metaData, record, rowIndex)
 														// {return rowIndex+1;}
-													// },			
+													// },
+													{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
 													{ text: 'code',minWidth: 70,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
 													{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
 													{ text: 'institute',minWidth: 70,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
@@ -6480,7 +6482,7 @@ var bton_sign_Up = new Ext.Button({
 
 													
 													{ text: 'variables',minWidth: 120,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-													{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+													
 													
 													// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 													// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
@@ -7145,7 +7147,8 @@ var bton_sign_Up = new Ext.Button({
 														// minWidth: 20,
 														// renderer : function(value, metaData, record, rowIndex)
 														// {return rowIndex+1;}
-													// },			
+													// },		
+													{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
 													{ text: 'code',minWidth: 70,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
 													{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
 													{ text: 'institute',minWidth: 70,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
@@ -7154,7 +7157,7 @@ var bton_sign_Up = new Ext.Button({
 
 													
 													{ text: 'variables',minWidth: 120,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-													{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+													
 													
 													// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 													// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
@@ -7655,7 +7658,8 @@ var bton_sign_Up = new Ext.Button({
 														// minWidth: 20,
 														// renderer : function(value, metaData, record, rowIndex)
 														// {return rowIndex+1;}
-													// },			
+													// },	
+													{ text: 'download',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
 													{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
 													{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
 													{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
@@ -7668,7 +7672,7 @@ var bton_sign_Up = new Ext.Button({
 													// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
 													
 													{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-													{ text: 'download',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+													
 													
 													// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 													// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
@@ -9381,7 +9385,8 @@ var bton_sign_Up = new Ext.Button({
 										// minWidth: 20,
 										// renderer : function(value, metaData, record, rowIndex)
 										// {return rowIndex+1;}
-										// },			
+										// },		
+										{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
 										{ text: 'code',minWidth: 70,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
 										{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
 										{ text: 'institute',minWidth: 70,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
@@ -9390,7 +9395,7 @@ var bton_sign_Up = new Ext.Button({
 
 										
 										{ text: 'variables',minWidth: 120,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-										{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+										
 										
 										// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 										// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
