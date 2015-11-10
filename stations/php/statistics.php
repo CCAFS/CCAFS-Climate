@@ -45,7 +45,7 @@ foreach ($files as $file) {
 
 
 	// $result['output']['totalCount'] = $i;
-// echo "<pre>".print_r($result['output'],true)."</pre>";
+ //echo "<pre>".print_r($result['output'],true)."</pre>";
 header('Content-type: application/json',true);
 echo json_encode($result['output']);
 
@@ -62,8 +62,9 @@ function resumeCalculator($data) {
 	$output['sd'] = strval(round(stdDev($data),2));
 	$output['median'] = strval(calculateMedian($data));
 	$output['cv_per'] = strval(round(cv($data),2));
-	$output['na'] = strval(nullCounter($data));
-	$output['na_per'] = strval(round(nullCounter($data, 'percent'),2));
+	$output['na'] = strval(nullCounterStation($data));
+	$output['na_per'] = strval(round(nullCounterStation($data, 'percent'),2));
+	 //echo "<pre>".$url.print_r($output,true)."</pre>";
 	return $output;
 }
 
@@ -101,7 +102,7 @@ function stationReadFile($url, $name) {
   $myfile = fopen( $dirfilesStations.$url . "/" . $name, "r") or die("Unable to open file!");
   $line = fgets($myfile);
   $i = 0;
-  while (!feof($myfile) && $i < 2000) {
+  while (!feof($myfile)) {
     $line = fgets($myfile);
       $line = explode("\t", $line);
       if (isset($line[1])) {
@@ -119,11 +120,11 @@ function stationReadFile($url, $name) {
 }
 
 
-function nullCounter ($data, $type = 'counter') {
+function nullCounterStation ($data, $type = 'counter') {
 	$num_args = 0;
 	$total = count($data);
 	foreach ($data as $value) {
-        if($value==0 || $value=='') {
+		if(is_null($value)) {
           $num_args++;
         }
     }
@@ -132,11 +133,12 @@ function nullCounter ($data, $type = 'counter') {
 
 function stationMean($values) {
     $sum = 0;
-    $num_args = 0;
+    //$num_args = 0;
+	$num_args = count ($values);
     foreach ($values as $value) {
         $sum += $value;
         if($value!=0 && $value!='') {
-          $num_args++;
+          //$num_args++;
         }
     }
     $mean = ($num_args!=0)?($sum / $num_args):0;
