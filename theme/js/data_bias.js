@@ -12,7 +12,7 @@ $(document).ready(function() {
 
 //$("#example_id").ionRangeSlider();
 
-$("#example_id").ionRangeSlider({
+$("#period").ionRangeSlider({
     type: "double",
     min: 2015,
     max: 2100,
@@ -284,19 +284,19 @@ function getFilesInfo(evt) {
   // console.log(filterValues.filesetId)
   // Hide the help icon 
 
-  if (filterValues.filesetId == 4 && filterValues.extendId == 2) {
-    filterValues.formatId = 1;
-  }
-  if (filterValues.filesetId == 12 && filterValues.extendId == 2) {
-    filterValues.formatId = 1;
-  }
+//  if (filterValues.filesetId == 4 && filterValues.extendId == 2) {
+//    filterValues.formatId = 1;
+//  }
+//  if (filterValues.filesetId == 12 && filterValues.extendId == 2) {
+//    filterValues.formatId = 1;
+//  }
   if ($(evt.target).parent().prev().hasClass("help_icon")) {
     $(evt.target).parent().prev().hide();
   }
   $.ajax({
     type: "POST",
     dataType: "json",
-    url: "/ajax/data-file-info.php",
+    url: "/ajax/data-file-info-bias.php",
     data: filterValues,
     beforeSend: function() {
       // Hide the help icon if exists
@@ -315,12 +315,14 @@ function getFilesInfo(evt) {
       if (data != null) {
         if (data.filesFound < 0) {
           $("#filesFound").text("0 files found");
-          $("#searchSubmit").attr("disabled", "disabled");
-          $("#searchSubmit").addClass("disable");
+//          $("#searchSubmit").attr("disabled", "disabled");
+//          $("#searchSubmit").addClass("disable");
         } else {
           if (data.filesFound == 0) {
-            $("#searchSubmit").attr("disabled", "disabled");
-            $("#searchSubmit").addClass("disable");
+//            $("#searchSubmit").attr("disabled", "disabled");
+//            $("#searchSubmit").addClass("disable");
+            $("#searchSubmit").removeAttr("disabled");
+            $("#searchSubmit").removeClass("disable");
           } else {
             $("#searchSubmit").removeAttr("disabled");
             $("#searchSubmit").removeClass("disable");
@@ -456,16 +458,18 @@ function getUserSelections(filterName) {
   }
 
   var data = {
+    coordinate: $("#lat").val()+","+$("#lon").val(),
     methodId: $("input[name='method']:checked").val(),
     modelId: model,
-    extendId: $("input[name='extent']:checked").val(),
+//    extendId: $("input[name='extent']:checked").val(),
     formatId: formats,
     scenarioId: scenarios,
     periodId: period,
     variableId: variables,
-    resolutionId: $("input[name='resolution']:checked").val(),
+//    resolutionId: $("input[name='resolution']:checked").val(),
+    observation: $("input[name='observation']:checked").val(),
     filesetId: $("input[name='fileSet']:checked").val(),
-    tileName: tileNameVal,
+//    tileName: tileNameVal,
     section: filterName
   }
 

@@ -8,11 +8,11 @@
 </div>
 
 
-<div class="messagepop pop" id='frameMain_video' class="ui-widget-content" title="Tutorial CCAFS-Climate">
+{*<div class="messagepop pop" id='frameMain_video' class="ui-widget-content" title="Tutorial CCAFS-Climate">
   <div id="content-video">
     <iframe id="playerID" width="100%" height="100%" src="http://www.youtube.com/embed/ubZ_d3X96tc">  </iframe>
   </div>
-</div>	
+</div>	*}
 
 <div id="content" class="data" style="margin-bottom:45px">
   <div style="height: 43px;">
@@ -37,7 +37,7 @@
     <P>If you are using IE 9 or later, make sure you <A href="http://windows.microsoft.com/en-US/windows7/webpages-look-incorrect-in-Internet-Explorer">turn off "Compatibility View"</A>.</P>
   </div>
   <div id="search_form">
-    <form method="GET" action="" TARGET="_blank" id="formSearch">
+    <form method="GET" action="/bias-corrected-request.php" TARGET="_blank" id="formSearch">
 
       <div id="side-left"> 
         <section class="ac-container">
@@ -47,9 +47,9 @@
             <label class="inputs-acf" for="ac-0">Location</label>
             <article class="ac-large"> 
               <label for="lat">Latitude</label>
-              <input type="text" id="lat" value="">
+              <input type="text" id="lat" name="lat" value="">
               <label for="lon">Longitude</label>
-              <input type="text" id="lon" value="">
+              <input type="text" id="lon" name="lon" value="">
             </article>
           </div>
 
@@ -94,7 +94,11 @@
           <div id="observation-filters" class="inputs-ac">
             <span id="ac-4" class="inputs-ac" > </span>
             <label class="inputs-ac" for="ac-4">Observation Dataset</label>
-            <article class="ac-large"> 
+            <article class="ac-large">
+              {foreach from=$observations item=observation}
+              <img class="help_icon" id="help_icon_fileSet" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+              <input id="observation-{$observation['id']}" type="radio" name="observation" value="{$observation['id']}" /><label for="observation-{$observation['id']}">{$observation["name"]}</label><br> 
+              {/foreach}
             </article>
           </div>
         </section>
@@ -107,7 +111,7 @@
               <div id="dropdown-arrow"></div> 
               <div id="drop-content">
 {*                <input type="hidden" class="slider-input" value="23" />*}
-                <input type="text" id="example_id" name="example_name" value="" />
+                <input type="text" id="period" name="period" value="" />
 {*                {foreach from=$periods item=period}
                   <img class="help_icon" id="help_icon_period" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
                   <input id="period-{$period['id']}" type="checkbox" name="period[]" value="{$period['id']}">
@@ -166,7 +170,7 @@
           </div>
 
           <div id="bloc-search">
-            <button type="submit" id="searchSubmit" disabled="disabled">Search</button>
+            <button type="submit" id="searchSubmit" disabled="disabled">Run</button>
             <label>
               <span id="filesFound">0 files found</span>
               <img class="loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />
