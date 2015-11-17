@@ -153,7 +153,8 @@ class Access_user {
 			// header("Location: ".$next_page);
 			// echo "success: true";
 			// print $goto_page;
-			echo "OK";
+			// echo "OK";
+			echo "OK ".$this->user;
 			//header('Location: http://'.$_SERVER['HTTP_HOST'].'/ejemplos/phpUserClass/example-jquery.php');
 			// header('Location: http://'.$_SERVER['HTTP_HOST'].'/Pagina_web/Pagina/SigturValle.php');
 			//header('Location: http://'.$_SERVER['HTTP_HOST'].'/classes/access_user/index.php');

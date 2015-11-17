@@ -241,6 +241,7 @@ Ext.application({
 	mapPanel.map.addLayer(layerTempRegion);
 	mapPanel.map.addLayer(layerTempStat);
 	
+	// este no esta en uso
 	var bton_login = new Ext.Button({	
 		text:'Login',
 		icon   : icons+'buttons/login16.png',//'buttons/login24.png',
@@ -460,7 +461,7 @@ Ext.application({
 									 *    custom getErrors method implementation.
 									 */
 									{
-										xtype: 'checkboxfield',
+										/*xtype: 'checkboxfield',
 										name: 'acceptTerms',
 										fieldLabel: 'Terms of Use',
 										hideLabel: true,
@@ -503,7 +504,7 @@ Ext.application({
 										// Custom validation logic - requires the checkbox to be checked
 										getErrors: function() {
 											return this.getValue() ? [] : ['You must accept the Terms of Use']
-										}
+										}*/
 									}],
 							 
 									dockedItems: [{
@@ -1615,220 +1616,10 @@ Ext.application({
 
 // });
 
-    var fieldsetLogin = {
-        xtype: 'fieldset',
-        title: 'Sign in with username and password   '+ '<img id="help_toolip" class="tooltipIcon" src='+icons+infoB+' data-qtip="'+toolip_fieldsetLogin+'" />',//<span data-qtip="hello">First Name</span>  
-		id:'Login',
-        layout: 'anchor',
-		width:fieldsetWidth,
-        defaults: {
-            anchor: '100%',
-			bodyStyle: 'padding:4px'
-        },
-        collapsible: true,
-        collapsed: false,
-		buttonAlign: 'right',
-		items: [
-			{
-				xtype: 'buttongroup',
-				// columns: 1,
-				// layout: 'column',
-				layout: {
-					type: 'hbox',
-					//columns: 2,
-					align: 'middle',
-					pack: 'center',
-						
-
-				},			
-				// style:'font-size: 10px;',
-				cls:'my-cls',
-				// layout: {
-					// type: 'vbox',
-					// align: 'center'
-				// },				
-				style: {
-					border: 0,
-					padding: 1
-				},				
-				defaults: {
-					scale: 'small',
-					// flex: 1
-				},
-				items: [		
-					{
-						xtype:'button',
-						id:'btonLoginId',
-						text:'Login',
-						icon: icons+'key-icon.png',
-						width:70,
-						handler: function(){
-							Ext.getCmp('mainpanelID').setDisabled(true);
-							var login = Ext.create('Ext.FormPanel', {
-								// url:'php/Login.php', 
-								// id:'formLoginId',
-								bodyPadding: 5,
-								cls: 'css_labels',
-								frame:true, 
-								// title:'Please Login', 
-								defaultType:'textfield',
-								monitorValid:true,
-								defaults: {
-									listeners:{
-										specialkey: function(field, e){
-											if (e.getKey() == e.ENTER){
-												var element = Ext.getCmp("Btn_Submit_id");
-												element.handler.call(element.scope);
-												// element.fireEvent('click',element); // field.up('form').getForm().submit({});
-											}
-										}									
-									}
-								},
-								items:[{ 
-										fieldLabel:'Login', 
-										name:'login', 
-										id:'login', 
-										labelWidth:60,
-										allowBlank:false,
-										minLength: 4, maxLength: 32
-									},{ 
-										fieldLabel:'Password', 
-										name:'password', 
-										id:'password', 
-										inputType:'password', 
-										labelWidth:60,
-										allowBlank:false, minLength: 4,
-										maxLength: 32, minLengthText: 'Password must be at least 4 characters long.' 
-									}],
-
-									buttons:[
-										{ 
-												// iconCls: 'key-go',
-												text:' Submit',
-												id:"Btn_Submit_id",
-												overCls : 'my-over',
-												formBind: true,	 
-												// icon: icons+'key-go-icon.png', 
-												scale: 'small',
-												// listeners : {
-													// click: function(button,event) {
-														// Ext.getCmp('btonLoginId').setText('Hide');
-													// }
-												// },										
-												handler:function(){ 
-														Ext.Ajax.request({
-															url: 'php/Geo_statByregion.php',
-															method: 'POST',
-															params : {type:23,login:Ext.getCmp('login').getValue(), password: Ext.getCmp('password').getValue()},
-															success: function(response, opts) {
-																resul=response.responseText
-																
-																// if(resul.split("\n")[1]=="OK"){
-																if(resul=="OK"){
-																	Ext.getCmp('btonLoginId').setText('Logout');
-																	// ventana_login.hide();
-																	ventana_login.destroy();
-																	Ext.getCmp('mainpanelID').enable()
-																}else if(resul==10){
-																	winInfo=Ext.MessageBox.show({
-																	   title: 'Warning',
-																	   msg: 'Login and/or password did not match to the database.',
-																	   width:300,
-																	   buttons: Ext.MessageBox.OK,
-																	   animateTarget: 'warning',
-																	   icon: 'x-message-box-warning'
-																	});	
-																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);															
-																
-																}else{
-																	winInfo=Ext.MessageBox.show({
-																	   title: 'Warning',
-																	   msg: 'Not stations found!',
-																	   width:300,
-																	   buttons: Ext.MessageBox.OK,
-																	   animateTarget: 'warning',
-																	   icon: 'x-message-box-warning'
-																	});	
-																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
-
-																}
-															},
-															failure: function(response, opts) {
-																var responseText = (response.responseText ? response.responseText : 'Unable to contact the server.  Please try again later.');
-																panelLaunch({
-																	iconClass: 'x-panel-action-icon-tick',
-																	position: 'br',
-																	actionMethod: ['hide']
-																}, responseText);
-															},
-															scope: this
-														});										
-													
-										} 
-									}],
-									// keys: [{ key: Ext.EventObject.ENTER, fn: Ext.getCmp('Btn_Submit_id') }]
-									
-						   });
-						   
-							btonLog=Ext.getCmp('btonLoginId').text
-							
-							var ventana_login = new Ext.Window({
-								iconCls: 'key',
-								title: 'Login',
-								id:'ventana_loginID',
-								style: "font-family: 'Oswald', sans-serif;font-size: 14px;",
-								constrainHeader: true,
-								collapsible: true,
-								resizable: false,
-								frame:true, 
-								// keys: [{ key: Ext.EventObject.ENTER, scope: this, handler:function(){console.log("holaaa")} }],
-								width: 250,
-								height: 150,
-								layout: 'fit', //fit
-								plain: true,
-								bodyStyle: 'padding:5px;',
-								buttonAlign: 'center',
-								x:mainPanelWidth/2,
-								y:mainPanelHeight/3,									
-								items: [login],
-								enablekeyEvents: true,
-								listeners:{
-									'close':function(){
-										Ext.getCmp('mainpanelID').enable()
-									}									
-								}								
-							}); // fin windows
-								
-							if(btonLog=="Login"){		
-								ventana_login.show();
-							}else{
-								Ext.Ajax.request({
-									url: 'php/Geo_statByregion.php',
-									method: 'POST',
-									params : {type:24},
-									success: function(response, opts) {
-										resul=response.responseText
-										Ext.getCmp('btonLoginId').setText('Login');
-										ventana_login.hide();
-										Ext.getCmp('mainpanelID').enable()
-									},
-									failure: function(response, opts) {
-										var responseText = (response.responseText ? response.responseText : 'Unable to contact the server.  Please try again later.');
-										panelLaunch({
-											iconClass: 'x-panel-action-icon-tick',
-											position: 'br',
-											actionMethod: ['hide']
-										}, responseText);
-									},
-									scope: this
-								});						
-								
-							}						
-						} // fin handler Login
-					},
-					{
-						xtype:'button',
+var bton_sign_Up = new Ext.Button({						
+						// xtype:'button',
 						text:'Sign Up',
+						id:'SignUpID',
 						icon: icons+'forms-icon.png',
 						width:70,
 						margin: '5px 5px 0 5px',
@@ -1936,6 +1727,24 @@ Ext.application({
 								 *    custom getErrors method implementation.
 								 */
 								{
+								
+									xtype: 'fieldset',
+									title: '<span style="color: #135A92">Important</span>',
+									id:'idTermsUSe',
+									
+									// layout: 'anchor',
+									// width:fieldsetWidth,
+									bodyPadding: 0,
+									defaults: {
+										anchor: '100%',
+										bodyStyle: 'padding:4px;'
+									},
+									// collapsible: true,
+									// collapsed: false,
+									// buttonAlign: 'right',
+									html: '<p style="color:#95999A">If you want to access restricted weather stations data please <a href="http://ccafs-climate.org/contact/" target="_blank">contact us.</a></p>'
+									// items: []								
+									/*
 									xtype: 'checkboxfield',
 									name: 'acceptTerms',
 									fieldLabel: 'Terms of Use',
@@ -1982,7 +1791,7 @@ Ext.application({
 									// Custom validation logic - requires the checkbox to be checked
 									getErrors: function() {
 										return this.getValue() ? [] : ['You must accept the Terms of Use']
-									}
+									}*/
 								}],
 						 
 								dockedItems: [{
@@ -2146,7 +1955,7 @@ Ext.application({
 								resizable: false,
 								frame:true, 
 								width: 350,
-								height: 280,
+								height: 310,
 								layout: 'fit', //fit
 								plain: true,
 								bodyStyle: 'padding:5px;',
@@ -2167,7 +1976,248 @@ Ext.application({
 																
 						
 						}
-					}					
+					})					
+
+
+
+    var fieldsetLogin = {
+        xtype: 'fieldset',
+        title: 'Sign in with username and password   '+ '<img id="help_toolip" class="tooltipIcon" src='+icons+infoB+' data-qtip="'+toolip_fieldsetLogin+'" />',//<span data-qtip="hello">First Name</span>  
+		id:'Login',
+        layout: 'anchor',
+		width:fieldsetWidth,
+        defaults: {
+            anchor: '100%',
+			bodyStyle: 'padding:4px'
+        },
+        collapsible: true,
+        collapsed: false,
+		buttonAlign: 'right',
+		items: [
+			{
+				xtype: 'buttongroup',
+				id: 'buttongroupCondForm',
+				// columns: 1,
+				// layout: 'column',
+				layout: {
+					type: 'hbox',
+					align: 'middle',
+					pack: 'center',
+				},			
+				// style:'font-size: 10px;',
+				cls:'my-cls',
+				// layout: {
+					// type: 'vbox',
+					// align: 'center'
+				// },				
+				style: {
+					border: 0,
+					padding: 1
+				},				
+				defaults: {
+					scale: 'small',
+					// flex: 1
+				},
+				items: [		
+					{
+						xtype:'button',
+						id:'btonLoginId',
+						text:'Login',
+						icon: icons+'key-icon.png',
+						width:70,
+						handler: function(){
+							if(Ext.getCmp('popupID')){
+								Ext.getCmp('popupID').close()
+							}						
+							Ext.getCmp('mainpanelID').setDisabled(true);
+							var login = Ext.create('Ext.FormPanel', {
+								// url:'php/Login.php', 
+								// id:'formLoginId',
+								bodyPadding: 5,
+								cls: 'css_labels',
+								frame:true, 
+								// title:'Please Login', 
+								defaultType:'textfield',
+								monitorValid:true,
+								defaults: {
+									listeners:{
+										specialkey: function(field, e){
+											if (e.getKey() == e.ENTER){
+												var element = Ext.getCmp("Btn_Submit_id");
+												element.handler.call(element.scope);
+												// element.fireEvent('click',element); // field.up('form').getForm().submit({});
+											}
+										}									
+									}
+								},
+								items:[{ 
+										fieldLabel:'Login', 
+										name:'login', 
+										id:'login', 
+										labelWidth:60,
+										allowBlank:false,
+										minLength: 4, maxLength: 32
+									},{ 
+										fieldLabel:'Password', 
+										name:'password', 
+										id:'password', 
+										inputType:'password', 
+										labelWidth:60,
+										allowBlank:false, minLength: 4,
+										maxLength: 32, minLengthText: 'Password must be at least 4 characters long.' 
+									}],
+
+									buttons:[
+										{ 
+												// iconCls: 'key-go',
+												text:' Submit',
+												id:"Btn_Submit_id",
+												overCls : 'my-over',
+												formBind: true,	 
+												// icon: icons+'key-go-icon.png', 
+												scale: 'small',
+												// listeners : {
+													// click: function(button,event) {
+														// Ext.getCmp('btonLoginId').setText('Hide');
+													// }
+												// },										
+												handler:function(){ 
+														Ext.Ajax.request({
+															url: 'php/Geo_statByregion.php',
+															method: 'POST',
+															params : {type:23,login:Ext.getCmp('login').getValue(), password: Ext.getCmp('password').getValue()},
+															success: function(response, opts) {
+																resul=response.responseText
+																var res = resul.split(" ")[0];
+																var usr  = resul.split(" ")[1];
+																// if(resul.split("\n")[1]=="OK"){
+																if(res=="OK"){
+																	Ext.getCmp('btonLoginId').setText('Logout');
+																	// ventana_login.hide();
+																	ventana_login.destroy();
+																	Ext.getCmp('mainpanelID').enable()
+																	Ext.getCmp('SignUpID').disable()
+																	// Ext.getCmp('buttongroupCondForm').remove(Ext.getCmp('SignUpID'));
+																	Ext.getCmp('buttongroupCondForm').add({
+																		xtype: 'label',
+																		// forId: 'myFieldIdLog',
+																		cls:'myFieldIdLog',
+																		id:'myFieldIdLog',
+																		height : 25,
+																		text: 'Welcome '+usr+'!',
+																		// labelAlign:'top',
+																		// bodyStyle: 'margin: -5px !important;',
+																		// style : {
+																			//background : '#6699FF',
+																			// color : '#394E6A',
+																			// textAlign: 'top',
+																			// margins: '-20 10 10 10'
+																		// },																		
+																		
+																	});
+																}else if(resul==10){
+																	winInfo=Ext.MessageBox.show({
+																	   title: 'Warning',
+																	   msg: 'Login and/or password did not match to the database.',
+																	   width:300,
+																	   buttons: Ext.MessageBox.OK,
+																	   animateTarget: 'warning',
+																	   icon: 'x-message-box-warning'
+																	});	
+																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);															
+																
+																}else{
+																	winInfo=Ext.MessageBox.show({
+																	   title: 'Warning',
+																	   msg: 'Not stations found!',
+																	   width:300,
+																	   buttons: Ext.MessageBox.OK,
+																	   animateTarget: 'warning',
+																	   icon: 'x-message-box-warning'
+																	});	
+																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+
+																}
+															},
+															failure: function(response, opts) {
+																var responseText = (response.responseText ? response.responseText : 'Unable to contact the server.  Please try again later.');
+																panelLaunch({
+																	iconClass: 'x-panel-action-icon-tick',
+																	position: 'br',
+																	actionMethod: ['hide']
+																}, responseText);
+															},
+															scope: this
+														});										
+													
+										} 
+									}],
+									// keys: [{ key: Ext.EventObject.ENTER, fn: Ext.getCmp('Btn_Submit_id') }]
+									
+						   });
+						   
+							btonLog=Ext.getCmp('btonLoginId').text
+							
+							var ventana_login = new Ext.Window({
+								iconCls: 'key',
+								title: 'Login',
+								id:'ventana_loginID',
+								style: "font-family: 'Oswald', sans-serif;font-size: 14px;",
+								constrainHeader: true,
+								collapsible: true,
+								resizable: false,
+								frame:true, 
+								// keys: [{ key: Ext.EventObject.ENTER, scope: this, handler:function(){console.log("holaaa")} }],
+								width: 250,
+								height: 150,
+								layout: 'fit', //fit
+								plain: true,
+								bodyStyle: 'padding:5px;',
+								buttonAlign: 'center',
+								x:mainPanelWidth/2,
+								y:mainPanelHeight/3,									
+								items: [login],
+								enablekeyEvents: true,
+								listeners:{
+									'close':function(){
+										Ext.getCmp('mainpanelID').enable()
+									}									
+								}								
+							}); // fin windows
+								
+							if(btonLog=="Login"){		
+								ventana_login.show();
+							}else{
+								Ext.Ajax.request({
+									url: 'php/Geo_statByregion.php',
+									method: 'POST',
+									params : {type:24},
+									success: function(response, opts) {
+										resul=response.responseText
+										Ext.getCmp('btonLoginId').setText('Login');
+										ventana_login.hide();
+										Ext.getCmp('mainpanelID').enable()
+									},
+									failure: function(response, opts) {
+										var responseText = (response.responseText ? response.responseText : 'Unable to contact the server.  Please try again later.');
+										panelLaunch({
+											iconClass: 'x-panel-action-icon-tick',
+											position: 'br',
+											actionMethod: ['hide']
+										}, responseText);
+									},
+									scope: this
+								});						
+								Ext.getCmp('SignUpID').enable()
+								// Ext.getCmp('buttongroupCondForm').add(bton_sign_Up);
+								Ext.getCmp('buttongroupCondForm').remove(Ext.getCmp('myFieldIdLog'),true)
+							}						
+						} // fin handler Login
+					},bton_sign_Up
+					
+					
+					
+					
 				]
 			}
 		
@@ -2203,6 +2253,7 @@ Ext.application({
 						stateVal = stateCmb.getValue()						
 						municipVal = cityCmb.getValue()	
 						
+						drawPolygon.control.deactivate();
 						polygonDraw.destroyFeatures();
 						// layerTemp=mapPanel.map.getLayersByName("Search_region")[0]
 						// if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}
@@ -2684,15 +2735,13 @@ Ext.application({
 										// {return rowIndex+1;}
 									// },			
 									// { text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
+									{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
 									{ text: 'code',minWidth: 70,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
 									{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
 									{ text: 'institute',minWidth: 70,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
 									{ text: 'model',minWidth: 80,dataIndex: 'model', flex: 2,tdCls: 'x-change-cell'},
-									
-
-									
 									{ text: 'variables',minWidth: 120,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-									{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+									
 									
 									// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 									// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
@@ -2858,7 +2907,8 @@ Ext.application({
 				handler: function(){
 					if(Ext.getCmp('popupID')){
 						Ext.getCmp('popupID').close()
-					}					
+					}			
+					drawPolygon.control.deactivate();
 					if(Ext.getCmp('gridRegionID')){
 						Ext.getCmp('mainTableID').collapse();
 						Ext.getCmp('gridRegionID').destroy();	
@@ -2976,6 +3026,7 @@ Ext.application({
 							Ext.getCmp('popupID').close()
 						}					
 						polygonDraw.destroyFeatures();
+						drawPolygon.control.deactivate();
 						radioCh = 2//Ext.getCmp('radioBton').getChecked()[0].getGroupValue();
 					
 						getStat = cmbStat.getValue();
@@ -3382,7 +3433,8 @@ Ext.application({
 										// minWidth: 20,
 										// renderer : function(value, metaData, record, rowIndex)
 										// {return rowIndex+1;}
-									// },			
+									// },
+									{ text: 'download',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
 									{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
 									{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
 									{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
@@ -3395,7 +3447,7 @@ Ext.application({
 									// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
 									
 									{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-									{ text: 'download',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+									
 									
 									// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 									// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
@@ -3646,6 +3698,7 @@ Ext.application({
 					if(Ext.getCmp('popupID')){
 						Ext.getCmp('popupID').close()
 					}				
+					drawPolygon.control.deactivate();
 					if(Ext.getCmp('gridRegionID')){
 						Ext.getCmp('mainTableID').collapse();
 						Ext.getCmp('gridRegionID').destroy();	
@@ -3984,6 +4037,8 @@ Ext.application({
 					handler: function(){
 						Ext.getCmp('buttongroupCondID').doLayout();
 						polygonDraw.destroyFeatures();
+						drawPolygon.control.deactivate();
+						
 						if(Ext.getCmp('popupID')){
 							Ext.getCmp('popupID').close()
 						}		
@@ -4410,7 +4465,8 @@ Ext.application({
 														// minWidth: 20,
 														// renderer : function(value, metaData, record, rowIndex)
 														// {return rowIndex+1;}
-													// },			
+													// },	
+														{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
 														{ text: 'code',minWidth: 70,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
 														{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
 														{ text: 'institute',minWidth: 70,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
@@ -4419,7 +4475,7 @@ Ext.application({
 
 														
 														{ text: 'variables',minWidth: 120,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-														{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+														
 														
 														// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 														// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
@@ -4654,7 +4710,8 @@ Ext.application({
 					handler: function(){
 						if(Ext.getCmp('popupID')){
 							Ext.getCmp('popupID').close()
-						}					
+						}		
+						drawPolygon.control.deactivate();
 						if(Ext.getCmp('gridRegionID')){
 							Ext.getCmp('mainTableID').collapse();
 							Ext.getCmp('gridRegionID').destroy();	
@@ -5483,7 +5540,8 @@ Ext.application({
 														// minWidth: 20,
 														// renderer : function(value, metaData, record, rowIndex)
 														// {return rowIndex+1;}
-													// },			
+													// },	
+													{ text: 'download',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
 													{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
 													{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
 													{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
@@ -5496,7 +5554,7 @@ Ext.application({
 													// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
 													
 													{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-													{ text: 'download',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+													
 													
 													// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 													// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
@@ -5996,7 +6054,7 @@ Ext.application({
 							}
 						},						
 						{
-							tooltip: 'Download data',
+							tooltip: 'Show more info',//'Download data',
 							scale: 'small',
 							cls:"toolDownload",
 							handler: funcPupup
@@ -6414,7 +6472,8 @@ Ext.application({
 														// minWidth: 20,
 														// renderer : function(value, metaData, record, rowIndex)
 														// {return rowIndex+1;}
-													// },			
+													// },
+													{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
 													{ text: 'code',minWidth: 70,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
 													{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
 													{ text: 'institute',minWidth: 70,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
@@ -6423,7 +6482,7 @@ Ext.application({
 
 													
 													{ text: 'variables',minWidth: 120,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-													{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+													
 													
 													// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 													// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
@@ -6626,7 +6685,7 @@ Ext.application({
 					anchorPosition: 'auto',
 					tools: [
 						{
-							tooltip: 'Download data',
+							tooltip: 'Show more info',//'Download data',
 							scale: 'small',
 							cls:"toolDownload",
 							handler: funcPupup
@@ -7088,7 +7147,8 @@ Ext.application({
 														// minWidth: 20,
 														// renderer : function(value, metaData, record, rowIndex)
 														// {return rowIndex+1;}
-													// },			
+													// },		
+													{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
 													{ text: 'code',minWidth: 70,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
 													{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
 													{ text: 'institute',minWidth: 70,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
@@ -7097,7 +7157,7 @@ Ext.application({
 
 													
 													{ text: 'variables',minWidth: 120,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-													{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+													
 													
 													// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 													// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
@@ -7598,7 +7658,8 @@ Ext.application({
 														// minWidth: 20,
 														// renderer : function(value, metaData, record, rowIndex)
 														// {return rowIndex+1;}
-													// },			
+													// },	
+													{ text: 'download',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
 													{ text: 'id',minWidth: 50,dataIndex: 'id', flex: 1,tdCls: 'x-change-cell'},
 													{ text: 'code',minWidth: 80,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
 													{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
@@ -7611,7 +7672,7 @@ Ext.application({
 													// { text: 'quality',minWidth: 80,dataIndex: 'quality', flex: 1},
 													
 													{ text: 'variables',minWidth: 100,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-													{ text: 'download',minWidth: 50,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+													
 													
 													// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 													// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
@@ -7884,7 +7945,7 @@ Ext.application({
 		selectClick.activate();
 		
 		mapPanel.map.addControl(selectHover);
-		selectHover.activate();
+		// selectHover.activate();
 
 		var oClickClose = new OpenLayers.Control.Click({eventMethods:{
 		 'click': function(e) {
@@ -7950,7 +8011,7 @@ Ext.application({
 			enableToggle: true,
 			allowDepress: true,
 			toggleGroup: "draw",
-			pressed:true,
+			pressed:false,
 			handler: function(toggled){
 				if(Ext.getCmp('popupID')){
 					Ext.getCmp('popupID').close()
@@ -9324,7 +9385,8 @@ Ext.application({
 										// minWidth: 20,
 										// renderer : function(value, metaData, record, rowIndex)
 										// {return rowIndex+1;}
-										// },			
+										// },		
+										{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
 										{ text: 'code',minWidth: 70,dataIndex: 'code', flex: 1,tdCls: 'x-change-cell'},
 										{ text: 'name',minWidth: 120,dataIndex: 'name', flex: 4,tdCls: 'x-change-cell'},
 										{ text: 'institute',minWidth: 70,dataIndex: 'institute', flex: 3,tdCls: 'x-change-cell'},
@@ -9333,7 +9395,7 @@ Ext.application({
 
 										
 										{ text: 'variables',minWidth: 120,dataIndex: 'variables', flex: 4,tdCls: 'x-change-cell'},
-										{ text: 'download',minWidth: 80,dataIndex: 'copyright', flex: 3,tdCls: 'x-change-cell'},
+										
 										
 										// { text: 'lon',minWidth: 80,dataIndex: 'lon', flex: 3},
 										// { text: 'lat',minWidth: 80,dataIndex: 'lat', flex: 3},
