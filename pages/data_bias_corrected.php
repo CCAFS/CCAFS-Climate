@@ -9,7 +9,7 @@ $query = "SELECT * FROM datasets_fileset_bias df  ";
 
 $fileSets = $db->getAll($query);
 
-$query = "SELECT id, name FROM datasets_scenario_bias ";
+$query = "SELECT id, name, acronym FROM datasets_scenario_bias where id <> 1";
 $scenarios = $db->getAll($query);
 
 $query = "SELECT id, name, acronym FROM datasets_model_bias ORDER BY acronym";
@@ -19,7 +19,7 @@ $query = "SELECT id, name FROM datasets_observation_bias ORDER BY name";
 $observations = $db->getAll($query);
 
 // Only the first 7 variables will be listed. The rest will be marked as other.
-$query = "SELECT id, name FROM datasets_variable_bias ORDER BY name";
+$query = "SELECT id, name, acronym FROM datasets_variable_bias ORDER BY name";
 $variables = $db->getAll($query);
 
 $query = "SELECT id, name FROM datasets_correction_method_bias";

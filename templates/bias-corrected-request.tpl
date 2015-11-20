@@ -1,4 +1,4 @@
-{include file='head.tpl' jsIncludes=["jquery", "dataBias", "tiptip","modernizr","icheck", "map"] pageTitle="Data - CCAFS Climate" pageDescription="High resolution climate change data for download, downscaled using different methods." keywords="IPCC,data,download,downscaling,high resolution,delta method,climate change,projections,MarkSim,MetOffice,PRECIS"}
+{include file='head.tpl' jsIncludes=["jquery", "tiptip","modernizr","icheck", "map"] pageTitle="Data - CCAFS Climate" pageDescription="High resolution climate change data for download, downscaled using different methods." keywords="IPCC,data,download,downscaling,high resolution,delta method,climate change,projections,MarkSim,MetOffice,PRECIS"}
 {include file='header.tpl' current="data"}
 
 
@@ -11,10 +11,10 @@
       <h3>Bias request</h3>
     </div>
   </div>
-</div>
+
 <hr>
 <p>
-    Please review thse selected items from reuqest: dataset, date ranges, output format, data types and selected location.
+    Please review these selected items from request: dataset, date ranges, output format, data types and selected location.
 </p>
 <p>
   Once your order is checked, enter a valid email address and click the "SUBMIT ORDER" button to finalize the order. No actual data
@@ -28,7 +28,18 @@
 <p>
   Please enter your email address. This is the address to which your data links and information regarding this order will be sent.
 </p>
-<form method="GET" action="">
+<form method="POST" action="/bias-corrected-request.php">
+  <input type="hidden" name="lat" id="lat" value="{$lat}">
+  <input type="hidden" name="lon" id="lon" value="{$lon}">
+  <input type="hidden" name="fileSet" id="fileSet" value="{$fileSets}">
+  <input type="hidden" name="scenarios" id="scenarios" value="{$scenarios}">
+  <input type="hidden" name="model" id="model" value="{$models}">
+  <input type="hidden" name="observation" id="observation" value="{$observation}">
+  <input type="hidden" name="periodh" id="periodh" value="{$periodh}">
+  <input type="hidden" name="period" id="period" value="{$period}">
+  <input type="hidden" name="variables" id="variables" value="{$variables}">
+  <input type="hidden" name="method" id="method" value="{$method}">
+  <input type="hidden" name="format" id="format" value="{$formats}">
   <label for="email">Email address</label>
   <input type="email" name="email" id="email">
   <label for="email_ver">Veerify Email address</label>
@@ -38,5 +49,5 @@
 <div>
   CCAFS will not share your email address with anyone. The email address will not be used for any purpuse other than communicating order status
 </div>
-
+</div>
 {include file='footer.tpl'}

@@ -2,28 +2,51 @@
 require_once '../config/smarty.php';
 require_once '../config/db.php';
 
-$methodId = isset($_GET["method"]) && is_numeric($_GET["method"]) && $_GET["method"] >= 0 ? $_GET["method"] : null;
-$lat = isset($_GET["lat"]) && is_numeric($_GET["lat"]) && $_GET["lat"] >= 0 ? $_GET["lat"] : null;
-$lon = isset($_GET["lon"]) && is_numeric($_GET["lon"]) && $_GET["lon"] >= 0 ? $_GET["lon"] : null;
-$variableId = isset($_GET["variables"]) ?  implode( ",", $_GET["variables"] ) : null;
-$scenarioId = isset($_GET["scenarios"]) ? implode( ",", $_GET["scenarios"] ) : null;
-$resolutionId = isset($_GET["resolution"]) && is_numeric($_GET["resolution"]) && $_GET["resolution"] >= 0 ? $_GET["resolution"] : null;
-$modelId = isset($_GET["model"]) ?  implode( ",", $_GET["model"] ) : null;
-// $formatId = isset($_GET["formats"]) && is_numeric($_GET["formats"]) && $_GET["formats"] >= 0 ? $_GET["formats"] : null;
-$formatId = isset($_GET["formats"]) ?  implode( ",", $_GET["formats"] ) : null;
-$periodId = isset($_GET["period"]) ?  implode( ",", $_GET["period"] ) : null;
-$fileSetId = isset($_GET["fileSet"]) && is_numeric($_GET["fileSet"]) && $_GET["fileSet"] >= 0 ? $_GET["fileSet"] : null;
-$observation = isset($_GET["observation"]) && is_numeric($_GET["observation"]) && $_GET["observation"] >= 0 ? $_GET["observation"] : null;
-//$extentId = isset($_GET["extent"]) && is_numeric($_GET["extent"]) && $_GET["extent"] >= 0 ? $_GET["extent"] : null;
-//$tile = isset($_GET["tile_name"]) && $_GET["tile_name"] != "" ? $_GET["tile_name"] : null;
+$method = isset($_REQUEST["method"]) && is_numeric($_REQUEST["method"]) && $_REQUEST["method"] >= 0 ? $_REQUEST["method"] : null;
+$lat = isset($_REQUEST["lat"]) && is_numeric($_REQUEST["lat"]) ? $_REQUEST["lat"] : null;
+$lon = isset($_REQUEST["lon"]) && is_numeric($_REQUEST["lon"]) ? $_REQUEST["lon"] : null;
+$period = isset($_REQUEST["period"]) ?  $_REQUEST["period"]  : null;
+$periodH = isset($_REQUEST["periodh"]) ?  $_REQUEST["periodh"]  : null;
+$fileSet = isset($_REQUEST["fileSet"]) && is_numeric($_REQUEST["fileSet"]) && $_REQUEST["fileSet"] >= 0 ? $_REQUEST["fileSet"] : null;
+$observation = isset($_REQUEST["observation"]) ? $_REQUEST["observation"] : null;
+//$extentId = isset($_REQUEST["extent"]) && is_numeric($_REQUEST["extent"]) && $_REQUEST["extent"] >= 0 ? $_REQUEST["extent"] : null;
+//$tile = isset($_REQUEST["tile_name"]) && $_REQUEST["tile_name"] != "" ? $_REQUEST["tile_name"] : null;
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-echo "<pre>".print_r($_GET,true)."</pre>";
-if (isset($_GET["email"]) && $_GET["email"] != "" && $_GET["email"] == $_GET["email_ver"]) {
+//echo "<pre>".print_r($_REQUEST,true)."</pre>";
+if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] == $_REQUEST["email_ver"]) {
   
+//  $url = "http://172.22.52.62/correctedTest.php";
+  $url = "http://gisweb.ciat.cgiar.org/Bc_Downscale/biasCorrected.php";
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $url);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl, CURLOPT_HEADER, false);
+  curl_setopt($curl, CURLOPT_POST, count($_REQUEST));
+  curl_setopt($curl, CURLOPT_POSTFIELDS, $_REQUEST);
+  curl_setopt($curl, CURLOPT_TIMEOUT, 4); 
+  $data = curl_exec($curl);
+  curl_close($curl);
+  echo $data;
+  $smarty->display("bias-corrected-requested.tpl");
+} else {
+  $variables = isset($_REQUEST["variables"]) ?  implode( ",", $_REQUEST["variables"] ) : null;
+  $scenarios = isset($_REQUEST["scenarios"]) ? implode( ",", $_REQUEST["scenarios"] ) : null;
+  $models = isset($_REQUEST["model"]) ?  implode( ",", $_REQUEST["model"] ) : null;
+  $formats = isset($_REQUEST["format"]) ?  implode( ",", $_REQUEST["format"] ) : null;
+  $smarty->assign("fileSets", $fileSet);
+  $smarty->assign("scenarios", $scenarios);
+  $smarty->assign("models", $models);
+  $smarty->assign("observation", $observation);
+  $smarty->assign("variables", $variables);
+  $smarty->assign("method", $method);
+  $smarty->assign("formats", $formats);
+  $smarty->assign("lat", $lat);
+  $smarty->assign("lon", $lon);
+  $smarty->assign("period", $period);
+  $smarty->assign("periodh", $periodH);
+  $smarty->display("bias-corrected-request.tpl");
 }
-$smarty->display("bias-corrected-request.tpl");
-

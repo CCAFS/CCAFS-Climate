@@ -62,16 +62,17 @@
               <input id="fileSet-{$fileSet['id']}" type="radio" name="fileSet" value="{$fileSet['id']}" checked/><label for="fileSet-{$fileSet['id']}">{$fileSet["name"]}</label><br> 
               {/foreach}
             </article>
-            <input type="hidden" id="tile_name" name="tile_name" />
+{*            <input type="hidden" id="tile_name" name="tile_name" />*}
           </div>
 
           <div class="inputs-ac" id="scenario-filters">
             <span id="ac-2" class="inputs-ac" > </span>
             <label class="inputs-ac" for="ac-2">Scenario</label> 
             <article class="ac-large">
+              <input type="checkbox" value="historical" onclick="return false" checked READONLY><label for="scenario-h">Historical</label><br>
               {foreach from=$scenarios item=scenario}
                 <img class="help_icon" id="help_icon_scenarios[]" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                <input id="scenario-{$scenario['id']}" type="checkbox" name="scenarios[]" value="{$scenario['id']}"><label for="scenario-{$scenario['id']}">{$scenario['name']}</label><br>
+                <input id="scenario-{$scenario['id']}" type="checkbox" name="scenarios[]" value="{$scenario['acronym']}"><label for="scenario-{$scenario['id']}">{$scenario['name']}</label><br>
               {/foreach}
             </article>
           </div>
@@ -85,7 +86,7 @@
               <label for="model-999">Select all options</label>
               {foreach from=$models item=model}
                 <img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                <input type="checkbox" id="model-{$model['id']}" name="model[]" value="{$model['id']}">
+                <input type="checkbox" id="model-{$model['id']}" name="model[]" value="{$model['acronym']}">
                 <label for="model-{$model['id']}">{$model['acronym']}</label>
               {/foreach} 
             </article>
@@ -97,7 +98,7 @@
             <article class="ac-large">
               {foreach from=$observations item=observation}
               <img class="help_icon" id="help_icon_fileSet" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-              <input id="observation-{$observation['id']}" type="radio" name="observation" value="{$observation['id']}" /><label for="observation-{$observation['id']}">{$observation["name"]}</label><br> 
+              <input id="observation-{$observation['id']}" type="radio" name="observation" value="{$observation['name']}" /><label for="observation-{$observation['id']}">{$observation["name"]}</label><br> 
               {/foreach}
             </article>
           </div>
@@ -111,6 +112,9 @@
               <div id="dropdown-arrow"></div> 
               <div id="drop-content">
 {*                <input type="hidden" class="slider-input" value="23" />*}
+                <label for="periodh" class="period[]">Historical</label><br>
+                <input type="text" id="periodh" name="periodh" value="" />
+                <label for="period" class="period[]">Future</label><br>
                 <input type="text" id="period" name="period" value="" />
 {*                {foreach from=$periods item=period}
                   <img class="help_icon" id="help_icon_period" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
@@ -128,7 +132,7 @@
               <div id="drop-content">
                 {foreach from=$variables item=variable}
                   <img class="help_icon" id="help_icon_variable" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                  <input id="variable-{$variable['id']}" type="checkbox" name="variables[]" value="{$variable['id']}">
+                  <input id="variable-{$variable['id']}" type="checkbox" name="variables[]" value="{$variable['acronym']}">
                   <label for="variable-{$variable['id']}" class="variables[]">{$variable['name']}</label><br>
                 {/foreach}
                 <input id="variable-9999" type="checkbox" name="variables[]" value="9999">

@@ -20,6 +20,14 @@ $("#period").ionRangeSlider({
     to: 2039,
     drag_interval: true
 });
+$("#periodh").ionRangeSlider({
+    type: "double",
+    min: 1980,
+    max: 2010,
+    from: 1985,
+    to: 1990,
+    drag_interval: true
+});
 //***********************************VIDEO******************************	
   $(".messagepop").hide();
 
