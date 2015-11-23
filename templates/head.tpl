@@ -63,6 +63,7 @@
                         <!-- Reference: http://code.drewwilson.com/entry/tiptip-jquery-plugin -->
                         <script src="{$smarty.const.SMARTY_JS_URI}/TipTip-v1.3/jquery.tipTip.minified.js"></script>
                         <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/tipTip.css" />
+                        <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/bc_email.css" />
                       {elseif $jsToInclude == "form"}
                         <script src="{$smarty.const.SMARTY_JS_URI}/form.js"></script>
                       {elseif $jsToInclude == "file-list"}
