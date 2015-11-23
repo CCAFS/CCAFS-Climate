@@ -1,0 +1,114 @@
+
+.boxblock {
+	width: 50%;
+	margin-left: 25%;
+}
+
+.emailIcon {
+    background: url('http://gisweb.ciat.cgiar.org/Bc_Downscale/icon_mail_tiny.png') no-repeat scroll 99% center #fff;
+}
+
+.boxblock label {
+    font-weight: bold;
+    width: 100%;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.clearfix {
+    display: block;
+}
+
+#email, #email_ver {
+    margin-bottom: 20px;
+    width: 100%;
+	
+    border-top: 1px solid #777;
+    border-left: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    border-right: 1px solid #aaa;	
+}
+
+.setCookieDesc {
+    padding: 10px;
+    background-color: #efefef;
+}
+
+h2, .h2 {
+    font-size: 1.17em;
+    font-weight: bold;
+    padding: .25em 0 .5em 0;
+    line-height: 1.1em;
+    margin-bottom: 0.25em;
+}
+
+table {
+    border-collapse: collapse;
+    border-top: 1px solid #CCC;
+    line-height: 1.333em;
+    width: 100%;
+    margin-bottom: 1em;
+	color: #444;
+}
+
+th {
+    background-color: #444;
+    color: #FFF;
+    font-weight: normal;
+    line-height: 1.333em;
+    vertical-align: middle;
+    text-align: center;
+    text-transform: uppercase;	
+}
+
+td, th {
+    border-bottom: 1px solid #CCC;
+    border-left: 1px solid #CCC;
+    padding: 10px;
+    vertical-align: top;
+}
+
+strong, th {
+    font-style: normal;
+    font-weight: bold;
+}
+
+tbody, tfoot {
+    border-right: 1px solid #CCC;
+}
+
+td.var {
+    font-weight: bold;
+    text-align: right;
+}
+
+#download-button-bottom {
+    float: right;
+    margin-left: 5px;
+	
+    line-height: 28px;
+    display: block;
+    padding: 7px 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    border: 0;
+    background-color: #245bab;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    /*font-family: 'Open Sans',Helvetica,Arial,sans-serif;	*/
+
+}
+
+.download-button:hover {
+    background-color: #4e8cc7!important;
+}
+
+    

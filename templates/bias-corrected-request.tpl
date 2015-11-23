@@ -8,23 +8,67 @@
 <div id="content" class="data" style="margin-bottom:45px">
   <div style="height: 43px;">
     <div style="width:70%; float:left; height: 38px;" >
-      <h3>Bias request</h3>
+      <h3>Send request</h3>
     </div>
   </div>
 
 <hr>
 <p>
-    Please review these selected items from request: dataset, date ranges, output format, data types and selected location.
-</p>
-<p>
-  Once your order is checked, enter a valid email address and click the "SUBMIT ORDER" button to finalize the order. No actual data
+    Please review these selected items from request. Once your order is checked, enter a valid email address and click the "SUBMIT ORDER" button to finalize the order. No actual data
   will be emailed directly. Only the links to access your ordered data from an FTP site will be sent.
 </p>
-<p>
-  By submitting this request, you agree with both the disclaimer and the privacy policy.
-</p>
 
-<h1>Enter email address</h1>
+<table class="reviewTable">
+<thead>
+<tr>
+<th colspan="2">Requested Data Review</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="var">Geographic location</td>
+<td class="val">Lon: {$lon}, Lat: {$lat}</td>
+</tr>
+<tr>
+<td class="var">GCM File Set</td>
+<td class="val">Raw GCM CMIP5 daily</td>
+</tr>
+<tr>
+<td class="var">Scenario</td>
+<td class="val">{$scenarios}</td>
+</tr>
+<tr>
+<td class="var">Model</td>
+<td class="val">{$models}</td>
+</tr>
+<tr>
+<td class="var">Observation datset</td>
+<td class="val">{$observation}</td>
+</tr>
+<tr>
+<td class="var">Period historical</td>
+<td class="val">{$periodh}</td>
+</tr>
+<tr>
+<td class="var">Period future</td>
+<td class="val">{$period}</td>
+</tr>
+<tr>
+<td class="var">Variables</td>
+<td class="val">{$variables}</td>
+</tr>
+<tr>
+<td class="var">Correction Method</td>
+<td class="val">{$method}</td>
+</tr>
+<tr>
+<td class="var">Ouput formats</td>
+<td class="val">{$formats}</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Enter email address</h2>
 <p>
   Please enter your email address. This is the address to which your data links and information regarding this order will be sent.
 </p>
@@ -40,14 +84,23 @@
   <input type="hidden" name="variables" id="variables" value="{$variables}">
   <input type="hidden" name="method" id="method" value="{$method}">
   <input type="hidden" name="format" id="format" value="{$formats}">
-  <label for="email">Email address</label>
-  <input type="email" name="email" id="email">
-  <label for="email_ver">Veerify Email address</label>
-  <input type="email" name="email_ver" id="email_ver">
-  <button id="download-button-bottom" class="download-button" type="submit" >SUBMIT ORDER</button>
+  <div class="boxblock clearfix">
+      <label for="email">Email address</label>
+      <input type="email" class="emailIcon" name="email" id="email" />
+      <br>
+      <label for="email_ver">Verify Email address</label>
+      <input type="email" class="emailIcon" name="email_ver" id="email_ver">
+      <br>
+        <div class="setCookieDesc">
+        	CCAFS will not share your email address with anyone. The email address will not be used for any purpuse other than communicating order status
+        </div>   
+        <br>   
+      <button id="download-button-bottom" class="download-button" type="submit" >SUBMIT ORDER</button>
+		<br><br>
+   </div>
 </form>
-<div>
-  CCAFS will not share your email address with anyone. The email address will not be used for any purpuse other than communicating order status
+
 </div>
-</div>
+
+
 {include file='footer.tpl'}

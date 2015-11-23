@@ -8,16 +8,16 @@
 <div id="content" class="data" style="margin-bottom:45px">
   <div style="height: 43px;">
     <div style="width:70%; float:left; height: 38px;" >
-      <h3>Bias request</h3>
+      <h3>Your request has been submitted</h3>
     </div>
   </div>
 
 <hr>
+<h2>Check your email</h2>
 <p>
-    Please review thse selected items from reuqest: dataset, date ranges, output format, data types and selected location.
+ A confirmation email has been sent to your inbox with order details. The email contains important information about the order. When the process is complete, you will receive an email that will include a link to the requested data.
+    
 </p>
-<div>
-  CCAFS will not share your email address with anyone. The email address will not be used for any purpuse other than communicating order status
-</div>
+
 </div>
 {include file='footer.tpl'}

@@ -30,7 +30,7 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
   curl_setopt($curl, CURLOPT_TIMEOUT, 4); 
   $data = curl_exec($curl);
   curl_close($curl);
-  echo $data;
+  // echo $data;
   $smarty->display("bias-corrected-requested.tpl");
 } else {
   $variables = isset($_REQUEST["variables"]) ?  implode( ",", $_REQUEST["variables"] ) : null;
