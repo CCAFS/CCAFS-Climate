@@ -13,13 +13,14 @@ $ids["resolution_id"] = isset($_POST["resolutionId"]) && $_POST["resolutionId"] 
 $ids["format_id"] = isset($_POST["formatId"]) && $_POST["formatId"] != "" ? $_POST["formatId"] : null;
 $ids["extent_id"] = isset($_POST["extendId"]) && $_POST["extendId"] != "" ? $_POST["extendId"] : null;
 $ids["file_set_id"] = isset($_POST["filesetId"]) && $_POST["filesetId"] != "" ? $_POST["filesetId"] : null;
+$ids["observation_id"] = isset($_POST["observation"]) && $_POST["observation"] != "" ? $_POST["observation"] : null;
 $ids["tile_id"] = isset($_POST["tileName"]) && $_POST["tileName"] != "" ? $_POST["tileName"] : null;
 $ids["tile_id"] = getTileID($ids["tile_id"]);
 
 if (!is_null($section)) {
   switch ($section) {
     case "method":
-      filesFound("datasets_method_bias", $ids["method_id"]);
+      filesFound("datasets_correction_method_bias", $ids["method_id"]);
       break;
     case "scenarios[]":
       filesFound("datasets_scenario_bias", $ids["scenario_id"]);
@@ -44,6 +45,9 @@ if (!is_null($section)) {
       break;
     case "fileSet":
       filesFound("datasets_fileset_bias", $ids["file_set_id"]);
+      break;
+    case "observation":
+      filesFound("datasets_observation_bias", $ids["observation_id"]);
       break;
     case "tile":
       // $ids["tile_id"] = getTileID($ids["tile_id"]);

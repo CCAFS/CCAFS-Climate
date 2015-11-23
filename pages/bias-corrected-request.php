@@ -18,15 +18,44 @@ $observation = isset($_REQUEST["observation"]) ? $_REQUEST["observation"] : null
  */
 //echo "<pre>".print_r($_REQUEST,true)."</pre>";
 if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] == $_REQUEST["email_ver"]) {
+  $vars = $_REQUEST;
   
+  $query = "SELECT id, name, acronym FROM datasets_scenario_bias where id in (".$_REQUEST["scenarios"].")";
+  $scenarios = $db->getAll($query);
+  $sceAcro = "";
+  foreach ($scenarios as $sce) {
+    $sceAcro .= $sce['acronym'].",";
+  }
+  $vars['scenarios-acronym'] = substr($sceAcro, 0, -1);
+  
+  $query = "SELECT id, name FROM datasets_observation_bias WHERE id =".$_REQUEST["observation"];
+  $observations = $db->getAll($query);
+  $vars['observation-acronym'] = $observations[0]['name'];
+  
+  $query = "SELECT id, name, acronym FROM datasets_variable_bias WHERE id in (".$_REQUEST["variables"].")";
+  $variables = $db->getAll($query);
+  $varAcro = "";
+  foreach ($variables as $var) {
+    $varAcro .= $var['acronym'].",";
+  }
+  $vars['variables-acronym'] = substr($varAcro, 0, -1);
+  $query = "SELECT * FROM datasets_fileset_bias df WHERE id = ".$_REQUEST["fileSet"];
+  $fileSets = $db->getAll($query);
+  $vars['fileSet-acronym'] = $fileSets[0]['name'];
+  
+  $query = "SELECT id, name FROM datasets_correction_method_bias WHERE id = ".$_REQUEST["method"];
+  $methods = $db->getAll($query);
+  $vars['method-acronym'] = $methods[0]['name'];
+  
+//  echo "<pre>".print_r($vars,true)."</pre>";
 //  $url = "http://172.22.52.62/correctedTest.php";
   $url = "http://gisweb.ciat.cgiar.org/Bc_Downscale/biasCorrected.php";
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($curl, CURLOPT_HEADER, false);
-  curl_setopt($curl, CURLOPT_POST, count($_REQUEST));
-  curl_setopt($curl, CURLOPT_POSTFIELDS, $_REQUEST);
+  curl_setopt($curl, CURLOPT_POST, count($vars));
+  curl_setopt($curl, CURLOPT_POSTFIELDS, $vars);
   curl_setopt($curl, CURLOPT_TIMEOUT, 4); 
   $data = curl_exec($curl);
   curl_close($curl);
@@ -36,7 +65,7 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
   $variables = isset($_REQUEST["variables"]) ?  implode( ",", $_REQUEST["variables"] ) : null;
   $scenarios = isset($_REQUEST["scenarios"]) ? implode( ",", $_REQUEST["scenarios"] ) : null;
   $models = isset($_REQUEST["model"]) ?  implode( ",", $_REQUEST["model"] ) : null;
-  $formats = isset($_REQUEST["format"]) ?  implode( ",", $_REQUEST["format"] ) : null;
+  $formats = isset($_REQUEST["formats"]) ?  implode( ",", $_REQUEST["formats"] ) : null;
   $smarty->assign("fileSets", $fileSet);
   $smarty->assign("scenarios", $scenarios);
   $smarty->assign("models", $models);

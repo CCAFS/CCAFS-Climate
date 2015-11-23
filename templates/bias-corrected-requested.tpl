@@ -12,12 +12,16 @@
     </div>
   </div>
 
-<hr>
-<p>
-    Please review thse selected items from reuqest: dataset, date ranges, output format, data types and selected location.
-</p>
-<div>
-  CCAFS will not share your email address with anyone. The email address will not be used for any purpuse other than communicating order status
-</div>
+  <hr>
+  <p>
+  <h3>Your order has been submitted. What's next?</h3>
+  <h3>Check your email</h3>
+  <p>
+    A confirmation email has been sent to your inbox with order details. The email contains important information about the order, including the order number. The order number is necessary for tracking the status of your order. When the process is complete, you will receive an email that will include a link to the requested data.
+  </p>
+  <h3>Certification</h3>
+  <p>
+    If the order was placed with the Department of Commerce Certification Option, a button labeled "Certify this order" will be found both in the email, once it has been processed, and on the order status page. Use either link to continue to the NCDC Online Store and follow the instructions to purchase the certification.
+  </p>
 </div>
 {include file='footer.tpl'}

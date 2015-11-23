@@ -39,7 +39,7 @@
   <input type="hidden" name="period" id="period" value="{$period}">
   <input type="hidden" name="variables" id="variables" value="{$variables}">
   <input type="hidden" name="method" id="method" value="{$method}">
-  <input type="hidden" name="format" id="format" value="{$formats}">
+  <input type="hidden" name="formats" id="formats" value="{$formats}">
   <label for="email">Email address</label>
   <input type="email" name="email" id="email">
   <label for="email_ver">Veerify Email address</label>

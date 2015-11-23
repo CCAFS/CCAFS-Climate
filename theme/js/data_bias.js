@@ -140,6 +140,7 @@ function setPageEvents() {
   $("#period-filters").find("input").on("ifToggled", getFilesInfo);
   $("#variable-filters").find("input").on("ifToggled", getFilesInfo);
   $("#resolution-filters").find("input").on("ifToggled", getFilesInfo);
+  $("#observation-filters").find("input").on("ifToggled", getFilesInfo);
   $("#extent-filters").find("input")/*.on("ifClicked", changeMap)*/.on("ifToggled", adjustFiltersOnExtentSelection);
 
   // load on the map the selected layer(file set). 
@@ -288,7 +289,11 @@ function selectAllModelOptionsEvent(evt) {
 }
 
 function getFilesInfo(evt) {
-  var filterValues = getUserSelections($(evt.target).attr("name"));
+  var nameEven = $(evt.target).attr("name");
+  var filterValues = getUserSelections(nameEven);
+  if (nameEven == 'observation') {
+//    $("#observation-acronym").val($(evt.target).val())
+  }
   // console.log(filterValues.filesetId)
   // Hide the help icon 
 
@@ -322,7 +327,7 @@ function getFilesInfo(evt) {
       $(".loader").hide();
       if (data != null) {
         if (data.filesFound < 0) {
-          $("#filesFound").text("0 files found");
+//          $("#filesFound").text("0 files found");
 //          $("#searchSubmit").attr("disabled", "disabled");
 //          $("#searchSubmit").addClass("disable");
         } else {
@@ -337,9 +342,9 @@ function getFilesInfo(evt) {
           }
           // update files found text
           if (data.filesFound == 1) {
-            $("#filesFound").text("1 file found");
+//            $("#filesFound").text("1 file found");
           } else {
-            $("#filesFound").text(data.filesFound + " files found");
+//            $("#filesFound").text(data.filesFound + " files found");
           }
 
           // Show filter description if exists 
@@ -362,7 +367,7 @@ function getFilesInfo(evt) {
           //$("#filesFound1").val(data.filesFound);
         }
       } else {
-        $("#filesFound").text("0 files found");
+//        $("#filesFound").text("0 files found");
         $("#searchSubmit").attr("disabled", "disabled");
         $("#searchSubmit").addClass("disable");
       }
