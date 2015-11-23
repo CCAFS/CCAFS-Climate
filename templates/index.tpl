@@ -20,7 +20,7 @@
           </a>
         </td>
         <td>
-          <a href="/data/">
+          <a href="/downloading_data/">
             <div id="section">
               <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_data.png">
             </div>

@@ -132,7 +132,7 @@ if($type==9){
 	
 
 if($type==4){
-	$Geosql =	"select *,st_asgeojson(geom) from geostation where country = 165 or country = 72;"; //,st_asgeojson(s.geom) 
+	$Geosql =	"select *,st_asgeojson(geom) from geostation"; //,st_asgeojson(s.geom) 
   
 	$result = pg_query($dbcon, $Geosql);
 
