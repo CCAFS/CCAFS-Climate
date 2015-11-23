@@ -105,7 +105,7 @@
                     type: OpenLayers.Filter.Comparison.BETWEEN,
                     property: "count",
                     lowerBoundary: 2,//2,//2,
-                    upperBoundary: 4//4//15
+                    upperBoundary: 15//4//15
                 }),
                 symbolizer: {
                     fillColor: colorsCluster.low,
@@ -125,8 +125,8 @@
                 filter: new OpenLayers.Filter.Comparison({
                     type: OpenLayers.Filter.Comparison.BETWEEN,
                     property: "count",
-                    lowerBoundary: 4,//4,//15,
-                    upperBoundary: 8//8//50
+                    lowerBoundary: 15,//4,//15,
+                    upperBoundary: 50//8//50
                 }),
                 symbolizer: {
                     fillColor: colorsCluster.middle,
@@ -146,7 +146,7 @@
                 filter: new OpenLayers.Filter.Comparison({
                     type: OpenLayers.Filter.Comparison.GREATER_THAN,
                     property: "count",
-                    value: 8//8//50
+                    value: 50//8//50
                 }),
                 symbolizer: {
                     fillColor: colorsCluster.high,
@@ -262,7 +262,7 @@
 				projection: new OpenLayers.Projection("EPSG:4326"),
 				displayProjection: new OpenLayers.Projection("EPSG:900913"),					 
                 protocol: new OpenLayers.Protocol.HTTP({
-                    url: "php/Geo_statByregion.php",
+                    url: "php/Geo_statByregion-test.php",
 					params : { type:4},
                     format: new OpenLayers.Format.GeoJSON()
                 }),
