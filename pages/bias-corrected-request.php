@@ -17,7 +17,7 @@ $observation = isset($_REQUEST["observation"]) ? $_REQUEST["observation"] : null
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-echo "<pre>".print_r($_REQUEST,true)."</pre>";
+//echo "<pre>".print_r($_REQUEST,true)."</pre>";
 if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] == $_REQUEST["email_ver"]) {
   $vars = $_REQUEST;
   
