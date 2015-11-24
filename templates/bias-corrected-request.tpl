@@ -42,7 +42,7 @@
 <td class="val">{$models}</td>
 </tr>
 <tr>
-<td class="var">Observation datset</td>
+<td class="var">Observation dataset</td>
 <td class="val">{$observationAcronym}</td>
 </tr>
 <tr>
