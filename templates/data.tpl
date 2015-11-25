@@ -17,7 +17,7 @@
 <div id="content" class="data" style="margin-bottom:45px">
 	<div style="height: 43px;">
 		<div style="width:70%; float:left; height: 38px;" >
-		 <h3>Data</h3>
+		 <h3>Spatial downscaling</h3>
 		</div>
 		
 		<div style="width:30%; height: 30px;float:left; text-align: right; padding-top: 20px;">
