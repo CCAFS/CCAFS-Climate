@@ -45,6 +45,7 @@
           <div id="location-filters" class="inputs-acf">
             <span id="ac-0" class="inputs-ac selected" > </span>
             <label class="inputs-acf" for="ac-0">Location</label>
+            <input type="hidden" id="coodValid" name="coodValid" value="0">
             <article class="ac-large"> 
               <label for="lat">Latitude</label>
               <input type="text" id="lat" name="lat" value="">
@@ -177,7 +178,7 @@
           <div id="bloc-search">
             <button type="submit" id="searchSubmit" disabled="disabled">Run</button>
             <label>
-{*              <span id="filesFound">0 files found</span>*}
+              <span id="filesFound"></span>
               <img class="loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />
             </label>
             <!--<input type="hidden" id="filesFound1" name="filesFound1" /> -->

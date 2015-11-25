@@ -67,12 +67,22 @@ $("#periodh").ionRangeSlider({
     var lat = ($(this).val() != "")?$(this).val():0;
     var lon = ($("#lon").val() != "" )?$("#lon").val():0;
     markerSync(parseFloat(lat),parseFloat(lon));
+    validCoordinate(parseFloat(lat),parseFloat(lon));
+//    console.log($("#coodValid").val());
+//    if (valid === false){
+////      console.log("no valid");
+//    }
   });
   
   $("#lon").on("change", function (evt){
     var lon = ($(this).val() != "")?$(this).val():0;
     var lat = ($("#lat").val() != "" )?$("#lat").val():0;
     markerSync(parseFloat(lat),parseFloat(lon));
+    validCoordinate(parseFloat(lat),parseFloat(lon));
+//    console.log($("#coodValid").val());
+//    if (valid === false){
+////      console.log("no valid");
+//    }
   });
 
   // Make the accordion effect on elements at left
@@ -568,6 +578,7 @@ function initializeMap() {
     $('#bias_point').text(event.latLng.lat().toFixed(4) + ', ' + event.latLng.lng().toFixed(4));
     $('#lat').val(event.latLng.lat().toFixed(4));
     $('#lon').val(event.latLng.lng().toFixed(4));
+    validCoordinate (event.latLng.lat(), event.latLng.lng());
   });
 }
 
@@ -713,6 +724,31 @@ function useTheData(doc) {
 
     }
   }
+}
+
+function validCoordinate (lat, lon) {
+  var geocoder = new google.maps.Geocoder;
+  var latlng = {lat: lat, lng: lon};
+//  var result = true;
+//  return "1";
+  geocoder.geocode({'location': latlng}, function(results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      if (results[1]) {
+        $("#searchSubmit").removeAttr("disabled");
+        $("#searchSubmit").removeClass("disable");
+        $("#filesFound").text("");
+      } else {
+        $("#searchSubmit").attr("disabled", "disabled");
+        $("#searchSubmit").addClass("disable");
+        $("#filesFound").text("Please select a valid coordinate");
+      }
+    } else {
+      $("#searchSubmit").attr("disabled", "disabled");
+      $("#searchSubmit").addClass("disable");
+      $("#filesFound").text("Please select a valid coordinate");
+    }
+  });
+//  return result;
 }
 
 /* Apply a custom KML to the map */
