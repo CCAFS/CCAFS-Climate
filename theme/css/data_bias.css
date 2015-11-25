@@ -371,3 +371,8 @@ button[type="submit"][disabled] {
  
   
 }
+
+.error {
+  color: red;
+  font-size: 11px;
+}

@@ -62,7 +62,18 @@ $("#periodh").ionRangeSlider({
   initializeICheckSettings();
   initializeMap();
   setPageEvents();
-
+  
+  $("#lat").on("change", function (evt){
+    var lat = ($(this).val() != "")?$(this).val():0;
+    var lon = ($("#lon").val() != "" )?$("#lon").val():0;
+    markerSync(parseFloat(lat),parseFloat(lon));
+  });
+  
+  $("#lon").on("change", function (evt){
+    var lon = ($(this).val() != "")?$(this).val():0;
+    var lat = ($("#lat").val() != "" )?$("#lat").val():0;
+    markerSync(parseFloat(lat),parseFloat(lon));
+  });
 
   // Make the accordion effect on elements at left
   $(".inputs-ac").on("click", function() {
@@ -557,6 +568,16 @@ function initializeMap() {
     $('#bias_point').text(event.latLng.lat().toFixed(4) + ', ' + event.latLng.lng().toFixed(4));
     $('#lat').val(event.latLng.lat().toFixed(4));
     $('#lon').val(event.latLng.lng().toFixed(4));
+  });
+}
+
+function markerSync (lat, lon) {
+  if (marker) {
+    marker.setMap(null);
+  }
+  marker = new google.maps.Marker({
+    position: {lat: lat, lng: lon},
+    map: map
   });
 }
 

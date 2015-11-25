@@ -55,66 +55,45 @@
                       <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>	
                       <link rel="stylesheet" href="{$smarty.const.SMARTY_CSS_URI}/ion.rangeSlider.skinHTML5.css"/>
                       <link rel="stylesheet" href="{$smarty.const.SMARTY_CSS_URI}/ion.rangeSlider.css"/>
-                        <script src="{$smarty.const.SMARTY_JS_URI}/ion.rangeSlider.js"></script> 
-                      {elseif $jsToInclude == "bpopup"}
-                        <!-- Reference http://dinbror.dk/bpopup/ -->
-                        <script src="{$smarty.const.SMARTY_JS_URI}/bpopup/jquery.bpopup-0.7.0.min.js"></script>
-                      {elseif $jsToInclude == "tiptip"}
-                        <!-- Reference: http://code.drewwilson.com/entry/tiptip-jquery-plugin -->
-                        <script src="{$smarty.const.SMARTY_JS_URI}/TipTip-v1.3/jquery.tipTip.minified.js"></script>
-                        <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/tipTip.css" />
-                        <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/bc_email.css" />
-                      {elseif $jsToInclude == "form"}
-                        <script src="{$smarty.const.SMARTY_JS_URI}/form.js"></script>
-                      {elseif $jsToInclude == "file-list"}
-                        <script src="{$smarty.const.SMARTY_JS_URI}/file-list.js"></script>
-                      {elseif $jsToInclude == "tablesorter"}
-                        <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/tablesorter.css" />
-                        <script src="{$smarty.const.SMARTY_JS_URI}/tablesorter/jquery.tablesorter.min.js"></script>
+                      <script src="{$smarty.const.SMARTY_JS_URI}/ion.rangeSlider.js"></script> 
+                    {elseif $jsToInclude == "bpopup"}
+                      <!-- Reference http://dinbror.dk/bpopup/ -->
+                      <script src="{$smarty.const.SMARTY_JS_URI}/bpopup/jquery.bpopup-0.7.0.min.js"></script>
+                    {elseif $jsToInclude == "tiptip"}
+                      <!-- Reference: http://code.drewwilson.com/entry/tiptip-jquery-plugin -->
+                      <script src="{$smarty.const.SMARTY_JS_URI}/TipTip-v1.3/jquery.tipTip.minified.js"></script>
+                      <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/tipTip.css" />
+                      <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/bc_email.css" />
+                    {elseif $jsToInclude == "form"}
+                      <script src="{$smarty.const.SMARTY_JS_URI}/form.js"></script>
+                    {elseif $jsToInclude == "file-list"}
+                      <script src="{$smarty.const.SMARTY_JS_URI}/file-list.js"></script>
+                    {elseif $jsToInclude == "tablesorter"}
+                      <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/tablesorter.css" />
+                      <script src="{$smarty.const.SMARTY_JS_URI}/tablesorter/jquery.tablesorter.min.js"></script>
 
-                      {elseif $jsToInclude == "modernizr"}
-                        <!-- Reference: JavaScript library that detects HTML5 and CSS3 features in the user’s browser. http://modernizr.com/ -->
-                        <script type="text/javascript" src="{$smarty.const.SMARTY_JS_URI}/Modernizr-2.0.6/modernizr.custom.23336.js"></script>
+                    {elseif $jsToInclude == "modernizr"}
+                      <!-- Reference: JavaScript library that detects HTML5 and CSS3 features in the user’s browser. http://modernizr.com/ -->
+                      <script type="text/javascript" src="{$smarty.const.SMARTY_JS_URI}/Modernizr-2.0.6/modernizr.custom.23336.js"></script>
 
-                      {elseif $jsToInclude == "map"}		
-                        <script src="http://geoxml3.googlecode.com/svn/branches/polys/geoxml3.js"></script>
+                    {elseif $jsToInclude == "map"}		
+                      <script src="http://geoxml3.googlecode.com/svn/branches/polys/geoxml3.js"></script>
 
-                      {elseif $jsToInclude == "station"}
-                        {*<script src="{$smarty.const.SMARTY_JS_URI}/station.js"></script>
-                        <script>var 
-                        js_uri = '{$smarty.const.SMARTY_JS_URI}';
-                        icons_uri = '{$smarty.const.SMARTY_IMG_URI}/iconosGIS/';
-                        </script>
-                        <script type="text/javascript" src="{$smarty.const.SMARTY_JS_URI}/ext-4.2.2/examples/shared/include-ext.js?theme=neptune"></script>	
-                        <script src="{$smarty.const.SMARTY_JS_URI}/theme.js"></script>
-                        <script src="{$smarty.const.SMARTY_JS_URI}/OpenLayers-2.13.1/OpenLayers.js"></script>
-                        <script type="text/javascript" src="{$smarty.const.SMARTY_JS_URI}/loader.js"></script>
-                        <script type="text/javascript" src="{$smarty.const.SMARTY_JS_URI}/tree.js"></script>
-                        <script src="{$smarty.const.SMARTY_JS_URI}/countries.js" type="text/javascript"></script>		
-                        <script src="{$smarty.const.SMARTY_JS_URI}/stylesLayer.js" type="text/javascript"></script>		
-                        <script src="{$smarty.const.SMARTY_JS_URI}/layersOpenlayer.js" type="text/javascript"></script>		
-                        <script type="text/javascript" src="{$smarty.const.SMARTY_JS_URI}/ext-4.2.2/examples/shared/examples.js"></script>
-                        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-                        <script src="http://code.highcharts.com/stock/highstock.js"></script>
-                        <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
-                        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGkYt6T3eVNusLjkov8jmxdQGT2YuSgJw&sensor=false"></script>		
+                    {elseif $jsToInclude == "bias_request"}
+                      <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+                      <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/data_bias.css" media="screen" /> 
+                      <script src="{$smarty.const.SMARTY_JS_URI}/bias_request.js"></script>
 
-                        <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/map.css" />
-                        <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/tabs.css" />
-                        <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_JS_URI}/ext-4.2.2/examples/ux/css/TabScrollerMenu.css" />
-                        <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
-                        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">*}
-
-                      {/if}
-                    {/foreach}
-                  {/if}
+                    {/if}
+                  {/foreach}
+                {/if}
 
 
 
 
 
-                  </head> 
-                  <body>
+                </head> 
+                <body>
 
 
-                  </body>
+                </body>

@@ -133,11 +133,11 @@
               <div id="drop-content">
                 {foreach from=$variables item=variable}
                   <img class="help_icon" id="help_icon_variable" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                  <input id="variable-{$variable['id']}" type="checkbox" name="variables[]" value="{$variable['id']}">
+                  <input id="variable-{$variable['id']}" type="checkbox" name="variables[]" value="{$variable['id']}" {(!in_array($variable['id'],$vars))? "disabled":""}>
                   <label for="variable-{$variable['id']}" class="variables[]">{$variable['name']}</label><br>
                 {/foreach}
-                <input id="variable-9999" type="checkbox" name="variables[]" value="9999">
-                <label for="variable-9999" class="variables[]">Other</label><br>
+{*                <input id="variable-9999" type="checkbox" name="variables[]" value="9999" disabled>*}
+{*                <label for="variable-9999" class="variables[]">Other</label><br>*}
               </div>
             </div>
           </div> 
