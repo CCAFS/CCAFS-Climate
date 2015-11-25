@@ -268,12 +268,13 @@ label.inputs-acf {
 
 #bloc-search {
     margin-top: 15px;
-    color: #555;
+    color: #cd0a0a;  /* #555*/
     font-weight: 300;
     position: inherit;
-    width: 240px;
+    width: 280px;
     float: right;
     text-align: center;
+	font-size: 14px;
     /* box-shadow: 1px 1px 8px #A7A7A7; */
 }
 
