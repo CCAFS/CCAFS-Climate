@@ -6,8 +6,8 @@
     <li {if $current == 'data'}class="current dropdown"{else}class="dropdown"{/if}><a href="/data/">Data</a>
       <ul class="sub-menu">
         <li><a href="/data/">Spatial downscaling</a></li>
-        <li><a href="/weather_stations/">Weather Stations</a></li>
         <li><a href="/data_bias_corrected/">Bias Correction</a></li>
+        <li><a href="/weather_stations/">Weather Stations</a></li>
       </ul>
     </li>
     {*        <li {if $current == 'weather_stations'}class="current"{/if}><a href="/weather_stations/">Weather Stations</a></li>*}
