@@ -45,7 +45,7 @@
           <div id="location-filters" class="inputs-acf">
             <span id="ac-0" class="inputs-ac selected" > </span>
             <label class="inputs-acf" for="ac-0">Location</label>
-            <input type="hidden" id="coodValid" name="coodValid" value="0">
+{*            <input type="hidden" id="coodValid" name="coodValid" value="0">*}
             <article class="ac-large"> 
               <label for="lat">Latitude</label>
               <input type="text" id="lat" name="lat" value="">
@@ -82,9 +82,9 @@
             <span class="inputs-ac" id="ac-3" > </span>
             <label  class="inputs-ac" for="ac-3">Model</label> 
             <article class="ac-large2"> 
-              <img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
+              {*<img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
               <input type="checkbox" id="model-999" value="999">
-              <label for="model-999">Select all options</label>
+              <label for="model-999">Select all options</label>*}
               {foreach from=$models item=model}
                 <img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
                 <input type="checkbox" id="model-{$model['id']}" name="model[]" value="{$model['acronym']}">
@@ -97,7 +97,6 @@
             <span id="ac-4" class="inputs-ac" > </span>
             <label class="inputs-ac" for="ac-4">Observation Dataset</label>
             <article class="ac-large">
-{*              <input type="hidden" id="observation-acronym" name="observation-acronym">*}
               {foreach from=$observations item=observation}
               <img class="help_icon" id="help_icon_observation" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
               <input id="observation-{$observation['id']}" type="radio" name="observation" value="{$observation['id']}" /><label for="observation-{$observation['id']}">{$observation["name"]}</label><br> 
@@ -176,7 +175,7 @@
           </div>
 
           <div id="bloc-search">
-            <button type="submit" id="searchSubmit" disabled="disabled">Run</button>
+            <button type="submit" id="searchSubmit" disabled="disabled" value="1">Run</button>
             <label>
               <span id="filesFound"></span>
               <img class="loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />

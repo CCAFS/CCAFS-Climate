@@ -68,10 +68,6 @@ $("#periodh").ionRangeSlider({
     var lon = ($("#lon").val() != "" )?$("#lon").val():0;
     markerSync(parseFloat(lat),parseFloat(lon));
     validCoordinate(parseFloat(lat),parseFloat(lon));
-//    console.log($("#coodValid").val());
-//    if (valid === false){
-////      console.log("no valid");
-//    }
   });
   
   $("#lon").on("change", function (evt){
@@ -79,10 +75,6 @@ $("#periodh").ionRangeSlider({
     var lat = ($("#lat").val() != "" )?$("#lat").val():0;
     markerSync(parseFloat(lat),parseFloat(lon));
     validCoordinate(parseFloat(lat),parseFloat(lon));
-//    console.log($("#coodValid").val());
-//    if (valid === false){
-////      console.log("no valid");
-//    }
   });
 
   // Make the accordion effect on elements at left
@@ -156,19 +148,32 @@ function setPageEvents() {
   $("#scenario-filters").find("input").on("ifToggled", getFilesInfo);
   $("#model-filters").find("input").on("ifToggled", getFilesInfo);
   $("#method-filters").find("input").on("ifToggled", getFilesInfo);
-  $("#extent-filters").find("input").on("ifToggled", getFilesInfo);
   $("#format-filters").find("input").on("ifToggled", getFilesInfo);
-  $("#period-filters").find("input").on("ifToggled", getFilesInfo);
   $("#variable-filters").find("input").on("ifToggled", getFilesInfo);
-  $("#resolution-filters").find("input").on("ifToggled", getFilesInfo);
   $("#observation-filters").find("input").on("ifToggled", getFilesInfo);
-  $("#extent-filters").find("input")/*.on("ifClicked", changeMap)*/.on("ifToggled", adjustFiltersOnExtentSelection);
 
-  // load on the map the selected layer(file set). 
-  // $("input[name='fileSet']").on('ifChecked', loadKmlOnMap); 
-  //$("input[name='fileSet']").on('ifChecked', changeMap); 
   // Select/De-select all option in model filter
-  $("model-999").on("ifToggled", selectAllModelOptionsEvent);
+//  $("model-999").on("ifToggled", selectAllModelOptionsEvent);
+}
+
+function validateForm () {
+  var fields = $("#formSearch :input");
+//  fields.keyup(function() {
+    var emptyFields = fields.filter(function() {
+
+      // remove the $.trim if whitespace is counted as filled
+      return $.trim(this.value) === "";
+    });
+    if (!emptyFields.length && fillout) {
+      $("#searchSubmit").removeAttr("disabled");
+      $("#searchSubmit").removeClass("disable");
+      $("#filesFound").text("");
+    } else {
+      $("#searchSubmit").attr("disabled", "disabled");
+      $("#searchSubmit").addClass("disable");
+      $("#filesFound").text("You forgot to fill something out");
+    }
+//  });
 }
 
 function removePageEvents() {
@@ -180,12 +185,12 @@ function removePageEvents() {
 
   $("#scenario-filters").find("input").off("ifToggled", getFilesInfo);
   $("#model-filters").find("input").off("ifToggled", getFilesInfo);
-  $("#extent-filters").find("input").off("ifToggled", getFilesInfo);
+//  $("#extent-filters").find("input").off("ifToggled", getFilesInfo);
   $("#format-filters").find("input").off("ifToggled", getFilesInfo);
-  $("#period-filters").find("input").off("ifToggled", getFilesInfo);
+//  $("#period-filters").find("input").off("ifToggled", getFilesInfo);
   $("#variable-filters").find("input").off("ifToggled", getFilesInfo);
-  $("#resolution-filters").find("input").off("ifToggled", getFilesInfo);
-  $("#extent-filters").find("input").off("ifToggled", getFilesInfo);
+//  $("#resolution-filters").find("input").off("ifToggled", getFilesInfo);
+//  $("#extent-filters").find("input").off("ifToggled", getFilesInfo);
 
 
   // Select/De-select all option in model filter
@@ -223,7 +228,6 @@ function changeMap(evt) {
   var period = getArrayValues($("input[name='period\\[\\]']:checked"));
   var section = $(evt.target).attr("name");
 
-  //console.log(filterValues,section,extentValue)
   if (filterValues == "extent-2" || extentValue == 2) {
     if (!$("#tile_name").val() && !variables && !scenarios && !model && !period) {
       loadKmlOnMap();
@@ -344,7 +348,6 @@ function getFilesInfo(evt) {
       // Show the loader gif
     },
     success: function(data) {
-      // console.log(data)
       $(".loader").hide();
       if (data != null) {
         if (data.filesFound < 0) {
@@ -395,25 +398,25 @@ function getFilesInfo(evt) {
 
 
       // if(filterValues.section == 'fileSet' || filterValues.section == 'extent' || filterValues.section == 'scenarios[]' ){
-      if (filterValues.filesetId == 12 || filterValues.filesetId == 4) {
-        data.filtersAvailable.extent = "1,2"
-      }
-      // }
-
-      // if(filterValues.section == 'fileSet' || filterValues.section == 'extent'){
-      if (filterValues.filesetId == 4 && filterValues.extendId == 1) {
-        deleteTileValue()
-      }
-      if (filterValues.filesetId == 12 && filterValues.extendId == 1) {
-        deleteTileValue()
-      }
-
-      if (filterValues.filesetId == 12 && filterValues.extendId == 1) {
-        data.filtersAvailable.format = "1,2"
-      }
-      if (filterValues.filesetId == 4 && filterValues.extendId == 1) {
-        data.filtersAvailable.format = "1,2"
-      }
+//      if (filterValues.filesetId == 12 || filterValues.filesetId == 4) {
+//        data.filtersAvailable.extent = "1,2"
+//      }
+//      // }
+//
+//      // if(filterValues.section == 'fileSet' || filterValues.section == 'extent'){
+//      if (filterValues.filesetId == 4 && filterValues.extendId == 1) {
+//        deleteTileValue()
+//      }
+//      if (filterValues.filesetId == 12 && filterValues.extendId == 1) {
+//        deleteTileValue()
+//      }
+//
+//      if (filterValues.filesetId == 12 && filterValues.extendId == 1) {
+//        data.filtersAvailable.format = "1,2"
+//      }
+//      if (filterValues.filesetId == 4 && filterValues.extendId == 1) {
+//        data.filtersAvailable.format = "1,2"
+//      }
       // if(filterValues.filesetId ==4 && filterValues.extendId==2){ 
       // $("#format-2").iCheck("uncheck");
       // $("#format-2").iCheck("enable");
@@ -431,6 +434,7 @@ function getFilesInfo(evt) {
       $("#filesFound").show();
     }
   });
+  validateForm();
 }
 
 function uncheckAllInputs() {
@@ -475,35 +479,57 @@ function updateFilters(filtersAvailable) {
  * This function return all the options selected by the user in 
  * an object.
  * 
- * @param  sectionName - Name of the filter that trigger the event
+ * @param  filterName - Name of the filter that trigger the event
  * @return an object with the values selected by the user.
  */
 function getUserSelections(filterName) {
-  var scenarios, model, period, tileNameVal;
-
+  var scenarios, model, period,variables,formats,method,observation;
+  fillout = true;
   scenarios = getArrayValues($("[name='scenarios\\[\\]']:checked"));
   model = getArrayValues($("input[name='model\\[\\]']:checked"));
   period = getArrayValues($("input[name='period\\[\\]']:checked"));
   variables = getArrayValues($("input[name='variables\\[\\]']:checked"));
   formats = getArrayValues($("input[name='formats\\[\\]']:checked"));
-  tileNameVal = ($("#tile_name").val() == "") ? undefined : "'" + $("#tile_name").val() + "'";
-  if (filterName == "extent") {
-    tileNameVal = null
+  method = $("input[name='method']:checked").val();
+  observation = $("input[name='observation']:checked").val();
+  if(scenarios.length == 0) {
+    fillout = false;
+    return;
+  }  
+  if (model.length == 0) {
+    fillout = false;
+    return;
+  }  
+  if (variables.length == 0) {
+    fillout = false;
+    return;
+  } 
+  if (formats.length == 0) {
+//    fillout = false;
+  } 
+  if (typeof method == 'undefined') {
+    fillout = false;
+    return;
+  } 
+  if (typeof observation == 'undefined') {
+    fillout = false;
+    return;
   }
+//  tileNameVal = ($("#tile_name").val() == "") ? undefined : "'" + $("#tile_name").val() + "'";
+//  if (filterName == "extent") {
+//    tileNameVal = null
+//  }
 
   var data = {
     coordinate: $("#lat").val()+","+$("#lon").val(),
-    methodId: $("input[name='method']:checked").val(),
+    methodId: method,
     modelId: model,
-//    extendId: $("input[name='extent']:checked").val(),
     formatId: formats,
     scenarioId: scenarios,
     periodId: period,
     variableId: variables,
-//    resolutionId: $("input[name='resolution']:checked").val(),
-    observation: $("input[name='observation']:checked").val(),
+    observation: observation,
     filesetId: $("input[name='fileSet']:checked").val(),
-//    tileName: tileNameVal,
     section: filterName
   }
 
@@ -546,6 +572,7 @@ var normalStyle = {fillColor: "#BDBDBD", strokeColor: "#424242", fillOpacity: 0.
 var selectedStyle = {fillColor: "#2E2E2E", strokeColor: "#1C1C1C", fillOpacity: 0.6, strokeWidth: 10};
 var minZoomLevel = 1;
 var marker = null;
+var fillout = false;
 
 // function initialize map
 function initializeMap() {
@@ -579,6 +606,7 @@ function initializeMap() {
     $('#lat').val(event.latLng.lat().toFixed(4));
     $('#lon').val(event.latLng.lng().toFixed(4));
     validCoordinate (event.latLng.lat(), event.latLng.lng());
+    validateForm ();
   });
 }
 
@@ -734,9 +762,15 @@ function validCoordinate (lat, lon) {
   geocoder.geocode({'location': latlng}, function(results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       if (results[1]) {
-        $("#searchSubmit").removeAttr("disabled");
-        $("#searchSubmit").removeClass("disable");
-        $("#filesFound").text("");
+        if (!fillout){
+          $("#searchSubmit").attr("disabled", "disabled");
+          $("#searchSubmit").addClass("disable");
+          $("#filesFound").text("You forgot to fill something out");
+        } else {
+          $("#searchSubmit").removeAttr("disabled");
+          $("#searchSubmit").removeClass("disable");
+          $("#filesFound").text("");
+        }
       } else {
         $("#searchSubmit").attr("disabled", "disabled");
         $("#searchSubmit").addClass("disable");
