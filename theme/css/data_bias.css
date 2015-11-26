@@ -183,7 +183,7 @@ label.inputs-acf {
 
 .bloc {
     font-size: 13px;
-    width: 110px;
+    width: 25%; /*110px;*/
     float: left;
 }
 #box {
@@ -206,7 +206,7 @@ label.inputs-acf {
     background: url(../images/dropdown.png) 83px no-repeat #7C7C7C;
     font-weight: 400;
     color: #FFF;
-    width: 54px;
+    width: 95px; /*54px;*/
     border-radius: 5px;
     padding: 3px 33px 3px 20px;
     
@@ -274,7 +274,7 @@ label.inputs-acf {
     width: 280px;
     float: right;
     text-align: center;
-	font-size: 14px;
+	font-size: 12px;
     /* box-shadow: 1px 1px 8px #A7A7A7; */
 }
 
