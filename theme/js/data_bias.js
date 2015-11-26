@@ -740,12 +740,12 @@ function validCoordinate (lat, lon) {
       } else {
         $("#searchSubmit").attr("disabled", "disabled");
         $("#searchSubmit").addClass("disable");
-        $("#filesFound").text("Please select a valid coordinate");
+        $("#filesFound").text("Please select a valid coordinate on continent");
       }
     } else {
       $("#searchSubmit").attr("disabled", "disabled");
       $("#searchSubmit").addClass("disable");
-      $("#filesFound").text("Please select a valid coordinate");
+      $("#filesFound").text("Please select a valid coordinate on continent");
     }
   });
 //  return result;
