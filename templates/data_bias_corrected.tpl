@@ -73,7 +73,7 @@
               <input type="checkbox" value="historical" onclick="return false" checked READONLY><label for="scenario-h">Historical</label><br>
               {foreach from=$scenarios item=scenario}
                 <img class="help_icon" id="help_icon_scenarios[]" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                <input id="scenario-{$scenario['id']}" type="checkbox" name="scenarios[]" value="{$scenario['id']}"><label for="scenario-{$scenario['id']}">{$scenario['name']}</label><br>
+                <input id="scenario-{$scenario['id']}" type="radio" name="scenarios[]" value="{$scenario['id']}"><label for="scenario-{$scenario['id']}">{$scenario['name']}</label><br>
               {/foreach}
             </article>
           </div>
