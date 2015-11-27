@@ -324,7 +324,7 @@ function getFilesInfo(evt) {
       url: "/ajax/data-options.php",
       data: {section: nameEven, id: id},
       success: function(data) {
-        if (data != null) {
+        if (data.startDate != null && data.endDate != null ) {
 //          console.log(data.startDate);
           var slider = $("#periodh").data("ionRangeSlider");
           slider.destroy();
