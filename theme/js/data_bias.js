@@ -317,17 +317,32 @@ function getFilesInfo(evt) {
   var nameEven = $(evt.target).attr("name");
   var filterValues = getUserSelections(nameEven);
   if (nameEven == 'observation') {
-//    $("#observation-acronym").val($(evt.target).val())
-  }
-  // console.log(filterValues.filesetId)
-  // Hide the help icon 
+    var id = $("input[name='observation']:checked").val();
+    $.ajax({
+      type: "GET",
+      dataType: "json",
+      url: "/ajax/data-options.php",
+      data: {section: nameEven, id: id},
+      success: function(data) {
+        if (data != null) {
+//          console.log(data.startDate);
+          var slider = $("#periodh").data("ionRangeSlider");
+          slider.destroy();
+          $("#periodh").ionRangeSlider({
+              type: "double",
+              min: data.startDate,
+              max: data.endDate,
+              from: 1985,
+              to: 1990,
+              drag_interval: true
+          });
+        } else {
 
-//  if (filterValues.filesetId == 4 && filterValues.extendId == 2) {
-//    filterValues.formatId = 1;
-//  }
-//  if (filterValues.filesetId == 12 && filterValues.extendId == 2) {
-//    filterValues.formatId = 1;
-//  }
+        }
+      }
+    });
+  }
+
   if ($(evt.target).parent().prev().hasClass("help_icon")) {
     $(evt.target).parent().prev().hide();
   }

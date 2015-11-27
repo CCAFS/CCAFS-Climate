@@ -29,6 +29,9 @@ if (isset($_GET['section']) && $_GET['section'] != '') {
         case "tile":
             tile();
             break;
+        case "observation" :
+            observation($_GET['id']);
+            break;
         default:
             break;
     }
@@ -132,5 +135,17 @@ function format($id) {
     echo json_encode($result);
 }
 function tile() {}
+function observation($id) {
+    global $db;
+
+    $obsQuery = "SELECT obs.start_date, obs.end_date
+        FROM datasets_observation_bias obs
+        WHERE obs.id = ".$id;
+    $result = new stdClass();
+    $descriptions = $db->getRow($obsQuery);
+    $result->startDate = $descriptions["start_date"];
+    $result->endDate = $descriptions["end_date"];
+    echo json_encode($result);
+}
 
 ?>
