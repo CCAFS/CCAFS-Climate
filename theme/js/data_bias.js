@@ -16,8 +16,8 @@ $("#period").ionRangeSlider({
     type: "double",
     min: 2015,
     max: 2100,
-    from: 2015,
-    to: 2039,
+    from: 2020,
+    to: 2049,
     drag_interval: true
 });
 $("#periodh").ionRangeSlider({
