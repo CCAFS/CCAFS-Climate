@@ -17,57 +17,58 @@
     Please review these selected items from request. Once your order is checked, enter a valid email address and click the "SUBMIT ORDER" button to finalize the order. No actual data
     will be emailed directly. Only the links to access your ordered data from an FTP site will be sent.
   </p>
-	<div id="reviewTable">
-      <table>
-        <thead>
-          <tr>
-            <th colspan="2">Requested Data Review</th>
-          </tr>
-        </thead>
+
+<div class="hd">  Requested Data Review </div>
+  <div class="reviewTable">
+    
+    <table>
         <tbody>
           <tr>
-            <td class="var">Geographic location</td>
+            <th class="var">Geographic location</th>
             <td class="val">Lon: {$lon}, Lat: {$lat}</td>
           </tr>
           <tr>
-            <td class="var">GCM File Set</td>
+            <th class="var">GCM File Set</th>
             <td class="val">Raw GCM CMIP5 daily</td>
           </tr>
           <tr>
-            <td class="var">Scenario</td>
+            <th class="var">Scenario</th>
             <td class="val">{$scenariosAcronym}</td>
           </tr>
           <tr>
-            <td class="var">Model</td>
+            <th class="var">Model</th>
             <td class="val">{$models}</td>
           </tr>
           <tr>
-            <td class="var">Observation dataset</td>
+            <th class="var">Observation dataset</th>
             <td class="val">{$observationAcronym}</td>
           </tr>
           <tr>
-            <td class="var">Period historical</td>
+            <th class="var">Period historical</th>
             <td class="val">{$periodh}</td>
           </tr>
           <tr>
-            <td class="var">Period future</td>
+            <th class="var">Period future</th>
             <td class="val">{$period}</td>
           </tr>
           <tr>
-            <td class="var">Variables</td>
+            <th class="var">Variables</th>
             <td class="val">{$variablesAcronym}</td>
           </tr>
           <tr>
-            <td class="var">Correction Method</td>
+            <th class="var">Correction Method</th>
             <td class="val">{$methodAcronym}</td>
           </tr>
           <tr>
-            <td class="var">Ouput formats</td>
+            <th class="var">Ouput formats</th>
             <td class="val">{$formatsAcronym}</td>
           </tr>
         </tbody>
-      </table>
-	</div>
+    </table>
+
+</div>
+   
+    
   <h2>Enter email address</h2>
   <p>
     Please enter your email address. This is the address to which your data links and information regarding this order will be sent.
