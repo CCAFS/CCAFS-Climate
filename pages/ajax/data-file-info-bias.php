@@ -129,24 +129,12 @@ function getFiltersAvailable() {
 //    $sql .= "GROUP_CONCAT( DISTINCT extent_id ) as \"extent\" ";
 //    $sql .= "FROM datasets_file WHERE TRUE";
   //SQL only for postgres
-  $sql = "SELECT array_to_string(array_agg(DISTINCT scenario_id), ',') as \"scenario\", 
-            array_to_string(array_agg(DISTINCT period_id ), ',') as \"period\", 
-            array_to_string(array_agg(DISTINCT model_id ), ',') as \"model\", 
-            array_to_string(array_agg(DISTINCT variable_id ), ',') as \"variable\", 
-            array_to_string(array_agg(DISTINCT resolution_id ), ',') as \"resolution\", 
-            array_to_string(array_agg(DISTINCT format_id ), ',') as \"format\", 
-            array_to_string(array_agg(DISTINCT extent_id ), ',') as \"extent\" 
-            FROM datasets_file_bias 
-            WHERE TRUE";
+  $sql = "SELECT array_to_string(array_agg(DISTINCT variable_id ), ',') as \"variable\"
+            FROM datasets_fileobservations_bias 
+            WHERE status = 2";
 
-  if (isset($ids["file_set_id"]) && $ids["file_set_id"] != "") {
-    $sql .= " AND file_set_id = " . $ids["file_set_id"];
-  }
-  if (isset($ids["extent_id"]) && $ids["extent_id"] != "") {
-    $sql .= " AND extent_id = " . $ids["extent_id"];
-  }
-  if (isset($ids["format_id"]) && $ids["format_id"] != "") {
-    $sql .= " AND format_id = " . $ids["format_id"];
+  if (isset($ids["observation_id"]) && $ids["observation_id"] != "") {
+    $sql .= " AND obsset_id = " . $ids["observation_id"];
   }
   // Adjust the db to only return the assoc array
   $db->SetFetchMode(ADODB_FETCH_ASSOC);
