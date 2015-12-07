@@ -18,56 +18,57 @@
     will be emailed directly. Only the links to access your ordered data from an FTP site will be sent.
   </p>
 
-  <table class="reviewTable">
-    <thead>
-      <tr>
-        <th colspan="2">Requested Data Review</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="var">Geographic location</td>
-        <td class="val">Lon: {$lon}, Lat: {$lat}</td>
-      </tr>
-      <tr>
-        <td class="var">GCM File Set</td>
-        <td class="val">Raw GCM CMIP5 daily</td>
-      </tr>
-      <tr>
-        <td class="var">Scenario</td>
-        <td class="val">{$scenariosAcronym}</td>
-      </tr>
-      <tr>
-        <td class="var">Model</td>
-        <td class="val">{$models}</td>
-      </tr>
-      <tr>
-        <td class="var">Observation dataset</td>
-        <td class="val">{$observationAcronym}</td>
-      </tr>
-      <tr>
-        <td class="var">Period historical</td>
-        <td class="val">{$periodh}</td>
-      </tr>
-      <tr>
-        <td class="var">Period future</td>
-        <td class="val">{$period}</td>
-      </tr>
-      <tr>
-        <td class="var">Variables</td>
-        <td class="val">{$variablesAcronym}</td>
-      </tr>
-      <tr>
-        <td class="var">Correction Method</td>
-        <td class="val">{$methodAcronym}</td>
-      </tr>
-      <tr>
-        <td class="var">Ouput formats</td>
-        <td class="val">{$formatsAcronym}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="hd">  Requested Data Review </div>
+  <div class="reviewTable">
+    
+    <table>
+        <tbody>
+          <tr>
+            <th class="var">Geographic location</th>
+            <td class="val">Lon: {$lon}, Lat: {$lat}</td>
+          </tr>
+          <tr>
+            <th class="var">GCM File Set</th>
+            <td class="val">Raw GCM CMIP5 daily</td>
+          </tr>
+          <tr>
+            <th class="var">Scenario</th>
+            <td class="val">{$scenariosAcronym}</td>
+          </tr>
+          <tr>
+            <th class="var">Model</th>
+            <td class="val">{$models}</td>
+          </tr>
+          <tr>
+            <th class="var">Observation dataset</th>
+            <td class="val">{$observationAcronym}</td>
+          </tr>
+          <tr>
+            <th class="var">Period historical</th>
+            <td class="val">{$periodh}</td>
+          </tr>
+          <tr>
+            <th class="var">Period future</th>
+            <td class="val">{$period}</td>
+          </tr>
+          <tr>
+            <th class="var">Variables</th>
+            <td class="val">{$variablesAcronym}</td>
+          </tr>
+          <tr>
+            <th class="var">Correction Method</th>
+            <td class="val">{$methodAcronym}</td>
+          </tr>
+          <tr>
+            <th class="var">Ouput formats</th>
+            <td class="val">{$formatsAcronym}</td>
+          </tr>
+        </tbody>
+    </table>
 
+</div>
+   
+    
   <h2>Enter email address</h2>
   <p>
     Please enter your email address. This is the address to which your data links and information regarding this order will be sent.

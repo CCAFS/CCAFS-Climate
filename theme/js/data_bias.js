@@ -776,7 +776,8 @@ function validCoordinate (lat, lon) {
 //  var result = true;
 //  return "1";
   geocoder.geocode({'location': latlng}, function(results, status) {
-    if (status === google.maps.GeocoderStatus.OK) {
+    // if (status === google.maps.GeocoderStatus.OK) {
+    if (status === "OK") {
       if (results[1]) {
         if (!fillout){
           $("#searchSubmit").attr("disabled", "disabled");

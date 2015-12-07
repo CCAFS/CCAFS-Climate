@@ -48,7 +48,7 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
   $formats = $db->getAll($query);
   $formAcro = "";
   foreach ($formats as $form) {
-    $formAcro .= $form['acronym'].",";
+    $formAcro .= $form['name'].",";
   }
  
   $vars['scenarios-acronym'] = substr($sceAcro, 0, -1);
@@ -57,14 +57,16 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
   
   $vars['variables-acronym'] = substr($varAcro, 0, -1);
   
-  $vars['formats-acronym'] = substr($formAcro, 0, -1);
+  $vars['formats-name'] = substr($formAcro, 0, -1);
   
   $vars['fileSet-acronym'] = $fileSets[0]['name'];
   
   $vars['method-acronym'] = $methods[0]['name'];
   
+
 //  echo "<pre>".print_r($vars,true)."</pre>";
 //  $url = "http://172.22.52.62/correctedTest.php";
+
   $url = "http://gisweb.ciat.cgiar.org/Bc_Downscale/biasCorrected.php";
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
@@ -104,9 +106,14 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
   $query = "SELECT id, name, acronym FROM datasets_format_bias WHERE id in (".implode( ",", $_REQUEST["formats"] ).")";
   $formats = $db->getAll($query);
   $formAcro = "";
+  $formName = "";
   foreach ($formats as $form) {
     $formAcro .= $form['acronym'].",";
+    $formName.= $form['name'].",";
   }
+  
+   
+	
   $variables = isset($_REQUEST["variables"]) ?  implode( ",", $_REQUEST["variables"] ) : null;
   $scenarios = isset($_REQUEST["scenarios"]) ? implode( ",", $_REQUEST["scenarios"] ) : null;
   $models = isset($_REQUEST["model"]) ?  implode( ",", $_REQUEST["model"] ) : null;
@@ -123,7 +130,7 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
   $smarty->assign("method", $method);
   $smarty->assign("methodAcronym", $methods[0]['name']);
   $smarty->assign("formats", $formats);
-  $smarty->assign("formatsAcronym", substr($formAcro, 0, -1));
+  $smarty->assign("formatsAcronym", substr($formName, 0, -1));
   $smarty->assign("lat", $lat);
   $smarty->assign("lon", $lon);
   $smarty->assign("period", $period);
