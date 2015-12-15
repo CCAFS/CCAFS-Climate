@@ -158,17 +158,18 @@ Ext.application({
 				// new OpenLayers.Layer.OSM("OSM"),
 				clusters,
 				new OpenLayers.Layer.Google(
+							"Google Hybrid",
+							{type: google.maps.MapTypeId.HYBRID}
+						),				
+				new OpenLayers.Layer.Google(
 							"Google Streets",
 							{type: google.maps.MapTypeId.STREETS}
 						),				
 				new OpenLayers.Layer.Google(
 							"Google Physical",
 							{type: google.maps.MapTypeId.TERRAIN}
-						),				
-				new OpenLayers.Layer.Google(
-							"Google Hybrid",
-							{type: google.maps.MapTypeId.HYBRID}
 						)				
+				
 				// gphy,ghyb,
                 /*new OpenLayers.Layer.WMS("Streets Map",
                     "http://ows.terrestris.de/osm/service?",
