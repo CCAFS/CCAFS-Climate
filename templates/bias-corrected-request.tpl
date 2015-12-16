@@ -85,6 +85,8 @@
     <input type="hidden" name="variables" id="variables" value="{$variables}">
     <input type="hidden" name="method" id="method" value="{$method}">
     <input type="hidden" name="formats" id="formats" value="{$formats}">
+    <input type="hidden" name="file" id="file" value="{$file}">
+    <input type="hidden" name="delimitator" id="delimitator" value="{$delimitator}">
     <div class="boxblock clearfix">
       <label for="email">Email address</label>
       <input type="email" class="emailIcon" name="email" id="email" />

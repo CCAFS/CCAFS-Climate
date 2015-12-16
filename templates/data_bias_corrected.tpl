@@ -37,7 +37,7 @@
     <P>If you are using IE 9 or later, make sure you <A href="http://windows.microsoft.com/en-US/windows7/webpages-look-incorrect-in-Internet-Explorer">turn off "Compatibility View"</A>.</P>
   </div>
   <div id="search_form">
-    <form method="GET" action="/bias-corrected-request.php" TARGET="_blank" id="formSearch">
+    <form method="POST" action="/bias-corrected-request.php" TARGET="_blank" id="formSearch" enctype="multipart/form-data">
 
       <div id="side-left"> 
         <section class="ac-container">
@@ -101,6 +101,13 @@
               <img class="help_icon" id="help_icon_observation" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
               <input id="observation-{$observation['id']}" type="radio" name="observation" value="{$observation['id']}" /><label for="observation-{$observation['id']}">{$observation["name"]}</label><br> 
               {/foreach}
+              <input type="file" id="station-file" name="station-file">
+              <select id="delimit" name="delimit">
+                <option>\t</option>
+                <option>;</option>
+                <option>Blank space</option>
+              </select>
+              <label for="delimit">Delimitator</label>
             </article>
           </div>
         </section>
