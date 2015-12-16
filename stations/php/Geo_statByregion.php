@@ -2,12 +2,12 @@
 
 /*
 
-Tabla geostation columna access_level: codigo de acceso
+Tabla geostation_sel columna access_level: codigo de acceso
 	1:free
 	2:restringido para colombia
 Tabla user columna access_level:
 	1:Restricted
-	2:if geostation level es 2 -> restringido para estaciones de colombia
+	2:if geostation_sel level es 2 -> restringido para estaciones de colombia
 	3:Free -> administrator
 
 */
@@ -39,7 +39,7 @@ Tabla user columna access_level:
 		$cadena= implode(",",json_decode ($_REQUEST['cadena']));
 	}
 	
-	$tableStation = "geostation";
+	$tableStation = "geostation_sel";
 	$admin = "gadm_lev2";
 	
 	// $country ="Colombia";
@@ -122,17 +122,18 @@ if($type==2 or $type==3){
 
 if($type==9){
 	if($radioCh==1){
-	$sql="select *,st_asgeojson(g.geom) from geostation as g where g.id=".intval($getStat).";";
+	$sql="select *,st_asgeojson(g.geom) from geostation_sel as g where g.id=".intval($getStat).";";
 	}
 	if($radioCh==2){
-	$sql="select *,st_asgeojson(g.geom) from geostation as g where g.name='".$getStat."';";
+	$sql="select *,st_asgeojson(g.geom) from geostation_sel as g where g.name='".$getStat."';";
 	}
 }
 
 	
 
 if($type==4){
-	$Geosql =	"select *,st_asgeojson(geom) from geostation where country = 165 or country = 72;"; //,st_asgeojson(s.geom) 
+	// $Geosql =	"select *,st_asgeojson(geom) from geostation_sel where country = 165 or country = 72;"; //,st_asgeojson(s.geom) 
+	$Geosql =	"select *,st_asgeojson(geom) from geostation_sel"; //,st_asgeojson(s.geom) 
   
 	$result = pg_query($dbcon, $Geosql);
 
@@ -204,13 +205,13 @@ if($type==5){
 
 	if($country and $state and $municip){
 		// $sql_tabla = "select s.id,s.code,s.name, c.name category,i.name institute,s.instalation,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
-					// from gadm_lev2 as l , geostation as s, station_category as c, station_institute as i, station_status as t, station_time_step as a, station_type as p, 
+					// from gadm_lev2 as l , geostation_sel as s, station_category as c, station_institute as i, station_status as t, station_time_step as a, station_type as p, 
 					// station_ctrl_quality as q, station_file as f
 					// where st_intersects(s.geom , l.geom) and s.category=c.id and s.institute=i.id and s.time_step=a.id and s.type=p.id and f.station_ctrl_quality_id=q.id and l.NAME_0='".$country."' and l.NAME_1='".$state."' and l.NAME_2='".$municip."'
 					// group by s.id, s.name, c.name,i.name,q.name,p.name,l.NAME_0,l.NAME_1,l.NAME_2";		
 					
 		$sql_tabla ="select DISTINCT s.id, s.code,s.name, c.name category,i.name institute,s.instalation,s.suspension,s.access_level,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,cop.name copyright,l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
-							 from gadm_lev2 as l, geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_status as t ON (t.id = s.status)
+							 from gadm_lev2 as l, geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_status as t ON (t.id = s.status)
 							JOIN station_type as p ON (p.id = s.type)  JOIN station_time_step as a ON (a.id = s.time_step) JOIN station_ctrl_quality as q ON (q.id = s.ctrl_quali)
 							JOIN station_category as c ON (c.id = s.category) JOIN station_institute as i ON (i.id = s.institute) JOIN station_copyright as cop ON (s.copyrigth=cop.id)	
 							where st_intersects(s.geom , l.geom) and l.NAME_0='".$country."' and l.NAME_1='".$state."' and l.NAME_2='".$municip."'";
@@ -218,13 +219,13 @@ if($type==5){
 	}
 	elseif($country and $state and !$municip){
 		// $sql_tabla = "select s.id,s.code,s.name, c.name category,i.name institute,s.instalation,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
-					// from gadm_lev2 as l , geostation as s, station_category as c, station_institute as i, station_status as t, station_time_step as a, station_type as p, 
+					// from gadm_lev2 as l , geostation_sel as s, station_category as c, station_institute as i, station_status as t, station_time_step as a, station_type as p, 
 					// station_ctrl_quality as q, station_file as f
 					// where st_intersects(s.geom , l.geom) and s.category=c.id and s.institute=i.id and s.time_step=a.id and s.type=p.id and f.station_ctrl_quality_id=q.id and l.NAME_0='".$country."' and l.NAME_1='".$state."'
 					// group by s.id, s.name, c.name,i.name,q.name,p.name,l.NAME_0,l.NAME_1,l.NAME_2";
 					
 		$sql_tabla ="select DISTINCT s.id, s.code,s.name, c.name category,i.name institute,s.instalation,s.suspension,s.access_level,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,cop.name copyright,l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
-							 from gadm_lev2 as l, geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_status as t ON (t.id = s.status)
+							 from gadm_lev2 as l, geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_status as t ON (t.id = s.status)
 							JOIN station_type as p ON (p.id = s.type)  JOIN station_time_step as a ON (a.id = s.time_step) JOIN station_ctrl_quality as q ON (q.id = s.ctrl_quali)
 							JOIN station_category as c ON (c.id = s.category) JOIN station_institute as i ON (i.id = s.institute) JOIN station_copyright as cop ON (s.copyrigth=cop.id)	
 							where st_intersects(s.geom , l.geom) and l.NAME_0='".$country."' and l.NAME_1='".$state."';";				
@@ -232,20 +233,20 @@ if($type==5){
 	}
 	elseif($country and !$state and !$municip){
 		// $sql_tabla = "select s.id,s.code,s.name, c.name category,i.name institute,s.instalation,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,cop.name copyright,l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
-					// from gadm_lev2 as l , geostation as s, station_category as c, station_institute as i, station_status as t, station_time_step as a, station_type as p, 
+					// from gadm_lev2 as l , geostation_sel as s, station_category as c, station_institute as i, station_status as t, station_time_step as a, station_type as p, 
 					// station_ctrl_quality as q, station_file as f, station_copyright as cop
 					// where st_intersects(s.geom , l.geom) and s.category=c.id and s.institute=i.id and s.time_step=a.id and s.type=p.id and f.station_ctrl_quality_id=q.id and s.copyrigth=cop.id and l.NAME_0='".$country."'
 					// group by s.id, s.name, c.name,i.name,q.name,p.name,cop.name,l.NAME_0,l.NAME_1,l.NAME_2";
 					
 		$sql_tabla ="select DISTINCT s.id, s.code,s.name, c.name category,i.name institute,s.instalation,s.suspension,s.access_level,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,cop.name copyright,l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
-							 from gadm_lev2 as l, geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_status as t ON (t.id = s.status)
+							 from gadm_lev2 as l, geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_status as t ON (t.id = s.status)
 							JOIN station_type as p ON (p.id = s.type)  JOIN station_time_step as a ON (a.id = s.time_step) JOIN station_ctrl_quality as q ON (q.id = s.ctrl_quali)
 							JOIN station_category as c ON (c.id = s.category) JOIN station_institute as i ON (i.id = s.institute) JOIN station_copyright as cop ON (s.copyrigth=cop.id)	
 							where st_intersects(s.geom , l.geom) and l.NAME_0='".$country."';";
 
 							
 		// $sql_tabla ="select DISTINCT s.id, s.code,s.name, c.name category,i.name institute,s.instalation,s.suspension,s.access_level,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,cop.name copyright, l.NAME_1 state
-						 // from gadm_lev1 as l, geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_status as t ON (t.id = s.status)
+						 // from gadm_lev1 as l, geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_status as t ON (t.id = s.status)
 						// JOIN station_type as p ON (p.id = s.type)  JOIN station_time_step as a ON (a.id = s.time_step) JOIN station_ctrl_quality as q ON (q.id = s.ctrl_quali)
 						// JOIN station_category as c ON (c.id = s.category) JOIN station_institute as i ON (i.id = s.institute) JOIN station_copyright as cop ON (s.copyrigth=cop.id)	
 						// where st_intersects(s.geom , l.geom) and l.NAME_0='".$country."';";							
@@ -344,17 +345,17 @@ if($type==6){
 
 	if($country and $state and $municip){
 		$sql_tabla ="select s.id idstat, v.id idvar, v.name,v.acronym, f.date_start, f.date_end, f.age
-		 from gadm_lev2 as l , geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
+		 from gadm_lev2 as l , geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
 		where st_intersects(s.geom , l.geom) and l.NAME_0='".$country."' and l.NAME_1='".$state."' and l.NAME_2='".$municip."' and s.id=".$idstat."";			
 	}
 	elseif($country and $state and !$municip){
 		$sql_tabla ="select s.id idstat, v.id idvar, v.name,v.acronym, f.date_start, f.date_end, f.age
-		 from gadm_lev2 as l , geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
+		 from gadm_lev2 as l , geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
 		where st_intersects(s.geom , l.geom) and l.NAME_0='".$country."' and l.NAME_1='".$state."' and s.id=".$idstat."";				
 	}
 	elseif($country and !$state and !$municip){
 		$sql_tabla ="select s.id idstat, v.id idvar, v.name,v.acronym, f.date_start, f.date_end, f.age
-		 from gadm_lev2 as l , geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
+		 from gadm_lev2 as l , geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
 		where st_intersects(s.geom , l.geom) and l.NAME_0='".$country."' and s.id=".$idstat."";		
 	}
 
@@ -402,17 +403,17 @@ if($type==7){
 
 	if($country and $state and $municip){
 		$sql_tabla ="select v.id, v.name, v.acronym
-		 from gadm_lev2 as l , geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
+		 from gadm_lev2 as l , geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
 		where st_intersects(s.geom , l.geom) and l.NAME_0='".$country."' and l.NAME_1='".$state."' and l.NAME_2='".$municip."' group by v.id, v.name, v.acronym";			
 	}
 	elseif($country and $state and !$municip){
 		$sql_tabla ="select v.id, v.name, v.acronym
-		 from gadm_lev2 as l , geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
+		 from gadm_lev2 as l , geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
 		where st_intersects(s.geom , l.geom) and l.NAME_0='".$country."' and l.NAME_1='".$state."' group by v.id, v.name, v.acronym";				
 	}
 	elseif($country and !$state and !$municip){
 		$sql_tabla ="select v.id, v.name, v.acronym
-		 from gadm_lev2 as l , geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
+		 from gadm_lev2 as l , geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
 		where st_intersects(s.geom , l.geom) and l.NAME_0='".$country."' group by v.id, v.name, v.acronym";		
 	}
 
@@ -449,7 +450,7 @@ if($type==8){
 
 	$i = 0;
 	if($radioCh==1){
-		$sql_tabla ="select v.id as name,f.name as inst from geostation as v JOIN station_institute as f ON (f.id=v.institute);";	
+		$sql_tabla ="select v.id as name,f.name as inst from geostation_sel as v JOIN station_institute as f ON (f.id=v.institute);";	
 		$result = pg_query($dbcon, $sql_tabla);
 
 
@@ -466,7 +467,7 @@ if($type==8){
 			$i++;
 		}		
 	}else{
-		$sql_tabla ="select DISTINCT v.id,v.name,g.iso,f.name as inst from geostation as v JOIN station_institute as f ON (f.id=v.institute) JOIN gadm_lev0 as g ON (g.id_0=v.country);";	
+		$sql_tabla ="select DISTINCT v.id,v.name,g.iso,f.name as inst from geostation_sel as v JOIN station_institute as f ON (f.id=v.institute) JOIN gadm_lev0 as g ON (g.id_0=v.country);";	
 		$result = pg_query($dbcon, $sql_tabla);
 
 
@@ -501,32 +502,32 @@ if($type==10){
 	if($radioCh==1){
 		// $sql_tabla = "select s.id,s.code,s.name, c.name category,i.name institute,s.instalation,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,
 		 // l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
-		 // from gadm_lev2 as l, geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.id) JOIN station_status as t ON (t.id = s.status) 
+		 // from gadm_lev2 as l, geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.id) JOIN station_status as t ON (t.id = s.status) 
 				// JOIN station_type as p ON (p.id = s.type)  JOIN station_time_step as a ON (a.id = s.time_step) JOIN station_ctrl_quality as q ON (q.id = s.ctrl_quali)
 				// JOIN station_category as c ON (c.id = s.category) JOIN station_institute as i ON (i.id = s.institute)
 		// where s.id=".$getStat." and st_intersects(s.geom , l.geom)";	
 		
 $sql_tabla = "select s.id,s.code,s.name, c.name category,i.name institute,s.instalation,s.suspension,s.access_level,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
-					from gadm_lev2 as l , geostation as s, station_category as c, station_institute as i, station_status as t, station_time_step as a, station_type as p, 
+					from gadm_lev2 as l , geostation_sel as s, station_category as c, station_institute as i, station_status as t, station_time_step as a, station_type as p, 
 					station_ctrl_quality as q, station_file as f
 					where s.id='".$getStat."' AND st_intersects(s.geom , l.geom) and s.category=c.id and s.institute=i.id and s.time_step=a.id and s.type=p.id and f.station_ctrl_quality_id=q.id and f.station_id=s.id
 					group by s.id, s.name, c.name,i.name,q.name,p.name,l.NAME_0,l.NAME_1,l.NAME_2;";			
 	}else{
 		// $sql_tabla = "select s.id,s.code,s.name, c.name category,i.name institute,s.instalation,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,
 		// l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
-		 // from gadm_lev2 as l, geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.id) JOIN station_status as t ON (t.id = s.status) 
+		 // from gadm_lev2 as l, geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.id) JOIN station_status as t ON (t.id = s.status) 
 				// JOIN station_type as p ON (p.id = s.type)  JOIN station_time_step as a ON (a.id = s.time_step) JOIN station_ctrl_quality as q ON (q.id = s.ctrl_quali)
 				// JOIN station_category as c ON (c.id = s.category) JOIN station_institute as i ON (i.id = s.institute)
 		// where s.name='".$getStat."' and st_intersects(s.geom , l.geom);";	
 		
 // $sql_tabla = "select s.id,s.code,s.name, c.name category,i.name institute,s.instalation,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
-					// from gadm_lev2 as l , geostation as s, station_category as c, station_institute as i, station_status as t, station_time_step as a, station_type as p, 
+					// from gadm_lev2 as l , geostation_sel as s, station_category as c, station_institute as i, station_status as t, station_time_step as a, station_type as p, 
 					// station_ctrl_quality as q, station_file as f
 					// where s.name='".$getStat."' AND st_intersects(s.geom , l.geom) and s.category=c.id and s.institute=i.id and s.time_step=a.id and s.type=p.id and f.station_ctrl_quality_id=q.id and f.station_id=s.id
 					// group by s.id, s.name, c.name,i.name,q.name,p.name,l.NAME_0,l.NAME_1,l.NAME_2;";		
 
 $sql_tabla ="select DISTINCT s.id, s.code,s.name, c.name category,i.name institute,s.instalation,s.suspension,s.access_level,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,cop.name copyright,l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
-					 from gadm_lev2 as l, geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_status as t ON (t.id = s.status)
+					 from gadm_lev2 as l, geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_status as t ON (t.id = s.status)
 					JOIN station_type as p ON (p.id = s.type)  JOIN station_time_step as a ON (a.id = s.time_step) JOIN station_ctrl_quality as q ON (q.id = s.ctrl_quali)
 					JOIN station_category as c ON (c.id = s.category) JOIN station_institute as i ON (i.id = s.institute) JOIN station_copyright as cop ON (s.copyrigth=cop.id)	
 					where st_intersects(s.geom , l.geom) and s.name='".$getStat."';"; 
@@ -605,11 +606,11 @@ if($type==11){
 
 	if($radioCh==1){
 	$sql_tabla ="select v.id, v.name, v.acronym
-		 from geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
+		 from geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
 		where s.id=".$getStat.";";		
 	}else{
 	$sql_tabla ="select v.id, v.name, v.acronym
-		 from geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
+		 from geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
 		where s.name='".$getStat."';";	
 	}	
 
@@ -646,11 +647,11 @@ if($type==12){
 
 	if($radioCh==1){
 	$sql_tabla ="select s.id idstat, v.id idvar, v.name,v.acronym, f.date_start, f.date_end, f.age
-			from geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id)
+			from geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id)
 		where s.id=".$getStat.";";		
 	}else{
 	$sql_tabla ="select s.id idstat, v.id idvar, v.name,v.acronym, f.date_start, f.date_end, f.age
-			from geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id)
+			from geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id)
 		where s.name='".$getStat."';";	
 	}
 
@@ -721,14 +722,14 @@ if($type==14){
 			$whereStation .= " AND s.id IN (" . implode(",",$statList).")";
 		}	
 		$sql_tabla ="select DISTINCT s.id, s.code,s.name, c.name category,i.name institute,s.instalation,s.suspension,s.access_level,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,cop.name copyright,l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
-							 from gadm_lev2 as l, geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_status as t ON (t.id = s.status)
+							 from gadm_lev2 as l, geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_status as t ON (t.id = s.status)
 							JOIN station_type as p ON (p.id = s.type)  JOIN station_time_step as a ON (a.id = s.time_step) JOIN station_ctrl_quality as q ON (q.id = s.ctrl_quali)
 							JOIN station_category as c ON (c.id = s.category) JOIN station_institute as i ON (i.id = s.institute) JOIN station_copyright as cop ON (s.copyrigth=cop.id)	
 							where TRUE $whereStation AND st_intersects(s.geom , l.geom);";		
 	}else{
 
 		$sql_tabla ="select DISTINCT s.id, s.code,s.name, c.name category,i.name institute,s.instalation,s.suspension,s.access_level,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,cop.name copyright,l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
-							 from gadm_lev2 as l, geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_status as t ON (t.id = s.status)
+							 from gadm_lev2 as l, geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_status as t ON (t.id = s.status)
 							JOIN station_type as p ON (p.id = s.type)  JOIN station_time_step as a ON (a.id = s.time_step) JOIN station_ctrl_quality as q ON (q.id = s.ctrl_quali)
 							JOIN station_category as c ON (c.id = s.category) JOIN station_institute as i ON (i.id = s.institute) JOIN station_copyright as cop ON (s.copyrigth=cop.id)	
 							where st_intersects(s.geom , ST_GeomFromText('$wkt',4326)) AND st_intersects(s.geom , l.geom);";		
@@ -740,7 +741,7 @@ if($type==14){
 
 	// $sql_tabla = "select s.id,s.code,s.name, c.name category,i.name institute,s.instalation,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,
 	// l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
-	 // from gadm_lev2 as l, geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.id) JOIN station_status as t ON (t.id = s.status) 
+	 // from gadm_lev2 as l, geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.id) JOIN station_status as t ON (t.id = s.status) 
 			// JOIN station_type as p ON (p.id = s.type)  JOIN station_time_step as a ON (a.id = s.time_step) JOIN station_ctrl_quality as q ON (q.id = s.ctrl_quali)
 			// JOIN station_category as c ON (c.id = s.category) JOIN station_institute as i ON (i.id = s.institute)
 	// where TRUE $whereStation and st_intersects(s.geom , l.geom);";	
@@ -824,7 +825,7 @@ if($type==15){
 	
 	
 	$sql_tabla ="select v.id, v.name, v.acronym
-		 from geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
+		 from geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) 
 		where st_intersects(s.geom , ST_GeomFromText('$wkt',4326));	";	
 		// where TRUE $whereStation;";	
 
@@ -859,7 +860,7 @@ if($type==15){
 }
 
 if($type==16){
-	$sql_tabla ="select column_name from information_schema.columns where table_name='geostation'";
+	$sql_tabla ="select column_name from information_schema.columns where table_name='geostation_sel'";
 
 	$result = pg_query($dbcon, $sql_tabla);
 	$geojson = array(
@@ -913,7 +914,7 @@ if($type==16){
 if($type==17){
 
 	$sql_tabla ="select s.id idstat, v.id idvar, v.name,v.acronym, f.date_start, f.date_end, f.age
-			from geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id)
+			from geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id)
 		where s.id=".$idstat.";";		
 
 
@@ -957,7 +958,7 @@ if($type==18){
 
 	if($idCond==2){ // Variables
 		// $sql_tabla ="SELECT id, name,acronym FROM station_variable;";	
-		$sql_tabla ="select v.id, v.acronym as name from geostation as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) group by v.id;";	
+		$sql_tabla ="select v.id, v.acronym as name from geostation_sel as s JOIN station_file as f ON (f.station_id=s.id) JOIN station_variable as v ON (v.id = f.station_variable_id) group by v.id;";	
 	}
 	if($idCond==3){ // download
 		$sql_tabla ="SELECT id, name FROM station_copyright;";	
@@ -1100,7 +1101,7 @@ if($type==19){
 			}			
 	}
 	
-	$sql_tabla1="SELECT s.id,st_asgeojson(s.geom) FROM station_file as f JOIN geostation as s ON (f.station_id=s.id) JOIN station_copyright as st ON (s.copyrigth=st.id) JOIN station_status as sta ON (s.status=sta.id)".
+	$sql_tabla1="SELECT s.id,st_asgeojson(s.geom) FROM station_file as f JOIN geostation_sel as s ON (f.station_id=s.id) JOIN station_copyright as st ON (s.copyrigth=st.id) JOIN station_status as sta ON (s.status=sta.id)".
 	"JOIN station_institute as i ON (s.institute=i.id) JOIN station_variable as v ON (f.station_variable_id=v.id)".
 	"JOIN station_time_step as a ON (f.station_time_step_id=a.id) JOIN station_ctrl_quality as q ON (f.station_ctrl_quality_id=q.id)".
 	"JOIN station_category as c ON (s.category=c.id) JOIN station_type as t ON (s.type=t.id) where ".implode(" ".$typeCon." ",$sqltemp).' group by s.id;';
@@ -1151,7 +1152,7 @@ if($type==21){
 	}	
 	
 	$sql ="select *, st_asgeojson(s.geom)
-		 from geostation as s
+		 from geostation_sel as s
 		where TRUE $whereStation;";	
 
 	// $result = pg_query($dbcon, $sql);
@@ -1177,7 +1178,7 @@ if($type==22){
 
 
 $sql_tabla = "select s.id,s.code,s.name, c.name category,i.name institute,s.instalation,s.suspension,q.name quality,p.name model, s.variables, s.lon,s.lat,s.elev,l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
-					from gadm_lev2 as l , geostation as s, station_category as c, station_institute as i, station_status as t, station_time_step as a, station_type as p, 
+					from gadm_lev2 as l , geostation_sel as s, station_category as c, station_institute as i, station_status as t, station_time_step as a, station_type as p, 
 					station_ctrl_quality as q, station_file as f
 					where TRUE $whereStation AND st_intersects(s.geom , l.geom) and s.category=c.id and s.institute=i.id and s.time_step=a.id and s.type=p.id and f.station_ctrl_quality_id=q.id and f.station_id=s.id
 					group by s.id, s.name, c.name,i.name,q.name,p.name,l.NAME_0,l.NAME_1,l.NAME_2;";
@@ -1262,7 +1263,7 @@ if($type==27){
 	$page_protect = new Access_user;
 	$level= $page_protect->get_access_level();	
 	
-	$sqlCheck ="SELECT s.access_level ,s.copyrigth FROM geostation as s WHERE id=".$idstat;
+	$sqlCheck ="SELECT s.access_level ,s.copyrigth FROM geostation_sel as s WHERE id=".$idstat;
  
  	$result = pg_query($dbcon, $sqlCheck);	
 	$row = pg_fetch_row($result);	
