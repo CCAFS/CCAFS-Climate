@@ -22,8 +22,8 @@ $observation = isset($_REQUEST["observation"]) ? $_REQUEST["observation"] : null
 //echo "<pre>" . print_r($_FILES, true) . "</pre>";
 if (isset($_FILES["station-file"]["tmp_name"]) && $_FILES["station-file"]["tmp_name"] != "") {
   $file_url = $_FILES["station-file"]["tmp_name"];
-//  $upload_dir = '/home/fourier/ccafs-climate.org/bias_tmp/';
-    $upload_dir = 'D:\htdocs\CCAFS-Climate\bias_tmp';
+  $upload_dir = '/home/fourier/ccafs-climate.org/bias_tmp/';
+//    $upload_dir = 'D:\htdocs\CCAFS-Climate\bias_tmp';
   $file_data = file_get_contents($file_url);
   $filename = basename('file_' . time()). ".txt";
   $uri = $upload_dir . '/' . $filename;
