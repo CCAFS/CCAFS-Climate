@@ -103,9 +103,9 @@
               {/foreach}
               <input type="file" id="station-file" name="station-file">
               <select id="delimit" name="delimit">
-                <option value="\t">Tab</option>
-                <option value=";">Semicolon (;)</option>
-                <option value=",">Comma (,)</option>
+                <option value="tab">Tab</option>
+                <option value="puntocoma">Semicolon (;)</option>
+                <option value="coma">Comma (,)</option>
                 <option value="space">Blank space</option>
               </select>
               <label for="delimit">Delimitator</label>

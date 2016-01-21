@@ -63,6 +63,10 @@
             <th class="var">Ouput formats</th>
             <td class="val">{$formatsAcronym}</td>
           </tr>
+          <tr>
+            <th class="var">File station</th>
+            <td class="val">{$file}</td>
+          </tr>		  
         </tbody>
     </table>
 

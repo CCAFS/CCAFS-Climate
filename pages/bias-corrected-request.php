@@ -138,8 +138,13 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
   $smarty->assign("scenariosAcronym", substr($sceAcro, 0, -1));
   $smarty->assign("models", $models);
   $smarty->assign("observation", $observation);
-  $smarty->assign("observationAcronym", $observations[0]['name']);
-  $smarty->assign("variables", $variables);
+  if($file){  
+	$smarty->assign("observationAcronym", "station");
+	$smarty->assign("variables", "ALL");
+  }else{
+    $smarty->assign("observationAcronym", $observations[0]['name']);
+	$smarty->assign("variables", $variables);
+  }
   $smarty->assign("variablesAcronym", substr($varAcro, 0, -1));
   $smarty->assign("method", $method);
   $smarty->assign("methodAcronym", $methods[0]['name']);
