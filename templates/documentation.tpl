@@ -47,13 +47,7 @@
 	</div>	
     <br>
     <h4>Useful documents</h4>
-    <ul id="document-list" type="none"> 
-		<li type="square">
-			<a href="{$smarty.const.SMARTY_DOCS_URI}/BC_methods_explaining_v2_jrv.pdf">
-				<img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
-				Bias-correction in the CCAFS-Climate Portal: A description of methodologies.
-			</a>
-		</li> 		
+    <ul id="document-list" type="none">    
         <li type="square">
             <a href="{$smarty.const.SMARTY_DOCS_URI}/mapping_data_ccafs-climate.pdf">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
