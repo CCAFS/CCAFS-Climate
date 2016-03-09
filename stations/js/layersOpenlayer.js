@@ -296,10 +296,11 @@
 				"Google Streets", // the default
 				{numZoomLevels: 20} //, visibility: false
 			);
-			var ghyb = new OpenLayers.Layer.Google(
-				"Google Hybrid",
-				{type: google.maps.MapTypeId.HYBRID, numZoomLevels: 22} //, visibility: false
-			);			
+			// var ghyb = new OpenLayers.Layer.Google(
+				// "Google Hybrid",
+				// {type: google.maps.MapTypeId.HYBRID, numZoomLevels: 22} //, visibility: false
+			// );			
+
 			
 // label:function(feature) {
 	// return feature.cluster[0].attributes.name;

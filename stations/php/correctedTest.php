@@ -1,25 +1,52 @@
 <?php
-  error_reporting(E_ALL | E_STRICT);
+  error_reporting(E_ALL);
   ini_set('display_errors', 'On');
-  define("PG_DB"  , "postgres");
+  define("PG_DB"  , "ccafs_climate");
   // define("PG_DB"  , "stations");
-  define("PG_HOST", "localhost"); 
+  define("PG_HOST", "172.22.52.62"); 
   define("PG_USER", "postgres");
-  define("PG_PASS", "123456");
+  define("PG_PASS", "PASSWORD");
 //  define("PG_PORT", "5432"); 
 //  define("SRID",   "4326");
   
-//  $_REQUEST['lon'];
-//  $_REQUEST['lat'];
-//  $_REQUEST['fileSet'];
-//  $_REQUEST['scenarios'];
-//  $_REQUEST['model'];
-//  $_REQUEST['variables'];
-//  $_REQUEST['method'];
-//  $_REQUEST['format'];
-//  $_REQUEST['period'];
-//  $_REQUEST['observation'];
+
+$vars = $_REQUEST;
   
+echo "<pre>CCC".print_r($_REQUEST,true)."</pre>";
+$period = explode(";",$_REQUEST['period']);
+$periodh = explode(";", $_REQUEST['periodh']);
+
+$serverData='/mnt/data_cluster_4/portals/ccafs_climate/download_data/files/data/bc_platform';
+$downData='http://gisweb.ciat.cgiar.org/ccafs_climate/files/data/bc_platform';
+$dirWork='/home/temp';
+$dirgcm = '/mnt/data_cluster_2/gcm/cmip5/raw/daily';
+$dirobs = '/mnt/data_cluster_5/cropdata';
+$dataset = $_REQUEST['observation-acronym'];
+$methBCList = $_REQUEST['method'];
+$varlist = $_REQUEST['variables-acronym'];
+$Obyi = $periodh[0];
+$Obyf = $periodh[1];
+$fuyi = $period[0];
+$fuyf = $period[1];
+$rcpList = $_REQUEST['scenarios-acronym'];
+$lon = $_REQUEST['lon'];;
+$lat = $_REQUEST['lat'];;
+$gcmlist = $_REQUEST['model'];
+$statList= $_REQUEST['formats'];
+$file = $_REQUEST['file'];
+$delimit = $_REQUEST['delimitator'];
+/*$dataset = 'wfd';
+$methBCList = '1';
+$varlist = 'tasmax,pr';
+$Obyi = '1975';
+$Obyf = '1980';
+$fuyi = '2030';
+$fuyf = '2035';
+$rcpList = 'rcp45';
+$lon = '-73.5';
+$lat = '3.4';
+$gcmlist = 'bcc_csm1_1';
+$statList= '1';*/
   
   $dbcon = pg_connect("dbname=".PG_DB." host=".PG_HOST." user=".PG_USER." password=".PG_PASS);
   
@@ -27,22 +54,83 @@
     echo "Error : Unable to open database\n";
     exit;
   } else {
-    echo "success\n";
+    echo "successs\n";
   }
    
-  $dirfilesStations = $_SERVER["DOCUMENT_ROOT"]."/downloads";
-  
-//  $sql ="select plr_array('hello','world');";
-  $sql ="SELECT * from test_processing('station','/tmp');";
-   $ret = pg_query($dbcon, $sql);
-   if(!$ret){
-      // echo pg_last_error($db);
-      exit;
-   } 
    
-   $files = pg_fetch_all($ret);
-   // echo "Operation done successfully\n";
-   pg_close($dbcon);
-   
-//   echo "<pre>CCC".print_r($files,true)."</pre>";
-?>
+	$dirfilesStations = $_SERVER["DOCUMENT_ROOT"]."/downloads";
+	date_default_timezone_set();
+	// $Date_Submitted=date("d-M-Y h:i:s");
+   // $EmailAddress= $_REQUEST['email'];
+	// $type=1
+	
+	$vars['type'] = 1;
+	$vars['Date_Submitted'] = $_REQUEST['Date_Submitted'];//date("d-M-Y h:i:s");;
+	$vars['EmailAddress'] = $_REQUEST['email'];
+	$vars['rcpList'] = $rcpList;
+	$vars['varlist'] = $varlist;
+	$vars['Obyi'] = $Obyi;
+	$vars['Obyf'] = $Obyf;
+	$vars['fuyi'] = $fuyi;
+	$vars['fuyf'] = $fuyf;
+	$vars['gcmlist'] = $gcmlist;
+	$vars['statList'] = $statList;
+	$vars['dataset'] = $dataset;
+
+
+	$url = "http://gisweb.ciat.cgiar.org/Bc_Downscale/PHPMailer/correctedTest.php";
+	$curl = curl_init();
+	curl_setopt($curl, CURLOPT_URL, $url);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($curl, CURLOPT_HEADER, false);
+	curl_setopt($curl, CURLOPT_POST, count($vars));
+	curl_setopt($curl, CURLOPT_POSTFIELDS, $vars);
+	curl_setopt($curl, CURLOPT_TIMEOUT, 4); 
+	$data = curl_exec($curl);
+	curl_close($curl);
+	
+	$sql ="select bc_processing(
+	'$serverData'::text, 
+	'$downData'::text, 
+	'$dirWork'::text,
+	'$dirgcm'::text,
+	'$dirobs'::text,
+	'$dataset'::text,
+	'$methBCList'::text,
+	'$varlist'::text,
+	'$Obyi'::text,
+	'$Obyf'::text,
+	'$fuyi'::text,
+	'$fuyf'::text,
+	'$rcpList'::text,
+	'$lon'::text,
+	'$lat'::text,
+	'$gcmlist'::text,
+	'$statList'::text,
+'$file'::text,
+'$delimit'::text);";
+	$ret = pg_query($dbcon, $sql);
+	if(!$ret){
+	  echo pg_last_error($dbcon);
+	  exit;
+	}   
+	$files = pg_fetch_all($ret);
+	pg_close($dbcon);
+
+	if (is_array($files) && count($files) > 0) {
+
+		$url_file = $files[0]['bc_processing'];
+		$vars['url_file'] = $url_file;
+		$vars['type'] = 2;
+		
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $url);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_HEADER, false);
+		curl_setopt($curl, CURLOPT_POST, count($vars));
+		curl_setopt($curl, CURLOPT_POSTFIELDS, $vars);
+		curl_setopt($curl, CURLOPT_TIMEOUT, 4); 
+		$data = curl_exec($curl);
+		curl_close($curl);	  
+	  
+	}

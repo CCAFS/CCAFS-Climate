@@ -56,6 +56,10 @@
                       <link rel="stylesheet" href="{$smarty.const.SMARTY_CSS_URI}/ion.rangeSlider.skinHTML5.css"/>
                       <link rel="stylesheet" href="{$smarty.const.SMARTY_CSS_URI}/ion.rangeSlider.css"/>
                       <script src="{$smarty.const.SMARTY_JS_URI}/ion.rangeSlider.js"></script> 
+					  <!--<script type="text/javascript" src="http://gisweb.ciat.cgiar.org/Bc_Downscale/bootstrap/src/bootstrap-filestyle.min.js"></script>
+					  <script type="text/javascript" src="http://gisweb.ciat.cgiar.org/Bc_Downscale/bootstrap/src/bootstrap-filestyle.js"></script>		
+					 <link href="http://gisweb.ciat.cgiar.org/Bc_Downscale/bootstrap/test/css/bootstrap.min.css" rel="stylesheet">
+					  -->
                     {elseif $jsToInclude == "bpopup"}
                       <!-- Reference http://dinbror.dk/bpopup/ -->
                       <script src="{$smarty.const.SMARTY_JS_URI}/bpopup/jquery.bpopup-0.7.0.min.js"></script>

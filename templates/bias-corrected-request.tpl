@@ -65,7 +65,7 @@
           </tr>
           <tr>
             <th class="var">File station</th>
-            <td class="val">{$file}</td>
+            <td class="val">{$namefile}</td>
           </tr>		  
         </tbody>
     </table>
@@ -90,6 +90,7 @@
     <input type="hidden" name="method" id="method" value="{$method}">
     <input type="hidden" name="formats" id="formats" value="{$formats}">
     <input type="hidden" name="file" id="file" value="{$file}">
+    <input type="hidden" name="observation-acronym" id="observation-acronym" value="{$observationAcronym}">
     <input type="hidden" name="delimitator" id="delimitator" value="{$delimitator}">
     <div class="boxblock clearfix">
       <label for="email">Email address</label>

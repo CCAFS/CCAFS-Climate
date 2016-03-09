@@ -101,14 +101,20 @@
               <img class="help_icon" id="help_icon_observation" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
               <input id="observation-{$observation['id']}" type="radio" name="observation" value="{$observation['id']}" /><label for="observation-{$observation['id']}">{$observation["name"]}</label><br> 
               {/foreach}
-              <input type="file" id="station-file" name="station-file">
-              <select id="delimit" name="delimit">
-                <option value="tab">Tab</option>
-                <option value="puntocoma">Semicolon (;)</option>
-                <option value="coma">Comma (,)</option>
-                <option value="space">Blank space</option>
-              </select>
-              <label for="delimit">Delimitator</label>
+				<div id="divFileInput" style="display: none">
+					<input type="text" id="fileName" readonly="readonly" >
+					 <div class="file_input_div">
+					 <input type="button" id="button-file" value="Load File"/>
+					 <input type="file" id="station-file" name="station-file" onchange="javascript: document.getElementById ('fileName').value = files[0].name"/>
+					 </div>	
+				  <select id="delimit" name="delimit">
+					<option value="tab">Tab</option>
+					<option value="puntocoma">Semicolon (;)</option>
+					<option value="comma">Comma (,)</option>
+					<option value="space">Blank space</option>
+				  </select>
+				  <label for="delimit">Delimitator</label>					 
+				</div>		 
             </article>
           </div>
         </section>
@@ -121,9 +127,11 @@
               <div id="dropdown-arrow"></div> 
               <div id="drop-content">
 {*                <input type="hidden" class="slider-input" value="23" />*}
+				<div id="periodHist">
                 <label for="periodh" class="period[]">Historical</label><br>
                 <input type="text" id="periodh" name="periodh" value="" />
-                <label for="period" class="period[]">Future</label><br>
+				</div>
+                <label for="period" id="periodf" class="period[]">Future</label><br>
                 <input type="text" id="period" name="period" value="" />
 {*                {foreach from=$periods item=period}
                   <img class="help_icon" id="help_icon_period" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />

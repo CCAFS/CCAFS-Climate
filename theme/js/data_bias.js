@@ -11,23 +11,63 @@ $(document).ready(function() {
 //});
 
 //$("#example_id").ionRangeSlider();
-
 $("#period").ionRangeSlider({
     type: "double",
     min: 2015,
     max: 2100,
     from: 2020,
-    to: 2049,
-    drag_interval: true
+    to: 2030,
+	to_max:2100,
+	max_interval:85,
+	// to_percent: 77.5,
+    drag_interval: true,
+	onChange: function (data) {
+		diff=data.to-data.from
+		var slider =$("#periodh").data("ionRangeSlider")
+		yi=slider.options.from
+		slider.update({to:yi+diff})//
+		$("#periodh").on("change", function () {
+			var $this = $(this),
+			value = $this.prop("value").split(";");
+				diffh=value[1]-value[0]
+				sliderf=$("#period").data("ionRangeSlider")
+				if(diffh<diff){
+					sliderf.update({max_interval:diffh})
+				}
+			// console.log(value[0] + " - " + value[1],diffh,diff);
+		});
+		
+	}
 });
+
 $("#periodh").ionRangeSlider({
     type: "double",
     min: 1980,
     max: 2010,
-    from: 1985,
+    from: 1980,
     to: 1990,
-    drag_interval: true
+	// max_interval:15,
+    drag_interval: true,
+	onChange: function (data) {
+		diff=data.to-data.from
+		var slider =$("#period").data("ionRangeSlider")
+		yi=slider.old_from
+		slider.update({to:yi+diff})
+		slider.update({max_interval:diff})
+		// $("#period").on("change", function () {
+			// var $this = $(this),
+			// value = $this.prop("value").split(";");
+				// diffh=value[1]-value[0]
+				// sliderf=$("#period").data("ionRangeSlider")
+				// if(diffh<diff){
+					// sliderf.update({max_interval:diffh})
+				// }
+			// console.log(value[0] + " - " + value[1],diffh,diff);
+		// });		
+	}	
 });
+
+
 //***********************************VIDEO******************************	
   $(".messagepop").hide();
 
@@ -160,15 +200,18 @@ function validateForm () {
   var fields = $("#formSearch :input");
 //  fields.keyup(function() {
     var emptyFields = fields.filter(function() {
-
       // remove the $.trim if whitespace is counted as filled
       return $.trim(this.value) === "";
     });
-    if (!emptyFields.length && fillout) {
+	// var filename = $('input[type=file]').val().split('\\').pop();
+	// var idObs = $("input[name='observation']:checked").val();
+    // if (!emptyFields.length && fillout) {
+	
+    if (fillout==true) {
       $("#searchSubmit").removeAttr("disabled");
       $("#searchSubmit").removeClass("disable");
       $("#filesFound").text("");
-    } else {
+    }else {
       $("#searchSubmit").attr("disabled", "disabled");
       $("#searchSubmit").addClass("disable");
       $("#filesFound").text("You forgot to fill something out");
@@ -317,8 +360,8 @@ function selectAllModelOptionsEvent(evt) {
 function getFilesInfo(evt) {
   var nameEven = $(evt.target).attr("name");
   var filterValues = getUserSelections(nameEven);
+  var id = $("input[name='observation']:checked").val();
   if (nameEven == 'observation') {
-    var id = $("input[name='observation']:checked").val();
     $.ajax({
       type: "GET",
       dataType: "json",
@@ -328,22 +371,21 @@ function getFilesInfo(evt) {
         if (data.startDate != null && data.endDate != null ) {
 //          console.log(data.startDate);
           var slider = $("#periodh").data("ionRangeSlider");
-          slider.destroy();
-          $("#periodh").ionRangeSlider({
-              type: "double",
-              min: data.startDate,
-              max: data.endDate,
-              from: 1985,
-              to: 1990,
-              drag_interval: true
-          });
-        } else {
-
+		  slider.update({min: data.startDate,max: data.endDate})
+          // slider.destroy();
+          // $("#periodh").ionRangeSlider({
+              // type: "double",
+              // min: data.startDate,
+              // max: data.endDate,
+              // from: 1985,
+              // to: 1990,
+              // drag_interval: true			  
+          // });
         }
       }
     });
   }
-
+  
   if ($(evt.target).parent().prev().hasClass("help_icon")) {
     $(evt.target).parent().prev().hide();
   }
@@ -374,11 +416,11 @@ function getFilesInfo(evt) {
           if (data.filesFound == 0) {
 //            $("#searchSubmit").attr("disabled", "disabled");
 //            $("#searchSubmit").addClass("disable");
-            $("#searchSubmit").removeAttr("disabled");
-            $("#searchSubmit").removeClass("disable");
+            // $("#searchSubmit").removeAttr("disabled");
+            // $("#searchSubmit").removeClass("disable");
           } else {
-            $("#searchSubmit").removeAttr("disabled");
-            $("#searchSubmit").removeClass("disable");
+            // $("#searchSubmit").removeAttr("disabled");
+            // $("#searchSubmit").removeClass("disable");
           }
           // update files found text
           if (data.filesFound == 1) {
@@ -531,6 +573,27 @@ function getUserSelections(filterName) {
     fillout = false;
 //    return;
   }
+  var filename = $('input[type=file]').val().split('\\').pop();
+  if(!filename && observation==7){
+	fillout = false;
+  }
+  
+	var id = $("input[name='observation']:checked").val();
+	if(id==7){
+		$("#periodHist").hide();
+		var slider =$("#period").data("ionRangeSlider")
+		slider.update({max_interval:85})
+		
+		$("#divFileInput").show("slow");
+		$('#station-file').live('change', function(){ getUserSelections(filterName); validateForm();});
+	}else{
+		$("#periodHist").show();
+		$("#divFileInput").hide();
+		var control = $("#station-file");
+		control.replaceWith( control = control.clone( true ) );
+		$("#fileName").val("");
+	}  
+	
 //  tileNameVal = ($("#tile_name").val() == "") ? undefined : "'" + $("#tile_name").val() + "'";
 //  if (filterName == "extent") {
 //    tileNameVal = null

@@ -27,6 +27,7 @@ if (isset($_FILES["station-file"]["tmp_name"]) && $_FILES["station-file"]["tmp_n
   $filename = basename('file_' . time()). ".txt";
   $uri = $upload_dir . '/' . $filename;
   $res = file_put_contents($uri, $file_data);
+  $namefile= $_FILES["station-file"]["name"];
   if ($res) {
     $url = SMARTY_ROOT_URI."bias_tmp/";
     $file = $url.$filename;
@@ -48,38 +49,40 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
   $variables = $db->getAll($query);
   $varAcro = "";
   foreach ($variables as $var) {
-    $varAcro .= $var['acronym'] . ",";
-  }
+	$varAcro .= $var['acronym'] . ",";
+  }	
 
   $query = "SELECT * FROM datasets_fileset_bias df WHERE id = " . $_REQUEST["fileSet"];
   $fileSets = $db->getAll($query);
 
   $query = "SELECT id, name FROM datasets_correction_method_bias WHERE id = " . $_REQUEST["method"];
   $methods = $db->getAll($query);
-
+  
   $query = "SELECT id, name, acronym FROM datasets_format_bias WHERE id in (" . $_REQUEST["formats"] . ")";
   $formats = $db->getAll($query);
   $formAcro = "";
   foreach ($formats as $form) {
-    $formAcro .= $form['name'] . ",";
-  }
-
+	$formAcro .= $form['name'] . ",";
+  }   
+  
   $vars['scenarios-acronym'] = substr($sceAcro, 0, -1);
 
-  $vars['observation-acronym'] = $observations[0]['name'];
+  
 
   $vars['variables-acronym'] = substr($varAcro, 0, -1);
 
   $vars['formats-name'] = substr($formAcro, 0, -1);
 
   $vars['fileSet-acronym'] = $fileSets[0]['name'];
+  
+   $vars['method-acronym'] = $methods[0]['name'];
 
-  $vars['method-acronym'] = $methods[0]['name'];
+	// $vars['observation-acronym'] = $observations[0]['name'];
 
 
-//  echo "<pre>".print_r($vars,true)."</pre>";
+ // echo "<pre>".print_r($vars,true)."</pre>";
 //  $url = "http://172.22.52.62/correctedTest.php";
-
+// exit();
   $url = "http://gisweb.ciat.cgiar.org/Bc_Downscale/biasCorrected.php";
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
@@ -102,13 +105,13 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
 
   $query = "SELECT id, name FROM datasets_observation_bias WHERE id =" . $_REQUEST["observation"];
   $observations = $db->getAll($query);
-
-  $query = "SELECT id, name, acronym FROM datasets_variable_bias WHERE id in (" . implode(",", $_REQUEST["variables"]) . ")";
-  $variables = $db->getAll($query);
-  $varAcro = "";
-  foreach ($variables as $var) {
-    $varAcro .= $var['acronym'] . ",";
-  }
+  
+	$query = "SELECT id, name, acronym FROM datasets_variable_bias WHERE id in (" . implode(",", $_REQUEST["variables"]) . ")";
+	$variables = $db->getAll($query);
+	$varAcro = "";
+	foreach ($variables as $var) {
+		$varAcro .= $var['acronym'] . ",";
+	}
 
   $query = "SELECT * FROM datasets_fileset_bias df WHERE id = " . $_REQUEST["fileSet"];
   $fileSets = $db->getAll($query);
@@ -125,8 +128,6 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
     $formName.= $form['name'] . ",";
   }
 
-
-
   $variables = isset($_REQUEST["variables"]) ? implode(",", $_REQUEST["variables"]) : null;
   $scenarios = isset($_REQUEST["scenarios"]) ? implode(",", $_REQUEST["scenarios"]) : null;
   $models = isset($_REQUEST["model"]) ? implode(",", $_REQUEST["model"]) : null;
@@ -138,14 +139,14 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
   $smarty->assign("scenariosAcronym", substr($sceAcro, 0, -1));
   $smarty->assign("models", $models);
   $smarty->assign("observation", $observation);
-  if($file){  
+  $smarty->assign("variables", $variables);
+  if($namefile){  
 	$smarty->assign("observationAcronym", "station");
-	$smarty->assign("variables", "ALL");
+	$smarty->assign("variablesAcronym", "ALL");
   }else{
     $smarty->assign("observationAcronym", $observations[0]['name']);
-	$smarty->assign("variables", $variables);
+	$smarty->assign("variablesAcronym", substr($varAcro, 0, -1));
   }
-  $smarty->assign("variablesAcronym", substr($varAcro, 0, -1));
   $smarty->assign("method", $method);
   $smarty->assign("methodAcronym", $methods[0]['name']);
   $smarty->assign("formats", $formats);
@@ -155,6 +156,7 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
   $smarty->assign("period", $period);
   $smarty->assign("periodh", $periodh);
   $smarty->assign("file", $file);
+  $smarty->assign("namefile", $namefile);
   $smarty->assign("delimitator", $delimitator);
   $smarty->display("bias-corrected-request.tpl");
 }
