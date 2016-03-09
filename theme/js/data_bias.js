@@ -577,7 +577,10 @@ function getUserSelections(filterName) {
   if(!filename && observation==7){
 	fillout = false;
   }
-  
+  if(!$("#lat").val() && !$("#lon").val()){
+	fillout = false;
+  }
+
 	var id = $("input[name='observation']:checked").val();
 	if(id==7){
 		$("#periodHist").hide();
@@ -686,6 +689,7 @@ function initializeMap() {
     $('#lon').val(event.latLng.lng().toFixed(4));
     validCoordinate (event.latLng.lat(), event.latLng.lng());
     validateForm ();
+	getUserSelections();
   });
 }
 
