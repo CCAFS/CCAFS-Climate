@@ -10,6 +10,7 @@ $period = isset($_REQUEST["period"]) ? $_REQUEST["period"] : null;
 $periodh = isset($_REQUEST["periodh"]) ? $_REQUEST["periodh"] : null;
 $fileSet = isset($_REQUEST["fileSet"]) && is_numeric($_REQUEST["fileSet"]) && $_REQUEST["fileSet"] >= 0 ? $_REQUEST["fileSet"] : null;
 $observation = isset($_REQUEST["observation"]) ? $_REQUEST["observation"] : null;
+$station_file = isset($_FILES["station-file"]["tmp_name"]) ? $_FILES["station-file"]["tmp_name"] : null;
 
 //$extentId = isset($_REQUEST["extent"]) && is_numeric($_REQUEST["extent"]) && $_REQUEST["extent"] >= 0 ? $_REQUEST["extent"] : null;
 //$tile = isset($_REQUEST["tile_name"]) && $_REQUEST["tile_name"] != "" ? $_REQUEST["tile_name"] : null;
@@ -20,7 +21,9 @@ $observation = isset($_REQUEST["observation"]) ? $_REQUEST["observation"] : null
  */
 //echo "<pre>" . print_r($_REQUEST, true) . "</pre>";
 //echo "<pre>" . print_r($_FILES, true) . "</pre>";
-if (isset($_FILES["station-file"]["tmp_name"]) && $_FILES["station-file"]["tmp_name"] != "") {
+// if (isset($_FILES["station-file"]["tmp_name"]) && $_FILES["station-file"]["tmp_name"] != "") {
+$namefile=null;
+if ($station_file) {
   $file_url = $_FILES["station-file"]["tmp_name"];
   $upload_dir = WORKSPACE_DIR.'/bias_tmp';
   $file_data = file_get_contents($file_url);
@@ -130,7 +133,13 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
 
   $variables = isset($_REQUEST["variables"]) ? implode(",", $_REQUEST["variables"]) : null;
   $scenarios = isset($_REQUEST["scenarios"]) ? implode(",", $_REQUEST["scenarios"]) : null;
-  $models = isset($_REQUEST["model"]) ? implode(",", $_REQUEST["model"]) : null;
+  $modelsall = isset($_REQUEST["model"]) ? $_REQUEST["model"] : null;
+  $model = array();
+	foreach ($modelsall as &$valor) {
+		$valor = explode("-", $valor)[0];
+		array_push($model, $valor);
+	}  
+  $models = isset($model) ? implode(",", $model) : null;
   $formats = isset($_REQUEST["formats"]) ? implode(",", $_REQUEST["formats"]) : null;
   $delimitator = isset($_REQUEST["delimit"]) ? $_REQUEST["delimit"] : '';
   $smarty->assign("fileSets", $fileSet);

@@ -87,7 +87,7 @@
               <label for="model-999">Select all options</label>*}
               {foreach from=$models item=model}
                 <img class="help_icon" id="help_icon_item-model" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                <input type="checkbox" id="model-{$model['id']}" name="model[]" value="{$model['acronym']}">
+                <input type="checkbox" id="model-{$model['id']}" name="model[]" value="{$model['acronym']}-{$model['id']}">
                 <label for="model-{$model['id']}">{$model['acronym']}</label>
               {/foreach} 
             </article>
@@ -106,7 +106,11 @@
 					 <div class="file_input_div">
 					 <input type="button" id="button-file" value="Load File"/>
 					 <input type="file" id="station-file" name="station-file" onchange="javascript: document.getElementById ('fileName').value = files[0].name"/>
-					 </div>	
+					 </div>
+					<!-- <div id='file_input_div'>
+					  <input type='file' id='station-file'> <span id='fileName'></span>
+					  <span id='button-file'>Load File</span>	
+					</div>-->
 				  <select id="delimit" name="delimit">
 					<option value="tab">Tab</option>
 					<option value="puntocoma">Semicolon (;)</option>

@@ -289,6 +289,7 @@ label.inputs-acf {
 }
 
 #bloc-search button{
+	cursor: pointer;
     border: 0; 
     background: #2a313a;
     color: #fff;
@@ -296,6 +297,10 @@ label.inputs-acf {
     border-radius: 4px;
     float: right;
 }
+#bloc-search button:hover {
+    background-color: #615D5D;
+}
+
 
 .data .help_icon {
     display: none;
@@ -383,6 +388,7 @@ button[type="submit"][disabled] {
 /******************* bton load file station *********************/
 
 #button-file{
+	cursor: pointer;
     position: relative;
     font-size: 14px;
     color: white;
@@ -391,21 +397,74 @@ button[type="submit"][disabled] {
     background-color: #2A313A;
     }
 #station-file{
+cursor: pointer;
 opacity:0;
  position:relative;
-    left: -120px;
-    top: -20px;
+    left: 0;/*-120px;*/
+    top: 0;/*-20px;*/
 }
 #fileName{
+cursor: pointer;
 width: 60%;
 margin-top: 8px;
 }
 
 #delimit{
-    margin-top: 10px;
+    margin-top: 5px;
 }
 .file_input_div{
 position: absolute;
     margin-top: 5px;
 	display: inline;
 }
+#button-file:hover {
+    background-color: #615D5D;
+}
+
+/*
+#file_input_div {
+    width: 100%;
+    height: 20px;
+    background-color: white;
+    box-shadow: 1px 2px 3px #ededed;
+    position:relative;
+    border: 1px solid #d8d8d8;
+	margin-top: 5px;
+}
+input[type='file'] {
+    width:100%;
+    height:25px;
+    opacity:0
+}
+#fileName {
+    width: 100%;
+    height:20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size:13px;
+    line-height: 25px;
+    text-indent: 10px;
+    pointer-events: none;
+}
+#button-file {
+    cursor: pointer;
+    display: block;
+    width: 60px;
+    background-color: #2A313A;
+    height:20px;
+    color: white;
+    position: absolute;
+    right:0;
+    top: 0;
+    font-size: 11px;
+    line-height:20px;
+    text-align: center;
+    -webkit-transition: 500ms all;
+    -moz-transition: 500ms all;
+    transition: 500ms all;
+}
+
+#button-file:hover {
+    background-color: #615D5D;
+}*/

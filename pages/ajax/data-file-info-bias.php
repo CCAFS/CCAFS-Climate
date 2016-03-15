@@ -12,7 +12,7 @@ $ids["variable_id"] = isset($_POST["variableId"]) && $_POST["variableId"] != "" 
 $ids["resolution_id"] = isset($_POST["resolutionId"]) && $_POST["resolutionId"] != "" ? $_POST["resolutionId"] : null;
 $ids["format_id"] = isset($_POST["formatId"]) && $_POST["formatId"] != "" ? $_POST["formatId"] : null;
 $ids["extent_id"] = isset($_POST["extendId"]) && $_POST["extendId"] != "" ? $_POST["extendId"] : null;
-$ids["file_set_id"] = isset($_POST["filesetId"]) && $_POST["filesetId"] != "" ? $_POST["filesetId"] : null;
+$ids["fileset_id"] = isset($_POST["filesetId"]) && $_POST["filesetId"] != "" ? $_POST["filesetId"] : null;
 $ids["observation_id"] = isset($_POST["observation"]) && $_POST["observation"] != "" ? $_POST["observation"] : null;
 $ids["tile_id"] = isset($_POST["tileName"]) && $_POST["tileName"] != "" ? $_POST["tileName"] : null;
 $ids["tile_id"] = getTileID($ids["tile_id"]);
@@ -44,7 +44,7 @@ if (!is_null($section)) {
 //      filesFound("datasets_extent", $ids["extent_id"]);
       break;
     case "fileSet":
-      filesFound("datasets_fileset_bias", $ids["file_set_id"]);
+      filesFound("datasets_fileset_bias", $ids["fileset_id"]);
       break;
     case "observation":
       filesFound("datasets_observation_bias", $ids["observation_id"]);
@@ -91,22 +91,26 @@ function filesFound($databaseName, $id) {
   }
 
   $isFirst = true;
+ 
   $query = "SELECT count(id) FROM datasets_file_bias WHERE ";
   foreach ($ids as $key => $value) {
-    if (!is_null($value)) {
-      if (!$isFirst) {
-        $query .= " AND ";
-      } else {
-        $isFirst = false;
-      }
+	if($key!="method_id" && $key!= "observation_id"){ 
+		if (!is_null($value)) {
+		  if (!$isFirst) {
+			$query .= " AND ";
+		  } else {
+			$isFirst = false;
+		  }
 
-      // 'Others' option for 'variables' filter
-//      if ($key == "variable_id" && $value == 9999) {
-//        $query .= $key . " > 7 ";
-//      } else {
-        $query .= $key . " IN ( " . $value . " )";
-//      }
-    }
+		  // 'Others' option for 'variables' filter
+	//      if ($key == "variable_id" && $value == 9999) {
+	//        $query .= $key . " > 7 ";
+	//      } else {
+			$query .= $key . " IN ( " . $value . " )";
+	//      }
+		}
+	  
+	}
   }
 
   if ($isFirst) {
@@ -129,16 +133,23 @@ function getFiltersAvailable() {
 //    $sql .= "GROUP_CONCAT( DISTINCT extent_id ) as \"extent\" ";
 //    $sql .= "FROM datasets_file WHERE TRUE";
   //SQL only for postgres
-  $sql = "SELECT array_to_string(array_agg(DISTINCT variable_id ), ',') as \"variable\"
-            FROM datasets_fileobservations_bias 
-            WHERE status = 2";
+	// $sql = "SELECT array_to_string(array_agg(DISTINCT variable_id ), ',') as \"variable\"
+			// FROM datasets_fileobservations_bias 
+			// WHERE status = 2;";
 
-  if (isset($ids["observation_id"]) && $ids["observation_id"] != "") {
-    $sql .= " AND obsset_id = " . $ids["observation_id"];
-  }
+	$sql = "SELECT array_to_string(array_agg(DISTINCT model_id ), ',') as \"model\"
+			FROM datasets_file_bias 
+			WHERE TRUE;";			
+			
+  // if (isset($ids["observation_id"]) && $ids["observation_id"] != "") {
+    // $sql .= " AND obsset_id = " . $ids["observation_id"];
+  // }
+     if( isset($ids["scenario_id"]) && $ids["scenario_id"] != "" ){
+        $sql .= " AND scenario_id = " . $ids["scenario_id"];
+    }  
   // Adjust the db to only return the assoc array
   $db->SetFetchMode(ADODB_FETCH_ASSOC);
-//    echo $sql;
+ // echo $sql;  
   $result = $db->GetRow($sql);
 
   // Returning the fetch mode to default

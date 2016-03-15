@@ -10,6 +10,21 @@ $(document).ready(function() {
 //    isRange : true
 //});
 
+$('#button-file').click(function () {
+    $("input[type='file']").trigger('click');
+})
+$('#fileName').click(function () {
+    $("input[type='file']").trigger('click');
+})
+// $('#button-file').click(function () {
+    // $("input[type='file']").trigger('click');
+// })
+
+// $("input[type='file']").change(function () {
+    // $('#fileName').text(this.value.replace(/C:\\fakepath\\/i, ''))
+    // $('#fileName').text(this.value.replace(/C:\\hola\\/i, ''))
+// })
+
 //$("#example_id").ionRangeSlider();
 $("#period").ionRangeSlider({
     type: "double",
@@ -360,7 +375,9 @@ function selectAllModelOptionsEvent(evt) {
 function getFilesInfo(evt) {
   var nameEven = $(evt.target).attr("name");
   var filterValues = getUserSelections(nameEven);
+  // console.log(filterValues)
   var id = $("input[name='observation']:checked").val();
+
   if (nameEven == 'observation') {
     $.ajax({
       type: "GET",
@@ -389,6 +406,8 @@ function getFilesInfo(evt) {
   if ($(evt.target).parent().prev().hasClass("help_icon")) {
     $(evt.target).parent().prev().hide();
   }
+  
+ 
   $.ajax({
     type: "POST",
     dataType: "json",
@@ -408,16 +427,23 @@ function getFilesInfo(evt) {
     success: function(data) {
       $(".loader").hide();
       if (data != null) {
+
         if (data.filesFound < 0) {
-//          $("#filesFound").text("0 files found");
-//          $("#searchSubmit").attr("disabled", "disabled");
-//          $("#searchSubmit").addClass("disable");
+         // $("#filesFound").text("0 files found");
+         // $("#searchSubmit").attr("disabled", "disabled");
+         // $("#searchSubmit").addClass("disable");
         } else {
           if (data.filesFound == 0) {
-//            $("#searchSubmit").attr("disabled", "disabled");
-//            $("#searchSubmit").addClass("disable");
+
+			  $("#searchSubmit").attr("disabled", "disabled");
+			  $("#searchSubmit").addClass("disable");
+			  $("#filesFound").text("0 files found");			
+			  getUserSelections(data.filesFound) 
+           // $("#searchSubmit").attr("disabled", "disabled");
+           // $("#searchSubmit").addClass("disable");
             // $("#searchSubmit").removeAttr("disabled");
             // $("#searchSubmit").removeClass("disable");
+		
           } else {
             // $("#searchSubmit").removeAttr("disabled");
             // $("#searchSubmit").removeClass("disable");
@@ -446,7 +472,7 @@ function getFilesInfo(evt) {
 
             }
           });
-          //$("#filesFound1").val(data.filesFound);
+          // $("#filesFound1").val(data.filesFound);
         }
       } else {
 //        $("#filesFound").text("0 files found");
@@ -454,7 +480,7 @@ function getFilesInfo(evt) {
         $("#searchSubmit").addClass("disable");
       }
 
-
+		
       // if(filterValues.section == 'fileSet' || filterValues.section == 'extent' || filterValues.section == 'scenarios[]' ){
 //      if (filterValues.filesetId == 12 || filterValues.filesetId == 4) {
 //        data.filtersAvailable.extent = "1,2"
@@ -483,15 +509,21 @@ function getFilesInfo(evt) {
       // $("#format-2").iCheck("uncheck");
       // $("#format-2").iCheck("enable");
       // } 
-
-      updateFilters(data.filtersAvailable);
+		   // console.log(data)
+	// if (nameEven != 'observation' && nameEven != 'method') { 
+		updateFilters(data.filtersAvailable);
+	// }
+      
 
 
       // }
 //      changeMap(evt);
       $("#filesFound").show();
+	  
     }
   });
+  
+// } 
   validateForm();
 }
 
@@ -544,17 +576,19 @@ function getUserSelections(filterName) {
   var scenarios, model, period,variables,formats,method,observation;
   fillout = true;
   scenarios = getArrayValues($("[name='scenarios\\[\\]']:checked"));
-  model = getArrayValues($("input[name='model\\[\\]']:checked"));
+  model=getArrayValuesModel($("input[name='model\\[\\]']:checked"))
+  model_id=getArrayValuesModelId($("input[name='model\\[\\]']:checked"))
   period = getArrayValues($("input[name='period\\[\\]']:checked"));
   variables = getArrayValues($("input[name='variables\\[\\]']:checked"));
-  formats = getArrayValues($("input[name='formats\\[\\]']:checked"));
+  // formats = getArrayValues($("input[name='formats\\[\\]']:checked"));
+  
   method = $("input[name='method']:checked").val();
   observation = $("input[name='observation']:checked").val();
   if(scenarios.length == 0) {
     fillout = false;
 //    return;
   }  
-  if (model.length == 0) {
+  if (model.length == 0 || filterName==0) {
     fillout = false;
 //    return;
   }  
@@ -562,9 +596,9 @@ function getUserSelections(filterName) {
     fillout = false;
 //    return;
   } 
-  if (formats.length == 0) {
+  // if (formats.length == 0) {
 //    fillout = false;
-  } 
+  // } 
   if (typeof method == 'undefined') {
     fillout = false;
 //    return;
@@ -588,15 +622,14 @@ function getUserSelections(filterName) {
 		slider.update({max_interval:85})
 		
 		$("#divFileInput").show("slow");
-		$('#station-file').live('change', function(){ getUserSelections(filterName); validateForm();});
+		$('#station-file').live('change', function(){ console.log($("#station-file").val());getUserSelections(filterName); validateForm();});
 	}else{
 		$("#periodHist").show();
 		$("#divFileInput").hide();
 		var control = $("#station-file");
 		control.replaceWith( control = control.clone( true ) );
-		$("#fileName").val("");
+		$("#station-file").val("");
 	}  
-	
 //  tileNameVal = ($("#tile_name").val() == "") ? undefined : "'" + $("#tile_name").val() + "'";
 //  if (filterName == "extent") {
 //    tileNameVal = null
@@ -605,7 +638,8 @@ function getUserSelections(filterName) {
   var data = {
     coordinate: $("#lat").val()+","+$("#lon").val(),
     methodId: method,
-    modelId: model,
+    model: model,
+    modelId: model_id,
     formatId: formats,
     scenarioId: scenarios,
     periodId: period,
@@ -633,6 +667,20 @@ function getArrayValues(array) {
     arr.push($(this).val());
   });
 
+  return arr.toString();
+}
+function getArrayValuesModel(array) {
+  var arr = new Array();
+  $.each($(array), function() {
+    arr.push($(this).val().split('-')[0]);
+  });
+  return arr.toString();
+}
+function getArrayValuesModelId(array) {
+  var arr = new Array();
+  $.each($(array), function() {
+    arr.push($(this).val().split('-')[1]);
+  });
   return arr.toString();
 }
 

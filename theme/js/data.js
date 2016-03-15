@@ -257,6 +257,7 @@ function selectAllModelOptionsEvent(evt){
 
 function getFilesInfo(evt){
   var filterValues = getUserSelections($(evt.target).attr("name"));
+  console.log(filterValues)
   // console.log(filterValues.filesetId)
   // Hide the help icon 
   
