@@ -49,7 +49,10 @@
           </tr>
           <tr>
             <th class="var">Period future</th>
-            <td class="val">{$period}</td>
+            <td class="val">{$period}
+			<div id="{$error}" class="error_file_p"> {$msg_p} </div> 
+			
+			</td>
           </tr>
           <tr>
             <th class="var">Variables</th>
@@ -65,7 +68,9 @@
           </tr>
           <tr>
             <th class="var">File station</th>
-            <td class="val">{$namefile}</td>
+            <td class="val">{$namefile} 
+			<div id="{$error}" class="error_file"> {$msg} </div> 
+			</td>
           </tr>		  
         </tbody>
     </table>

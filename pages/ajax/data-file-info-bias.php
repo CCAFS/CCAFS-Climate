@@ -139,7 +139,7 @@ function getFiltersAvailable() {
 
 	$sql = "SELECT array_to_string(array_agg(DISTINCT model_id ), ',') as \"model\"
 			FROM datasets_file_bias 
-			WHERE TRUE;";			
+			WHERE TRUE";			
 			
   // if (isset($ids["observation_id"]) && $ids["observation_id"] != "") {
     // $sql .= " AND obsset_id = " . $ids["observation_id"];
@@ -147,11 +147,12 @@ function getFiltersAvailable() {
      if( isset($ids["scenario_id"]) && $ids["scenario_id"] != "" ){
         $sql .= " AND scenario_id = " . $ids["scenario_id"];
     }  
+	
   // Adjust the db to only return the assoc array
   $db->SetFetchMode(ADODB_FETCH_ASSOC);
  // echo $sql;  
   $result = $db->GetRow($sql);
-
+// print_r($result);
   // Returning the fetch mode to default
   $db->SetFetchMode(ADODB_FETCH_BOTH);
 

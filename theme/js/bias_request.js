@@ -16,5 +16,14 @@ $(document).ready(function() {
 
     }}
   );
+   id=$(".error_file").attr('id')
+   if(id==0){
+ 		$("#download-button-bottom").removeAttr("disabled");
+		$("#download-button-bottom").removeClass("disable");    
+   }else{
+	  $("#download-button-bottom").attr("disabled", "disabled");
+	  $("#download-button-bottom").addClass("disable");    		
+   }
+ 
 })
 

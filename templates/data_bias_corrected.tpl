@@ -132,7 +132,7 @@
               <div id="drop-content">
 {*                <input type="hidden" class="slider-input" value="23" />*}
 				<div id="periodHist">
-                <label for="periodh" class="period[]">Historical</label><br>
+                <label for="periodh" class="period[]">Historical Observation</label><br>
                 <input type="text" id="periodh" name="periodh" value="" />
 				</div>
                 <label for="period" id="periodf" class="period[]">Future</label><br>

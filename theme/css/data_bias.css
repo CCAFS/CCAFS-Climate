@@ -421,6 +421,23 @@ position: absolute;
     background-color: #615D5D;
 }
 
+/*=============error file station==============*/
+
+.error_file {
+    font-size: 14px;
+    color: red;
+    font-family: 'Oswald', sans-serif;
+    }
+.error_file_p{
+    font-size: 14px;
+    color: red;
+    font-family: 'Oswald', sans-serif;
+    }	
+	
+.disabledbutton {
+    pointer-events: none;
+    opacity: 0.4;
+}	
 /*
 #file_input_div {
     width: 100%;

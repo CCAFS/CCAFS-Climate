@@ -82,7 +82,6 @@ $("#periodh").ionRangeSlider({
 	}	
 });
 
-
 //***********************************VIDEO******************************	
   $(".messagepop").hide();
 
@@ -229,7 +228,7 @@ function validateForm () {
     }else {
       $("#searchSubmit").attr("disabled", "disabled");
       $("#searchSubmit").addClass("disable");
-      $("#filesFound").text("You forgot to fill something out");
+      $("#filesFound").text("Please enter all search term.");
     }
 //  });
 }
@@ -345,8 +344,8 @@ function adjustFiltersOnExtentSelection() {
   $("input[id^='scenario']").attr("checked", false);
   $("input[id^='scenario']").iCheck('update');
 
-  $("input[id^='period']").attr("checked", false);
-  $("input[id^='period']").iCheck('update');
+  // $("input[id^='period']").attr("checked", false);
+  // $("input[id^='period']").iCheck('update');
 
 }
 
@@ -376,6 +375,7 @@ function getFilesInfo(evt) {
   var nameEven = $(evt.target).attr("name");
   var filterValues = getUserSelections(nameEven);
   // console.log(filterValues)
+  
   var id = $("input[name='observation']:checked").val();
 
   if (nameEven == 'observation') {
@@ -425,6 +425,7 @@ function getFilesInfo(evt) {
       // Show the loader gif
     },
     success: function(data) {
+	 // console.log(data)
       $(".loader").hide();
       if (data != null) {
 
@@ -509,7 +510,7 @@ function getFilesInfo(evt) {
       // $("#format-2").iCheck("uncheck");
       // $("#format-2").iCheck("enable");
       // } 
-		   // console.log(data)
+		   
 	// if (nameEven != 'observation' && nameEven != 'method') { 
 		updateFilters(data.filtersAvailable);
 	// }
@@ -584,6 +585,8 @@ function getUserSelections(filterName) {
   
   method = $("input[name='method']:checked").val();
   observation = $("input[name='observation']:checked").val();
+  var id = $("input[name='observation']:checked").val();
+  
   if(scenarios.length == 0) {
     fillout = false;
 //    return;
@@ -592,7 +595,7 @@ function getUserSelections(filterName) {
     fillout = false;
 //    return;
   }  
-  if (variables.length == 0) {
+  if (variables.length == 0 && id!=7) {
     fillout = false;
 //    return;
   } 
@@ -615,20 +618,22 @@ function getUserSelections(filterName) {
 	fillout = false;
   }
 
-	var id = $("input[name='observation']:checked").val();
+	
 	if(id==7){
 		$("#periodHist").hide();
 		var slider =$("#period").data("ionRangeSlider")
 		slider.update({max_interval:85})
-		
 		$("#divFileInput").show("slow");
-		$('#station-file').live('change', function(){ console.log($("#station-file").val());getUserSelections(filterName); validateForm();});
+		$('#station-file').live('change', function(){getUserSelections(filterName); validateForm();});
+		$("#variable-filters").addClass("disabledbutton");
 	}else{
 		$("#periodHist").show();
 		$("#divFileInput").hide();
+		$("#fileName").val("");
 		var control = $("#station-file");
 		control.replaceWith( control = control.clone( true ) );
-		$("#station-file").val("");
+		$("#variable-filters").removeAttr("disabledbutton");
+		$("#variable-filters").removeClass("disabledbutton");
 	}  
 //  tileNameVal = ($("#tile_name").val() == "") ? undefined : "'" + $("#tile_name").val() + "'";
 //  if (filterName == "extent") {
@@ -897,7 +902,7 @@ function validCoordinate (lat, lon) {
         if (!fillout){
           $("#searchSubmit").attr("disabled", "disabled");
           $("#searchSubmit").addClass("disable");
-          $("#filesFound").text("You forgot to fill something out");
+          $("#filesFound").text("Please enter all search term.");
         } else {
           $("#searchSubmit").removeAttr("disabled");
           $("#searchSubmit").removeClass("disable");
