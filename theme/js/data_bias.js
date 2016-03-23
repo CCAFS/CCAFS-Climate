@@ -228,7 +228,7 @@ function validateForm () {
     }else {
       $("#searchSubmit").attr("disabled", "disabled");
       $("#searchSubmit").addClass("disable");
-      $("#filesFound").text("Please enter all search term.");
+      $("#filesFound").text("Please enter all search terms.");
     }
 //  });
 }
@@ -902,7 +902,7 @@ function validCoordinate (lat, lon) {
         if (!fillout){
           $("#searchSubmit").attr("disabled", "disabled");
           $("#searchSubmit").addClass("disable");
-          $("#filesFound").text("Please enter all search term.");
+          $("#filesFound").text("Please enter all search terms.");
         } else {
           $("#searchSubmit").removeAttr("disabled");
           $("#searchSubmit").removeClass("disable");
