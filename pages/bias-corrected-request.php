@@ -33,7 +33,7 @@ if(!$period){
 }else{$code=0;$msg=null;$msgy=null;}
 
 
-print_r($period);	
+// print_r($period);	
 if ($station_file && $code==0) {
 
   $file_url = $_FILES["station-file"]["tmp_name"];
