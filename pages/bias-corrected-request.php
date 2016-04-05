@@ -49,8 +49,8 @@ if ($station_file && $code==0) {
   }
 
 	$myfile = file($uri);
-	$varlist = array("prec","tmin","tmax","tmean");
-	$namescol = array("date","prec","tmin","tmax","tmean");
+	$varlist = array("prec","tmin","tmax","tmean","srad");
+	$namescol = array("date","prec","tmin","tmax","tmean","srad");
 	$colnames = explode("\t", substr($myfile[0], 0, -2));
 	$start1 = explode("\t", $myfile[1]);
 	$start = substr($start1[0], 0, 4)."-".substr($start1[0], 4, 2)."-".substr($start1[0], 6, 2);
@@ -95,7 +95,7 @@ if ($station_file && $code==0) {
 // print_r($result);	
 	
 	
-	if(count($colnames)<2 || count($colnames)>5){
+	if(count($colnames)<2 || count($colnames)>6){
 		$code=1;$msg="There is an error in the number of columns";
 	}elseif (count(array_intersect ($namescol, $colnames))!=count($colnames)){
 		$code=2;$msg="The name columns are not correct (date  prec	tmin	tmax tmean)";
