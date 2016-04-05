@@ -41,7 +41,7 @@ $smarty->assign("observations", $observations);
 $smarty->assign("variables", $variables);
 $smarty->assign("methods", $methods);
 $smarty->assign("formats", $formats);
-$smarty->assign("vars", array(1,2,3,4));
+$smarty->assign("vars", array(1,2,3,4,5));
 //$smarty->assign("extents", $extents);
 //$smarty->assign("tiles", $tiles);
 
