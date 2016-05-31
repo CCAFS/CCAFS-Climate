@@ -81,7 +81,7 @@
                       <script type="text/javascript" src="{$smarty.const.SMARTY_JS_URI}/Modernizr-2.0.6/modernizr.custom.23336.js"></script>
 
                     {elseif $jsToInclude == "map"}		
-                      <script src="http://geoxml3.googlecode.com/svn/branches/polys/geoxml3.js"></script>
+                      <script src="../libs/geoxml3/polys/geoxml3.js"></script>
 
                     {elseif $jsToInclude == "bias_request"}
                       <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
