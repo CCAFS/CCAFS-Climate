@@ -10229,7 +10229,7 @@ var groupByRegion = {
 								// layout: 'fit',
 								forceFit: true,
 								store: gridStatStore,
-								maxHeight: Ext.getBody().getViewSize().height*0.3,
+								maxHeight: mainPanelHeight*0.4,//Ext.getBody().getViewSize().height*0.3,
 								width: mainPanelWidth,
 								// height:273,
 								// maxHeight: mainPanelHeight*0.4,
