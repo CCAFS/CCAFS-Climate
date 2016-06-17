@@ -15,10 +15,12 @@ $whereStation = "";
 $result = array();
 
 if (isset($_REQUEST['station'])) {
+  // $statList = $_REQUEST["station"];
   $statList = json_decode($_REQUEST["station"]);
 }
 if (isset($_REQUEST['variable'])) {
-  $varList = json_decode($_REQUEST["variable"]);
+  $varList = $_REQUEST["variable"];
+  // $varList = json_decode($_REQUEST["variable"]);
 }
 if (isset($_REQUEST['typedwn'])) {
   $typedwn = $_REQUEST["typedwn"];
@@ -32,7 +34,10 @@ if (isset($_REQUEST['state'])) {
 if (isset($_REQUEST['municip'])) {
   $municip = $_REQUEST["municip"];
 }
-
+if (isset($_REQUEST['qc'])) {
+  // $qc = json_decode($_REQUEST["qc"]);
+  $qc = $_REQUEST["qc"];
+}
 
 $admin = "gadm_lev2";
 
@@ -46,16 +51,33 @@ if (isset($statList) && $statList != "") {
   $whereStation .= " AND a.id IN (" . implode(",", $statList) . ")";
 }
 if (isset($varList) && $varList != "") {
-//print_r($varList);
-  $where .= " AND station_variable_id IN (" . implode(",", $varList) . ")";
+// print_r($varList);
+	if($varList!="ALL"){
+	  $where .= " AND station_variable_id IN (" .$varList. ")";
+	  // $where .= " AND station_variable_id IN (" . implode(",", $varList) . ")";
+	}
 }
-
+if (isset($qc) && $qc != "") {
+//print_r($varList);
+	if($qc=='qc'){
+		$where .= " AND station_ctrl_quality_id=2";
+		$whereStation .= " AND ctrl_quali_var!='raw'";
+	}elseif($qc=='raw'){
+		$where .= " AND station_ctrl_quality_id=1";
+		$whereStation .= " AND ctrl_quali_var='raw'";	
+	}
+  
+}
 
 if (!$dbcon) {
   echo "Error : Unable to open database\n";
 } else {
   //echo "Opened database successfully\n";
 }
+$sql_count ="select DISTINCT l.iso, l.NAME_0 country, l.NAME_1 state,l.NAME_2 city
+					from geostation as a 	
+					JOIN gadm_lev2 as l ON (l.id_2=a.city)
+					where TRUE $whereStation"; 
 
 if ($country != "null" && $state != "null" && $municip != "null") {
   $sql_t = "select hasc_2
@@ -82,6 +104,8 @@ if ($country != "null" && $state != "null" && $municip != "null") {
 
 
 
+
+
 if ($country == "null" && $state == "null" && $municip == "null" && count($statList) == 1) {
   $outfile = "ccafs-climate_stations_id" . $statList[0] . ".zip";
 }
@@ -95,10 +119,14 @@ if (isset($typedwn)) {
     $outfile = "ccafs-climate_stations_query.zip";
   }
 }
+if(!isset($outfile)){
+	$outfile = "ccafs-climate_stations.zip";
+}
 
 
 $sql = "SELECT file_name, local_url, station_variable_id, date_start FROM station_file WHERE TRUE $where";
-
+// print_r ($sql);
+// exit();
 $ret = pg_query($dbcon, $sql);
 if (!$ret) {
   echo pg_last_error($dbcon);

@@ -10,7 +10,10 @@ include_once('../config/db_ccafs_climate.php');
 
 		
 // print $access_level." ".$copyrigth ." ".$copyright;
-
+if (isset($_REQUEST['qc'])) {
+  // $qc = json_decode($_REQUEST["qc"]);
+  $qc = $_REQUEST["qc"];
+}
 
 	$where = "";
 	$result = array();
@@ -23,10 +26,16 @@ include_once('../config/db_ccafs_climate.php');
 	  $where .= " AND b.id IN (" . implode(",",$vars) . ")";
 	}
 
-
+	if (isset($qc) && $qc != "") {
+	//print_r($varList);
+		if($qc=='qc'){
+			$where .= " AND station_ctrl_quality_id=2";
+		}elseif($qc=='raw'){
+			$where .= " AND station_ctrl_quality_id=1";
+		}
+	}
 
 	   $sql ="SELECT a.file_name, a.local_url, a.station_variable_id, a.date_start FROM station_file a INNER JOIN station_variable b ON (a.station_variable_id = b.id)  WHERE TRUE $where";
-
 	   $ret = pg_query($dbcon, $sql);
 	   if(!$ret){
 		  echo pg_last_error($dbcon);
@@ -34,10 +43,12 @@ include_once('../config/db_ccafs_climate.php');
 	   } 
 	   
 	   $files = pg_fetch_all($ret);
+
 	   // echo "Operation done successfully\n";
 	   pg_close($dbcon);
 
 	foreach ($files as $file) {
+		
 	  if ($period == 3) {
 		//precipitacion
 		if ($file['station_variable_id'] == 1) {
@@ -57,13 +68,17 @@ include_once('../config/db_ccafs_climate.php');
 		  $result['tmean']['data'] = array_merge(stationReadFile($file['local_url'], $file['file_name'], $period), isset($result['tmean']['data']) ? $result['tmean']['data'] : array());
 		  $result['tmean']['data'] = stationMean($result['tmean']['data']);
 		} else if ($file['station_variable_id'] == 5) {
-		  $result['sbright']['sdate'] = $file['date_start'];
-		  $result['sbright']['data'] = array_merge(stationReadFile($file['local_url'], $file['file_name'], $period), isset($result['sbright']['data']) ? $result['sbright']['data'] : array());
-		  $result['sbright']['data'] = stationMean($result['sbright']['data']);
+		  $result['srad']['sdate'] = $file['date_start'];
+		  $result['srad']['data'] = array_merge(stationReadFile($file['local_url'], $file['file_name'], $period), isset($result['srad']['data']) ? $result['srad']['data'] : array());
+		  $result['srad']['data'] = stationSum($result['srad']['data']);
 		} else if ($file['station_variable_id'] == 6) {
 		  $result['rhum']['sdate'] = $file['date_start'];
 		  $result['rhum']['data'] = array_merge(stationReadFile($file['local_url'], $file['file_name'], $period), isset($result['rhum']['data']) ? $result['rhum']['data'] : array());
 		  $result['rhum']['data'] = stationMean($result['rhum']['data']);
+		} else if ($file['station_variable_id'] == 6) {
+		  $result['sbright']['sdate'] = $file['date_start'];
+		  $result['sbright']['data'] = array_merge(stationReadFile($file['local_url'], $file['file_name'], $period), isset($result['sbright']['data']) ? $result['sbright']['data'] : array());
+		  $result['sbright']['data'] = stationSum($result['sbright']['data']);
 		}
 	  } else if ($period == 2) {
 		//precipitacion
@@ -84,13 +99,17 @@ include_once('../config/db_ccafs_climate.php');
 		  $result['tmean']['data'] = array_merge(stationReadFile($file['local_url'], $file['file_name'], $period), isset($result['tmean']['data']) ? $result['tmean']['data'] : array());
 		  $result['tmean']['data'] = stationMean($result['tmean']['data']);
 		} else if ($file['station_variable_id'] == 5) {
-		  $result['sbright']['sdate'] = $file['date_start'];
-		  $result['sbright']['data'] = array_merge(stationReadFile($file['local_url'], $file['file_name'], $period), isset($result['sbright']['data']) ? $result['sbright']['data'] : array());
-		  $result['sbright']['data'] = stationMean($result['sbright']['data']);
+		  $result['srad']['sdate'] = $file['date_start'];
+		  $result['srad']['data'] = array_merge(stationReadFile($file['local_url'], $file['file_name'], $period), isset($result['srad']['data']) ? $result['srad']['data'] : array());
+		  $result['srad']['data'] = stationSum($result['srad']['data']);
 		} else if ($file['station_variable_id'] == 6) {
 		  $result['rhum']['sdate'] = $file['date_start'];
 		  $result['rhum']['data'] = array_merge(stationReadFile($file['local_url'], $file['file_name'], $period), isset($result['rhum']['data']) ? $result['rhum']['data'] : array());
 		  $result['rhum']['data'] = stationMean($result['rhum']['data']);
+		} else if ($file['station_variable_id'] == 6) {
+		  $result['sbright']['sdate'] = $file['date_start'];
+		  $result['sbright']['data'] = array_merge(stationReadFile($file['local_url'], $file['file_name'], $period), isset($result['sbright']['data']) ? $result['sbright']['data'] : array());
+		  $result['sbright']['data'] = stationSum($result['sbright']['data']);
 		}
 	  } else if ($period == 1) {
 		//precipitacion
@@ -107,11 +126,14 @@ include_once('../config/db_ccafs_climate.php');
 		  $result['tmean']['sdate'] = $file['date_start'];
 		  $result['tmean']['data'] = array_merge(stationReadFile($file['local_url'], $file['file_name'], $period), isset($result['tmean']['data']) ? $result['tmean']['data'] : array());
 		} else if ($file['station_variable_id'] == 5) {
-		  $result['sbright']['sdate'] = $file['date_start'];
-		  $result['sbright']['data'] = array_merge(stationReadFile($file['local_url'], $file['file_name'], $period), isset($result['sbright']['data']) ? $result['sbright']['data'] : array());
+		  $result['srad']['sdate'] = $file['date_start'];
+		  $result['srad']['data'] = array_merge(stationReadFile($file['local_url'], $file['file_name'], $period), isset($result['srad']['data']) ? $result['srad']['data'] : array());
 		} else if ($file['station_variable_id'] == 6) {
 		  $result['rhum']['sdate'] = $file['date_start'];
 		  $result['rhum']['data'] = array_merge(stationReadFile($file['local_url'], $file['file_name'], $period), isset($result['rhum']['data']) ? $result['rhum']['data'] : array());
+		} else if ($file['station_variable_id'] == 6) {
+		  $result['sbright']['sdate'] = $file['date_start'];
+		  $result['sbright']['data'] = array_merge(stationReadFile($file['local_url'], $file['file_name'], $period), isset($result['sbright']['data']) ? $result['sbright']['data'] : array());
 		}
 	  }
 	}
@@ -121,6 +143,8 @@ include_once('../config/db_ccafs_climate.php');
 	function stationReadFile($url, $name, $period) {
 	//  global $smarty;
 	//  print_r($smarty->getTemplateDir());
+	// print_r($dirfilesStations.$url . "/" . $name);
+
 		global $dirfilesStations;
 	  $ouput = array();
 	  $myfile = fopen( $dirfilesStations.$url . "/" . $name, "r") or die("Unable to open file!"); //realpath(dirname(__FILE__))

@@ -183,7 +183,10 @@
 					}
 					if(feature.cluster[0].attributes.institute==7){
 						return "green"
-					}						
+					}
+					if(feature.cluster[0].attributes.institute==8){
+						return "DarkOrange"
+					}					
 					// if (count < 2) {
 						// return "blue";
 					// }else{
@@ -232,7 +235,7 @@
 				return feature.cluster[0].attributes.elev;
 			}			
 			onLabel5=function(feature) {
-				return feature.cluster[0].attributes.status;
+				return feature.cluster[0].attributes.estado;
 			}	
 			context["label"]=onLabel3
 

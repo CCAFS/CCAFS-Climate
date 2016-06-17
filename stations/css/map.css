@@ -364,7 +364,11 @@
 				font-size: 20px;
 				color: green;
 			}			
-			
+			#inmet:before {
+				content: ' \25CF';
+				font-size: 20px;
+				color: DarkOrange;
+			}			
 			.legendFond{
 				font-family: Trebuchet MS;/*Oswald,sans-serif;*/
 				font-size: 10px !important;
@@ -535,7 +539,9 @@
 			.key-go {
 			  background-image:url('../iconosGIS/key-go-icon.png') !important;
 			}	
-
+			.down {
+			  background-image:url('../iconosGIS/download.png') !important;
+			}	
 			.mainpanelID_header-body{
 				height: 25px;
 			}

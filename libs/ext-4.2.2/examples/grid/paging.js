@@ -19,12 +19,9 @@ Ext.onReady(function(){
     Ext.define('ForumThread', {
         extend: 'Ext.data.Model',
         fields: [
-            'title', 'forumtitle', 'forumid', 'username',
-            {name: 'replycount', type: 'int'},
-            {name: 'lastpost', mapping: 'lastpost', type: 'date', dateFormat: 'timestamp'},
-            'lastposter', 'excerpt', 'threadid'
+            'username'
         ],
-        idProperty: 'threadid'
+        // idProperty: 'threadid'
     });
 
     // create the Data Store
@@ -43,11 +40,11 @@ Ext.onReady(function(){
             },
             // sends single sort as multi parameter
             simpleSortMode: true
-        },
-        sorters: [{
-            property: 'lastpost',
-            direction: 'DESC'
-        }]
+        }
+        // sorters: [{
+            // property: 'lastpost',
+            // direction: 'DESC'
+        // }]
     });
 
     // pluggable renders
@@ -87,35 +84,20 @@ Ext.onReady(function(){
         },
         // grid columns
         columns:[{
+            xtype: 'rownumberer',
+            width: 50,
+            sortable: false
+        },{
             // id assigned so we can apply custom css (e.g. .x-grid-cell-topic b { color:#333 })
             // TODO: This poses an issue in subclasses of Grid now because Headers are now Components
             // therefore the id will be registered in the ComponentManager and conflict. Need a way to
             // add additional CSS classes to the rendered cells.
-            id: 'topic',
+            // id: 'topic',
             text: "Topic",
-            dataIndex: 'title',
-            flex: 1,
-            renderer: renderTopic,
-            sortable: false
-        },{
-            text: "Author",
             dataIndex: 'username',
-            width: 100,
-            hidden: true,
-            sortable: true
-        },{
-            text: "Replies",
-            dataIndex: 'replycount',
-            width: 70,
-            align: 'right',
-            sortable: true
-        },{
-            id: 'last',
-            text: "Last Post",
-            dataIndex: 'lastpost',
-            width: 150,
-            renderer: renderLast,
-            sortable: true
+            flex: 1,
+            // renderer: renderTopic,
+            sortable: false
         }],
         // paging bar on the bottom
         bbar: Ext.create('Ext.PagingToolbar', {

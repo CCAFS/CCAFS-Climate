@@ -18,7 +18,7 @@ if (isset($vars) && $vars != "" && count($vars) && !in_array(0, $vars)) {
 }
 
 
-   $sql ="SELECT a.file_name, a.local_url, a.station_variable_id, a.date_start, b.acronym, c.code, c.id, c.name FROM station_file a INNER JOIN station_variable b ON (a.station_variable_id = b.id) INNER JOIN geostation c ON (a.station_id = c.id)  WHERE TRUE $where order by c.id DESC";
+   $sql ="SELECT a.file_name, a.local_url, a.station_variable_id, a.date_start, b.acronym, c.code, c.id, c.name, qc.name quality,a.date_start, a.date_end FROM station_file a INNER JOIN station_variable b ON (a.station_variable_id = b.id) INNER JOIN geostation c ON (a.station_id = c.id) INNER JOIN station_ctrl_quality qc ON (a.station_ctrl_quality_id = qc.id) WHERE TRUE $where order by c.id DESC";
 
    $ret = pg_query($dbcon, $sql);
    if(!$ret){
@@ -37,7 +37,10 @@ foreach ($files as $file) {
 	$result['output']['topics'][$i]['idstat'] = $file['id'];
 	$result['output']['topics'][$i]['code'] = $file['code'];
 	$result['output']['topics'][$i]['name'] = $file['name'];
+	$result['output']['topics'][$i]['quality'] = $file['quality'];
 	$result['output']['topics'][$i]['var'] = $file['acronym'];
+	$result['output']['topics'][$i]['date_start'] = $file['date_start'];
+	$result['output']['topics'][$i]['date_end'] = $file['date_end'];
 	$result['output']['topics'][$i] = array_merge($result['output']['topics'][$i],resumeCalculator($result[$file['id']][$file['acronym']]['data']));
 	//unset($result[$file['id']][$file['acronym']]['data']);
 	$i++;

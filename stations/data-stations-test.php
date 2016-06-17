@@ -33,7 +33,7 @@
         <script type="text/javascript" src="js/loader.js"></script>
 		
 		
-        <script type="text/javascript" src="js/tree.js"></script>
+        <script type="text/javascript" src="js/tree-test.js"></script>
 
 		<!-- files JS  -->
 		<script src="js/countries.js" type="text/javascript"></script>		

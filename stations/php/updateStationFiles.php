@@ -31,7 +31,7 @@
 			$var = getVarID ($dbcon,str_replace(".txt","",$name[5]));
 			$url = explode('downloads',$file['dir']);
 			$sql = "INSERT INTO station_file (date_start, date_end, age, file_name, local_url, station_id, station_variable_id, station_time_step_id, station_ctrl_quality_id) 
-			VALUES ('".$start."','".$end."',".$days.",'".$file['name']."','".$url[1]."', ".$name[0].", ".$var.", 2, 1)";
+			VALUES ('".$start."','".$end."',".$days.",'".$file['name']."','".$url[1]."', ".$name[0].", ".$var.", 2, 2)";
 			
 			//echo $sql;
 			$sqldata = pg_query($dbcon, $sql);
