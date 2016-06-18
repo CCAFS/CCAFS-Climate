@@ -92,8 +92,23 @@ Ext.application({
 		
 		var WGS84 = new OpenLayers.Projection("EPSG:4326");
 		var WGS84_google_mercator = new OpenLayers.Projection("EPSG:900913"); //map.getProjectionObject()
-	
-		
+
+// para quitar loadmask	cuando se traba	
+Ext.override(Ext.grid.GridPanel, {
+	reconfigure : function(store, colModel){
+		if(this.loadMask && this.loadMask.store){
+			this.loadMask.destroy();
+			this.loadMask = new Ext.LoadMask(this.bwrap,
+				Ext.apply({}, {store:store}, this.initialConfig.loadMask));
+		}
+		this.view.initData(store, colModel);
+		this.store = store;
+		this.colModel = colModel;
+		if(this.rendered){
+			this.view.refresh(true);
+		}
+	}
+});		
 		// Init the singleton.  Any tag-based quick tips will start working.
 		Ext.tip.QuickTipManager.init();
 
@@ -2647,6 +2662,7 @@ var bton_sign_Up = new Ext.Button({
 			winInfo2.setPosition(mainPanelWidth/3,mainPanelHeight/2);										
 		}
 	}	
+	var myMask = new Ext.LoadMask(Ext.getCmp('mapPanelID'), {msg:"Please wait..."});
 	
 var groupByRegion = {
         xtype: 'fieldset',
@@ -2689,7 +2705,7 @@ var groupByRegion = {
 							Ext.getCmp('popupID').close()
 						}
 						// loading status
-						var myMask = new Ext.LoadMask(Ext.getCmp('mapPanelID'), {msg:"Please wait..."});
+						
 						var myAjax = new Ext.data.Connection({
 							// handler: function(){if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}},
 							listeners : {        
@@ -3435,7 +3451,9 @@ var groupByRegion = {
 			}
 		}		
 	});	
-   
+
+// ##########################################  groupByStation ######################################################################
+	
     var groupByStation = {
         xtype: 'fieldset',
         title: 'Search by station   '+ '<img id="help_toolip" class="tooltipIcon" src='+icons+infoB+' data-qtip="'+toolip_groupByStation+'" />',//<span data-qtip="hello">First Name</span>  
@@ -4704,6 +4722,7 @@ var groupByRegion = {
 							var myMask = new Ext.LoadMask(Ext.getCmp('mapPanelID'), {msg:"Please wait..."});
 							var myAjax = new Ext.data.Connection({
 								// handler: function(){if(layerTemp){layerTemp.destroyFeatures();mapPanel.map.removeLayer(layerTemp);}},
+								id:'myAjaxID',
 								listeners : {        
 									beforerequest : function () {myMask.show();},
 									// requestcomplete : function () {myMask.hide();}
@@ -5503,10 +5522,17 @@ var groupByRegion = {
 					text:'Cancel',
 					icon: icons+'decline.png',
 					handler: function(){
+						Ext.LoadMask.override({    listeners: {
+								beforedestroy: function() {
+									this.hide();
+								}
+							}
+						});						
+					
 						if(Ext.getCmp('popupID')){
 							Ext.getCmp('popupID').close()
 						}		
-						drawPolygon.control.deactivate();
+						// drawPolygon.control.deactivate();
 						if(Ext.getCmp('gridRegionID')){
 							Ext.getCmp('mainTableID').collapse();
 							Ext.getCmp('gridRegionID').destroy();	
