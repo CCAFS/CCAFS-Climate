@@ -9,7 +9,7 @@
   <hr>
   <div>
 	  <div id="loading" style=""><img style="" src="{$smarty.const.SMARTY_IMG_URI}/loading.gif" alt="Loader" /></div>
-	  <iframe name="myFrame" id="myFrame" src="{$smarty.const.SMARTY_ROOT_URI}/stations/data-stations.php" width="836" height="650" frameBorder="0" scrolling="no" onload="document.getElementById('loading').style.display='none';"></iframe>
+	  <iframe name="myFrame" id="myFrame" src="{$smarty.const.SMARTY_ROOT_URI}/stations/data-stations-test.php" width="836" height="650" frameBorder="0" scrolling="no" onload="document.getElementById('loading').style.display='none';"></iframe>
   </div>
   <p>
   <div>
