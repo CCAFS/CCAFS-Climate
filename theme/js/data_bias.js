@@ -574,7 +574,7 @@ function updateFilters(filtersAvailable) {
  * @return an object with the values selected by the user.
  */
 function getUserSelections(filterName) {
-  var scenarios, model, period,variables,formats,method,observation;
+  var scenarios, model, period,variables,formats,methods,observation;
   fillout = true;
   scenarios = getArrayValues($("[name='scenarios\\[\\]']:checked"));
   model=getArrayValuesModel($("input[name='model\\[\\]']:checked"))
@@ -583,11 +583,17 @@ function getUserSelections(filterName) {
   variables = getArrayValues($("input[name='variables\\[\\]']:checked"));
   // formats = getArrayValues($("input[name='formats\\[\\]']:checked"));
   
-  method = $("input[name='method']:checked").val();
+  // method = $("input[name='method']:checked").val();
+  methods = getArrayValues($("input[name='methods\\[\\]']:checked"));
+  // console.log(methods);
   observation = $("input[name='observation']:checked").val();
   var id = $("input[name='observation']:checked").val();
   
   if(scenarios.length == 0) {
+    fillout = false;
+//    return;
+  }   
+  if(methods.length == 0) {
     fillout = false;
 //    return;
   }  
@@ -602,10 +608,9 @@ function getUserSelections(filterName) {
   // if (formats.length == 0) {
 //    fillout = false;
   // } 
-  if (typeof method == 'undefined') {
-    fillout = false;
-//    return;
-  } 
+  // if (typeof method == 'undefined') {
+    // fillout = false;
+  // } 
   if (typeof observation == 'undefined') {
     fillout = false;
 //    return;
@@ -642,7 +647,7 @@ function getUserSelections(filterName) {
 
   var data = {
     coordinate: $("#lat").val()+","+$("#lon").val(),
-    methodId: method,
+    methodId: methods,
     model: model,
     modelId: model_id,
     formatId: formats,

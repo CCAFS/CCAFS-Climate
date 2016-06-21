@@ -167,12 +167,14 @@
             <div class="box-content"> 
               <div id="dropdown-arrow"></div> 
               <div id="drop-content">
-                {$isFirst = true}
+                <!-- {$isFirst = true} -->
                 {foreach from=$methods item=method}
                   <img class="help_icon" id="help_icon_method" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
-                  <input id="method-{$method['id']}" type="radio" name="method" value="{$method['id']}" />
+                 <!-- <input id="method-{$method['id']}" type="radio" name="method" value="{$method['id']}" /> -->
+                 <input id="method-{$method['id']}" type="checkbox" name="methods[]" value="{$method['id']}" />
+				 
                   <label for="method-{$method['id']}" class="resolution">{$method["name"]}</label><br>
-                  {$isFirst = false}
+                 <!--  {$isFirst = false} -->
                 {/foreach}
               </div>
             </div> 

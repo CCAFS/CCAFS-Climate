@@ -19,7 +19,7 @@ $ids["tile_id"] = getTileID($ids["tile_id"]);
 
 if (!is_null($section)) {
   switch ($section) {
-    case "method":
+    case "methods[]":
       filesFound("datasets_correction_method_bias", $ids["method_id"]);
       break;
     case "scenarios[]":

@@ -92,7 +92,7 @@
     <input type="hidden" name="periodh" id="periodh" value="{$periodh}">
     <input type="hidden" name="period" id="period" value="{$period}">
     <input type="hidden" name="variables" id="variables" value="{$variables}">
-    <input type="hidden" name="method" id="method" value="{$method}">
+    <input type="hidden" name="methods" id="method" value="{$methods}">
     <input type="hidden" name="formats" id="formats" value="{$formats}">
     <input type="hidden" name="file" id="file" value="{$file}">
     <input type="hidden" name="observation-acronym" id="observation-acronym" value="{$observationAcronym}">
