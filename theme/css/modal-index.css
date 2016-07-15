@@ -255,8 +255,9 @@ and open the template in the editor.
 }
 .profile-detail {
   width: 70%;
-  float:right;
-  border-left: solid 1px;
+  padding-left: 70px;
+  /*float:left;
+  border-left: solid 1px;*/
   /*position: relative;*/
 }
 .profile-detail-1 {
@@ -322,3 +323,7 @@ and open the template in the editor.
   font-size: 14px;
 }
 
+table.profile-detail_table  td, th{
+	padding: 0px 15px 0px;
+	vertical-align: top;
+}

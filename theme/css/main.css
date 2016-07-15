@@ -68,7 +68,9 @@ span.little {
     margin-left: -49px;
 }
 
-
+.main_section {
+    /*margin-left: 4%;*/
+}
 
 /* Content */
 #content {
@@ -225,7 +227,7 @@ div.home {
 .home #sections img {
     /*width: 158px;*/
     /*height: 350px;*/
-    width: 126.4px;
+    width: 120px;/*126.4px;*/
     height: 280px;
     top: 0;
     left: 0;
@@ -247,7 +249,7 @@ div.home {
 
 .downscaling #methods {
     text-align: center;
-    margin-left: 35px;
+    margin-left: 20px;
 }
 
 .downscaling  #methods #section {
@@ -519,6 +521,39 @@ div.home {
   left: 50%;
 }
 
+#eq_bc{
+	padding-left: 30%;
+}
+
+#bc_img{
+}
+
+
+/******************* Bias correction *********************/
+.img_bc_big {
+width: 200px;
+padding-left: 30%;
+}
+table.obs_dataset_table td, th{
+    padding: 0px 5px 0px;
+	margin : 0;
+	border-spacing:0;
+}
+/*
+table.obs_dataset_table {
+    border: 1px groove;
+    margin-left: 110px;
+    text-align: center;
+	border-spacing: 0;
+}
+
+table.obs_dataset_table td , td{
+    padding: 0px 5px 0px;
+	margin : 0;
+	border-spacing:0;
+
+
+}*/
 /*#myFrame {
  background-image: url("/theme/images/loading.gif");   
     background-repeat: no-repeat;

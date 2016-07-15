@@ -1,4 +1,4 @@
-{include file='head.tpl' jsIncludes=[] pageTitle="Spatial Disaggregation - CCAFS Climate" pageDescription="Spatially disaggregated future climate projections from all IPCC assessment reports." keywords="IPCC,disaggregated,climate change,CMIP,projections,high resolution"}
+{include file='head.tpl' jsIncludes=['jquery', 'dissagregation'] pageTitle="Spatial Disaggregation - CCAFS Climate" pageDescription="Spatially disaggregated future climate projections from all IPCC assessment reports." keywords="IPCC,disaggregated,climate change,CMIP,projections,high resolution"}
 {include file='header.tpl' current="dissagregation"}
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_spdis.gif" />
@@ -48,7 +48,7 @@
     </p>
     <br>
     <div class="center">
-        <a href="/data/">
+        <a href="/data_spatial_downscaling/">
             <img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png" />
         </a>
     </div>

@@ -167,7 +167,7 @@
         <span><a href="mailto:c.e.navarro@cgiar.org">c.e.navarro@cgiar.org</a></span>
     </div>
     <div class="center">
-        <a href="/data/">
+        <a href="/data_spatial_downscaling/">
             <img name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png">
         </a>
     </div>

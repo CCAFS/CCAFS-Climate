@@ -1,62 +1,71 @@
 {include file='head.tpl' jsIncludes=['jquery', 'index'] pageTitle="CCAFS Climate" pageDescription="Climate change downscaled data portal provided by CIAT and CCAFS." keywords="downscaling,GCM,climate change,CIAT,CCAFS"}
 {include file='header.tpl' current="home"}
 
-<div id="content" class="home">
-  <table id="sections">
-    <tbody>
-      <tr>
-        <td>
-          <a href="/spatial_downscaling/">
-            <div id="section">
-              <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_spatial_downscaling.png" />
-            </div>
-          </a>
-        </td>
-        <td>
-          <a href="/spatial_disaggregation/">
-            <div id="section">
-              <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_spatial_disaggregation.png">
-            </div>
-          </a>
-        </td>
-        <td>
-          <a href="/downloading_data/">
-            <div id="section">
-              <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_data.png">
-            </div>
-          </a>
-        </td>
-        <td>
-          <a href="/documentation/">
-            <div id="section">
-              <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_docs.png">
-            </div>
-          </a>
-        </td>
-        <td>
-          <a href="/links/">
-            <div id="section">
-              <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_links.png">
-            </div>
-          </a>
-        </td>
-        <td>
-          <a href="/citations/">
-            <div id="section">
-              <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_citations.png">
-            </div>
-          </a>
-        </td>
-        <td>
-          <a href="/contact/">
-            <div id="section">
-              <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_contact.png">
-            </div>
-          </a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div id="content" class="home" class="main_section">
+	<div class="main_section">
+	  <table id="sections" align="centre">
+		<tbody>
+		  <tr>
+			<!--<td>
+			  <a href="/methods/">
+				<div id="section">
+				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_methods.png" />
+				</div>
+			  </a>
+			</td>-->
+			<td>
+			  <a href="/downscaling/">
+				<div id="section">
+				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/menu_index-05.png">
+				</div>
+			  </a>
+			</td>			
+			<td>
+			  <a href="/bias_correction/">
+				<div id="section">
+				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/menu_index-09.png">
+				</div>
+			  </a>
+			</td>
+			<td>
+			  <a href="/data/">
+				<div id="section">
+				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_data.png">
+				</div>
+			  </a>
+			</td>
+			<td>
+			  <a href="/documentation/">
+				<div id="section">
+				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_docs.png">
+				</div>
+			  </a>
+			</td>
+			<td>
+			  <a href="/links/">
+				<div id="section">
+				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_links.png">
+				</div>
+			  </a>
+			</td>
+			<td>
+			  <a href="/citations/">
+				<div id="section">
+				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_citations.png">
+				</div>
+			  </a>
+			</td>
+			<td>
+			  <a href="/contact/">
+				<div id="section">
+				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_contact.png">
+				</div>
+			  </a>
+			</td>
+		  </tr>
+		</tbody>
+	  </table>
+	</div> 
   <div id="content-description">
     <h4>Data Provided by the CGIAR Research Program on Climate Change, Agriculture and Food Security (CCAFS)</h4>
     <p>
@@ -82,49 +91,95 @@
     <div class="modal-first modal-whatis">
       <h2><strong>What is CCAFS-Climate?</strong></h2>
       <p>
-        The CCAFS-Climate data portal provides users global and regional future high-resolution climate datasets that can help assess the impacts of climate change in a variety of fields related to biodiversity, agriculture in others. 
+        The CCAFS-Climate data portal provides global and regional future high-resolution climate datasets that serve as a basis for assessing the climate change impacts and adaptation in a variety of fields including biodiversity, agricultural and livestock production, and ecosystem services and hydrology.
       </p>
     </div>
-    <h2><strong>Who are you?</strong></h2>
-    <div class="modal-first modal-whoare">
+    <h2><strong>Uses of CCAFS-Climate data</strong></h2>
 
-      {*    <p>  *}
-      Applications of CCAFS-Climate data include assessing  agriculture, ecosystem functioning, options for policy-making, food security and adaptation planning, in others. 
-      <a id="profiles" href="#">See how CCAFS-Climate can help to your specific field</a>
-      {*    <p>*}
+    <div class="profiles-container">
+
+      <div class="profile-detail">
+        <div class="profile-detail-1">
+			<table class="profile-detail_table" border="0" cellspacing="0" cellpadding="0" width="100%">
+			  <tr>
+				<td width="30%">
+				  <div class="icon-container-d1" title="<ul>
+					   <li>Policy making, food security, and adaptation planning</li><li>Assessing / enhancing agricultural practices.
+					   </li><li>The informing of crop insurance policy development 
+					   </li><li>Inform agricultural investment prioritization 
+					   </li><li>Food security assessment.
+					   </li><li>Vulnerability assessment especially in developing countries.
+					   </li></ul>">
+					<div class="topic-02 icon-c">
+					</div>
+					<div class="icon-text-c">
+					  Agriculture
+					</div>
+				  </div>		
+				</td>
+				<td width="30%">
+				  <div class="icon-container-d1" title="<ul>
+					   <li>Prioritize conservation efforts, for policy and planning in national parks/wildlife reserves and by municipalities
+					   </li>
+					   <li>Prioritization of conservation efforts</li>
+					   </ul>">
+					<div class="topic-09 icon-c">
+					</div>
+					<div class="icon-text-c">
+					  Biodiversity & Genetic
+					</div>
+				  </div>		
+				</td>
+				<td width="30%">
+				  <div class="icon-container-d1" title="<ul><li>Understanding downscaled climate modeling in order to create more robust impact assessments</li></ul>">
+					<div class="topic-04 icon-c">
+					</div>
+					<div class="icon-text-c">
+					  Agro-climatology
+					</div>
+				  </div>		
+				</td>
+				<td width="30%">
+				  <div class="icon-container-d1" title="<ul>
+					   <li>Policy making, food security, and adaptation planning</li>
+					   <li>Custom analyses for specific places to support adaptation planning</li>
+					   <li>The informing of water policy development</li>
+					   <li>Land-use planning</li>
+					   <li>Adaptative capacity enhancement in developing countries</li>
+					   </ul>">
+					<div class="topic-05 icon-c">
+					</div>
+					<div class="icon-text-c">
+					  Ecosystem functioning
+					</div>
+				  </div>		
+				</td>
+				<td width="30%">
+				  <div class="icon-container-d1" title="<ul>
+					   <li>Capacity building / Academia (teaching, Master, PhD)
+					   </li>
+					   </ul>">
+					<div class="topic-08 icon-c">
+					</div>
+					<div class="icon-text-c">
+					  Teaching and demonstrating
+					</div>
+				  </div>		
+				</td>
+			  </tr>
+			</table>	  
+        </div>
+      </div>
+    </div>	
+	
+	
+
+
+	<div class="modal-first modal-whoare">
+
       <p class="chkmsg"><input type="checkbox" id="chk_showmsg">&nbsp;Don't show this message again</p>
-    </div>
-    <div class="modal-first modal-whoare modal-icons">
-      <div id="policy" class="icon-container-p">
-        <div class="policy icon">
-        </div>
-        <div class="icon-text">
-          Policy/Decision Maker
-        </div>
-      </div>
-      <div id="govermental" class="icon-container-p">
-        <div class="govermental icon">
-        </div>
-        <div class="icon-text">
-          Governmental Staff
-        </div>
-      </div>
-      <div id="academic" class="icon-container-p">
-        <div class="academic icon">
-        </div>
-        <div class="icon-text">
-          Academic
-        </div>
-      </div>
-      <div id="researcher" class="icon-container-p">
-        <div class="researcher icon">
-        </div>
-        <div class="icon-text">
-          Researcher
-        </div>
-      </div>
-      {*      <img src="{$smarty.const.SMARTY_IMG_URI}/modal/policy_decision_maker.png">*}
-    </div>
+    </div>	
+	
   </div>
   <div>
     <div id="info" class="left">

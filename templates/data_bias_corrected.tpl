@@ -1,10 +1,10 @@
 
-{include file='head.tpl' jsIncludes=["jquery", "dataBias", "tiptip","modernizr","icheck", "map"] pageTitle="Data - CCAFS Climate" pageDescription="High resolution climate change data for download, downscaled using different methods." keywords="IPCC,data,download,downscaling,high resolution,delta method,climate change,projections,MarkSim,MetOffice,PRECIS"}
+{include file='head.tpl' jsIncludes=["jquery", "dataBias", "tiptip","modernizr","icheck", "map"] pageTitle="Data bias correction - CCAFS Climate" pageDescription="High resolution climate change data for download, downscaled using different methods." keywords="IPCC,data,download,downscaling,high resolution,delta method,climate change,projections,MarkSim,MetOffice,PRECIS"}
 {include file='header.tpl' current="data"}
 
 
 <div id="subheader-image">
-  <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_data.gif" />
+  <img src="{$smarty.const.SMARTY_IMG_URI}/header_bc_data_cinta.gif" />
 </div>
 
 
@@ -17,7 +17,7 @@
 <div id="content" class="data" style="margin-bottom:45px">
   <div style="height: 43px;">
     <div style="width:70%; float:left; height: 38px;" >
-      <h3>Bias correction ( beta version )</h3>
+      <h3>Bias correction</h3>
     </div>
 
     {*    <div style="width:30%; height: 30px;float:left; text-align: right; padding-top: 20px;">
@@ -219,10 +219,11 @@
 
   {*  <p>*}
   <div>
-    <p>The data used here are based on global climate projections daily from the phase 5 (CMIP5) multi-model dataset that is informing the IPCC Fifth Assessment. CCAFS and its partners have processed this data to provide seamless continuous future climate surfaces.
-      Users are prohibited from any commercial, non-free resale, or redistribution without explicit written permission from CCAFS or the data-developing institutions.
-      Users should acknowledge CCAFS as the source used in the creation of any reports, publications, new data sets, derived products, or services resulting from the use of this data set.
-      For commercial access to the data, send requests to <a href="mailto:a.jarvis@cgiar.org">Andy Jarvis</a> at the International Center for Tropical Agriculture (CIAT).
+    <p>The data distributed here are in text file format and are derivated from Global Climate Models (GCM) and observational datasets (Reanalysis). 
+	CCAFS and its partners have developed this on live processing to provide continuous future climate data. Users are prohibited from any commercial, 
+	non-free resale, or redistribution without explicit written permission from CCAFS or the data-developing institutions. Users should acknowledge 
+	CCAFS as the source used in the creation of any reports, publications, new data sets, derived products, or services resulting from the use of this data set. 
+	For commercial access to the data, send requests to <a href="mailto:a.jarvis@cgiar.org">Andy Jarvis</a> at the International Center for Tropical Agriculture (CIAT).
     </p>
   </div>
 

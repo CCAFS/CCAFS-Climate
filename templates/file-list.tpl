@@ -27,7 +27,7 @@
 
                     <th style="width: 395px;">File Name</th>
                     <th style="width: 205px;">File Set</th>
-                    <th style="width: 91px;">Status</th>
+                    <th style="width: 91px;">Status*</th>
                 </tr>
             </thead>
             <tbody id="bodyTableFiles">
@@ -55,5 +55,15 @@
         <input type="hidden" name="file-type" value="file" />
         <button id="download-button-bottom" class="download-button" type="submit" disabled="disabled">Generate Download Links</button>
     </form>
+	
+    <p>
+        <h4>*Status:</h4>
+		<ul>
+			<li>Available: data is available online.</li>
+			<li>Deprecated: data is old and only available by request. Go to <a href="http://ccafs-climate.org/contact/">contact</a> page.</li>		
+			<li>In production: data is in production and will be available soon.</li>
+		</ul>
+    </p>  	
+	<br>
 </div>
 {include file='footer.tpl'}

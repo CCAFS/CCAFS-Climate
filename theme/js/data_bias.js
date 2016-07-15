@@ -581,11 +581,11 @@ function getUserSelections(filterName) {
   model_id=getArrayValuesModelId($("input[name='model\\[\\]']:checked"))
   period = getArrayValues($("input[name='period\\[\\]']:checked"));
   variables = getArrayValues($("input[name='variables\\[\\]']:checked"));
-  // formats = getArrayValues($("input[name='formats\\[\\]']:checked"));
+  formats = getArrayValues($("input[name='formats\\[\\]']:checked"));
   
   // method = $("input[name='method']:checked").val();
   methods = getArrayValues($("input[name='methods\\[\\]']:checked"));
-  // console.log(methods);
+  // console.log(formats);
   observation = $("input[name='observation']:checked").val();
   var id = $("input[name='observation']:checked").val();
   

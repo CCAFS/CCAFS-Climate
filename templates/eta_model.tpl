@@ -1,9 +1,9 @@
-{include file='head.tpl' jsIncludes=["jquery", "pattern_scaling"] pageTitle="Pattern Scaling MarkSim - CCAFS Climate" pageDescription="Downscaled future climate data using the MarkSim weather generator." keywords="MarkSim,weather typing,IPCC,climate projections,climate change"}
+{include file='head.tpl' jsIncludes=["jquery", "pattern_scaling"] pageTitle="Eta Model - CCAFS Climate" pageDescription="Downscaled future climate data using the MarkSim weather generator." keywords="MarkSim,weather typing,IPCC,climate projections,climate change"}
 {include file='header.tpl' current="downscaling"}
 <div id="subheader-image">
-    <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_eta.gif" /></div>
+    <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_rcm.gif" /></div>
 <div id="content" class="pattern_scaling">
-    <h3>EtaModel</h3>
+    <h3>Dynamical Downscaling (Eta Model)</h3>
     <hr>
 <br>
 
@@ -48,7 +48,7 @@
         <span><a href="mailto:c.e.navarro@cgiar.org">c.e.navarro@cgiar.org</a></span>
     </div>
     <div class="center">
-        <a href="/data/">
+        <a href="/data_spatial_downscaling/">
             <img name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png">
         </a>
     </div>

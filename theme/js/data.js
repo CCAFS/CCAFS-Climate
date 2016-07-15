@@ -96,10 +96,9 @@ function initializeICheckSettings(){
  */
 function setPageEvents(){
 
-  $("#fileSet-filters").find("input")
-    .on("ifChecked", getFilesInfo)
-    .on("ifToggled", adjustFiltersOnFileSetSelection);
+  $("#fileSet-filters").find("input").on("ifChecked", getFilesInfo).on("ifToggled", adjustFiltersOnFileSetSelection);
 	/*.on("ifClicked", changeMap);*/
+  $("#fileSet-filters").find("input").on("ifToggled", getFilesInfo);
   $("#scenario-filters").find("input").on("ifToggled", getFilesInfo);
   $("#model-filters").find("input").on("ifToggled", getFilesInfo);
   $("#method-filters").find("input").on("ifToggled", getFilesInfo);
@@ -109,7 +108,10 @@ function setPageEvents(){
   $("#variable-filters").find("input").on("ifToggled", getFilesInfo);
   $("#resolution-filters").find("input").on("ifToggled", getFilesInfo);
   $("#extent-filters").find("input")/*.on("ifClicked", changeMap)*/.on("ifToggled", adjustFiltersOnExtentSelection);
-
+  // $("#extent-filters").find("input").on("ifClicked", changeMap2);
+    // $('#filters-selected').find("span").on("click", changeMap2)
+ 
+  
   // load on the map the selected layer(file set). 
   // $("input[name='fileSet']").on('ifChecked', loadKmlOnMap); 
   //$("input[name='fileSet']").on('ifChecked', changeMap); 
@@ -131,7 +133,7 @@ function removePageEvents(){
   $("#period-filters").find("input").off("ifToggled", getFilesInfo);
   $("#variable-filters").find("input").off("ifToggled", getFilesInfo);
   $("#resolution-filters").find("input").off("ifToggled", getFilesInfo);
-  $("#extent-filters").find("input").off("ifToggled", getFilesInfo);
+  // $("#extent-filters").find("input").off("ifToggled", getFilesInfo);
 
 
   // Select/De-select all option in model filter
@@ -157,8 +159,27 @@ function deleteTileValue(){
 }
 
 // function changeMap2(evt){
-
+	// console.log($(evt.target).attr("id"))
 // }
+
+/*function myFunction(e,s){
+	if(s=="scenarios"){
+		sectionMod="scenarios[]"
+	}else if(s=="model"){
+		sectionMod="model[]"
+	}else if(s=="formats"){
+		sectionMod="formats[]"
+	}else if(s=="period"){
+		sectionMod="period[]"
+	}else if(s=="variables"){
+		sectionMod="variables[]"
+	}else{
+		sectionMod=s
+	}
+	$("[name='"+sectionMod+"']").iCheck('uncheck');
+	$("#"+e).remove(); 
+	return false;
+}*/
 
 function changeMap(evt){
   var filterValues= $(evt.target).attr("id")
@@ -168,8 +189,55 @@ function changeMap(evt){
   var model = getArrayValues( $("input[name='model\\[\\]']:checked") );
   var period = getArrayValues( $("input[name='period\\[\\]']:checked") ); 
   var section = $(evt.target).attr("name");
-  
-  //console.log(filterValues,section,extentValue)
+  var filter = $("#filters-selected");
+
+
+/*
+	filters=[]	
+	if(getUserSelections($(evt.target).attr("name")).extendId!=null & getUserSelections($(evt.target).attr("name")).extendId!=""){	
+	filters.push("extent")
+	}
+	if(getUserSelections($(evt.target).attr("name")).filesetId!=null & getUserSelections($(evt.target).attr("name")).filesetId!=""){	
+	filters.push("fileSet")
+	}
+	if(getUserSelections($(evt.target).attr("name")).formatId!=null & getUserSelections($(evt.target).attr("name")).formatId!=""){	
+	filters.push("formats")
+	}
+	if(getUserSelections($(evt.target).attr("name")).modelId!=null & getUserSelections($(evt.target).attr("name")).modelId!=""){	
+	filters.push("model")
+	}
+	if(getUserSelections($(evt.target).attr("name")).periodId!=null & getUserSelections($(evt.target).attr("name")).periodId!=""){	
+	filters.push("period")
+	}
+	if(getUserSelections($(evt.target).attr("name")).resolutionId!=null & getUserSelections($(evt.target).attr("name")).resolutionId!=""){	
+	filters.push("resolution")
+	}
+	if(getUserSelections($(evt.target).attr("name")).scenarioId!=null & getUserSelections($(evt.target).attr("name")).scenarioId!=""){	
+	filters.push("scenarios")
+	}
+	if(getUserSelections($(evt.target).attr("name")).variableId!=null & getUserSelections($(evt.target).attr("name")).variableId!=""){	
+	filters.push("variables")
+	}
+	if(getUserSelections($(evt.target).attr("name")).tileName!=null & getUserSelections($(evt.target).attr("name")).tileName!=""){	
+	filters.push("tileName")
+	}
+	// $(".fragment").remove();
+	for(var i = 0; i < filters.length; i++){
+		sectionMod=filters[i]
+		filerSelID='"filterSel-'+sectionMod+'"'
+		sec='"'+filters[i]+'"'	
+		var element = evt.target;
+		if($(element).attr("checked") == "checked"){
+			if($("#filterSel-"+sectionMod).length == 0  ){
+				addFilter="<div class='fragment' id="+filerSelID+" ><span class='closeWin' id='"+sectionMod+"' onclick='myFunction("+filerSelID+","+sec+")'><label id='LabelX'>x</label></span><label id='LabelID'>"+sectionMod+"</label> </div>"
+				$("#filters-selected").append(addFilter);
+			}
+		}else{
+			// $("#filterSel-"+sectionMod).remove();
+		}	
+	}
+	
+  */
   if(filterValues== "extent-2" || extentValue== 2){
 	if(!$("#tile_name").val() && !variables && !scenarios && !model && !period){
 		loadKmlOnMap();
@@ -257,7 +325,7 @@ function selectAllModelOptionsEvent(evt){
 
 function getFilesInfo(evt){
   var filterValues = getUserSelections($(evt.target).attr("name"));
-  // console.log(filterValues.filesetId)
+  // console.log(filterValues)
   // Hide the help icon 
   
 	if(filterValues.filesetId ==4 && filterValues.extendId==2){
@@ -443,8 +511,6 @@ function getUserSelections(filterName){
     section: filterName
   }
   
-    // console.log(data)
-
   return data;
 }
 

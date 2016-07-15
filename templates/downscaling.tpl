@@ -1,4 +1,4 @@
-{include file='head.tpl' jsIncludes=['jquery', 'downscaling'] pageTitle="Spatial Downscaling Methods - CCAFS Climate" pageDescription="Statistically downscaled future climate projections from IPCC assessment reports." keywords="downscaling,projections,climate change,high resolution,IPCC,CCAFS"}
+{include file='head.tpl' jsIncludes=['jquery', 'downscaling'] pageTitle="Downscaling Methods - CCAFS Climate" pageDescription="Statistically downscaled future climate projections from IPCC assessment reports." keywords="downscaling,projections,climate change,high resolution,IPCC,CCAFS"}
 {include file='header.tpl' current="downscaling"}
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_down.gif" />
@@ -59,6 +59,24 @@
                 </a>
             </td>
         </tr>
+    </table>
+	<br>
+    <h3>Spatial Dissagregation</h3>
+    <hr>
+	<br>
+    <table id="methods">
+        <tr>
+            <td>
+                <a href="/spatial_disaggregation/" >
+                    <div id="section">
+                        <img src="{$smarty.const.SMARTY_IMG_URI}/submenu-06.png" /> 
+                    </div>
+                </a>
+            </td>
+            <td>
+
+            </td>
+        </tr>	
     </table>
 </div>
 

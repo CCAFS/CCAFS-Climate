@@ -39,6 +39,7 @@ Tabla user columna access_level:
 	if (isset($_REQUEST['sort'])){$sort = (isset($_POST['sort']) ? $_POST['sort'] : $_GET['sort']);}
 	if (isset($_REQUEST['dir'])){$dir = (isset($_POST['dir']) ? $_POST['dir'] : $_GET['dir']);}
 	if (isset($_REQUEST['query'])){$query = $_REQUEST["query"];}
+	if (isset($_REQUEST['spec'])){$spec = $_REQUEST["spec"];}else{$spec =null;}
 	
 	$Cond = isset($_REQUEST['condit']) ? $_REQUEST['condit'] : '';
 	if (isset($_REQUEST['children'])){$children = $_REQUEST["children"];}
@@ -1089,7 +1090,7 @@ if($type==18){
 		$sql_tabla ="SELECT id_0 as id, name_0 as name FROM gadm_lev1 group by id_0,name_0 order by name_0 ASC;";	
 	}
 	if($idCond==11){ // State
-		$sql_tabla ="SELECT id_1 as id, name_1 as name FROM gadm_lev1 group by id_1,name_1 order by name_1 ASC;";	
+		$sql_tabla ="SELECT id_1 as id, name_1 as name FROM gadm_lev2 group by id_1,name_1 order by name_1 ASC;";	
 	}
 	if($idCond==12){ // Municipality
 		$sql_tabla ="SELECT id_2 as id, name_2 as name FROM gadm_lev2 group by id_2,name_2 order by name_2 ASC;";	
@@ -1498,10 +1499,13 @@ if($type==29){
 	// $whereStation = "";
 	
 	$statList=json_decode($_REQUEST["listStatSel"]);
-	
+
 	if (isset($statList) && $statList != "") {
-		
-	  $whereStation = " AND s.id IN (" . implode(",",$statList).")";
+		if($spec){
+			$whereStation = " AND s.id IN (" .$statList.")";
+		}else{
+			 $whereStation = " AND s.id IN (" . implode(",",$statList).")";
+		}
 	  // print_r($whereStation);
 	}	
 	
@@ -1511,7 +1515,7 @@ if($type==29){
 		where TRUE $whereStation and s.ctrl_quali=2 group by q.name, q.description;";	
 		//st_intersects(s.geom , ST_GeomFromText('$wkt',4326));	";	
 		
-
+// echo $sql_tabla;
 
 	$result = pg_query($dbcon, $sql_tabla);
 

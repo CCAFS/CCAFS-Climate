@@ -1,11 +1,20 @@
 <nav id="main-menu">
   <ul id="navlist">
     <li {if $current == 'home'}class="current"{/if}><a href="/">Home</a></li>
-    <li {if $current == 'downscaling'}class="current"{/if}><a href="/spatial_downscaling/">Spatial Downscaling</a></li>
-    <li {if $current == 'dissagregation'}class="current"{/if}><a href="/spatial_disaggregation/">Spatial Dissagregation</a></li>
+    <!--<li {if $current == 'methods'}class="current dropdown"{else}class="dropdown"{/if}><a href="/methods/">Methods</a>
+      <ul class="sub-menu">
+        <li {if $current == 'downscaling'}class="current"{/if}><a href="/spatial_downscaling/">Spatial Downscaling</a></li>
+        <li {if $current == 'dissagregation'}class="current"{/if}><a href="/spatial_disaggregation/">Spatial Dissagregation</a></li>
+        <li><a href="/bias_correction/">Bias Correction</a></li>
+      </ul>	
+	</li>-->
+    <!--<li {if $current == 'downscaling'}class="current"{/if}><a href="/spatial_downscaling/">Spatial Downscaling</a></li>
+    <li {if $current == 'dissagregation'}class="current"{/if}><a href="/spatial_disaggregation/">Spatial Dissagregation</a></li>-->
+    <li {if $current == 'downscaling'}class="current"{/if}><a href="/downscaling/">Downscaling</a></li>
+    <li {if $current == 'dissagregation'}class="current"{/if}><a href="/bias_correction/">Bias Correction</a></li>	
     <li {if $current == 'data'}class="current dropdown"{else}class="dropdown"{/if}><a href="/data/">Data</a>
       <ul class="sub-menu">
-        <li><a href="/data/">Spatial downscaling</a></li>
+        <li><a href="/data_spatial_downscaling/">Spatial downscaling</a></li>
         <li><a href="/data_bias_corrected/">Bias Correction</a></li>
         <li><a href="/weather_stations/">Weather Stations</a></li>
       </ul>
