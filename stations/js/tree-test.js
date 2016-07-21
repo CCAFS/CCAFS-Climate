@@ -6815,8 +6815,8 @@ var groupByRegion = {
 											Ext.getCmp('mapPanelID').setHeight(0)
 											Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
 											tabs.setActiveTab('graphic_tab');
-											var qc = Ext.getCmp('qcCmbGrapID').getValue()
-											generateGraps(selectionID,cmbPeriod.getValue(),'ALL',qc)
+											// var qc = Ext.getCmp('qcCmbGrapID').getValue()
+											generateGraps(selectionID,cmbPeriod.getValue(),'ALL','ALL')
 											
 										}else{
 											// Ext.Msg.alert('Login Failed!',"Sorry, a user with this login and/or e-mail address already exist."); 
