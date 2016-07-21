@@ -117,8 +117,13 @@ span.inputs-ac.selected ~ article{
 }
 
 .inputs-acf span.inputs-ac.selected ~ article.ac-large{
-    height: 100px;
-    padding-top: 10px;
+    height: 105px;
+    padding-top: 2px;
+}
+
+.inputs-acf span.inputs-ac.selected ~ article.ac-large div{
+	font-size: 11px;
+	padding-top: 2px;
 }
 
 span.inputs-ac.selected ~ article.ac-large{

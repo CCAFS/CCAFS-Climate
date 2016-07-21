@@ -22,8 +22,13 @@ Ext.application({
             expires: new Date(new Date().getTime()+(1000*60*60*24*7)) //7 days from now
         }));
 
-        var map = new OpenLayers.Map({});
-        
+        var map = new OpenLayers.Map('map',{allOverlays: true});
+		var ghyb = new OpenLayers.Layer.Google(
+			"Google Hybrid",
+			{type: google.maps.MapTypeId.HYBRID, numZoomLevels: 22, visibility: false}
+		);
+ 
+ 
         var wms = new OpenLayers.Layer.WMS(
             "OpenStreetMap WMS",
             "http://ows.terrestris.de/osm/service?",
@@ -36,12 +41,17 @@ Ext.application({
             }
         );
         
-        map.addLayers([wms]);
-        
+        map.addLayers([ghyb]);
+ 
+    map.setCenter(new OpenLayers.LonLat(10.2, 48.9).transform(
+        new OpenLayers.Projection("EPSG:4326"),
+        map.getProjectionObject()
+    ), 5); 
+	
         mappanel = Ext.create('GeoExt.panel.Map', {
             title: 'The GeoExt.panel.Map-class',
             map: map,
-            center: '12.3046875,51.48193359375',
+            // center: new OpenLayers.LonLat(10.2, 48.9).transform(new OpenLayers.Projection("EPSG:4326"),map.getProjectionObject()),
             zoom: 6,
             stateful: true,
             stateId: 'mappanel',

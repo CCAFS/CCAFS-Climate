@@ -51,7 +51,9 @@
               <input type="text" id="lat" name="lat" value="">
               <label for="lon">Longitude</label>
               <input type="text" id="lon" name="lon" value="">
+			  <div> *Get coordinates from the map or enter</div>
             </article>
+			
           </div>
 
           <div id="fileSet-filters" class="inputs-ac"> 
