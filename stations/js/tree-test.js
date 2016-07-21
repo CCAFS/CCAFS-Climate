@@ -7440,13 +7440,13 @@ var groupByRegion = {
 														tooltip:'zoomExtent to ALL',
 														icon   : iconGridzoomExtentALL,//iconCls:'add',
 														handler: onZoomExtentALL 
-													}*/,{
+													},{
 														itemId: 'idExpand',
 														text:'Expand all',
 														tooltip:'Expand all',
 														iconCls:iconGridExpand,
 														handler: expand 
-													},{
+													}*/,{
 													
 														itemId: 'idstatistic',
 														text:'Statistics',
@@ -7478,7 +7478,7 @@ var groupByRegion = {
 													
 													Ext.getCmp('mainTableID').add(gridRegion);
 													gridRegion.down('#numRecords').setText('Records: ' + countRow);
-													gridRegion.down('#numRecordsSelected').setText('Selected: ' + 0);
+													// gridRegion.down('#numRecordsSelected').setText('Selected: ' + 0);
 													Ext.getCmp('mainTableID').expand()
 													
 													// Ext.DomHelper.append(document.body, {
