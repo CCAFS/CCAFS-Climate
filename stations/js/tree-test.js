@@ -8009,7 +8009,7 @@ var groupByRegion = {
 																copyrightN = rec.get('copyright');
 																if (copyrightN == 'Free') {
 																
-																	varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
+																	// varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
 																	var arrayvar =new Array() //varlist.split(',');
 																	
 																	for(var i = 0; i < varstore.getCount(); i++) {
@@ -8160,7 +8160,7 @@ var groupByRegion = {
 																	tabs.setActiveTab('graphic_tab');
 																	
 																	// console.log(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
-																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()),'raw')
+																	generateGraps(selectionID,cmbPeriod.getValue(),"ALL",'raw')
 																}else{
 																	winInfo=Ext.MessageBox.show({
 																	   title: 'Information',
