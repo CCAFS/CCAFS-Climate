@@ -155,7 +155,7 @@ Ext.override(Ext.grid.GridPanel, {
 				}
 			}
 		});
-		
+			
 		mapPanel = Ext.create('GeoExt.panel.Map', {
 			id: 'mapPanelID',
             border: true,
@@ -1027,9 +1027,16 @@ Ext.override(Ext.grid.GridPanel, {
 				type: 'json',
 				root: 'data'
 			}
-		}
+		},
+		 filter: function(filters, value) {
+				Ext.data.Store.prototype.filter.apply(this, [
+					filters,
+					value ? new RegExp(Ext.String.escapeRegex(value), 'i') : value
+				]);
+			}		
 	});	
 	
+
 	var stateCmb = Ext.create('Ext.form.field.ComboBox', {
         fieldLabel: 'State',
         displayField: 'label',
@@ -1041,6 +1048,8 @@ Ext.override(Ext.grid.GridPanel, {
         queryMode: 'local',
         typeAhead: true,	
 		disabled: true,
+		// enableRegEx: true,
+		// anyMatch: true, 
 		listeners: {
 			select:{fn:function(combo, value) {
 				var storecity = Ext.getCmp('cityCmbID');  
@@ -1063,7 +1072,13 @@ Ext.override(Ext.grid.GridPanel, {
 				type: 'json',
 				root: 'data'
 			}
-		}
+		},
+		 filter: function(filters, value) {
+				Ext.data.Store.prototype.filter.apply(this, [
+					filters,
+					value ? new RegExp(Ext.String.escapeRegex(value), 'i') : value
+				]);
+			}		
 	});	
 	var cityCmb = Ext.create('Ext.form.field.ComboBox', {
 		fieldLabel: 'City',
@@ -1075,7 +1090,8 @@ Ext.override(Ext.grid.GridPanel, {
 		store: cityStore,
 		queryMode: 'local',
 		typeAhead: true	,
-		disabled: true
+		disabled: true,
+		enableRegEx: true
 
 	});	
 	
@@ -2683,7 +2699,8 @@ var bton_sign_Up = new Ext.Button({
 		}
 	}	
 	var myMask = new Ext.LoadMask(Ext.getCmp('mapPanelID'), {msg:"Please wait..."});
-	
+
+
 var groupByRegion = {
         xtype: 'fieldset',
         title: 'Search by region   '+ '<img id="help_toolip" class="tooltipIcon" src='+icons+infoB+' data-qtip="'+toolip_groupByRegion+'" />',//<span data-qtip="hello">First Name</span>  
@@ -2750,6 +2767,7 @@ var groupByRegion = {
 							Ext.getCmp('gridRegionID').destroy();
 						}						
 						if(country){
+							clusters.setVisibility(false)
 							Ext.Ajax.request({ // PINTA EN EL MAPA LA REGION
 								url : 'php/Geo_statByregion-test.php' , 
 								params : { type:1,country : country, state:state, municip:municip},
@@ -3386,6 +3404,12 @@ var groupByRegion = {
 			},{
 				text: 'Reset',
 				handler: function(){
+					var storecity = Ext.getCmp('cityCmbID');  
+					var storestate = Ext.getCmp('stateCmbID');  
+					storecity.disable();	
+					storestate.disable();	
+					
+					clusters.setVisibility(true)
 					if(Ext.getCmp('popupID')){
 						Ext.getCmp('popupID').close()
 					}			
@@ -3532,6 +3556,7 @@ var groupByRegion = {
 							Ext.getCmp('gridRegionID_1').destroy();
 						}						
 						if(getStat){
+							clusters.setVisibility(false)
 							Ext.Ajax.request({ // PINTA EN EL MAPA LAS ESTACIONES INTERCEPTADAS
 								url : 'php/Geo_statByregion-test.php' , 
 								params : {type:9,getStat:getStat,radioCh:radioCh},
@@ -4321,6 +4346,7 @@ var groupByRegion = {
 			},{
 				text: 'Reset',
 				handler: function(){
+					clusters.setVisibility(true)
 					if(Ext.getCmp('popupID')){
 						Ext.getCmp('popupID').close()
 					}				
@@ -4783,6 +4809,7 @@ var groupByRegion = {
 
 							}	
 							if(checkCond.length==0){
+								clusters.setVisibility(false)
 								myAjax.request({ // PINTA EN EL MAPA LAS ESTACIONES INTERCEPTADAS
 									url : 'php/Geo_statByregion-test.php' , 
 									params : { type:19,condit : cond, children:Ext.encode(children)},
@@ -5566,6 +5593,7 @@ var groupByRegion = {
 					text:'Cancel',
 					icon: icons+'decline.png',
 					handler: function(){
+						clusters.setVisibility(true)
 						Ext.LoadMask.override({    listeners: {
 								beforedestroy: function() {
 									this.hide();
@@ -5991,7 +6019,7 @@ var groupByRegion = {
 		// ));
 		mapPanel.map.addControl(new OpenLayers.Control.MousePosition());
 		
-// ############################################## POPUP IDENTIFY ##############################################################################################################			
+// ################################################################# POPUP IDENTIFY ##############################################################################################################			
 
 		
 		mapPanel.map.addLayer(locationLayer);
@@ -6026,7 +6054,7 @@ var groupByRegion = {
 
 		
 		function createPopupOne(feature,myFeatyures) {
-
+			
 			selIds=new Array()
 			selname=new Array()
 			for(var i = 0; i < myFeatyures.length; i++) {
@@ -6774,8 +6802,8 @@ var groupByRegion = {
 														var idx = tabs.items.indexOf(actTab);
 														// actTabId=parseInt((actTab.title).match(/\d+/)[0])
 														var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
-														var qc = Ext.getCmp('qcCmbGrapID').getValue()
-														generateGraps(selectionID,idPeriod,"ALL",qc)
+														// var qc = Ext.getCmp('qcCmbGrapID').getValue()
+														generateGraps(selectionID,idPeriod,"ALL","ALL")
 
 													}
 												}
@@ -9128,6 +9156,8 @@ var groupByRegion = {
 			toggleHandler: function(btn, pressed){
 				if(pressed==true){
 					selectHover.activate();
+					// mapPanel.map.removeControl(selectFeature); // 
+					// selectFeature.deactivate()					
 				}else{
 					layerTempSel.destroyFeatures();
 					selectHover.deactivate();

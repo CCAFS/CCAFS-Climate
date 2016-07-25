@@ -1575,11 +1575,12 @@ if($type==1){
 
 if($type==2 or $type==9  or $type==19 or $type==21  or $type==26){
 	while($line = pg_fetch_assoc($result)){
+		$line["vacio"] = "";
+		// print_r($line);
 		$feature = array(
 						'geometry' => json_decode($line['st_asgeojson'],true),
 						'properties' => $data[]=$line,
 						'id' => $i++
-
 					);
 		array_push($geojson['features'],$feature);
 	}

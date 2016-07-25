@@ -1003,7 +1003,8 @@ Ext.define('Ext.form.field.ComboBox', {
         // Querying by a string...
         if (queryString || !queryPlan.forceAll) {
             me.queryFilter.disabled = false;
-            me.queryFilter.setValue(me.enableRegEx ? new RegExp(queryString) : queryString);
+            me.queryFilter.setValue(me.enableRegEx ? new RegExp(queryString) : queryString); // old
+			// me.queryFilter.setValue(me.enableRegEx ? new RegExp(queryString, me.caseSensitive ? '' : 'i') : queryString);
         }
 
         // If forceAll being used, or no query string, disable the filter
