@@ -273,7 +273,7 @@ label.inputs-acf {
 }
 
 #bloc-search {
-    margin-top: 15px;
+    margin-top: 10px;
     color: #cd0a0a;  /* #555*/
     font-weight: 300;
     position: inherit;
@@ -283,6 +283,67 @@ label.inputs-acf {
 	font-size: 12px;
     /* box-shadow: 1px 1px 8px #A7A7A7; */
 }
+/*##########################################################################################*/
+/*
+#bloc-search button {
+  background: #2a313a;
+  background-image: -webkit-linear-gradient(top, #2a313a, #8b8e8f);
+  background-image: -moz-linear-gradient(top, #2a313a, #8b8e8f);
+  background-image: -ms-linear-gradient(top, #2a313a, #8b8e8f);
+  background-image: -o-linear-gradient(top, #2a313a, #8b8e8f);
+  background-image: linear-gradient(to bottom, #2a313a, #8b8e8f);
+  -webkit-border-radius: 6;
+  -moz-border-radius: 6;
+  border-radius: 6px;
+  -webkit-box-shadow: 2px 2px 3px #bdb9bd;
+  -moz-box-shadow: 2px 2px 3px #bdb9bd;
+  box-shadow: 2px 2px 3px #bdb9bd;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 13px;
+  padding: 8px 14px 8px 14px;
+  text-decoration: none;
+}
+
+#bloc-search button:hover {
+  background: #a8a6a8;
+  background-image: -webkit-linear-gradient(top, #a8a6a8, #9ea1a3);
+  background-image: -moz-linear-gradient(top, #a8a6a8, #9ea1a3);
+  background-image: -ms-linear-gradient(top, #a8a6a8, #9ea1a3);
+  background-image: -o-linear-gradient(top, #a8a6a8, #9ea1a3);
+  background-image: linear-gradient(to bottom, #a8a6a8, #9ea1a3);
+  text-decoration: none;
+}
+*/
+#bloc-search button{
+	cursor: pointer;
+    border: 0; 
+    background: #2a313a;
+    color: #fff;
+    padding: 5px 12px 5px 8px; /*padding: 4px 14px 4px 14px;*/
+    border-radius: 4px;
+    float: right;
+	border: solid #ffffff 1px;
+	box-shadow: 2px 3px 3px #bdb9bd;
+}
+#bloc-search button:hover {
+    background-color: #8eb9d4; /*#615D5D;*/
+}
+#bloc-search span.icon {
+    background: url(../images/run.png) no-repeat;
+    float: left;
+    width: 16px;
+    height: 16px;
+}
+
+#bloc-search .btn-txt{
+    float: left;
+	padding-left: 2px;
+	font-size: 16px;
+}
+
+/*##########################################################################################*/
+
 
 #bloc-point {
     margin-top: 15px;
@@ -292,20 +353,6 @@ label.inputs-acf {
     width: 240px;
     float: left;
 }
-
-#bloc-search button{
-	cursor: pointer;
-    border: 0; 
-    background: #2a313a;
-    color: #fff;
-    padding: 4px 14px 4px 14px;
-    border-radius: 4px;
-    float: right;
-}
-#bloc-search button:hover {
-    background-color: #615D5D;
-}
-
 
 .data .help_icon {
     display: none;

@@ -24,6 +24,10 @@
     <table>
         <tbody>
           <tr>
+            <th class="var">Order Number</th>
+            <td class="val">{$order}</td>
+          </tr>		
+          <tr>
             <th class="var">Geographic location</th>
             <td class="val">Lon: {$lon}, Lat: {$lat}</td>
           </tr>
@@ -105,7 +109,7 @@
       <input type="email" class="emailIcon" name="email_ver" id="email_ver">
       <br>
       <div class="setCookieDesc">
-        CCAFS will not share your email address with anyone. The email address will not be used for any purpuse other than communicating order status
+        CCAFS-Climate will not share your email address with anyone. The email address will not be used for any purpuse other than communicating order status
       </div>   
       <br>   
       <button id="download-button-bottom" class="download-button" type="submit" >SUBMIT ORDER</button>

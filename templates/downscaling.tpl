@@ -61,6 +61,7 @@
         </tr>
     </table>
 	<br>
+	<!--
     <h3>Spatial Dissagregation</h3>
     <hr>
 	<br>
@@ -77,7 +78,7 @@
 
             </td>
         </tr>	
-    </table>
+    </table> -->
 </div>
 
 {include file='footer.tpl'}

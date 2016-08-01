@@ -10,6 +10,23 @@ $(document).ready(function() {
 //    isRange : true
 //});
 
+
+   var helpIcon2 = $("#help_icon_period");
+  $(helpIcon2).attr("title", "The interval of years of historical and future period should be equal");
+  $(helpIcon2).tipTip({
+	activation: "click",
+	fadeOut:100,
+	keepAlive: true,
+	maxWidth: "400px",
+	defaultPosition: "right"
+  }); 
+  
+  $('#help_icon_period').click(function () {
+	// console.log(helpIcon2.tipTip())
+  });
+
+  
+
 $('#button-file').click(function () {
     $("input[type='file']").trigger('click');
 })
@@ -58,7 +75,7 @@ $("#period").ionRangeSlider({
 $("#periodh").ionRangeSlider({
     type: "double",
     min: 1980,
-    max: 2010,
+    max: 2005,
     from: 1980,
     to: 1990,
 	// max_interval:15,
@@ -406,8 +423,7 @@ function getFilesInfo(evt) {
   if ($(evt.target).parent().prev().hasClass("help_icon")) {
     $(evt.target).parent().prev().hide();
   }
- 
- 
+  
   $.ajax({
     type: "POST",
     dataType: "json",

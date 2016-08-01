@@ -35,6 +35,8 @@ and open the template in the editor.
 
 .chkmsg {
   font-size: 12px;
+	padding-right: 177px;
+      margin-top: 0px;
 }
 
 .ui-tooltip {
@@ -42,11 +44,13 @@ and open the template in the editor.
 }
 
 .buttons {
-  width: 50%;
-  float:left;
-  /*margin-top: 30px;*/
-  min-height: 50px;
-  text-align: left;
+    /* width: 50%; */
+    float: right;
+    padding-top: 12px;
+    /* padding-right: 0px; */
+    /* margin-top: 30px; */
+    /* min-height: 50px; */
+    /* text-align: left; */
 }
 
 .buttons-c {
@@ -72,7 +76,7 @@ and open the template in the editor.
 }
 
 .modal-first {
-  float:left;
+    /* float: left; */
 }
 
 .modal-whatis {
@@ -242,7 +246,7 @@ and open the template in the editor.
 .profiles-container {
   width: 100%;
   float:left;
-  padding-bottom: 30px;
+  padding-bottom: 5px;
 }
 
 .icon-detail-container {
@@ -326,4 +330,8 @@ and open the template in the editor.
 table.profile-detail_table  td, th{
 	padding: 0px 15px 0px;
 	vertical-align: top;
+}
+.moreInfo{
+    margin-bottom: 0px;
+	padding-right: 18px;
 }

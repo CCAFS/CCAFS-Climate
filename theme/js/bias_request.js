@@ -11,7 +11,7 @@ $(document).ready(function() {
       email:
               {
                 required: "Please insert a correct email",
-                equalTo: "Email must be equal"
+                equalTo: "Please enter the same email."//"Email must be equal"
               }
 
     }}

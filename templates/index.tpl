@@ -6,34 +6,38 @@
 	  <table id="sections" align="centre">
 		<tbody>
 		  <tr>
-			<!--<td>
-			  <a href="/methods/">
-				<div id="section">
-				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_methods.png" />
-				</div>
-			  </a>
-			</td>-->
-			<td>
-			  <a href="/downscaling/">
-				<div id="section">
-				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/menu_index-05.png">
-				</div>
-			  </a>
-			</td>			
-			<td>
-			  <a href="/bias_correction/">
-				<div id="section">
-				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/menu_index-09.png">
-				</div>
-			  </a>
-			</td>
 			<td>
 			  <a href="/data/">
 				<div id="section">
 				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_data.png">
 				</div>
 			  </a>
+			</td>		  
+	  
+			<td>
+			  <a href="/methods/">
+				<div id="section">
+				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/menu-09.png" />
+				</div>
+			  </a>
 			</td>
+			<!--
+			<td>
+			  <a href="/bias_correction/">
+				<div id="section">
+				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/menu_index-09.png">
+				</div>
+			  </a>
+			</td>				
+			<td>
+			  <a href="/downscaling/">
+				<div id="section">
+				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/menu_index-05.png">
+				</div>
+			  </a>
+			</td>-->			
+
+
 			<td>
 			  <a href="/documentation/">
 				<div id="section">
@@ -173,25 +177,22 @@
     </div>	
 	
 	
-
-
-	<div class="modal-first modal-whoare">
-
-      <p class="chkmsg"><input type="checkbox" id="chk_showmsg">&nbsp;Don't show this message again</p>
-    </div>	
+	<div>
+		<div id="info" class="left">
+		  <p class="moreInfo">For more information on CCAFS-Climate, visit the <a href="/about/">About</a> page.</p>
+		  <p class="chkmsg"><input type="checkbox" id="chk_showmsg">&nbsp;Don't show this message again</p>
+		</div>
+	
+		<div class="buttons">
+		  <div class="buttons-c">
+			<a id="goback1" class="gotoclimate" style="display:none">Back</a>
+			<a id="goback" class="gotoclimate" style="display:none">Back</a>
+			<a id="gotoclimate" class="gotoclimate">Return to Website</a>
+		  </div>
+		</div>
+	 </div>
 	
   </div>
-  <div>
-    <div id="info" class="left">
-      <p >For more information on CCAFS-Climate, visit the <a href="/about/">About</a> page.</p>
-    </div>
-    <div class="buttons">
-      <div class="buttons-c">
-        <a id="goback1" class="gotoclimate" style="display:none">Back</a>
-        <a id="goback" class="gotoclimate" style="display:none">Back</a>
-        <a id="gotoclimate" class="gotoclimate">Return to Website</a>
-      </div>
-    </div>
-  </div>
+
 </div>
 {include file='footer.tpl'}
