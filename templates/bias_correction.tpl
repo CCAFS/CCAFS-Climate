@@ -1,7 +1,7 @@
 {include file='head.tpl' jsIncludes=['jquery', 'dissagregation'] pageTitle="Bias Correction - CCAFS Climate" pageDescription="Spatially disaggregated future climate projections from all IPCC assessment reports." keywords="IPCC,disaggregated,climate change,CMIP,projections,high resolution"}
 {include file='header.tpl' current="dissagregation"}
 <div id="subheader-image">
-    <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_bias_correction.gif" />
+    <img src="{$smarty.const.SMARTY_IMG_URI}/header_bc_data_cinta.gif" />
 </div>
 <div id="content" class="bias_correction">
     <h3>Bias-Correction </h3>
