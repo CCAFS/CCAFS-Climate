@@ -16,9 +16,10 @@
 				graphicWidth: graphicSize,
 				// graphicYOffset: -24,									
 				fillColor: "#99ccff",
-				// label:"${id}",
+				label:"${label}",
 				fontFamily: "Trebuchet MS",
 				fontWeight: "bold",
+				fontSize: "11px",
 				strokeColor: "#00FF00",
 				strokeWidth: 3,
 				labelOutlineColor: "white",
@@ -50,6 +51,18 @@
 
 		})
 	];	
+	
+
+	contextLabels= {}	
+		
+	viewLabel=function(feature) {
+		if(feature.layer.map.getZoom() < 7) {
+			return feature.attributes.vacio
+		}else{return feature.attributes.code}
+	}	
+	contextLabels["label"]=viewLabel
+
+
 	var layerTempStat = new OpenLayers.Layer.Vector('Search station', {
 		renderers: renderer,
 		styleMap: new OpenLayers.StyleMap({
@@ -61,7 +74,7 @@
 				graphicYOffset: -graphicSize,
 				fillOpacity: 0.2,
 				pointRadius: 10
-			}, {rules: rulesStat})
+			}, {rules: rulesStat,context: contextLabels})
 
 		})
 	});
@@ -113,7 +126,7 @@
 		graphicWidth: 24,
 		graphicYOffset: -24,
 		fillOpacity: 0.1,
-		pointRadius: 10
+		pointRadius: 10,
 	}, {rules: rulesRegion});
 			
 	var layerTempRegion = new OpenLayers.Layer.Vector('Search_region', {'displayInLayerSwitcher':false,

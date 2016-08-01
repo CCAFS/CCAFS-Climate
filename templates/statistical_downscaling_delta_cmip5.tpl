@@ -1,4 +1,4 @@
-{include file='head.tpl' jsIncludes=[] pageTitle="Statistical Downscaling (Delta Method) - CCAFS Climate" pageDescription="Downscaled future climate data using the delta method." keywords="delta method,climate change,downscaling,high resolution,IPCC"}
+{include file='head.tpl' jsIncludes=['jquery'] pageTitle="Statistical Downscaling (Delta Method) - CCAFS Climate" pageDescription="Downscaled future climate data using the delta method." keywords="delta method,climate change,downscaling,high resolution,IPCC"}
 {include file='header.tpl' current="downscaling"}
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_stdown.gif" />
@@ -88,7 +88,7 @@ and their extensions from 1765 to 2300<span class="little"></span></a>
     </ul> 
     </ol>
 <div class="center">
-        <a href="/data.php">
+        <a href="/data_spatial_downscaling/">
             <img width="224" height="75" border="0" id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png">
         </a>
     </div>

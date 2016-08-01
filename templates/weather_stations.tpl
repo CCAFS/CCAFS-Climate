@@ -2,7 +2,7 @@
 {include file='header.tpl' current="data"}
 
 <div id="subheader-image">
-  <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_stations.gif" />
+  <img src="{$smarty.const.SMARTY_IMG_URI}/header_ws_cinta.gif" />
 </div>
 <div id="content" class="documentation">
   <h3>Weather Stations</h3>
@@ -13,10 +13,11 @@
   </div>
   <p>
   <div>
-    <p>The weather stations data distributed here are daily in txt format.
-      Users are prohibited from any commercial, non-free resale, or redistribution without explicit written permission from CCAFS or the data-developing institutions.
-      Users should acknowledge CCAFS as the source used in the creation of any reports, publications, new data sets, derived products, or services resulting from the use of this data set.
-      For commercial access to the data, send requests to <a href="mailto:a.jarvis@cgiar.org">Andy Jarvis</a> at the International Center for Tropical Agriculture (CIAT).
+    <p>
+	The data distributed here are in text file format from weather stations data. CCAFS and its partners have developed this on live query and download interface to provide observational data for 
+	CCAFS/CIAT/Partners related projects. Users are prohibited from any commercial, non-free resale, or redistribution without explicit written permission from CCAFS or the data-developing institutions. 
+	Users should acknowledge CCAFS as the source used in the creation of any reports, publications, new data sets, derived products, or services resulting from the use of this data set. 
+	For commercial access to the data, send requests to <a href="mailto:a.jarvis@cgiar.org">Andy Jarvis</a> at the International Center for Tropical Agriculture (CIAT).
     </p>
   </div>
 

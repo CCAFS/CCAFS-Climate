@@ -35,6 +35,7 @@ $gcmlist = $_REQUEST['model'];
 $statList= $_REQUEST['formats'];
 $file = $_REQUEST['file'];
 $delimit = $_REQUEST['delimitator'];
+$order = $_REQUEST['order'];
 /*$dataset = 'wfd';
 $methBCList = '1';
 $varlist = 'tasmax,pr';
@@ -76,6 +77,7 @@ $statList= '1';*/
 	$vars['gcmlist'] = $gcmlist;
 	$vars['statList'] = $statList;
 	$vars['dataset'] = $dataset;
+	$vars['order'] = $_REQUEST['order'];
 
 
 	$url = "http://gisweb.ciat.cgiar.org/Bc_Downscale/PHPMailer/correctedTest.php";
@@ -107,8 +109,9 @@ $statList= '1';*/
 	'$lat'::text,
 	'$gcmlist'::text,
 	'$statList'::text,
-'$file'::text,
-'$delimit'::text);";
+	'$file'::text,
+	'$delimit'::text,
+	'$order'::text);";
 	$ret = pg_query($dbcon, $sql);
 	if(!$ret){
 	  echo pg_last_error($dbcon);
@@ -122,6 +125,7 @@ $statList= '1';*/
 		$url_file = $files[0]['bc_processing'];
 		$vars['url_file'] = $url_file;
 		$vars['type'] = 2;
+		$vars['order'] = $_REQUEST['order'];
 		
 		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_URL, $url);

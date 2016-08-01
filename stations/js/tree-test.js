@@ -155,7 +155,7 @@ Ext.override(Ext.grid.GridPanel, {
 				}
 			}
 		});
-		
+			
 		mapPanel = Ext.create('GeoExt.panel.Map', {
 			id: 'mapPanelID',
             border: true,
@@ -1027,9 +1027,16 @@ Ext.override(Ext.grid.GridPanel, {
 				type: 'json',
 				root: 'data'
 			}
-		}
+		},
+		 filter: function(filters, value) {
+				Ext.data.Store.prototype.filter.apply(this, [
+					filters,
+					value ? new RegExp(Ext.String.escapeRegex(value), 'i') : value
+				]);
+			}		
 	});	
 	
+
 	var stateCmb = Ext.create('Ext.form.field.ComboBox', {
         fieldLabel: 'State',
         displayField: 'label',
@@ -1041,6 +1048,8 @@ Ext.override(Ext.grid.GridPanel, {
         queryMode: 'local',
         typeAhead: true,	
 		disabled: true,
+		// enableRegEx: true,
+		// anyMatch: true, 
 		listeners: {
 			select:{fn:function(combo, value) {
 				var storecity = Ext.getCmp('cityCmbID');  
@@ -1063,7 +1072,13 @@ Ext.override(Ext.grid.GridPanel, {
 				type: 'json',
 				root: 'data'
 			}
-		}
+		},
+		 filter: function(filters, value) {
+				Ext.data.Store.prototype.filter.apply(this, [
+					filters,
+					value ? new RegExp(Ext.String.escapeRegex(value), 'i') : value
+				]);
+			}		
 	});	
 	var cityCmb = Ext.create('Ext.form.field.ComboBox', {
 		fieldLabel: 'City',
@@ -1075,7 +1090,8 @@ Ext.override(Ext.grid.GridPanel, {
 		store: cityStore,
 		queryMode: 'local',
 		typeAhead: true	,
-		disabled: true
+		disabled: true,
+		enableRegEx: true
 
 	});	
 	
@@ -1173,10 +1189,10 @@ Ext.override(Ext.grid.GridPanel, {
 			if(Ext.getCmp('gridRegionID')){
 				var selection = Ext.getCmp('gridRegionID').getView().getSelectionModel().getSelection();//[0];
 			}			
-			if(Ext.getCmp('gridStatID')){
-				var selection = Ext.getCmp('gridStatID').getView().getSelectionModel().getSelection();//[0];
+			if(Ext.getCmp('gridRegionID_1')){
+				var selection = Ext.getCmp('gridRegionID_1').getView().getSelectionModel().getSelection();//[0];
 			}
-			
+
 			selgrid=new Array()
 			for(var i = 0; i < selection.length; i++) {
 				selgrid.push(Number(selection[i].data.id));
@@ -1316,10 +1332,15 @@ Ext.override(Ext.grid.GridPanel, {
 				Ext.getCmp('tabsID').setHeight(0);
 				Ext.getCmp('mapPanelID').setHeight(0);
 				Ext.getCmp('mainTableID').maxHeight=mainPanelHeight-46;
-				Ext.getCmp('gridRegionID').maxHeight=mainPanelHeight;
-				Ext.getCmp('mainTableID').setHeight(mainPanelHeight);
-				Ext.getCmp('gridRegionID').getView().refresh();
+				if(Ext.getCmp('gridRegionID_1')){
+					Ext.getCmp('gridRegionID_1').maxHeight=mainPanelHeight;Ext.getCmp('gridRegionID_1').setHeight(mainPanelHeight);Ext.getCmp('mainTableID').setHeight(mainPanelHeight);Ext.getCmp('gridRegionID_1').getView().refresh();
+				}else{Ext.getCmp('gridRegionID').maxHeight=mainPanelHeight;Ext.getCmp('mainTableID').setHeight(mainPanelHeight);Ext.getCmp('mainTableID').setHeight(mainPanelHeight);Ext.getCmp('gridRegionID').getView().refresh();}				
+				
+				
+				
 				Ext.getCmp('mainpanelID').doLayout();
+
+				
 				// console.log("fgfgf",Ext.getCmp('mainTableID').maxHeight,mainPanelHeight,Ext.getCmp('gridRegionID').maxHeight)
 			}
 			// var store = gridRegion.getStore();
@@ -2154,6 +2175,10 @@ var bton_sign_Up = new Ext.Button({
 									Ext.getCmp('gridRegionID').getStore().load({ params: { start: 0, limit: 30} });
 									Ext.getCmp('gridRegionID').doLayout();	
 								}
+								if(Ext.getCmp('gridRegionID_1')){
+									Ext.getCmp('gridRegionID_1').getStore().load({ params: { start: 0, limit: 30} });
+									Ext.getCmp('gridRegionID_1').doLayout();	
+								}								
 							}							
 							var login = Ext.create('Ext.FormPanel', {
 								// url:'php/Login.php', 
@@ -2228,7 +2253,10 @@ var bton_sign_Up = new Ext.Button({
 																		Ext.getCmp('gridRegionID').doLayout();	
 																	}
 
-																	
+																	if(Ext.getCmp('gridRegionID_1')){
+																		Ext.getCmp('gridRegionID_1').getStore().load({ params: { start: 0, limit: 30} });
+																		Ext.getCmp('gridRegionID_1').doLayout();	
+																	}																	
 																	Ext.getCmp('btonLoginId').setText('Logout');
 																	// ventana_login.hide();
 																	ventana_login.destroy();
@@ -2607,14 +2635,22 @@ var bton_sign_Up = new Ext.Button({
 	btn_download = function () {
 		if(Ext.getCmp('windownloadID')){
 			Ext.getCmp('windownloadID').destroy();	
-		}		
-		var selectionModel = Ext.getCmp('gridRegionID').getView().getSelectionModel(); 
+		}	
+		
+		if(Ext.getCmp('gridRegionID')){
+				var selectionModel = Ext.getCmp('gridRegionID').getView().getSelectionModel(); 
+		}else if(Ext.getCmp('gridRegionID_1')){
+				var selectionModel = Ext.getCmp('gridRegionID_1').getView().getSelectionModel(); 
+		}
+		
+		
 		var selection = selectionModel.getSelection();
 		records1=selectionModel.getStore().getCount()
 		records2=selection.length
 		listsel=new Array()
 		copyrightN=[]
 		check=""
+		// console.log(Ext.ComponentQuery.query("#status").getValue())
 		if(records2>0 & records2<150){
 			records=records2
 			for(var i = 0; i < records; i++) {
@@ -2663,7 +2699,8 @@ var bton_sign_Up = new Ext.Button({
 		}
 	}	
 	var myMask = new Ext.LoadMask(Ext.getCmp('mapPanelID'), {msg:"Please wait..."});
-	
+
+
 var groupByRegion = {
         xtype: 'fieldset',
         title: 'Search by region   '+ '<img id="help_toolip" class="tooltipIcon" src='+icons+infoB+' data-qtip="'+toolip_groupByRegion+'" />',//<span data-qtip="hello">First Name</span>  
@@ -2720,13 +2757,17 @@ var groupByRegion = {
 							winRegion.destroy();
 						} //winRegion		
 						
+						if(Ext.getCmp('gridRegionID_1')){
+							Ext.getCmp('mainTableID').collapse();
+							Ext.getCmp('gridRegionID_1').destroy();
+							// console.log(Ext.getBody().getViewSize().height*0.3,mainPanelHeight*0.4)
+						}	
 						if(Ext.getCmp('gridRegionID')){
 							Ext.getCmp('mainTableID').collapse();
 							Ext.getCmp('gridRegionID').destroy();
-							// console.log(Ext.getBody().getViewSize().height*0.3,mainPanelHeight*0.4)
-						}	
-					
+						}						
 						if(country){
+							clusters.setVisibility(false)
 							Ext.Ajax.request({ // PINTA EN EL MAPA LA REGION
 								url : 'php/Geo_statByregion-test.php' , 
 								params : { type:1,country : country, state:state, municip:municip},
@@ -2946,14 +2987,14 @@ var groupByRegion = {
 							});
 
 							gridRegion = Ext.create('Ext.grid.Panel', {
-								id: 'gridRegionID',
+								id: 'gridRegionID_1',
 								border: true,
 								// layout: 'fit',
 								forceFit: true,
 								store: gridRegionStore,
-								maxHeight: mainPanelHeight*0.4,//Ext.getBody().getViewSize().height*0.3,
+								// maxHeight: mainPanelHeight*0.4,//Ext.getBody().getViewSize().height*0.3,
 								width: mainPanelWidth,
-								// height:273,
+								height:mainPanelHeight*0.4,
 								// maxHeight: mainPanelHeight*0.4,
 								selType: 'checkboxmodel',
 								autoHeight: true,
@@ -3008,15 +3049,21 @@ var groupByRegion = {
 												selectionID = rec.get('id');
 												statName = rec.get('name');
 												copyrightN = rec.get('copyright');
+												varget = rec.get('variables');
+												// console.log(varget.split(","))
+												varstore=varget.split(",")
 												if (copyrightN == 'Free') {
-													varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
+													varlist="ALL"//(cmbVar.getRawValue()).replace(/\s/g, '')
 													var arrayvar =new Array() //varlist.split(',');
-
-													for(var i = 0; i < varstore.getCount(); i++) {
-														var record = varstore.getAt(i);
-														id=record.get('id')
-														acronym=record.get('acronym')
-														arrayvar.push(acronym)
+										
+													// for(var i = 0; i < varstore.getCount(); i++) {
+													for(var i = 0; i < varstore.length; i++) {
+														// var record = varstore.getAt(i);
+														var record = varstore[i];
+														// id=record.get('id')
+														// acronym=record.get('acronym')
+														// arrayvar.push(acronym)
+														arrayvar.push(record)
 														// console.log(id,acronym)
 													}
 													
@@ -3058,7 +3105,10 @@ var groupByRegion = {
 																var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
 																var qc = Ext.getCmp('qcCmbGrapID').getValue()
 																
-																generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
+																// generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
+																// console.log(selectionID,idPeriod,"ALL",qc)
+																// console.log("hola")
+																generateGraps(selectionID,idPeriod,"ALL",qc)
 
 															}
 														}
@@ -3089,7 +3139,8 @@ var groupByRegion = {
 																// actTabId=parseInt((actTab.title).match(/\d+/)[0])
 																var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
 																var qc = Ext.getCmp('qcCmbGrapID').getValue()
-																generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
+																// generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
+																generateGraps(selectionID,idPeriod,"ALL",qc)
 
 															}
 														}
@@ -3145,7 +3196,8 @@ var groupByRegion = {
 													// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
 													tabs.setActiveTab('graphic_tab');
 													
-													generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()),'raw')
+													// generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()),'raw')
+													generateGraps(selectionID,cmbPeriod.getValue(),"ALL",'raw')
 												}else{
 													winInfo=Ext.MessageBox.show({
 													   title: 'Information',
@@ -3352,13 +3404,19 @@ var groupByRegion = {
 			},{
 				text: 'Reset',
 				handler: function(){
+					var storecity = Ext.getCmp('cityCmbID');  
+					var storestate = Ext.getCmp('stateCmbID');  
+					storecity.disable();	
+					storestate.disable();	
+					
+					clusters.setVisibility(true)
 					if(Ext.getCmp('popupID')){
 						Ext.getCmp('popupID').close()
 					}			
 					drawPolygon.control.deactivate();
-					if(Ext.getCmp('gridRegionID')){
+					if(Ext.getCmp('gridRegionID_1')){
 						Ext.getCmp('mainTableID').collapse();
-						Ext.getCmp('gridRegionID').destroy();	
+						Ext.getCmp('gridRegionID_1').destroy();	
 					}				
 					selectControl.control.unselectAll();
 					tabSearchRegion.getForm().reset();
@@ -3493,7 +3551,12 @@ var groupByRegion = {
 							Ext.getCmp('mainTableID').collapse();
 							Ext.getCmp('gridRegionID').destroy();	
 						}
+						if(Ext.getCmp('gridRegionID_1')){
+							Ext.getCmp('mainTableID').collapse();
+							Ext.getCmp('gridRegionID_1').destroy();
+						}						
 						if(getStat){
+							clusters.setVisibility(false)
 							Ext.Ajax.request({ // PINTA EN EL MAPA LAS ESTACIONES INTERCEPTADAS
 								url : 'php/Geo_statByregion-test.php' , 
 								params : {type:9,getStat:getStat,radioCh:radioCh},
@@ -3763,7 +3826,7 @@ var groupByRegion = {
 								}//								
 								
 							});	
-								btn_download = function () {
+								/*btn_download = function () {
 								var selection = gridRegion.getView().getSelectionModel().getSelection();//[0];
 								selgrid=new Array()
 								for(var i = 0; i < selection.length; i++) {
@@ -3780,7 +3843,7 @@ var groupByRegion = {
 								  css: 'display:none;visibility:hidden;height: 0px;',
 								  src: 'php/dowloaddata.php?qc='+qc+'&station='+Ext.encode(selgrid)+'&'+'country=null'+'&'+'state=null'+'&'+'municip=null'+'&'+'variable='+cmbVar.getValue()//Ext.encode(cmbVar.getValue())
 								});
-							}	
+							}	*/
 
 								cmbVar= Ext.create('Ext.form.field.ComboBox', { 
 								editable: false, 
@@ -3905,7 +3968,8 @@ var groupByRegion = {
 																	var idx = tabs.items.indexOf(actTab);
 																	// actTabId=parseInt((actTab.title).match(/\d+/)[0])
 																	var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
-																	generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
+																	var qc = Ext.getCmp('qcCmbGrapID').getValue()
+																	generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
 
 																}
 															}
@@ -4282,6 +4346,7 @@ var groupByRegion = {
 			},{
 				text: 'Reset',
 				handler: function(){
+					clusters.setVisibility(true)
 					if(Ext.getCmp('popupID')){
 						Ext.getCmp('popupID').close()
 					}				
@@ -4684,6 +4749,10 @@ var groupByRegion = {
 						if(Ext.getCmp('gridRegionID')){
 							Ext.getCmp('mainTableID').collapse();
 							Ext.getCmp('gridRegionID').destroy();	
+						}
+						if(Ext.getCmp('gridRegionID_1')){
+							Ext.getCmp('mainTableID').collapse();
+							Ext.getCmp('gridRegionID_1').destroy();
 						}						
 						// loading status
 						// var myMask = new Ext.LoadMask(Ext.getCmp('mapPanelID'), {msg:"Please wait..."});
@@ -4740,6 +4809,7 @@ var groupByRegion = {
 
 							}	
 							if(checkCond.length==0){
+								clusters.setVisibility(false)
 								myAjax.request({ // PINTA EN EL MAPA LAS ESTACIONES INTERCEPTADAS
 									url : 'php/Geo_statByregion-test.php' , 
 									params : { type:19,condit : cond, children:Ext.encode(children)},
@@ -5155,7 +5225,8 @@ var groupByRegion = {
 																				var idx = tabs.items.indexOf(actTab);
 																				// actTabId=parseInt((actTab.title).match(/\d+/)[0])
 																				var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
-																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
+																				var qc = Ext.getCmp('qcCmbGrapID').getValue()
+																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
 
 																			}
 																		}
@@ -5522,6 +5593,7 @@ var groupByRegion = {
 					text:'Cancel',
 					icon: icons+'decline.png',
 					handler: function(){
+						clusters.setVisibility(true)
 						Ext.LoadMask.override({    listeners: {
 								beforedestroy: function() {
 									this.hide();
@@ -5537,7 +5609,10 @@ var groupByRegion = {
 							Ext.getCmp('mainTableID').collapse();
 							Ext.getCmp('gridRegionID').destroy();	
 						}
-						
+						if(Ext.getCmp('gridRegionID_1')){
+							Ext.getCmp('mainTableID').collapse();
+							Ext.getCmp('gridRegionID_1').destroy();
+						}						
 						if(Ext.getCmp("cmbQueryID")){
 							Ext.getCmp("cmbQueryID").reset();
 							Ext.getCmp("cmbCondID").reset();
@@ -5944,7 +6019,7 @@ var groupByRegion = {
 		// ));
 		mapPanel.map.addControl(new OpenLayers.Control.MousePosition());
 		
-// ############################################## POPUP IDENTIFY ##############################################################################################################			
+// ################################################################# POPUP IDENTIFY ##############################################################################################################			
 
 		
 		mapPanel.map.addLayer(locationLayer);
@@ -5979,7 +6054,7 @@ var groupByRegion = {
 
 		
 		function createPopupOne(feature,myFeatyures) {
-
+			
 			selIds=new Array()
 			selname=new Array()
 			for(var i = 0; i < myFeatyures.length; i++) {
@@ -6018,7 +6093,11 @@ var groupByRegion = {
 								if(Ext.getCmp('gridRegionID')){
 									Ext.getCmp('mainTableID').collapse();
 									Ext.getCmp('gridRegionID').destroy();	
-								}				
+								}	
+								if(Ext.getCmp('gridRegionID_1')){
+									Ext.getCmp('mainTableID').collapse();
+									Ext.getCmp('gridRegionID_1').destroy();
+								}								
 								if(Ext.getCmp('popupID')){
 									Ext.getCmp('popupID').close()
 								}	
@@ -6199,9 +6278,9 @@ var groupByRegion = {
 												// layout: 'fit',
 												forceFit: true,
 												store: gridStatStore,
-												maxHeight: Ext.getBody().getViewSize().height*0.3,
+												// maxHeight: Ext.getBody().getViewSize().height*0.3,
 												width: mainPanelWidth,
-												// height:273,
+												height:mainPanelHeight*0.4,
 												// maxHeight: mainPanelHeight*0.4,
 												selType: 'checkboxmodel',
 												autoHeight: true,
@@ -6282,7 +6361,8 @@ var groupByRegion = {
 																				var idx = tabs.items.indexOf(actTab);
 																				// actTabId=parseInt((actTab.title).match(/\d+/)[0])
 																				var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
-																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
+																				var qc = Ext.getCmp('qcCmbGrapID').getValue()
+																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
 
 																			}
 																		}
@@ -6338,8 +6418,8 @@ var groupByRegion = {
 																	Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
 																	// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
 																	tabs.setActiveTab('graphic_tab');
-																	
-																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+																	var qc = Ext.getCmp('qcCmbGrapID').getValue()
+																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()),qc)
 																}else{
 																	winInfo=Ext.MessageBox.show({
 																	   title: 'Information',
@@ -6722,7 +6802,8 @@ var groupByRegion = {
 														var idx = tabs.items.indexOf(actTab);
 														// actTabId=parseInt((actTab.title).match(/\d+/)[0])
 														var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
-														generateGraps(selectionID,idPeriod,"ALL")
+														// var qc = Ext.getCmp('qcCmbGrapID').getValue()
+														generateGraps(selectionID,idPeriod,"ALL","ALL")
 
 													}
 												}
@@ -6762,8 +6843,8 @@ var groupByRegion = {
 											Ext.getCmp('mapPanelID').setHeight(0)
 											Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
 											tabs.setActiveTab('graphic_tab');
-											
-											generateGraps(selectionID,cmbPeriod.getValue(),'ALL')
+											// var qc = Ext.getCmp('qcCmbGrapID').getValue()
+											generateGraps(selectionID,cmbPeriod.getValue(),'ALL','ALL')
 											
 										}else{
 											// Ext.Msg.alert('Login Failed!',"Sorry, a user with this login and/or e-mail address already exist."); 
@@ -6954,7 +7035,11 @@ var groupByRegion = {
 								if(Ext.getCmp('gridRegionID')){
 									Ext.getCmp('mainTableID').collapse();
 									Ext.getCmp('gridRegionID').destroy();	
-								}				
+								}
+								if(Ext.getCmp('gridRegionID_1')){
+									Ext.getCmp('mainTableID').collapse();
+									Ext.getCmp('gridRegionID_1').destroy();
+								}								
 								if(Ext.getCmp('popupID')){
 									Ext.getCmp('popupID').close()
 								}	
@@ -7135,9 +7220,9 @@ var groupByRegion = {
 												// layout: 'fit',
 												forceFit: true,
 												store: gridStatStore,
-												maxHeight: Ext.getBody().getViewSize().height*0.3,
+												// maxHeight: Ext.getBody().getViewSize().height*0.3,
 												width: mainPanelWidth,
-												// height:273,
+												height:mainPanelHeight*0.4,
 												// maxHeight: mainPanelHeight*0.4,
 												selType: 'checkboxmodel',
 												autoHeight: true,
@@ -7217,7 +7302,8 @@ var groupByRegion = {
 																				var idx = tabs.items.indexOf(actTab);
 																				// actTabId=parseInt((actTab.title).match(/\d+/)[0])
 																				var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
-																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
+																				var qc = Ext.getCmp('qcCmbGrapID').getValue()
+																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
 
 																			}
 																		}
@@ -7273,8 +7359,8 @@ var groupByRegion = {
 																	Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
 																	// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
 																	tabs.setActiveTab('graphic_tab');
-																	
-																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+																	var qc = Ext.getCmp('qcCmbGrapID').getValue()
+																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()),qc)
 																}else{
 																	winInfo=Ext.MessageBox.show({
 																	   title: 'Information',
@@ -7382,13 +7468,13 @@ var groupByRegion = {
 														tooltip:'zoomExtent to ALL',
 														icon   : iconGridzoomExtentALL,//iconCls:'add',
 														handler: onZoomExtentALL 
-													}*/,{
+													},{
 														itemId: 'idExpand',
 														text:'Expand all',
 														tooltip:'Expand all',
 														iconCls:iconGridExpand,
 														handler: expand 
-													},{
+													}*/,{
 													
 														itemId: 'idstatistic',
 														text:'Statistics',
@@ -7420,7 +7506,7 @@ var groupByRegion = {
 													
 													Ext.getCmp('mainTableID').add(gridRegion);
 													gridRegion.down('#numRecords').setText('Records: ' + countRow);
-													gridRegion.down('#numRecordsSelected').setText('Selected: ' + 0);
+													// gridRegion.down('#numRecordsSelected').setText('Selected: ' + 0);
 													Ext.getCmp('mainTableID').expand()
 													
 													// Ext.DomHelper.append(document.body, {
@@ -7726,7 +7812,11 @@ var groupByRegion = {
 								if(Ext.getCmp('gridRegionID')){
 									Ext.getCmp('mainTableID').collapse();
 									Ext.getCmp('gridRegionID').destroy();	
-								}				
+								}	
+								if(Ext.getCmp('gridRegionID_1')){
+									Ext.getCmp('mainTableID').collapse();
+									Ext.getCmp('gridRegionID_1').destroy();
+								}								
 								if(Ext.getCmp('popupID')){
 									Ext.getCmp('popupID').close()
 								}	
@@ -7912,9 +8002,9 @@ var groupByRegion = {
 												// layout: 'fit',
 												forceFit: true,
 												store: gridStatStore,
-												maxHeight: Ext.getBody().getViewSize().height*0.3,
+												// maxHeight: Ext.getBody().getViewSize().height*0.3,
 												width: mainPanelWidth,
-												// height:273,
+												height:mainPanelHeight*0.4,
 												// maxHeight: mainPanelHeight*0.4,
 												selType: 'checkboxmodel',
 												autoHeight: true,
@@ -7947,7 +8037,7 @@ var groupByRegion = {
 																copyrightN = rec.get('copyright');
 																if (copyrightN == 'Free') {
 																
-																	varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
+																	// varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
 																	var arrayvar =new Array() //varlist.split(',');
 																	
 																	for(var i = 0; i < varstore.getCount(); i++) {
@@ -7994,7 +8084,8 @@ var groupByRegion = {
 																				var idx = tabs.items.indexOf(actTab);
 																				// actTabId=parseInt((actTab.title).match(/\d+/)[0])
 																				var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
-																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),Ext.getCmp('qcCmbGrapID').getValue())
+																				var qc = Ext.getCmp('qcCmbGrapID').getValue()
+																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),Ext.getCmp('qcCmbGrapID').getValue(),qc)
 
 																			}
 																		}
@@ -8097,7 +8188,7 @@ var groupByRegion = {
 																	tabs.setActiveTab('graphic_tab');
 																	
 																	// console.log(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
-																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()),'raw')
+																	generateGraps(selectionID,cmbPeriod.getValue(),"ALL",'raw')
 																}else{
 																	winInfo=Ext.MessageBox.show({
 																	   title: 'Information',
@@ -8297,7 +8388,11 @@ var groupByRegion = {
 								if(Ext.getCmp('gridRegionID')){
 									Ext.getCmp('mainTableID').collapse();
 									Ext.getCmp('gridRegionID').destroy();	
-								}				
+								}	
+								if(Ext.getCmp('gridRegionID_1')){
+									Ext.getCmp('mainTableID').collapse();
+									Ext.getCmp('gridRegionID_1').destroy();
+								}								
 								if(Ext.getCmp('popupID')){
 									Ext.getCmp('popupID').close()
 								}	
@@ -8562,7 +8657,8 @@ var groupByRegion = {
 																				var idx = tabs.items.indexOf(actTab);
 																				// actTabId=parseInt((actTab.title).match(/\d+/)[0])
 																				var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
-																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
+																				var qc = Ext.getCmp('qcCmbGrapID').getValue()
+																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
 
 																			}
 																		}
@@ -8649,8 +8745,8 @@ var groupByRegion = {
 																	Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
 																	// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
 																	tabs.setActiveTab('graphic_tab');
-																	
-																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+																	var qc = Ext.getCmp('qcCmbGrapID').getValue()
+																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()),qc)
 																}else{
 																	winInfo=Ext.MessageBox.show({
 																	   title: 'Information',
@@ -8945,6 +9041,10 @@ var groupByRegion = {
 			if(Ext.getCmp('gridRegionID')){
 				Ext.getCmp('mainTableID').collapse();
 				Ext.getCmp('gridRegionID').destroy();	
+			}
+			if(Ext.getCmp('gridRegionID_1')){
+				Ext.getCmp('mainTableID').collapse();
+				Ext.getCmp('gridRegionID_1').destroy();
 			}			
         } 		
 
@@ -9056,6 +9156,8 @@ var groupByRegion = {
 			toggleHandler: function(btn, pressed){
 				if(pressed==true){
 					selectHover.activate();
+					// mapPanel.map.removeControl(selectFeature); // 
+					// selectFeature.deactivate()					
 				}else{
 					layerTempSel.destroyFeatures();
 					selectHover.deactivate();
@@ -9200,6 +9302,10 @@ var groupByRegion = {
 				if(Ext.getCmp('gridRegionID')){
 					Ext.getCmp('mainTableID').collapse();
 					Ext.getCmp('gridRegionID').destroy();	
+				}
+				if(Ext.getCmp('gridRegionID_1')){
+					Ext.getCmp('mainTableID').collapse();
+					Ext.getCmp('gridRegionID_1').destroy();
 				}				
 				getWin = Ext.getCmp('distanceID');
 				if (getWin) {
@@ -9990,6 +10096,10 @@ var groupByRegion = {
 						Ext.getCmp('mainTableID').collapse();
 						Ext.getCmp('gridRegionID').destroy();	
 					}	
+					if(Ext.getCmp('gridRegionID_1')){
+						Ext.getCmp('mainTableID').collapse();
+						Ext.getCmp('gridRegionID_1').destroy();
+					}					
 					// layerTempReg=mapPanel.map.getLayersByName("FindRegion")[0]
 					// if(layerTempReg){mapPanel.map.removeLayer(layerTempReg);}
 					layerTempRegion.destroyFeatures();
@@ -10012,7 +10122,11 @@ var groupByRegion = {
 			if(Ext.getCmp('gridRegionID')){
 				Ext.getCmp('mainTableID').collapse();
 				Ext.getCmp('gridRegionID').destroy();	
-			}	
+			}
+			if(Ext.getCmp('gridRegionID_1')){
+				Ext.getCmp('mainTableID').collapse();
+				Ext.getCmp('gridRegionID_1').destroy();
+			}			
 			if(Ext.getCmp('popupID')){
 				Ext.getCmp('popupID').close()
 			}			
@@ -10255,9 +10369,9 @@ var groupByRegion = {
 								// layout: 'fit',
 								forceFit: true,
 								store: gridStatStore,
-								maxHeight: mainPanelHeight*0.4,//Ext.getBody().getViewSize().height*0.3,
+								// maxHeight: mainPanelHeight*0.4,//Ext.getBody().getViewSize().height*0.3,
 								width: mainPanelWidth,
-								// height:273,
+								height: mainPanelHeight*0.4,
 								// maxHeight: mainPanelHeight*0.4,
 								selType: 'checkboxmodel',
 								autoHeight: true,
@@ -10336,7 +10450,35 @@ var groupByRegion = {
 														'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
 														'</tpl>'
 														];	
+													var qcstoreGrap = Ext.create('Ext.data.Store', {
+														model: 'modelQC',
+														autoLoad: true,
+														autoSync: true,
+														sorters: { property: 'name', direction : 'ASC' },
 
+														proxy: {
+															type: 'ajax',
+															url: 'php/Geo_statByregion-test.php',
+															extraParams: {type:29,listStatSel:Ext.encode(selectionID),spec:"espc"},
+															actionMethods: {
+																read: 'POST'//'POST'
+															},												
+															reader: {
+																type: 'json',
+																root: 'topics'
+															}
+														},
+														listeners: {
+															 load: function(store, records) {
+																  store.insert(0, [{
+																	  id: 0,
+																	  name: 'raw',
+																	  description: 'Original data'
+																	  
+																  }]);														  
+															 }
+														  }								
+													});
 													cmbPeriod='cmbPeriod'+selectionID
 													cmbPeriod=Ext.create('Ext.form.field.ComboBox', { 
 														fieldLabel: 'Select graphic model',
@@ -10361,12 +10503,44 @@ var groupByRegion = {
 																var idx = tabs.items.indexOf(actTab);
 																// actTabId=parseInt((actTab.title).match(/\d+/)[0])
 																var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
-																generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()))
+																var qc = Ext.getCmp('qcCmbGrapID').getValue()
+																generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
 
 															}
 														}
 													});	
-													
+													cmbqc='cmbqc'+selectionID
+													cmbqc=Ext.create('Ext.form.field.ComboBox', { 
+														fieldLabel: 'Quality control:',
+														labelWidth:90,
+														editable: false, 
+														value: 'raw',
+														multiSelect: false, 
+														displayField: 'name',
+														valueField: 'name', 
+														id:'qcCmbGrapID',
+														queryMode: 'local',
+														typeAhead: true,
+														store: qcstoreGrap,
+														width: 180,												
+														listConfig: {
+															getInnerTpl: function() {
+																return '<div data-qtip="{description}">{name}</div>';
+															}
+														},														
+														listeners: {
+															select: function() {
+																var actTab = tabs.getActiveTab();
+																var idx = tabs.items.indexOf(actTab);
+																// actTabId=parseInt((actTab.title).match(/\d+/)[0])
+																var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
+																var qc = Ext.getCmp('qcCmbGrapID').getValue()
+																// generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
+																generateGraps(selectionID,idPeriod,"ALL",qc)
+
+															}
+														}
+													});														
 													btonReturn= new Ext.Button({
 														pressedCls : 'my-pressed',
 														overCls : 'my-over',
@@ -10404,7 +10578,7 @@ var groupByRegion = {
 														dockedItems: [
 															{
 															xtype: 'toolbar',
-															items: [cmbPeriod,{xtype: 'tbfill'},btonReturn]
+															items: [cmbPeriod,cmbqc,{xtype: 'tbfill'},btonReturn]
 															}
 														]													
 													});		
@@ -10417,8 +10591,9 @@ var groupByRegion = {
 													Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
 													// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
 													tabs.setActiveTab('graphic_tab');
-													
-													generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
+													// var qc = Ext.getCmp('qcCmbGrapID').getValue()
+													// generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()),qc)
+													generateGraps(selectionID,cmbPeriod.getValue(),"ALL","raw")
 												}else{
 													winInfo=Ext.MessageBox.show({
 													   title: 'Information',
@@ -10697,7 +10872,11 @@ var groupByRegion = {
 					if(Ext.getCmp('gridRegionID')){
 						Ext.getCmp('mainTableID').collapse();
 						Ext.getCmp('gridRegionID').destroy();	
-					}					  
+					}
+					if(Ext.getCmp('gridRegionID_1')){
+						Ext.getCmp('mainTableID').collapse();
+						Ext.getCmp('gridRegionID_1').destroy();
+					}					
 			 }
 			}});
 			mapPanel.map.addControl(oClick);

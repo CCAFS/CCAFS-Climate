@@ -1,4 +1,4 @@
-{include file='head.tpl' jsIncludes=[] pageTitle="Statistical Downscaling (Climgen) - CCAFS Climate" pageDescription="Downscaled future climate data using the Climgen pattern scaling method." keywords="Climgen,pattern scaling,climate change,IPCC,projections"}
+{include file='head.tpl' jsIncludes=['jquery'] pageTitle="Statistical Downscaling (Climgen) - CCAFS Climate" pageDescription="Downscaled future climate data using the Climgen pattern scaling method." keywords="Climgen,pattern scaling,climate change,IPCC,projections"}
 {include file='header.tpl' current="downscaling"}
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_climgen.gif" />
@@ -57,7 +57,7 @@
     </p>
     <br>
     <div class="center">
-        <a href="/data/">
+        <a href="/data_spatial_downscaling/">
             <img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png">
         </a>
     </div>

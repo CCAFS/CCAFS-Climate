@@ -10,6 +10,23 @@ $(document).ready(function() {
 //    isRange : true
 //});
 
+
+   var helpIcon2 = $("#help_icon_period");
+  $(helpIcon2).attr("title", "The interval of years of historical and future period should be equal");
+  $(helpIcon2).tipTip({
+	activation: "click",
+	fadeOut:100,
+	keepAlive: true,
+	maxWidth: "400px",
+	defaultPosition: "right"
+  }); 
+  
+  $('#help_icon_period').click(function () {
+	// console.log(helpIcon2.tipTip())
+  });
+
+  
+
 $('#button-file').click(function () {
     $("input[type='file']").trigger('click');
 })
@@ -58,7 +75,7 @@ $("#period").ionRangeSlider({
 $("#periodh").ionRangeSlider({
     type: "double",
     min: 1980,
-    max: 2010,
+    max: 2005,
     from: 1980,
     to: 1990,
 	// max_interval:15,
@@ -375,7 +392,7 @@ function getFilesInfo(evt) {
   var nameEven = $(evt.target).attr("name");
   var filterValues = getUserSelections(nameEven);
   // console.log(filterValues)
-  
+ 
   var id = $("input[name='observation']:checked").val();
 
   if (nameEven == 'observation') {
@@ -407,7 +424,6 @@ function getFilesInfo(evt) {
     $(evt.target).parent().prev().hide();
   }
   
- 
   $.ajax({
     type: "POST",
     dataType: "json",
@@ -438,8 +454,9 @@ function getFilesInfo(evt) {
 
 			  $("#searchSubmit").attr("disabled", "disabled");
 			  $("#searchSubmit").addClass("disable");
-			  $("#filesFound").text("0 files found");			
-			  getUserSelections(data.filesFound) 
+			  $("#filesFound").text("0 files found");	
+				validCoordinate(parseFloat($("#lat").val()),parseFloat($("#lon").val()));			  
+			  // getUserSelections(data.filesFound) 
            // $("#searchSubmit").attr("disabled", "disabled");
            // $("#searchSubmit").addClass("disable");
             // $("#searchSubmit").removeAttr("disabled");
@@ -581,11 +598,11 @@ function getUserSelections(filterName) {
   model_id=getArrayValuesModelId($("input[name='model\\[\\]']:checked"))
   period = getArrayValues($("input[name='period\\[\\]']:checked"));
   variables = getArrayValues($("input[name='variables\\[\\]']:checked"));
-  // formats = getArrayValues($("input[name='formats\\[\\]']:checked"));
+  formats = getArrayValues($("input[name='formats\\[\\]']:checked"));
   
   // method = $("input[name='method']:checked").val();
   methods = getArrayValues($("input[name='methods\\[\\]']:checked"));
-  // console.log(methods);
+  // console.log(formats);
   observation = $("input[name='observation']:checked").val();
   var id = $("input[name='observation']:checked").val();
   
@@ -605,6 +622,8 @@ function getUserSelections(filterName) {
     fillout = false;
 //    return;
   } 
+  
+  
   // if (formats.length == 0) {
 //    fillout = false;
   // } 
@@ -619,11 +638,11 @@ function getUserSelections(filterName) {
   if(!filename && observation==7){
 	fillout = false;
   }
+  
   if(!$("#lat").val() && !$("#lon").val()){
 	fillout = false;
   }
 
-	
 	if(id==7){
 		$("#periodHist").hide();
 		var slider =$("#period").data("ionRangeSlider")
@@ -748,6 +767,7 @@ function initializeMap() {
     validCoordinate (event.latLng.lat(), event.latLng.lng());
     validateForm ();
 	getUserSelections();
+	// console.log("mapa")
   });
 }
 
@@ -897,18 +917,46 @@ function useTheData(doc) {
 
 function validCoordinate (lat, lon) {
   var geocoder = new google.maps.Geocoder;
-  var latlng = {lat: lat, lng: lon};
+  var latlng = {lat: lat, lon: lon};
 //  var result = true;
 //  return "1";
+
+  $.ajax({
+    type: "POST",
+    dataType: "json",
+    url: "/ajax/validaCoordinates-bias.php",
+    data: latlng,
+    success: function(data) {
+		if(data==2){
+			if (fillout==false || fillout==null){
+			  $("#searchSubmit").attr("disabled", "disabled");
+			  $("#searchSubmit").addClass("disable");
+			  $("#filesFound").text("Please enter all search terms.");
+			} else {
+				
+			  $("#searchSubmit").removeAttr("disabled");
+			  $("#searchSubmit").removeClass("disable");
+			  $("#filesFound").text("");
+			}		
+		}else{
+		  $("#searchSubmit").attr("disabled", "disabled");
+		  $("#searchSubmit").addClass("disable");
+		  $("#filesFound").text("Please select a valid coordinate on continent");		
+		}
+	}
+  })
+/*
   geocoder.geocode({'location': latlng}, function(results, status) {
     // if (status === google.maps.GeocoderStatus.OK) {
+	console.log(fillout)
     if (status === "OK") {
       if (results[1]) {
-        if (!fillout){
+        if (fillout==false || fillout==null){
           $("#searchSubmit").attr("disabled", "disabled");
           $("#searchSubmit").addClass("disable");
           $("#filesFound").text("Please enter all search terms.");
         } else {
+			
           $("#searchSubmit").removeAttr("disabled");
           $("#searchSubmit").removeClass("disable");
           $("#filesFound").text("");
@@ -923,7 +971,7 @@ function validCoordinate (lat, lon) {
       $("#searchSubmit").addClass("disable");
       $("#filesFound").text("Please select a valid coordinate on continent");
     }
-  });
+  });*/
 //  return result;
 }
 

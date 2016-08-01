@@ -1,4 +1,6 @@
-code,name,institute,model,category,instalation,lon,lat,elev,country,state,city,variables
-13015040,Represa Urra,ideam,Convencional,Climatológica Principal,2014-11-15,76d12'15"W,8ø1'0"N,300,Colombia,C¢rdoba,Tierralta,prec|rhum|sbright|tmax|tmin
-13055030,Galan,ideam,Convencional,Climatológica Ordinaria,1979-06-15,75ø58'21"W,8ø39'33"N,30,Colombia,C¢rdoba,Monter¡a,prec|rhum|tmax|tmean|tmin
-13065020,Maracayo,ideam,Convencional,Climatológica Ordinaria,1979-05-15,75ø53'29"W,8ø24'28.8"N,25,Colombia,C¢rdoba,Monter¡a,prec|rhum|tmax|tmean|tmin
+id,code,name,institute,model,category,instalation,lon,lat,elev,country,state,city,variables
+1408,26055070,Univ del Valle,ideam,NA,Climatological Principal,1965-12-15,76 32 1.6W,3 22 40.8N,985,Colombia,Valle del Cauca,Santiago de Cali,prec|rhum|sbright|tmax|tmin
+1409,26055100,Farallones Automat,ideam,NA,Climatological Principal,2005-06-28,76 39 5.6W,3 24 57.7N,2275,Colombia,Valle del Cauca,Santiago de Cali,prec|rhum|tmax|tmean|tmin|wsmean
+1410,26055120,Univ del Valle Aut,ideam,NA,Climatological Principal,2006-11-26,76 32 1.6W,3 22 40.8N,992,Colombia,Valle del Cauca,Santiago de Cali,prec|rhum|tmax|tmean|tmin|wsmean
+1426,26080280,Pichinde,ideam,NA,Pluviometer,1974-01-15,76 36 5.6W,3 26 17.4N,1651,Colombia,Valle del Cauca,Santiago de Cali,prec
+1431,26085160,Siloe Automatica,ideam,NA,Climatological Principal,2005-06-28,76 33 38.3W,3 25 30.9N,1234,Colombia,Valle del Cauca,Santiago de Cali,prec|rhum|tmax|tmean|tmin|wsmean

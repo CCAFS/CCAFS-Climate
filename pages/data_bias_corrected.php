@@ -9,7 +9,7 @@ $query = "SELECT * FROM datasets_fileset_bias df  ";
 
 $fileSets = $db->getAll($query);
 
-$query = "SELECT id, name, acronym FROM datasets_scenario_bias where id <> 1";
+$query = "SELECT id, name, acronym FROM datasets_scenario_bias where id <> 1 order by name asc";
 $scenarios = $db->getAll($query);
 
 $query = "SELECT id, name, acronym FROM datasets_model_bias ORDER BY acronym";

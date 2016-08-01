@@ -6,11 +6,18 @@ DirectoryIndex index.php pages/index.php
 RewriteEngine On
 RewriteBase /
 # URL more readable and much shorter.
-RewriteCond %{REQUEST_URI} !^/(pages|stations)/
+RewriteCond %{REQUEST_URI} !^/(pages|stations)
 RewriteRule ^(.*)\.php /pages/$1.php [L]
 RewriteRule ^(.*)/$ /pages/$1.php [L]
-
 </IfModule>
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^.*[^/]$ /$0/ [L,R=301]
+</IfModule>
+
 ###### END CCAFS-CLIMATE ######
 ErrorDocument 404 /pages/404.php 
 

@@ -261,26 +261,27 @@
 		
 			strategy = new OpenLayers.Strategy.Cluster({distance: 40}); //
 			
-            var clusters = new OpenLayers.Layer.Vector("Stations", {
+
+			var clusters = new OpenLayers.Layer.Vector("Stations", {
 				projection: new OpenLayers.Projection("EPSG:4326"),
 				displayProjection: new OpenLayers.Projection("EPSG:900913"),					 
-                protocol: new OpenLayers.Protocol.HTTP({
-                    url: "php/Geo_statByregion-test.php",
+				protocol: new OpenLayers.Protocol.HTTP({
+					url: "php/Geo_statByregion-test.php",
 					params : { type:4},
-                    format: new OpenLayers.Format.GeoJSON()
-                }),
-                // renderers: ['Canvas','SVG'],
-                strategies: [new OpenLayers.Strategy.Fixed(),strategy],
-                isBaseLayer: false,
-                styleMap:  new OpenLayers.StyleMap({
+					format: new OpenLayers.Format.GeoJSON()
+				}),
+				// renderers: ['Canvas','SVG'],
+				strategies: [new OpenLayers.Strategy.Fixed(),strategy],
+				isBaseLayer: false,
+				styleMap:  new OpenLayers.StyleMap({
 						"default": style					
 						// "select": {
-                            // fillColor: "#8aeeef",
-                            // strokeColor: "#32a8a9"
-                        // }
+							// fillColor: "#8aeeef",
+							// strokeColor: "#32a8a9"
+						// }
 					})
-            });	
-			
+			});	
+
 			clusters.events.on({"loadend": function(){ //layerTemp.events.register("featuresadded",layerTemp,function(){console.log(layerTemp.features.length)});	
 				var bounds = clusters.getDataExtent();
 				if(bounds){ mapPanel.map.panTo(bounds.getCenterLonLat()); mapPanel.map.zoomToExtent(bounds); }

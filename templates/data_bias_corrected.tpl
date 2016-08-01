@@ -1,10 +1,10 @@
 
-{include file='head.tpl' jsIncludes=["jquery", "dataBias", "tiptip","modernizr","icheck", "map"] pageTitle="Data - CCAFS Climate" pageDescription="High resolution climate change data for download, downscaled using different methods." keywords="IPCC,data,download,downscaling,high resolution,delta method,climate change,projections,MarkSim,MetOffice,PRECIS"}
+{include file='head.tpl' jsIncludes=["jquery", "dataBias", "tiptip","modernizr","icheck", "map"] pageTitle="Data bias correction - CCAFS Climate" pageDescription="High resolution climate change data for download, downscaled using different methods." keywords="IPCC,data,download,downscaling,high resolution,delta method,climate change,projections,MarkSim,MetOffice,PRECIS"}
 {include file='header.tpl' current="data"}
 
 
 <div id="subheader-image">
-  <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_data.gif" />
+  <img src="{$smarty.const.SMARTY_IMG_URI}/header_bc_data_cinta.gif" />
 </div>
 
 
@@ -16,8 +16,9 @@
 
 <div id="content" class="data" style="margin-bottom:45px">
   <div style="height: 43px;">
-    <div style="width:70%; float:left; height: 38px;" >
-      <h3>Bias correction ( beta version )</h3>
+    <div style="width:100%; float:left; height: 38px;" >
+      <h3>Bias correction</h3>
+		
     </div>
 
     {*    <div style="width:30%; height: 30px;float:left; text-align: right; padding-top: 20px;">
@@ -51,7 +52,9 @@
               <input type="text" id="lat" name="lat" value="">
               <label for="lon">Longitude</label>
               <input type="text" id="lon" name="lon" value="">
+			  <div> *Get coordinates from the map or enter</div>
             </article>
+			
           </div>
 
           <div id="fileSet-filters" class="inputs-ac"> 
@@ -132,13 +135,13 @@
               <div id="drop-content">
 {*                <input type="hidden" class="slider-input" value="23" />*}
 				<div id="periodHist">
-                <label for="periodh" class="period[]">Historical Observation</label><br>
+                <label for="periodh" class="period[]">Historical Observation <img class="help_icon_period_cl" id="help_icon_period" style="float: right;" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" /></label><br>
+				
                 <input type="text" id="periodh" name="periodh" value="" />
 				</div>
                 <label for="period" id="periodf" class="period[]">Future</label><br>
                 <input type="text" id="period" name="period" value="" />
 {*                {foreach from=$periods item=period}
-                  <img class="help_icon" id="help_icon_period" src="{$smarty.const.SMARTY_IMG_URI}/help_icon.png" />
                   <input id="period-{$period['id']}" type="checkbox" name="period[]" value="{$period['id']}">
                   <label for="period-{$period['id']}" class="period[]">{$period['name']}</label><br>
                 {/foreach}*}
@@ -197,7 +200,8 @@
           </div>
 
           <div id="bloc-search">
-            <button type="submit" id="searchSubmit" disabled="disabled" value="1">Run</button>
+            <!--<button type="submit" id="searchSubmit" disabled="disabled" value="1">Run<span></span></button>-->
+            <button type="submit" id="searchSubmit" disabled="disabled" value="1"><span class="icon"></span><span class="btn-txt">Excute</span></button>
             <label>
               <span id="filesFound"></span>
               <img class="loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />
@@ -219,10 +223,12 @@
 
   {*  <p>*}
   <div>
-    <p>The data used here are based on global climate projections daily from the phase 5 (CMIP5) multi-model dataset that is informing the IPCC Fifth Assessment. CCAFS and its partners have processed this data to provide seamless continuous future climate surfaces.
-      Users are prohibited from any commercial, non-free resale, or redistribution without explicit written permission from CCAFS or the data-developing institutions.
-      Users should acknowledge CCAFS as the source used in the creation of any reports, publications, new data sets, derived products, or services resulting from the use of this data set.
-      For commercial access to the data, send requests to <a href="mailto:a.jarvis@cgiar.org">Andy Jarvis</a> at the International Center for Tropical Agriculture (CIAT).
+    <p> See the <A href="http://ccafs-climate.org/bias_corrected/">description of methodologies of bias correction</A> document. </p>
+	<p>The data distributed here are in text file format and are derivated from Global Climate Models (GCM) and observational datasets (Reanalysis). 
+	CCAFS and its partners have developed this on live processing to provide continuous future climate data. Users are prohibited from any commercial, 
+	non-free resale, or redistribution without explicit written permission from CCAFS or the data-developing institutions. Users should acknowledge 
+	CCAFS as the source used in the creation of any reports, publications, new data sets, derived products, or services resulting from the use of this data set. 
+	For commercial access to the data, send requests to <a href="mailto:a.jarvis@cgiar.org">Andy Jarvis</a> at the International Center for Tropical Agriculture (CIAT).
     </p>
   </div>
 

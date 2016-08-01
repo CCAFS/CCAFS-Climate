@@ -130,8 +130,8 @@ $(document).ready(function() {
     },
     function() {
       $(this).stop().css({'z-index': '1'}).animate({
-        "width": "126.4px",
-        "height": "280px",
+        "width": "140px", //126.4px",
+        "height": "300px",//"280px",
         "top": "0",
         "left": "0"
       }, "fast");

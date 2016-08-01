@@ -162,6 +162,7 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
 	$varAcro .= $var['acronym'] . ",";
   }	
 
+
   
   // $query = "SELECT id, name FROM datasets_correction_method_bias WHERE id in (" . implode(",", $_REQUEST["methods"]) . ")";
   // $methods = $db->getAll($query);
@@ -191,6 +192,7 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
 	}   
   
   $vars['scenarios-acronym'] = substr($sceAcro, 0, -1);
+  // $vars['modelid'] = substr($modelid, 0, -1);
 
   
 
@@ -203,12 +205,20 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
    // $vars['method-acronym'] = $methods[0]['name'];
    $vars['method-acronym'] =substr($methodAcro, 0, -1);
 
-	// $vars['observation-acronym'] = $observations[0]['name'];
-
+	// ALTER SEQUENCE datasets_download_bias_id_seq RESTART WITH 1
+   $register="INSERT INTO datasets_download_bias(lon, lat, models, scenarios, observation, periodh, periodf, variables, methods, formats,email)VALUES (".$vars['lon'].",".$vars['lat'].",'".$vars['model']."','".$vars['scenarios']."','".$vars['observation-acronym']."','".$vars['periodh']."','".$vars['period']."','".$vars['variables-acronym']."','".$vars['methods']."','".$vars['formats']."','".$vars['email']."');";
+	$ret = $db->getAll($register);
+   
+   $getLastRegister="select id from datasets_download_bias order by id desc limit 1";
+   $getID = $db->getAll($getLastRegister);
+	$vars['order'] =$getID[0][0];
+ 
  // echo "<pre>".print_r($vars,true)."</pre>";
+ // echo $vars;
 //  $url = "http://172.22.52.62/correctedTest.php";
 // exit();
-// echo($data);
+
+
   $url = "http://gisweb.ciat.cgiar.org/Bc_Downscale/biasCorrected.php";
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
@@ -277,6 +287,10 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
   $formats = isset($_REQUEST["formats"]) ? implode(",", $_REQUEST["formats"]) : null;
   $delimitator = isset($_REQUEST["delimit"]) ? $_REQUEST["delimit"] : '';
 
+	$getLastRegister="select id from datasets_download_bias order by id desc limit 1";
+	$getID = $db->getAll($getLastRegister);
+	
+  $smarty->assign("order", $getID[0][0]+1);
   $smarty->assign("error", $code);
   $smarty->assign("msg", $msg);
   $smarty->assign("msg_p", $msgy);  
