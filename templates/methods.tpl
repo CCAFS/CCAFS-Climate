@@ -1,7 +1,7 @@
 {include file='head.tpl' jsIncludes=['jquery', 'downscaling'] pageTitle="Methods - CCAFS Climate" pageDescription="Statistically downscaled future climate projections from IPCC assessment reports." keywords="downscaling,projections,climate change,high resolution,IPCC,CCAFS"}
 {include file='header.tpl' current="methods"}
 <div id="subheader-image">
-    <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_down_data.gif" />
+    <img src="{$smarty.const.SMARTY_IMG_URI}/header_methods.gif" />
 </div>
 <div id="content" class="downscaling">
     <h3>Methods</h3>
