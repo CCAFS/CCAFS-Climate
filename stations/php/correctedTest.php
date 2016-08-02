@@ -12,7 +12,7 @@
 
 $vars = $_REQUEST;
   
-echo "<pre>CCC".print_r($_REQUEST,true)."</pre>";
+// echo "<pre>CCC".print_r($_REQUEST,true)."</pre>";
 $period = explode(";",$_REQUEST['period']);
 $periodh = explode(";", $_REQUEST['periodh']);
 
@@ -122,6 +122,10 @@ $statList= '1';*/
 
 	if (is_array($files) && count($files) > 0) {
 
+		$register="INSERT INTO datasets_download_bias(lon, lat, models, scenarios, observation, periodh, periodf, variables, methods, formats,email,send)VALUES (".$lon.",".$lat.",'".$gcmlist."','".$rcpList."','".$dataset."','".$_REQUEST['periodh']."','".$_REQUEST['period']."','".$varlist."','".$methBCList."','".$_REQUEST['formats']."','".$_REQUEST['email']."','OK');";
+		$ret = pg_query($dbcon, $register);
+		// $ch = pg_fetch_all($ret);
+	
 		$url_file = $files[0]['bc_processing'];
 		$vars['url_file'] = $url_file;
 		$vars['type'] = 2;
@@ -137,4 +141,9 @@ $statList= '1';*/
 		$data = curl_exec($curl);
 		curl_close($curl);	  
 	  
+	}else{
+		$register="INSERT INTO datasets_download_bias(lon, lat, models, scenarios, observation, periodh, periodf, variables, methods, formats,email,send)VALUES (".$lon.",".$lat.",'".$gcmlist."','".$rcpList."','".$dataset."','".$_REQUEST['periodh']."','".$_REQUEST['period']."','".$varlist."','".$methBCList."','".$_REQUEST['formats']."','".$_REQUEST['email']."','NO');";
+		$ret = pg_query($dbcon, $register);
+		// $ch = pg_fetch_all($ret);
 	}
+

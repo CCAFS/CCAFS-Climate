@@ -187,7 +187,7 @@
 
 	<br>
     <div class="center">
-        <a href="/data_bias_corrected/">
+        <a href="/data_bias_correction/">
             <img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png" />
         </a>
     </div>

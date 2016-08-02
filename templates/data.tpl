@@ -10,7 +10,7 @@
     <table width="100%" id="methods">
         <tr>
             <td width="50%" align="center">
-				<a href="/data_bias_corrected/" >
+				<a href="/data_bias_correction/" >
                     <div id="section">
                       <img src="{$smarty.const.SMARTY_IMG_URI}/submenu-09.png" />                     </div>
 				</a>
