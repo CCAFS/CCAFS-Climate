@@ -166,11 +166,18 @@
         <h5>Carlos Navarro</h5>
         <span><a href="mailto:c.e.navarro@cgiar.org">c.e.navarro@cgiar.org</a></span>
     </div>
-    <div class="center">
-        <a href="/data_spatial_downscaling/">
-            <img name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png">
-        </a>
-    </div>
+	<div>
+		<div class="center2">
+			<a href="/data_spatial_downscaling/">
+				<img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png" />
+			</a>
+		</div>
+		<div>
+			<a href="{$smarty.const.SMARTY_DOCS_URI}/MarkSim_Standalone_Documentation_v2.pdf">
+				<img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/doc_button.png" />
+			</a>
+		</div>
+	 </div>	
 </div>
 
 {include file='footer.tpl'}

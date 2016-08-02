@@ -114,11 +114,18 @@
 
     <br>
     <br>
-    <div class="center">
-        <a href="/data_spatial_downscaling/">
-            <img src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png">
-        </a>
-    </div>
+	<div>
+		<div class="center2">
+			<a href="/data_spatial_downscaling/">
+				<img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png" />
+			</a>
+		</div>
+		<div>
+			<a href="http://www.metoffice.gov.uk/media/pdf/6/5/PRECIS_Handbook.pdf">
+				<img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/doc_button.png" />
+			</a>
+		</div>
+	 </div>	
 </div>
 
 {include file='footer.tpl'}

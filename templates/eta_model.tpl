@@ -29,9 +29,9 @@
     <br><br>
     <ul>
         <li>            
-            <a target="_blank" href="http://etamodel.cptec.inpe.br/index.shtml">
+            <a target="_blank" href="http://etamodel.cptec.inpe.br">
                 http://etamodel.cptec.inpe.br/index.shtml<span class="little"></span></a>      </li>
-        <li><a target="_blank" href="http://etamodel.cptec.inpe.br/etadoc.pdf">Model equations and discretization<span class="little"></span></a></li>
+        <li><a target="_blank" href="http://etamodel.cptec.inpe.br/~retamod/etadoc.pdf">Model equations and discretization<span class="little"></span></a></li>
         <li><a target="_blank" href="http://www.emc.ncep.noaa.gov/mmb/mmbpll/eta12tpb/">Model microphysics<span class="little"></span></a></li>
         <li><a target="_blank" href="ftp://ftp1.cptec.inpe.br/etamdl/Download/model/convection_essay_2008_rvsd_Mar_2011.pdf">An Essay on the Eta Cumulus Convection (BMJ) Scheme<span class="little"></span></a></li>
         <li><a target="_blank" href="http://etamodel.cptec.inpe.br/~retamod/mesinger_et_al_2012_MAP.pdf">An upgraded version of the Eta model<span class="little"></span></a></li>
@@ -47,11 +47,19 @@
         <h5>Carlos Navarro</h5>
         <span><a href="mailto:c.e.navarro@cgiar.org">c.e.navarro@cgiar.org</a></span>
     </div>
-    <div class="center">
-        <a href="/data_spatial_downscaling/">
-            <img name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png">
-        </a>
-    </div>
+
+	<div>
+		<div class="center2">
+			<a href="/data_spatial_downscaling/">
+				<img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png" />
+			</a>
+		</div>
+		<div>
+			<a href="http://etamodel.cptec.inpe.br">
+				<img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/doc_button.png" />
+			</a>
+		</div>
+	 </div>	
 </div>
 
 {include file='footer.tpl'}
