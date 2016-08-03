@@ -22,7 +22,7 @@ $station_file = isset($_FILES["station-file"]["tmp_name"]) ? $_FILES["station-fi
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-//echo "<pre>" . print_r($_REQUEST, true) . "</pre>";
+// echo "<pre>" . print_r($_REQUEST, true) . "</pre>";
 //echo "<pre>" . print_r($_FILES, true) . "</pre>";
 // if (isset($_FILES["station-file"]["tmp_name"]) && $_FILES["station-file"]["tmp_name"] != "") {
 $namefile=null;
@@ -138,13 +138,16 @@ if ($station_file && $code==0) {
 		}
 	}
 }
-// print_r($method);
+
+
 	
 
 // exit();	
 if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] == $_REQUEST["email_ver"]) {
 
   $vars = $_REQUEST;
+  // print_r($vars );
+  
   $query = "SELECT id, name, acronym FROM datasets_scenario_bias where id in (" . $_REQUEST["scenarios"] . ")";
   $scenarios = $db->getAll($query);
   $sceAcro = "";
@@ -154,9 +157,16 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
 
   $query = "SELECT id, name FROM datasets_observation_bias WHERE id =" . $_REQUEST["observation"];
   $observations = $db->getAll($query);
+	
+  // if($code==0){
+    // $query = "SELECT id, name, acronym FROM datasets_variable_bias WHERE id in (" .implode(",", $variable) . ");";
+  // $variables = $db->getAll($query);
+// }else{
+  $query = "SELECT id, name, acronym FROM datasets_variable_bias WHERE id in (" . $_REQUEST["variables"] . ");";
 
-  $query = "SELECT id, name, acronym FROM datasets_variable_bias WHERE id in (" . $_REQUEST["variables"] . ")";
   $variables = $db->getAll($query);
+  
+
   $varAcro = "";
   foreach ($variables as $var) {
 	$varAcro .= $var['acronym'] . ",";
@@ -242,12 +252,15 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
   $query = "SELECT id, name FROM datasets_observation_bias WHERE id =" . $_REQUEST["observation"];
   $observations = $db->getAll($query);
   if($code==0){
-	$query = "SELECT id, name, acronym FROM datasets_variable_bias WHERE id in (" . implode(",", $variable) . ")";
-	$variables = $db->getAll($query);
+	$variables=implode(",", $variable);
+	$query = "SELECT id, name, acronym FROM datasets_variable_bias WHERE id in (" .$variables. ")";
+	$variablesq = $db->getAll($query);
 	$varAcro = "";
-	foreach ($variables as $var) {
+	foreach ($variablesq as $var) {
 		$varAcro .= $var['acronym'] . ",";
 	}
+  }else{
+   $variables = isset($_REQUEST["variables"]) ? implode(",", $_REQUEST["variables"]) : null; 
   }
   $query = "SELECT * FROM datasets_fileset_bias df WHERE id = " . $_REQUEST["fileSet"];
   $fileSets = $db->getAll($query);
@@ -275,7 +288,7 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
   }
 
   $methods = isset($_REQUEST["methods"]) ? implode(",", $_REQUEST["methods"]) : null;
-  $variables = isset($_REQUEST["variables"]) ? implode(",", $_REQUEST["variables"]) : null;
+
   $scenarios = isset($_REQUEST["scenarios"]) ? implode(",", $_REQUEST["scenarios"]) : null;
   $modelsall = isset($_REQUEST["model"]) ? $_REQUEST["model"] : null;
   $model = array();
