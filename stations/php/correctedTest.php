@@ -118,7 +118,6 @@ $statList= '1';*/
 	  exit;
 	}   
 	$files = pg_fetch_all($ret);
-	pg_close($dbcon);
 
 	if (is_array($files) && count($files) > 0) {
 
@@ -146,4 +145,5 @@ $statList= '1';*/
 		$ret = pg_query($dbcon, $register);
 		// $ch = pg_fetch_all($ret);
 	}
+	pg_close($dbcon);
 

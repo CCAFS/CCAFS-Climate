@@ -446,9 +446,9 @@ function getFilesInfo(evt) {
       if (data != null) {
 
         if (data.filesFound < 0) {
-         // $("#filesFound").text("0 files found");
-         // $("#searchSubmit").attr("disabled", "disabled");
-         // $("#searchSubmit").addClass("disable");
+         $("#filesFound").text("0 files found");
+         $("#searchSubmit").attr("disabled", "disabled");
+         $("#searchSubmit").addClass("disable");
         } else {
           if (data.filesFound == 0) {
 
