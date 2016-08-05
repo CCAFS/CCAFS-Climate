@@ -423,7 +423,7 @@ function getFilesInfo(evt) {
   if ($(evt.target).parent().prev().hasClass("help_icon")) {
     $(evt.target).parent().prev().hide();
   }
-  
+
   $.ajax({
     type: "POST",
     dataType: "json",
@@ -449,6 +449,7 @@ function getFilesInfo(evt) {
          $("#filesFound").text("0 files found");
          $("#searchSubmit").attr("disabled", "disabled");
          $("#searchSubmit").addClass("disable");
+		 // validCoordinate(parseFloat($("#lat").val()),parseFloat($("#lon").val()));	
         } else {
           if (data.filesFound == 0) {
 
@@ -474,6 +475,7 @@ function getFilesInfo(evt) {
           }
 
           // Show filter description if exists 
+		  // console.log(data.description)
           $.each(data.description, function(id, descriptionText) {
             if (descriptionText != null) {
               var elementId = $(evt.target).attr("id");

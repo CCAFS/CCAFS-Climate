@@ -10,7 +10,7 @@ $ids["model_id"] = isset($_POST["modelId"]) && $_POST["modelId"] != "" ? $_POST[
 $ids["period_id"] = isset($_POST["periodId"]) && $_POST["periodId"] != "" ? $_POST["periodId"] : null;
 $ids["variable_id"] = isset($_POST["variableId"]) && $_POST["variableId"] != "" ? $_POST["variableId"] : null;
 $ids["resolution_id"] = isset($_POST["resolutionId"]) && $_POST["resolutionId"] != "" ? $_POST["resolutionId"] : null;
-// $ids["format_id"] = isset($_POST["formatId"]) && $_POST["formatId"] != "" ? $_POST["formatId"] : null;
+$ids["format_id"] = isset($_POST["formatId"]) && $_POST["formatId"] != "" ? $_POST["formatId"] : null;
 $ids["extent_id"] = isset($_POST["extendId"]) && $_POST["extendId"] != "" ? $_POST["extendId"] : null;
 $ids["fileset_id"] = isset($_POST["filesetId"]) && $_POST["filesetId"] != "" ? $_POST["filesetId"] : null;
 $ids["obsset_id"] = isset($_POST["observation"]) && $_POST["observation"] != "" ? $_POST["observation"] : null;
@@ -38,7 +38,7 @@ if (!is_null($section)) {
 //      filesFound("datasets_resolution", $ids["resolution_id"]);
       break;
     case "formats[]":
-      // filesFound("datasets_format_bias", $ids["format_id"]);
+      filesFound("datasets_format_bias", $ids["format_id"]);
       break;
     case "extent":
 //      filesFound("datasets_extent", $ids["extent_id"]);
@@ -98,7 +98,7 @@ function filesFound($databaseName, $id) {
   $query_obs = "SELECT count(id) FROM datasets_fileobservations_bias WHERE ";
   
   foreach ($ids as $key => $value) {
-	if($key!="method_id" && $key!= "obsset_id"){ 
+	if($key!="method_id" && $key!= "obsset_id" && $key!= "format_id"){ // && $key!= "format_id"
 		if (!is_null($value)) {
 		  if (!$isFirst) {
 			$query .= " AND ";
@@ -144,6 +144,7 @@ $filesFound_obs = $db->GetOne($query_obs);
 	$info->filesFound =-1;
   }
 // print_r($info);  
+// print_r($query_obs);  
   $info->query = $query;
   $info->filtersAvailable = getFiltersAvailable();
 
