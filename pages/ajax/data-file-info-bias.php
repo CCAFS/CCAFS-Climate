@@ -129,7 +129,14 @@ function filesFound($databaseName, $id) {
 			}	
 		}
 	}
-
+$query_meth=null;
+	foreach ($ids as $key => $value) {
+		if($key== "method_id" || $key=='format_id') {
+			if (!is_null($value)) {
+				$query_meth .= 1;
+			}	
+		}
+	}
 $filesFound = $db->GetOne($query);
 $filesFound_obs = $db->GetOne($query_obs);
 // if($filesFound>0 && $filesFound_obs>0){
@@ -140,10 +147,12 @@ $filesFound_obs = $db->GetOne($query_obs);
     $info->filesFound = -1;
   }elseif($filesFound>0 && $filesFound_obs>0) {
     $info->filesFound = $db->GetOne($query);
+  }elseif($filesFound>0 && $filesFound_obs>0 && $query_meth>1){
+	$info->filesFound =1;
   }else{
 	$info->filesFound =-1;
   }
-// print_r($info);  
+// print_r($query_meth);  
 // print_r($query_obs);  
   $info->query = $query;
   $info->filtersAvailable = getFiltersAvailable();
