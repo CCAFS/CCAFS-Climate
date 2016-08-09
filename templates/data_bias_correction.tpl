@@ -223,7 +223,7 @@
 
   {*  <p>*}
   <div>
-    <p> See the <A href="http://ccafs-climate.org/bias_corrected/">description of methodologies of bias correction</A> document. </p>
+    <p> See the <A href="http://ccafs-climate.org/bias_correction/">description of methodologies of bias correction</A> document. </p>
 	<p>The data distributed here are in text file format and are derivated from Global Climate Models (GCM) and observational datasets (Reanalysis). 
 	CCAFS and its partners have developed this on live processing to provide continuous future climate data. Users are prohibited from any commercial, 
 	non-free resale, or redistribution without explicit written permission from CCAFS or the data-developing institutions. Users should acknowledge 
