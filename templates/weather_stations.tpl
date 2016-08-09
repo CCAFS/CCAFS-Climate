@@ -19,12 +19,13 @@
 	Users should acknowledge CCAFS as the source used in the creation of any reports, publications, new data sets, derived products, or services resulting from the use of this data set. 
 	For commercial access to the data, send requests to <a href="mailto:a.jarvis@cgiar.org">Andy Jarvis</a> at the International Center for Tropical Agriculture (CIAT).
     </p>
+	  <div style="float:right;font-size:12px;padding-bottom:5px; height:10px">
+		<i>Last updated: 8 August 2016</i>  		
+	  </div> 	
   </div>
 
-  <div style="float:right;font-size:12px;padding-bottom:5px;margin-top:2px; height:10px">
-    <i>Last updated: 16 April 2015</i>  		
-  </div>   
-
+  
+<br>
 </p>
 </div>
 
