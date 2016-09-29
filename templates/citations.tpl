@@ -1,4 +1,4 @@
-{include file='head.tpl' jsIncludes=[] pageTitle="Citations - CCAFS Climate" pageDescription="Peer-reviewed literature that have cited the CCAFS downscaled climate datasets." keywords="CCAFS,literature,citations,climate change,impacts"}
+{include file='head.tpl' jsIncludes=['jquery', 'downscaling'] pageTitle="Citations - CCAFS Climate" pageDescription="Peer-reviewed literature that have cited the CCAFS downscaled climate datasets." keywords="CCAFS,literature,citations,climate change,impacts"}
 {include file='header.tpl' current="citations"}
 <div id="subheader-image">
   <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_citations.gif" />
@@ -19,6 +19,7 @@
 	<li> El-Gabbas, A., El Din, S. B., Zalat, S., & Gilbert, F. 2016. <a target="_blank" href="">"Conserving Egypt’s reptiles under climate change"</a> Journal of Arid Environments, 127, 211–221.</li>
 	<li> Haché, S., Cameron, R., Villard, M.-A., Bayne, E. M., & MacLean, D. A. 2016. <a target="_blank" href="http://www.sciencedirect.com/science/article/pii/S0378112715005460">"Demographic response of a neotropical migrant songbird to forest management and climate change scenarios"</a> Forest Ecology and Management, 359, 309–320.</li>
 	<li> Hall, A., Mathews, A. J., & Holzapfel, B. P. 2016. <a target="_blank" href="http://link.springer.com/article/10.1007/s00484-016-1133-z">"Potential effect of atmospheric warming on grapevine phenology and post-harvest heat accumulation across a range of climates"</a> International Journal of Biometeorology, 1–18.</li>
+	<li> Jennings M., Harris G. 2016. <a target="_blank" href="http://link.springer.com/10.1007/s10980-016-0435-1">"Climate change and ecosystem composition across large landscapes"</a> Landscape Ecology, 1–13.</li>
 	<li> Leemans, R. 2016. <a target="_blank" href="">"The lessons learned from shifting from global-change research programmes to transdisciplinary sustainability science"</a> Current Opinion in Environmental Sustainability, 19, 103–110.</li>
 	<li> Mehar, M., Mittal, S., & Prasad, N. 2016. <a target="_blank" href="">"Farmers coping strategies for climate shock: Is it differentiated by gender? "</a> Journal of Rural Studies, 44, 123–131.</li>
 	<li> Mereu, S., Sušnik, J., Trabucco, A., Daccache, A., Vamvakeridou-Lyroudia, L., Renoldi, S., … Assimacopoulos, D. 2016. <a target="_blank" href="http://www.sciencedirect.com/science/article/pii/S0048969715300024">"Operational resilience of reservoirs to climate change, agricultural demand, and tourism: A case study from Sardinia"</a> Science of the Total Environment, 543, 1028–1038.</li>

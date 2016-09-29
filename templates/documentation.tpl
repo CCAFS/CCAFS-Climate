@@ -1,4 +1,4 @@
-{include file='head.tpl' jsIncludes=[] pageTitle="Documentation- CCAFS Climate" pageDescription="Useful reading for understanding the CCAFS downscaled climate change projections." keywords="CCAFS,documentation,downscaling,climate change"}
+{include file='head.tpl' jsIncludes=['jquery', 'downscaling'] pageTitle="Documentation- CCAFS Climate" pageDescription="Useful reading for understanding the CCAFS downscaled climate change projections." keywords="CCAFS,documentation,downscaling,climate change"}
 {include file='header.tpl' current="documentation"}
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_docs.gif" />
