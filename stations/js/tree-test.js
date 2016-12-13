@@ -2060,9 +2060,13 @@ function ConvertDDToDMS(D){
 						
 					});		
 					/************************** STATISTICAL *********/
-					$('#index_boxplot').append('<img src="http://gisweb.ciat.cgiar.org/Bc_Downscale/download/chirpsV2_boxplot_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
-					$('#index_wetdays').append('<img src="http://gisweb.ciat.cgiar.org/Bc_Downscale/download/chirpsV2_wetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
-					$('#index_conswetdays').append('<img src="http://gisweb.ciat.cgiar.org/Bc_Downscale/download/chirpsV2_conswetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
+					source_ftp="http://172.22.52.8/download_chirps" //"http://gisweb.ciat.cgiar.org/Bc_Downscale/download" 
+					
+					$('#index_boxplot').append('<img src="'+source_ftp+'/chirpsV2_boxplot_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
+					$('#index_wetdays').append('<img src="'+source_ftp+'/chirpsV2_wetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
+					$('#index_conswetdays').append('<img src="'+source_ftp+'/chirpsV2_conswetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
+					
+					/**************************  *********/
 					
 					$('#stats_chirps').append(
 						'<br><table width="265" border="1" style="font-family: Trebuchet MS;margin-left: 35%;">                      \
