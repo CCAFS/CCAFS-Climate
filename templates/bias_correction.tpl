@@ -1,7 +1,7 @@
 {include file='head.tpl' jsIncludes=['jquery', 'dissagregation'] pageTitle="Bias Correction - CCAFS Climate" pageDescription="Spatially disaggregated future climate projections from all IPCC assessment reports." keywords="IPCC,disaggregated,climate change,CMIP,projections,high resolution"}
 {include file='header.tpl' current="dissagregation"}
 <div id="subheader-image">
-    <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_bias_correction.gif" />
+    <img src="{$smarty.const.SMARTY_IMG_URI}/header_bc_cinta.gif" />
 </div>
 <div id="content" class="bias_correction">
     <h3>Bias-Correction </h3>
@@ -186,11 +186,18 @@
 	</table>
 
 	<br>
-    <div class="center">
-        <a href="/data_bias_corrected/">
-            <img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png" />
-        </a>
-    </div>
+	<div>
+		<div class="center2">
+			<a href="/data_bias_correction/">
+				<img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png" />
+			</a>
+		</div>
+		<div>
+			<a href="{$smarty.const.SMARTY_DOCS_URI}/BC_methods_explaining_v4.pdf">
+				<img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/doc_button.png" />
+			</a>
+		</div>
+	 </div>
 </div>
 
 {include file='footer.tpl'}

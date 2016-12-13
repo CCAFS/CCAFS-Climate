@@ -3,7 +3,7 @@
     <li {if $current == 'home'}class="current"{/if}><a href="/">Home</a></li>
     <li {if $current == 'data'}class="current dropdown"{else}class="dropdown"{/if}><a href="/data/">Data</a>
       <ul class="sub-menu">
-        <li style="line-height:35px;"><a class="conBorder" href="/data_bias_corrected/">Bias correction</a></li>	  
+        <li style="line-height:35px;"><a class="conBorder" href="/data_bias_correction/">Bias correction</a></li>	  
         <li style="line-height:20px;"><a class="conBorder" style="margin-top: 6px;padding-bottom: 8px;" href="/data_spatial_downscaling/">Spatial downscaling & disaggregation</a></li>
         <li style="line-height:35px;"><a href="/weather_stations/">Weather stations</a></li>
       </ul>

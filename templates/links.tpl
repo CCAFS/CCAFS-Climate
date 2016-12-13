@@ -1,4 +1,4 @@
-{include file='head.tpl' jsIncludes=[] pageTitle="Links - CCAFS Climate" pageDescription="Links to useful information, datasets and tools related to the CCAFS downscaled data." keywords="CCAFS,tools,datases,downscaling"}
+{include file='head.tpl' jsIncludes=['jquery', 'downscaling'] pageTitle="Links - CCAFS Climate" pageDescription="Links to useful information, datasets and tools related to the CCAFS downscaled data." keywords="CCAFS,tools,datases,downscaling"}
 {include file='header.tpl' current="links"}
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_links.gif" />

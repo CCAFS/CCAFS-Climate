@@ -85,12 +85,18 @@
         If you need baseline data for this method see <a target="_blank" href="http://www.worldclim.org/current">WorldClim portal</a>.
     </p>
     <br>
-    <div class="center">
-        <a href="/data_spatial_downscaling/">
-            <img width="224" height="75" border="0" id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png">
-        </a>
-    </div>
-
+	<div>
+		<div class="center2">
+			<a href="/data_spatial_downscaling/">
+				<img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png" />
+			</a>
+		</div>
+		<div>
+			<a href="{$smarty.const.SMARTY_DOCS_URI}/Downscaling-WP-01.pdf">
+				<img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/doc_button.png" />
+			</a>
+		</div>
+	 </div>
 
 
 </div>

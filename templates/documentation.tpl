@@ -1,4 +1,4 @@
-{include file='head.tpl' jsIncludes=[] pageTitle="Documentation- CCAFS Climate" pageDescription="Useful reading for understanding the CCAFS downscaled climate change projections." keywords="CCAFS,documentation,downscaling,climate change"}
+{include file='head.tpl' jsIncludes=['jquery', 'downscaling'] pageTitle="Documentation- CCAFS Climate" pageDescription="Useful reading for understanding the CCAFS downscaled climate change projections." keywords="CCAFS,documentation,downscaling,climate change"}
 {include file='header.tpl' current="documentation"}
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_docs.gif" />
@@ -49,7 +49,7 @@
     <h4>Useful documents</h4>
     <ul id="document-list" type="none"> 
 		<li type="square">
-			<a href="{$smarty.const.SMARTY_DOCS_URI}/BC_methods_explaining_v4.pdf">
+			<a href="{$smarty.const.SMARTY_DOCS_URI}/BC_methods_explaining_v2.pdf">
 				<img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
 				Bias-correction in the CCAFS-Climate Portal: A description of methodologies.
 			</a>

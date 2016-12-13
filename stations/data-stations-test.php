@@ -37,13 +37,22 @@
 
 		<!-- files JS  -->
 		<script src="js/countries.js" type="text/javascript"></script>		
-		<script src="js/stylesLayer.js" type="text/javascript"></script>		
+		<script src="js/stylesLayer.js" type="text/javascript"></script>
+		
 	
 		<script src="js/layersOpenlayer-test.js" type="text/javascript"></script>		
 		<script type="text/javascript" src="../libs/ext-4.2.2/examples/shared/examples.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<!-- <script src="http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js" type="text/javascript"></script>-->
+		
+		
 
+    <link rel="stylesheet" href="../libs/ionRangeSliderDemo/css/normalize.css" />
+    <link rel="stylesheet" href="../libs/ionRangeSliderDemo/css/ion.rangeSlider.css" />
+    <link rel="stylesheet" href="../libs/ionRangeSliderDemo/css/ion.rangeSlider.skinFlat.css" />
+	<script src="../libs/ionRangeSliderDemo/js/jquery-1.12.3.min.js"></script>	
+	<script src="../libs/ionRangeSliderDemo/js/ion.rangeSlider.js"></script>    
+		
 		
 		<!-- <script type="text/javascript" src="http://ows.terrestris.de/print/pdf/info.json?var=printCapabilities"></script>
 		<script type="text/javascript" src="http://172.22.52.48:8080/geoserver/pdf/info.json?var=printCapabilities"></script>	 -->

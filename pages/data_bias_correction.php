@@ -45,5 +45,5 @@ $smarty->assign("vars", array(1,2,3,4,5));
 //$smarty->assign("extents", $extents);
 //$smarty->assign("tiles", $tiles);
 
-$smarty->display("data_bias_corrected.tpl");
+$smarty->display("data_bias_correction.tpl");
 ?>

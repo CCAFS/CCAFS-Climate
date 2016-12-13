@@ -13,7 +13,7 @@ $ids["resolution_id"] = isset($_POST["resolutionId"]) && $_POST["resolutionId"] 
 $ids["format_id"] = isset($_POST["formatId"]) && $_POST["formatId"] != "" ? $_POST["formatId"] : null;
 $ids["extent_id"] = isset($_POST["extendId"]) && $_POST["extendId"] != "" ? $_POST["extendId"] : null;
 $ids["fileset_id"] = isset($_POST["filesetId"]) && $_POST["filesetId"] != "" ? $_POST["filesetId"] : null;
-$ids["observation_id"] = isset($_POST["observation"]) && $_POST["observation"] != "" ? $_POST["observation"] : null;
+$ids["obsset_id"] = isset($_POST["observation"]) && $_POST["observation"] != "" ? $_POST["observation"] : null;
 $ids["tile_id"] = isset($_POST["tileName"]) && $_POST["tileName"] != "" ? $_POST["tileName"] : null;
 $ids["tile_id"] = getTileID($ids["tile_id"]);
 
@@ -47,7 +47,7 @@ if (!is_null($section)) {
       filesFound("datasets_fileset_bias", $ids["fileset_id"]);
       break;
     case "observation":
-      filesFound("datasets_observation_bias", $ids["observation_id"]);
+      filesFound("datasets_observation_bias", $ids["obsset_id"]);
       break;
     case "tile":
       // $ids["tile_id"] = getTileID($ids["tile_id"]);
@@ -82,6 +82,7 @@ function filesFound($databaseName, $id) {
 //      } else {
         $query = "SELECT id, description FROM " . $databaseName . " WHERE id = " . $oId;
 //      }
+// print_r($query);
       $result = $db->GetRow($query);
       $info->description->$oId = $result["description"];
       // print_r($info);
@@ -91,10 +92,13 @@ function filesFound($databaseName, $id) {
   }
 
   $isFirst = true;
+  $isFirst2 = true;
  
   $query = "SELECT count(id) FROM datasets_file_bias WHERE ";
+  $query_obs = "SELECT count(id) FROM datasets_fileobservations_bias WHERE ";
+  
   foreach ($ids as $key => $value) {
-	if($key!="method_id" && $key!= "observation_id"){ 
+	if($key!="method_id" && $key!= "obsset_id" && $key!= "format_id"){ // && $key!= "format_id"
 		if (!is_null($value)) {
 		  if (!$isFirst) {
 			$query .= " AND ";
@@ -111,13 +115,45 @@ function filesFound($databaseName, $id) {
 		}
 	  
 	}
+
   }
+	foreach ($ids as $key => $value) {
+		if($key== "obsset_id" || $key=='variable_id') {
+			if (!is_null($value)) {
+			  if (!$isFirst2) {
+				$query_obs .= " AND ";
+			  } else {
+				$isFirst2 = false;
+			  }
+				$query_obs .= $key . " IN ( " . $value . " )";
+			}	
+		}
+	}
+$query_meth=null;
+	foreach ($ids as $key => $value) {
+		if($key== "method_id" || $key=='format_id') {
+			if (!is_null($value)) {
+				$query_meth .= 1;
+			}	
+		}
+	}
+$filesFound = $db->GetOne($query);
+$filesFound_obs = $db->GetOne($query_obs);
+// if($filesFound>0 && $filesFound_obs>0){
+// }
+
 
   if ($isFirst) {
     $info->filesFound = -1;
-  } else {
+  }elseif($filesFound>0 && $filesFound_obs>0) {
     $info->filesFound = $db->GetOne($query);
+  }elseif($filesFound>0 && $filesFound_obs>0 && $query_meth>1){
+	$info->filesFound =1;
+  }else{
+	$info->filesFound =-1;
   }
+// print_r($query_meth);  
+// print_r($query_obs);  
   $info->query = $query;
   $info->filtersAvailable = getFiltersAvailable();
 

@@ -56,11 +56,18 @@
         <i>For more info see the <a href="{$smarty.const.SMARTY_DOCS_URI}/Climgen-Downscaling-Tyndall.pdf">The CLIMGEN model; Downscaling Tyndall</a> document</i>.
     </p>
     <br>
-    <div class="center">
-        <a href="/data_spatial_downscaling/">
-            <img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png">
-        </a>
-    </div>
+	<div>
+		<div class="center2">
+			<a href="/data_spatial_downscaling/">
+				<img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/download_data_button.png" />
+			</a>
+		</div>
+		<div>
+			<a href="{$smarty.const.SMARTY_DOCS_URI}/Climgen-Downscaling-Tyndall.pdf">
+				<img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/doc_button.png" />
+			</a>
+		</div>
+	 </div>	
 </div>
 
 {include file='footer.tpl'}

@@ -108,7 +108,21 @@ Ext.override(Ext.grid.GridPanel, {
 			this.view.refresh(true);
 		}
 	}
-});		
+});	
+
+
+/*===================== PARA CONVERTIR COORDENADAS DECIMALES A DSM BICEVERSA =======================*/
+ function ConvertDMSToDD(degrees, minutes, seconds) {
+ 		if(degrees<0){degrees=degrees*-1;dir=-1}else{dir=1}
+    var dd = degrees + minutes/60 + seconds/(60*60);
+        dd = dd*dir;
+    return dd;
+}  
+function ConvertDDToDMS(D){
+    return [0|D, 0|(D<0?D=-D:D)%1*60, 0|D*60%1*60];
+}
+/*============================*/
+	
 		// Init the singleton.  Any tag-based quick tips will start working.
 		Ext.tip.QuickTipManager.init();
 
@@ -1738,6 +1752,544 @@ Ext.override(Ext.grid.GridPanel, {
 
 		}// fin function generateGraps
 
+		function generateGrapsChirps(lon, lat,yi,yf,mi,mf,period) {
+			// var myMask = new Ext.LoadMask(Ext.getCmp('tabsID').getActiveTab(), {msg:"Please wait..."});
+			$(".grap").html("");
+			idSta=1
+			var myMask = new Ext.LoadMask(Ext.getCmp('tabsID'), {msg:"Please wait..."});
+			// console.log(idSta, period,listVar)
+			myMask.show();						
+			  $.ajax({
+				type: "GET",//"POST",
+			//    dataType: "json",
+				url: "php/data-graphics-chirps.php",
+				data: 'lon='+lon+'&lat='+lat+'&yi='+yi+'&yf='+yf+'&mi='+mi+'&mf='+mf,//filterValues,
+				success: function(result) {
+				  var objJSON = {};
+				  if (result != null) {
+					objJSON = eval("(function(){return " + result + ";})()");
+				  } else {
+
+				  }
+				  var data = objJSON;
+				  // var period = period;
+				  if (('tmax' in data) || data['tmin'] || data['tmean']) {
+					var seriesData = [];
+					if (data['tmin']) {
+					  if (period == 1) {
+						seriesData.push({
+						  name: 'T. min',
+						  data: data['tmin']['data'],
+						  pointStart: Date.UTC(data['tmin']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['tmin']['sdate'].split(' ')[0].split('-')[1]) - 1), parseInt(data['tmin']['sdate'].split(' ')[0].split('-')[2])),
+						  pointInterval: 24 * 3600 * 1000
+						});
+					  } else if (period == 2) {
+						dLen = data['tmin']['data'].length;
+						for (var i = 0; i < dLen; i++) {
+						  data['tmin']['data'][i] = [Date.UTC(data['tmin']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['tmin']['sdate'].split(' ')[0].split('-')[1]) - 1 + i), 1), data['tmin']['data'][i]];
+						}
+						seriesData.push({
+						  name: 'T. min',
+						  data: data['tmin']['data']
+						});
+					  } else if (period == 3) {
+						dLen = data['tmin']['data'].length;
+						for (var i = 0; i < dLen; i++) {
+						  data['tmin']['data'][i] = [Date.UTC((parseInt(data['tmin']['sdate'].split(' ')[0].split('-')[0]) + i), (parseInt(data['tmin']['sdate'].split(' ')[0].split('-')[1]) - 1), 1), data['tmin']['data'][i]];
+						}
+						seriesData.push({
+						  name: 'T. min',
+						  data: data['tmin']['data']
+						});
+					  }
+					}
+					if (data['tmax']) {
+					  if (period == 1) {
+						seriesData.push({
+						  name: 'T. max',
+						  data: data['tmax']['data'],
+						  pointStart: Date.UTC(data['tmax']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['tmax']['sdate'].split(' ')[0].split('-')[1]) - 1), parseInt(data['tmax']['sdate'].split(' ')[0].split('-')[2])),
+						  pointInterval: 24 * 3600 * 1000
+						});
+					  } else if (period == 2) {
+						dLen = data['tmax']['data'].length;
+						for (var i = 0; i < dLen; i++) {
+						  data['tmax']['data'][i] = [Date.UTC(data['tmax']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['tmax']['sdate'].split(' ')[0].split('-')[1]) - 1 + i), 1), data['tmax']['data'][i]];
+						}
+						seriesData.push({
+						  name: 'T. max',
+						  data: data['tmax']['data']
+						});
+					  } else if (period == 3) {
+						dLen = data['tmax']['data'].length;
+						for (var i = 0; i < dLen; i++) {
+						  data['tmax']['data'][i] = [Date.UTC((parseInt(data['tmax']['sdate'].split(' ')[0].split('-')[0]) + i), (parseInt(data['tmax']['sdate'].split(' ')[0].split('-')[1]) - 1), 1), data['tmax']['data'][i]];
+						}
+						seriesData.push({
+						  name: 'T. max',
+						  data: data['tmax']['data']
+						});
+					  }
+
+					}
+					if (data['tmean']) {
+					  if (period == 1) {
+						seriesData.push({
+						  name: 'T. mean',
+						  data: data['tmean']['data'],
+						  pointStart: Date.UTC(data['tmean']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['tmean']['sdate'].split(' ')[0].split('-')[1]) - 1), parseInt(data['tmean']['sdate'].split(' ')[0].split('-')[2])),
+						  pointInterval: 24 * 3600 * 1000
+						});
+					  } else if (period == 2) {
+						dLen = data['tmean']['data'].length;
+						for (var i = 0; i < dLen; i++) {
+						  data['tmean']['data'][i] = [Date.UTC(data['tmean']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['tmean']['sdate'].split(' ')[0].split('-')[1]) - 1 + i), 1), data['tmean']['data'][i]];
+						}
+						seriesData.push({
+						  name: 'T. mean',
+						  data: data['tmean']['data']
+						});
+					  } else if (period == 3) {
+						dLen = data['tmean']['data'].length;
+						for (var i = 0; i < dLen; i++) {
+						  data['tmean']['data'][i] = [Date.UTC((parseInt(data['tmean']['sdate'].split(' ')[0].split('-')[0]) + i), (parseInt(data['tmean']['sdate'].split(' ')[0].split('-')[1]) - 1), 1), data['tmean']['data'][i]];
+						}
+						seriesData.push({
+						  name: 'T. mean',
+						  data: data['tmean']['data']
+						});
+					  }
+
+					}
+			//        alert(seriesData);
+					$('#grap_temp_'+idSta).highcharts('StockChart',{
+					  chart: {
+						type: 'spline',
+						zoomType: 'x'
+					  },
+					  title: {
+						text: 'Temperatura'
+					  },
+					  xAxis: {
+						type: 'datetime',
+						labels: {
+						  overflow: 'justify'
+						}
+					  },
+					  yAxis: {
+						title: {
+						  text: 'Temperature'
+						}
+					  },
+					  tooltip: {
+						valueSuffix: ' C',
+						shared: true,
+						valueDecimals: 2
+					  },
+					  plotOptions: {
+						series: {
+						  turboThreshold: 15000//larger threshold or set to 0 to disable
+						}
+					  },
+					  series: seriesData
+					});
+				  }
+				  if (data['prec']) {
+					dLen = data['prec']['data'].length;
+					dLenMon = data['monthly']['data'].length;
+					dLenClim = data['clim']['data'].length;
+
+					if (period == 1) {
+					  seriesData = {
+						name: 'Precipitation',
+						data: data['prec']['data'],
+						pointStart: Date.UTC(data['prec']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['prec']['sdate'].split(' ')[0].split('-')[1]) - 1), parseInt(data['prec']['sdate'].split(' ')[0].split('-')[2])),
+						pointInterval: 24 * 3600 * 1000
+					  };
+					} else if (period == 2) {
+					  for (var i = 0; i < dLen; i++) {
+						data['prec']['data'][i] = [Date.UTC(data['prec']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['prec']['sdate'].split(' ')[0].split('-')[1]) - 1 + i), 1), data['prec']['data'][i]];
+					  }
+					  seriesData = {
+						name: 'Precipitation',
+						data: data['prec']['data']
+					  };
+					} else if (period == 3) {
+					  for (var i = 0; i < dLen; i++) {
+						data['prec']['data'][i] = [Date.UTC((parseInt(data['prec']['sdate'].split(' ')[0].split('-')[0]) + i), (parseInt(data['prec']['sdate'].split(' ')[0].split('-')[1]) - 1), 1), data['prec']['data'][i]];
+					  }
+					  seriesData = {
+						name: 'Precipitation',
+						data: data['prec']['data']
+					  };
+					}
+					
+					//******************** monthly**********
+					  for (var i = 0; i < dLenMon; i++) {
+						data['monthly']['data'][i] = [Date.UTC(data['monthly']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['monthly']['sdate'].split(' ')[0].split('-')[1]) - 1 + i), 1), data['monthly']['data'][i]];
+					  }
+					  seriesDataMonthly = {
+						name: 'Precipitation',
+						data: data['monthly']['data']
+					  };
+					  
+					//************* climatology ***********
+					var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+									'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+					categories_months=[]
+					for (var i = 0; i < dLenClim; i++) {
+						listmons=parseInt(data['monthly']['sdate'].split(' ')[0].split('-')[1])-1 + i
+						categories_months.push(monthNames[listmons]);
+					 }
+
+					climData=data['clim']['data']					  
+					Array.prototype.max = function() {
+					  return Math.max.apply(null, this);
+					};
+
+					Array.prototype.min = function() {
+					  return Math.min.apply(null, this);
+					};
+					var indexmax = climData.indexOf(climData.max());
+					// var indexmin = climData.indexOf(climData.min());
+					climData[indexmax] = {y: climData.max(),marker: {symbol: 'url(https://www.highcharts.com/samples/graphics/snow.png)'}}; //'url(https://www.highcharts.com/samples/graphics/sun.png)'
+					// climData[indexmin] = {y: climData.min(),marker: {symbol: 'url(http://gisweb.ciat.cgiar.org/Bc_Downscale/img/sun.png)'}};
+				
+					//*******************
+					
+					$('#grap_prec_'+idSta).highcharts('StockChart',{
+					  chart: {
+						type: 'spline',
+						zoomType: 'x'
+					  },
+					  title: {
+						text: 'Daily Precipitation'
+					  },
+					  xAxis: {
+						type: 'datetime',
+						labels: {
+						  overflow: 'justify'
+						}
+					  },
+					  yAxis: {
+						title: {
+						  text: 'Rainfall mm/day'
+						}
+					  },
+					  tooltip: {
+						valueSuffix: ' mm/day',
+						valueDecimals: 2
+					  },
+					  plotOptions: {
+						series: {
+						  turboThreshold: 15000//larger threshold or set to 0 to disable
+						}
+					  },
+					  series: [seriesData]
+					});
+					//*********************************** monthly**********************************
+					
+					$('#grap_prec_mon_'+idSta).highcharts('StockChart',{
+					  chart: {
+						type: 'spline',
+						zoomType: 'x'
+					  },
+					  title: {
+						text: 'Monthly Precipitation'
+					  },
+					  xAxis: {
+						type: 'datetime',
+						labels: {
+						  overflow: 'justify'
+						}
+					  },
+					  yAxis: {
+						title: {
+						  text: 'Rainfall mm/month'
+						}
+					  },
+					  tooltip: {
+						valueSuffix: ' mm/month',
+						valueDecimals: 2
+					  },
+					  plotOptions: {
+						series: {
+						  turboThreshold: 15000//larger threshold or set to 0 to disable
+						}
+					  },
+					  series: [seriesDataMonthly]
+
+					});		
+					//************************* climatology *********************************
+					
+					$('#grap_prec_clim_'+idSta).highcharts({
+
+							chart: {
+								type: 'line'
+							},
+							title: {
+								text: 'Monthly Average Precipitation'
+							},
+							xAxis: {
+								categories: categories_months
+							},
+							yAxis: {
+								title: {
+									text: 'Rainfall (mm)'
+								},
+								opposite: true								
+							},
+							plotOptions: {
+								 line: {
+									dataLabels: {
+										enabled: true
+									},
+									enableMouseTracking: false
+								}           
+							},
+							series: [{
+								showInLegend: false,
+								name: 'Rainfall (mm)',
+								marker: {
+									symbol: 'square'
+								},
+								data: data['clim']['data']
+
+							}]
+
+						
+					});		
+					/************************** STATISTICAL *********/
+					$('#index_boxplot').append('<img src="http://gisweb.ciat.cgiar.org/Bc_Downscale/download/chirpsV2_boxplot_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
+					$('#index_wetdays').append('<img src="http://gisweb.ciat.cgiar.org/Bc_Downscale/download/chirpsV2_wetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
+					$('#index_conswetdays').append('<img src="http://gisweb.ciat.cgiar.org/Bc_Downscale/download/chirpsV2_conswetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
+					
+					$('#stats_chirps').append(
+						'<br><table width="265" border="1" style="font-family: Trebuchet MS;margin-left: 35%;">                      \
+						  <tr>                                                                                \
+							<td colspan="2" style="padding-bottom: 5px;padding-top: 5px;" ><div align="center"><strong>Summary statistics of daily data</strong></div></td>\
+						  </tr>                                                                               \
+						  <tr>                                                                                \
+							<td width="110"><div align="center">N</div></td>                                  '+
+							'<td width="80"><div align="center">'+data['stats']['data'][0]+'</div></td>'+
+						  '</tr>                                                                               \
+						  <tr>                                                                                \
+							<td><div align="center">Min</div></td>                                           '+
+							'<td width="80"><div align="center">'+data['stats']['data'][1]+'</div></td>'+
+						  '</tr>                                                                               \
+						  <tr>                                                                                \
+							<td><div align="center">Max</div></td>                                        '+
+							'<td width="80"><div align="center">'+data['stats']['data'][2]+'</div></td>'+
+						  '</tr>                                                                               \
+						  <tr>                                                                                \
+							<td><div align="center">Mean</div></td>                                '+
+							'<td width="80"><div align="center">'+data['stats']['data'][3]+'</div></td>'+
+						  '</tr>                                                                               \
+						  <tr>                                                                                \
+							<td><div align="center">Median</div></td>                                       '+
+							'<td width="80"><div align="center">'+data['stats']['data'][6]+'</div></td>'+
+						  '</tr>                                                                               \
+						  <tr>                                                                                \
+							<td><div align="center">Standard deviation</div></td>                                '+
+							'<td width="80"><div align="center">'+data['stats']['data'][5]+'</div></td>'+
+						  '</tr>                                                                               \
+						  <tr>                                                                                \
+							<td><div align="center">Variance</div></td>                                            '+
+							'<td width="80"><div align="center">'+data['stats']['data'][6]+'</div></td>'+
+						  '</tr>                                                                               \
+						  <tr>                                                                                \
+							<td><div align="center">Coef. Variation</div></td>                                            '+
+							'<td width="80"><div align="center">'+data['stats']['data'][7]+'</div></td>'+
+						  '</tr>                                                                               \
+						</table>   <br> <br>                                                                          ' 
+		
+					);
+			
+					
+				  } // fin prec
+				  if (data['sbright']) {
+					dLen = data['sbright']['data'].length;
+
+					if (period == 1) {
+					  seriesData = {
+						name: 'Sun bright',
+						data: data['sbright']['data'],
+						pointStart: Date.UTC(data['sbright']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['sbright']['sdate'].split(' ')[0].split('-')[1]) - 1), parseInt(data['sbright']['sdate'].split(' ')[0].split('-')[2])),
+						pointInterval: 24 * 3600 * 1000
+					  };
+					} else if (period == 2) {
+					  for (var i = 0; i < dLen; i++) {
+						data['sbright']['data'][i] = [Date.UTC(data['sbright']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['sbright']['sdate'].split(' ')[0].split('-')[1]) - 1 + i), 1), data['sbright']['data'][i]];
+					  }
+					  seriesData = {
+						name: 'Sun bright',
+						data: data['sbright']['data']
+					  };
+					} else if (period == 3) {
+					  for (var i = 0; i < dLen; i++) {
+						data['sbright']['data'][i] = [Date.UTC((parseInt(data['sbright']['sdate'].split(' ')[0].split('-')[0]) + i), (parseInt(data['sbright']['sdate'].split(' ')[0].split('-')[1]) - 1), 1), data['sbright']['data'][i]];
+					  }
+					  seriesData = {
+						name: 'Sun bright',
+						data: data['sbright']['data']
+					  };
+					}
+					$('#grap_sbright_'+idSta).highcharts('StockChart',{
+					  chart: {
+						type: 'spline',
+						zoomType: 'x'
+					  },
+					  title: {
+						text: 'Sun bright'
+					  },
+					  xAxis: {
+						type: 'datetime',
+						labels: {
+						  overflow: 'justify'
+						}
+					  },
+					  yAxis: {
+						title: {
+						  text: 'Sun bright hours/day'
+						}
+					  },
+					  tooltip: {
+						valueSuffix: ' hours/day',
+						valueDecimals: 2
+					  },
+					  plotOptions: {
+						series: {
+						  turboThreshold: 15000//larger threshold or set to 0 to disable
+						}
+					  },
+					  series: [seriesData]
+					});
+				  }
+				  if (data['rhum']) {
+					dLen = data['rhum']['data'].length;
+
+					if (period == 1) {
+					  seriesData = {
+						name: 'Air humidity',
+						data: data['rhum']['data'],
+						pointStart: Date.UTC(data['rhum']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['rhum']['sdate'].split(' ')[0].split('-')[1]) - 1), parseInt(data['rhum']['sdate'].split(' ')[0].split('-')[2])),
+						pointInterval: 24 * 3600 * 1000
+					  };
+					} else if (period == 2) {
+					  for (var i = 0; i < dLen; i++) {
+						data['rhum']['data'][i] = [Date.UTC(data['rhum']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['rhum']['sdate'].split(' ')[0].split('-')[1]) - 1 + i), 1), data['rhum']['data'][i]];
+					  }
+					  seriesData = {
+						name: 'Air humidity',
+						data: data['rhum']['data']
+					  };
+					} else if (period == 3) {
+					  for (var i = 0; i < dLen; i++) {
+						data['rhum']['data'][i] = [Date.UTC((parseInt(data['rhum']['sdate'].split(' ')[0].split('-')[0]) + i), (parseInt(data['rhum']['sdate'].split(' ')[0].split('-')[1]) - 1), 1), data['rhum']['data'][i]];
+					  }
+					  seriesData = {
+						name: 'Air humidity',
+						data: data['rhum']['data']
+					  };
+					}
+					$('#grap_rhum_'+idSta).highcharts('StockChart',{
+					  chart: {
+						type: 'spline',
+						zoomType: 'x'
+					  },
+					  title: {
+						text: 'Air humidity'
+					  },
+					  xAxis: {
+						type: 'datetime',
+						labels: {
+						  overflow: 'justify'
+						}
+					  },
+					  yAxis: {
+						title: {
+						  text: 'Air humidity %'
+						}
+					  },
+					  tooltip: {
+						valueSuffix: ' %',
+						valueDecimals: 2
+					  },
+					  plotOptions: {
+						series: {
+						  turboThreshold: 15000//larger threshold or set to 0 to disable
+						}
+					  },
+					  series: [seriesData]
+					});
+				  }
+				  if (data['srad']) {
+					dLen = data['srad']['data'].length;
+
+					if (period == 1) {
+					  seriesData = {
+						name: 'Sun bright',
+						data: data['srad']['data'],
+						pointStart: Date.UTC(data['srad']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['srad']['sdate'].split(' ')[0].split('-')[1]) - 1), parseInt(data['srad']['sdate'].split(' ')[0].split('-')[2])),
+						pointInterval: 24 * 3600 * 1000
+					  };
+					} else if (period == 2) {
+					  for (var i = 0; i < dLen; i++) {
+						data['srad']['data'][i] = [Date.UTC(data['srad']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['srad']['sdate'].split(' ')[0].split('-')[1]) - 1 + i), 1), data['srad']['data'][i]];
+					  }
+					  seriesData = {
+						name: 'Sun bright',
+						data: data['srad']['data']
+					  };
+					} else if (period == 3) {
+					  for (var i = 0; i < dLen; i++) {
+						data['srad']['data'][i] = [Date.UTC((parseInt(data['srad']['sdate'].split(' ')[0].split('-')[0]) + i), (parseInt(data['srad']['sdate'].split(' ')[0].split('-')[1]) - 1), 1), data['srad']['data'][i]];
+					  }
+					  seriesData = {
+						name: 'Sun bright',
+						data: data['srad']['data']
+					  };
+					}
+					$('#grap_srad_'+idSta).highcharts('StockChart',{
+					  chart: {
+						type: 'spline',
+						zoomType: 'x'
+					  },
+					  title: {
+						text: 'Sun bright'
+					  },
+					  xAxis: {
+						type: 'datetime',
+						labels: {
+						  overflow: 'justify'
+						}
+					  },
+					  yAxis: {
+						title: {
+						  text: 'Sun bright hours/day'
+						}
+					  },
+					  tooltip: {
+						valueSuffix: ' hours/day',
+						valueDecimals: 2
+					  },
+					  plotOptions: {
+						series: {
+						  turboThreshold: 15000//larger threshold or set to 0 to disable
+						}
+					  },
+					  series: [seriesData]
+					});
+				  }
+				
+				},
+				complete: function() {
+					myMask.hide();
+				}
+			  });
+
+		}// fin function generateGraps
+		
 // Ext.define('MyApp.ux.DisableCheckColumn', {
     // extend: 'Ext.ux.CheckColumn',
     // alias: 'widget.disablecheckcolumn',
@@ -10068,6 +10620,615 @@ var groupByRegion = {
 
 			}
 		});
+		/*########################################################################  CHIRPS DAILY V2 #########################################################################*/
+		var winChirps
+		mapPanel.map.addLayer(poinDraw);
+		var customHandlerPoint = OpenLayers.Class(OpenLayers.Handler.Point, {
+			addPoint: function(pixel) {}
+		});	  
+		drawControls = new OpenLayers.Control.DrawFeature(poinDraw,customHandlerPoint)
+		mapPanel.map.addControl(drawControls);		
+	
+		var btonChirps = new Ext.Button({
+			id:"btonChirpsID",
+			pressedCls : 'my-pressed',
+			overCls : 'my-over',
+			// toggleGroup: "draw",
+			// group: "draw",				
+			tooltip: "Get data from CHIRPS",
+			icon: icons+'rsz_weather_showers.png', 
+			scale: 'medium',
+			enableToggle: true,
+			toggleHandler: function(btn, pressed){
+				if(pressed==false){
+					 if(Ext.getCmp('winChirpsID')){
+						 Ext.getCmp('winChirpsID').close();		
+						Ext.getCmp('winChirpsID').destroy();
+						poinDraw.destroyFeatures();	
+						drawControls.deactivate();						
+					 }
+				}else{
+				}
+			},		
+			handler: function(){
+				updateCoordsDeg=function (){
+					FieldLon=Ext.getCmp("lon_deg")
+					FieldLat=Ext.getCmp("lat_deg")
+					lonIn=FieldLon.getValue()
+					latIn=FieldLat.getValue()	
+					if(Ext.getCmp('lon_deg').getValue()!=null & Ext.getCmp('lon_deg').getValue()!=0 & Ext.getCmp('lat_deg').getValue()!=null & Ext.getCmp('lat_deg').getValue()!=0 & FieldLon.isValid() & FieldLat.isValid()){
+						var lonlatIn = new OpenLayers.LonLat(lonIn, latIn).transform(new OpenLayers.Projection("EPSG:4326"),new OpenLayers.Projection("EPSG:900913"))
+						if(Ext.getCmp("btnCoordMap").pressed==true){
+							pointMap=poinDraw.features[0].geometry
+							var lonlatMap = new OpenLayers.LonLat(pointMap.x, pointMap.y).transform(new OpenLayers.Projection("EPSG:900913"),new OpenLayers.Projection("EPSG:4326"))
+							cond=Math.abs(lonIn-lonlatMap.lon)>0.000000000001 & Math.abs(latIn-lonlatMap.lat)>0.000000000001
+						}else{cond=Math.abs(lonIn-lonIn)==0}
+						if(cond){
+							var point = new OpenLayers.Geometry.Point(lonlatIn.lon, lonlatIn.lat);
+							var pointFeature2 = new OpenLayers.Feature.Vector(point)
+							poinDraw.addFeatures([pointFeature2]);
+							mapPanel.map.setCenter(new OpenLayers.LonLat(lonlatIn.lon, lonlatIn.lat), 10);	
+						}
+					}				
+				}
+				updateCoordsDMS=function (){
+					FieldLon1=Ext.getCmp("lon_1")
+					FieldLon2=Ext.getCmp("lon_2")
+					FieldLon3=Ext.getCmp("lon_3")
+					FieldLat1=Ext.getCmp("lat_1")
+					FieldLat2=Ext.getCmp("lat_2")
+					FieldLat3=Ext.getCmp("lat_3")
+
+					lonIn1=FieldLon1.getValue()
+					lonIn2=FieldLon2.getValue()
+					lonIn3=FieldLon3.getValue()
+					latIn1=FieldLat1.getValue()	
+					latIn2=FieldLat2.getValue()	
+					latIn3=FieldLat3.getValue()	
+					if(FieldLon1.isValid() & FieldLon2.isValid() & FieldLon3.isValid() & FieldLat1.isValid() & FieldLat2.isValid() & FieldLat3.isValid()){
+						lonIn=ConvertDMSToDD(parseInt(lonIn1),parseInt(lonIn2),parseInt(lonIn3))				
+						latIn=ConvertDMSToDD(parseInt(latIn1),parseInt(latIn2),parseInt(latIn3))				
+						var lonlatIn = new OpenLayers.LonLat(lonIn, latIn).transform(new OpenLayers.Projection("EPSG:4326"),new OpenLayers.Projection("EPSG:900913"))
+						if(Ext.getCmp("btnCoordMap").pressed==true){
+							pointMap=poinDraw.features[0].geometry
+							var lonlatMap = new OpenLayers.LonLat(pointMap.x, pointMap.y).transform(new OpenLayers.Projection("EPSG:900913"),new OpenLayers.Projection("EPSG:4326"))
+							cond=Math.abs(lonIn-lonIn)>1
+						}else{cond=Math.abs(lonIn-lonIn)==0}
+						if(cond){
+							var point = new OpenLayers.Geometry.Point(lonlatIn.lon, lonlatIn.lat);
+							var pointFeature2 = new OpenLayers.Feature.Vector(point)
+							poinDraw.addFeatures([pointFeature2]);
+							mapPanel.map.setCenter(new OpenLayers.LonLat(lonlatIn.lon, lonlatIn.lat), 10);	
+						}
+					}				
+				}			
+				
+			   var form = Ext.create('Ext.form.Panel', {
+					id:"formChirps",
+					autoHeight: true,
+					//width   : 365,
+					bodyPadding: 10,
+					defaults: {
+						anchor: '100%',
+						labelWidth: 100
+					},
+					items   : [
+						{
+							xtype: 'fieldset',
+							title: 'Options',
+							collapsible: false,
+							defaults: {
+								//labelWidth: 89,
+								//anchor: '100%',
+								layout: {
+									//type: 'hbox',
+									//defaultMargins: {top: 0, right: 5, bottom: 0, left: 0}
+								}
+							},
+							items: [
+								{
+									xtype      : 'radiogroup',
+									fieldLabel : 'Coord. format',
+									labelWidth:85,
+									defaults: {
+										//flex: 1
+									},
+									//layout: 'hbox',
+									items: [
+										{
+											boxLabel  : 'DMS',
+											name      : 'coord',
+											width: 60,
+											inputValue: 'dms',
+											id        : 'radio2',
+											checked   : true,
+											margin: '0 0 0 0'
+										},            
+										{
+											boxLabel  : 'Decimal degrees',
+											name      : 'coord',                   
+											inputValue: 'deg',                  
+											id        : 'radio1',
+											margin: '0 0 0 -30'
+										}
+									],
+									listeners: {
+										change: {
+											fn: function(field, newValue, oldValue, options) {
+												if(newValue.coord=='dms'){
+													Ext.getCmp('lon_deg').hide();Ext.getCmp('lon_deg').disable()
+													Ext.getCmp('contCoordsLon').show();Ext.getCmp('contCoordsLon').enable();
+													Ext.getCmp('lat_deg').hide();Ext.getCmp('lat_deg').disable()
+													Ext.getCmp('contCoordsLat').show();Ext.getCmp('contCoordsLat').enable();						
+												}else{
+													Ext.getCmp('lon_deg').show();Ext.getCmp('lon_deg').enable();
+													Ext.getCmp('contCoordsLon').hide();Ext.getCmp('contCoordsLon').disable();
+													Ext.getCmp('lon_deg').reset();
+													var fieldContainer = form.down('#invoiceCt');
+													fieldContainer.items.each(function(f) {
+														if (Ext.isFunction(f.reset)) {
+															f.reset();
+														}
+													});   
+													/*******/
+													Ext.getCmp('lat_deg').show();Ext.getCmp('lat_deg').enable()
+													Ext.getCmp('contCoordsLat').hide();Ext.getCmp('contCoordsLat').disable();
+													Ext.getCmp('lat_deg').reset();
+													var fieldContainer = form.down('#contCoordsLat');
+													fieldContainer.items.each(function(f) {
+														if (Ext.isFunction(f.reset)) {
+															f.reset();
+														}
+													}); 							
+												}
+
+											}
+										}
+									}            
+								},                   
+								{
+									xtype: 'fieldcontainer',
+									fieldLabel: 'Longitude',
+									//combineErrors: true,
+									msgTarget: 'under',
+									labelWidth:85,
+									layout: 'hbox',
+									defaults: {
+										hideLabel: true
+									},
+									items: [
+										{
+											xtype: 'fieldcontainer',
+											id:"contCoordsLon",
+											itemId: 'invoiceCt',
+											msgTarget: 'under', 
+											layout: 'hbox',
+											defaults: {
+												hideLabel: true
+											},
+											items: [
+												{xtype: 'numberfield',  id:"lon_1",hideTrigger: true,fieldLabel: 'Lon 1', name: 'lon_1', width: 40, allowBlank: false, margins: '0 5 0 0',maxValue: 180,minValue: -180,
+													listeners: {
+														'change': updateCoordsDMS
+													}												
+												},                        
+												{xtype: 'displayfield', id:"lon_1_1",value: '&deg;'}, 
+												{xtype: 'numberfield',  id:"lon_2",    hideTrigger: true, fieldLabel: 'Lon 2', name: 'lon_2', width: 35, allowBlank: false, margins: '0 5 0 0',maxValue: 60,minValue: 0,
+													listeners: {
+														'change': updateCoordsDMS
+													}												
+												},
+												{xtype: 'displayfield',id:"lon_2_1", value: '&prime;'},
+												{xtype: 'numberfield',id:"lon_3", hideTrigger: true, fieldLabel: 'Lon 3', name: 'lon_3', width: 45, allowBlank: false,maxValue: 60,minValue: 0,decimalPrecision:2,
+													listeners: {
+														'change': updateCoordsDMS
+													}												
+												},
+												{xtype: 'displayfield', id:"lon_3_1",value: '&Prime;'}
+											]
+										},// container contCoordsLon
+										{xtype: 'numberfield', id:"lon_deg",emptyText: 'Decimal Degrees',hidden: true,disabled:true,hideTrigger: true,fieldLabel: 'Lon_deg 1', name: 'lon_deg-1', width: 120, allowBlank: false, margins: '0 5 0 0',maxValue: 180,minValue: -180,decimalPrecision:12,
+											listeners: {
+												'change': updateCoordsDeg
+											}										
+										},
+									]
+								},
+								{
+									xtype: 'fieldcontainer',
+									fieldLabel: 'Latitude',
+									//combineErrors: true,
+									labelWidth:85,
+									msgTarget: 'under',
+									defaults: {
+										hideLabel: true
+									},
+									items: [
+										{
+											xtype: 'fieldcontainer',
+											id:"contCoordsLat",
+											itemId: 'contCoordsLat',
+											//combineErrors: true,
+											msgTarget: 'under', 
+											layout: 'hbox',
+											defaults: {
+												hideLabel: true
+											},
+											items: [
+												{xtype: 'numberfield',  id:"lat_1",hideTrigger: true,fieldLabel: 'Lat 1', name: 'lat_1', width: 40, allowBlank: false, margins: '0 5 0 0',maxValue: 180,minValue: -180,
+													listeners: {
+														'change': updateCoordsDMS
+													}												
+												},
+												{xtype: 'displayfield', id:"lat_1_1",value: '&deg;'}, 
+												{xtype: 'numberfield',  id:"lat_2",    hideTrigger: true, fieldLabel: 'Lat 2', name: 'lat_2', width: 35, allowBlank: false, margins: '0 5 0 0',maxValue: 60,minValue: 0,
+													listeners: {
+														'change': updateCoordsDMS
+													}												
+												},
+												{xtype: 'displayfield',id:"lat_2_1", value: '&prime;'},
+												{xtype: 'numberfield',id:"lat_3", hideTrigger: true, fieldLabel: 'Lat 3', name: 'lat_3', width: 45, allowBlank: false,maxValue: 60,minValue: 0,decimalPrecision:2,
+													listeners: {
+														'change': updateCoordsDMS
+													}												
+												},
+												{xtype: 'displayfield', id:"lat_3_1",value: '&Prime;'}
+
+											]
+										},// container corrds
+										{xtype: 'numberfield',  id:"lat_deg",hidden: true,disabled:true,emptyText: 'Decimal Degrees',hideTrigger: true,fieldLabel: 'Lat_deg 1', name: 'lat_deg-1', width: 120, allowBlank: false, margins: '0 5 0 0',maxValue: 180,minValue: -180,decimalPrecision:12,
+											listeners: {
+												'change': updateCoordsDeg
+											}										
+										},
+									]
+								},
+								{
+									xtype: 'container',
+									combineErrors: true,
+									msgTarget: 'side',
+									fieldLabel: 'Year Range',
+									anchor: '100%',
+									layout: 'hbox',
+									margin: '5 0 0 0',
+									// defaultMargins: {top: 0, right: 5, bottom: 0, lef:
+									defaults: {
+										hideLabel: true
+									},
+									items : [
+										
+										{xtype: 'displayfield', value: 'Year Range',margin: '15 0 0 0',},
+										{
+											xtype: 'panel',
+											id:"panelSlider",
+											width: 210,
+											height:60,
+											margin: '0 0 0 22',
+											html: ['<input type="text" id="periodh" name="periodh" value="" />']								   
+										}
+									]
+								},
+								{
+									xtype: 'container',
+									combineErrors: true,
+									msgTarget: 'side',
+									fieldLabel: 'Month Range',
+									anchor: '100%',
+									layout: 'hbox',
+									margin: '-12 0 -10 0',
+									// defaultMargins: {top: 0, right: 5, bottom: 0, lef:
+									defaults: {
+										hideLabel: true
+									},
+									items : [
+										
+										{xtype: 'displayfield', value: 'Month Range',margin: '15 0 0 0',},
+										{
+											xtype: 'panel',
+											width: 210,
+											height:60,
+											margin: '0 0 0 12',
+											html: ['<input type="text" id="Smonth" name="Smonth" value="" />']								   
+										}
+									]
+								}
+							]
+						}
+					],
+					buttons: [
+						{
+							text   : 'Get coords from map',
+							id:"btnCoordMap",
+							pressedCls : 'my-pressed',
+							enableToggle: true,
+							handler: function() {
+								// values=this.up('form').getForm().getValues()
+							  // if(values.coord=="dms"){
+								  // console.log(ConvertDMSToDD(parseInt(values.lat_1),parseInt(values.lat_2),parseInt(values.lat_3)))
+							  // }else{
+								  // console.log(ConvertDDToDMS(parseInt(values.lat_deg)))
+							  // }
+							},
+							toggleHandler: function(btn, pressed){
+								if(pressed==false){
+									 drawControls.deactivate();
+									 
+								}else{
+									drawControls.activate();
+								}
+							}				
+						},
+						{
+							text   : 'Run',
+							handler: function() {
+								var form   = this.up('form').getForm();
+								// values=Ext.getCmp("formChirps").getForm().getValues()
+								if (form.isValid()) {
+									valueSlider= $("#periodh").prop("value").split(";");
+									monSlider= $("#Smonth").prop("value").split(";");
+									
+									pointMap=poinDraw.features[0].geometry
+									var lonlatMap = new OpenLayers.LonLat(pointMap.x, pointMap.y).transform(new OpenLayers.Projection("EPSG:900913"),new OpenLayers.Projection("EPSG:4326"))
+									yi=parseInt(valueSlider[0])
+									yf=parseInt(valueSlider[1])
+									mi=parseInt(monSlider[0])
+									mf=parseInt(monSlider[1])										
+									selectionID = 1;
+									statName = "chirps";
+									copyrightN = 1;
+										var arrayvar =new Array("prec") //varlist.split(',');
+									
+										var datatest = {
+											name: 'xxx',
+											rowTitleArr: arrayvar,
+											colTitleArr: ['a', 'b', 'c']
+										}
+										var tpl = [
+											// '<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+											
+											'<tpl for="rowTitleArr">',
+											'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+											'</tpl>',
+											// '<div id="grap_prec_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+											'<div id="grap_prec_mon_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+											'<div id="grap_prec_clim_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+											
+											'<div id="index_boxplot" style="width:'+grapWidth+'px;"></div>',
+											'<div id="index_wetdays" style="width:'+grapWidth+'px;"></div>',
+											'<div id="index_conswetdays" style="width:'+grapWidth+'px;"></div>',
+											'<div id="stats_chirps" style="width:'+grapWidth+'px;"></div>',
+											
+											];	
+										var qcstoreGrap = Ext.create('Ext.data.Store', {
+											model: 'modelQC',
+											autoLoad: true,
+											autoSync: true,
+											sorters: { property: 'name', direction : 'ASC' },
+
+											proxy: {
+												type: 'ajax',
+												url: 'php/Geo_statByregion-test.php',
+												extraParams: {type:29,listStatSel:Ext.encode(selectionID),spec:"espc"},
+												actionMethods: {
+													read: 'POST'//'POST'
+												},												
+												reader: {
+													type: 'json',
+													root: 'topics'
+												}
+											},
+											listeners: {
+												 load: function(store, records) {
+													  store.insert(0, [{
+														  id: 0,
+														  name: 'raw',
+														  description: 'Original data'
+														  
+													  }]);														  
+												 }
+											  }								
+										});
+										btonReturn= new Ext.Button({
+											pressedCls : 'my-pressed',
+											overCls : 'my-over',
+											tooltip: "Return to map",
+											text:'Return to map',
+											icon: icons+'map.png', 
+											scale: 'small',
+											handler: function(){
+												tabs.setActiveTab(0);
+											}													
+										});	
+										btonDowndChirps= new Ext.Button({
+											pressedCls : 'my-pressed',
+											overCls : 'my-over',
+											tooltip: "Download data",
+											text:'Download data',
+											icon: icons+'download-icon.png', 
+											scale: 'small',
+											handler: function(){
+												tabs.setActiveTab(0);
+											}													
+										});					
+										if(Ext.getCmp('graphic_tab')){
+											tabs.remove(Ext.getCmp('graphic_tab'), true);
+										}												
+
+										tabs.add({
+											// contentEl: "desc",
+											// xtype: 'panel',
+											title: 'Graph '+statName,//'Graphic_id'+selectionID
+											name: 'graphic_tab',
+											// width:mainPanelWidth-15,
+											// height: mainPanelHeight,
+											autoScroll: true,
+											// height: 100,
+											// autoHeight: true,
+											// layout: 'fit',
+											id: 'graphic_tab',
+											// html:'<div id="grap_prec_clim_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+											 // html: new Ext.XTemplate(
+											 // tpl
+											 // '<div id="grap_tmin_'+selectionID+'" ></div>',
+											 // '<div id="grap_prec_'+selectionID+'"></div>'
+											 // ),
+											 // .apply({value: '2. HTML property of a panel generated by an XTemplate'}),
+											closable: true,
+											dockedItems: [
+												{
+												xtype: 'toolbar',
+												items: [{xtype: 'tbtext',text: 'Long: '+lonlatMap.lon+' Lat: '+lonlatMap.lat},{xtype: 'tbfill'},btonDowndChirps,'-',btonReturn]
+												}
+											]													
+										});		
+										
+										var t = new Ext.XTemplate(tpl);
+										Ext.getCmp('graphic_tab').update(t.apply(datatest));
+										Ext.getCmp('mapPanelID').setHeight(0)
+										Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
+										tabs.setActiveTab('graphic_tab');
+										var idPeriod = 1
+										generateGrapsChirps(lonlatMap.lon, lonlatMap.lat,yi,yf,mi,mf,idPeriod)
+										
+									// if (copyrightN == 'Free') {
+
+									// }else{
+										// winInfo=Ext.MessageBox.show({
+										   // title: 'Information',
+										   // msg: 'Sorry, You are not authorized to download data.',
+										   // width:300,
+										   // buttons: Ext.MessageBox.OK,
+										   // animateTarget: 'error',
+										   // icon: 'x-message-box-error'
+										   
+										// });	
+										// winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
+									// }
+								
+								
+								
+								}
+							}
+						},
+			 
+						{
+							text   : 'Reset',
+							handler: function() {
+								this.up('form').getForm().reset();
+							}
+						}
+					]
+				});
+					  
+					  
+					  
+				// var winChirps = Ext.create('Ext.window.Window', {
+				var winChirps = new Ext.window.Window({
+				// var winChirps = new Ext.Window({
+					id: "winChirpsID",	
+					title: 'CHIRPS DATA',
+					// closeAction: 'close',
+					height: 300,//250,
+					width: 360,
+					collapsible: true,
+					resizable: false,
+					layout:'fit',
+					//layout: 'fit',
+					items: [form],
+					listeners:{
+						 'close':function(){
+								Ext.getCmp("btonChirpsID").toggle(false);
+								poinDraw.destroyFeatures();
+								drawControls.deactivate();
+						  }
+						}		
+				}).show();
+				
+				$("#periodh").ionRangeSlider({
+					type: "double",
+					min: 1981,
+					max: 2016,
+					from: 1990,
+					to: 2000,
+					to_max:2016,
+					max_interval:10,
+					// to_percent: 77.5,
+					drag_interval: true
+				});				
+				$("#Smonth").ionRangeSlider({
+					type: "double",
+					min: 1,
+					max: 12,
+					from: 1,
+					to: 12,
+					to_max:12,
+					// max_interval:8,
+					// to_percent: 77.5,
+					drag_interval: true
+				});					
+				// $("#period").append( "<p>Test</p>" );
+				
+				// if(Ext.getCmp("btonChirpsID").pressed==false){
+					// Ext.getCmp("winChirpsID").close();	
+					// Ext.getCmp("winChirpsID").destroy();	
+				// }
+	
+			}			
+		});
+	
+		// mapPanel.map.addLayer(poinDraw);
+		
+				// var customHandlerPoint = OpenLayers.Class(OpenLayers.Handler.Point, {
+			// addPoint: function(pixel) {}
+		// });
+		// var drawPoint = Ext.create('GeoExt.Action', {
+			// pressedCls : 'my-pressed',
+			// overCls : 'my-over',
+			// toggleGroup: "draw",
+			// group: "draw",
+			// icon: icons+'rsz_weather_showers.png',
+			// scale: 'medium',		
+			// control: new OpenLayers.Control.DrawFeature(poinDraw, customHandlerPoint ),
+			// map: mapPanel.map,
+			// enableToggle: true,
+			// allowDepress: true,
+			// tooltip: "Get data from CHIRPS",			
+			// toggleHandler: function(btn, pressed){
+				// if(pressed==false){}
+			// }
+		// });
+		poinDraw.events.register('featureadded',poinDraw, onAddedPoint);
+		function onAddedPoint(ev){
+			var point=ev.feature.geometry;
+			// console.log(poinDraw.features[0])
+			// poinDraw.removeFeatures(featureObject);
+			if(poinDraw.features.length>1){
+				// poinDraw.destroyFeatures();
+				poinDraw.removeFeatures(poinDraw.features[0]);
+			}
+			
+			
+			
+			var lonlat = new OpenLayers.LonLat(point.x, point.y).transform(new OpenLayers.Projection("EPSG:900913"),new OpenLayers.Projection("EPSG:4326"))
+			
+			values=Ext.getCmp("formChirps").getForm().getValues()
+			// console.log(values)
+			
+		  if(values.coord=="dms"){
+			 Ext.getCmp('lon_1').setValue(ConvertDDToDMS(lonlat.lon)[0]);Ext.getCmp('lon_2').setValue(ConvertDDToDMS(lonlat.lon)[1]);Ext.getCmp('lon_3').setValue(ConvertDDToDMS(lonlat.lon)[2]);
+			 Ext.getCmp('lat_1').setValue(ConvertDDToDMS(lonlat.lat)[0]);Ext.getCmp('lat_2').setValue(ConvertDDToDMS(lonlat.lat)[1]);Ext.getCmp('lat_3').setValue(ConvertDDToDMS(lonlat.lat)[2]);
+		  }else{
+			 Ext.getCmp('lon_deg').setValue(lonlat.lon);Ext.getCmp('lat_deg').setValue(lonlat.lat);
+			  
+		  }
+		  
+			
+											
+			
+			
+			
+		}
+		/*###############################################################################  FIN CHIRPS DAILY V2 #########################################################################*/
 		
 		var drawPolygon = Ext.create('GeoExt.Action', {
 			pressedCls : 'my-pressed',
@@ -11001,6 +12162,7 @@ var groupByRegion = {
 		toolbarItems.push(Ext.create('Ext.button.Button', ctrl_zoomBox));		
 		// toolbarItems.push(Ext.create('Ext.button.Button', selectControl));
 		toolbarItems.push(Ext.create('Ext.button.Button', drawPolygon));
+		toolbarItems.push(Ext.create('Ext.button.Button', btonChirps));
 		
 		// Ext.getCmp('toolbarID').add(medirDistancia);	
 		// Ext.getCmp('toolbarID').add({xtype: 'tbfill'});
