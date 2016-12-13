@@ -96,6 +96,7 @@
 	});	
 	
 	var polygonDraw = new OpenLayers.Layer.Vector("Shapes",{'displayInLayerSwitcher':false, renderers: renderer,transparent: true,visibility: true});
+	var poinDraw = new OpenLayers.Layer.Vector("Chirps",{'displayInLayerSwitcher':false, renderers: renderer,transparent: true,visibility: true});
 			
 	var rulesRegion = [
 		new OpenLayers.Rule({
