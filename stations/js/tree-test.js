@@ -2060,7 +2060,7 @@ function ConvertDDToDMS(D){
 						
 					});		
 					/************************** STATISTICAL *********/
-					source_ftp="http://172.22.52.8/CCAFS-Climate/downloads/chirps/" //"http://gisweb.ciat.cgiar.org/Bc_Downscale/download" 
+					source_ftp="../../downloads/chirps/"//"http://172.22.52.8/CCAFS-Climate/downloads/chirps/" //"http://gisweb.ciat.cgiar.org/Bc_Downscale/download" 
 					
 					$('#index_boxplot').append('<img src="'+source_ftp+'/chirpsV2_boxplot_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
 					$('#index_wetdays').append('<img src="'+source_ftp+'/chirpsV2_wetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
