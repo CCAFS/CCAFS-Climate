@@ -12,7 +12,7 @@
     </p>
     <p>
         Here we apply a downscaling method based on thin plate spline spatial interpolation of anomalies (deltas) of original GCM outputs.
-        Anomalies are interpolated between GCM cell centroids and are then applied to a baseline climate given by a high resolution surface (<a href="{$smarty.const.SMARTY_DOCS_URI}/worldclim_IJC.pdf">WorldClim; Hijmans et al., 2005</a>).
+        Anomalies are interpolated between GCM cell centroids and are then applied to a baseline climate given by a high resolution surface (<a target="_blank" href="http://worldclim.com/current"><i>WorldClim 1.4</i></a>; <a href="{$smarty.const.SMARTY_DOCS_URI}/worldclim_IJC.pdf">Hijmans et al., 2005</a>).
         The method makes the following gross assumptions:
     </p>
     <ol>

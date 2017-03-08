@@ -215,6 +215,9 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
    // $vars['method-acronym'] = $methods[0]['name'];
    $vars['method-acronym'] =substr($methodAcro, 0, -1);
 
+   $Date_Submitted=date("d-M-Y h:i:s");
+  $vars["Date_Submitted"]=$Date_Submitted;  
+   
 	// ALTER SEQUENCE datasets_download_bias_id_seq RESTART WITH 1
    $register="INSERT INTO datasets_download_bias(lon, lat, models, scenarios, observation, periodh, periodf, variables, methods, formats,email)VALUES (".$vars['lon'].",".$vars['lat'].",'".$vars['model']."','".$vars['scenarios']."','".$vars['observation-acronym']."','".$vars['periodh']."','".$vars['period']."','".$vars['variables-acronym']."','".$vars['methods']."','".$vars['formats']."','".$vars['email']."');";
 	$ret = $db->getAll($register);
@@ -223,13 +226,14 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
    $getID = $db->getAll($getLastRegister);
 	$vars['order'] =$getID[0][0];
  
- // echo "<pre>".print_r($vars,true)."</pre>";
+ echo "<pre>".print_r($vars,true)."</pre>";
  // echo $vars;
 //  $url = "http://172.22.52.62/correctedTest.php";
 // exit();
 
 
-  $url = "http://gisweb.ciat.cgiar.org/Bc_Downscale/biasCorrected.php";
+  $url = "http://172.22.52.8/correctedTest.php";
+  // $url = "http://gisweb.ciat.cgiar.org/Bc_Downscale/biasCorrected.php";
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
