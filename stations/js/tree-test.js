@@ -74,7 +74,7 @@ Ext.application({
 
 		mainPanelHeight=650//Ext.getBody().getViewSize().height//*0.7//800	heightDiv//
 		mainPanelWidth= 836//Ext.getBody().getViewSize().width//*0.5 //1000 widthDiv//		
-		tabsWidth= mainPanelWidth*0.35
+		tabsWidth= mainPanelWidth*0.37
 		fieldsetWidth=280
 		fieldsetWidthLayer=270
 		widthComboBox =150 //tabsWidth*0.8 //
@@ -5134,7 +5134,7 @@ var groupByRegion = {
 	count=0
     var groupByQuery = {
         xtype: 'fieldset',
-        title: 'Advanced query   '+ '<img id="help_toolip" class="tooltipIcon" src='+icons+infoB+' data-qtip="'+toolip_groupByQuery+'" />',//<span data-qtip="hello">First Name</span>  
+        title: 'Advanced query station   '+ '<img id="help_toolip" class="tooltipIcon" src='+icons+infoB+' data-qtip="'+toolip_groupByQuery+'" />',//<span data-qtip="hello">First Name</span>  
 		id:'groupByQueryID',
         layout: 'anchor',
 		width:fieldsetWidth,
@@ -6201,6 +6201,510 @@ var groupByRegion = {
 		
 	}
 
+		/*########################################################################  FORM CHIRPS DAILY V2 #########################################################################*/
+		
+		mapPanel.map.addLayer(poinDraw);
+		var customHandlerPoint = OpenLayers.Class(OpenLayers.Handler.Point, {
+			addPoint: function(pixel) {}
+		});	  
+		drawControls = new OpenLayers.Control.DrawFeature(poinDraw,customHandlerPoint)
+		mapPanel.map.addControl(drawControls);	
+		
+		updateCoordsDeg=function (){
+			FieldLon=Ext.getCmp("lon_deg")
+			FieldLat=Ext.getCmp("lat_deg")
+			lonIn=FieldLon.getValue()
+			latIn=FieldLat.getValue()	
+			if(Ext.getCmp('lon_deg').getValue()!=null & Ext.getCmp('lon_deg').getValue()!=0 & Ext.getCmp('lat_deg').getValue()!=null & Ext.getCmp('lat_deg').getValue()!=0 & FieldLon.isValid() & FieldLat.isValid()){
+				var lonlatIn = new OpenLayers.LonLat(lonIn, latIn).transform(new OpenLayers.Projection("EPSG:4326"),new OpenLayers.Projection("EPSG:900913"))
+				if(Ext.getCmp("btnCoordMap").pressed==true){
+					pointMap=poinDraw.features[0].geometry
+					var lonlatMap = new OpenLayers.LonLat(pointMap.x, pointMap.y).transform(new OpenLayers.Projection("EPSG:900913"),new OpenLayers.Projection("EPSG:4326"))
+					cond=Math.abs(lonIn-lonlatMap.lon)>0.000000000001 & Math.abs(latIn-lonlatMap.lat)>0.000000000001
+				}else{cond=Math.abs(lonIn-lonIn)==0}
+				if(cond){
+					var point = new OpenLayers.Geometry.Point(lonlatIn.lon, lonlatIn.lat);
+					var pointFeature2 = new OpenLayers.Feature.Vector(point)
+					poinDraw.addFeatures([pointFeature2]);
+					mapPanel.map.setCenter(new OpenLayers.LonLat(lonlatIn.lon, lonlatIn.lat), 10);	
+				}
+			}				
+		}
+		updateCoordsDMS=function (){
+			FieldLon1=Ext.getCmp("lon_1")
+			FieldLon2=Ext.getCmp("lon_2")
+			FieldLon3=Ext.getCmp("lon_3")
+			FieldLat1=Ext.getCmp("lat_1")
+			FieldLat2=Ext.getCmp("lat_2")
+			FieldLat3=Ext.getCmp("lat_3")
+
+			lonIn1=FieldLon1.getValue()
+			lonIn2=FieldLon2.getValue()
+			lonIn3=FieldLon3.getValue()
+			latIn1=FieldLat1.getValue()	
+			latIn2=FieldLat2.getValue()	
+			latIn3=FieldLat3.getValue()	
+			if(FieldLon1.isValid() & FieldLon2.isValid() & FieldLon3.isValid() & FieldLat1.isValid() & FieldLat2.isValid() & FieldLat3.isValid()){
+				lonIn=ConvertDMSToDD(parseInt(lonIn1),parseInt(lonIn2),parseInt(lonIn3))				
+				latIn=ConvertDMSToDD(parseInt(latIn1),parseInt(latIn2),parseInt(latIn3))				
+				var lonlatIn = new OpenLayers.LonLat(lonIn, latIn).transform(new OpenLayers.Projection("EPSG:4326"),new OpenLayers.Projection("EPSG:900913"))
+				if(Ext.getCmp("btnCoordMap").pressed==true){
+					pointMap=poinDraw.features[0].geometry
+					var lonlatMap = new OpenLayers.LonLat(pointMap.x, pointMap.y).transform(new OpenLayers.Projection("EPSG:900913"),new OpenLayers.Projection("EPSG:4326"))
+					cond=Math.abs(lonIn-lonIn)>1
+				}else{cond=Math.abs(lonIn-lonIn)==0}
+				if(cond){
+					var point = new OpenLayers.Geometry.Point(lonlatIn.lon, lonlatIn.lat);
+					var pointFeature2 = new OpenLayers.Feature.Vector(point)
+					poinDraw.addFeatures([pointFeature2]);
+					mapPanel.map.setCenter(new OpenLayers.LonLat(lonlatIn.lon, lonlatIn.lat), 10);	
+				}
+			}				
+		}			
+	   labelWidthChirps=68
+	   var formChirps = Ext.create('Ext.form.Panel', {
+			id:"formChirps",
+			autoHeight: true,
+			//width   : 365,
+			bodyPadding: 10,
+			defaults: {
+				anchor: '100%',
+				labelWidth: 100
+			},
+			items   : [
+						{
+							xtype      : 'radiogroup',
+							fieldLabel : 'Format',
+							labelWidth:labelWidthChirps,
+							defaults: {
+								//flex: 1
+							},
+							//layout: 'hbox',
+							items: [
+								{
+									boxLabel  : 'DMS',
+									name      : 'coord',
+									width: 60,
+									inputValue: 'dms',
+									id        : 'radio2',
+									checked   : true,
+									margin: '0 0 0 0'
+								},            
+								{
+									boxLabel  : 'DEG',
+									name      : 'coord',                   
+									inputValue: 'deg',                  
+									id        : 'radio1',
+									margin: '0 0 0 -30'
+								}
+							],
+							listeners: {
+								change: {
+									fn: function(field, newValue, oldValue, options) {
+										if(newValue.coord=='dms'){
+											Ext.getCmp('lon_deg').hide();Ext.getCmp('lon_deg').disable()
+											Ext.getCmp('contCoordsLon').show();Ext.getCmp('contCoordsLon').enable();
+											Ext.getCmp('lat_deg').hide();Ext.getCmp('lat_deg').disable()
+											Ext.getCmp('contCoordsLat').show();Ext.getCmp('contCoordsLat').enable();						
+										}else{
+											Ext.getCmp('lon_deg').show();Ext.getCmp('lon_deg').enable();
+											Ext.getCmp('contCoordsLon').hide();Ext.getCmp('contCoordsLon').disable();
+											Ext.getCmp('lon_deg').reset();
+											var fieldContainer = formChirps.down('#invoiceCt');
+											fieldContainer.items.each(function(f) {
+												if (Ext.isFunction(f.reset)) {
+													f.reset();
+												}
+											});   
+											/*******/
+											Ext.getCmp('lat_deg').show();Ext.getCmp('lat_deg').enable()
+											Ext.getCmp('contCoordsLat').hide();Ext.getCmp('contCoordsLat').disable();
+											Ext.getCmp('lat_deg').reset();
+											var fieldContainer = formChirps.down('#contCoordsLat');
+											fieldContainer.items.each(function(f) {
+												if (Ext.isFunction(f.reset)) {
+													f.reset();
+												}
+											}); 							
+										}
+
+									}
+								}
+							}            
+						},                   
+						{
+							xtype: 'fieldcontainer',
+							fieldLabel: 'Longitude',
+							//combineErrors: true,
+							msgTarget: 'under',
+							labelWidth:labelWidthChirps,
+							layout: 'hbox',
+							defaults: {
+								hideLabel: true
+							},
+							items: [
+								{
+									xtype: 'fieldcontainer',
+									id:"contCoordsLon",
+									itemId: 'invoiceCt',
+									msgTarget: 'under', 
+									layout: 'hbox',
+									defaults: {
+										hideLabel: true
+									},
+									items: [
+										{xtype: 'numberfield',  id:"lon_1",hideTrigger: true,fieldLabel: 'Lon 1', name: 'lon_1', width: 40, allowBlank: false, margins: '0 5 0 0',maxValue: 180,minValue: -180,
+											listeners: {
+												'change': updateCoordsDMS
+											}												
+										},                        
+										{xtype: 'displayfield', id:"lon_1_1",value: '&deg;'}, 
+										{xtype: 'numberfield',  id:"lon_2",    hideTrigger: true, fieldLabel: 'Lon 2', name: 'lon_2', width: 35, allowBlank: false, margins: '0 5 0 0',maxValue: 60,minValue: 0,
+											listeners: {
+												'change': updateCoordsDMS
+											}												
+										},
+										{xtype: 'displayfield',id:"lon_2_1", value: '&prime;'},
+										{xtype: 'numberfield',id:"lon_3", hideTrigger: true, fieldLabel: 'Lon 3', name: 'lon_3', width: 45, allowBlank: false,maxValue: 60,minValue: 0,decimalPrecision:2,
+											listeners: {
+												'change': updateCoordsDMS
+											}												
+										},
+										{xtype: 'displayfield', id:"lon_3_1",value: '&Prime;'}
+									]
+								},// container contCoordsLon
+								{xtype: 'numberfield', id:"lon_deg",emptyText: 'Decimal Degrees',hidden: true,disabled:true,hideTrigger: true,fieldLabel: 'Lon_deg 1', name: 'lon_deg-1', width: 120, allowBlank: false, margins: '0 5 0 0',maxValue: 180,minValue: -180,decimalPrecision:12,
+									listeners: {
+										'change': updateCoordsDeg
+									}										
+								},
+							]
+						},
+						{
+							xtype: 'fieldcontainer',
+							fieldLabel: 'Latitude',
+							//combineErrors: true,
+							labelWidth:labelWidthChirps,
+							msgTarget: 'under',
+							defaults: {
+								hideLabel: true
+							},
+							items: [
+								{
+									xtype: 'fieldcontainer',
+									id:"contCoordsLat",
+									itemId: 'contCoordsLat',
+									//combineErrors: true,
+									msgTarget: 'under', 
+									layout: 'hbox',
+									defaults: {
+										hideLabel: true
+									},
+									items: [
+										{xtype: 'numberfield',  id:"lat_1",hideTrigger: true,fieldLabel: 'Lat 1', name: 'lat_1', width: 40, allowBlank: false, margins: '0 5 0 0',maxValue: 180,minValue: -180,
+											listeners: {
+												'change': updateCoordsDMS
+											}												
+										},
+										{xtype: 'displayfield', id:"lat_1_1",value: '&deg;'}, 
+										{xtype: 'numberfield',  id:"lat_2",    hideTrigger: true, fieldLabel: 'Lat 2', name: 'lat_2', width: 35, allowBlank: false, margins: '0 5 0 0',maxValue: 60,minValue: 0,
+											listeners: {
+												'change': updateCoordsDMS
+											}												
+										},
+										{xtype: 'displayfield',id:"lat_2_1", value: '&prime;'},
+										{xtype: 'numberfield',id:"lat_3", hideTrigger: true, fieldLabel: 'Lat 3', name: 'lat_3', width: 45, allowBlank: false,maxValue: 60,minValue: 0,decimalPrecision:2,
+											listeners: {
+												'change': updateCoordsDMS
+											}												
+										},
+										{xtype: 'displayfield', id:"lat_3_1",value: '&Prime;'}
+
+									]
+								},// container corrds
+								{xtype: 'numberfield',  id:"lat_deg",hidden: true,disabled:true,emptyText: 'Decimal Degrees',hideTrigger: true,fieldLabel: 'Lat_deg 1', name: 'lat_deg-1', width: 120, allowBlank: false, margins: '0 5 0 0',maxValue: 180,minValue: -180,decimalPrecision:12,
+									listeners: {
+										'change': updateCoordsDeg
+									}										
+								},
+							]
+						},
+						{
+							xtype: 'container',
+							combineErrors: true,
+							msgTarget: 'side',
+							fieldLabel: 'Year',
+							anchor: '100%',
+							layout: 'hbox',
+							margin: '5 0 0 0',
+							// defaultMargins: {top: 0, right: 5, bottom: 0, lef:
+							defaults: {
+								hideLabel: true
+							},
+							items : [
+								
+								{xtype: 'displayfield', value: 'Year',margin: '15 0 0 0',},
+								{
+									xtype: 'panel',
+									id:"panelSlider",
+									width: 180,
+									height:60,
+									margin: '0 0 0 22',
+									html: ['<input type="text" id="periodh" name="periodh" value="" />']								   
+								}
+							]
+						},
+						{
+							xtype: 'container',
+							combineErrors: true,
+							msgTarget: 'side',
+							fieldLabel: 'Month',
+							anchor: '100%',
+							layout: 'hbox',
+							margin: '-12 0 -10 0',
+							// defaultMargins: {top: 0, right: 5, bottom: 0, lef:
+							defaults: {
+								hideLabel: true
+							},
+							items : [
+								
+								{xtype: 'displayfield', value: 'Month',margin: '15 0 0 0',},
+								{
+									xtype: 'panel',
+									width: 180,
+									height:60,
+									margin: '0 0 0 12',
+									html: ['<input type="text" id="Smonth" name="Smonth" value="" />']								   
+								}
+							]
+						}
+
+			],
+			buttons: [
+				{
+					text   : 'coords map',
+					id:"btnCoordMap",
+					pressedCls : 'my-pressed',
+					enableToggle: true,
+					handler: function() {
+						// values=this.up('form').getForm().getValues()
+					  // if(values.coord=="dms"){
+						  // console.log(ConvertDMSToDD(parseInt(values.lat_1),parseInt(values.lat_2),parseInt(values.lat_3)))
+					  // }else{
+						  // console.log(ConvertDDToDMS(parseInt(values.lat_deg)))
+					  // }
+					},
+					toggleHandler: function(btn, pressed){
+						if(pressed==false){
+							 drawControls.deactivate();
+							 poinDraw.destroyFeatures()
+							 
+						}else{
+							drawControls.activate();
+						}
+					}				
+				},
+				{
+					text   : 'Run',
+					handler: function() {
+						var form   = this.up('form').getForm();
+						// values=Ext.getCmp("formChirps").getForm().getValues()
+						if (form.isValid()) {
+							valueSlider= $("#periodh").prop("value").split(";");
+							monSlider= $("#Smonth").prop("value").split(";");
+							
+							pointMap=poinDraw.features[0].geometry
+							var lonlatMap = new OpenLayers.LonLat(pointMap.x, pointMap.y).transform(new OpenLayers.Projection("EPSG:900913"),new OpenLayers.Projection("EPSG:4326"))
+							yi=parseInt(valueSlider[0])
+							yf=parseInt(valueSlider[1])
+							mi=parseInt(monSlider[0])
+							mf=parseInt(monSlider[1])										
+							selectionID = 1;
+							statName = "chirps";
+							copyrightN = 1;
+								var arrayvar =new Array("prec") //varlist.split(',');
+							
+								var datatest = {
+									name: 'xxx',
+									rowTitleArr: arrayvar,
+									colTitleArr: ['a', 'b', 'c']
+								}
+								var tpl = [
+									// '<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+									
+									'<tpl for="rowTitleArr">',
+									'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+									'</tpl>',
+									// '<div id="grap_prec_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+									'<div id="grap_prec_mon_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+									'<div id="grap_prec_clim_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+									
+									'<div id="index_boxplot" style="width:'+grapWidth+'px;"></div>',
+									'<div id="index_wetdays" style="width:'+grapWidth+'px;"></div>',
+									'<div id="index_conswetdays" style="width:'+grapWidth+'px;"></div>',
+									'<div id="stats_chirps" style="width:'+grapWidth+'px;"></div>',
+									
+									];	
+								var qcstoreGrap = Ext.create('Ext.data.Store', {
+									model: 'modelQC',
+									autoLoad: true,
+									autoSync: true,
+									sorters: { property: 'name', direction : 'ASC' },
+
+									proxy: {
+										type: 'ajax',
+										url: 'php/Geo_statByregion-test.php',
+										extraParams: {type:29,listStatSel:Ext.encode(selectionID),spec:"espc"},
+										actionMethods: {
+											read: 'POST'//'POST'
+										},												
+										reader: {
+											type: 'json',
+											root: 'topics'
+										}
+									},
+									listeners: {
+										 load: function(store, records) {
+											  store.insert(0, [{
+												  id: 0,
+												  name: 'raw',
+												  description: 'Original data'
+												  
+											  }]);														  
+										 }
+									  }								
+								});
+								btonReturn= new Ext.Button({
+									pressedCls : 'my-pressed',
+									overCls : 'my-over',
+									tooltip: "Return to map",
+									text:'Return to map',
+									icon: icons+'map.png', 
+									scale: 'small',
+									handler: function(){
+										tabs.setActiveTab(0);
+									}													
+								});	
+								btonDowndChirps= new Ext.Button({
+									pressedCls : 'my-pressed',
+									overCls : 'my-over',
+									tooltip: "Download data",
+									text:'Download data',
+									icon: icons+'download-icon.png', 
+									scale: 'small',
+									handler: function(){
+										tabs.setActiveTab(0);
+									}													
+								});					
+								if(Ext.getCmp('graphic_tab')){
+									tabs.remove(Ext.getCmp('graphic_tab'), true);
+								}												
+
+								tabs.add({
+									// contentEl: "desc",
+									// xtype: 'panel',
+									title: 'Graph '+statName,//'Graphic_id'+selectionID
+									name: 'graphic_tab',
+									// width:mainPanelWidth-15,
+									// height: mainPanelHeight,
+									autoScroll: true,
+									// height: 100,
+									// autoHeight: true,
+									// layout: 'fit',
+									id: 'graphic_tab',
+									// html:'<div id="grap_prec_clim_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+									 // html: new Ext.XTemplate(
+									 // tpl
+									 // '<div id="grap_tmin_'+selectionID+'" ></div>',
+									 // '<div id="grap_prec_'+selectionID+'"></div>'
+									 // ),
+									 // .apply({value: '2. HTML property of a panel generated by an XTemplate'}),
+									closable: true,
+									dockedItems: [
+										{
+										xtype: 'toolbar',
+										items: [{xtype: 'tbtext',text: 'Long: '+lonlatMap.lon+' Lat: '+lonlatMap.lat},{xtype: 'tbfill'},btonDowndChirps,'-',btonReturn]
+										}
+									]													
+								});		
+								
+								var t = new Ext.XTemplate(tpl);
+								Ext.getCmp('graphic_tab').update(t.apply(datatest));
+								Ext.getCmp('mapPanelID').setHeight(0)
+								Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
+								tabs.setActiveTab('graphic_tab');
+								var idPeriod = 1
+								generateGrapsChirps(lonlatMap.lon, lonlatMap.lat,yi,yf,mi,mf,idPeriod)
+								
+							// if (copyrightN == 'Free') {
+
+							// }else{
+								// winInfo=Ext.MessageBox.show({
+								   // title: 'Information',
+								   // msg: 'Sorry, You are not authorized to download data.',
+								   // width:300,
+								   // buttons: Ext.MessageBox.OK,
+								   // animateTarget: 'error',
+								   // icon: 'x-message-box-error'
+								   
+								// });	
+								// winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
+							// }
+						
+						
+						
+						}
+					}
+				},
+	 
+				{
+					text   : 'Reset',
+					handler: function() {
+						this.up('form').getForm().reset();
+					}
+				}
+			]
+		});
+
+
+	
+    var groupByChirps = {
+        xtype: 'fieldset',
+        title: 'Get CHIRPS & WorldClim V2 data   '+ '<img id="help_toolip" class="tooltipIcon" src='+icons+infoB+' data-qtip="'+toolip_groupByStation+'" />',//<span data-qtip="hello">First Name</span>  
+		width:fieldsetWidth,
+        layout: 'anchor',
+        defaults: {
+            anchor: '100%'
+        },
+        collapsible: true,
+        collapsed: false,
+        items: [formChirps]
+	}
+	
+	
+		poinDraw.events.register('featureadded',poinDraw, onAddedPoint);
+		function onAddedPoint(ev){
+			var point=ev.feature.geometry;
+			// console.log(poinDraw.features[0])
+			// poinDraw.removeFeatures(featureObject);
+			if(poinDraw.features.length>1){
+				// poinDraw.destroyFeatures();
+				poinDraw.removeFeatures(poinDraw.features[0]);
+			}
+			var lonlat = new OpenLayers.LonLat(point.x, point.y).transform(new OpenLayers.Projection("EPSG:900913"),new OpenLayers.Projection("EPSG:4326"))
+			values=Ext.getCmp("formChirps").getForm().getValues()
+		  if(values.coord=="dms"){
+			 Ext.getCmp('lon_1').setValue(ConvertDDToDMS(lonlat.lon)[0]);Ext.getCmp('lon_2').setValue(ConvertDDToDMS(lonlat.lon)[1]);Ext.getCmp('lon_3').setValue(ConvertDDToDMS(lonlat.lon)[2]);
+			 Ext.getCmp('lat_1').setValue(ConvertDDToDMS(lonlat.lat)[0]);Ext.getCmp('lat_2').setValue(ConvertDDToDMS(lonlat.lat)[1]);Ext.getCmp('lat_3').setValue(ConvertDDToDMS(lonlat.lat)[2]);
+		  }else{
+			 Ext.getCmp('lon_deg').setValue(lonlat.lon);Ext.getCmp('lat_deg').setValue(lonlat.lat);
+		  }
+		}
+	
+		/*########################################################################  FIN FORM CHIRPS DAILY V2 #########################################################################*/
+
+	
+
     var groupLocation = {
         xtype: 'fieldset',
         title: 'Location place',
@@ -6266,6 +6770,16 @@ var groupByRegion = {
             groupByQuery
         ]	
     });	
+    var tabSearchChirps = Ext.create('Ext.FormPanel', {
+		width:fieldsetWidth+10,//tabsWidth,
+        bodyPadding: 5,
+        items: [
+            groupByChirps
+        ]	
+    });	
+	
+
+			
 // ############################################################################
 	slider=Ext.create('Ext.slider.Single', {
 		hideLabel: true,
@@ -6521,7 +7035,7 @@ var groupByRegion = {
 			items: [{
 				// contentEl:'markup', 
 				title: 'Search',
-				items:[tabSearchLogin,tabSearchRegion,tabSearchStat,tabSearchQuery]
+				items:[tabSearchLogin,tabSearchRegion,tabSearchStat,tabSearchQuery,tabSearchChirps]
 			},{
 				// contentEl:'script', 
 				title: 'Options',
@@ -6549,9 +7063,7 @@ var groupByRegion = {
 				}
 			}			
 		});
-		
 
-		
 	// ########################### mapPanel ###################
 		
 	
@@ -10626,13 +11138,14 @@ var groupByRegion = {
 		});
 		/*########################################################################  CHIRPS DAILY V2 #########################################################################*/
 		var winChirps
-		mapPanel.map.addLayer(poinDraw);
-		var customHandlerPoint = OpenLayers.Class(OpenLayers.Handler.Point, {
-			addPoint: function(pixel) {}
-		});	  
-		drawControls = new OpenLayers.Control.DrawFeature(poinDraw,customHandlerPoint)
-		mapPanel.map.addControl(drawControls);		
-	
+		// mapPanel.map.addLayer(poinDraw);
+		// var customHandlerPoint = OpenLayers.Class(OpenLayers.Handler.Point, {
+			// addPoint: function(pixel) {}
+		// });	  
+		// drawControls = new OpenLayers.Control.DrawFeature(poinDraw,customHandlerPoint)
+		// mapPanel.map.addControl(drawControls);		
+
+		
 		var btonChirps = new Ext.Button({
 			id:"btonChirpsID",
 			pressedCls : 'my-pressed',
@@ -10655,6 +11168,7 @@ var groupByRegion = {
 				}
 			},		
 			handler: function(){
+			/*
 				updateCoordsDeg=function (){
 					FieldLon=Ext.getCmp("lon_deg")
 					FieldLat=Ext.getCmp("lat_deg")
@@ -10706,7 +11220,7 @@ var groupByRegion = {
 						}
 					}				
 				}			
-				
+
 			   var form = Ext.create('Ext.form.Panel', {
 					id:"formChirps",
 					autoHeight: true,
@@ -10774,7 +11288,6 @@ var groupByRegion = {
 															f.reset();
 														}
 													});   
-													/*******/
 													Ext.getCmp('lat_deg').show();Ext.getCmp('lat_deg').enable()
 													Ext.getCmp('contCoordsLat').hide();Ext.getCmp('contCoordsLat').disable();
 													Ext.getCmp('lat_deg').reset();
@@ -11147,7 +11660,7 @@ var groupByRegion = {
 						  }
 						}		
 				}).show();
-				
+
 				$("#periodh").ionRangeSlider({
 					type: "double",
 					min: 1981,
@@ -11169,7 +11682,8 @@ var groupByRegion = {
 					// max_interval:8,
 					// to_percent: 77.5,
 					drag_interval: true
-				});					
+				});		
+			*/				
 				// $("#period").append( "<p>Test</p>" );
 				
 				// if(Ext.getCmp("btonChirpsID").pressed==false){
@@ -11201,6 +11715,7 @@ var groupByRegion = {
 				// if(pressed==false){}
 			// }
 		// });
+		/*
 		poinDraw.events.register('featureadded',poinDraw, onAddedPoint);
 		function onAddedPoint(ev){
 			var point=ev.feature.geometry;
@@ -11210,28 +11725,16 @@ var groupByRegion = {
 				// poinDraw.destroyFeatures();
 				poinDraw.removeFeatures(poinDraw.features[0]);
 			}
-			
-			
-			
 			var lonlat = new OpenLayers.LonLat(point.x, point.y).transform(new OpenLayers.Projection("EPSG:900913"),new OpenLayers.Projection("EPSG:4326"))
-			
 			values=Ext.getCmp("formChirps").getForm().getValues()
-			// console.log(values)
-			
 		  if(values.coord=="dms"){
 			 Ext.getCmp('lon_1').setValue(ConvertDDToDMS(lonlat.lon)[0]);Ext.getCmp('lon_2').setValue(ConvertDDToDMS(lonlat.lon)[1]);Ext.getCmp('lon_3').setValue(ConvertDDToDMS(lonlat.lon)[2]);
 			 Ext.getCmp('lat_1').setValue(ConvertDDToDMS(lonlat.lat)[0]);Ext.getCmp('lat_2').setValue(ConvertDDToDMS(lonlat.lat)[1]);Ext.getCmp('lat_3').setValue(ConvertDDToDMS(lonlat.lat)[2]);
 		  }else{
 			 Ext.getCmp('lon_deg').setValue(lonlat.lon);Ext.getCmp('lat_deg').setValue(lonlat.lat);
-			  
 		  }
-		  
-			
-											
-			
-			
-			
 		}
+		*/
 		/*###############################################################################  FIN CHIRPS DAILY V2 #########################################################################*/
 		
 		var drawPolygon = Ext.create('GeoExt.Action', {
@@ -12166,7 +12669,7 @@ var groupByRegion = {
 		toolbarItems.push(Ext.create('Ext.button.Button', ctrl_zoomBox));		
 		// toolbarItems.push(Ext.create('Ext.button.Button', selectControl));
 		toolbarItems.push(Ext.create('Ext.button.Button', drawPolygon));
-		toolbarItems.push(Ext.create('Ext.button.Button', btonChirps));
+		// toolbarItems.push(Ext.create('Ext.button.Button', btonChirps));
 		
 		// Ext.getCmp('toolbarID').add(medirDistancia);	
 		// Ext.getCmp('toolbarID').add({xtype: 'tbfill'});
@@ -12438,6 +12941,30 @@ var tabCount = 4;
 
 			],
 			renderTo: Ext.getBody() //Ext.getElementById("geomap")
-		});
+		}); // fin mainPanel
+		
+		$("#periodh").ionRangeSlider({
+			type: "double",
+			min: 1981,
+			max: 2016,
+			from: 1990,
+			to: 2000,
+			to_max:2016,
+			max_interval:10,
+			// to_percent: 77.5,
+			drag_interval: true
+		});				
+		$("#Smonth").ionRangeSlider({
+			type: "double",
+			min: 1,
+			max: 12,
+			from: 1,
+			to: 12,
+			to_max:12,
+			drag_interval: true
+		});		
+
+		
     }
 });
+

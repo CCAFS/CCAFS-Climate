@@ -4,6 +4,8 @@
 	require_once '../../config/smarty.php';*/
 	// include_once('../config/db_ccafs_climate.php');
 	//http://172.22.52.48/stations/php/data-graphics-chirps.php?lon=-76&lat=4&yi=1981&yf=1981&mi=1&mf=1
+	
+	### Gisweb
 	define("PG_DB"  , "ccafs_climate");
 	define("PG_HOST", "172.22.52.15"); 
 	define("PG_USER", "jtarapues");
