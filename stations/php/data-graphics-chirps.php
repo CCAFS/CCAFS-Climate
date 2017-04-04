@@ -6,13 +6,22 @@
 	//http://172.22.52.48/stations/php/data-graphics-chirps.php?lon=-76&lat=4&yi=1981&yf=1981&mi=1&mf=1
 	
 	### Gisweb
-	define("PG_DB"  , "ccafs_climate");
-	define("PG_HOST", "172.22.52.15"); 
-	define("PG_USER", "jtarapues");
-	define("PG_PASS", "Jaime881");
-	define("PG_PORT", "5432"); 
-	define("SRID",   "4326"); 
+	// define("PG_DB"  , "ccafs_climate");
+	// define("PG_HOST", "172.22.52.15"); 
+	// define("PG_USER", "jtarapues");
+	// define("PG_PASS", "Jaime881");
+	// define("PG_PORT", "5432"); 
+	// define("SRID",   "4326"); 
 
+	//### para 172.22.52.8
+	define("PG_DB"  , "ccafs_climate");
+	// define("PG_HOST", "localhost"); 
+	define("PG_HOST", "172.22.52.8"); 
+	define("PG_USER", "jetarapues");
+	define("PG_PASS", "ciat2016");
+	define("PG_PORT", "5432"); 
+	define("SRID",   "4326"); 	
+	
 	  $dbcon = pg_connect("dbname=".PG_DB." host=".PG_HOST." user=".PG_USER." password=".PG_PASS." port=".PG_PORT);
 	// $dirfilesStations="C:\xampp\htdocs\CCAFS-Climate\downloads";
 
@@ -22,8 +31,9 @@
 	$yf=$_REQUEST["yf"];
 	$mi=$_REQUEST["mi"]; 
 	$mf=$_REQUEST["mf"]; 
+	$order=100;//$_REQUEST["mf"]; este no se está usando pero debe incluirse
 	
-	$sql ="select * from getValuesChirpsGlobal($lon,$lat,$yi,$yf,$mi,$mf)"; 
+	$sql ="select * from getValuesChirpsGlobal_v2($lon,$lat,$yi,$yf,$mi,$mf,$order)"; 
 	$result = pg_query($dbcon, $sql);
 	// $row = pg_fetch_row($result);
 	// print $row[0];
@@ -43,6 +53,42 @@
 					'sdate' => $yi.'-'.$mi.'-01',
 					'data' => array()
 					),
+			"wcl_prec" => array(
+					'sdate' => $yi.'-'.$mi.'-01',
+					'data' => array()
+					),
+			"wcl_tmin" => array(
+					'sdate' => $yi.'-'.$mi.'-01',
+					'data' => array()
+					),
+			"wcl_tmax" => array(
+					'sdate' => $yi.'-'.$mi.'-01',
+					'data' => array()
+					),					
+			"rainy" => array(
+					'sdate' => $yi.'-'.$mi.'-01',
+					'data' => array()
+					),
+			"wetdays" => array(
+					'sdate' => $yi.'-'.$mi.'-01',
+					'data' => array()
+					),	
+			"annual" => array(
+					'sdate' => $yi.'-'.$mi.'-01',
+					'data' => array()
+					),
+			"cru_prec" => array(
+					'sdate' => $yi.'-'.$mi.'-01',
+					'data' => array()
+					),	
+			"cru_tmin" => array(
+					'sdate' => $yi.'-'.$mi.'-01',
+					'data' => array()
+					),	
+			"cru_tmax" => array(
+					'sdate' => $yi.'-'.$mi.'-01',
+					'data' => array()
+					),						
 			"stats" => array(
 					'data' => array()
 					)					
@@ -61,7 +107,34 @@
 		}	
 		if($line['type']=="4"){
 			array_push($geojson['stats']['data'],floatval($line['prec']));
-		}		
+		}
+		if($line['type']=="5"){
+			array_push($geojson['wcl_prec']['data'],floatval($line['prec']));
+		}
+		if($line['type']=="6"){
+			array_push($geojson['wcl_tmin']['data'],floatval($line['prec']));
+		}
+		if($line['type']=="7"){
+			array_push($geojson['wcl_tmax']['data'],floatval($line['prec']));
+		}
+		if($line['type']=="8"){
+			array_push($geojson['rainy']['data'],floatval($line['prec']));
+		}
+		if($line['type']=="9"){
+			array_push($geojson['wetdays']['data'],floatval($line['prec']));
+		}
+		if($line['type']=="10"){
+			array_push($geojson['annual']['data'],floatval($line['prec']));
+		}	
+		if($line['type']=="11"){
+			array_push($geojson['cru_prec']['data'],floatval($line['prec']));
+		}	
+		if($line['type']=="12"){
+			array_push($geojson['cru_tmin']['data'],floatval($line['prec']));
+		}	
+		if($line['type']=="13"){
+			array_push($geojson['cru_tmax']['data'],floatval($line['prec']));
+		}			
 	}
 	pg_close($dbcon);
 	echo json_encode($geojson);	  

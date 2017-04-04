@@ -147,6 +147,7 @@ function ConvertDDToDMS(D){
 		toolip_groupLabels='Change weather station labels'		
 		toolip_groupLayers='Base layers of map. Select a layer by clicking the radio button'		
 		toolip_fieldsetLogin='According to the terms of use, some stations are restricted for unauthorized users'		
+		toolip_chirpsWcl='From a coordinate get data from chirps (Rain. Resolution pixel 5 km) and WorldClim (Rain, Tmin, Tmax. Resolution pixel 1 km)'		
 
 		// para corregir cuando se desplega en el boton + las varaibles aparece error en property 'isGroupHeader'
 		Ext.define('SystemFox.overrides.view.Table', {
@@ -1897,6 +1898,9 @@ function ConvertDDToDMS(D){
 				  if (data['prec']) {
 					dLen = data['prec']['data'].length;
 					dLenMon = data['monthly']['data'].length;
+					dLencru_prec = data['cru_prec']['data'].length;
+					dLencru_tmin = data['cru_tmin']['data'].length;
+					dLencru_tmax = data['cru_tmax']['data'].length;
 					dLenClim = data['clim']['data'].length;
 
 					if (period == 1) {
@@ -1928,11 +1932,75 @@ function ConvertDDToDMS(D){
 					  for (var i = 0; i < dLenMon; i++) {
 						data['monthly']['data'][i] = [Date.UTC(data['monthly']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['monthly']['sdate'].split(' ')[0].split('-')[1]) - 1 + i), 1), data['monthly']['data'][i]];
 					  }
+					  // seriesDataMonthly = {
+						  // name: 'Prec. Chirps',
+						  // data: data['monthly']['data']
+					  // }
 					  seriesDataMonthly = {
-						name: 'Precipitation',
-						data: data['monthly']['data']
+							name: 'Prec. Chirps',
+							type: 'column',
+							yAxis: 1,
+							data: data['monthly']['data'],
+							tooltip: {
+								valueSuffix: ' mm'
+							}					  
 					  };
-					  
+					//******************** monthly CRU **********
+					  for (var i = 0; i < dLencru_prec; i++) {
+						data['cru_prec']['data'][i] = [Date.UTC(data['cru_prec']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['cru_prec']['sdate'].split(' ')[0].split('-')[1]) - 1 + i), 1), data['cru_prec']['data'][i]];
+					  }
+					  serieCruPrec = {
+						name: 'Prec. CRU',
+						type: 'column',
+						yAxis: 1,
+						data: data['cru_prec']['data'],
+						tooltip: {
+							valueSuffix: ' mm'
+						}						
+					  };	
+					  //tmin
+					  for (var i = 0; i < dLencru_tmin; i++) {
+						data['cru_tmin']['data'][i] = [Date.UTC(data['cru_tmin']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['cru_tmin']['sdate'].split(' ')[0].split('-')[1]) - 1 + i), 1), data['cru_tmin']['data'][i]];
+					  }
+					  serieCruTmin = {
+							name: 'Temp. Min (cru)',
+							type: 'spline',	
+							color:'orange',
+							data: data['cru_tmin']['data'],
+							tooltip: {
+								valueSuffix: ' C'
+							}						
+					  };		
+
+					  //tmax
+					  for (var i = 0; i < dLencru_tmax; i++) {
+						data['cru_tmax']['data'][i] = [Date.UTC(data['cru_tmax']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['cru_tmax']['sdate'].split(' ')[0].split('-')[1]) - 1 + i), 1), data['cru_tmax']['data'][i]];
+					  }
+						serieCruTmax ={
+							name: 'Temp. Max (wcl)',
+							type: 'spline',
+							color:'red',
+							data: data['cru_tmax']['data'],//[7.5, 7.4, 9.8, 14.9, 18.7, 21.9, 25.6, 26.8, 23.9, 18.9, 14.7, 10],
+							tooltip: {
+								valueSuffix: ' C'
+							}
+						}					  
+					//******************** rainy**********
+					  for (var i = 0; i < dLenMon; i++) {
+						data['rainy']['data'][i] = [Date.UTC(data['rainy']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['rainy']['sdate'].split(' ')[0].split('-')[1]) - 1 + i), 1), data['rainy']['data'][i]];
+					  }
+					  seriesDataRainy = {
+						name: 'Rainy',
+						data: data['rainy']['data']
+					  };
+					  //******************** Wetdays **********
+					  for (var i = 0; i < dLenMon; i++) {
+						data['wetdays']['data'][i] = [Date.UTC(data['wetdays']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['wetdays']['sdate'].split(' ')[0].split('-')[1]) - 1 + i), 1), data['wetdays']['data'][i]];
+					  }
+					  seriesDataWetdays = {
+						name: 'wetdays',
+						data: data['wetdays']['data']
+					  };					  
 					//************* climatology ***********
 					var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
 									'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -1954,7 +2022,7 @@ function ConvertDDToDMS(D){
 					// var indexmin = climData.indexOf(climData.min());
 					climData[indexmax] = {y: climData.max(),marker: {symbol: 'url(https://www.highcharts.com/samples/graphics/snow.png)'}}; //'url(https://www.highcharts.com/samples/graphics/sun.png)'
 					// climData[indexmin] = {y: climData.min(),marker: {symbol: 'url(http://gisweb.ciat.cgiar.org/Bc_Downscale/img/sun.png)'}};
-				
+					
 					//*******************
 					
 					$('#grap_prec_'+idSta).highcharts('StockChart',{
@@ -1989,49 +2057,116 @@ function ConvertDDToDMS(D){
 					});
 					//*********************************** monthly**********************************
 					
-					$('#grap_prec_mon_'+idSta).highcharts('StockChart',{
-					  chart: {
-						type: 'spline',
-						zoomType: 'x'
-					  },
-					  title: {
-						text: 'Monthly Precipitation'
-					  },
-					  xAxis: {
-						type: 'datetime',
-						labels: {
-						  overflow: 'justify'
-						}
-					  },
-					  yAxis: {
+					// $('#grap_prec_mon_'+idSta).highcharts('StockChart',{ # StockChart es para ver el rangeSelector
+					  // chart: {
+						// type: 'spline',
+						// zoomType: 'xy'
+					  // },
+					  // title: {
+						// text: 'Monthly Precipitation'
+					  // },
+					  // xAxis: {
+						// type: 'datetime',
+						// labels: {
+						  // overflow: 'justify'
+						// }
+					  // },
+					  // yAxis: {
+						// title: {
+						  // text: 'Rainfall mm/month'
+						// }
+					  // },
+					  // tooltip: {
+						// valueSuffix: ' mm/month',
+						// valueDecimals: 2
+					  // },
+					  // plotOptions: {
+						// series: {
+						  // turboThreshold: 15000//larger threshold or set to 0 to disable
+						// }
+					  // },
+					  // series: [seriesDataMonthly]
+
+					// });	
+					//*********************************** monthly V2 + CRU **********************************
+					
+					$('#grap_prec_mon_'+idSta).highcharts({
+						chart: {
+							zoomType: 'xy'
+						},
 						title: {
-						  text: 'Rainfall mm/month'
-						}
-					  },
-					  tooltip: {
-						valueSuffix: ' mm/month',
-						valueDecimals: 2
-					  },
+							text: 'Monthly Precipitation CRIPRS and CRU TS V4'
+						},
+						xAxis: {
+							type: 'datetime',
+							labels: {
+							  overflow: 'justify'
+							}
+						},						
+						yAxis: [{ // Primary yAxis
+							labels: {
+								format: '{value} C',
+								style: {
+									color: Highcharts.getOptions().colors[1]
+								}
+							},
+							title: {
+								text: 'Temperature',
+								style: {
+									color: Highcharts.getOptions().colors[1]
+								}
+							}
+						}, { // Secondary yAxis
+							title: {
+								text: 'Rainfall',
+								style: {
+									color: Highcharts.getOptions().colors[0]
+								}
+							},
+							labels: {
+								format: '{value} mm',
+								style: {
+									color: Highcharts.getOptions().colors[0]
+								}
+							},
+							opposite: true
+						}],
+						tooltip: {
+							shared: true
+						},
+						legend: {
+							layout: 'horizontal',
+							align: 'left',
+							x: 100,
+							verticalAlign: 'bottom',//'top',
+							y: 25,
+							floating: true,
+							backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+						},
 					  plotOptions: {
 						series: {
 						  turboThreshold: 15000//larger threshold or set to 0 to disable
 						}
-					  },
-					  series: [seriesDataMonthly]
-
-					});		
-					//************************* climatology *********************************
-					
-					$('#grap_prec_clim_'+idSta).highcharts({
+					  },						
+						series: [seriesDataMonthly,serieCruPrec,serieCruTmin,serieCruTmax]
+					});						
+					//************************* annual *********************************
+					 function range(start, count) {
+						  return Array.apply(0, Array(count))
+							.map(function (element, index) { 
+							  return index + start;  
+						  });
+						}					
+					$('#grap_prec_annual_'+idSta).highcharts({
 
 							chart: {
 								type: 'line'
 							},
 							title: {
-								text: 'Monthly Average Precipitation'
+								text: 'Annual Precipitation'
 							},
 							xAxis: {
-								categories: categories_months
+								categories: range(yi,yf-yi+1)
 							},
 							yAxis: {
 								title: {
@@ -2053,18 +2188,223 @@ function ConvertDDToDMS(D){
 								marker: {
 									symbol: 'square'
 								},
-								data: data['clim']['data']
+								data: data['annual']['data']
 
 							}]
 
 						
-					});		
-					/************************** STATISTICAL *********/
-					source_ftp="../../downloads/chirps/"//"http://172.22.52.8/CCAFS-Climate/downloads/chirps/" //"http://gisweb.ciat.cgiar.org/Bc_Downscale/download" 
+					});							
 					
-					$('#index_boxplot').append('<img src="'+source_ftp+'/chirpsV2_boxplot_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
-					$('#index_wetdays').append('<img src="'+source_ftp+'/chirpsV2_wetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
-					$('#index_conswetdays').append('<img src="'+source_ftp+'/chirpsV2_conswetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
+					//*********************************** Rainy **********************************
+					
+					$('#grap_rainy_'+idSta).highcharts('StockChart',{
+					  chart: {
+						type: 'spline',
+						zoomType: 'x'
+					  },
+					  title: {
+						text: 'Rainy days per month'
+					  },
+					  xAxis: {
+						type: 'datetime',
+						labels: {
+						  overflow: 'justify'
+						}
+					  },
+					  yAxis: {
+						title: {
+						  text: 'Rainy days (>1mm/day)'
+						}
+					  },
+					  tooltip: {
+						valueSuffix: ' days',
+						valueDecimals: 0
+					  },
+					  plotOptions: {
+						series: {
+						  turboThreshold: 15000//larger threshold or set to 0 to disable
+						}
+					  },
+					  series: [seriesDataRainy]
+
+					});			
+
+					//*********************************** wetdays **********************************
+					
+					$('#grap_wetdays_'+idSta).highcharts('StockChart',{
+					  chart: {
+						type: 'spline',
+						zoomType: 'x'
+					  },
+					  title: {
+						text: 'Maximum consecutive rainy per month'
+					  },
+					  xAxis: {
+						type: 'datetime',
+						labels: {
+						  overflow: 'justify'
+						}
+					  },
+					  yAxis: {
+						title: {
+						  text: 'Max wetdays (>1mm/day)'
+						}
+					  },
+					  tooltip: {
+						valueSuffix: ' days',
+						valueDecimals: 0
+					  },
+					  plotOptions: {
+						series: {
+						  turboThreshold: 15000//larger threshold or set to 0 to disable
+						}
+					  },
+					  series: [seriesDataWetdays]
+
+					});			
+					
+					//************************* climatology *********************************
+					
+					// $('#grap_prec_clim_'+idSta).highcharts({
+
+							// chart: {
+								// type: 'line'
+							// },
+							// title: {
+								// text: 'Monthly Average Precipitation'
+							// },
+							// xAxis: {
+								// categories: categories_months
+							// },
+							// yAxis: {
+								// title: {
+									// text: 'Rainfall (mm)'
+								// },
+								// opposite: true								
+							// },
+							// plotOptions: {
+								 // line: {
+									// dataLabels: {
+										// enabled: true
+									// },
+									// enableMouseTracking: false
+								// }           
+							// },
+							// series: [{
+								// showInLegend: false,
+								// name: 'Rainfall (mm)',
+								// marker: {
+									// symbol: 'square'
+								// },
+								// data: data['clim']['data']
+
+							// }]
+
+						
+					// });		
+					
+					//************* climatology v2 + WCL ***********
+					
+					$('#grap_clim_wcl'+idSta).highcharts({
+						chart: {
+							zoomType: 'xy'
+						},
+						title: {
+							text: 'Average Monthly Temperature and Precipitation (CHIRPS and WorldClim V2)'
+						},
+						// subtitle: {
+							// text: 'Source: WorldClimate.com'
+						// },
+						xAxis: [{
+							categories: categories_months,
+							crosshair: true
+						}],
+						yAxis: [{ // Primary yAxis
+							labels: {
+								format: '{value} C',
+								style: {
+									color: Highcharts.getOptions().colors[1]
+								}
+							},
+							title: {
+								text: 'Temperature',
+								style: {
+									color: Highcharts.getOptions().colors[1]
+								}
+							}
+						}, { // Secondary yAxis
+							title: {
+								text: 'Rainfall',
+								style: {
+									color: Highcharts.getOptions().colors[0]
+								}
+							},
+							labels: {
+								format: '{value} mm',
+								style: {
+									color: Highcharts.getOptions().colors[0]
+								}
+							},
+							opposite: true
+						}],
+						tooltip: {
+							shared: true
+						},
+						legend: {
+							layout: 'horizontal',
+							align: 'left',
+							x: 100,
+							verticalAlign: 'bottom',//'top',
+							y: 25,
+							floating: true,
+							backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+						},
+						series: [{
+							name: 'Prec. WorldClim',
+							type: 'column',
+							yAxis: 1,
+							data: data['wcl_prec']['data'],//[49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+							tooltip: {
+								valueSuffix: ' mm'
+							}
+
+						},{
+							name: 'Prec. Chirps',
+							type: 'column',
+							yAxis: 1,
+							data: data['clim']['data'],//[49.9, 71.9, 106.1, 129.2, 144.7, 176.0, 135.6, 148.0, 216.4, 194.1, 95.9, 54.4],
+							tooltip: {
+								valueSuffix: ' mm'
+							}
+
+						}, {
+							name: 'Temp. Min (wcl)',
+							type: 'spline',
+							color:'orange',
+							data: data['wcl_tmin']['data'],//[7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+							tooltip: {
+								valueSuffix: ' C'
+							}
+						}, {
+							name: 'Temp. Max (wcl)',
+							type: 'spline',
+							color:'red',
+							data: data['wcl_tmax']['data'],//[7.5, 7.4, 9.8, 14.9, 18.7, 21.9, 25.6, 26.8, 23.9, 18.9, 14.7, 10],
+							tooltip: {
+								valueSuffix: ' C'
+							}
+						}]
+					});					
+					
+					
+					
+					/************************** STATISTICAL *********/
+					source_ftp="http://172.22.52.8/CCAFS-Climate/downloads/chirps/" //"http://gisweb.ciat.cgiar.org/Bc_Downscale/download" // "../../downloads/chirps/"//
+					lon=Math.round(lon*10000)/10000
+					lat=Math.round(lat*10000)/10000
+					$('#index_boxplot').append('<img src="'+source_ftp+'/chirps_lonlat_'+lon+'_'+lat+'/chirpsV2_boxplot_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
+					// $('#index_wetdays').append('<img src="'+source_ftp+'/chirpsV2_wetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
+					// $('#index_conswetdays').append('<img src="'+source_ftp+'/chirpsV2_conswetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
 					
 					/**************************  *********/
 					
@@ -2099,7 +2439,7 @@ function ConvertDDToDMS(D){
 						  '</tr>                                                                               \
 						  <tr>                                                                                \
 							<td><div align="center">Variance</div></td>                                            '+
-							'<td width="80"><div align="center">'+data['stats']['data'][6]+'</div></td>'+
+							'<td width="80"><div align="center">'+data['stats']['data'][4]+'</div></td>'+
 						  '</tr>                                                                               \
 						  <tr>                                                                                \
 							<td><div align="center">Coef. Variation</div></td>                                            '+
@@ -6537,11 +6877,15 @@ var groupByRegion = {
 									'</tpl>',
 									// '<div id="grap_prec_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
 									'<div id="grap_prec_mon_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-									'<div id="grap_prec_clim_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+									'<div id="grap_prec_annual_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+									'<div id="grap_rainy_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+									'<div id="grap_wetdays_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+									'<div id="grap_clim_wcl'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+									// '<div id="grap_prec_clim_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
 									
 									'<div id="index_boxplot" style="width:'+grapWidth+'px;"></div>',
-									'<div id="index_wetdays" style="width:'+grapWidth+'px;"></div>',
-									'<div id="index_conswetdays" style="width:'+grapWidth+'px;"></div>',
+									// '<div id="index_wetdays" style="width:'+grapWidth+'px;"></div>',
+									// '<div id="index_conswetdays" style="width:'+grapWidth+'px;"></div>',
 									'<div id="stats_chirps" style="width:'+grapWidth+'px;"></div>',
 									
 									];	
@@ -6585,6 +6929,11 @@ var groupByRegion = {
 										tabs.setActiveTab(0);
 									}													
 								});	
+								source_ftp="http://172.22.52.8/CCAFS-Climate/downloads/chirps/" //"http://gisweb.ciat.cgiar.org/Bc_Downscale/download" // "../../downloads/chirps/"//
+								lon=Math.round(lonlatMap.lon*10000)/10000
+								lat=Math.round(lonlatMap.lat*10000)/10000			
+								dataftp=source_ftp+'/chirps_lonlat_'+lon+'_'+lat+'.zip';
+					
 								btonDowndChirps= new Ext.Button({
 									pressedCls : 'my-pressed',
 									overCls : 'my-over',
@@ -6593,7 +6942,16 @@ var groupByRegion = {
 									icon: icons+'download-icon.png', 
 									scale: 'small',
 									handler: function(){
-										tabs.setActiveTab(0);
+										Ext.DomHelper.append(document.body, {
+										  tag: 'iframe',
+										  id:'downloadIframe',
+										  frameBorder: 0,
+										  width: 0,
+										  height: 0,
+										  css: 'display:none;visibility:hidden;height: 0px;',
+										  src: dataftp
+										});
+										
 									}													
 								});					
 								if(Ext.getCmp('graphic_tab')){
@@ -6668,18 +7026,18 @@ var groupByRegion = {
 
 
 	
-    var groupByChirps = {
-        xtype: 'fieldset',
-        title: 'Get CHIRPS & WorldClim V2 data   '+ '<img id="help_toolip" class="tooltipIcon" src='+icons+infoB+' data-qtip="'+toolip_groupByStation+'" />',//<span data-qtip="hello">First Name</span>  
-		width:fieldsetWidth,
-        layout: 'anchor',
-        defaults: {
-            anchor: '100%'
-        },
-        collapsible: true,
-        collapsed: false,
-        items: [formChirps]
-	}
+		var groupByChirps = {
+			xtype: 'fieldset',
+			title: 'CHIRPS & WorldClim V2 & CRU TS V4 data   '+ '<img id="help_toolip" class="tooltipIcon" src='+icons+infoB+' data-qtip="'+toolip_chirpsWcl+'" />',//<span data-qtip="hello">First Name</span>  
+			width:fieldsetWidth,
+			layout: 'anchor',
+			defaults: {
+				anchor: '100%'
+			},
+			collapsible: true,
+			collapsed: false,
+			items: [formChirps]
+		}
 	
 	
 		poinDraw.events.register('featureadded',poinDraw, onAddedPoint);
@@ -12946,10 +13304,10 @@ var tabCount = 4;
 		$("#periodh").ionRangeSlider({
 			type: "double",
 			min: 1981,
-			max: 2016,
+			max: 2018,
 			from: 1990,
 			to: 2000,
-			to_max:2016,
+			to_max:2017,
 			max_interval:10,
 			// to_percent: 77.5,
 			drag_interval: true
