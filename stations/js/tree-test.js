@@ -2095,7 +2095,7 @@ function ConvertDDToDMS(D){
 							zoomType: 'xy'
 						},
 						title: {
-							text: 'Monthly Precipitation CRIPRS and CRU TS V4'
+							text: 'Monthly Precipitation CHIRPS and CRU TS V4'
 						},
 						xAxis: {
 							type: 'datetime',

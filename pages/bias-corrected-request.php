@@ -226,14 +226,15 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
    $getID = $db->getAll($getLastRegister);
 	$vars['order'] =$getID[0][0];
  
- echo "<pre>".print_r($vars,true)."</pre>";
+ // echo "<pre>".print_r($vars,true)."</pre>";
  // echo $vars;
 //  $url = "http://172.22.52.62/correctedTest.php";
 // exit();
 
 
-  $url = "http://172.22.52.8/correctedTest.php";
-  // $url = "http://gisweb.ciat.cgiar.org/Bc_Downscale/biasCorrected.php";
+  // $url = "http://172.22.52.8/correctedTest.php";
+  // $url = "http://172.22.52.8/PHPMailer/bias_process.php";
+  $url = "http://gisweb.ciat.cgiar.org/Bc_Downscale/biasCorrected.php";
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
