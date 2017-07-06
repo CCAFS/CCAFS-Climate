@@ -2,6 +2,7 @@
 ## CCAFS-Climate
 #################
 /config/config.php
+/config/downloads/chirps/*
 
 # Smarthy
 /templates_c/
@@ -14,5 +15,6 @@
 .buildpath
 .project
 .settings*
+stations/config/*
 stations/config/db_ccafs_climate.php
 downloads/data_stations
