@@ -18,7 +18,7 @@
         The process consists in the following steps:
     </p>
     <ol>
-        <li>Gathering of baseline data (current climates corresponding to WorldClim).</li>
+        <li>Gathering of baseline data (current climates corresponding to <a target="_blank" href="http://worldclim.com/current"><i>WorldClim 1.4</i></a>).</li>
         <li>Gathering of full GCM timeseries.</li>
         <li>Calculation of 30 year running averages for present day simulations (1961-1990) and 7 future periods (2010-2039, 2020-2049, 2030-2059, 2040-2069, 2050-2079, 2060-2089, 2070-2099).</li>
         <li>Calculation of anomalies as the absolute difference between future values in each of the 3 variables to be disaggregated.</li>
@@ -44,7 +44,7 @@
         <i>View all projections from spatial disaggregated data, for <a href="{$smarty.const.SMARTY_DOCS_URI}/Disaggregation_Graphs_A1B.pdf">A1B</a>, <a href="{$smarty.const.SMARTY_DOCS_URI}/Disaggregation_Graphs_A2.pdf">A2A</a>, <a href="{$smarty.const.SMARTY_DOCS_URI}/Disaggregation_Graphs_B1.pdf">B1</a> scenarios</i>.
     </p>
     <p>
-        If you need baseline data for this method see <a target="_blank" href="http://www.worldclim.org/current">WorldClim portal</a>.
+        If you need baseline data for this method see <a target="_blank" href="http://www.worldclim.org/current">WorldClim 1.4 portal</a>.
     </p>
     <br>
 	<div>

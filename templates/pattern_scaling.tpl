@@ -31,8 +31,7 @@
       <li>Integrated Pest Management Collaborative Research Support Program (IPM-CRSP).</li>
     </ul>
     <ol><li><h4 id="marksim_standalone">MarkSim standalone for DSSAT users</h4></li>
-    <p>        
-        Marksim standalone combines the basic routines from the original MarkSim version, produced at CIAT (<a href="#standard_version">see below</a>), and the new <a href="#web_version">MarkSimGCM web application</a> (Jones et al. 2011, <a target="_blank" href="https://hc.box.com/shared/f2gk053td8"><i>see the full report</i></a>) that runs off Google Earth. 
+    <p>                Marksim standalone combines the basic routines from the original MarkSim version, produced at CIAT (<a href="#standard_version">see below</a>), and the new <a href="#web_version">MarkSimGCM web application</a> (Jones et al. 2011) that runs off Google Earth. 
         The standalone version is designed for computer users that need to process a large amount of data. It eliminates their picking at a keyboard and abusing their eyesight by searching an on-screen map for the required data point. It uses the same six GCM model results as MarkSimGCM and the same three scenarios, along with an ensemble of the six.
     </p>
     <p>
@@ -40,7 +39,7 @@
         In each of these it will place up to 99 replicates of yearly weather data and a new CLI file describing the climate under the particular situation of GCM/scenario/year for which the user called.
     </p>
     <p>
-        A new version of MarkSim standalone (v. 2) was developed for the CMIP5 GCMs. The original MarkSim_Standalone used six GCMs from the fourth approximation of the IPCC(<a target="_blank" href="https://hc.box.com/shared/f2gk053td8"><i>see the full report</i></a>), the new one use 17 models from the CMIP5 range that were considered in the last IPCC report.
+        A new version of MarkSim standalone (v. 2) was developed for the CMIP5 GCMs. The original MarkSim_Standalone used six GCMs from the fourth approximation of the IPCC(<a target="_blank" href="http://www.ipcc.ch/pdf/assessment-report/ar4/wg1/ar4_wg1_full_report.pdf"><i>see the full report</i></a>), the new one use 17 models from the CMIP5 range that were considered in the last IPCC report.
     </p>
     <p>
         The executable program, the GCM data and the MarkSim standalone documentation are available in the following links (you must allow pop-up windows in your browser):
@@ -105,7 +104,7 @@
         Find the full list of models and scenarios, assessment of the methods used, comments on the limitations of the data, and suggestions for further work at the full report before proceeding to downloading and using the dataset.
     </p>
     <p>
-      Find the full list of models and scenarios, assessment of the methods used, comments on the limitations of the data, and suggestions for further work at the <a target="_blank" href="https://hc.box.com/shared/f2gk053td8"><i>full report</i></a> and <a href="https://hc.box.net/shared/xc38lnbznn">disclaimers</a>. To download see the <a href="http://www.ccafs-climate.org/data/">Data Section</a>.
+      Find the full list of models and scenarios, assessment of the methods used, comments on the limitations of the data, and suggestions for further work at the <a target="_blank" href="http://ccafs-climate.org/downloads/docs/MarkSim_Standalone_Documentation_v2.pdf"><i>full report</i></a> and disclaimers. To download see the <a href="http://www.ccafs-climate.org/data/">Data Section</a>.
     </p>
     <h4>Credits</h4>
     <ol>
