@@ -20,3 +20,6 @@ stations/config/db_ccafs_climate.php
 downloads/data_stations
 /config/smarty.php
 /config/db.php
+/stations/config/*.php
+/stations/config/db_ccafs_climate.php
+/stations/config/db_config.php
