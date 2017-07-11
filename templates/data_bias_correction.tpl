@@ -201,7 +201,7 @@
 
           <div id="bloc-search">
             <!--<button type="submit" id="searchSubmit" disabled="disabled" value="1">Run<span></span></button>-->
-            <button type="submit" id="searchSubmit" disabled="disabled" value="1"><span class="icon"></span><span class="btn-txt">Excute</span></button>
+            <button type="submit" id="searchSubmit" disabled="disabled" value="1"><span class="icon"></span><span class="btn-txt">Execute</span></button>
             <label>
               <span id="filesFound"></span>
               <img class="loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />

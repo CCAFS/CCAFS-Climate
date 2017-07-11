@@ -226,8 +226,8 @@ define('XMLSCHEMA', 'http://www.w3.org/2001/XMLSchema-instance');
 // DB - HESPINOSA - 16-07-2015
 $DB_HOST = '127.0.0.1';
 $DB_USER = 'postgres';
-$DB_PASSWD = '123456';
-$DB_NAME = 'ccafs_stations';
+$DB_PASSWD = 'bNs2IJ0L6i4h';
+$DB_NAME = 'ccafs_climate';
 
 
 // Data Source Name: This is the universal connection string
