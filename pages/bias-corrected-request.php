@@ -49,8 +49,16 @@ if ($station_file && $code==0) {
     $url = SMARTY_ROOT_URI."bias_tmp/";
     $file = $url.$filename;
   }
-	print_r $delimitator;
-    if($delimitator=="space"){$sepFile=" ";} elseif ($delimitator=="tab"){$sepFile="\t";}elseif ($delimitator=="puntocoma"){$sepFile=";";}elseif ($delimitator=="Comma"){$sepFile=",";};
+	// print_r($delimitator);
+    if($delimitator=="space"){
+		$sepFile=" ";
+	} elseif ($delimitator=="tab"){
+		$sepFile="\t";
+	}elseif ($delimitator=="puntocoma"){
+		$sepFile=";";
+	}elseif ($delimitator=="comma"){
+		$sepFile=",";
+	}
 	
 	$myfile = file($uri);
 	$varlist = array("prec","tmin","tmax","tmean","srad");
