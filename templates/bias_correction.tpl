@@ -193,7 +193,7 @@
 			</a>
 		</div>
 		<div>
-			<a href="{$smarty.const.SMARTY_DOCS_URI}/BC_methods_explaining_v4.pdf">
+			<a href="{$smarty.const.SMARTY_DOCS_URI}/BC_methods_explaining_v2.pdf">
 				<img id="download_data_button" name="download_data_button" src="{$smarty.const.SMARTY_IMG_URI}/doc_button.png" />
 			</a>
 		</div>
