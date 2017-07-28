@@ -1753,7 +1753,7 @@ function ConvertDDToDMS(D){
 
 		}// fin function generateGraps
 
-		function generateGrapsChirps(lon, lat,yi,yf,mi,mf,period) {
+		function generateGrapsChirps(lon, lat,yi,yf,mi,mf,period,ch_chirps,ch_chirp,ch_wcl,ch_cru) {
 			// var myMask = new Ext.LoadMask(Ext.getCmp('tabsID').getActiveTab(), {msg:"Please wait..."});
 			$(".grap").html("");
 			idSta=1
@@ -1764,7 +1764,7 @@ function ConvertDDToDMS(D){
 				type: "GET",//"POST",
 			//    dataType: "json",
 				url: "php/data-graphics-chirps.php",
-				data: 'lon='+lon+'&lat='+lat+'&yi='+yi+'&yf='+yf+'&mi='+mi+'&mf='+mf,//filterValues,
+				data: 'lon='+lon+'&lat='+lat+'&yi='+yi+'&yf='+yf+'&mi='+mi+'&mf='+mf+'&ch_chirps='+ch_chirps+'&ch_chirp='+ch_chirp+'&ch_wcl='+ch_wcl+'&ch_cru='+ch_cru,//filterValues,
 				success: function(result) {
 				  var objJSON = {};
 				  if (result != null) {
@@ -1897,6 +1897,7 @@ function ConvertDDToDMS(D){
 				  }
 				  if (data['prec']) {
 					dLen = data['prec']['data'].length;
+					dLchirp = data['prchirp']['data'].length;
 					dLenMon = data['monthly']['data'].length;
 					dLencru_prec = data['cru_prec']['data'].length;
 					dLencru_tmin = data['cru_tmin']['data'].length;
@@ -1905,11 +1906,18 @@ function ConvertDDToDMS(D){
 
 					if (period == 1) {
 					  seriesData = {
-						name: 'Precipitation',
+						name: 'CHIRPS',
 						data: data['prec']['data'],
 						pointStart: Date.UTC(data['prec']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['prec']['sdate'].split(' ')[0].split('-')[1]) - 1), parseInt(data['prec']['sdate'].split(' ')[0].split('-')[2])),
 						pointInterval: 24 * 3600 * 1000
 					  };
+					  
+					  serieschirp = {
+						name: 'CHIRP',
+						data: data['prchirp']['data'],
+						pointStart: Date.UTC(data['prchirp']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['prchirp']['sdate'].split(' ')[0].split('-')[1]) - 1), parseInt(data['prchirp']['sdate'].split(' ')[0].split('-')[2])),
+						pointInterval: 24 * 3600 * 1000
+					  };					  
 					} else if (period == 2) {
 					  for (var i = 0; i < dLen; i++) {
 						data['prec']['data'][i] = [Date.UTC(data['prec']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['prec']['sdate'].split(' ')[0].split('-')[1]) - 1 + i), 1), data['prec']['data'][i]];
@@ -2024,6 +2032,22 @@ function ConvertDDToDMS(D){
 					// climData[indexmin] = {y: climData.min(),marker: {symbol: 'url(http://gisweb.ciat.cgiar.org/Bc_Downscale/img/sun.png)'}};
 					
 					//*******************
+					if(data['database']['chirps']=="false" && data['database']['chirp']=="false"){
+						$('#grap_prec_'+idSta).remove();
+					}
+					if(data['database']['chirps']=="false"){
+						$('#grap_prec_annual_'+idSta).remove();
+						$('#grap_rainy_'+idSta).remove();
+						$('#grap_wetdays_'+idSta).remove();
+						$('#index_boxplot').remove();
+						$('#stats_chirps').remove();
+					}
+					if(data['database']['cru']=="false"){
+						$('#grap_prec_mon_'+idSta).remove();
+					}
+					if(data['database']['wcl']=="false"){
+						$('#grap_clim_wcl'+idSta).remove();
+					}
 					
 					$('#grap_prec_'+idSta).highcharts('StockChart',{
 					  chart: {
@@ -2053,7 +2077,7 @@ function ConvertDDToDMS(D){
 						  turboThreshold: 15000//larger threshold or set to 0 to disable
 						}
 					  },
-					  series: [seriesData]
+					  series: [seriesData,serieschirp]
 					});
 					//*********************************** monthly**********************************
 					
@@ -2402,53 +2426,55 @@ function ConvertDDToDMS(D){
 					source_ftp="http://172.22.52.8/CCAFS-Climate/downloads/chirps/" //"http://gisweb.ciat.cgiar.org/Bc_Downscale/download" // "../../downloads/chirps/"//
 					lon=Math.round(lon*10000)/10000
 					lat=Math.round(lat*10000)/10000
-					$('#index_boxplot').append('<img src="'+source_ftp+'/chirps_lonlat_'+lon+'_'+lat+'/chirpsV2_boxplot_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
-					// $('#index_wetdays').append('<img src="'+source_ftp+'/chirpsV2_wetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
-					// $('#index_conswetdays').append('<img src="'+source_ftp+'/chirpsV2_conswetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
-					
-					/**************************  *********/
-					
-					$('#stats_chirps').append(
-						'<br><table width="265" border="1" style="font-family: Trebuchet MS;margin-left: 35%;">                      \
-						  <tr>                                                                                \
-							<td colspan="2" style="padding-bottom: 5px;padding-top: 5px;" ><div align="center"><strong>Summary statistics of daily data</strong></div></td>\
-						  </tr>                                                                               \
-						  <tr>                                                                                \
-							<td width="110"><div align="center">N</div></td>                                  '+
-							'<td width="80"><div align="center">'+data['stats']['data'][0]+'</div></td>'+
-						  '</tr>                                                                               \
-						  <tr>                                                                                \
-							<td><div align="center">Min</div></td>                                           '+
-							'<td width="80"><div align="center">'+data['stats']['data'][1]+'</div></td>'+
-						  '</tr>                                                                               \
-						  <tr>                                                                                \
-							<td><div align="center">Max</div></td>                                        '+
-							'<td width="80"><div align="center">'+data['stats']['data'][2]+'</div></td>'+
-						  '</tr>                                                                               \
-						  <tr>                                                                                \
-							<td><div align="center">Mean</div></td>                                '+
-							'<td width="80"><div align="center">'+data['stats']['data'][3]+'</div></td>'+
-						  '</tr>                                                                               \
-						  <tr>                                                                                \
-							<td><div align="center">Median</div></td>                                       '+
-							'<td width="80"><div align="center">'+data['stats']['data'][6]+'</div></td>'+
-						  '</tr>                                                                               \
-						  <tr>                                                                                \
-							<td><div align="center">Standard deviation</div></td>                                '+
-							'<td width="80"><div align="center">'+data['stats']['data'][5]+'</div></td>'+
-						  '</tr>                                                                               \
-						  <tr>                                                                                \
-							<td><div align="center">Variance</div></td>                                            '+
-							'<td width="80"><div align="center">'+data['stats']['data'][4]+'</div></td>'+
-						  '</tr>                                                                               \
-						  <tr>                                                                                \
-							<td><div align="center">Coef. Variation</div></td>                                            '+
-							'<td width="80"><div align="center">'+data['stats']['data'][7]+'</div></td>'+
-						  '</tr>                                                                               \
-						</table>   <br> <br>                                                                          ' 
-		
-					);
+					if(data['database']['chirps']=="true"){
+						$('#index_boxplot').append('<img src="'+source_ftp+'/chirps_lonlat_'+lon+'_'+lat+'/chirpsV2_boxplot_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
+
+						// $('#index_wetdays').append('<img src="'+source_ftp+'/chirpsV2_wetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
+						// $('#index_conswetdays').append('<img src="'+source_ftp+'/chirpsV2_conswetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
+						
+						/**************************  *********/
+						
+						$('#stats_chirps').append(
+							'<br><table width="265" border="1" style="font-family: Trebuchet MS;margin-left: 35%;">                      \
+							  <tr>                                                                                \
+								<td colspan="2" style="padding-bottom: 5px;padding-top: 5px;" ><div align="center"><strong>Summary statistics of daily data</strong></div></td>\
+							  </tr>                                                                               \
+							  <tr>                                                                                \
+								<td width="110"><div align="center">N</div></td>                                  '+
+								'<td width="80"><div align="center">'+data['stats']['data'][0]+'</div></td>'+
+							  '</tr>                                                                               \
+							  <tr>                                                                                \
+								<td><div align="center">Min</div></td>                                           '+
+								'<td width="80"><div align="center">'+data['stats']['data'][1]+'</div></td>'+
+							  '</tr>                                                                               \
+							  <tr>                                                                                \
+								<td><div align="center">Max</div></td>                                        '+
+								'<td width="80"><div align="center">'+data['stats']['data'][2]+'</div></td>'+
+							  '</tr>                                                                               \
+							  <tr>                                                                                \
+								<td><div align="center">Mean</div></td>                                '+
+								'<td width="80"><div align="center">'+data['stats']['data'][3]+'</div></td>'+
+							  '</tr>                                                                               \
+							  <tr>                                                                                \
+								<td><div align="center">Median</div></td>                                       '+
+								'<td width="80"><div align="center">'+data['stats']['data'][6]+'</div></td>'+
+							  '</tr>                                                                               \
+							  <tr>                                                                                \
+								<td><div align="center">Standard deviation</div></td>                                '+
+								'<td width="80"><div align="center">'+data['stats']['data'][5]+'</div></td>'+
+							  '</tr>                                                                               \
+							  <tr>                                                                                \
+								<td><div align="center">Variance</div></td>                                            '+
+								'<td width="80"><div align="center">'+data['stats']['data'][4]+'</div></td>'+
+							  '</tr>                                                                               \
+							  <tr>                                                                                \
+								<td><div align="center">Coef. Variation</div></td>                                            '+
+								'<td width="80"><div align="center">'+data['stats']['data'][7]+'</div></td>'+
+							  '</tr>                                                                               \
+							</table>   <br> <br>                                                                          ' 
 			
+						);
+			        }
 					
 				  } // fin prec
 				  if (data['sbright']) {
@@ -6817,7 +6843,24 @@ var groupByRegion = {
 									html: ['<input type="text" id="Smonth" name="Smonth" value="" />']								   
 								}
 							]
-						}
+						},
+
+						{
+							xtype: 'checkboxgroup',
+							id: 'datasetid',
+							// fieldLabel: 'Multi-Column (horizontal)',
+							// cls: 'x-check-group-alt',
+							// Distribute controls across 3 even columns, filling each row
+							// from left to right before starting the next row
+							columns: 2,
+							margin: '10 0 5 30', //top,left,down,right
+							items: [
+								{boxLabel: 'CHIRPS', name: 'cb-horiz-1',inputValue: 'chirps',checked: true,},
+								{boxLabel: 'CHIRP', name: 'cb-horiz-2', inputValue: 'chirp'},
+								{boxLabel: 'WorldClim V2', name: 'cb-horiz-3', inputValue: 'wcl',checked: true,},
+								{boxLabel: 'CRU V4', name: 'cb-horiz-4', inputValue: 'cru',checked: true,}
+							]
+						}						
 
 			],
 			buttons: [
@@ -6827,6 +6870,9 @@ var groupByRegion = {
 					pressedCls : 'my-pressed',
 					enableToggle: true,
 					handler: function() {
+						// prevalence.items.items[0].getValue()
+						
+						// console.log(values)
 						// values=this.up('form').getForm().getValues()
 					  // if(values.coord=="dms"){
 						  // console.log(ConvertDMSToDD(parseInt(values.lat_1),parseInt(values.lat_2),parseInt(values.lat_3)))
@@ -6871,22 +6917,21 @@ var groupByRegion = {
 								}
 								var tpl = [
 									// '<div id="grap_temp_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-									
-									'<tpl for="rowTitleArr">',
-									'<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-									'</tpl>',
-									// '<div id="grap_prec_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-									'<div id="grap_prec_mon_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-									'<div id="grap_prec_annual_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-									'<div id="grap_rainy_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-									'<div id="grap_wetdays_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
-									'<div id="grap_clim_wcl'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+									'<div id="grap_clim_wcl'+selectionID+'" style="width:'+grapWidth+'px;"></div>','<br>',
+									'<div id="grap_prec_mon_'+selectionID+'" style="width:'+grapWidth+'px;"></div>','<br>',
+									// '<tpl for="rowTitleArr">',
+									// '<div id="grap_{.}_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
+									// '</tpl>',
+									'<div id="grap_prec_annual_'+selectionID+'" style="width:'+grapWidth+'px;"></div>','<br>',
+									'<div id="grap_rainy_'+selectionID+'" style="width:'+grapWidth+'px;"></div>','<br>',
+									'<div id="grap_wetdays_'+selectionID+'" style="width:'+grapWidth+'px;"></div>','<br>',
 									// '<div id="grap_prec_clim_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
 									
 									'<div id="index_boxplot" style="width:'+grapWidth+'px;"></div>',
 									// '<div id="index_wetdays" style="width:'+grapWidth+'px;"></div>',
 									// '<div id="index_conswetdays" style="width:'+grapWidth+'px;"></div>',
-									'<div id="stats_chirps" style="width:'+grapWidth+'px;"></div>',
+									'<div id="grap_prec_'+selectionID+'" style="width:'+grapWidth+'px;"></div>','<br>',
+									'<div id="stats_chirps" style="width:'+grapWidth+'px;"></div>'
 									
 									];	
 								var qcstoreGrap = Ext.create('Ext.data.Store', {
@@ -6981,7 +7026,7 @@ var groupByRegion = {
 									dockedItems: [
 										{
 										xtype: 'toolbar',
-										items: [{xtype: 'tbtext',text: 'Long: '+lonlatMap.lon+' Lat: '+lonlatMap.lat},{xtype: 'tbfill'},btonDowndChirps,'-',btonReturn]
+										items: [{xtype: 'tbtext',text: 'Long: '+Math.round(lonlatMap.lon*10000)/10000+' Lat: '+Math.round(lonlatMap.lat*10000)/10000},{xtype: 'tbfill'},btonDowndChirps,'-',btonReturn]
 										}
 									]													
 								});		
@@ -6992,7 +7037,11 @@ var groupByRegion = {
 								Ext.getCmp('tabsID').setWidth(mainPanelWidth-15);
 								tabs.setActiveTab('graphic_tab');
 								var idPeriod = 1
-								generateGrapsChirps(lonlatMap.lon, lonlatMap.lat,yi,yf,mi,mf,idPeriod)
+								ch_chirps=Ext.getCmp("datasetid").items.items[0].getValue()
+								ch_chirp=Ext.getCmp("datasetid").items.items[1].getValue()
+								ch_wcl=Ext.getCmp("datasetid").items.items[2].getValue()
+								ch_cru=Ext.getCmp("datasetid").items.items[3].getValue()
+								generateGrapsChirps(lonlatMap.lon, lonlatMap.lat,yi,yf,mi,mf,idPeriod,ch_chirps,ch_chirp,ch_wcl,ch_cru)
 								
 							// if (copyrightN == 'Free') {
 

@@ -3,7 +3,7 @@
 	/*require_once '../../config/db.php';
 	require_once '../../config/smarty.php';*/
 	// include_once('../config/db_ccafs_climate.php');
-	//http://172.22.52.48/stations/php/data-graphics-chirps.php?lon=-76&lat=4&yi=1981&yf=1981&mi=1&mf=1
+	//http://172.22.52.8/stations/php/data-graphics-chirps.php?lon=-76&lat=4&yi=2015&yf=2017&mi=1&mf=12&ch_chirps=true&ch_chirp=false&ch_wcl=true&ch_cru=true
 	
 	### Gisweb
 	// define("PG_DB"  , "ccafs_climate");
@@ -31,9 +31,13 @@
 	$yf=$_REQUEST["yf"];
 	$mi=$_REQUEST["mi"]; 
 	$mf=$_REQUEST["mf"]; 
+	$chirps=$_REQUEST["ch_chirps"]; 
+	$chirp=$_REQUEST["ch_chirp"]; 
+	$wcl=$_REQUEST["ch_wcl"]; 
+	$cru=$_REQUEST["ch_cru"]; 
 	$order=100;//$_REQUEST["mf"]; este no se está usando pero debe incluirse
 	
-	$sql ="select * from getValuesChirpsGlobal_v2($lon,$lat,$yi,$yf,$mi,$mf,$order)"; 
+	$sql ="select * from getValuesChirpsGlobal_v2($lon,$lat,$yi,$yf,$mi,$mf,$order,'".$chirps."','".$chirp."','".$wcl."','".$cru."')"; 
 	$result = pg_query($dbcon, $sql);
 	// $row = pg_fetch_row($result);
 	// print $row[0];
@@ -45,6 +49,10 @@
 					'sdate' => $yi.'-'.$mi.'-01',
 					'data' => array()
 					),
+			"prchirp" => array(
+					'sdate' => $yi.'-'.$mi.'-01',
+					'data' => array()
+					),					
 			"monthly" => array(
 					'sdate' => $yi.'-'.$mi.'-01',
 					'data' => array()
@@ -91,6 +99,12 @@
 					),						
 			"stats" => array(
 					'data' => array()
+					),
+			"database" => array(
+					"chirps"=>$chirps,
+					"chirp"=>$chirp,
+					"wcl"=>$wcl,
+					"cru"=>$cru
 					)					
 	);
 				
@@ -134,13 +148,22 @@
 		}	
 		if($line['type']=="13"){
 			array_push($geojson['cru_tmax']['data'],floatval($line['prec']));
-		}			
+		}	
+		if($line['type']=="14"){
+			array_push($geojson['prchirp']['data'],floatval($line['prec']));
+		}		
 	}
+
+
+	// $especie = json_encode($geojson);
+
+	// $sqli ="INSERT INTO station_downloads_chirps (user_id, lon, lat,yi,yf,mi,mf,chirps,chirp,wcl,cru) VALUES
+	// (".$id.",".$lon.",".$lat.",".$yi.",".$yf.",".$mi.",".$mf.",'".serialize($chirps)."','".serialize($chirp)."','".serialize($wcl)."', '".serialize($cru)."'); ";
+   // $ret = pg_exec($dbcon, $sqli);
+   
 	pg_close($dbcon);
 	echo json_encode($geojson);	  
-	// $especie = json_encode($geojson);
 	
-
 	// header('Content-type: application/json',true);
 	
 	// echo $especie;  	

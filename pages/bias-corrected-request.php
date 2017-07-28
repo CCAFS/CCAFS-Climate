@@ -13,7 +13,7 @@ $periodh = isset($_REQUEST["periodh"]) ? $_REQUEST["periodh"] : null;
 $fileSet = isset($_REQUEST["fileSet"]) && is_numeric($_REQUEST["fileSet"]) && $_REQUEST["fileSet"] >= 0 ? $_REQUEST["fileSet"] : null;
 $observation = isset($_REQUEST["observation"]) ? $_REQUEST["observation"] : null;
 $station_file = isset($_FILES["station-file"]["tmp_name"]) ? $_FILES["station-file"]["tmp_name"] : null;
-
+$delimitator = isset($_REQUEST["delimit"]) ? $_REQUEST["delimit"] : '';
 
 //$extentId = isset($_REQUEST["extent"]) && is_numeric($_REQUEST["extent"]) && $_REQUEST["extent"] >= 0 ? $_REQUEST["extent"] : null;
 //$tile = isset($_REQUEST["tile_name"]) && $_REQUEST["tile_name"] != "" ? $_REQUEST["tile_name"] : null;
@@ -49,16 +49,18 @@ if ($station_file && $code==0) {
     $url = SMARTY_ROOT_URI."bias_tmp/";
     $file = $url.$filename;
   }
-
+	print_r $delimitator;
+    if($delimitator=="space"){$sepFile=" ";} elseif ($delimitator=="tab"){$sepFile="\t";}elseif ($delimitator=="puntocoma"){$sepFile=";";}elseif ($delimitator=="Comma"){$sepFile=",";};
+	
 	$myfile = file($uri);
 	$varlist = array("prec","tmin","tmax","tmean","srad");
 	$namescol = array("date","prec","tmin","tmax","tmean","srad");
 	// $namescol = array("0"=>"date","1"=>"prec","2"=>"tmin","3"=>"tmax","4"=>"tmean","5"=>"srad");
 	// $colnames = explode("\t", substr($myfile[0], 0, -2));
-	$colnames = explode("\t", trim($myfile[0]));
-	$start1 = explode("\t", $myfile[1]);
+	$colnames = explode($sepFile, trim($myfile[0]));
+	$start1 = explode($sepFile, $myfile[1]);
 	$start = substr($start1[0], 0, 4)."-".substr($start1[0], 4, 2)."-".substr($start1[0], 6, 2);
-	$end1   = explode("\t", $myfile[count($myfile)-1]);
+	$end1   = explode($sepFile, $myfile[count($myfile)-1]);
 	$end   = substr($end1[0], 0, 4)."-".substr($end1[0], 4, 2)."-".substr($end1[0], 6, 2);
 	$periodst=substr($start1[0], 0, 4).';'.substr($end1[0], 0, 4);
 	
