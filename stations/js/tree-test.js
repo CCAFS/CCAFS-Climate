@@ -2165,6 +2165,7 @@ function ConvertDDToDMS(D){
 							verticalAlign: 'bottom',//'top',
 							y: 25,
 							floating: true,
+							itemMarginBottom: 5,
 							backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
 						},
 					  plotOptions: {
@@ -2381,6 +2382,8 @@ function ConvertDDToDMS(D){
 							verticalAlign: 'bottom',//'top',
 							y: 25,
 							floating: true,
+							itemMarginBottom: 5,
+							//padding:0.8,
 							backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
 						},
 						series: [{
@@ -6931,7 +6934,11 @@ var groupByRegion = {
 									// '<div id="index_wetdays" style="width:'+grapWidth+'px;"></div>',
 									// '<div id="index_conswetdays" style="width:'+grapWidth+'px;"></div>',
 									'<div id="grap_prec_'+selectionID+'" style="width:'+grapWidth+'px;"></div>','<br>',
-									'<div id="stats_chirps" style="width:'+grapWidth+'px;"></div>'
+									'<div id="stats_chirps" style="width:'+grapWidth+'px;"></div>','<br>',
+									'<p style="font-size:20px">Data source:</p>',
+									'<a href="http://chg.geog.ucsb.edu/data/index.html" target="_blank">CHIRPS and CHIRP</a>: Is a 30+ year quasi-global rainfall dataset. Spanning 50°S-50°N (and all longitudes), starting in 1981 to near-present, CHIRP incorporates 0.05° resolution (~5km) satellite imagery and CHIPRS incorporates 0.05° resolution (~5km) satellite imagery with in-situ station data to create gridded rainfall time series for trend analysis and seasonal drought monitoring.','<br>',
+									'<a href="http://worldclim.org/version2" target="_blank">WorldClim V2:</a>: Very high resolution interpolated climate surfaces with in-situ station data for global land areas (~1km resolution). WorldClim version 2 has average monthly climate data for minimum, mean, and maximum temperature and for precipitation for 1970-2000.','<br>',
+									'<a href="http://www.cru.uea.ac.uk/" target="_blank">CRU V4</a>: Datasets interpolated monthly for global land for multiple variables with 0.5° x 0.5° resolution (~50 km) from 1901-2015'
 									
 									];	
 								var qcstoreGrap = Ext.create('Ext.data.Store', {
