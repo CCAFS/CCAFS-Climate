@@ -2,27 +2,10 @@
 
 	/*require_once '../../config/db.php';
 	require_once '../../config/smarty.php';*/
-	// include_once('../config/db_ccafs_climate.php');
+	include_once('../config/db_ccafs_climate.php');
 	//http://172.22.52.8/stations/php/data-graphics-chirps.php?lon=-76&lat=4&yi=2015&yf=2017&mi=1&mf=12&ch_chirps=true&ch_chirp=false&ch_wcl=true&ch_cru=true
 	
-	### Gisweb
-	// define("PG_DB"  , "ccafs_climate");
-	// define("PG_HOST", "172.22.52.15"); 
-	// define("PG_USER", "jtarapues");
-	// define("PG_PASS", "Jaime881");
-	// define("PG_PORT", "5432"); 
-	// define("SRID",   "4326"); 
-
-	//### para 172.22.52.8
-	define("PG_DB"  , "ccafs_climate");
-	// define("PG_HOST", "localhost"); 
-	define("PG_HOST", "172.22.52.8"); 
-	define("PG_USER", "jetarapues");
-	define("PG_PASS", "ciat2016");
-	define("PG_PORT", "5432"); 
-	define("SRID",   "4326"); 	
-	
-	  $dbcon = pg_connect("dbname=".PG_DB." host=".PG_HOST." user=".PG_USER." password=".PG_PASS." port=".PG_PORT);
+    // $dbcon = pg_connect("dbname=".PG_DB." host=".PG_HOST." user=".PG_USER." password=".PG_PASS." port=".PG_PORT);
 	// $dirfilesStations="C:\xampp\htdocs\CCAFS-Climate\downloads";
 
 	$lon=$_REQUEST["lon"]; 
