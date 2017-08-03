@@ -2,7 +2,7 @@
 
 	/*require_once '../../config/db.php';
 	require_once '../../config/smarty.php';*/
-	include_once('../config/db_ccafs_climate.php');
+	include_once('../config/db_chirps.php');
 	//http://172.22.52.8/stations/php/data-graphics-chirps.php?lon=-76&lat=4&yi=2015&yf=2017&mi=1&mf=12&ch_chirps=true&ch_chirp=false&ch_wcl=true&ch_cru=true
 	
     // $dbcon = pg_connect("dbname=".PG_DB." host=".PG_HOST." user=".PG_USER." password=".PG_PASS." port=".PG_PORT);
