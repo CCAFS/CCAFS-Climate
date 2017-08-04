@@ -23,4 +23,5 @@ downloads/data_stations
 /stations/config/*.php
 /stations/config/db_ccafs_climate.php
 /stations/config/db_config.php
+/stations/config/db_chirps.php
 /pages/oai2/oaidp-config.php
