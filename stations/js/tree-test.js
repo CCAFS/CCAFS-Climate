@@ -3977,7 +3977,14 @@ var groupByRegion = {
 												varget = rec.get('variables');
 												// console.log(varget.split(","))
 												varstore=varget.split(",")
-												if (copyrightN == 'Free') {
+													var periodst = Ext.create('Ext.data.Store', {
+															fields: ['value','name'], 
+															data: [ 
+																{value:1,name: 'Daily'}, 
+																{value:2,name: 'Monthly'}, 
+																{value:3,name: 'Yearly'}
+															]																	
+													})
 													varlist="ALL"//(cmbVar.getRawValue()).replace(/\s/g, '')
 													var arrayvar =new Array() //varlist.split(',');
 										
@@ -4009,14 +4016,7 @@ var groupByRegion = {
 														fieldLabel: 'Select graphic model',
 														id:'cmbPeriodID',
 														labelWidth:150,
-														store: {
-															fields: ['value','name'], 
-															data: [ 
-																{value:1,name: 'Daily'}, 
-																{value:2,name: 'Monthly'}, 
-																{value:3,name: 'Yearly'}
-															]
-														},
+														store: periodst,
 														displayField: 'name',
 														value: 1,
 														queryMode: 'local',
@@ -4033,11 +4033,42 @@ var groupByRegion = {
 																// generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
 																// console.log(selectionID,idPeriod,"ALL",qc)
 																// console.log("hola")
-																generateGraps(selectionID,idPeriod,"ALL",qc)
+																if (copyrightN == 'Free') {
+																	generateGraps(selectionID,idPeriod,"ALL",qc)
+																}else if (copyrightN != 'Free' && idPeriod==1){
+																	winInfo=Ext.MessageBox.show({
+																	   title: 'Information',
+																	   msg: 'Sorry, You are not authorized to download data.',
+																	   width:300,
+																	   buttons: Ext.MessageBox.OK,
+																	   animateTarget: 'error',
+																	   icon: 'x-message-box-error'
+																	   
+																	});	
+																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+																	Ext.getCmp('cmbPeriodID').setValue(3);
+																}else if (copyrightN != 'Free' && idPeriod==2 ){
+																	winInfo=Ext.MessageBox.show({
+																	   title: 'Information',
+																	   msg: 'Sorry, You are not authorized to download data.',
+																	   width:300,
+																	   buttons: Ext.MessageBox.OK,
+																	   animateTarget: 'error',
+																	   icon: 'x-message-box-error'
+																	   
+																	});	
+																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+																	Ext.getCmp('cmbPeriodID').setValue(3);
+																}																
+																
 
 															}
 														}
 													});	
+													if (copyrightN != 'Free') {
+													Ext.getCmp('cmbPeriodID').setValue(3);
+													}else{Ext.getCmp('cmbPeriodID').setValue(1);}
+													
 													cmbqc='cmbqc'+selectionID
 													cmbqc=Ext.create('Ext.form.field.ComboBox', { 
 														fieldLabel: 'Quality control:',
@@ -4123,18 +4154,7 @@ var groupByRegion = {
 													
 													// generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()),'raw')
 													generateGraps(selectionID,cmbPeriod.getValue(),"ALL",'raw')
-												}else{
-													winInfo=Ext.MessageBox.show({
-													   title: 'Information',
-													   msg: 'Sorry, You are not authorized to download data.',
-													   width:300,
-													   buttons: Ext.MessageBox.OK,
-													   animateTarget: 'error',
-													   icon: 'x-message-box-error'
-													   
-													});	
-													winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);												
-												}
+
 												
 											}, // handler
 										   isDisabled: function(view, rowIndex, colIndex, item, record) {
@@ -4844,8 +4864,14 @@ var groupByRegion = {
 													selectionID = rec.get('id');
 													statName = rec.get('name');
 													copyrightN = rec.get('copyright');
-													if (copyrightN == 'Free') {
-													
+														var periodst = Ext.create('Ext.data.Store', {
+																fields: ['value','name'], 
+																data: [ 
+																	{value:1,name: 'Daily'}, 
+																	{value:2,name: 'Monthly'}, 
+																	{value:3,name: 'Yearly'}
+																]																	
+														})													
 														varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
 														var arrayvar =new Array() //varlist.split(',');
 
@@ -4874,14 +4900,7 @@ var groupByRegion = {
 															fieldLabel: 'Select graphic model',
 															id:'cmbPeriodID',
 															labelWidth:150,
-															store: {
-																fields: ['value','name'], 
-																data: [ 
-																	{value:1,name: 'Daily'}, 
-																	{value:2,name: 'Monthly'}, 
-																	{value:3,name: 'Yearly'}
-																]
-															},
+															store: periodst,
 															displayField: 'name',
 															value: 1,
 															queryMode: 'local',
@@ -4894,11 +4913,40 @@ var groupByRegion = {
 																	// actTabId=parseInt((actTab.title).match(/\d+/)[0])
 																	var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
 																	var qc = Ext.getCmp('qcCmbGrapID').getValue()
-																	generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
-
+																	if (copyrightN == 'Free') {
+																		generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
+																	}else if (copyrightN != 'Free' && idPeriod==1){
+																		winInfo=Ext.MessageBox.show({
+																		   title: 'Information',
+																		   msg: 'Sorry, You are not authorized to download data.',
+																		   width:300,
+																		   buttons: Ext.MessageBox.OK,
+																		   animateTarget: 'error',
+																		   icon: 'x-message-box-error'
+																		   
+																		});	
+																		winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
+																		Ext.getCmp('cmbPeriodID').setValue(3);
+																	}else if (copyrightN != 'Free' && idPeriod==2 ){
+																		winInfo=Ext.MessageBox.show({
+																		   title: 'Information',
+																		   msg: 'Sorry, You are not authorized to download data.',
+																		   width:300,
+																		   buttons: Ext.MessageBox.OK,
+																		   animateTarget: 'error',
+																		   icon: 'x-message-box-error'
+																		   
+																		});	
+																		winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+																		Ext.getCmp('cmbPeriodID').setValue(3);
+																	}
 																}
 															}
 														});	
+														if (copyrightN != 'Free') {
+														Ext.getCmp('cmbPeriodID').setValue(3);
+														}else{Ext.getCmp('cmbPeriodID').setValue(1);}
+															
 														cmbqc='cmbqc'+selectionID
 														cmbqc=Ext.create('Ext.form.field.ComboBox', { 
 															fieldLabel: 'Quality control:',
@@ -4981,18 +5029,7 @@ var groupByRegion = {
 														// Ext.getCmp('tabsID').setHeight(mainPanelHeight*0.2);
 														tabs.setActiveTab('graphic_tab');
 														generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()),'raw')
-													}else{
-														winInfo=Ext.MessageBox.show({
-														   title: 'Information',
-														   msg: 'Sorry, You are not authorized to download data.',
-														   width:300,
-														   buttons: Ext.MessageBox.OK,
-														   animateTarget: 'error',
-														   icon: 'x-message-box-error'
-														   
-														});	
-														winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
-													}
+
 													
 												}, // handler											
 											}]
@@ -6101,7 +6138,14 @@ var groupByRegion = {
 																selectionID = rec.get('id');
 																statName = rec.get('name');
 																copyrightN = rec.get('copyright');
-																if (copyrightN == 'Free') {
+																var periodst = Ext.create('Ext.data.Store', {
+																		fields: ['value','name'], 
+																		data: [ 
+																			{value:1,name: 'Daily'}, 
+																			{value:2,name: 'Monthly'}, 
+																			{value:3,name: 'Yearly'}
+																		]																	
+																})
 																
 																	varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
 																	var arrayvar =new Array() //varlist.split(',');
@@ -6131,14 +6175,7 @@ var groupByRegion = {
 																		fieldLabel: 'Select graphic model',
 																		id:'cmbPeriodID',
 																		labelWidth:150,
-																		store: {
-																			fields: ['value','name'], 
-																			data: [ 
-																				{value:1,name: 'Daily'}, 
-																				{value:2,name: 'Monthly'}, 
-																				{value:3,name: 'Yearly'}
-																			]
-																		},
+																		store: periodst,
 																		displayField: 'name',
 																		value: 1,
 																		queryMode: 'local',
@@ -6151,11 +6188,40 @@ var groupByRegion = {
 																				// actTabId=parseInt((actTab.title).match(/\d+/)[0])
 																				var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
 																				var qc = Ext.getCmp('qcCmbGrapID').getValue()
-																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
-
+																				if (copyrightN == 'Free') {
+																					generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
+																				}else if (copyrightN != 'Free' && idPeriod==1){
+																					winInfo=Ext.MessageBox.show({
+																					   title: 'Information',
+																					   msg: 'Sorry, You are not authorized to download data.',
+																					   width:300,
+																					   buttons: Ext.MessageBox.OK,
+																					   animateTarget: 'error',
+																					   icon: 'x-message-box-error'
+																					   
+																					});	
+																					winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
+																					Ext.getCmp('cmbPeriodID').setValue(3);
+																				}else if (copyrightN != 'Free' && idPeriod==2 ){
+																					winInfo=Ext.MessageBox.show({
+																					   title: 'Information',
+																					   msg: 'Sorry, You are not authorized to download data.',
+																					   width:300,
+																					   buttons: Ext.MessageBox.OK,
+																					   animateTarget: 'error',
+																					   icon: 'x-message-box-error'
+																					   
+																					});	
+																					winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+																					Ext.getCmp('cmbPeriodID').setValue(3);
+																				}
 																			}
 																		}
 																	});	
+																	if (copyrightN != 'Free') {
+																	Ext.getCmp('cmbPeriodID').setValue(3);
+																	}else{Ext.getCmp('cmbPeriodID').setValue(1);}
+																	
 																	cmbqc='cmbqc'+selectionID
 																	cmbqc=Ext.create('Ext.form.field.ComboBox', { 
 																		fieldLabel: 'Quality control:',
@@ -6239,18 +6305,6 @@ var groupByRegion = {
 																	tabs.setActiveTab('graphic_tab');
 																	
 																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()),'raw')
-																}else{
-																	winInfo=Ext.MessageBox.show({
-																	   title: 'Information',
-																	   msg: 'Sorry, You are not authorized to download data.',
-																	   width:300,
-																	   buttons: Ext.MessageBox.OK,
-																	   animateTarget: 'error',
-																	   icon: 'x-message-box-error'
-																	   
-																	});	
-																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
-																}
 																
 															}, // handler															
 														}]
@@ -6935,10 +6989,10 @@ var groupByRegion = {
 									// '<div id="index_conswetdays" style="width:'+grapWidth+'px;"></div>',
 									'<div id="grap_prec_'+selectionID+'" style="width:'+grapWidth+'px;"></div>','<br>',
 									'<div id="stats_chirps" style="width:'+grapWidth+'px;"></div>',
-									'<p style="font-size:20px">Data sources</p>',
+									'<div style="font-family: Trebuchet MS";><p style="font-size:20px">Data sources</p>',
 									'<a href="http://chg.geog.ucsb.edu/data/index.html" target="_blank">CHIRPS and CHIRP</a>: Is a 30+ year quasi-global rainfall dataset. Spanning 50&deg;S-50&deg;N (and all longitudes), starting in 1981 to near-present, CHIRP incorporates 0.05&deg; resolution (~5km) satellite imagery and CHIPRS incorporates 0.05&deg; resolution (~5km) satellite imagery with in-situ station data to create gridded rainfall time series for trend analysis and seasonal drought monitoring.','<br>',
 									'<a href="http://worldclim.org/version2" target="_blank">WorldClim V2:</a>: Very high resolution interpolated climate surfaces with in-situ station data for global land areas (~1km resolution). WorldClim version 2 has average monthly climate data for minimum, mean, and maximum temperature and for precipitation for 1970-2000.','<br>',
-									'<a href="http://www.cru.uea.ac.uk/" target="_blank">CRU V4</a>: Datasets interpolated monthly for global land for multiple variables with 0.5&deg; x 0.5&deg; resolution (~50 km) from 1901-2015.','<br>','<br>'
+									'<a href="http://www.cru.uea.ac.uk/" target="_blank">CRU V4</a>: Datasets interpolated monthly for global land for multiple variables with 0.5&deg; x 0.5&deg; resolution (~50 km) from 1901-2015.','<br>','<br>,<br> </div>'
 									
 									];	
 								var qcstoreGrap = Ext.create('Ext.data.Store', {
@@ -7794,8 +7848,14 @@ var groupByRegion = {
 																selectionID = rec.get('id');
 																statName = rec.get('name');
 																copyrightN = rec.get('copyright');
-																if (copyrightN == 'Free') {
-																
+																	var periodst = Ext.create('Ext.data.Store', {
+																			fields: ['value','name'], 
+																			data: [ 
+																				{value:1,name: 'Daily'}, 
+																				{value:2,name: 'Monthly'}, 
+																				{value:3,name: 'Yearly'}
+																			]																	
+																	})																
 																	varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
 																	var arrayvar =new Array() //varlist.split(',');
 
@@ -7824,14 +7884,7 @@ var groupByRegion = {
 																		fieldLabel: 'Select graphic model',
 																		id:'cmbPeriodID',
 																		labelWidth:150,
-																		store: {
-																			fields: ['value','name'], 
-																			data: [ 
-																				{value:1,name: 'Daily'}, 
-																				{value:2,name: 'Monthly'}, 
-																				{value:3,name: 'Yearly'}
-																			]
-																		},
+																		store: periodst,
 																		displayField: 'name',
 																		value: 1,
 																		queryMode: 'local',
@@ -7844,11 +7897,40 @@ var groupByRegion = {
 																				// actTabId=parseInt((actTab.title).match(/\d+/)[0])
 																				var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
 																				var qc = Ext.getCmp('qcCmbGrapID').getValue()
-																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
-
+																				
+																				if (copyrightN == 'Free') {
+																					generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
+																				}else if (copyrightN != 'Free' && idPeriod==1){
+																					winInfo=Ext.MessageBox.show({
+																					   title: 'Information',
+																					   msg: 'Sorry, You are not authorized to download data.',
+																					   width:300,
+																					   buttons: Ext.MessageBox.OK,
+																					   animateTarget: 'error',
+																					   icon: 'x-message-box-error'
+																					   
+																					});	
+																					winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
+																					Ext.getCmp('cmbPeriodID').setValue(3);
+																				}else if (copyrightN != 'Free' && idPeriod==2 ){
+																					winInfo=Ext.MessageBox.show({
+																					   title: 'Information',
+																					   msg: 'Sorry, You are not authorized to download data.',
+																					   width:300,
+																					   buttons: Ext.MessageBox.OK,
+																					   animateTarget: 'error',
+																					   icon: 'x-message-box-error'
+																					   
+																					});	
+																					winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+																					Ext.getCmp('cmbPeriodID').setValue(3);
+																				}
 																			}
 																		}
 																	});	
+																	if (copyrightN != 'Free') {
+																	Ext.getCmp('cmbPeriodID').setValue(3);
+																	}else{Ext.getCmp('cmbPeriodID').setValue(1);}
 																	
 																	btonReturn= new Ext.Button({
 																		pressedCls : 'my-pressed',
@@ -7902,20 +7984,8 @@ var groupByRegion = {
 																	tabs.setActiveTab('graphic_tab');
 																	var qc = Ext.getCmp('qcCmbGrapID').getValue()
 																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()),qc)
-																}else{
-																	winInfo=Ext.MessageBox.show({
-																	   title: 'Information',
-																	   msg: 'Sorry, You are not authorized to download data.',
-																	   width:300,
-																	   buttons: Ext.MessageBox.OK,
-																	   animateTarget: 'error',
-																	   icon: 'x-message-box-error'
-																	   
-																	});	
-																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
-																}
 																
-															}, // handler
+															} // handler
 															
 														}]
 													},								
@@ -8735,7 +8805,14 @@ var groupByRegion = {
 																selectionID = rec.get('id');
 																statName = rec.get('name');
 																copyrightN = rec.get('copyright');
-																if (copyrightN == 'Free') {
+																	var periodst = Ext.create('Ext.data.Store', {
+																			fields: ['value','name'], 
+																			data: [ 
+																				{value:1,name: 'Daily'}, 
+																				{value:2,name: 'Monthly'}, 
+																				{value:3,name: 'Yearly'}
+																			]																	
+																	})
 																
 																	varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
 																	var arrayvar =new Array() //varlist.split(',');
@@ -8765,14 +8842,7 @@ var groupByRegion = {
 																		fieldLabel: 'Select graphic model',
 																		id:'cmbPeriodID',
 																		labelWidth:150,
-																		store: {
-																			fields: ['value','name'], 
-																			data: [ 
-																				{value:1,name: 'Daily'}, 
-																				{value:2,name: 'Monthly'}, 
-																				{value:3,name: 'Yearly'}
-																			]
-																		},
+																		store: periodst,
 																		displayField: 'name',
 																		value: 1,
 																		queryMode: 'local',
@@ -8785,11 +8855,40 @@ var groupByRegion = {
 																				// actTabId=parseInt((actTab.title).match(/\d+/)[0])
 																				var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
 																				var qc = Ext.getCmp('qcCmbGrapID').getValue()
-																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
+																				if (copyrightN == 'Free') {
+																					generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
+																				}else if (copyrightN != 'Free' && idPeriod==1){
+																					winInfo=Ext.MessageBox.show({
+																					   title: 'Information',
+																					   msg: 'Sorry, You are not authorized to download data.',
+																					   width:300,
+																					   buttons: Ext.MessageBox.OK,
+																					   animateTarget: 'error',
+																					   icon: 'x-message-box-error'
+																					   
+																					});	
+																					winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
+																					Ext.getCmp('cmbPeriodID').setValue(3);
+																				}else if (copyrightN != 'Free' && idPeriod==2 ){
+																					winInfo=Ext.MessageBox.show({
+																					   title: 'Information',
+																					   msg: 'Sorry, You are not authorized to download data.',
+																					   width:300,
+																					   buttons: Ext.MessageBox.OK,
+																					   animateTarget: 'error',
+																					   icon: 'x-message-box-error'
+																					   
+																					});	
+																					winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+																					Ext.getCmp('cmbPeriodID').setValue(3);
+																				}																				
 
 																			}
 																		}
 																	});	
+																	if (copyrightN != 'Free') {
+																	Ext.getCmp('cmbPeriodID').setValue(3);
+																	}else{Ext.getCmp('cmbPeriodID').setValue(1);}
 																	
 																	btonReturn= new Ext.Button({
 																		pressedCls : 'my-pressed',
@@ -8843,18 +8942,6 @@ var groupByRegion = {
 																	tabs.setActiveTab('graphic_tab');
 																	var qc = Ext.getCmp('qcCmbGrapID').getValue()
 																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()),qc)
-																}else{
-																	winInfo=Ext.MessageBox.show({
-																	   title: 'Information',
-																	   msg: 'Sorry, You are not authorized to download data.',
-																	   width:300,
-																	   buttons: Ext.MessageBox.OK,
-																	   animateTarget: 'error',
-																	   icon: 'x-message-box-error'
-																	   
-																	});	
-																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
-																}
 																
 															}, // handler
 														}]
@@ -9517,9 +9604,16 @@ var groupByRegion = {
 																selectionID = rec.get('id');
 																statName = rec.get('name');
 																copyrightN = rec.get('copyright');
-																if (copyrightN == 'Free') {
-																
+																	var periodst = Ext.create('Ext.data.Store', {
+																			fields: ['value','name'], 
+																			data: [ 
+																				{value:1,name: 'Daily'}, 
+																				{value:2,name: 'Monthly'}, 
+																				{value:3,name: 'Yearly'}
+																			]																	
+																	})																	
 																	// varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
+																	varlist="ALL"
 																	var arrayvar =new Array() //varlist.split(',');
 																	
 																	for(var i = 0; i < varstore.getCount(); i++) {
@@ -9547,16 +9641,9 @@ var groupByRegion = {
 																		fieldLabel: 'Select graphic model',
 																		id:'cmbPeriodID',
 																		labelWidth:125,
-																		store: {
-																			fields: ['value','name'], 
-																			data: [ 
-																				{value:1,name: 'Daily'}, 
-																				{value:2,name: 'Monthly'}, 
-																				{value:3,name: 'Yearly'}
-																			]
-																		},
+																		store: periodst,
 																		displayField: 'name',
-																		value: 1,
+																		// value: 1,
 																		queryMode: 'local',
 																		valueField: 'value', 								
 																		typeAhead: true,
@@ -9566,12 +9653,42 @@ var groupByRegion = {
 																				var idx = tabs.items.indexOf(actTab);
 																				// actTabId=parseInt((actTab.title).match(/\d+/)[0])
 																				var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
+																				// var field = Ext.getCmp('cmbPeriodID').findField('Daily');
 																				var qc = Ext.getCmp('qcCmbGrapID').getValue()
-																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),Ext.getCmp('qcCmbGrapID').getValue(),qc)
-
+																				if (copyrightN == 'Free') {
+																					generateGraps(selectionID,idPeriod,varlist,Ext.getCmp('qcCmbGrapID').getValue(),qc)
+																				}else if (copyrightN != 'Free' && idPeriod==1){
+																					winInfo=Ext.MessageBox.show({
+																					   title: 'Information',
+																					   msg: 'Sorry, You are not authorized to download data.',
+																					   width:300,
+																					   buttons: Ext.MessageBox.OK,
+																					   animateTarget: 'error',
+																					   icon: 'x-message-box-error'
+																					   
+																					});	
+																					winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+																					Ext.getCmp('cmbPeriodID').setValue(3);
+																				}else if (copyrightN != 'Free' && idPeriod==2 ){
+																					winInfo=Ext.MessageBox.show({
+																					   title: 'Information',
+																					   msg: 'Sorry, You are not authorized to download data.',
+																					   width:300,
+																					   buttons: Ext.MessageBox.OK,
+																					   animateTarget: 'error',
+																					   icon: 'x-message-box-error'
+																					   
+																					});	
+																					winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+																					Ext.getCmp('cmbPeriodID').setValue(3);
+																				}																					
 																			}
 																		}
 																	});	
+																	
+																	if (copyrightN != 'Free') {
+																	Ext.getCmp('cmbPeriodID').setValue(3);
+																	}else{Ext.getCmp('cmbPeriodID').setValue(1);}
 																	
 																	cmbqc='cmbqc'+selectionID
 																	cmbqc=Ext.create('Ext.form.field.ComboBox', { 
@@ -9612,12 +9729,12 @@ var groupByRegion = {
 																				// actTabId=parseInt((actTab.title).match(/\d+/)[0])
 																				var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
 																				var qc = Ext.getCmp('qcCmbGrapID').getValue()
-																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
+																				generateGraps(selectionID,idPeriod,varlist,qc)
 
 																			}
 																		}
 																	});	
-																	
+
 																	btonReturn= new Ext.Button({
 																		pressedCls : 'my-pressed',
 																		overCls : 'my-over',
@@ -9671,18 +9788,6 @@ var groupByRegion = {
 																	
 																	// console.log(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()))
 																	generateGraps(selectionID,cmbPeriod.getValue(),"ALL",'raw')
-																}else{
-																	winInfo=Ext.MessageBox.show({
-																	   title: 'Information',
-																	   msg: 'Sorry, You are not authorized to download data.',
-																	   width:300,
-																	   buttons: Ext.MessageBox.OK,
-																	   animateTarget: 'error',
-																	   icon: 'x-message-box-error'
-																	   
-																	});	
-																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
-																}
 																
 															}, // handler
 														}]
@@ -10090,7 +10195,14 @@ var groupByRegion = {
 																selectionID = rec.get('id');
 																statName = rec.get('name');
 																copyrightN = rec.get('copyright');
-																if (copyrightN == 'Free') {
+																	var periodst = Ext.create('Ext.data.Store', {
+																			fields: ['value','name'], 
+																			data: [ 
+																				{value:1,name: 'Daily'}, 
+																				{value:2,name: 'Monthly'}, 
+																				{value:3,name: 'Yearly'}
+																			]																	
+																	})	
 																
 																	varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
 																	var arrayvar =new Array() //varlist.split(',');
@@ -10120,14 +10232,7 @@ var groupByRegion = {
 																		fieldLabel: 'Select graphic model',
 																		id:'cmbPeriodID',
 																		labelWidth:150,
-																		store: {
-																			fields: ['value','name'], 
-																			data: [ 
-																				{value:1,name: 'Daily'}, 
-																				{value:2,name: 'Monthly'}, 
-																				{value:3,name: 'Yearly'}
-																			]
-																		},
+																		store: periodst,
 																		displayField: 'name',
 																		value: 1,
 																		queryMode: 'local',
@@ -10140,11 +10245,41 @@ var groupByRegion = {
 																				// actTabId=parseInt((actTab.title).match(/\d+/)[0])
 																				var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
 																				var qc = Ext.getCmp('qcCmbGrapID').getValue()
-																				generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
+																				if (copyrightN == 'Free') {
+																					generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
+																				}else if (copyrightN != 'Free' && idPeriod==1){
+																					winInfo=Ext.MessageBox.show({
+																					   title: 'Information',
+																					   msg: 'Sorry, You are not authorized to download data.',
+																					   width:300,
+																					   buttons: Ext.MessageBox.OK,
+																					   animateTarget: 'error',
+																					   icon: 'x-message-box-error'
+																					   
+																					});	
+																					winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
+																					Ext.getCmp('cmbPeriodID').setValue(3);
+																				}else if (copyrightN != 'Free' && idPeriod==2 ){
+																					winInfo=Ext.MessageBox.show({
+																					   title: 'Information',
+																					   msg: 'Sorry, You are not authorized to download data.',
+																					   width:300,
+																					   buttons: Ext.MessageBox.OK,
+																					   animateTarget: 'error',
+																					   icon: 'x-message-box-error'
+																					   
+																					});	
+																					winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+																					Ext.getCmp('cmbPeriodID').setValue(3);
+																				}																				
 
 																			}
 																		}
 																	});	
+																	if (copyrightN != 'Free') {
+																	Ext.getCmp('cmbPeriodID').setValue(3);
+																	}else{Ext.getCmp('cmbPeriodID').setValue(1);}
+																	
 																	cmbqc='cmbqc'+selectionID
 																	cmbqc=Ext.create('Ext.form.field.ComboBox', { 
 																		fieldLabel: 'Quality control:',
@@ -10229,18 +10364,6 @@ var groupByRegion = {
 																	tabs.setActiveTab('graphic_tab');
 																	var qc = Ext.getCmp('qcCmbGrapID').getValue()
 																	generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()),qc)
-																}else{
-																	winInfo=Ext.MessageBox.show({
-																	   title: 'Information',
-																	   msg: 'Sorry, You are not authorized to download data.',
-																	   width:300,
-																	   buttons: Ext.MessageBox.OK,
-																	   animateTarget: 'error',
-																	   icon: 'x-message-box-error'
-																	   
-																	});	
-																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
-																}
 																
 															}, // handler
 															
@@ -12508,7 +12631,14 @@ var groupByRegion = {
 												selectionID = rec.get('id');
 												statName = rec.get('name');
 												copyrightN = rec.get('copyright');
-												if (copyrightN == 'Free') {
+													var periodst = Ext.create('Ext.data.Store', {
+															fields: ['value','name'], 
+															data: [ 
+																{value:1,name: 'Daily'}, 
+																{value:2,name: 'Monthly'}, 
+																{value:3,name: 'Yearly'}
+															]																	
+													})	
 												
 													varlist=(cmbVar.getRawValue()).replace(/\s/g, '')
 													var arrayvar =new Array() //varlist.split(',');
@@ -12566,14 +12696,7 @@ var groupByRegion = {
 														fieldLabel: 'Select graphic model',
 														id:'cmbPeriodID',
 														labelWidth:150,
-														store: {
-															fields: ['value','name'], 
-															data: [ 
-																{value:1,name: 'Daily'}, 
-																{value:2,name: 'Monthly'}, 
-																{value:3,name: 'Yearly'}
-															]
-														},
+														store: periodst,
 														displayField: 'name',
 														value: 1,
 														queryMode: 'local',
@@ -12586,11 +12709,41 @@ var groupByRegion = {
 																// actTabId=parseInt((actTab.title).match(/\d+/)[0])
 																var idPeriod = Ext.getCmp('cmbPeriodID').getValue()
 																var qc = Ext.getCmp('qcCmbGrapID').getValue()
-																generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
+																if (copyrightN == 'Free') {
+																	generateGraps(selectionID,idPeriod,Ext.encode(cmbVar.getValue()),qc)
+																}else if (copyrightN != 'Free' && idPeriod==1){
+																	winInfo=Ext.MessageBox.show({
+																	   title: 'Information',
+																	   msg: 'Sorry, You are not authorized to download data.',
+																	   width:300,
+																	   buttons: Ext.MessageBox.OK,
+																	   animateTarget: 'error',
+																	   icon: 'x-message-box-error'
+																	   
+																	});	
+																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
+																	Ext.getCmp('cmbPeriodID').setValue(3);
+																}else if (copyrightN != 'Free' && idPeriod==2 ){
+																	winInfo=Ext.MessageBox.show({
+																	   title: 'Information',
+																	   msg: 'Sorry, You are not authorized to download data.',
+																	   width:300,
+																	   buttons: Ext.MessageBox.OK,
+																	   animateTarget: 'error',
+																	   icon: 'x-message-box-error'
+																	   
+																	});	
+																	winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);
+																	Ext.getCmp('cmbPeriodID').setValue(3);
+																}																
 
 															}
 														}
 													});	
+													if (copyrightN != 'Free') {
+													Ext.getCmp('cmbPeriodID').setValue(3);
+													}else{Ext.getCmp('cmbPeriodID').setValue(1);}
+													
 													cmbqc='cmbqc'+selectionID
 													cmbqc=Ext.create('Ext.form.field.ComboBox', { 
 														fieldLabel: 'Quality control:',
@@ -12676,18 +12829,6 @@ var groupByRegion = {
 													// var qc = Ext.getCmp('qcCmbGrapID').getValue()
 													// generateGraps(selectionID,cmbPeriod.getValue(),Ext.encode(cmbVar.getValue()),qc)
 													generateGraps(selectionID,cmbPeriod.getValue(),"ALL","raw")
-												}else{
-													winInfo=Ext.MessageBox.show({
-													   title: 'Information',
-													   msg: 'Sorry, You are not authorized to download data.',
-													   width:300,
-													   buttons: Ext.MessageBox.OK,
-													   animateTarget: 'error',
-													   icon: 'x-message-box-error'
-													   
-													});	
-													winInfo.setPosition(mainPanelWidth/3,mainPanelHeight/2);																			
-												}
 												
 											}, // handler											
 										}]

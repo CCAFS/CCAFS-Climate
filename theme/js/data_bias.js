@@ -25,7 +25,7 @@ $(document).ready(function() {
 	// console.log(helpIcon2.tipTip())
   });
 
-  
+ $("input[id='format-3']").iCheck('disable');  
 
 $('#button-file').click(function () {
     $("input[type='file']").trigger('click');
@@ -391,8 +391,6 @@ function selectAllModelOptionsEvent(evt) {
 function getFilesInfo(evt) {
   var nameEven = $(evt.target).attr("name");
   var filterValues = getUserSelections(nameEven);
-  // console.log(filterValues)
- 
   var id = $("input[name='observation']:checked").val();
 
   if (nameEven == 'observation') {
@@ -625,7 +623,11 @@ function getUserSelections(filterName) {
 //    return;
   } 
   
-  
+ if($("input[name='variables\\[\\]']:checked").length==5){
+	 $("input[id='format-3']").iCheck('enable');
+ }else{
+	 $("input[id='format-3']").iCheck('disable');
+ }
   // if (formats.length == 0) {
 //    fillout = false;
   // } 
