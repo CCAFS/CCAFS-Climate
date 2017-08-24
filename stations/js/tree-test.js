@@ -6992,7 +6992,7 @@ var groupByRegion = {
 									'<div style="font-family: Trebuchet MS";><p style="font-size:20px">Data sources</p>',
 									'<a href="http://chg.geog.ucsb.edu/data/index.html" target="_blank">CHIRPS and CHIRP</a>: Is a 30+ year quasi-global rainfall dataset. Spanning 50&deg;S-50&deg;N (and all longitudes), starting in 1981 to near-present, CHIRP incorporates 0.05&deg; resolution (~5km) satellite imagery and CHIPRS incorporates 0.05&deg; resolution (~5km) satellite imagery with in-situ station data to create gridded rainfall time series for trend analysis and seasonal drought monitoring.','<br>',
 									'<a href="http://worldclim.org/version2" target="_blank">WorldClim V2:</a>: Very high resolution interpolated climate surfaces with in-situ station data for global land areas (~1km resolution). WorldClim version 2 has average monthly climate data for minimum, mean, and maximum temperature and for precipitation for 1970-2000.','<br>',
-									'<a href="http://www.cru.uea.ac.uk/" target="_blank">CRU V4</a>: Datasets interpolated monthly for global land for multiple variables with 0.5&deg; x 0.5&deg; resolution (~50 km) from 1901-2015.','<br>','<br>,<br> </div>'
+									'<a href="http://www.cru.uea.ac.uk/" target="_blank">CRU V4</a>: Datasets interpolated monthly for global land for multiple variables with 0.5&deg; x 0.5&deg; resolution (~50 km) from 1901-2015.','<br>','<br><br> </div>'
 									
 									];	
 								var qcstoreGrap = Ext.create('Ext.data.Store', {
