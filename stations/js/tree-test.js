@@ -147,7 +147,7 @@ function ConvertDDToDMS(D){
 		toolip_groupLabels='Change weather station labels'		
 		toolip_groupLayers='Base layers of map. Select a layer by clicking the radio button'		
 		toolip_fieldsetLogin='According to the terms of use, some stations are restricted for unauthorized users'		
-		toolip_chirpsWcl='Datasets: Chirps and Chirp ~5km grid resolution.  WorldClim V2 (Rain, Tmin, Tmax) ~1km grid resolution. CRU V4 ~50km grid resolution.'		
+		toolip_chirpsWcl='Datasets: Chirps and Chirp (Daily Precipitation) ~5km grid resolution.  WorldClim V2 (Rain, Tmin, Tmax. Climatology ) ~1km grid resolution. CRU V4 (Rain, Tmin, Tmax. Monthly) ~50km grid resolution.'		
 
 		// para corregir cuando se desplega en el boton + las varaibles aparece error en property 'isGroupHeader'
 		Ext.define('SystemFox.overrides.view.Table', {
@@ -1761,9 +1761,10 @@ function ConvertDDToDMS(D){
 			// console.log(idSta, period,listVar)
 			myMask.show();						
 			  $.ajax({
-				type: "GET",//"POST",
+				type: "POST", //"GET",//
 			//    dataType: "json",
-				url: "php/data-graphics-chirps.php",
+				// url: "php/data-graphics-chirps.php",
+				url: "http://maprooms.ciat.cgiar.org:8080/CCAFS-Climate/chirps/data-graphics-chirps.php",
 				data: 'lon='+lon+'&lat='+lat+'&yi='+yi+'&yf='+yf+'&mi='+mi+'&mf='+mf+'&ch_chirps='+ch_chirps+'&ch_chirp='+ch_chirp+'&ch_wcl='+ch_wcl+'&ch_cru='+ch_cru,//filterValues,
 				success: function(result) {
 				  var objJSON = {};
@@ -2425,7 +2426,7 @@ function ConvertDDToDMS(D){
 					
 					
 					
-					/************************** STATISTICAL *********/
+					//************************** STATISTICAL *********
 					source_ftp="http://172.22.52.8/CCAFS-Climate/downloads/chirps/" //"http://gisweb.ciat.cgiar.org/Bc_Downscale/download" // "../../downloads/chirps/"//
 					lon=Math.round(lon*10000)/10000
 					lat=Math.round(lat*10000)/10000
@@ -2435,7 +2436,7 @@ function ConvertDDToDMS(D){
 						// $('#index_wetdays').append('<img src="'+source_ftp+'/chirpsV2_wetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
 						// $('#index_conswetdays').append('<img src="'+source_ftp+'/chirpsV2_conswetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
 						
-						/**************************  *********/
+						//**************************  *********
 						
 						$('#stats_chirps').append(
 							'<br><table width="265" border="1" style="font-family: Trebuchet MS;margin-left: 35%;">                      \
