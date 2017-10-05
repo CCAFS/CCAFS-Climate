@@ -232,15 +232,18 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
    $getLastRegister="select id from datasets_download_bias order by id desc limit 1";
    $getID = $db->getAll($getLastRegister);
 	$vars['order'] =$getID[0][0];
- 
+  $Date_Submitted=date("d-M-Y h:i:s");
+  $vars["Date_Submitted"]=$Date_Submitted;
+  
  // echo "<pre>".print_r($vars,true)."</pre>";
  // echo $vars;
 //  $url = "http://172.22.52.62/correctedTest.php";
 // exit();
 
 
-  $url = "http://gisweb.ciat.cgiar.org/Bc_Downscale/biasCorrected.php";
+  // $url = "http://gisweb.ciat.cgiar.org/Bc_Downscale/biasCorrected.php";
   //$url = "http://172.22.52.8/PHPMailer/bias_process.php";
+  $url = "http://maprooms.ciat.cgiar.org:8080/CCAFS-Climate/PHPMailer/bias_process.php";
   //$url = "http://172.22.52.8/PHPMailer/example.php";
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
