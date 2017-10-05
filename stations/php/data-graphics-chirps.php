@@ -140,8 +140,8 @@
 
 	// $especie = json_encode($geojson);
 
-	// $sqli ="INSERT INTO station_downloads_chirps (user_id, lon, lat,yi,yf,mi,mf,chirps,chirp,wcl,cru) VALUES
-	// (".$id.",".$lon.",".$lat.",".$yi.",".$yf.",".$mi.",".$mf.",'".serialize($chirps)."','".serialize($chirp)."','".serialize($wcl)."', '".serialize($cru)."'); ";
+	// $sqli ="INSERT INTO station_downloads_chirps (lon, lat,yi,yf,mi,mf,chirps,chirp,wcl,cru) VALUES
+	// (".$lon.",".$lat.",".$yi.",".$yf.",".$mi.",".$mf.",'".serialize($chirps)."','".serialize($chirp)."','".serialize($wcl)."', '".serialize($cru)."'); ";
    // $ret = pg_exec($dbcon, $sqli);
    
 	pg_close($dbcon);
