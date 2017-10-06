@@ -46,10 +46,10 @@ $('#fileName').click(function () {
 $("#period").ionRangeSlider({
     type: "double",
     min: 2015,
-    max: 2100,
+    max: 2099,
     from: 2020,
     to: 2030,
-	to_max:2100,
+	to_max:2099,
 	max_interval:85,
 	// to_percent: 77.5,
     drag_interval: true,

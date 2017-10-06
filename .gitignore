@@ -14,5 +14,5 @@
 .buildpath
 .project
 .settings*
-stations/config/db_ccafs_climate.php
-downloads/data_stations
+/stations/config/*
+/downloads/data_stations/*

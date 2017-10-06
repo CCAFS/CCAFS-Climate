@@ -113,7 +113,7 @@
             </a>
         </li>                
         <li type="square">
-            <a href="http://www.metoffice.gov.uk/media/pdf/6/5/PRECIS_Handbook.pdf">
+            <a href="https://www.metoffice.gov.uk/binaries/content/assets/mohippo/pdf/6/5/precis_handbook.pdf">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
                 Generating High Resolution Climate Change Scenarios using PRECIS.
             </a>
