@@ -91,6 +91,30 @@ $statList= '1';*/
 	$data = curl_exec($curl);
 	curl_close($curl);
 	
+	// $sql ="select bc_processing(
+	// '$serverData'::text, 
+	// '$downData'::text, 
+	// '$dirWork'::text,
+	// '$dirgcm'::text,
+	// '$dirobs'::text,
+	// '$dataset'::text,
+	// '$methBCList'::text,
+	// '$varlist'::text,
+	// '$Obyi'::text,
+	// '$Obyf'::text,
+	// '$fuyi'::text,
+	// '$fuyf'::text,
+	// '$rcpList'::text,
+	// '$lon'::text,
+	// '$lat'::text,
+	// '$gcmlist'::text,
+	// '$statList'::text,
+	// '$file'::text,
+	// '$delimit'::text,
+	// '$order'::text);";
+	$coors=$lon.','.$lat;
+	$xyfile="";
+	$dircdo="cdo";
 	$sql ="select bc_processing(
 	'$serverData'::text, 
 	'$downData'::text, 
@@ -105,13 +129,16 @@ $statList= '1';*/
 	'$fuyi'::text,
 	'$fuyf'::text,
 	'$rcpList'::text,
-	'$lon'::text,
-	'$lat'::text,
+	'$coors'::text,
+	'$xyfile'::text,
 	'$gcmlist'::text,
 	'$statList'::text,
 	'$file'::text,
 	'$delimit'::text,
-	'$order'::text);";
+	'$order'::text,
+	'$dircdo'::text);";
+	
+	
 	$ret = pg_query($dbcon, $sql);
 	if(!$ret){
 	  echo pg_last_error($dbcon);

@@ -1,2 +1,2 @@
 id,code,name,institute,model,category,instalation,lon,lat,elev,country,state,city,variables
-213,26125060,Apto El Eden,ideam,NA,Principal synoptic,1949-04-15,75 45 59W,4 27 16.8N,1229,Colombia,Quind¡o,Armenia,evap|prec|rhum|sbright|tmax|tmean|tmin|wsmean
+945,22025010,Apto Planadas,ideam,NA,Climatological Principal,1964-10-15,75 40 0W,3 10 0N,1355,Colombia,Tolima,Planadas,prec|rhum|sbright|tmax|tmin
