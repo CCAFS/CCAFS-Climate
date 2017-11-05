@@ -1764,7 +1764,7 @@ function ConvertDDToDMS(D){
 				type: "POST", //"GET",//
 			//    dataType: "json",
 				// url: "php/data-graphics-chirps.php",
-				url: "http://maprooms.ciat.cgiar.org:8080/CCAFS-Climate/chirps/data-graphics-chirps.php",
+				url: "http://maprooms.ciat.cgiar.org/CCAFS-Climate/chirps/data-graphics-chirps.php",
 				data: 'lon='+lon+'&lat='+lat+'&yi='+yi+'&yf='+yf+'&mi='+mi+'&mf='+mf+'&ch_chirps='+ch_chirps+'&ch_chirp='+ch_chirp+'&ch_wcl='+ch_wcl+'&ch_cru='+ch_cru,//filterValues,
 				success: function(result) {
 				  var objJSON = {};
@@ -2427,7 +2427,7 @@ function ConvertDDToDMS(D){
 					
 					
 					//************************** STATISTICAL *********
-					source_ftp="http://maprooms.ciat.cgiar.org:8080/CCAFS-Climate/downloads/chirps/" //"http://gisweb.ciat.cgiar.org/Bc_Downscale/download" // "../../downloads/chirps/"//
+					source_ftp="http://maprooms.ciat.cgiar.org/CCAFS-Climate/downloads/chirps/" //"http://gisweb.ciat.cgiar.org/Bc_Downscale/download" // "../../downloads/chirps/"//
 					lon=Math.round(lon*10000)/10000
 					lat=Math.round(lat*10000)/10000
 					if(data['database']['chirps']=="true"){
@@ -7036,7 +7036,7 @@ var groupByRegion = {
 										tabs.setActiveTab(0);
 									}													
 								});	
-								source_ftp="http://maprooms.ciat.cgiar.org:8080/CCAFS-Climate/downloads/chirps/" //"http://gisweb.ciat.cgiar.org/Bc_Downscale/download" // "../../downloads/chirps/"//
+								source_ftp="http://maprooms.ciat.cgiar.org/CCAFS-Climate/downloads/chirps/" //"http://gisweb.ciat.cgiar.org/Bc_Downscale/download" // "../../downloads/chirps/"//
 								lon=Math.round(lonlatMap.lon*10000)/10000
 								lat=Math.round(lonlatMap.lat*10000)/10000			
 								dataftp=source_ftp+'/chirps_lonlat_'+lon+'_'+lat+'.zip';

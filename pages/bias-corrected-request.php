@@ -243,14 +243,15 @@ if (isset($_REQUEST["email"]) && $_REQUEST["email"] != "" && $_REQUEST["email"] 
 
   // $url = "http://gisweb.ciat.cgiar.org/Bc_Downscale/biasCorrected.php";
   //$url = "http://172.22.52.8/PHPMailer/bias_process.php";
-  $url = "http://maprooms.ciat.cgiar.org:8080/CCAFS-Climate/PHPMailer/bias_process.php";
+  $url = "http://maprooms.ciat.cgiar.org/CCAFS-Climate/PHPMailer/bias_process.php";
   //$url = "http://172.22.52.8/PHPMailer/example.php";
   $curl = curl_init();
   curl_setopt($curl, CURLOPT_URL, $url);
   curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($curl, CURLOPT_HEADER, false);
   curl_setopt($curl, CURLOPT_POST, count($vars));
-  curl_setopt($curl, CURLOPT_POSTFIELDS, $vars);
+  // curl_setopt($curl, CURLOPT_POSTFIELDS, $vars);
+  curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($vars));
   curl_setopt($curl, CURLOPT_TIMEOUT, 4);
   $data = curl_exec($curl);
   curl_close($curl);
