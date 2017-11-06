@@ -1761,7 +1761,7 @@ function ConvertDDToDMS(D){
 			// console.log(idSta, period,listVar)
 			myMask.show();						
 			  $.ajax({
-				type: "POST", //"GET",//
+				type: "GET",//"POST", //
 			//    dataType: "json",
 				// url: "php/data-graphics-chirps.php",
 				url: "http://maprooms.ciat.cgiar.org/CCAFS-Climate/chirps/data-graphics-chirps.php",
