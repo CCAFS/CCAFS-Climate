@@ -2431,7 +2431,7 @@ function ConvertDDToDMS(D){
 					lon=Math.round(lon*10000)/10000
 					lat=Math.round(lat*10000)/10000
 					if(data['database']['chirps']=="true"){
-						$('#index_boxplot').append('<img src="'+source_ftp+'/chirps_lonlat_'+lon+'_'+lat+'/chirpsV2_boxplot_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%;height: 350px;display:block" />');
+						$('#index_boxplot').append('<img src="'+source_ftp+'/chirps_lonlat_'+lon+'_'+lat+'/chirpsV2_boxplot_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%;height: 100%;display:block" />');
 
 						// $('#index_wetdays').append('<img src="'+source_ftp+'/chirpsV2_wetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
 						// $('#index_conswetdays').append('<img src="'+source_ftp+'/chirpsV2_conswetdays_yi_'+yi+'_yf_'+yf+'_lon_'+Math.round(lon*10000)/10000+'_lat_'+Math.round(lat*10000)/10000+'.png" style="margin:auto; width:100%display:block" />');
@@ -6985,7 +6985,7 @@ var groupByRegion = {
 									'<div id="grap_wetdays_'+selectionID+'" style="width:'+grapWidth+'px;"></div>','<br>',
 									// '<div id="grap_prec_clim_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
 									
-									'<div id="index_boxplot" style="width:'+grapWidth+'px;height: 350px;"></div>',
+									'<div id="index_boxplot" style="width:'+grapWidth+'px;"></div>',
 									// '<div id="index_wetdays" style="width:'+grapWidth+'px;"></div>',
 									// '<div id="index_conswetdays" style="width:'+grapWidth+'px;"></div>',
 									'<div id="grap_prec_'+selectionID+'" style="width:'+grapWidth+'px;"></div>','<br>',
