@@ -6985,7 +6985,7 @@ var groupByRegion = {
 									'<div id="grap_wetdays_'+selectionID+'" style="width:'+grapWidth+'px;"></div>','<br>',
 									// '<div id="grap_prec_clim_'+selectionID+'" style="width:'+grapWidth+'px;"></div>',
 									
-									'<div id="index_boxplot" style="width:'+grapWidth+'px;"></div>',
+									'<div id="index_boxplot" style="width:'+grapWidth+'px;height: 350px;"></div>',
 									// '<div id="index_wetdays" style="width:'+grapWidth+'px;"></div>',
 									// '<div id="index_conswetdays" style="width:'+grapWidth+'px;"></div>',
 									'<div id="grap_prec_'+selectionID+'" style="width:'+grapWidth+'px;"></div>','<br>',
