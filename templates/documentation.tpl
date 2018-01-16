@@ -49,7 +49,7 @@
     <h4>Useful documents</h4>
     <ul id="document-list" type="none"> 
 		<li type="square">
-			<a href="{$smarty.const.SMARTY_DOCS_URI}/BC_methods_explaining_v2.pdf">
+			<a href="https://cgspace.cgiar.org/handle/10568/76609">
 				<img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
 				Bias-correction in the CCAFS-Climate Portal: A description of methodologies.
 			</a>
@@ -95,7 +95,7 @@
             </li>
         </ul>
         <li type="square">
-            <a href="{$smarty.const.SMARTY_DOCS_URI}/Disaggregation-WP-02.pdf">
+            <a href="https://cgspace.cgiar.org/bitstream/handle/10568/70021/Disaggregation-WP-02.pdf ">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
                 Disaggregation of Global Circulation Model Outputs.
             </a>
@@ -107,13 +107,13 @@
             </a>
         </li>
         <li type="square">
-            <a href="{$smarty.const.SMARTY_DOCS_URI}/worldclim_IJC.pdf">
+            <a href="http://dx.doi.org/10.1002/joc.1276">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
                 Very high resolution interpolated climate surfaces for Global Land Areas.
             </a>
         </li>                
         <li type="square">
-            <a href="https://www.metoffice.gov.uk/binaries/content/assets/mohippo/pdf/6/5/precis_handbook.pdf">
+            <a href="http://precis.metoffice.com/docs/PRECIS_Handbook.pdf">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
                 Generating High Resolution Climate Change Scenarios using PRECIS.
             </a>
@@ -127,7 +127,7 @@
             </li>
         </ul>
         <li type="square">
-            <a href="{$smarty.const.SMARTY_DOCS_URI}/Generating_Characteristic_Daily_Weather_Data_using_Downscaled_Climate_Model_Data_Jones_Thornton_Heinke_2009.pdf">
+            <a href="https://cgspace.cgiar.org/bitstream/handle/10568/2482/Jones-Thornton-Heinke-2009.pdf">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
                 Generating characteristic daily weather data using downscaled climate model data from IPCC's Fourth Assessment.
             </a>
@@ -145,7 +145,7 @@
             </a>
         </li>		
         <li type="square">
-            <a href="{$smarty.const.SMARTY_DOCS_URI}/MarkSim_Generating_Downscaled_Weather_Data.pdf">
+            <a href="http://dx.doi.org/10.1016/j.agsy.2012.08.002">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
                 Generating downscaled weather data from a suite of climate models for agricultural modelling applications
             </a>
