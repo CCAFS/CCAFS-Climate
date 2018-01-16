@@ -55,7 +55,7 @@
 			</a>
 		</li> 			
         <li type="square">
-            <a href="{$smarty.const.SMARTY_DOCS_URI}/mapping_data_ccafs-climate.pdf">
+            <a href="https://cgspace.cgiar.org/bitstream/handle/10568/89497/mapping_data_ccafs-climate.pdf ">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
                 CCAFS Climate datasets map.
             </a>
