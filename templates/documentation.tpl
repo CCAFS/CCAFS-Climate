@@ -101,7 +101,7 @@
             </a>
         </li>
         <li type="square">
-            <a href="{$smarty.const.SMARTY_DOCS_URI}/Climgen-Downscaling-Tyndall.pdf">
+            <a href="http://dx.doi.org/10.1007/s10584-015-1509-9">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
                 The CLIMGEN model: Downscaling Tyndall.
             </a>
