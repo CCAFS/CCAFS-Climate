@@ -30,7 +30,7 @@
     <p>
 		The Bias Correction (BC) approach corrects the projected raw daily GCM output using the differences in the mean and variability between GCM and observations in a reference period (Figure 1).     
 	</p>
-	<div id="img_bc_big"> <img class="img_bc_big" border="0" name="bc_sq" src="{$smarty.const.SMARTY_IMG_URI}/bc_sq.jpg" />	</div>
+	<div id="img_bc_big"> <img class="img_bc_big" border="0" name="bc_sq" src="{$smarty.const.SMARTY_IMG_URI}/cf_sq.jpg" />	</div>
 	<p style="font-size: 14px;"><b>Figure 1</b>. Schematic of the bias correction methodology. BC uses raw model output for the future period, and corrects it using the differences (&Delta;) between historical reference data from the model and observations. 
 	(O<sub>REF</sub> = observations in the historical reference period; T<sub>REF</sub> = GCM output from the historical reference period; T<sub>RAW</sub> = raw GCM output for the historical or future period; T<sub>BC</sub> = bias-corrected GCM output.)  </p>
 	
@@ -76,7 +76,7 @@
     <p>
 		In the Change Factor (CF) approach the raw GCM outputs current values are subtracted from the future simulated values, resulting in &#8220;climate anomalies&#8221; which are then added to the present day observational dataset (<a href="http://onlinelibrary.wiley.com/doi/10.1890/09-0173.1/abstract">Tabor & Williams, 2010</a>).   
 	</p>
-	<div id="img_bc_big"> <img class="img_bc_big" border="0" name="cf_sq" src="{$smarty.const.SMARTY_IMG_URI}/cf_sq.jpg" />	</div>
+	<div id="img_bc_big"> <img class="img_bc_big" border="0" name="cf_sq" src="{$smarty.const.SMARTY_IMG_URI}/bc_sq.jpg" />	</div>
 	<p style="font-size: 14px;"><b>Figure 2</b>. 
 		Schematic of the change factor methodology. CF uses present day observations, corrected using the differences (&Delta;) between present and future model data. (O<sub>REF</sub> = observations in the historical reference period; 
 		T<sub>REF</sub> = GCM output from the historical reference period; T<sub>RAW</sub> = raw GCM output for the historical or future period; T<sub>BC</sub> = change factor-corrected GCM output.)	
