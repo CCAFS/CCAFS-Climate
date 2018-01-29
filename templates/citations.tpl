@@ -62,7 +62,7 @@
 	<li> Wang, C.-J., Wan, J.-Z., & Zhang, Z.-X. 2017. <a target="_blank" href="http://dx.doi.org/10.1080/02827581.2017.1283049 ">"Expansion potential of invasive tree plants in ecoregions under climate change scenarios: an assessment of 54 species at a global scale. "</a>Scandinavian Journal of Forest Research, 32(8), 663-670. </li>
 	<li> Zhao, J., Du, H. Y., Shi, Y. F., & Che, Y. J. 2017. <a target="_blank" href="https://doi.org/10.1134/S1995425517030131 ">"A GIS simulation of potential vegetation in China under different climate scenarios at the end of the 21st century. "</a>Contemporary Problems of Ecology, 10(3), 315-325. </li>
   </ol>   
-  
+ 
   <h5>2016</h5>
   <ol>   
 	<li> Agarwal, A., Babel, M. S., Maskey, S., Shrestha, S., Kawasaki, A., & Tripathi, N. K. 2016. <a target="_blank" href="http://onlinelibrary.wiley.com/doi/10.1002/joc.4342/full ">"Analysis of temperature projections in the Koshi River Basin, Nepal. "</a>International Journal of Climatology, 36(1), 266-279. </li>
@@ -74,7 +74,7 @@
 	<li> Carrillo-Angeles, I. G., Suzán-Azpiri, H., Mandujano, M. C., Golubov, J., & Martínez-Ávalos, J. G. 2016. <a target="_blank" href="http://www.sciencedirect.com/science/article/pii/S0140196315300471 ">"Niche breadth and the implications of climate change in the conservation of the genus Astrophytum (Cactaceae). "</a>Journal of Arid Environments, 124, 310-317. </li>
 	<li> Casazza, G., Grassi, F., Zecca, G., & Minuto, L. 2016. <a target="_blank" href="https://doi.org/10.1371/journal.pone.0166983 ">"Phylogeographic Insights into a Peripheral Refugium: The Importance of Cumulative Effect of Glaciation on the Genetic Structure of Two Endemic Plants. "</a>PloS one, 11(11), e0166983-e0166983. </li>
 	<li> Costa, H. C., São-Pedro, V. A., & Silva, D. P. 2016. <a target="_blank" href="http://www.revistas.unisinos.br/index.php/neotropical/article/viewFile/nbc.2016.111.02/5129 ">"Habitats climaticamente adequados para uma espécie de serpente potencialmente ameaçada em cenários atuais e futuros. "</a>Neotropical Biology and Conservation, 11(1), 13-23. </li>
-	<li> Cunze, S., Koch, L. K., Kochmann, J., & Klimpel, S. 2016. <a target="_blank" href="https://doi.org/10.1186/s13071-016-1853-2 ">"Aedes albopictus and Aedes japonicus - two invasive mosquito species with different temperature niches in Europe. "</a>Parasites {&} Vectors, 9(1), 573-573. </li>
+	<li> Cunze, S., Koch, L. K., Kochmann, J., & Klimpel, S. 2016. <a target="_blank" href="https://doi.org/10.1186/s13071-016-1853-2 ">"Aedes albopictus and Aedes japonicus - two invasive mosquito species with different temperature niches in Europe. "</a>Parasites & Vectors, 9(1), 573-573. </li>
 	<li> Cunze, S., Kochmann, J., Koch, L. K., & Klimpel, S. 2016. <a target="_blank" href="https://doi.org/10.1371/journal.pone.0162116 ">"Aedes albopictus and Its Environmental Limits in Europe. "</a>PloS one, 11(9), e0162116-e0162116. </li>
 	<li> de Oliveira, I. S., Rodder, D., & Toledo, L. F. 2016. <a target="_blank" href="http://biozoojournals.ro/nwjz/content/v12n1/nwjz_e151802_Oliveira.pdf ">"Potential worldwide impacts of sea level rise on coastal-lowland anurans. "</a>North-Western Journal of Zoology, 12(1), 91-101. </li>
 	<li> De Pinto, A., Li, M., Haruna, A., Hyman, G. G., Martinez, M. A. L., Creamer, B., . . . Martinez, J. D. 2016. <a target="_blank" href="http://www.sciencedirect.com/science/article/pii/S0305750X16304041 ">"Low Emission Development Strategies in Agriculture. An Agriculture, Forestry, and Other Land Uses (AFOLU) Perspective. "</a>World Development, 87(Supplement C), 180-203. </li>
@@ -239,7 +239,7 @@
 	<li> Zomer, R. J., Xu, J., Wang, M., Trabucco, A., & Li, Z. 2015. <a target="_blank" href="http://www.sciencedirect.com/science/article/pii/S000632071500052X ">"Projected impact of climate change on the effectiveness of the existing protected area network for biodiversity conservation within Yunnan Province, China. "</a>Biological Conservation, 184, 335-345. </li>
   
   </ol> 
-  
+ 
   <h5>2014</h5>
   <ol>    
 	<li> Aguirre‐Gutiérrez, J. 2014. <a target="_blank" href="http://onlinelibrary.wiley.com/doi/10.1111/ddi.12268/full">"Similar but Not Equivalent: Ecological Niche Comparison across Closely–related Mexican White Pines."</a> Diversity and Distributions. doi:10.1111/ddi.12268.</li>
@@ -570,6 +570,6 @@
 	<li> Zougmoré, R., Traoré, A. S., & Mbodj, Y. 2015. <a target="_blank" href="https://cgspace.cgiar.org/handle/10568/68482">"Overview of the Scientific, Political and Financial Landscape of Climate-Smart Agriculture in West Africa. Working Paper."</a> </li>
 	<li> Jaitiang, D. 2015.  <a target="_blank" href="http://ir.lib.nchu.edu.tw/bitstream/11455/90358/1/nchu-104-7102030513-1.pdf">"Skateholder priorities and goals during initiation of an agricultural innovation platform in Nan Province, Thailand."</a> National Chung Hsing University</li>
   </ol>
-
+ 
 </div>
 {include file='footer.tpl'}
