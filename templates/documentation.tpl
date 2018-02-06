@@ -61,21 +61,21 @@
             </a>
         </li>    
         <li type="square">
-            <a href="{$smarty.const.SMARTY_DOCS_URI}/Ramirez_Bueno-Cabrera_2009_tutorial_bcvars_creation.pdf">
+            <a href="http://hdl.handle.net/10568/90732">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
                 Tutorial to generate 19 bioclimatic variables from monthly datasets.
             </a>
         </li>
         <ul>
             <li type="circle">
-                <a href="{$smarty.const.SMARTY_DOCS_URI}/bioclimatic-variables.pdf">
+                <a href="http://hdl.handle.net/10568/90730">
                     <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
                     Abbreviations Used For Bioclimatic Variables.
                 </a>
             </li>
         </ul>
         <li type="square">
-            <a href="{$smarty.const.SMARTY_DOCS_URI}/Downscaling-WP-01.pdf">
+            <a href="http://hdl.handle.net/10568/90731">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
                 Downscaling Global Circulation Model Outputs: The Delta Method.
             </a>
@@ -133,13 +133,13 @@
             </a>
         </li>
         <li type="square">
-            <a href="{$smarty.const.SMARTY_DOCS_URI}/MarkSim_Standalone_Documentation.pdf">
+            <a href="http://hdl.handle.net/10568/90728">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
                 MarkSim standalone for DSSAT users (Jones et al., 2012).
             </a>
         </li>
         <li type="square">
-            <a href="{$smarty.const.SMARTY_DOCS_URI}/MarkSim_Standalone_Documentation_v2.pdf">
+            <a href="http://hdl.handle.net/10568/90729">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
                 MarkSim standalone V2 for DSSAT users (Jones et al., 2013).
             </a>
