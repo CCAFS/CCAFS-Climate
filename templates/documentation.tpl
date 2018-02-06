@@ -63,37 +63,21 @@
         <li type="square">
             <a href="http://hdl.handle.net/10568/90732">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
-                Tutorial to generate 19 bioclimatic variables from monthly datasets.
+                Working with climate data and niche modeling: I. Creation of bioclimatic variables.
             </a>
         </li>
-        <ul>
-            <li type="circle">
-                <a href="http://hdl.handle.net/10568/90730">
-                    <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
-                    Abbreviations Used For Bioclimatic Variables.
-                </a>
-            </li>
-        </ul>
+		<li type="circle">
+			<a href="http://hdl.handle.net/10568/90730">
+				<img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
+				Abbreviations used in CCAFS climate.
+			</a>
+		</li>
         <li type="square">
             <a href="http://hdl.handle.net/10568/90731">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
-                Downscaling Global Circulation Model Outputs: The Delta Method.
+                Downscaling Global Circulation Model Outputs: The Delta Method Decision and Policy Analysis Working Paper No. 1.
             </a>
         </li>
-        <ul>
-            <li type="circle">
-                <a href="{$smarty.const.SMARTY_DOCS_URI}/Data_source_and_process_flow_chart_CIAT_DELTA.pdf">
-                    <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
-                    Data Source and Process flow chart Delta Method (Hiett M., 2011).
-                </a>
-            </li>
-            <li type="circle">
-                <a href="{$smarty.const.SMARTY_DOCS_URI}/delta_disaggregation_variables.pdf">
-                    <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
-                    Abbreviations Used For Delta Method Downscaled and Disaggregation data.
-                </a>
-            </li>
-        </ul>
         <li type="square">
             <a href="https://cgspace.cgiar.org/bitstream/handle/10568/70021/Disaggregation-WP-02.pdf ">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
@@ -118,14 +102,6 @@
                 Generating High Resolution Climate Change Scenarios using PRECIS.
             </a>
         </li>
-        <ul>
-            <li type="circle">
-                <a href="{$smarty.const.SMARTY_DOCS_URI}/precis-variables.pdf">
-                    <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
-                    Abbreviations Used For PRECIS Data.
-                </a>
-            </li>
-        </ul>
         <li type="square">
             <a href="https://cgspace.cgiar.org/bitstream/handle/10568/2482/Jones-Thornton-Heinke-2009.pdf">
                 <img src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
