@@ -1,7 +1,8 @@
 <?php
 
 require_once '../../config/db.php';
-define("LINKS_AWS_URI", "http://cgiardata.s3.amazonaws.com/ccafs/ccafs-climate");
+//define("LINKS_AWS_URI", "http://cgiardata.s3.amazonaws.com/ccafs/ccafs-climate");
+define("LINKS_AWS_URI", "http://datacgiar.s3.amazonaws.com/ccafs/ccafs-climate");
 
 $files = isset($_POST["files"]) ? $_POST["files"] : null;
 $downloadId = isset($_POST["downloadId"]) ? $_POST["downloadId"] : null;

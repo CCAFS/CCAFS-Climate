@@ -1,0 +1,56 @@
+<?php
+$dataset = 'agmerra';
+$methBCList = '1';
+$varlist = 'pr';
+$rcpList = 'rcp45';
+$lon = '-73.5';
+$lat = '3.4';
+$gcmlist = 'bcc_csm1_1';
+$statList= '1';
+$file = '';
+$delimit = '';
+$order = '100';
+$vars = $_REQUEST;
+
+	$vars['dataset'] = $dataset;
+	$vars['methBCList'] = $methBCList;
+	$vars['varlist'] = $varlist;
+	$vars['periodh'] = $_REQUEST["periodh"];
+	$vars['period'] = $_REQUEST["period"];
+	$vars['rcpList'] = $rcpList;
+	$vars['lon'] = $_REQUEST["lon"];
+	$vars['lat'] = $_REQUEST["lat"];
+	$vars['gcmlist'] = $gcmlist;
+	$vars['statList'] = $statList;
+	$vars['file'] = $file;
+	$vars['delimit'] = $delimit;
+	$vars['order'] = $_REQUEST["order"];
+	$vars['email'] = $_REQUEST["email"];
+	$vars['scenarios-acronym'] = 'rcp45';
+	$vars['variables-acronym'] = 'prec';
+	$vars['observation-acronym'] = 'agmerra';
+	$vars['formats-name'] = 'na';
+	$vars['fileSet-acronym'] = 'tap';
+	$vars['email_ver'] = 'jaime.tm8@gmail.com';
+	$vars['email'] = 'jaime.tm8@gmail.com';
+	// $vars['type'] = '1';
+  
+  // $Date_Submitted=date("d-M-Y h:i:s");
+  // $vars["Date_Submitted"]=$Date_Submitted;
+  
+	print_r($vars);	
+// $url = "http://gisweb.ciat.cgiar.org/Bc_Downscale/biasCorrected_andro.php";
+// $url = "http://172.22.52.8/PHPMailer/bias_process.php";
+$url = "http://maprooms.ciat.cgiar.org/CCAFS-Climate/PHPMailer/bias_process.php";
+// $url = "http://maprooms.ciat.cgiar.org/CCAFS-Climate/PHPMailer/test_server.php";
+// $url = "http://172.22.52.8/PHPMailer/example.php";
+$curl = curl_init();
+curl_setopt($curl, CURLOPT_URL, $url);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($curl, CURLOPT_HEADER, false);
+curl_setopt($curl, CURLOPT_POST, count($vars));
+curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($vars));
+// curl_setopt($curl, CURLOPT_POSTFIELDS, "user=VALOR&password=VALOR");
+curl_setopt($curl, CURLOPT_TIMEOUT, 4);
+$data = curl_exec($curl);
+curl_close($curl);

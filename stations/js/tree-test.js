@@ -13502,10 +13502,10 @@ var tabCount = 4;
 		$("#periodh").ionRangeSlider({
 			type: "double",
 			min: 1981,
-			max: 2018,
-			from: 1990,
-			to: 2000,
-			to_max:2017,
+			max: 2019,
+			from: 2008,
+			to: 2018,
+			to_max:2018,
 			max_interval:30,
 			// to_percent: 77.5,
 			drag_interval: true
