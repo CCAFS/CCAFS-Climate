@@ -3,6 +3,7 @@
 #################
 /config/config.php
 /config/downloads/chirps/*
+/bias_tmp/*
 
 # Smarthy
 /templates_c/
