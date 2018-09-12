@@ -17,11 +17,11 @@ if (isset($_REQUEST['qc'])) {
 
 	$where = "";
 	$result = array();
-	if (isset($_POST["station"]) && isset($_POST["station"]) != "") {
-	  $where .= " AND station_id = " . $_POST["station"];
+	if (isset($_REQUEST["station"]) && isset($_REQUEST["station"]) != "") {
+	  $where .= " AND station_id = " . $_REQUEST["station"];
 	}
-	$period = isset($_POST["period"]) && $_POST["period"] != "" ? $_POST["period"] : null;
-	if (isset($_REQUEST['variable'])){$vars = json_decode($_POST["variable"]);}
+	$period = isset($_REQUEST["period"]) && $_REQUEST["period"] != "" ? $_REQUEST["period"] : null;
+	if (isset($_REQUEST['variable'])){$vars = json_decode($_REQUEST["variable"]);}
 	if (isset($vars) && $vars != "" && count($vars) && !in_array(0, $vars)) {
 	  $where .= " AND b.id IN (" . implode(",",$vars) . ")";
 	}
@@ -43,7 +43,7 @@ if (isset($_REQUEST['qc'])) {
 	   } 
 	   
 	   $files = pg_fetch_all($ret);
-
+	   
 	   // echo "Operation done successfully\n";
 	   pg_close($dbcon);
 
@@ -176,7 +176,13 @@ if (isset($_REQUEST['qc'])) {
 			$ouput[$keym][] = $line[1];
 		  }
 		} else if ($period == 3) {
-		  $line = explode("\t", $line);
+		  
+		  if(explode("/", $url)[2]=='hnd-copeco'){
+			  $line = explode(" ", $line);
+		  }else{
+			  $line = explode("\t", $line);
+		  }
+		  
 		  if (isset($line[1])) {
 			$line[1] = trim(preg_replace('/\s\s+/', ' ', $line[1]));
 			if ($line[1] != 'NA' && $line[1] != '') {
