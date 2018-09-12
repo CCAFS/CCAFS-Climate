@@ -189,7 +189,10 @@
 					}	
 					if(feature.cluster[0].attributes.institute==9){
 						return "gray"
-					}						
+					}	
+					if(feature.cluster[0].attributes.institute==10){
+						return "purple"
+					}					
 					// if (count < 2) {
 						// return "blue";
 					// }else{

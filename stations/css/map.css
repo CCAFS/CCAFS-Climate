@@ -373,6 +373,11 @@
 				content: ' \25CF';
 				font-size: 20px;
 				color: gray;
+			}
+			#noaa:before {
+				content: ' \25CF';
+				font-size: 20px;
+				color: purple;
 			}			
 			.legendFond{
 				font-family: Trebuchet MS;/*Oswald,sans-serif;*/
