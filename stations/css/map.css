@@ -368,6 +368,11 @@
 				content: ' \25CF';
 				font-size: 20px;
 				color: DarkOrange;
+			}		
+			#Copeco:before {
+				content: ' \25CF';
+				font-size: 20px;
+				color: gray;
 			}			
 			.legendFond{
 				font-family: Trebuchet MS;/*Oswald,sans-serif;*/

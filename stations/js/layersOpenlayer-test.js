@@ -186,7 +186,10 @@
 					}
 					if(feature.cluster[0].attributes.institute==8){
 						return "DarkOrange"
-					}					
+					}	
+					if(feature.cluster[0].attributes.institute==9){
+						return "gray"
+					}						
 					// if (count < 2) {
 						// return "blue";
 					// }else{
