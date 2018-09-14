@@ -378,6 +378,11 @@
 				content: ' \25CF';
 				font-size: 20px;
 				color: purple;
+			}	
+			#enee:before {
+				content: ' \25CF';
+				font-size: 20px;
+				color: brown;
 			}			
 			.legendFond{
 				font-family: Trebuchet MS;/*Oswald,sans-serif;*/

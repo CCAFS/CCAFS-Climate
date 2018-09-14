@@ -192,6 +192,9 @@
 					}	
 					if(feature.cluster[0].attributes.institute==10){
 						return "purple"
+					}	
+					if(feature.cluster[0].attributes.institute==11){
+						return "brown"
 					}					
 					// if (count < 2) {
 						// return "blue";

@@ -177,7 +177,7 @@ if (isset($_REQUEST['qc'])) {
 		  }
 		} else if ($period == 3) {
 		  
-		  if(explode("/", $url)[2]=='hnd-copeco' || explode("/", $url)[2]=='hnd-dgrh-noaa'){
+		  if(explode("/", $url)[2]=='hnd-copeco' || explode("/", $url)[2]=='hnd-dgrh-noaa'|| explode("/", $url)[2]=='hnd-enee'){
 			  $line = explode(" ", $line);
 		  }else{
 			  $line = explode("\t", $line);

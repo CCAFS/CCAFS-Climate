@@ -7329,6 +7329,9 @@ var groupByRegion = {
 						'<td><div class="legendFond" id="inmet">INMET (BRA)</div></td>' +
 						'<td><div class="legendFond" id="Copeco">Copeco (HND)</div></td>' +
 						'<td><div class="legendFond" id="noaa">NOAA (HND)</div></td>' +
+					  '</tr>'+	
+					  '<tr>'+
+						'<td><div class="legendFond" id="enee">ENEE (HND)</div></td>' +
 					  '</tr>'+					  
 					'</table>'				  
 				  
