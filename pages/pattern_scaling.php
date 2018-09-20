@@ -45,6 +45,10 @@ foreach ($result as $value) {
             $resource->iconUrl = SMARTY_IMG_URI."/resources/icon_entry_data.png";
             $resource->isNew = true;
             break;
+        case 11:
+            $resource->iconUrl = SMARTY_IMG_URI."/resources/icon_grid.png";
+            $resource->isNew = true;
+            break;			
         default:
             $resource->iconUrl = SMARTY_IMG_URI."/resources/icon_grid.png";
             break;

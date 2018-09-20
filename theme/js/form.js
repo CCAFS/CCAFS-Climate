@@ -112,7 +112,8 @@ $(document).ready(function(){
                 files: $selectedFiles,
                 downloadId: downloadId,
                 fileType: $("#file-type").val(),
-				fileSet: $("#fileSet").val()
+				fileSet: $("#fileSet").val(),
+				tileName: $("#tile_name").val()
             },
             beforeSend: function(){
                 $(".skip-button #message").text("Generating links...");
@@ -139,7 +140,8 @@ $(document).ready(function(){
                 files: $selectedFiles,
                 downloadId: downloadId,
                 fileType: $("#file-type").val(),
-                fileSet: $("#fileSet").val()
+                fileSet: $("#fileSet").val(),
+				tileName: $("#tile_name").val()
             },
             beforeSend: function(){
                 $(".submit-button #message").text("Generating links...");

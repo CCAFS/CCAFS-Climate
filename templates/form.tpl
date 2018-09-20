@@ -22,6 +22,7 @@
     <form id="contact-form" action="/ajax/user-info.php" method="GET">
       <input type="hidden" id="user-id" name="userId" value="-1" />
       <input type="hidden" id="file-type" name="file-type" value="{$fileType}" />
+	  <input type="hidden" id="tile_name" name="tile_name" value="{$tileName}" />
       <div class="input-form">
         <label class="label" for="email">Email:</label>
         <input id="email" name="email" type="email" />
@@ -86,6 +87,7 @@
   </div>
   <div class="skip-button">
     <input type="hidden" id="fileSet" name="fileSet" value="{$filsetTem}" />
+    <input type="hidden" id="tile_name" name="tile_name" value="{$tileName}" />
     <img id="ajax-loader" src="{$smarty.const.SMARTY_IMG_URI}/ajax-loader.gif" />
     <span id="message"></span>
   </div>

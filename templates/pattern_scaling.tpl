@@ -1,5 +1,5 @@
 {include file='head.tpl' jsIncludes=["jquery", "pattern_scaling"] pageTitle="Pattern Scaling MarkSim - CCAFS Climate" pageDescription="Downscaled future climate data using the MarkSim weather generator." keywords="MarkSim,weather typing,IPCC,climate projections,climate change"}
-{include file='header.tpl' current="downscaling"}
+{include file='header.tpl' current="data"}
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_ptscalims.gif" />
 </div>
@@ -72,14 +72,14 @@
     </ul>
 
 {*    <h4 style="color: red">Resources</h4>*}
-    <form action="/form.php" method="POST">
+    <form action="/form.php" method="GET">
       {foreach from=$resources item=resourceA key=keyr}
         <br>
         <h4>{$keyr}</h4>
         <ul style="list-style: none;">          
             {foreach from=$resourceA item=resource}
                 <li>
-                    <input type="checkbox" name="download-files[]" id="option_1" class="checkbox-resource" value="{$resource->id}" />
+                    <input type="checkbox" name="download-files[]" id="tile-{$resource->id}" class="checkbox-resource" value="{$resource->id}" />
                     {$resource->description} -
                     <img src="{$resource->iconUrl}">
                     <span class="little">({$resource->size})</span>
@@ -91,11 +91,19 @@
           
         </ul>
         {/foreach}
+			<input type="hidden" id="tile_name" name="tile_name" />
             <input type="hidden" name="file-type" value="resource" />
+			<br>
+			<ul style="">      
+			<div id="map" style="display: none; width:610px; height:300px;"></div>
+			</ul>
             <div id="button_down_resc">
                 <button id="download-button" type="submit" disabled="disabled">Download resources</button>
             </div>
     </form>
+
+
+	
     <br>
     <li><h4 id="future_climate_data">Pattern Scaling (MarkSim) Data</h4></li>
     <p>
