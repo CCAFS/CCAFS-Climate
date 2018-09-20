@@ -18,7 +18,7 @@
 .settings*
 stations/config/*
 stations/config/db_ccafs_climate.php
-downloads/data_stations
+downloads/data_stations/*
 /config/smarty.php
 /config/db.php
 /stations/config/*.php
