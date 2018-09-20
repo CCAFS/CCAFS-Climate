@@ -92,7 +92,7 @@ function loadKmlOnMap(){
 			  afterParse: useTheData
 			});
 
-	geoXml.parse('http://localhost/theme/kmls/tiled_marksim.kml');		
+	geoXml.parse('/theme/kmls/tiled_marksim.kml');		
 }
 
 function deleteTileValue(){
