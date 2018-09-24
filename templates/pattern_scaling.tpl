@@ -1,5 +1,5 @@
 {include file='head.tpl' jsIncludes=["jquery", "pattern_scaling"] pageTitle="Pattern Scaling MarkSim - CCAFS Climate" pageDescription="Downscaled future climate data using the MarkSim weather generator." keywords="MarkSim,weather typing,IPCC,climate projections,climate change"}
-{include file='header.tpl' current="data"}
+{include file='header.tpl' current="downscaling"}
 <div id="subheader-image">
     <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_ptscalims.gif" />
 </div>
@@ -72,7 +72,7 @@
     </ul>
 
 {*    <h4 style="color: red">Resources</h4>*}
-    <form action="/form.php" method="GET">
+    <form action="/form.php" method="POST">
       {foreach from=$resources item=resourceA key=keyr}
         <br>
         <h4>{$keyr}</h4>
