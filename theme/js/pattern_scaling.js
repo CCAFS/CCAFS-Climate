@@ -53,7 +53,7 @@ var geoXmlDoc = null;
 			  mapTypeId: google.maps.MapTypeId.ROADMAP
 		  };
 
-		  map = new google.maps.Map(document.getElementById('map'),
+		  map = new google.maps.Map(document.getElementById('map_canvas'),
 			  mapOptions);
 
 		  google.maps.event.addListenerOnce(map, 'idle', function(){
@@ -69,15 +69,15 @@ function setPageEvents(){
 
 	$('input[id=tile-11]').change(function(){
 		if($(this).is(':checked')) {
-			$('#map').show();
+			$('#map_canvas').show();
 			loadKmlOnMap();
 			if(!$("#tile_name").val()){
 				 $("#download-button").attr("disabled", "disabled");
 			}			
 		} else {
-			$('#map').hide();
+			$('#map_canvas').hide();
 			deleteTileValue()
-			$("#map").html("<img src='/theme/images/map-not-available.png'/>"); 
+			$("#map_canvas").html("<img src='/theme/images/map-not-available.png'/>"); 
 		}
 	});  	
 	
@@ -92,6 +92,7 @@ function loadKmlOnMap(){
 			  afterParse: useTheData
 			});
 
+	// geoXml.parse('http://localhost/tiled_marksim.kml');		
 	geoXml.parse('/theme/kmls/tiled_marksim.kml');		
 }
 

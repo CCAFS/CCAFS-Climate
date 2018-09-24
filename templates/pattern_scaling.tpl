@@ -95,7 +95,7 @@
             <input type="hidden" name="file-type" value="resource" />
 			<br>
 			<ul style="">      
-			<div id="map" style="display: none; width:610px; height:300px;"></div>
+			<div id="map_canvas" style="display: none; width:610px; height:300px;"></div>
 			</ul>
             <div id="button_down_resc">
                 <button id="download-button" type="submit" disabled="disabled">Download resources</button>
