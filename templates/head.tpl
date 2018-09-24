@@ -36,7 +36,8 @@
                      <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>		
                      <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>	
                     <script src="{$smarty.const.SMARTY_JS_URI}/pattern_scaling.js"></script>					
-					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTC15VqenY93jEFMYO8F-mcWc-cXUZ_Mw&callback=initMap"async defer></script>
+					<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTC15VqenY93jEFMYO8F-mcWc-cXUZ_Mw&callback=initMap"async defer></script> -->
+					<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={$smarty.const.GOOGLE_API_KEY}&sensor=false"></script>
 					<script src="/libs/geoxml3/polys/geoxml3.js"></script>		
 					  
                   {elseif $jsToInclude == "data"}
