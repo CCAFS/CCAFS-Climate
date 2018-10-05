@@ -35,7 +35,8 @@ if (!is_null($files) && !is_null($downloadId) && !is_null($fileType)) {
         $link = new stdClass();
 		
         // $link->reference = LINKS_BASE_URI .$fileName;
-        $link->reference = LINKS_AWS_URI.$fileName;
+        // $link->reference = LINKS_AWS_URI.$fileName;
+        $link->reference = $links_urls.$fileName;
         $arr = explode("/", $fileName);
         $fileName = $arr[count($arr) - 1];
         $link->name = $fileName;
