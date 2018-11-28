@@ -339,7 +339,7 @@ if($type==5){
 	
 	
 	while($line = pg_fetch_assoc($result)){
-		
+		// echo($line['copyright']);
 		// if($line['copyright']==$levelName){
 			// $copyright=$line['copyright'];
 		// }else{
@@ -357,6 +357,15 @@ if($type==5){
 			$levelName="Free";
 			$copyright=$levelName;
 		}else if($level==3){
+			$levelName="Free";
+			$copyright=$levelName;
+		}else if($line['access_level']==4){
+			$levelName="Free";
+			$copyright=$levelName;
+		}else if($line['access_level']==5){
+			$levelName="Free";
+			$copyright=$levelName;
+		}else if($line['access_level']==6){
 			$levelName="Free";
 			$copyright=$levelName;
 		}else{
@@ -1417,7 +1426,6 @@ if($type==27){
 
 	$page_protect = new Access_user;
 	$level= $page_protect->get_access_level();	
-	
 	$sqlCheck ="SELECT s.access_level ,s.copyrigth FROM geostation as s WHERE id=".$idstat;
  
  	$result = pg_query($dbcon, $sqlCheck);	
@@ -1435,6 +1443,9 @@ if($type==27){
 		$copyright=$levelName;
 	}else if($level==3){
 		$levelName=3;
+		$copyright=$levelName;
+	}else if($level==4){
+		$levelName=4;
 		$copyright=$levelName;
 	}else{
 		$copyright=$row[1];
