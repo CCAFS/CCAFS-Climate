@@ -339,13 +339,6 @@ if($type==5){
 	
 	
 	while($line = pg_fetch_assoc($result)){
-		// echo($line['copyright']);
-		// if($line['copyright']==$levelName){
-			// $copyright=$line['copyright'];
-		// }else{
-			// $copyright="Restricted";
-		// }
-	
 		if($level==1){
 			$levelName="Restricted"; 
 			if($line['copyright']==$levelName){
@@ -640,6 +633,15 @@ $sql_tabla ="select DISTINCT s.id, s.code,s.name, c.name category,i.name institu
 		}else if($level==3){
 			$levelName="Free";
 			$copyright=$levelName;
+		}else if($line['access_level']==4){
+			$levelName="Free";
+			$copyright=$levelName;
+		}else if($line['access_level']==5){
+			$levelName="Free";
+			$copyright=$levelName;
+		}else if($line['access_level']==6){
+			$levelName="Free";
+			$copyright=$levelName;
 		}else{
 			$copyright=$line['copyright'];
 		}
@@ -893,9 +895,19 @@ if($type==14){
 		}else if($level==3){
 			$levelName="Free";
 			$copyright=$levelName;
+		}else if($line['access_level']==4){
+			$levelName="Free";
+			$copyright=$levelName;
+		}else if($line['access_level']==5){
+			$levelName="Free";
+			$copyright=$levelName;
+		}else if($line['access_level']==6){
+			$levelName="Free";
+			$copyright=$levelName;
 		}else{
 			$copyright=$line['copyright'];
-		}	
+		}
+		
 		$feature = array(
 						'id' => $line['id'],					
 						'code' => $line['code'],
@@ -1444,8 +1456,14 @@ if($type==27){
 	}else if($level==3){
 		$levelName=3;
 		$copyright=$levelName;
-	}else if($level==4){
-		$levelName=4;
+	}else if($row[1]==4){
+		$levelName="Free";
+		$copyright=$levelName;
+	}else if($row[1]==5){
+		$levelName="Free";
+		$copyright=$levelName;
+	}else if($row[1]==6){
+		$levelName="Free";
 		$copyright=$levelName;
 	}else{
 		$copyright=$row[1];
