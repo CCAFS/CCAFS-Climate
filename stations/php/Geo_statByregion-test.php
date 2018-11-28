@@ -337,7 +337,7 @@ if($type==5){
 	// print_r(pg_fetch_all($result));
 	// exit();	
 	
-	
+	// echo($level);
 	while($line = pg_fetch_assoc($result)){
 		if($level==1){
 			$levelName="Restricted"; 
@@ -352,17 +352,11 @@ if($type==5){
 		}else if($level==3){
 			$levelName="Free";
 			$copyright=$levelName;
-		}else if($line['access_level']==4){
+		}else if($line['access_level']==$level){
 			$levelName="Free";
 			$copyright=$levelName;
-		}else if($line['access_level']==5){
-			$levelName="Free5";
-			$copyright=$levelName;
-		}else if($line['access_level']==6){
-			$levelName="Free6";
-			$copyright=$levelName;
 		}else{
-			$copyright="hola";#$line['copyright'];
+			$copyright=$line['copyright'];
 		}
 	
 		$feature = array(
@@ -633,13 +627,7 @@ $sql_tabla ="select DISTINCT s.id, s.code,s.name, c.name category,i.name institu
 		}else if($level==3){
 			$levelName="Free";
 			$copyright=$levelName;
-		}else if($line['access_level']==4){
-			$levelName="Free";
-			$copyright=$levelName;
-		}else if($line['access_level']==5){
-			$levelName="Free";
-			$copyright=$levelName;
-		}else if($line['access_level']==6){
+		}else if($line['access_level']==$level){
 			$levelName="Free";
 			$copyright=$levelName;
 		}else{
@@ -895,13 +883,7 @@ if($type==14){
 		}else if($level==3){
 			$levelName="Free";
 			$copyright=$levelName;
-		}else if($line['access_level']==4){
-			$levelName="Free";
-			$copyright=$levelName;
-		}else if($line['access_level']==5){
-			$levelName="Free";
-			$copyright=$levelName;
-		}else if($line['access_level']==6){
+		}else if($line['access_level']==$level){
 			$levelName="Free";
 			$copyright=$levelName;
 		}else{
@@ -1456,17 +1438,11 @@ if($type==27){
 	}else if($level==3){
 		$levelName=3;
 		$copyright=$levelName;
-	}else if($row[1]==4){
-		$levelName="Free";
-		$copyright=$levelName;
-	}else if($row[1]==5){
-		$levelName="Free";
-		$copyright=$levelName;
-	}else if($row[1]==6){
-		$levelName="Free";
-		$copyright=$levelName;
+	}else if($row[1]==$level){
+			$levelName="Free";
+			$copyright=$levelName;
 	}else{
-		$copyright=$row[1];
+	$copyright=$row[1];
 	}
 	
 	if( $copyright==3){
