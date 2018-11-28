@@ -356,13 +356,13 @@ if($type==5){
 			$levelName="Free";
 			$copyright=$levelName;
 		}else if($line['access_level']==5){
-			$levelName="Free";
+			$levelName="Free5";
 			$copyright=$levelName;
 		}else if($line['access_level']==6){
-			$levelName="Free";
+			$levelName="Free6";
 			$copyright=$levelName;
 		}else{
-			$copyright=$line['copyright'];
+			$copyright="hola";#$line['copyright'];
 		}
 	
 		$feature = array(
