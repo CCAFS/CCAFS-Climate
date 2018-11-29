@@ -152,8 +152,13 @@ if (isset($_REQUEST['qc'])) {
 	  $i = 0;
 	  while (!feof($myfile) && $i < 2000) {
 		$line = fgets($myfile);
-		if ($period == 1) {
+		if(explode("/", $url)[2]=='hnd-copeco' || explode("/", $url)[2]=='hnd-dgrh-noaa'|| explode("/", $url)[2]=='hnd-enee'){
+		  $line = explode(" ", $line);
+		}else{
 		  $line = explode("\t", $line);
+		}
+		if ($period == 1) {
+		  // $line = explode("\t", $line);
 		  if (isset($line[1])) {
 			$line[1] = trim(preg_replace('/\s\s+/', ' ', $line[1]));
 			if ($line[1] != 'NA' && $line[1] != '') {
@@ -163,7 +168,7 @@ if (isset($_REQUEST['qc'])) {
 			}
 		  }
 		} else if ($period == 2) {
-		  $line = explode("\t", $line);
+		  // $line = explode("\t", $line);
 		  if (isset($line[1])) {
 			$line[1] = trim(preg_replace('/\s\s+/', ' ', $line[1]));
 			if ($line[1] != 'NA' && $line[1] != '') {
@@ -176,13 +181,6 @@ if (isset($_REQUEST['qc'])) {
 			$ouput[$keym][] = $line[1];
 		  }
 		} else if ($period == 3) {
-		  
-		  if(explode("/", $url)[2]=='hnd-copeco' || explode("/", $url)[2]=='hnd-dgrh-noaa'|| explode("/", $url)[2]=='hnd-enee'){
-			  $line = explode(" ", $line);
-		  }else{
-			  $line = explode("\t", $line);
-		  }
-		  
 		  if (isset($line[1])) {
 			$line[1] = trim(preg_replace('/\s\s+/', ' ', $line[1]));
 			if ($line[1] != 'NA' && $line[1] != '') {
