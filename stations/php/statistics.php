@@ -107,7 +107,12 @@ function stationReadFile($url, $name) {
   $i = 0;
   while (!feof($myfile)) {
     $line = fgets($myfile);
-      $line = explode("\t", $line);
+      // $line = explode("\t", $line);
+	if(explode("/", $url)[2]=='hnd-copeco' || explode("/", $url)[2]=='hnd-dgrh-noaa'|| explode("/", $url)[2]=='hnd-enee'){
+	  $line = explode(" ", $line);
+	}else{
+	  $line = explode("\t", $line);
+	}	  
       if (isset($line[1])) {
         $line[1] = trim(preg_replace('/\s\s+/', ' ', $line[1]));
         if ($line[1] != 'NA' && $line[1] != '') {
