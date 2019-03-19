@@ -1516,6 +1516,7 @@ function ConvertDDToDMS(D){
 					dLen = data['prec']['data'].length;
 
 					if (period == 1) {
+						labelPrec="mm/day"
 					  seriesData = {
 						name: 'Precipitation',
 						data: data['prec']['data'],
@@ -1523,6 +1524,7 @@ function ConvertDDToDMS(D){
 						pointInterval: 24 * 3600 * 1000
 					  };
 					} else if (period == 2) {
+						labelPrec="mm/month"
 					  for (var i = 0; i < dLen; i++) {
 						data['prec']['data'][i] = [Date.UTC(data['prec']['sdate'].split(' ')[0].split('-')[0], (parseInt(data['prec']['sdate'].split(' ')[0].split('-')[1]) - 1 + i), 1), data['prec']['data'][i]];
 					  }
@@ -1531,6 +1533,7 @@ function ConvertDDToDMS(D){
 						data: data['prec']['data']
 					  };
 					} else if (period == 3) {
+						labelPrec="mm/year"
 					  for (var i = 0; i < dLen; i++) {
 						data['prec']['data'][i] = [Date.UTC((parseInt(data['prec']['sdate'].split(' ')[0].split('-')[0]) + i), (parseInt(data['prec']['sdate'].split(' ')[0].split('-')[1]) - 1), 1), data['prec']['data'][i]];
 					  }
@@ -1555,11 +1558,11 @@ function ConvertDDToDMS(D){
 					  },
 					  yAxis: {
 						title: {
-						  text: 'Precipitation mm/day'
+						  text: 'Precipitation '+labelPrec
 						}
 					  },
 					  tooltip: {
-						valueSuffix: ' mm/day',
+						valueSuffix: ' '+labelPrec,
 						valueDecimals: 2
 					  },
 					  plotOptions: {
