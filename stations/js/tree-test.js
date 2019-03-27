@@ -13512,8 +13512,8 @@ var tabCount = 4;
 			min: 1981,
 			max: 2019,
 			from: 2008,
-			to: 2018,
-			to_max:2018,
+			to: 2019,
+			to_max:2019,
 			max_interval:30,
 			// to_percent: 77.5,
 			drag_interval: true
