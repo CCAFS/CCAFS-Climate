@@ -51,6 +51,17 @@
                       <!--[if lte IE 8]>
                           <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/data-IE8.css" media="screen" />
                       <![endif]-->
+                  {elseif $jsToInclude == "cimatewizard"}
+					<link rel="stylesheet" href="https://js.arcgis.com/3.26/esri/css/esri.css">
+					<script src="https://js.arcgis.com/3.26/"></script>						  
+                    <script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>	
+                    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={$smarty.const.GOOGLE_API_KEY}&sensor=false"></script> -->
+                    <script src="{$smarty.const.SMARTY_JS_URI}/climatewizard.js"></script> 
+                    <link rel="stylesheet" type="text/css" href="{$smarty.const.SMARTY_CSS_URI}/data.css" media="screen" /> 
+                    <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css"> -->
+                      <!-- <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>		 -->
+                      <!-- <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>	 -->
+			  
                     {elseif $jsToInclude == "dataBias"}
                       <script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>	
                       <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={$smarty.const.GOOGLE_API_KEY}&sensor=false"></script>

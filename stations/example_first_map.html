@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--https://developers.arcgis.com/javascript/3/jshelp/intro_firstmap_amd.html-->
+
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+  <title>Create web map from id</title>
+
+  <!-- <link rel="stylesheet" href="https://js.arcgis.com/3.26/dijit/themes/claro/claro.css"> -->
+  <!-- <link rel="stylesheet" href="https://js.arcgis.com/3.26/esri/css/esri.css"> -->
+<link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/2.7/js/dojo/dijit/themes/claro/claro.css">
+ <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.7"></script>
+	
+  <!-- <script src="https://js.arcgis.com/3.26/" data-dojo-config="async:true"></script> -->
+    <style>
+      html, body, #map {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
+    <script>
+		var map;
+		dojo.require("esri.map");
+
+/*
+		function init(){
+			
+			pwd = new dijit.Dialog({
+				title: "Password Required",
+				content: 'Please note:  The password has changed.  If you would like to use the ClimateWizard Custom Analysis Tool please send and email to <a href="mailto:climatewizard@tnc.org">climatewizard@tnc.org</a><br><br>Please include the following information in the body of the email:<br>1.  Name and address of the primary user<br>2.  Email address of the primary user<br>3.  Affiliated organization<br>4.  Brief description of your research project and the intended audience of your climate analysis.<br><br><br><div dojoType="dijit.form.Form" id="myForm" jsId="myForm" encType="multipart/form-data" action="" method=""><table width="100%" style="border: 1px solid #9f9f9f;" cellspacing="10"> <tr> <td> <label for="name"> Password: </td> <td> <input type="text" id="name" name="name" required="true" dojoType="dijit.form.TextBox" /> </td> </tr>  </table> <center> <button dojoType="dijit.form.Button" type=button onClick="checkok(myForm.getValues())"> Ok! </button> </center> </div>',
+				style: "width: 500px",
+				onHide: function() {checkok({name:""})},
+				id: "pwdd"
+			});
+
+			//pwd.show();
+
+				
+			var doitagain = true;
+
+			//while (doitagain == true) {
+
+			//var pw = prompt("Please note:  The password has changed.  If you would like to use the ClimateWizard Custom Analysis Tool please send and email to climatewizard@tnc.org. <br>Use just the above if we don’t have much room for text but if you do include the below to","Site Password Required", "Password");
+			//if (pw == "qweasd") {
+				doitagain = false;
+			//}
+				
+			//}
+				
+			polys = new esri.layers.ArcGISDynamicMapServiceLayer("http://" + currentURL + "/ArcGIS/rest/services/ClimateWizardAreas_WB/MapServer", {id:"polys"});
+
+			dojo.connect(polys, "onLoad", addqs);
+
+			pic1 = new Image(5,5); 
+			pic1.src = "images/load_back.png";
+
+
+				e = document.getElementById('Region_Types');
+				//e.options[0].selected=true;
+
+
+				 var initExtent = new esri.geometry.Extent({"xmin":-20037508,"ymin":-8337508,"xmax":20037508,"ymax":11837508.34,"spatialReference":{"wkid":102100}});
+				 map = new esri.Map("map",{extent:initExtent,logo:false});
+				//Add the topographic layer to the map. View the ArcGIS Online site for services http://arcgisonline/home/search.html?t=content&f=typekeywords:service    
+				var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer");
+				map.addLayer(basemap);
+				
+			toolbar = new esri.toolbars.Draw(map);
+			dojo.connect(toolbar, "onDrawEnd", adduser);
+
+			//choosecc();
+		
+		
+		}
+	dojo.addOnLoad(init);		
+	*/
+    </script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+  </body>
+</html>

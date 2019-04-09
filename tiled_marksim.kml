@@ -1,0 +1,997 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.0">
+    <Document>
+        <name>Global Tiled</name>
+		
+ <Style id="Mapit"> 
+<IconStyle>
+<color>FFFFFFFF</color>
+<scale>0.3</scale>
+<Icon><href>root://icons/palette-5.png</href><x>192</x><y>192</y><w>32</w><h>32</h>  </Icon>
+</IconStyle>
+<LabelStyle>
+<scale>0</scale>
+</LabelStyle>
+<BalloonStyle >
+<text>$[description]</text>
+<color>FFFFFFFF</color>
+</BalloonStyle>
+</Style>
+<Style id="zh">
+<IconStyle>
+<color>FFFFFFFF</color>
+<scale>0.3</scale>
+<Icon><href>http://maps.google.com/mapfiles/kml/pal3/icon63.png</href></Icon>
+</IconStyle>
+<LabelStyle>
+<scale>0</scale>
+</LabelStyle>
+<LineStyle>
+<color>FFB7B7B7</color>
+<width>2</width>
+</LineStyle>
+<PolyStyle>
+<color>60B7B7B7</color>
+</PolyStyle>
+</Style>
+<Style id="zn">
+<IconStyle>
+<color>FFFFFFFF</color>
+<scale>0.3</scale>
+<Icon><href>../../theme/images/help_icon.png</href><x>192</x><y>192</y><w>32</w><h>32</h></Icon>
+</IconStyle>
+<LabelStyle>
+<scale>0</scale>
+</LabelStyle>
+<BalloonStyle ><text>$[description]</text><color>FFFFFFFF</color></BalloonStyle>
+<LineStyle><color>FFFFFFFF</color><width>1</width></LineStyle>
+<PolyStyle><color>60CECECE</color></PolyStyle>
+</Style>
+
+<!-- <StyleMap id="MapRollOver"><Pair><key>normal</key><styleUrl>#zn</styleUrl></Pair><Pair><key>highlight</key><styleUrl>#zh</styleUrl></Pair> -->
+<!-- </StyleMap>    -->
+
+  <Style id="styleA1">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/A1-01.png</href>
+      </Icon>
+    </IconStyle>
+
+  </Style>
+  
+   <Style id="styleA2">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/A2-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+  
+   <Style id="styleA3">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/A3-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+  
+   <Style id="styleA4">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/A4-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>  
+
+   <Style id="styleA5">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/A5-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+
+  <Style id="styleB1">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/B1-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  
+   <Style id="styleB2">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/B2-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+  
+   <Style id="styleB3">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/B3-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+  
+   <Style id="styleB4">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/B4-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>  
+
+   <Style id="styleB5">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/B5-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+
+   <Style id="styleC1">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/C1-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  
+   <Style id="styleC2">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/C2-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+  
+   <Style id="styleC3">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/C3-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+  
+   <Style id="styleC4">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/C4-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>  
+
+   <Style id="styleC5">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/C5-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+
+
+
+   <Style id="styleD1">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/D1-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  
+   <Style id="styleD2">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/D2-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+  
+   <Style id="styleD3">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/D3-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+  
+   <Style id="styleD4">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/D4-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>  
+
+   <Style id="styleD5">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/D5-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>  
+
+
+
+   <Style id="styleE1">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/E1-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  
+   <Style id="styleE2">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/E2-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+  
+   <Style id="styleE3">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/E3-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+  
+   <Style id="styleE4">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/E4-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>  
+
+   <Style id="styleE5">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/E5-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>  
+
+
+   <Style id="styleF1">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/F1-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>
+  
+   <Style id="styleF2">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/F2-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+  
+   <Style id="styleF3">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/F3-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style> 
+  
+   <Style id="styleF4">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/F4-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>  
+
+   <Style id="styleF5">
+    <IconStyle>
+      <Icon>
+        <href>../../theme/images/F5-01.png</href>
+      </Icon>
+    </IconStyle>
+  </Style>   
+  
+        <Placemark>
+            <name>Tile_A1</name>    
+            <styleUrl>#styleA1</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								-119.9999999999999,60.00000000000011,0 -119.9999999999999,90.00000000000011,0 -179.9999999999999,90.00000000000011,0 -179.9999999999999,60.00000000000011,0 -119.9999999999999,60.00000000000011,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-150,75.00000000000006,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_B1</name>           
+            <styleUrl>#styleB1</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								-59.99999999999989,60.00000000000011,0 -59.99999999999989,90.00000000000011,0 -119.9999999999999,90.00000000000011,0 -119.9999999999999,60.00000000000011,0 -59.99999999999989,60.00000000000011,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+					<tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-90,75.00000000000006,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_C1</name>           
+            <styleUrl>#styleC1</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								5.684341886080802e-014,60.00000000000011,0 5.684341886080802e-014,90.00000000000011,0 -59.99999999999989,90.00000000000011,0 -59.99999999999989,60.00000000000011,0 5.684341886080802e-014,60.00000000000011,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-30,75.00000000000006,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_D1</name>            
+            <styleUrl>#styleD1</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								60.00000000000006,60.00000000000011,0 60.00000000000006,90.00000000000011,0 5.684341886080802e-014,90.00000000000011,0 5.684341886080802e-014,60.00000000000011,0 60.00000000000006,60.00000000000011,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>30,75.00000000000006,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_E1</name>           
+            <styleUrl>#styleE1</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								120.0000000000002,60.00000000000011,0 120.0000000000002,90.00000000000011,0 60.00000000000006,90.00000000000011,0 60.00000000000006,60.00000000000011,0 120.0000000000002,60.00000000000011,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>90,75.00000000000006,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_F1</name>            
+            <styleUrl>#styleF1</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								180.0000000000001,60.00000000000011,0 180.0000000000001,90.00000000000011,0 120.0000000000002,90.00000000000011,0 120.0000000000002,60.00000000000011,0 180.0000000000001,60.00000000000011,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>150,75.00000000000006,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+		
+		        <Placemark>
+            <name>Tile_A2</name>            
+            <styleUrl>#styleA2</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								-119.9999999999999,30,0 -119.9999999999999,60,0 -179.9999999999999,60,0 -179.9999999999999,30,0 -119.9999999999999,30,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-150,45.00000000000006,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>tile_B2</name>            
+            <styleUrl>#styleB2</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								-59.99999999999989,30,0 -59.99999999999989,60,0 -119.9999999999999,60,0 -119.9999999999999,30,0 -59.99999999999989,30,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-90,45.00000000000006,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_C2</name>            
+            <styleUrl>#styleC2</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								5.684341886080802e-014,30,0 5.684341886080802e-014,60,0 -59.99999999999989,60,0 -59.99999999999989,30,0 5.684341886080802e-014,30,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-30,45.00000000000006,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_D2</name>            
+            <styleUrl>#styleD2</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								60.00000000000006,30,0 60.00000000000006,60,0 5.684341886080802e-014,60,0 5.684341886080802e-014,30,0 60.00000000000006,30,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>30,45.00000000000006,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_E2</name>            
+            <styleUrl>#styleE2</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								120.0000000000002,30,0 120.0000000000002,60,0 60.00000000000006,60,0 60.00000000000006,30,0 120.0000000000002,30,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>90,45.00000000000006,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_F2</name>            
+            <styleUrl>#styleF2</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								180.0000000000001,30,0 180.0000000000001,60,0 120.0000000000002,60,0 120.0000000000002,30,0 180.0000000000001,30,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>150,45.00000000000006,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+		
+        <Placemark>
+            <name>Tile_A3</name>            
+            <styleUrl>#styleA3</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								-119.9999999999999,0,0 -119.9999999999999,30,0 -179.9999999999999,30,0 -179.9999999999999,0,0 -119.9999999999999,0,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-150,15.00000000000006,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_B3</name>            
+            <styleUrl>#styleB3</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								-59.99999999999989,0,0 -59.99999999999989,30,0 -119.9999999999999,30,0 -119.9999999999999,0,0 -59.99999999999989,0,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-90,15.00000000000006,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_C3</name>            
+            <styleUrl>#styleC3</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								5.684341886080802e-014,0,0 5.684341886080802e-014,30,0 -59.99999999999989,30,0 -59.99999999999989,0,0 5.684341886080802e-014,0,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-30,15.00000000000006,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_D3</name>            
+            <styleUrl>#styleD3</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								60.00000000000006,0,0 60.00000000000006,30,0 5.684341886080802e-014,30,0 5.684341886080802e-014,0,0 60.00000000000006,0,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>30,15.00000000000006,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_E3</name>            
+            <styleUrl>#styleE3</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								120.0000000000002,0,0 120.0000000000002,30,0 60.00000000000006,30,0 60.00000000000006,0,0 120.0000000000002,0,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>90,15.00000000000006,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_F3</name>            
+            <styleUrl>#styleF3</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								180.0000000000001,0,0 180.0000000000001,30,0 120.0000000000002,30,0 120.0000000000002,0,0 180.0000000000001,0,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>150,15.00000000000006,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+		
+        <Placemark>
+            <name>Tile_A4</name>            
+            <styleUrl>#styleA4</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								-119.9999999999999,-30,0 -119.9999999999999,0,0 -179.9999999999999,0,0 -179.9999999999999,-30,0 -119.9999999999999,-30,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-150,-14.99999999999994,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_B4</name>            
+            <styleUrl>#styleB4</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								-59.99999999999989,-30,0 -59.99999999999989,0,0 -119.9999999999999,0,0 -119.9999999999999,-30,0 -59.99999999999989,-30,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-90,-14.99999999999994,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_C4</name>            
+            <styleUrl>#styleC4</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								5.684341886080802e-014,-30,0 5.684341886080802e-014,0,0 -59.99999999999989,0,0 -59.99999999999989,-30,0 5.684341886080802e-014,-30,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-30,-14.99999999999994,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_D4</name>            
+            <styleUrl>#styleD4</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								60.00000000000006,-30,0 60.00000000000006,0,0 5.684341886080802e-014,0,0 5.684341886080802e-014,-30,0 60.00000000000006,-30,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>30,-14.99999999999994,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_E4</name>            
+            <styleUrl>#styleE4</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								120.0000000000002,-30,0 120.0000000000002,0,0 60.00000000000006,0,0 60.00000000000006,-30,0 120.0000000000002,-30,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>90,-14.99999999999994,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_F4</name>            
+            <styleUrl>#styleF4</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								180.0000000000001,-30,0 180.0000000000001,0,0 120.0000000000002,0,0 120.0000000000002,-30,0 180.0000000000001,-30,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>150,-14.99999999999994,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+
+        <Placemark>
+            <name>Tile_A5</name>            
+            <styleUrl>#styleA5</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								-119.9999999999999,-90,0 -119.9999999999999,-30,0 -179.9999999999999,-30,0 -179.9999999999999,-90,0 -119.9999999999999,-90,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+					<coordinates>-150,-44.99999999999994,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_B5</name>            
+            <styleUrl>#styleB5</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								-59.99999999999989,-90,0 -59.99999999999989,-30,0 -119.9999999999999,-30,0 -119.9999999999999,-90,0 -59.99999999999989,-90,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+					<coordinates>-90,-44.99999999999994,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_C5</name>            
+            <styleUrl>#styleC5</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								5.684341886080802e-014,-90,0 5.684341886080802e-014,-30,0 -59.99999999999989,-30,0 -59.99999999999989,-90,0 5.684341886080802e-014,-90,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>-30,-44.99999999999994,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_D5</name>            
+            <styleUrl>#styleD5</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								60.00000000000006,-90,0 60.00000000000006,-30,0 5.684341886080802e-014,-30,0 5.684341886080802e-014,-90,0 60.00000000000006,-90,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>30,-44.99999999999994,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_E5</name>            
+            <styleUrl>#styleE5</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								120.0000000000002,-90,0 120.0000000000002,-30,0 60.00000000000006,-30,0 60.00000000000006,-90,0 120.0000000000002,-90,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>90,-44.99999999999994,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+        <Placemark>
+            <name>Tile_F5</name>            
+            <styleUrl>#styleF5</styleUrl>
+            <MultiGeometry>
+                <Polygon>
+                    <tessellate>0</tessellate>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <outerBoundaryIs>
+                        <LinearRing>
+							<coordinates>
+								180.0000000000001,-90,0 180.0000000000001,-30,0 120.0000000000002,-30,0 120.0000000000002,-90,0 180.0000000000001,-90,0 
+							</coordinates>
+                        </LinearRing>
+                    </outerBoundaryIs>
+                </Polygon>
+                <Point>
+                    <extrude>0</extrude>
+                    <altitudeMode>clampedToGround</altitudeMode>
+                    <coordinates>150,-44.99999999999994,0</coordinates>
+                </Point>
+            </MultiGeometry>
+        </Placemark>
+    
+    </Document>
+</kml>

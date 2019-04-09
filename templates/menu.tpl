@@ -5,7 +5,9 @@
       <ul class="sub-menu">
         <li style="line-height:35px;"><a class="conBorder" href="/data_bias_correction/">Bias correction</a></li>	  
         <li style="line-height:20px;"><a class="conBorder" style="margin-top: 6px;padding-bottom: 8px;" href="/data_spatial_downscaling/">Spatial downscaling & disaggregation</a></li>
-        <li style="line-height:35px;"><a href="/weather_stations/">Weather stations</a></li>
+		<li style="line-height:20px;"><a class="conBorder" style="margin-top: 6px;padding-bottom: 8px;" href="/weather_stations/">Weather stations</a></li>
+        <li style="line-height:35px;"><a href="/climatewizard/">Climate Wizard</a></li>
+
       </ul>
     </li>	
     <li {if $current == 'methods'}class="current dropdown"{else}class="dropdown"{/if}><a href="/methods/">Methods</a>
