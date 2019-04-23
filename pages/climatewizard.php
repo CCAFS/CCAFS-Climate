@@ -1,6 +1,6 @@
 <?php
 require_once '../config/smarty.php';
-require_once '../config/db.php';
+//require_once '../config/db.php';
 
 // $query = "SELECT df.id, df.name, dfc.name as 'category' FROM datasets_fileset df ";
 // $query .= "INNER JOIN datasets_fileset_category dfc ON df.category_id = dfc.id ";
