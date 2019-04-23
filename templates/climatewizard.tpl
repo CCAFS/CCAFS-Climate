@@ -9,7 +9,7 @@
   <hr>
   <div>
 	  <div id="loading" style=""><img style="" src="{$smarty.const.SMARTY_IMG_URI}/loading.gif" alt="Loader" /></div>
-	  <iframe name="myFrame" id="myFrame" src="http://climatewizard.ciat.cgiar.org/index_ar5_25km_test.html" width="936" height="1300" frameBorder="0" scrolling="no" onload="document.getElementById('loading').style.display='none';"></iframe>
+	  <iframe name="myFrame" id="myFrame" src="http://climatewizard.ciat.cgiar.org/index_ar5_25km_test.html" width="936" height="1380" frameBorder="0" scrolling="no" onload="document.getElementById('loading').style.display='none';"></iframe>
   </div>
   <p>
   <div>
