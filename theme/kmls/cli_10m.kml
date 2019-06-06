@@ -1,0 +1,1251 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="cli_10m" id="cli_10m">
+	<SimpleField name="Id" type="int"></SimpleField>
+	<SimpleField name="lon" type="float"></SimpleField>
+	<SimpleField name="lat" type="float"></SimpleField>
+</Schema>
+<Folder><name>cli_10m</name>
+  <Placemark>
+	<name>S060W180</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">1</SimpleData>
+		<SimpleData name="lon">-170</SimpleData>
+		<SimpleData name="lat">-50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-180,-60 -180,-40 -160,-40 -160,-60 -180,-60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S060W080</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">2</SimpleData>
+		<SimpleData name="lon">-70</SimpleData>
+		<SimpleData name="lat">-50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-80,-60 -80,-40 -60,-40 -60,-60 -80,-60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S060W060</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">3</SimpleData>
+		<SimpleData name="lon">-50</SimpleData>
+		<SimpleData name="lat">-50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-60,-60 -60,-40 -40,-40 -40,-60 -60,-60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S060W040</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">4</SimpleData>
+		<SimpleData name="lon">-30</SimpleData>
+		<SimpleData name="lat">-50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-40,-60 -40,-40 -20,-40 -20,-60 -40,-60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S060W020</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">5</SimpleData>
+		<SimpleData name="lon">-10</SimpleData>
+		<SimpleData name="lat">-50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-20,-60 -20,-40 0,-40 0,-60 -20,-60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S060E000</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">6</SimpleData>
+		<SimpleData name="lon">10</SimpleData>
+		<SimpleData name="lat">-50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>0,-60 0,-40 20,-40 20,-60 0,-60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S060E020</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">7</SimpleData>
+		<SimpleData name="lon">30</SimpleData>
+		<SimpleData name="lat">-50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>20,-60 20,-40 40,-40 40,-60 20,-60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S060E040</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">8</SimpleData>
+		<SimpleData name="lon">50</SimpleData>
+		<SimpleData name="lat">-50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>40,-60 40,-40 60,-40 60,-60 40,-60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S060E060</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">9</SimpleData>
+		<SimpleData name="lon">70</SimpleData>
+		<SimpleData name="lat">-50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>60,-60 60,-40 80,-40 80,-60 60,-60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S060E140</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">10</SimpleData>
+		<SimpleData name="lon">150</SimpleData>
+		<SimpleData name="lat">-50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>140,-60 140,-40 160,-40 160,-60 140,-60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S060E160</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">11</SimpleData>
+		<SimpleData name="lon">170</SimpleData>
+		<SimpleData name="lat">-50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>160,-60 160,-40 180,-40 180,-60 160,-60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S040W180</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">12</SimpleData>
+		<SimpleData name="lon">-170</SimpleData>
+		<SimpleData name="lat">-30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-180,-40 -180,-20 -160,-20 -160,-40 -180,-40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S040W160</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">13</SimpleData>
+		<SimpleData name="lon">-150</SimpleData>
+		<SimpleData name="lat">-30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-160,-40 -160,-20 -140,-20 -140,-40 -160,-40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S040W140</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">14</SimpleData>
+		<SimpleData name="lon">-130</SimpleData>
+		<SimpleData name="lat">-30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-140,-40 -140,-20 -120,-20 -120,-40 -140,-40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S040W120</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">15</SimpleData>
+		<SimpleData name="lon">-110</SimpleData>
+		<SimpleData name="lat">-30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-120,-40 -120,-20 -100,-20 -100,-40 -120,-40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S040W100</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">16</SimpleData>
+		<SimpleData name="lon">-90</SimpleData>
+		<SimpleData name="lat">-30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-100,-40 -100,-20 -80,-20 -80,-40 -100,-40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S040W080</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">17</SimpleData>
+		<SimpleData name="lon">-70</SimpleData>
+		<SimpleData name="lat">-30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-80,-40 -80,-20 -60,-20 -60,-40 -80,-40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S040W060</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">18</SimpleData>
+		<SimpleData name="lon">-50</SimpleData>
+		<SimpleData name="lat">-30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-60,-40 -60,-20 -40,-20 -40,-40 -60,-40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S040W040</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">19</SimpleData>
+		<SimpleData name="lon">-30</SimpleData>
+		<SimpleData name="lat">-30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-40,-40 -40,-20 -20,-20 -20,-40 -40,-40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S040W020</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">20</SimpleData>
+		<SimpleData name="lon">-10</SimpleData>
+		<SimpleData name="lat">-30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-20,-40 -20,-20 0,-20 0,-40 -20,-40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S040E000</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">21</SimpleData>
+		<SimpleData name="lon">10</SimpleData>
+		<SimpleData name="lat">-30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>0,-40 0,-20 20,-20 20,-40 0,-40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S040E020</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">22</SimpleData>
+		<SimpleData name="lon">30</SimpleData>
+		<SimpleData name="lat">-30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>20,-40 20,-20 40,-20 40,-40 20,-40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S040E040</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">23</SimpleData>
+		<SimpleData name="lon">50</SimpleData>
+		<SimpleData name="lat">-30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>40,-40 40,-20 60,-20 60,-40 40,-40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S040E060</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">24</SimpleData>
+		<SimpleData name="lon">70</SimpleData>
+		<SimpleData name="lat">-30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>60,-40 60,-20 80,-20 80,-40 60,-40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S040E100</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">25</SimpleData>
+		<SimpleData name="lon">110</SimpleData>
+		<SimpleData name="lat">-30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>100,-40 100,-20 120,-20 120,-40 100,-40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S040E120</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">26</SimpleData>
+		<SimpleData name="lon">130</SimpleData>
+		<SimpleData name="lat">-30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>120,-40 120,-20 140,-20 140,-40 120,-40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S040E140</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">27</SimpleData>
+		<SimpleData name="lon">150</SimpleData>
+		<SimpleData name="lat">-30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>140,-40 140,-20 160,-20 160,-40 140,-40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S040E160</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">28</SimpleData>
+		<SimpleData name="lon">170</SimpleData>
+		<SimpleData name="lat">-30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>160,-40 160,-20 180,-20 180,-40 160,-40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S020W180</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">29</SimpleData>
+		<SimpleData name="lon">-170</SimpleData>
+		<SimpleData name="lat">-10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-180,-20 -180,0 -160,0 -160,-20 -180,-20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S020W160</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">30</SimpleData>
+		<SimpleData name="lon">-150</SimpleData>
+		<SimpleData name="lat">-10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-160,-20 -160,0 -140,0 -140,-20 -160,-20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S020W140</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">31</SimpleData>
+		<SimpleData name="lon">-130</SimpleData>
+		<SimpleData name="lat">-10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-140,-20 -140,0 -120,0 -120,-20 -140,-20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S020W100</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">32</SimpleData>
+		<SimpleData name="lon">-90</SimpleData>
+		<SimpleData name="lat">-10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-100,-20 -100,0 -80,0 -80,-20 -100,-20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S020W080</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">33</SimpleData>
+		<SimpleData name="lon">-70</SimpleData>
+		<SimpleData name="lat">-10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-80,-20 -80,0 -60,0 -60,-20 -80,-20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S020W060</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">34</SimpleData>
+		<SimpleData name="lon">-50</SimpleData>
+		<SimpleData name="lat">-10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-60,-20 -60,0 -40,0 -40,-20 -60,-20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S020W040</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">35</SimpleData>
+		<SimpleData name="lon">-30</SimpleData>
+		<SimpleData name="lat">-10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-40,-20 -40,0 -20,0 -20,-20 -40,-20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S020W020</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">36</SimpleData>
+		<SimpleData name="lon">-10</SimpleData>
+		<SimpleData name="lat">-10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-20,-20 -20,0 0,0 0,-20 -20,-20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S020E000</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">37</SimpleData>
+		<SimpleData name="lon">10</SimpleData>
+		<SimpleData name="lat">-10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>0,-20 0,0 20,0 20,-20 0,-20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S020E020</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">38</SimpleData>
+		<SimpleData name="lon">30</SimpleData>
+		<SimpleData name="lat">-10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>20,-20 20,0 40,0 40,-20 20,-20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S020E040</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">39</SimpleData>
+		<SimpleData name="lon">50</SimpleData>
+		<SimpleData name="lat">-10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>40,-20 40,0 60,0 60,-20 40,-20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S020E060</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">40</SimpleData>
+		<SimpleData name="lon">70</SimpleData>
+		<SimpleData name="lat">-10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>60,-20 60,0 80,0 80,-20 60,-20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S020E080</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">41</SimpleData>
+		<SimpleData name="lon">90</SimpleData>
+		<SimpleData name="lat">-10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>80,-20 80,0 100,0 100,-20 80,-20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S020E100</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">42</SimpleData>
+		<SimpleData name="lon">110</SimpleData>
+		<SimpleData name="lat">-10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>100,-20 100,0 120,0 120,-20 100,-20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S020E120</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">43</SimpleData>
+		<SimpleData name="lon">130</SimpleData>
+		<SimpleData name="lat">-10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>120,-20 120,0 140,0 140,-20 120,-20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S020E140</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">44</SimpleData>
+		<SimpleData name="lon">150</SimpleData>
+		<SimpleData name="lat">-10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>140,-20 140,0 160,0 160,-20 140,-20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>S020E160</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">45</SimpleData>
+		<SimpleData name="lon">170</SimpleData>
+		<SimpleData name="lat">-10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>160,-20 160,0 180,0 180,-20 160,-20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N000W180</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">46</SimpleData>
+		<SimpleData name="lon">-170</SimpleData>
+		<SimpleData name="lat">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-180,0 -180,20 -160,20 -160,0 -180,0</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N000W160</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">47</SimpleData>
+		<SimpleData name="lon">-150</SimpleData>
+		<SimpleData name="lat">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-160,0 -160,20 -140,20 -140,0 -160,0</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N000W120</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">48</SimpleData>
+		<SimpleData name="lon">-110</SimpleData>
+		<SimpleData name="lat">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-120,0 -120,20 -100,20 -100,0 -120,0</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N000W100</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">49</SimpleData>
+		<SimpleData name="lon">-90</SimpleData>
+		<SimpleData name="lat">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-100,0 -100,20 -80,20 -80,0 -100,0</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N000W080</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">50</SimpleData>
+		<SimpleData name="lon">-70</SimpleData>
+		<SimpleData name="lat">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-80,0 -80,20 -60,20 -60,0 -80,0</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N000W060</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">51</SimpleData>
+		<SimpleData name="lon">-50</SimpleData>
+		<SimpleData name="lat">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-60,0 -60,20 -40,20 -40,0 -60,0</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N000W040</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">52</SimpleData>
+		<SimpleData name="lon">-30</SimpleData>
+		<SimpleData name="lat">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-40,0 -40,20 -20,20 -20,0 -40,0</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N000W020</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">53</SimpleData>
+		<SimpleData name="lon">-10</SimpleData>
+		<SimpleData name="lat">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-20,0 -20,20 0,20 0,0 -20,0</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N000E000</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">54</SimpleData>
+		<SimpleData name="lon">10</SimpleData>
+		<SimpleData name="lat">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>0,0 0,20 20,20 20,0 0,0</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N000E020</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">55</SimpleData>
+		<SimpleData name="lon">30</SimpleData>
+		<SimpleData name="lat">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>20,0 20,20 40,20 40,0 20,0</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N000E040</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">56</SimpleData>
+		<SimpleData name="lon">50</SimpleData>
+		<SimpleData name="lat">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>40,0 40,20 60,20 60,0 40,0</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N000E060</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">57</SimpleData>
+		<SimpleData name="lon">70</SimpleData>
+		<SimpleData name="lat">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>60,0 60,20 80,20 80,0 60,0</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N000E080</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">58</SimpleData>
+		<SimpleData name="lon">90</SimpleData>
+		<SimpleData name="lat">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>80,0 80,20 100,20 100,0 80,0</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N000E100</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">59</SimpleData>
+		<SimpleData name="lon">110</SimpleData>
+		<SimpleData name="lat">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>100,0 100,20 120,20 120,0 100,0</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N000E120</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">60</SimpleData>
+		<SimpleData name="lon">130</SimpleData>
+		<SimpleData name="lat">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>120,0 120,20 140,20 140,0 120,0</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N000E140</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">61</SimpleData>
+		<SimpleData name="lon">150</SimpleData>
+		<SimpleData name="lat">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>140,0 140,20 160,20 160,0 140,0</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N000E160</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">62</SimpleData>
+		<SimpleData name="lon">170</SimpleData>
+		<SimpleData name="lat">10</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>160,0 160,20 180,20 180,0 160,0</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N020W180</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">63</SimpleData>
+		<SimpleData name="lon">-170</SimpleData>
+		<SimpleData name="lat">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-180,20 -180,40 -160,40 -160,20 -180,20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N020W160</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">64</SimpleData>
+		<SimpleData name="lon">-150</SimpleData>
+		<SimpleData name="lat">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-160,20 -160,40 -140,40 -140,20 -160,20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N020W140</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">65</SimpleData>
+		<SimpleData name="lon">-130</SimpleData>
+		<SimpleData name="lat">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-140,20 -140,40 -120,40 -120,20 -140,20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N020W120</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">66</SimpleData>
+		<SimpleData name="lon">-110</SimpleData>
+		<SimpleData name="lat">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-120,20 -120,40 -100,40 -100,20 -120,20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N020W100</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">67</SimpleData>
+		<SimpleData name="lon">-90</SimpleData>
+		<SimpleData name="lat">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-100,20 -100,40 -80,40 -80,20 -100,20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N020W080</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">68</SimpleData>
+		<SimpleData name="lon">-70</SimpleData>
+		<SimpleData name="lat">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-80,20 -80,40 -60,40 -60,20 -80,20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N020W040</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">69</SimpleData>
+		<SimpleData name="lon">-30</SimpleData>
+		<SimpleData name="lat">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-40,20 -40,40 -20,40 -20,20 -40,20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N020W020</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">70</SimpleData>
+		<SimpleData name="lon">-10</SimpleData>
+		<SimpleData name="lat">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-20,20 -20,40 0,40 0,20 -20,20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N020E000</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">71</SimpleData>
+		<SimpleData name="lon">10</SimpleData>
+		<SimpleData name="lat">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>0,20 0,40 20,40 20,20 0,20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N020E020</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">72</SimpleData>
+		<SimpleData name="lon">30</SimpleData>
+		<SimpleData name="lat">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>20,20 20,40 40,40 40,20 20,20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N020E040</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">73</SimpleData>
+		<SimpleData name="lon">50</SimpleData>
+		<SimpleData name="lat">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>40,20 40,40 60,40 60,20 40,20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N020E060</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">74</SimpleData>
+		<SimpleData name="lon">70</SimpleData>
+		<SimpleData name="lat">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>60,20 60,40 80,40 80,20 60,20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N020E080</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">75</SimpleData>
+		<SimpleData name="lon">90</SimpleData>
+		<SimpleData name="lat">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>80,20 80,40 100,40 100,20 80,20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N020E100</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">76</SimpleData>
+		<SimpleData name="lon">110</SimpleData>
+		<SimpleData name="lat">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>100,20 100,40 120,40 120,20 100,20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N020E120</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">77</SimpleData>
+		<SimpleData name="lon">130</SimpleData>
+		<SimpleData name="lat">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>120,20 120,40 140,40 140,20 120,20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N020E140</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">78</SimpleData>
+		<SimpleData name="lon">150</SimpleData>
+		<SimpleData name="lat">30</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>140,20 140,40 160,40 160,20 140,20</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N040W180</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">79</SimpleData>
+		<SimpleData name="lon">-170</SimpleData>
+		<SimpleData name="lat">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-180,40 -180,60 -160,60 -160,40 -180,40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N040W160</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">80</SimpleData>
+		<SimpleData name="lon">-150</SimpleData>
+		<SimpleData name="lat">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-160,40 -160,60 -140,60 -140,40 -160,40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N040W140</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">81</SimpleData>
+		<SimpleData name="lon">-130</SimpleData>
+		<SimpleData name="lat">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-140,40 -140,60 -120,60 -120,40 -140,40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N040W120</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">82</SimpleData>
+		<SimpleData name="lon">-110</SimpleData>
+		<SimpleData name="lat">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-120,40 -120,60 -100,60 -100,40 -120,40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N040W100</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">83</SimpleData>
+		<SimpleData name="lon">-90</SimpleData>
+		<SimpleData name="lat">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-100,40 -100,60 -80,60 -80,40 -100,40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N040W080</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">84</SimpleData>
+		<SimpleData name="lon">-70</SimpleData>
+		<SimpleData name="lat">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-80,40 -80,60 -60,60 -60,40 -80,40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N040W060</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">85</SimpleData>
+		<SimpleData name="lon">-50</SimpleData>
+		<SimpleData name="lat">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-60,40 -60,60 -40,60 -40,40 -60,40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N040W020</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">86</SimpleData>
+		<SimpleData name="lon">-10</SimpleData>
+		<SimpleData name="lat">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-20,40 -20,60 0,60 0,40 -20,40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N040E000</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">87</SimpleData>
+		<SimpleData name="lon">10</SimpleData>
+		<SimpleData name="lat">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>0,40 0,60 20,60 20,40 0,40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N040E020</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">88</SimpleData>
+		<SimpleData name="lon">30</SimpleData>
+		<SimpleData name="lat">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>20,40 20,60 40,60 40,40 20,40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N040E040</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">89</SimpleData>
+		<SimpleData name="lon">50</SimpleData>
+		<SimpleData name="lat">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>40,40 40,60 60,60 60,40 40,40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N040E060</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">90</SimpleData>
+		<SimpleData name="lon">70</SimpleData>
+		<SimpleData name="lat">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>60,40 60,60 80,60 80,40 60,40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N040E080</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">91</SimpleData>
+		<SimpleData name="lon">90</SimpleData>
+		<SimpleData name="lat">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>80,40 80,60 100,60 100,40 80,40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N040E100</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">92</SimpleData>
+		<SimpleData name="lon">110</SimpleData>
+		<SimpleData name="lat">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>100,40 100,60 120,60 120,40 100,40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N040E120</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">93</SimpleData>
+		<SimpleData name="lon">130</SimpleData>
+		<SimpleData name="lat">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>120,40 120,60 140,60 140,40 120,40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N040E140</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">94</SimpleData>
+		<SimpleData name="lon">150</SimpleData>
+		<SimpleData name="lat">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>140,40 140,60 160,60 160,40 140,40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N040E160</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">95</SimpleData>
+		<SimpleData name="lon">170</SimpleData>
+		<SimpleData name="lat">50</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>160,40 160,60 180,60 180,40 160,40</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N060W180</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">96</SimpleData>
+		<SimpleData name="lon">-170</SimpleData>
+		<SimpleData name="lat">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-180,60 -180,80 -160,80 -160,60 -180,60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N060W160</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">97</SimpleData>
+		<SimpleData name="lon">-150</SimpleData>
+		<SimpleData name="lat">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-160,60 -160,80 -140,80 -140,60 -160,60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N060W140</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">98</SimpleData>
+		<SimpleData name="lon">-130</SimpleData>
+		<SimpleData name="lat">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-140,60 -140,80 -120,80 -120,60 -140,60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N060W120</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">99</SimpleData>
+		<SimpleData name="lon">-110</SimpleData>
+		<SimpleData name="lat">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-120,60 -120,80 -100,80 -100,60 -120,60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N060W100</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">100</SimpleData>
+		<SimpleData name="lon">-90</SimpleData>
+		<SimpleData name="lat">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-100,60 -100,80 -80,80 -80,60 -100,60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N060W080</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">101</SimpleData>
+		<SimpleData name="lon">-70</SimpleData>
+		<SimpleData name="lat">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-80,60 -80,80 -60,80 -60,60 -80,60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N060W060</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">102</SimpleData>
+		<SimpleData name="lon">-50</SimpleData>
+		<SimpleData name="lat">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-60,60 -60,80 -40,80 -40,60 -60,60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N060W040</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">103</SimpleData>
+		<SimpleData name="lon">-30</SimpleData>
+		<SimpleData name="lat">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-40,60 -40,80 -20,80 -20,60 -40,60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N060W020</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">104</SimpleData>
+		<SimpleData name="lon">-10</SimpleData>
+		<SimpleData name="lat">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-20,60 -20,80 0,80 0,60 -20,60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N060E000</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">105</SimpleData>
+		<SimpleData name="lon">10</SimpleData>
+		<SimpleData name="lat">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>0,60 0,80 20,80 20,60 0,60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N060E020</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">106</SimpleData>
+		<SimpleData name="lon">30</SimpleData>
+		<SimpleData name="lat">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>20,60 20,80 40,80 40,60 20,60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N060E040</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">107</SimpleData>
+		<SimpleData name="lon">50</SimpleData>
+		<SimpleData name="lat">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>40,60 40,80 60,80 60,60 40,60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N060E060</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">108</SimpleData>
+		<SimpleData name="lon">70</SimpleData>
+		<SimpleData name="lat">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>60,60 60,80 80,80 80,60 60,60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N060E080</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">109</SimpleData>
+		<SimpleData name="lon">90</SimpleData>
+		<SimpleData name="lat">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>80,60 80,80 100,80 100,60 80,60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N060E100</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">110</SimpleData>
+		<SimpleData name="lon">110</SimpleData>
+		<SimpleData name="lat">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>100,60 100,80 120,80 120,60 100,60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N060E120</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">111</SimpleData>
+		<SimpleData name="lon">130</SimpleData>
+		<SimpleData name="lat">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>120,60 120,80 140,80 140,60 120,60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N060E140</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">112</SimpleData>
+		<SimpleData name="lon">150</SimpleData>
+		<SimpleData name="lat">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>140,60 140,80 160,80 160,60 140,60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N060E160</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">113</SimpleData>
+		<SimpleData name="lon">170</SimpleData>
+		<SimpleData name="lat">70</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>160,60 160,80 180,80 180,60 160,60</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N080W120</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">114</SimpleData>
+		<SimpleData name="lon">-110</SimpleData>
+		<SimpleData name="lat">90</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-120,80 -120,100 -100,100 -100,80 -120,80</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N080W100</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">115</SimpleData>
+		<SimpleData name="lon">-90</SimpleData>
+		<SimpleData name="lat">90</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-100,80 -100,100 -80,100 -80,80 -100,80</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N080W080</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">116</SimpleData>
+		<SimpleData name="lon">-70</SimpleData>
+		<SimpleData name="lat">90</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-80,80 -80,100 -60,100 -60,80 -80,80</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N080W060</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">117</SimpleData>
+		<SimpleData name="lon">-50</SimpleData>
+		<SimpleData name="lat">90</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-60,80 -60,100 -40,100 -40,80 -60,80</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N080W040</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">118</SimpleData>
+		<SimpleData name="lon">-30</SimpleData>
+		<SimpleData name="lat">90</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-40,80 -40,100 -20,100 -20,80 -40,80</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N080W020</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">119</SimpleData>
+		<SimpleData name="lon">-10</SimpleData>
+		<SimpleData name="lat">90</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-20,80 -20,100 0,100 0,80 -20,80</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N080E000</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">120</SimpleData>
+		<SimpleData name="lon">10</SimpleData>
+		<SimpleData name="lat">90</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>0,80 0,100 20,100 20,80 0,80</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N080E020</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">121</SimpleData>
+		<SimpleData name="lon">30</SimpleData>
+		<SimpleData name="lat">90</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>20,80 20,100 40,100 40,80 20,80</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N080E040</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">122</SimpleData>
+		<SimpleData name="lon">50</SimpleData>
+		<SimpleData name="lat">90</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>40,80 40,100 60,100 60,80 40,80</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N080E060</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">123</SimpleData>
+		<SimpleData name="lon">70</SimpleData>
+		<SimpleData name="lat">90</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>60,80 60,100 80,100 80,80 60,80</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark>
+	<name>N080E080</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#cli_10m">
+		<SimpleData name="Id">124</SimpleData>
+		<SimpleData name="lon">90</SimpleData>
+		<SimpleData name="lat">90</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>80,80 80,100 100,100 100,80 80,80</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+</Folder>
+</Document></kml>

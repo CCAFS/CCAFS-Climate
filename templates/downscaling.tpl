@@ -36,7 +36,7 @@
             <td>
                 <a href="/pattern_scaling/" > 
                     <div id="section">
-                        <img src="{$smarty.const.SMARTY_IMG_URI}/logo_marksim.png" />
+                        <img src="{$smarty.const.SMARTY_IMG_URI}/logo_marksim_v2.png" />
                     </div>
                 </a>
             </td>

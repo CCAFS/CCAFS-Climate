@@ -2,8 +2,8 @@
 
 require_once '../../config/db.php';
 
-$context = isset($_POST["context"]) ? $_POST["context"] : null;
-$filset = isset($_POST["fileSet"]) ? $_POST["fileSet"] : null;
+$context = isset($_REQUEST["context"]) ? $_REQUEST["context"] : null;
+$filset = isset($_REQUEST["fileSet"]) ? $_REQUEST["fileSet"] : null;
 
 if (!is_null($context)) {
     switch ($context) {
@@ -21,9 +21,9 @@ if (!is_null($context)) {
 
 function addUserInfoAnonymous() {
     global $db;
-    $userId = isset($_POST["userId"]) ? $_POST["userId"] : null;
-    $instituteName = isset($_POST["instituteName"]) ? $_POST["instituteName"] : null;
-    $use = isset($_POST["use"]) ? $_POST["use"] : null;
+    $userId = isset($_REQUEST["userId"]) ? $_REQUEST["userId"] : null;
+    $instituteName = isset($_REQUEST["instituteName"]) ? $_REQUEST["instituteName"] : null;
+    $use = isset($_REQUEST["use"]) ? $_REQUEST["use"] : null;
     if (!is_null($instituteName) && !is_null($use)) { 
         // Now is an existing user.
         // lets insert the download information.

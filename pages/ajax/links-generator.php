@@ -61,7 +61,6 @@ if (!is_null($files) && !is_null($downloadId) && !is_null($fileType)) {
 
     // return null;
 // }
-
 function registerResource2($resourceId, $downloadId,$tileName) {
     global $db;
     $query = "SELECT id, name, local_url FROM datasets_resource WHERE id = " . $resourceId;
@@ -72,7 +71,13 @@ function registerResource2($resourceId, $downloadId,$tileName) {
 			if(!$tileName){
 				return $resourceInfo["local_url"] . "/Tile not selected";
 			}else{
-				return $resourceInfo["local_url"] . "/".strtoupper($tileName).".zip";
+				if($resourceId==12 or $resourceId==13 or $resourceId==14 or $resourceId==15){
+					$exten=".rar";
+				}else{
+					$exten=".zip";
+				}
+				return $resourceInfo["local_url"] . "/".strtoupper($tileName).$exten;
+
 			}
 			
 		}else{

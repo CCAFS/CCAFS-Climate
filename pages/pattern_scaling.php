@@ -48,7 +48,39 @@ foreach ($result as $value) {
         case 11:
             $resource->iconUrl = SMARTY_IMG_URI."/resources/icon_grid.png";
             $resource->isNew = true;
-            break;			
+            break;		
+        case 12:
+            $resource->iconUrl = SMARTY_IMG_URI."/resources/icon_grid.png";
+            $resource->isNew = true;
+            break;	
+        case 13:
+            $resource->iconUrl = SMARTY_IMG_URI."/resources/icon_grid.png";
+            $resource->isNew = true;
+            break;	
+        case 14:
+            $resource->iconUrl = SMARTY_IMG_URI."/resources/icon_grid.png";
+            $resource->isNew = true;
+            break;	
+        case 15:
+            $resource->iconUrl = SMARTY_IMG_URI."/resources/icon_grid.png";
+            $resource->isNew = true;
+            break;	
+        case 16:
+            $resource->iconUrl = SMARTY_IMG_URI."/resources/icon_grid.png";
+            $resource->isNew = true;
+            break;	
+        case 17:
+            $resource->iconUrl = SMARTY_IMG_URI."/resources/icon_grid.png";
+            $resource->isNew = true;
+            break;	
+        case 18:
+            $resource->iconUrl = SMARTY_IMG_URI."/resources/icon_grid.png";
+            $resource->isNew = true;
+            break;	
+        case 19:
+            $resource->iconUrl = SMARTY_IMG_URI."/resources/icon_grid.png";
+            $resource->isNew = true;
+            break;				
         default:
             $resource->iconUrl = SMARTY_IMG_URI."/resources/icon_grid.png";
             break;

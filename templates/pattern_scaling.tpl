@@ -1,10 +1,10 @@
 {include file='head.tpl' jsIncludes=["jquery", "pattern_scaling"] pageTitle="Pattern Scaling MarkSim - CCAFS Climate" pageDescription="Downscaled future climate data using the MarkSim weather generator." keywords="MarkSim,weather typing,IPCC,climate projections,climate change"}
 {include file='header.tpl' current="downscaling"}
 <div id="subheader-image">
-    <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_ptscalims.gif" />
+    <img src="{$smarty.const.SMARTY_IMG_URI}/ribbon_header_ptscalims_v2.gif" />
 </div>
 <div id="content" class="pattern_scaling">
-    <h3>Pattern Scaling with MarkSim Weather Generator</h3>
+    <h3>Weather Simulation with MarkSim</h3>
     <hr>
     <br><br>
 
@@ -69,6 +69,14 @@
                 <span class="little">(7 KB)</span>
             </a>
         </li>
+        <li>
+            <a target="_blank" href="/downloads/docs/release_of_MarkSim_base_data_from_WorldClim_2.pdf">
+                Release of MarkSim base data from WorldClim 2 -
+                <img id="download_pdf_button" title="Download the document" src="{$smarty.const.SMARTY_IMG_URI}/icon-pdf.png" />
+                <span class="little">(1239 KB)</span>
+				- <img class="new_item" title="New" src="{$smarty.const.SMARTY_IMG_URI}/icon_new.png" />
+            </a>
+        </li>		
     </ul>
 
 {*    <h4 style="color: red">Resources</h4>*}
