@@ -40,16 +40,26 @@ var selectedPolygonStyle=null;
 var highlightOptions = {fillColor: "#FFFFFF", strokeColor: "#FFFFFF", fillOpacity: 0.6, strokeWidth: 10};
 var normalStyle = {fillColor: "#BDBDBD", strokeColor: "#424242", fillOpacity: 0.4, strokeWidth: 10};
 var selectedStyle= {fillColor: "#2E2E2E", strokeColor: "#1C1C1C", fillOpacity: 0.6, strokeWidth: 10};
-var minZoomLevel = 1;  
+var minZoomLevel = 1.4;  
 
 var map;
 var geoXml = null;
 var geoXmlDoc = null;
-
+var world_ext = {
+north: 85,
+south: -85,
+west: -179,
+east: 179,
+};
       function initMap() {
 		  var mapOptions = {
 			  zoom: minZoomLevel,
-			  center: new google.maps.LatLng(23.079732,17.226563),
+			  // center: new google.maps.LatLng(23.079732,17.226563),
+			  center: new google.maps.LatLng(0,0),
+			  restriction: {
+				latLngBounds: world_ext,
+				strictBounds: false,
+			  },			  
 			  mapTypeId: google.maps.MapTypeId.ROADMAP
 		  };
 
@@ -182,14 +192,16 @@ function loadKmlCLI_5min(){
 
 	geoXml.parse('/theme/kmls/cli_5m.kml');	
 }  
+
+
 function loadKmlCLI_10min(){ 
 	initMap()
 	geoXml = new geoXML3.parser({
 			  map: map,
 			  singleInfoWindow: true,
 			  afterParse: useTheDataTiled
-			});
 
+			});
 	geoXml.parse('/theme/kmls/cli_10m.kml');	
 }  
   
