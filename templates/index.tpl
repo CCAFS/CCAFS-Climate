@@ -6,14 +6,20 @@
 	  <table id="sections" align="centre">
 		<tbody>
 		  <tr>
-			<td>
+			<td align="center">
 			  <a href="/data/">
 				<div id="section">
 				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_data.png">
 				</div>
 			  </a>
 			</td>		  
-	  
+			<td>
+			  <a href="/climatewizard/">
+				<div id="section">
+				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/menu-10.png">
+				</div>
+			  </a>
+			</td>		  
 			<td>
 			  <a href="/methods/">
 				<div id="section">
@@ -45,13 +51,14 @@
 				</div>
 			  </a>
 			</td>
+			<!--
 			<td>
 			  <a href="/links/">
 				<div id="section">
 				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_links.png">
 				</div>
 			  </a>
-			</td>
+			</td>-->
 			<td>
 			  <a href="/citations/">
 				<div id="section">
@@ -59,13 +66,14 @@
 				</div>
 			  </a>
 			</td>
+			<!--
 			<td>
 			  <a href="/contact/">
 				<div id="section">
 				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_contact.png">
 				</div>
 			  </a>
-			</td>
+			</td>-->
 		  </tr>
 		</tbody>
 	  </table>

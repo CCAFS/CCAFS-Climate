@@ -28,12 +28,18 @@
 
 		
         <tr>
-            <td colspan="2" align="center">
+            <td width="50%" align="center">
                 <a href="/weather_stations/" >
                     <div id="section">
                         <img src="{$smarty.const.SMARTY_IMG_URI}/submenu-08.png" />                    </div>
 				</a>            
 		  </td>
+            <td width="50%" align="center">
+                <a href="/climatewizard/" >
+                    <div id="section">
+                        <img src="{$smarty.const.SMARTY_IMG_URI}/submenu-11.png" />                    </div>
+				</a>            
+		  </td>		  
         </tr>
   </table>
 </div>
