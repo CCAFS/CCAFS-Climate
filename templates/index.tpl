@@ -6,20 +6,35 @@
 	  <table id="sections" align="centre">
 		<tbody>
 		  <tr>
+		  <!--
 			<td align="center">
 			  <a href="/data/">
 				<div id="section">
 				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/icon_data.png">
 				</div>
 			  </a>
-			</td>		  
+			</td>	-->	  
+			<td>
+			  <a href="/downscaling/">
+				<div id="section">
+				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/1_SpatialDownscaling.png">
+				</div>
+			  </a>
+			</td>
 			<td>
 			  <a href="/climatewizard/">
 				<div id="section">
 				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/menu-10.png">
 				</div>
 			  </a>
-			</td>		  
+			</td>			
+			<td>
+			  <a href="/bias_correction/">
+				<div id="section">
+				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/menu_bias-01.png">
+				</div>
+			  </a>
+			</td>			
 			<td>
 			  <a href="/methods/">
 				<div id="section">
@@ -27,21 +42,9 @@
 				</div>
 			  </a>
 			</td>
-			<!--
-			<td>
-			  <a href="/bias_correction/">
-				<div id="section">
-				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/menu_index-09.png">
-				</div>
-			  </a>
-			</td>				
-			<td>
-			  <a href="/downscaling/">
-				<div id="section">
-				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/menu_index-05.png">
-				</div>
-			  </a>
-			</td>-->			
+
+				
+			
 
 
 			<td>
