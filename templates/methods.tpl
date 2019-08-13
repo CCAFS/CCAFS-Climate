@@ -12,7 +12,7 @@
             <td width="50%" align="center">
                 <a href="/bias_correction/" >
                     <div id="section">
-                        <img src="{$smarty.const.SMARTY_IMG_URI}/submenu_m-09.png" />                    </div>
+                        <img src="{$smarty.const.SMARTY_IMG_URI}/submenu_m-09_v2-01.png" />                    </div>
 					</a>   
 					
            

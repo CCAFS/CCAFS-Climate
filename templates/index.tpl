@@ -38,7 +38,7 @@
 			<td>
 			  <a href="/methods/">
 				<div id="section">
-				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/menu-09.png" />
+				  <img class="color" src="{$smarty.const.SMARTY_IMG_URI}/menu_index-08.png" />
 				</div>
 			  </a>
 			</td>
