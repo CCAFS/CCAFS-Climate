@@ -2430,7 +2430,7 @@ function ConvertDDToDMS(D){
 					
 					
 					//************************** STATISTICAL *********
-					source_ftp="http://maprooms.ciat.cgiar.org/CCAFS-Climate/downloads/chirps/" //"http://gisweb.ciat.cgiar.org/Bc_Downscale/download" // "../../downloads/chirps/"//
+					source_ftp="ftp://ftp.ciat.cgiar.org/DAPA/projects/GCMPage/data/data_requests/" //"http://gisweb.ciat.cgiar.org/Bc_Downscale/download" // "../../downloads/chirps/"//
 					lon=Math.round(lon*10000)/10000
 					lat=Math.round(lat*10000)/10000
 					if(data['database']['chirps']=="true"){
@@ -7039,7 +7039,7 @@ var groupByRegion = {
 										tabs.setActiveTab(0);
 									}													
 								});	
-								source_ftp="http://maprooms.ciat.cgiar.org/CCAFS-Climate/downloads/chirps/" //"http://gisweb.ciat.cgiar.org/Bc_Downscale/download" // "../../downloads/chirps/"//
+								source_ftp="ftp://ftp.ciat.cgiar.org/DAPA/projects/GCMPage/data/data_requests/" //"http://gisweb.ciat.cgiar.org/Bc_Downscale/download" // "../../downloads/chirps/"//
 								lon=Math.round(lonlatMap.lon*10000)/10000
 								lat=Math.round(lonlatMap.lat*10000)/10000			
 								dataftp=source_ftp+'/chirps_lonlat_'+lon+'_'+lat+'.zip';
