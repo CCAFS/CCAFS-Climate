@@ -1767,7 +1767,7 @@ function ConvertDDToDMS(D){
 				type: "GET",//"POST", //
 			//    dataType: "json",
 				// url: "php/data-graphics-chirps.php",
-				url: "http://maprooms.ciat.cgiar.org/CCAFS-Climate/chirps/data-graphics-chirps.php",
+				url: "../php/data-graphics-chirps.php",
 				data: 'lon='+lon+'&lat='+lat+'&yi='+yi+'&yf='+yf+'&mi='+mi+'&mf='+mf+'&ch_chirps='+ch_chirps+'&ch_chirp='+ch_chirp+'&ch_wcl='+ch_wcl+'&ch_cru='+ch_cru,//filterValues,
 				success: function(result) {
 				  var objJSON = {};
