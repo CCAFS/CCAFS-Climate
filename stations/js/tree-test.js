@@ -7052,15 +7052,16 @@ var groupByRegion = {
 									icon: icons+'download-icon.png', 
 									scale: 'small',
 									handler: function(){
-										Ext.DomHelper.append(document.body, {
-										  tag: 'iframe',
-										  id:'downloadIframe',
-										  frameBorder: 0,
-										  width: 0,
-										  height: 0,
-										  css: 'display:none;visibility:hidden;height: 0px;',
-										  src: dataftp
-										});
+										window.open(dataftp)
+										// Ext.DomHelper.append(document.body, {
+										  // tag: 'iframe',
+										  // id:'downloadIframe',
+										  // frameBorder: 0,
+										  // width: 0,
+										  // height: 0,
+										  // css: 'display:none;visibility:hidden;height: 0px;',
+										  // src: dataftp
+										// });
 										
 									}													
 								});					
